@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontend": {
+    "frontend-admin": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,22 +11,50 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/frontend",
-            "index": "src/index.html",
-            "main": "src/main.ts",
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            },
+            "outputPath": "dist/frontend-admin",
+            "index": "src/admin-index.html",
+            "main": "src/admin-main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "extractCss": true,
             "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/admin_lte/plugins/fontawesome-free/css/all.min.css",
+              "src/assets/admin_lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "src/assets/admin_lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "src/assets/admin_lte/plugins/jqvmap/jqvmap.min.css",
+              "src/assets/admin_lte/dist/css/adminlte.min.css",
+              "src/assets/admin_lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "src/assets/admin_lte/plugins/daterangepicker/daterangepicker.css",
+              "src/assets/admin_lte/plugins/summernote/summernote-bs4.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/admin_lte/plugins/jquery/jquery.min.js",
+              "src/assets/admin_lte/plugins/jquery-ui/jquery-ui.min.js",
+              "src/assets/admin_lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "src/assets/admin_lte/plugins/chart.js/Chart.min.js",
+              "src/assets/admin_lte/plugins/sparklines/sparkline.js",
+              "src/assets/admin_lte/plugins/jquery-knob/jquery.knob.min.js",
+              "src/assets/admin_lte/plugins/moment/moment.min.js",
+              "src/assets/admin_lte/plugins/daterangepicker/daterangepicker.js",
+              "src/assets/admin_lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "src/assets/admin_lte/plugins/summernote/summernote-bs4.min.js",
+              "src/assets/admin_lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+              "src/assets/admin_lte/plugins/sparklines/sparkline.js",
+              "src/assets/admin_lte/dist/js/adminlte.min.js",
+              "src/assets/admin_lte/dist/js/demo.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -60,20 +88,20 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "frontend:build"
+            "browserTarget": "frontend-admin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "frontend:build:production"
+              "browserTarget": "frontend-admin:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "frontend:build"
+            "browserTarget": "frontend-admin:build"
           }
         },
         "test": {
@@ -110,15 +138,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "frontend:serve"
+            "devServerTarget": "frontend-admin:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "frontend:serve:production"
+              "devServerTarget": "frontend-admin:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "frontend"
+  "defaultProject": "frontend-admin"
 }
