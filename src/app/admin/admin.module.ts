@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MenuComponent } from './menu/menu.component';
+import {AdminComponent} from './admin.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {AdminRoutingModule} from './admin-routing.module';
+import {RouterModule} from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+
+
+@NgModule({
+  declarations: [AdminComponent, MenuComponent, DashboardComponent],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    AdminRoutingModule,
+    RouterModule
+  ],
+  providers: [],
+  bootstrap: [AdminComponent, MenuComponent]
+})
+export class AdminModule { }
