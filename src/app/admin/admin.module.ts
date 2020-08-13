@@ -6,11 +6,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AdminRoutingModule} from './admin-routing.module';
 import {RouterModule} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { TestComponent } from './test/test.component';
 
 
 
 @NgModule({
-  declarations: [AdminComponent, MenuComponent, DashboardComponent],
+  declarations: [AdminComponent, MenuComponent, DashboardComponent, TestComponent],
   imports: [
     BrowserModule,
     CommonModule,
