@@ -1,6 +1,7 @@
 module.exports = {
-  //...
-  watchOptions: {
-    aggregateTimeout: 6000
-  }
+  devServer: {
+    watchOptions: {
+      ignored: [/src\/assets\/admin_lte/, /node_modules/],
+    }
+  },
 };
