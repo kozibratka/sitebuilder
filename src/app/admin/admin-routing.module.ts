@@ -16,6 +16,11 @@ const routes: Routes = [
         component: DashboardComponent
       }
     ]
+  },
+  {
+    path: '',
+    redirectTo: '/admin',
+    pathMatch: 'full'
   }
 ];
 

@@ -19,6 +19,9 @@ import { TestComponent } from './test/test.component';
     RouterModule
   ],
   providers: [],
+  exports: [
+    MenuComponent
+  ],
   bootstrap: [AdminComponent, MenuComponent]
 })
 export class AdminModule { }
