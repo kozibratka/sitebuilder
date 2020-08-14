@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-menu-builder',
@@ -12,10 +13,19 @@ export class MenuBuilderComponent implements OnInit {
   constructor() {
     this.baseBlocks = [
       {image: 'https://via.placeholder.com/300/000000?text=2', id: 1},
-      {image: 'https://via.placeholder.com/300/000000?text=5', id: 2}
+      {image: 'https://via.placeholder.com/300/008254?text=5', id: 2}
     ];
+  }
 
-
+  drop(event: CdkDragDrop<{ image: string, id: number }[]>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 
   ngOnInit(): void {

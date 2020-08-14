@@ -14,7 +14,16 @@
     <div class="tab-content" id="custom-tabs-three-tabContent">
       <div class="tab-pane fade show active" id="custom-tabs-three-home" role="tabpanel"
            aria-labelledby="custom-tabs-three-home-tab">
-        test
+
+        <div
+          cdkDropList
+          [cdkDropListData]="baseBlocks"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <img alt="{{img.id}}" src="{{img.image}}" class="menu-block" *ngFor="let img of baseBlocks" cdkDrag>
+        </div>
+
+
       </div>
     </div>
   </div>
