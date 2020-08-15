@@ -2,3 +2,7 @@
   width: 100%;
   margin-bottom: 5px;
 }
+
+.cdk-drag-placeholder {
+  opacity: 1;
+}

@@ -17,6 +17,7 @@
 
         <div
           cdkDropList
+          [cdkDropListSortingDisabled]=true
           [cdkDropListData]="baseBlocks"
           class="example-list"
           (cdkDropListDropped)="drop($event)">

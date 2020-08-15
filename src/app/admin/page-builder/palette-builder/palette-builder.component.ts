@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-palette-builder',
@@ -8,6 +8,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class PaletteBuilderComponent implements OnInit {
 
+  @ViewChild(CdkDropList) paletteCdk: CdkDropList;
   baseBlocks: { image: string, id: number }[];
 
   constructor() {
