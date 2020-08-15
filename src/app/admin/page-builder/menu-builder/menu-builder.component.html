@@ -19,8 +19,7 @@
           cdkDropList
           [cdkDropListSortingDisabled]=true
           [cdkDropListData]="baseBlocks"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
+          class="example-list">
           <img alt="{{img.id}}" src="{{img.image}}" class="menu-block" *ngFor="let img of baseBlocks" cdkDrag>
         </div>
 

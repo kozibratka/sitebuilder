@@ -2,11 +2,12 @@
   <div class="card-header">
     <h3 class="card-title">Editační plátno</h3>
   </div> <!-- /.card-body -->
-  <div class="card-body">
+  <div class="card-body palette">
     <div
       cdkDropList
       [cdkDropListData]="baseBlocks"
       class="example-list"
+      (cdkDropListEntered)="entered($event)"
       (cdkDropListDropped)="drop($event)">
       <img alt="{{img.id}}" src="{{img.image}}" class="pallete-block" *ngFor="let img of baseBlocks" cdkDrag>
     </div>
