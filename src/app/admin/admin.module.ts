@@ -7,6 +7,7 @@ import {AdminRoutingModule} from './admin-routing.module';
 import {RouterModule} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestComponent } from './test/test.component';
+import {SortablejsModule} from 'ngx-sortablejs';
 
 
 
@@ -16,7 +17,8 @@ import { TestComponent } from './test/test.component';
     BrowserModule,
     CommonModule,
     AdminRoutingModule,
-    RouterModule
+    RouterModule,
+    SortablejsModule.forRoot({ animation: 150 })
   ],
   providers: [],
   exports: [

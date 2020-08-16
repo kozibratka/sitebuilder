@@ -1,13 +1,14 @@
-.pallete-block{
+.palette-block > img{
   width: 100%;
   height: 100px;
   margin-bottom: 5px;
 }
 
-/deep/ .palette .cdk-drag-placeholder
+/deep/.palette .palette-block > .sortable-ghost
 {
   width: 100%;
   height: 50px;
+  margin-bottom: 5px;
   content:url("http://imgur.com/SZ8Cm.jpg");
 
 }

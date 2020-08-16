@@ -3,13 +3,14 @@
     <h3 class="card-title">Editační plátno</h3>
   </div> <!-- /.card-body -->
   <div class="card-body palette">
+
     <div
-      cdkDropList
-      [cdkDropListData]="baseBlocks"
-      class="example-list"
-      (cdkDropListEntered)="entered($event)"
-      (cdkDropListDropped)="drop($event)">
-      <img alt="{{img.id}}" src="{{img.image}}" class="pallete-block" *ngFor="let img of baseBlocks" cdkDrag>
+      class="palette-block"
+      [sortablejs]="baseBlocks"
+      [sortablejsOptions]="{ group: 'shared' }">
+      <img alt="" src="{{item.image}}" *ngFor="let item of baseBlocks">
     </div>
+
+
   </div><!-- /.card-body -->
 </div>

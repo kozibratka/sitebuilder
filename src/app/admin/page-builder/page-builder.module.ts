@@ -4,7 +4,7 @@ import { PageBuilderComponent } from './page-builder/page-builder.component';
 import { MenuBuilderComponent } from './menu-builder/menu-builder.component';
 import { PaletteBuilderComponent } from './palette-builder/palette-builder.component';
 import { PageBuilderRoutingModule } from './page-builder-routing.module';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import {SortablejsModule} from 'ngx-sortablejs';
 
 
 
@@ -13,7 +13,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   imports: [
     CommonModule,
     PageBuilderRoutingModule,
-    DragDropModule
+    SortablejsModule
   ]
 })
 export class PageBuilderModule { }

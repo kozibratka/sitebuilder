@@ -16,20 +16,12 @@
            aria-labelledby="custom-tabs-three-home-tab">
 
         <div
-          cdkDropList
-          [cdkDropListSortingDisabled]=true
-          [cdkDropListData]="baseBlocks"
-          class="example-list">
-          <div
-            (cdkDragStarted)="cdkDragStarted($event)"
-            (cdkDragEntered)="cdkDragEntered($event)"
-            [cdkDragData]="{img: img, index: i}"
-            class="menu-block"
-            *ngFor="let img of baseBlocks; index as i" cdkDrag>
-            <img alt="{{img.id}}" src="{{img.image}}">
-            <span *cdkDragPlaceholder></span>
-          </div>
+          class="menu-block"
+          [sortablejs]="baseBlocks"
+          [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false} }">
+          <img alt="" src="{{item.image}}" *ngFor="let item of baseBlocks">
         </div>
+
 
       </div>
     </div>
