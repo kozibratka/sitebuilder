@@ -14,6 +14,7 @@ import {SortablejsModule} from 'ngx-sortablejs';
     CommonModule,
     PageBuilderRoutingModule,
     SortablejsModule
-  ]
+  ],
+  exports: [PageBuilderComponent]
 })
 export class PageBuilderModule { }

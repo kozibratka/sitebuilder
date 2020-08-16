@@ -16,9 +16,10 @@ import {SortablejsModule} from 'ngx-sortablejs';
   imports: [
     BrowserModule,
     CommonModule,
-    AdminRoutingModule,
     RouterModule,
-    SortablejsModule.forRoot({ animation: 150 })
+    SortablejsModule.forRoot({ animation: 150 }),
+    AdminRoutingModule,
+
   ],
   providers: [],
   exports: [

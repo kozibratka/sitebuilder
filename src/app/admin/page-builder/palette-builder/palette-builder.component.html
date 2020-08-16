@@ -4,12 +4,14 @@
   </div> <!-- /.card-body -->
   <div class="card-body palette">
 
-    <div
-      class="palette-block"
+    <ul
+      class="palette-block list-group listing-area clearfix"
       [sortablejs]="baseBlocks"
-      [sortablejsOptions]="{ group: 'shared' }">
-      <img alt="" src="{{item.image}}" *ngFor="let item of baseBlocks">
-    </div>
+      [sortablejsOptions]="{ group: 'shared', scroll: true }">
+      <li class="list-group-item palette-item" *ngFor="let item of baseBlocks">
+        <p>gegegeg</p>
+      </li>
+    </ul>
 
 
   </div><!-- /.card-body -->

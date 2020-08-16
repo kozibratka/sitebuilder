@@ -1,14 +1,19 @@
-.palette-block > img{
+.palette-block > li > img{
   width: 100%;
   height: 100px;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
+}
+
+.palette-item
+{
+  padding: 0px;
 }
 
 /deep/.palette .palette-block > .sortable-ghost
 {
   width: 100%;
   height: 50px;
-  margin-bottom: 5px;
+  margin-bottom: 1px;
   content:url("http://imgur.com/SZ8Cm.jpg");
 
 }
