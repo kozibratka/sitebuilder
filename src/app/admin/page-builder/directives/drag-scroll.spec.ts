@@ -1,8 +1,8 @@
-import { SmartPageScrollDirective } from './smart-page-scroll.directive';
+import { DragScrollDirective } from './drag-scroll-directive';
 
 describe('SmartPageScrollDirective', () => {
   it('should create an instance', () => {
-    const directive = new SmartPageScrollDirective();
+    const directive = new DragScrollDirective();
     expect(directive).toBeTruthy();
   });
 });

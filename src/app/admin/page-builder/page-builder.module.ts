@@ -5,12 +5,12 @@ import { MenuBuilderComponent } from './menu-builder/menu-builder.component';
 import { PaletteBuilderComponent } from './palette-builder/palette-builder.component';
 import { PageBuilderRoutingModule } from './page-builder-routing.module';
 import {SortablejsModule} from 'ngx-sortablejs';
-import { SmartPageScrollDirective } from './directives/smart-page-scroll.directive';
+import { DragScrollDirective } from './directives/drag-scroll-directive';
 
 
 
 @NgModule({
-  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, SmartPageScrollDirective],
+  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective],
   imports: [
     CommonModule,
     PageBuilderRoutingModule,

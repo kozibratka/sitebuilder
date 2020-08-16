@@ -3,7 +3,7 @@ import {Directive, ElementRef, HostListener, NgZone} from '@angular/core';
 @Directive({
   selector: '[appSmartPageScroll]'
 })
-export class SmartPageScrollDirective {
+export class DragScrollDirective {
 
   constructor(private window: Window, private element: ElementRef, private zone: NgZone) {
     this.zone.runOutsideAngular(() => {
