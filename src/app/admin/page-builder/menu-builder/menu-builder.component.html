@@ -20,9 +20,16 @@
           [cdkDropListSortingDisabled]=true
           [cdkDropListData]="baseBlocks"
           class="example-list">
-          <img alt="{{img.id}}" src="{{img.image}}" class="menu-block" *ngFor="let img of baseBlocks" cdkDrag>
+          <div
+            (cdkDragStarted)="cdkDragStarted($event)"
+            (cdkDragEntered)="cdkDragEntered($event)"
+            [cdkDragData]="{img: img, index: i}"
+            class="menu-block"
+            *ngFor="let img of baseBlocks; index as i" cdkDrag>
+            <img alt="{{img.id}}" src="{{img.image}}">
+            <span *cdkDragPlaceholder></span>
+          </div>
         </div>
-
 
       </div>
     </div>

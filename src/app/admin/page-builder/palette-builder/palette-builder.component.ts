@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CdkDragDrop, CdkDragEnter, CdkDropList, copyArrayItem, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {PageBuilderComponent} from '../page-builder/page-builder.component';
 
 @Component({
   selector: 'app-palette-builder',
@@ -11,7 +12,7 @@ export class PaletteBuilderComponent implements OnInit {
   @ViewChild(CdkDropList) paletteCdk: CdkDropList;
   baseBlocks: { image: string, id: number }[];
 
-  constructor() {
+  constructor(private pageBuilderComponent: PageBuilderComponent) {
     this.baseBlocks = [
       {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
       {image: 'https://via.placeholder.com/300/0086985?text=5', id: 2}
@@ -22,7 +23,12 @@ export class PaletteBuilderComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      copyArrayItem(event.previousContainer.data,
+      // transferArrayItem(event.previousContainer.data,
+      //   event.container.data,
+      //   event.previousIndex,
+      //   event.currentIndex);
+
+      transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
@@ -30,7 +36,8 @@ export class PaletteBuilderComponent implements OnInit {
   }
 
   entered(event: CdkDragEnter<{ image: string, id: number }[]>): void{
-    console.log(event.container.data);
+    // console.log(event.container.data);
+    // console.log(this.pageBuilderComponent.childMenu.baseBlocks.push({image: 'https://via.placeholder.com/300/0086985?text=5', id: 8}));
   }
 
   ngOnInit(): void {
