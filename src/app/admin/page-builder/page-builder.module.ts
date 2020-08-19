@@ -6,11 +6,12 @@ import { PaletteBuilderComponent } from './palette-builder/palette-builder.compo
 import { PageBuilderRoutingModule } from './page-builder-routing.module';
 import {SortablejsModule} from 'ngx-sortablejs';
 import { DragScrollDirective } from './directives/drag-scroll-directive';
+import { PaletteBlockComponent } from './palette-block/palette-block.component';
 
 
 
 @NgModule({
-  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective],
+  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent],
   imports: [
     CommonModule,
     PageBuilderRoutingModule,
