@@ -1,0 +1,27 @@
+.block-content{
+  min-height: 100px;
+}
+
+.block{
+  position: relative;
+}
+
+.block-menu{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.block:hover .block-menu{
+  opacity: 1;
+}
+
+:host-context(.dragged) .block:hover .block-menu{
+  opacity: 0;
+}
+
+.handle:hover{
+  cursor: pointer;
+}
