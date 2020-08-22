@@ -19,6 +19,8 @@
     "@angular/platform-browser": "~10.0.6",
     "@angular/platform-browser-dynamic": "~10.0.6",
     "@angular/router": "~10.0.6",
+    "@libria/gridstack": "^9.0.1",
+    "gridstack": "^2.0.0-rc2",
     "ngx-sortablejs": "^3.1.4",
     "rxjs": "~6.5.5",
     "sortablejs": "^1.10.2",
