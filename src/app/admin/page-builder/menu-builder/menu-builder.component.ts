@@ -1,11 +1,13 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+/// <reference types="jqueryui" />
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+
 
 @Component({
   selector: 'app-menu-builder',
   templateUrl: './menu-builder.component.html',
   styleUrls: ['./menu-builder.component.css']
 })
-export class MenuBuilderComponent implements OnInit, AfterViewChecked {
+export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   baseBlocks: { image: string, id: number }[];
 
@@ -16,9 +18,9 @@ export class MenuBuilderComponent implements OnInit, AfterViewChecked {
     ];
   }
 
-  ngAfterViewChecked(): void {
-
-
+  ngAfterViewInit(): void {
+    //GridStack.init({itemClass: 'menu-block'});
+    console.log($('aloha').length);
   }
 
   ngOnInit(): void {
