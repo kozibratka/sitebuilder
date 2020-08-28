@@ -1,7 +1,6 @@
 /// <reference types="jqueryui" />
 import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 
-
 @Component({
   selector: 'app-menu-builder',
   templateUrl: './menu-builder.component.html',
@@ -19,11 +18,11 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    //GridStack.init({itemClass: 'menu-block'});
-    console.log($('aloha').length);
+
   }
 
   ngOnInit(): void {
+
   }
 
 }

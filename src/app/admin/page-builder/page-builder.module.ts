@@ -1,21 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageBuilderComponent } from './page-builder/page-builder.component';
-import { MenuBuilderComponent } from './menu-builder/menu-builder.component';
-import { PaletteBuilderComponent } from './palette-builder/palette-builder.component';
+import { MenuBuilderComponent } from './page-builder/menu-builder/menu-builder.component';
+import { PaletteBuilderComponent } from './page-builder/palette-builder/palette-builder.component';
 import { PageBuilderRoutingModule } from './page-builder-routing.module';
 import {SortablejsModule} from 'ngx-sortablejs';
-import { DragScrollDirective } from './directives/drag-scroll-directive';
-import { PaletteBlockComponent } from './palette-block/palette-block.component';
+import { DragScrollDirective } from './page-builder/palette-builder/directives/drag-scroll-directive';
+import { PaletteBlockComponent } from './page-builder/palette-builder/palette-block/palette-block.component';
+import { GridstackModule } from '@libria/gridstack';
+import {TestSliderComponent} from '../../plugins/test-slider/test-slider.component';
+import { MenuPluginResolverDirective } from './page-builder/directives/menu-plugin-resolver.directive';
 
 
 
 @NgModule({
-  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent],
+  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, TestSliderComponent, MenuPluginResolverDirective],
   imports: [
     CommonModule,
     PageBuilderRoutingModule,
-    SortablejsModule
+    SortablejsModule,
+    GridstackModule.forRoot()
   ],
   exports: [PageBuilderComponent],
   providers: [{provide: Window, useValue: window}]
