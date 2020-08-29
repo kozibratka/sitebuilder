@@ -19,7 +19,13 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
+    $('.menu-element .menu-element-item').draggable({
+      revert: 'invalid',
+      handle: 'img',
+      scroll: false,
+      appendTo: 'body',
+      helper: 'clone'
+    });
   }
 
   ngOnInit(): void {

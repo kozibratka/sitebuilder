@@ -7,7 +7,6 @@ import { PageBuilderRoutingModule } from './page-builder-routing.module';
 import {SortablejsModule} from 'ngx-sortablejs';
 import { DragScrollDirective } from './page-builder/palette-builder/directives/drag-scroll-directive';
 import { PaletteBlockComponent } from './page-builder/palette-builder/palette-block/palette-block.component';
-import { GridstackModule } from '@libria/gridstack';
 import {TestSliderComponent} from '../../plugins/test-slider/test-slider.component';
 import { MenuPluginResolverDirective } from './page-builder/menu-builder/directives/menu-plugin-resolver.directive';
 
@@ -18,8 +17,7 @@ import { MenuPluginResolverDirective } from './page-builder/menu-builder/directi
   imports: [
     CommonModule,
     PageBuilderRoutingModule,
-    SortablejsModule,
-    GridstackModule.forRoot()
+    SortablejsModule
   ],
   exports: [PageBuilderComponent],
   providers: [{provide: Window, useValue: window}]
