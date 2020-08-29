@@ -11,6 +11,6 @@ export class TestSliderResolverService extends AbstractMenuPluginResolver {
   }
 
   getMenuImage(): string {
-    return '';
+    return 'https://via.placeholder.com/300/000000?text=2';
   }
 }

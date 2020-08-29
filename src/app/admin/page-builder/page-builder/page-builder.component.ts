@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {TestSliderResolverService} from './services/menu-plugin-resolvers/test-slider-resolver.service';
-import {AbstractMenuPluginResolver} from './services/menu-plugin-resolvers/abstract-menu-plugin-resolver';
+import {TestSliderResolverService} from './menu-builder/services/menu-plugin-resolvers/test-slider-resolver.service';
+import {AbstractMenuPluginResolver} from './menu-builder/services/menu-plugin-resolvers/abstract-menu-plugin-resolver';
 
 @Component({
   selector: 'app-page-builder',
