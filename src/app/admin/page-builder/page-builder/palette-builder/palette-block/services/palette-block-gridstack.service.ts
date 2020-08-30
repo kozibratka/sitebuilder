@@ -1,13 +1,14 @@
 import {ElementRef, Inject, Injectable, NgZone} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 
+@Injectable()
 export class PaletteBlockGridstackService {
 
   private gridStack: GridStack;
   private gridNodesRef: GridStackNode[] = [];
   private newGridNodes: ElementRef[] = [];
 
-  constructor(@Inject(NgZone) private zone: NgZone) {
+  constructor(private zone: NgZone) {
 
   }
 
@@ -27,9 +28,11 @@ export class PaletteBlockGridstackService {
   }
 
   reinit(): void {
-    this.newGridNodes.forEach(value => {
-      this.gridStack.addWidget(value.nativeElement);
+    this.zone.runOutsideAngular(() => {
+      this.newGridNodes.forEach(value => {
+        this.gridStack.addWidget(value.nativeElement);
+      });
+      this.newGridNodes = [];
     });
-    this.newGridNodes = [];
   }
 }
