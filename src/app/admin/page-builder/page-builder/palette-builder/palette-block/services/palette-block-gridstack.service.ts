@@ -15,7 +15,7 @@ export class PaletteBlockGridstackService {
   init(elementRef: ElementRef, gridStackNodes: GridStackNode[]): void {
     this.gridNodesRef = gridStackNodes;
     this.zone.runOutsideAngular(() => {
-      this.gridStack = GridStack.init({acceptWidgets: true, column: 12, float: false}, elementRef.nativeElement);
+      this.gridStack = GridStack.init({acceptWidgets: true, column: 12, float: true}, elementRef.nativeElement);
       (this.gridStack as any).on('dropped', (event: Event, arg2: any, arg3: any) => {
         this.gridStack.removeWidget(arg3.el);
         this.gridNodesRef.push(arg3);
