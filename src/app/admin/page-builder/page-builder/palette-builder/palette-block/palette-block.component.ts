@@ -1,38 +1,36 @@
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
+import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
+import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gridstack-item.directive';
 
 @Component({
   selector: 'app-palette-block',
   templateUrl: './palette-block.component.html',
-  styleUrls: ['./palette-block.component.css']
+  styleUrls: ['./palette-block.component.css'],
+  viewProviders: [{provide: PaletteBlockGridstackService}]
 })
-export class PaletteBlockComponent implements OnInit, AfterViewInit {
+export class PaletteBlockComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @ViewChild('palette_content') paletteContent: ElementRef;
-  private gridStack: GridStack;
+  @ViewChild(PaletteBlockGridstackItemDirective) paletteBlockGridstackItemDirective: PaletteBlockGridstackItemDirective[];
   gridNodes: GridStackNode[] = [];
 
-  constructor() {
+  constructor(
+    private paletteBlockGridstackService: PaletteBlockGridstackService
+  ) {
+    let grd: GridStackNode = {x: 2, y: 2, width: 2, height: 1};
+    this.gridNodes.push(grd);
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.reinitGridStack();
+    this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
   }
 
-  reinitGridStack(): void {
-    this.gridStack = GridStack.init({acceptWidgets: true, column: 12, float: true}, this.paletteContent.nativeElement);
-    (this.gridStack as any).on('dropped', (event: Event, arg2: any, arg3: any) => {
-      this.gridStack.removeWidget(arg3.el);
-      this.reinitDropedPlugin(arg3);
-    });
+  ngAfterViewChecked(): void {
+    console.log("checked");
+    this.paletteBlockGridstackService.reinit();
   }
-
-  reinitDropedPlugin(gridStackNode: GridStackNode): void {
-    this.gridNodes.push(gridStackNode);
-    this.reinitGridStack();
-  }
-
 }

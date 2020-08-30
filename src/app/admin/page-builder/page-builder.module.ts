@@ -9,11 +9,12 @@ import { DragScrollDirective } from './page-builder/palette-builder/directives/d
 import { PaletteBlockComponent } from './page-builder/palette-builder/palette-block/palette-block.component';
 import {TestSliderComponent} from '../../plugins/test-slider/test-slider.component';
 import { MenuPluginResolverDirective } from './page-builder/menu-builder/directives/menu-plugin-resolver.directive';
+import { PaletteBlockGridstackItemDirective } from './page-builder/palette-builder/palette-block/directives/palette-block-gridstack-item.directive';
 
 
 
 @NgModule({
-  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, TestSliderComponent, MenuPluginResolverDirective],
+  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, TestSliderComponent, MenuPluginResolverDirective, PaletteBlockGridstackItemDirective],
   imports: [
     CommonModule,
     PageBuilderRoutingModule,

@@ -2,9 +2,14 @@
   <div class="block-menu">
     <i class="fas fa-arrows-alt handle"></i>
   </div>
-  <div #palette_content class="block-content">
-    <div *ngFor="let gridNode of gridNodes" class="grid-stack-item" [attr.data-gs-x]="gridNode.x" [attr.data-gs-y]="gridNode.y" [attr.data-gs-width]="gridNode.width" [attr.data-gs-height]="gridNode.height">
-      aloha
+  <div #palette_content class="block-content grid-stack">
+    <div appPaletteBlockGridstackItem *ngFor="let gridNode of gridNodes" class="grid-stack-item" [attr.data-gs-x]="gridNode.x"
+         [attr.data-gs-y]="gridNode.y" [attr.data-gs-width]="gridNode.width" [attr.data-gs-height]="gridNode.height">
+      <div class="grid-stack-item-content">
+        <div>
+          Aloha
+        </div>
+      </div>
     </div>
   </div>
 </div>

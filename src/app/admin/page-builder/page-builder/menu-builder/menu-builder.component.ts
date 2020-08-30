@@ -1,5 +1,5 @@
 /// <reference types="jqueryui" />
-import {AfterViewChecked, AfterViewInit, Component, Inject, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, ElementRef, Inject, NgZone, OnInit} from '@angular/core';
 import {AbstractMenuPluginResolver} from './services/menu-plugin-resolvers/abstract-menu-plugin-resolver';
 
 @Component({
@@ -11,7 +11,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   baseBlocks: { image: string, id: number }[];
 
-  constructor(@Inject(AbstractMenuPluginResolver) public abstractMenuPluginResolver: AbstractMenuPluginResolver[]) {
+  constructor(@Inject(AbstractMenuPluginResolver) public abstractMenuPluginResolver: AbstractMenuPluginResolver[], private zone: NgZone) {
     this.baseBlocks = [
       {image: 'https://via.placeholder.com/300/000000?text=2', id: 1},
       {image: 'https://via.placeholder.com/300/008254?text=5', id: 2}
@@ -19,12 +19,14 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    $('.menu-element .menu-element-item').draggable({
-      revert: 'invalid',
-      handle: 'img',
-      scroll: false,
-      appendTo: 'body',
-      helper: 'clone'
+    this.zone.runOutsideAngular(() => {
+      $('.menu-element .menu-element-item').draggable({
+        revert: 'invalid',
+        handle: 'img',
+        scroll: false,
+        appendTo: 'body',
+        helper: 'clone'
+      });
     });
   }
 
