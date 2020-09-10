@@ -1,38 +1,31 @@
-import {ElementRef, Inject, Injectable, NgZone} from '@angular/core';
+import {ChangeDetectorRef, ElementRef, Inject, Injectable, NgZone} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 
 @Injectable()
 export class PaletteBlockGridstackService {
 
   private gridStack: GridStack;
-  private gridNodesRef: GridStackNode[] = [];
-  private newGridNodes: ElementRef[] = [];
+  private isInited = false;
 
-  constructor(private zone: NgZone) {
+  constructor(private zone: NgZone, private a: ChangeDetectorRef) {
 
   }
 
   init(elementRef: ElementRef, gridStackNodes: GridStackNode[]): void {
-    this.gridNodesRef = gridStackNodes;
     this.zone.runOutsideAngular(() => {
       this.gridStack = GridStack.init({acceptWidgets: true, column: 12, float: true}, elementRef.nativeElement);
+      this.isInited = true;
       (this.gridStack as any).on('dropped', (event: Event, arg2: any, arg3: any) => {
         this.gridStack.removeWidget(arg3.el);
-        this.gridNodesRef.push(arg3);
+        gridStackNodes.push(arg3);
+        this.a.detectChanges();
       });
     });
   }
 
   addWidget(elementRef: ElementRef): void {
-    this.newGridNodes.push(elementRef);
-  }
-
-  reinit(): void {
-    this.zone.runOutsideAngular(() => {
-      this.newGridNodes.forEach(value => {
-        this.gridStack.addWidget(value.nativeElement);
-      });
-      this.newGridNodes = [];
-    });
+    if(this.isInited){
+      this.gridStack.addWidget(elementRef.nativeElement);
+    }
   }
 }

@@ -8,6 +8,7 @@ import {RouterModule} from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TestComponent } from './test/test.component';
 import {SortablejsModule} from 'ngx-sortablejs';
+import {PageBuilderModule} from './page-builder/page-builder.module';
 
 
 
@@ -19,7 +20,7 @@ import {SortablejsModule} from 'ngx-sortablejs';
     RouterModule,
     SortablejsModule.forRoot({ animation: 150 }),
     AdminRoutingModule,
-
+    PageBuilderModule
   ],
   providers: [],
   exports: [

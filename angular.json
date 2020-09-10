@@ -55,8 +55,7 @@
               "src/assets/admin_lte/plugins/sparklines/sparkline.js",
               "src/assets/admin_lte/dist/js/adminlte.min.js",
               "src/assets/admin_lte/dist/js/demo.js",
-              "node_modules/lodash/lodash.min.js",
-              "node_modules/gridstack/dist/gridstack.all.js"
+              "node_modules/lodash/lodash.min.js"
             ]
           },
           "configurations": {

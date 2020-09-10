@@ -1,5 +1,5 @@
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
-import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
+import {Component, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef} from '@angular/core';
+import {GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
 import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gridstack-item.directive';
 
@@ -9,7 +9,7 @@ import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gri
   styleUrls: ['./palette-block.component.css'],
   viewProviders: [{provide: PaletteBlockGridstackService}]
 })
-export class PaletteBlockComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class PaletteBlockComponent implements AfterViewInit{
 
   @ViewChild('palette_content') paletteContent: ElementRef;
   @ViewChild(PaletteBlockGridstackItemDirective) paletteBlockGridstackItemDirective: PaletteBlockGridstackItemDirective[];
@@ -22,15 +22,7 @@ export class PaletteBlockComponent implements OnInit, AfterViewInit, AfterViewCh
     this.gridNodes.push(grd);
   }
 
-  ngOnInit(): void {
-  }
-
   ngAfterViewInit(): void {
     this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
-  }
-
-  ngAfterViewChecked(): void {
-    console.log("checked");
-    this.paletteBlockGridstackService.reinit();
   }
 }
