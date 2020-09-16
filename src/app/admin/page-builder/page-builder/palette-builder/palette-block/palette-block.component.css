@@ -12,6 +12,7 @@
   right: 5px;
   opacity: 0;
   transition: opacity 0.5s;
+  z-index: 999999999;
 }
 
 .block:hover .block-menu{

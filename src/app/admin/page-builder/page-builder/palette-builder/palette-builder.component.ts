@@ -1,11 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ViewChild, ViewChildren} from '@angular/core';
+import {PaletteBlockGridstackService} from './palette-block/services/palette-block-gridstack.service';
+import {PaletteBlockComponent} from './palette-block/palette-block.component';
 
 @Component({
   selector: 'app-palette-builder',
   templateUrl: './palette-builder.component.html',
-  styleUrls: ['./palette-builder.component.css']
+  styleUrls: ['./palette-builder.component.css'],
 })
-export class PaletteBuilderComponent implements OnInit {
+export class PaletteBuilderComponent implements AfterViewChecked{
 
   baseBlocks: { image: string, id: number }[];
   isDraggedContent = false;
@@ -19,11 +21,16 @@ export class PaletteBuilderComponent implements OnInit {
     ];
   }
 
-  setContentDragged(isDraggedContent: boolean): void {
-    this.isDraggedContent = isDraggedContent;
+  ngAfterViewChecked(): void {
+
   }
 
-  ngOnInit(): void {
+  blockDragStart(): void {
+    this.isDraggedContent = true;
+  }
+
+  blockDragStop(): void {
+    this.isDraggedContent = false;
   }
 
 }

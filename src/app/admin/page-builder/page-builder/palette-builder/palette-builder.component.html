@@ -10,7 +10,7 @@
       appSmartPageScroll
       [sortablejs]="baseBlocks"
       [sortablejsOptions]="{ group: 'shared', scroll: false, handle: '.handle' }">
-      <li (dragstart)="isDraggedContent = true" (dragend)="isDraggedContent = false" class="list-group-item palette-item" *ngFor="let item of baseBlocks">
+      <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of baseBlocks">
         <app-palette-block></app-palette-block>
       </li>
     </ul>
