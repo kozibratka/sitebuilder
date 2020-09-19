@@ -14,6 +14,11 @@
   width: 100%;
   height: 50px;
   margin-bottom: 1px;
-  content:url("http://imgur.com/SZ8Cm.jpg");
+  background-color: black;
 
+}
+
+/deep/.palette .palette-block > .sortable-ghost > img
+{
+  display: none;
 }

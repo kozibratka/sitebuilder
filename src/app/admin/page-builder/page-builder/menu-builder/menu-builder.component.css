@@ -1,4 +1,8 @@
-.menu-block > img{
+.menu-block{
+  list-style-type: none;
+}
+
+.menu-block  img{
   width: 100%;
   margin-bottom: 5px;
 }

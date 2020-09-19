@@ -18,12 +18,15 @@
 <div class="tab-content" id="custom-content-below-tabContent">
   <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel"
        aria-labelledby="custom-content-below-home-tab">
-    <div
+    <ul
       class="menu-block"
       [sortablejs]="baseBlocks"
       [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false} }">
-      <img alt="" src="{{item.image}}" *ngFor="let item of baseBlocks">
-    </div>
+      <li *ngFor="let item of baseBlocks">
+        <img alt="" src="{{item.image}}">
+
+      </li>
+    </ul>
   </div>
   <div class="tab-pane fade menu-element" id="custom-content-below-profile" role="tabpanel"
        aria-labelledby="custom-content-below-profile-tab">
