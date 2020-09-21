@@ -30,7 +30,7 @@
   </div>
   <div class="tab-pane fade menu-element" id="custom-content-below-profile" role="tabpanel"
        aria-labelledby="custom-content-below-profile-tab">
-    <div class="menu-element-item grid-stack-item" *ngFor="let menuPluginResolver of abstractMenuPluginResolver" data-gs-width="1" data-gs-height="1">
+    <div class="menu-element-item grid-stack-item-menu" *ngFor="let menuPluginResolver of abstractMenuPluginResolver" data-gs-width="1" data-gs-height="1">
       <img appMenuPluginResolver [abstractMenuPluginResolver] = "menuPluginResolver" [src]="menuPluginResolver.getMenuImage()">
     </div>
   </div>

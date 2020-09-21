@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, ElementRef, Host, Inject, Injectable, NgZone} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
+import {PaletteBlockGridstackItemDirective} from '../directives/palette-block-gridstack-item.directive';
 
 @Injectable()
 export class PaletteBlockGridstackService {
@@ -23,7 +24,7 @@ export class PaletteBlockGridstackService {
   startGridstack(): void {
     this.zone.runOutsideAngular(() => {
       this.gridStack = GridStack.init({
-        acceptWidgets: true,
+        acceptWidgets: ".grid-stack-item-menu",
         column: 12,
         ddPlugin: GridStackDragDrop,
         float: true,
@@ -31,9 +32,12 @@ export class PaletteBlockGridstackService {
         placeholderText: "Zde bude nový obsah :)",
       }, this.gridstackElement.nativeElement);
       this.isInited = true;
-      (this.gridStack as any).on('dropped', (event: Event, arg2: any, arg3: any) => {
-        this.gridStack.removeWidget(arg3.el);
-        this.gridStackNodes.push(arg3);
+      (this.gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: any) => {
+        // this.gridStack.opts.minRow = 4;
+        // this.gridStack.engine.maxRow = 4;
+        // this.gridStack.cellHeight(this.gridStack.getCellHeight());
+        this.gridStack.removeWidget(newWidget.el);
+        this.gridStackNodes.push(newWidget);
         this.changeDetectorRef.detectChanges();
       });
     });

@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef} from '@angular/core';
+import {Component, AfterViewInit, ViewChild, ElementRef, HostListener, ViewChildren, QueryList} from '@angular/core';
 import {GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
 import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gridstack-item.directive';
@@ -12,7 +12,7 @@ import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gri
 export class PaletteBlockComponent implements AfterViewInit{
 
   @ViewChild('palette_content') paletteContent: ElementRef;
-  @ViewChild(PaletteBlockGridstackItemDirective) paletteBlockGridstackItemDirective: PaletteBlockGridstackItemDirective[];
+  @ViewChildren(PaletteBlockGridstackItemDirective) paletteBlockGridstackItemDirective: QueryList<PaletteBlockGridstackItemDirective>;
   gridNodes: GridStackNode[] = [];
 
   constructor(
@@ -22,7 +22,31 @@ export class PaletteBlockComponent implements AfterViewInit{
     this.gridNodes.push(grd);
   }
 
+  @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
+    this.resizeHorizontalPalette(event.offsetY);
+  }
+
   ngAfterViewInit(): void {
     this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
+  }
+
+  private resizeHorizontalPalette(offsetY: number): void{
+    const actualHeight = this.paletteContent.nativeElement.offsetHeight;
+    if (offsetY < actualHeight - 7) {
+      return;
+    }
+    const paletteBlockGridstackItemDirectiveSorted = this.sortPaletteBlockGridstackItemDirective();
+    const lastBottomPaletteBlockGridstackItemDirective = paletteBlockGridstackItemDirectiveSorted[0] ?? null;
+    const mostBottomYInGrid = lastBottomPaletteBlockGridstackItemDirective ?
+      lastBottomPaletteBlockGridstackItemDirective.getRowsInGrid() : 0;
+  }
+
+  sortPaletteBlockGridstackItemDirective(): PaletteBlockGridstackItemDirective[] {
+    const paletteBlockGridstackItemDirectives = this.paletteBlockGridstackItemDirective.toArray();
+    paletteBlockGridstackItemDirectives.sort((a, b) =>
+      b.getRowsInGrid() - a.getRowsInGrid()
+    );
+
+    return paletteBlockGridstackItemDirectives;
   }
 }

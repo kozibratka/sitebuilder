@@ -1,9 +1,21 @@
 .block-content{
-  min-height: 313px;
+  /*min-height: 313px;*/
 }
 
 .block{
   position: relative;
+}
+
+.block:after {
+  width: 100%;
+  display: inline-block;
+  position: absolute;
+  bottom: -2px;
+  left: 0px;
+  content: '';
+  color: transparent;
+  border-bottom: 8px solid transparent;
+  cursor: row-resize;
 }
 
 .block-menu{
