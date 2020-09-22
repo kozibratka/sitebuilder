@@ -8,6 +8,7 @@
       class="palette-block list-group listing-area clearfix"
       [class.dragged]="isDraggedContent"
       appSmartPageScroll
+      #palette
       [sortablejs]="baseBlocks"
       [sortablejsOptions]="{ group: 'shared', scroll: false, handle: '.handle' }">
       <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of baseBlocks">

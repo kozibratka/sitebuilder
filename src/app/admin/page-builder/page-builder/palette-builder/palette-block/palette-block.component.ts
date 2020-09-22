@@ -2,6 +2,7 @@ import {Component, AfterViewInit, ViewChild, ElementRef, HostListener, ViewChild
 import {GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
 import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gridstack-item.directive';
+import {PaletteBuilderComponent} from '../palette-builder.component';
 
 @Component({
   selector: 'app-palette-block',
@@ -19,30 +20,31 @@ export class PaletteBlockComponent implements AfterViewInit{
     private paletteBlockGridstackService: PaletteBlockGridstackService,
     private renderer: Renderer2,
     private ngZone: NgZone,
-    private window: Window
+    private window: Window,
+    private paletteBuilderComponent: PaletteBuilderComponent
   ) {
     let grd: GridStackNode = {x: 2, y: 2, width: 2, height: 1};
     this.gridNodes.push(grd);
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
-    this.prepareResizeHorizontalPalette(event.offsetY);
+    this.prepareResizeHorizontalPalette(event);
   }
 
   ngAfterViewInit(): void {
     this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
   }
 
-  private prepareResizeHorizontalPalette(offsetY: number): void{
+  private prepareResizeHorizontalPalette(event: MouseEvent): void{
     const actualHeight = this.paletteContent.nativeElement.offsetHeight;
-    if (offsetY < actualHeight - 7) {
+    if (event.offsetY < actualHeight - 7) {
       return;
     }
-    this.paletteBlockGridstackService.prepareResizeHorizontalPalette(this.paletteBlockGridstackItemDirective.toArray());
+    this.paletteBlockGridstackService.prepareResizeHorizontalPalette(this.paletteBlockGridstackItemDirective.toArray(), event);
     let resizeMouseMovePaletteListener: () => void;
     this.ngZone.runOutsideAngular(() => {
       resizeMouseMovePaletteListener = this.renderer.listen(
-        this.paletteContent.nativeElement,
+        this.paletteBuilderComponent.palette.nativeElement,
         'mousemove',
         (event) => this.paletteBlockGridstackService.resizeHorizontalPalette(event)
       );

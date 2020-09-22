@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, ViewChild, ViewChildren} from '@angular/core';
 import {PaletteBlockGridstackService} from './palette-block/services/palette-block-gridstack.service';
 import {PaletteBlockComponent} from './palette-block/palette-block.component';
 
@@ -9,10 +9,12 @@ import {PaletteBlockComponent} from './palette-block/palette-block.component';
 })
 export class PaletteBuilderComponent implements AfterViewChecked{
 
+  @ViewChild('palette') private _palette: ElementRef;
   baseBlocks: { image: string, id: number }[];
   isDraggedContent = false;
 
-  constructor() {
+  constructor(
+  ) {
     this.baseBlocks = [
       {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
       {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
@@ -33,4 +35,11 @@ export class PaletteBuilderComponent implements AfterViewChecked{
     this.isDraggedContent = false;
   }
 
+  get palette(): ElementRef<any> {
+    return this._palette;
+  }
+
+  set palette(value: ElementRef<any>) {
+    this._palette = value;
+  }
 }

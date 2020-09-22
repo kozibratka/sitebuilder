@@ -11,7 +11,7 @@ export class PaletteBlockGridstackService {
   private isInited = false;
   private gridstackElement: ElementRef;
   private gridStackNodes: GridStackNode[];
-  private mostBottomNumRows = 0;
+  private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
 
   constructor(private zone: NgZone,
               private changeDetectorRef: ChangeDetectorRef,
@@ -54,15 +54,24 @@ export class PaletteBlockGridstackService {
     }
   }
 
-  prepareResizeHorizontalPalette(paletteBlockGridstackItemDirectives: PaletteBlockGridstackItemDirective[]): void {
+  prepareResizeHorizontalPalette(paletteBlockGridstackItemDirectives: PaletteBlockGridstackItemDirective[], mouseEvent: MouseEvent): void {
+    this.resizePaletteStartData.resizePaletteStartPosition = mouseEvent.pageY;
     const paletteBlockGridstackItemDirectiveSorted =
       this.paletteBlockService.sortPaletteBlockGridstackItemDirective(paletteBlockGridstackItemDirectives);
     const lastBottomPaletteBlockGridstackItemDirective = paletteBlockGridstackItemDirectiveSorted[0] ?? null;
-    this.mostBottomNumRows = lastBottomPaletteBlockGridstackItemDirective ?
+    this.resizePaletteStartData.mostBottomNumRows = lastBottomPaletteBlockGridstackItemDirective ?
       lastBottomPaletteBlockGridstackItemDirective.getRowsInGrid() : 0;
+    this.resizePaletteStartData.cellHeight = this.gridStack.getCellHeight();
+    this.resizePaletteStartData.startNumRows = this.gridStack.engine.maxRow;
   }
 
-  resizeHorizontalPalette(event: any): void {
-    console.log("egsg");
+  resizeHorizontalPalette(event: MouseEvent): void {
+    const mousePalettePosition = event.pageY - this.resizePaletteStartData.resizePaletteStartPosition;
+    let moveNumRows = Math.trunc(Math.abs(mousePalettePosition) / this.resizePaletteStartData.cellHeight);
+    const modulo = Math.abs(mousePalettePosition) % this.resizePaletteStartData.cellHeight;
+    if (modulo > (this.resizePaletteStartData.cellHeight / 2)) {
+      ++moveNumRows;
+    }
+    console.log(moveNumRows);
   }
 }
