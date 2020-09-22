@@ -2,6 +2,7 @@ import {ChangeDetectorRef, ElementRef, Host, Inject, Injectable, NgZone} from '@
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
 import {PaletteBlockGridstackItemDirective} from '../directives/palette-block-gridstack-item.directive';
+import {PaletteBlockService} from './palette-block.service';
 
 @Injectable()
 export class PaletteBlockGridstackService {
@@ -10,8 +11,12 @@ export class PaletteBlockGridstackService {
   private isInited = false;
   private gridstackElement: ElementRef;
   private gridStackNodes: GridStackNode[];
+  private mostBottomNumRows = 0;
 
-  constructor(private zone: NgZone, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private zone: NgZone,
+              private changeDetectorRef: ChangeDetectorRef,
+              private paletteBlockService: PaletteBlockService
+  ) {
 
   }
 
@@ -43,9 +48,21 @@ export class PaletteBlockGridstackService {
     });
   }
 
-  addWidget(elementRef: ElementRef): void {
+  addWidget(gridstackItemElementRef: ElementRef): void {
     if (this.isInited) {
-      this.gridStack.addWidget(elementRef.nativeElement);
+      this.gridStack.addWidget(gridstackItemElementRef.nativeElement);
     }
+  }
+
+  prepareResizeHorizontalPalette(paletteBlockGridstackItemDirectives: PaletteBlockGridstackItemDirective[]): void {
+    const paletteBlockGridstackItemDirectiveSorted =
+      this.paletteBlockService.sortPaletteBlockGridstackItemDirective(paletteBlockGridstackItemDirectives);
+    const lastBottomPaletteBlockGridstackItemDirective = paletteBlockGridstackItemDirectiveSorted[0] ?? null;
+    this.mostBottomNumRows = lastBottomPaletteBlockGridstackItemDirective ?
+      lastBottomPaletteBlockGridstackItemDirective.getRowsInGrid() : 0;
+  }
+
+  resizeHorizontalPalette(event: any): void {
+    console.log("egsg");
   }
 }
