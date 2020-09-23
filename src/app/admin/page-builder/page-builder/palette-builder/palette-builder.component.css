@@ -9,6 +9,11 @@
   padding: 0px;
 }
 
+.palette-block.resized
+{
+  cursor: row-resize;
+}
+
 /deep/.palette .palette-block > .sortable-ghost
 {
   width: 100%;

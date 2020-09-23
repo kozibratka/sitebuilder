@@ -12,6 +12,7 @@ export class PaletteBuilderComponent implements AfterViewChecked{
   @ViewChild('palette') private _palette: ElementRef;
   baseBlocks: { image: string, id: number }[];
   isDraggedContent = false;
+  private _isResized = false;
 
   constructor(
   ) {
@@ -41,5 +42,13 @@ export class PaletteBuilderComponent implements AfterViewChecked{
 
   set palette(value: ElementRef<any>) {
     this._palette = value;
+  }
+
+  get isResized(): boolean {
+    return this._isResized;
+  }
+
+  set isResized(value: boolean) {
+    this._isResized = value;
   }
 }

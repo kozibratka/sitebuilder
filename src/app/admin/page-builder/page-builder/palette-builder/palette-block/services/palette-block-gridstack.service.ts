@@ -12,6 +12,7 @@ export class PaletteBlockGridstackService {
   private gridstackElement: ElementRef;
   private gridStackNodes: GridStackNode[];
   private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
+  private toResizeRows = 0;
 
   constructor(private zone: NgZone,
               private changeDetectorRef: ChangeDetectorRef,
@@ -33,14 +34,12 @@ export class PaletteBlockGridstackService {
         column: 12,
         ddPlugin: GridStackDragDrop,
         float: true,
+        row: 4,
         styleInHead: true,
         placeholderText: "Zde bude nový obsah :)",
       }, this.gridstackElement.nativeElement);
       this.isInited = true;
       (this.gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: any) => {
-        // this.gridStack.opts.minRow = 4;
-        // this.gridStack.engine.maxRow = 4;
-        // this.gridStack.cellHeight(this.gridStack.getCellHeight());
         this.gridStack.removeWidget(newWidget.el);
         this.gridStackNodes.push(newWidget);
         this.changeDetectorRef.detectChanges();
@@ -72,6 +71,21 @@ export class PaletteBlockGridstackService {
     if (modulo > (this.resizePaletteStartData.cellHeight / 2)) {
       ++moveNumRows;
     }
-    console.log(moveNumRows);
+    let toMove = 0;
+    if (mousePalettePosition < 0) {
+      toMove = this.resizePaletteStartData.startNumRows - moveNumRows;
+    } else {
+      toMove = this.resizePaletteStartData.startNumRows + moveNumRows;
+    }
+    if (toMove < this.resizePaletteStartData.mostBottomNumRows) {
+      return;
+    }
+    if (this.toResizeRows === toMove || toMove < 1) {
+      return;
+    }
+    this.gridStack.opts.minRow = toMove;
+    this.gridStack.engine.maxRow = toMove;
+    (this.gridStack as any)._updateStyles();
+    this.toResizeRows = toMove;
   }
 }

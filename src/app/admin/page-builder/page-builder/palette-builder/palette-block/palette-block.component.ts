@@ -1,4 +1,16 @@
-import {Component, AfterViewInit, ViewChild, ElementRef, HostListener, ViewChildren, QueryList, Renderer2, NgZone} from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  HostListener,
+  ViewChildren,
+  QueryList,
+  Renderer2,
+  NgZone,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
 import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gridstack-item.directive';
@@ -14,6 +26,7 @@ export class PaletteBlockComponent implements AfterViewInit{
 
   @ViewChild('palette_content') paletteContent: ElementRef;
   @ViewChildren(PaletteBlockGridstackItemDirective) paletteBlockGridstackItemDirective: QueryList<PaletteBlockGridstackItemDirective>;
+  @Output() resized = new EventEmitter<boolean>();
   gridNodes: GridStackNode[] = [];
 
   constructor(
@@ -40,6 +53,7 @@ export class PaletteBlockComponent implements AfterViewInit{
     if (event.offsetY < actualHeight - 7) {
       return;
     }
+    this.resized.emit(true);
     this.paletteBlockGridstackService.prepareResizeHorizontalPalette(this.paletteBlockGridstackItemDirective.toArray(), event);
     let resizeMouseMovePaletteListener: () => void;
     this.ngZone.runOutsideAngular(() => {
@@ -50,6 +64,7 @@ export class PaletteBlockComponent implements AfterViewInit{
       );
     });
     const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
+      this.resized.emit(false);
       resizeMouseMovePaletteListener();
       mouseUpListener();
     });
