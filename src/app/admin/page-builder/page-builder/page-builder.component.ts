@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {TestSliderResolverService} from './menu-builder/services/menu-plugin-resolvers/test-slider-resolver.service';
-import {AbstractMenuPluginResolver} from './menu-builder/services/menu-plugin-resolvers/abstract-menu-plugin-resolver';
+import {MenuPluginResolverService} from './menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
 
 @Component({
   selector: 'app-page-builder',
   templateUrl: './page-builder.component.html',
   styleUrls: ['./page-builder.component.css'],
-  providers: [{provide: AbstractMenuPluginResolver, useClass: TestSliderResolverService, multi: true }]
+  providers: [MenuPluginResolverService]
 })
 export class PageBuilderComponent implements OnInit, AfterViewInit {
 

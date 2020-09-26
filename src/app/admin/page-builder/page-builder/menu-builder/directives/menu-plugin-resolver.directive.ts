@@ -1,20 +1,22 @@
 import {Directive, HostListener, Inject, Input} from '@angular/core';
-import {MenuPluginResolverMessengerService} from '../services/menu-plugin-resolver-messenger.service';
-import {AbstractMenuPluginResolver} from '../services/menu-plugin-resolvers/abstract-menu-plugin-resolver';
+import {AbstractMenuPluginResolverMessenger} from '../services/menu-plugin-resolvers/abstract-class/abstract-menu-plugin-resolver-messenger';
+import {MenuPluginResolverService} from '../services/menu-plugin-resolvers/menu-plugin-resolver.service';
 
 @Directive({
-  selector: '[appMenuPluginResolver]'
+  selector: '[appMenuPluginResolverDirective]'
 })
 export class MenuPluginResolverDirective {
 
-  @Input() abstractMenuPluginResolver: AbstractMenuPluginResolver;
+  @Input() abstractMenuPluginResolverMessenger: AbstractMenuPluginResolverMessenger;
 
-  constructor(private menuPluginResolverMessengerService: MenuPluginResolverMessengerService) {
+  constructor(
+    private menuPluginResolverService: MenuPluginResolverService
+  ) {
 
   }
 
   @HostListener('dragstart')
   resolveComponent(): void{
-    this.menuPluginResolverMessengerService.setComponentToCreate(this.abstractMenuPluginResolver.getComponent());
+    this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger = this.abstractMenuPluginResolverMessenger;
   }
 }
