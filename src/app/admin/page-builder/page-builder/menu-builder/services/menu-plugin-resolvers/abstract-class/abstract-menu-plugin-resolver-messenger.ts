@@ -1,9 +1,9 @@
 export abstract class AbstractMenuPluginResolverMessenger {
   abstract getMenuImage(): string;
 
-  abstract getMenuImageSize(): { x: number, y: number };
+  abstract get menuImageSize(): { x: number, y: number };
 
-  abstract getComponentClass(): new(...args: any[]) => {};
+  abstract get componentClass(): new(...args: any[]) => {};
 
-  abstract getMenuImageGridSize(): number;
+  abstract get menuImageGridSize(): number;
 }

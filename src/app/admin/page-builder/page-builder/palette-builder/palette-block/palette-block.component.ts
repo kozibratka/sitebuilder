@@ -13,8 +13,8 @@ import {
 } from '@angular/core';
 import {GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
-import {PaletteBlockGridstackItemDirective} from './directives/palette-block-gridstack-item.directive';
 import {PaletteBuilderComponent} from '../palette-builder.component';
+import {PaletteItemComponent} from './palette-item/palette-item.component';
 
 @Component({
   selector: 'app-palette-block',
@@ -25,7 +25,7 @@ import {PaletteBuilderComponent} from '../palette-builder.component';
 export class PaletteBlockComponent implements AfterViewInit{
 
   @ViewChild('palette_content') paletteContent: ElementRef;
-  @ViewChildren(PaletteBlockGridstackItemDirective) paletteBlockGridstackItemDirective: QueryList<PaletteBlockGridstackItemDirective>;
+  @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @Output() resized = new EventEmitter<boolean>();
   gridNodes: GridStackNode[] = [];
 
@@ -36,7 +36,7 @@ export class PaletteBlockComponent implements AfterViewInit{
     private window: Window,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
-    let grd: GridStackNode = {x: 2, y: 2, width: 2, height: 1};
+    const grd: GridStackNode = {x: 2, y: 2, width: 2, height: 1};
     this.gridNodes.push(grd);
   }
 
@@ -54,7 +54,7 @@ export class PaletteBlockComponent implements AfterViewInit{
       return;
     }
     this.resized.emit(true);
-    this.paletteBlockGridstackService.prepareResizeHorizontalPalette(this.paletteBlockGridstackItemDirective.toArray(), event);
+    this.paletteBlockGridstackService.prepareResizeHorizontalPalette(this.paletteItemComponents.toArray(), event);
     let resizeMouseMovePaletteListener: () => void;
     this.ngZone.runOutsideAngular(() => {
       resizeMouseMovePaletteListener = this.renderer.listen(

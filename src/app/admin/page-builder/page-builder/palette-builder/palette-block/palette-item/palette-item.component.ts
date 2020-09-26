@@ -1,18 +1,21 @@
-import {AfterViewInit, Directive, ElementRef, OnInit} from '@angular/core';
-import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
+import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
 import {GridStackNode} from 'gridstack';
+import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
 
-@Directive({
-  selector: '[appPaletteBlockGridstackItem]'
+@Component({
+  selector: 'app-palette-item',
+  templateUrl: './palette-item.component.html',
+  styleUrls: ['./palette-item.component.css']
 })
-export class PaletteBlockGridstackItemDirective implements OnInit, AfterViewInit {
+export class PaletteItemComponent implements OnInit, AfterViewInit {
+
+  @Input() gridStackNode: GridStackNode;
 
   constructor(private paletteBlockGridstackService: PaletteBlockGridstackService, private elementRef: ElementRef) {
 
   }
 
   ngOnInit(): void {
-
   }
 
   ngAfterViewInit(): void {
@@ -34,4 +37,5 @@ export class PaletteBlockGridstackItemDirective implements OnInit, AfterViewInit
   getRowsInGrid(): number {
     return this.getHeightInGrid() + this.getYPositionInGrid();
   }
+
 }

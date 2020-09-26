@@ -1,8 +1,8 @@
 import {ChangeDetectorRef, ElementRef, Host, Inject, Injectable, NgZone} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
-import {PaletteBlockGridstackItemDirective} from '../directives/palette-block-gridstack-item.directive';
 import {PaletteBlockService} from './palette-block.service';
+import {PaletteItemComponent} from '../palette-item/palette-item.component';
 
 @Injectable()
 export class PaletteBlockGridstackService {
@@ -53,10 +53,10 @@ export class PaletteBlockGridstackService {
     }
   }
 
-  prepareResizeHorizontalPalette(paletteBlockGridstackItemDirectives: PaletteBlockGridstackItemDirective[], mouseEvent: MouseEvent): void {
+  prepareResizeHorizontalPalette(paletteItemComponents: PaletteItemComponent[], mouseEvent: MouseEvent): void {
     this.resizePaletteStartData.resizePaletteStartPosition = mouseEvent.pageY;
     const paletteBlockGridstackItemDirectiveSorted =
-      this.paletteBlockService.sortPaletteBlockGridstackItemDirective(paletteBlockGridstackItemDirectives);
+      this.paletteBlockService.sortPaletteBlockGridstackItemDirective(paletteItemComponents);
     const lastBottomPaletteBlockGridstackItemDirective = paletteBlockGridstackItemDirectiveSorted[0] ?? null;
     this.resizePaletteStartData.mostBottomNumRows = lastBottomPaletteBlockGridstackItemDirective ?
       lastBottomPaletteBlockGridstackItemDirective.getRowsInGrid() : 0;
