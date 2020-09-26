@@ -21,7 +21,7 @@ import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plu
 export class PaletteItemComponent implements OnInit, AfterViewInit {
 
   @Input() gridStackNode: GridStackNode;
-  @ViewChild(ViewContainerRef) viewContainerRef: ViewContainerRef;
+  @ViewChild('itemTemplate') viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
   constructor(
