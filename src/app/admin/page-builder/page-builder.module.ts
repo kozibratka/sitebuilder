@@ -6,14 +6,13 @@ import { PaletteBuilderComponent } from './page-builder/palette-builder/palette-
 import {SortablejsModule} from 'ngx-sortablejs';
 import { DragScrollDirective } from './page-builder/palette-builder/directives/drag-scroll-directive';
 import { PaletteBlockComponent } from './page-builder/palette-builder/palette-block/palette-block.component';
-import {TestSliderComponent} from '../../plugins/test-slider/test-slider.component';
 import { MenuPluginResolverDirective } from './page-builder/menu-builder/directives/menu-plugin-resolver.directive';
 import { PaletteItemComponent } from './page-builder/palette-builder/palette-block/palette-item/palette-item.component';
 
 
 
 @NgModule({
-  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, TestSliderComponent, MenuPluginResolverDirective, PaletteItemComponent],
+  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, MenuPluginResolverDirective, PaletteItemComponent],
   imports: [
     CommonModule,
     SortablejsModule

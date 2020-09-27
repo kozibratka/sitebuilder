@@ -21,7 +21,7 @@ import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plu
 export class PaletteItemComponent implements OnInit, AfterViewInit {
 
   @Input() gridStackNode: GridStackNode;
-  @ViewChild('itemTemplate') viewContainerRef: ViewContainerRef;
+  @ViewChild('itemTemplate', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
   constructor(
@@ -37,6 +37,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.createPluginFromMenu();
     this.paletteBlockGridstackService.addWidget(this.elementRef);
   }
 
@@ -57,6 +58,9 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
   }
 
   createPluginFromMenu(): void {
+    if (!this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger) {
+      return;
+    }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(
       this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass);
     this.componentRef = this.viewContainerRef.createComponent<any>(factory);

@@ -15,7 +15,7 @@ export class MenuPluginResolverDirective {
 
   }
 
-  @HostListener('dragstart')
+  @HostListener('mousedown')
   resolveComponent(): void{
     this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger = this.abstractMenuPluginResolverMessenger;
   }
