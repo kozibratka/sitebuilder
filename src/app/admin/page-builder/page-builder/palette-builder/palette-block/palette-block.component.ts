@@ -36,8 +36,6 @@ export class PaletteBlockComponent implements AfterViewInit{
     private window: Window,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
-    const grd: GridStackNode = {x: 2, y: 2, width: 2, height: 1};
-    this.gridNodes.push(grd);
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {

@@ -34,7 +34,7 @@ export class PaletteBlockGridstackService {
         column: 12,
         ddPlugin: GridStackDragDrop,
         float: true,
-        row: 4,
+        row: 3,
         styleInHead: true,
         placeholderText: "Zde bude nový obsah :)",
       }, this.gridstackElement.nativeElement);
