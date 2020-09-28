@@ -1,18 +1,17 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component, ComponentFactory,
   ComponentFactoryResolver, ComponentRef,
   ElementRef, HostListener, Inject,
-  Input,
+  Input, NgZone,
   OnInit,
-  TemplateRef,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import {GridStackNode} from 'gridstack';
 import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
 import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
-import {QuickMenuMessenger} from '../../palette-item-quick-menu/messengers/quick-menu-messenger';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -20,7 +19,7 @@ import {Subject} from 'rxjs';
   templateUrl: './palette-item.component.html',
   styleUrls: ['./palette-item.component.css']
 })
-export class PaletteItemComponent implements OnInit, AfterViewInit {
+export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @Input() gridStackNode: GridStackNode;
   @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
@@ -31,7 +30,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
     private elementRef: ElementRef,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
+    private zone: NgZone
   ) {
 
   }
@@ -44,9 +44,12 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
     this.paletteBlockGridstackService.addWidget(this.elementRef);
   }
 
+  ngAfterViewChecked(): void {
+  }
+
   @HostListener('mouseenter')
   onMouseEnter(): void {
-    this.mouseEnter();
+    this.prepareItemQuickMenu();
   }
 
   getelementRef(): ElementRef {
@@ -74,9 +77,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
     this.componentRef = this.viewContainerRef.createComponent<any>(factory);
   }
 
-  mouseEnter(): void {
-    let quickMenuMessenger = new QuickMenuMessenger();
-    this.quickMenuMessenger.next(quickMenuMessenger);
+  prepareItemQuickMenu(): void {
+    this.quickMenuMessenger.next(this);
   }
 
 }

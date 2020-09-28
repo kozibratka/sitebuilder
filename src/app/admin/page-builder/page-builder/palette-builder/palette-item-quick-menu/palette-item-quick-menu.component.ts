@@ -1,4 +1,6 @@
-import {Component, HostBinding, OnInit} from '@angular/core';
+import {Component, HostBinding, Inject, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
+import {PaletteItemComponent} from '../palette-block/palette-item/palette-item.component';
 
 @Component({
   selector: 'app-palette-item-quick-menu',
@@ -7,14 +9,22 @@ import {Component, HostBinding, OnInit} from '@angular/core';
 })
 export class PaletteItemQuickMenuComponent implements OnInit {
 
-  @HostBinding('style.color') leftPosition = 'red';
+  @HostBinding('style.color') leftPosition;
 
-  constructor() {
+  constructor(
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>
+  ) {
 
   }
 
   ngOnInit(): void {
-    //this.leftPosition = 55;
+    this.prepareQuickMenu();
+  }
+
+  private prepareQuickMenu(): void {
+    this.quickMenuMessenger.subscribe(paletteItemComponent => {
+      this.leftPosition = 'yellow';
+    });
   }
 
 }

@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MenuPluginResolverService} from './menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
-import {Observable, Subject} from 'rxjs';
-import {QuickMenuMessenger} from './palette-builder/palette-item-quick-menu/messengers/quick-menu-messenger';
+import {Subject} from 'rxjs';
+import {PaletteItemComponent} from './palette-builder/palette-block/palette-item/palette-item.component';
 
 @Component({
   selector: 'app-page-builder',
@@ -9,24 +9,18 @@ import {QuickMenuMessenger} from './palette-builder/palette-item-quick-menu/mess
   styleUrls: ['./page-builder.component.css'],
   providers: [
     MenuPluginResolverService,
-    {provide: 'QuickMenuMessenger', useFactory: () => new Subject<QuickMenuMessenger>()}
+    {provide: 'QuickMenuMessenger', useFactory: () => new Subject<PaletteItemComponent>()}
   ]
 })
 export class PageBuilderComponent implements OnInit, AfterViewInit {
 
-  constructor(
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>
-  ) {
+  constructor() {
   }
 
   ngAfterViewInit(): void {
   }
 
   ngOnInit(): void {
-    // On item mouse Enter
-    this.quickMenuMessenger.subscribe(quickMenuMessenger => {
-      console.log("wfwfwfwfwfwf");
-    });
   }
 
 
