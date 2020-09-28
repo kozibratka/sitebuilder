@@ -9,33 +9,3 @@
   outline-color: #007BFF;
 }
 
-.edit-buttons {
-  position: absolute;
-  top: -38px;
-  right: -1px;
-  opacity: 0;
-  transition: opacity 0.5s;
-  z-index: 999999999;
-}
-
-.btn-app {
-  border-radius: 3px;
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  color: #6c757d;
-  font-size: 12px;
-  height: 37px;
-  margin: 0 0 10px 10px;
-  min-width: 42px;
-  padding: 4px 0px;
-  position: absolute;
-  text-align: center;
-}
-
-:host:hover > .edit-buttons {
-  opacity: 1;
-}
-
-:host > .edit-buttons > i {
-  font-size: 12px;
-}

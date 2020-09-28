@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component, ComponentFactory,
   ComponentFactoryResolver, ComponentRef,
-  ElementRef,
+  ElementRef, HostListener, Inject,
   Input,
   OnInit,
   TemplateRef,
@@ -12,6 +12,8 @@ import {
 import {GridStackNode} from 'gridstack';
 import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
 import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
+import {QuickMenuMessenger} from '../../palette-item-quick-menu/messengers/quick-menu-messenger';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-palette-item',
@@ -21,14 +23,15 @@ import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plu
 export class PaletteItemComponent implements OnInit, AfterViewInit {
 
   @Input() gridStackNode: GridStackNode;
-  @ViewChild('itemTemplate', { read: ViewContainerRef }) viewContainerRef: ViewContainerRef;
+  @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
     private elementRef: ElementRef,
     private menuPluginResolverService: MenuPluginResolverService,
-    private resolver: ComponentFactoryResolver
+    private resolver: ComponentFactoryResolver,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>
   ) {
 
   }
@@ -39,6 +42,11 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.createPluginFromMenu();
     this.paletteBlockGridstackService.addWidget(this.elementRef);
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.mouseEnter();
   }
 
   getelementRef(): ElementRef {
@@ -64,6 +72,11 @@ export class PaletteItemComponent implements OnInit, AfterViewInit {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(
       this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass);
     this.componentRef = this.viewContainerRef.createComponent<any>(factory);
+  }
+
+  mouseEnter(): void {
+    let quickMenuMessenger = new QuickMenuMessenger();
+    this.quickMenuMessenger.next(quickMenuMessenger);
   }
 
 }

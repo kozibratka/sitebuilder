@@ -8,11 +8,12 @@ import { DragScrollDirective } from './page-builder/palette-builder/directives/d
 import { PaletteBlockComponent } from './page-builder/palette-builder/palette-block/palette-block.component';
 import { MenuPluginResolverDirective } from './page-builder/menu-builder/directives/menu-plugin-resolver.directive';
 import { PaletteItemComponent } from './page-builder/palette-builder/palette-block/palette-item/palette-item.component';
+import { PaletteItemQuickMenuComponent } from './page-builder/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
 
 
 
 @NgModule({
-  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, MenuPluginResolverDirective, PaletteItemComponent],
+  declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, MenuPluginResolverDirective, PaletteItemComponent, PaletteItemQuickMenuComponent],
   imports: [
     CommonModule,
     SortablejsModule
