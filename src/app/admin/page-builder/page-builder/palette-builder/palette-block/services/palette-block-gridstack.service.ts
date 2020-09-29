@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, ElementRef, Injectable, NgZone} from '@angular/core';
-import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
+import {ChangeDetectorRef, ElementRef, Inject, Injectable, NgZone} from '@angular/core';
+import {GridItemHTMLElement, GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
 import {PaletteBlockService} from './palette-block.service';
 import {PaletteItemComponent} from '../palette-item/palette-item.component';
@@ -45,9 +45,7 @@ export class PaletteBlockGridstackService {
         this.zone.run(() => {
           this.changeDetectorRef.detectChanges();
         });
-
       });
-
   }
 
   addWidget(gridstackItemElementRef: ElementRef): void {

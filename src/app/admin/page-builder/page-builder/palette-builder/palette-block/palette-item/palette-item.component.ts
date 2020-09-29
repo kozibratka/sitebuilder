@@ -25,6 +25,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   @Input() gridStackNode: GridStackNode;
   @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
+  private lastPosition: string;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -43,11 +44,16 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   ngAfterViewInit(): void {
     this.createPluginFromMenu();
     this.paletteBlockGridstackService.addWidget(this.elementRef);
+    this.lastPosition = JSON.stringify(this.elementRef.nativeElement.getBoundingClientRect().toJSON());
     this.prepareItemQuickMenu(null);
   }
 
   ngAfterViewChecked(): void {
-
+    const currentPosition = JSON.stringify(this.elementRef.nativeElement.getBoundingClientRect().toJSON());
+    if (this.lastPosition !== currentPosition) {
+      this.prepareItemQuickMenu(null);
+      this.lastPosition = currentPosition;
+    }
   }
 
   @HostListener('mouseenter', ['$event'])

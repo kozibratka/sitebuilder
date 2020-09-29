@@ -1,11 +1,12 @@
 import {AfterViewChecked, Component, ElementRef, ViewChild, ViewChildren} from '@angular/core';
-import {PaletteBlockGridstackService} from './palette-block/services/palette-block-gridstack.service';
-import {PaletteBlockComponent} from './palette-block/palette-block.component';
+import {Subject} from 'rxjs';
+import {QuickMenuMessenger} from './palette-item-quick-menu/interfaces/quick-menu-messenger';
 
 @Component({
   selector: 'app-palette-builder',
   templateUrl: './palette-builder.component.html',
   styleUrls: ['./palette-builder.component.css'],
+  providers: [{provide: 'QuickMenuMessenger', useFactory: () => new Subject<QuickMenuMessenger>()}]
 })
 export class PaletteBuilderComponent implements AfterViewChecked{
 

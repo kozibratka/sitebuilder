@@ -1,7 +1,7 @@
 :host {
-  transition: top 0.5s, left 0.5s;
+  transition: top 0.5s, left 0.5s, right 0.5s, bottom 0.5s;
   z-index: 999999999;
-  position: absolute;
+  position: relative;
   display: none;
   text-align: center;
 }
