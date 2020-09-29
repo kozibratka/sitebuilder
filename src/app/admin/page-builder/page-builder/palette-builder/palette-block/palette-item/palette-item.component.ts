@@ -9,10 +9,11 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {GridStackNode} from 'gridstack';
+import {GridItemHTMLElement, GridStackNode} from 'gridstack';
 import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
 import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
 import {Subject} from 'rxjs';
+import {QuickMenuMessenger} from '../../palette-item-quick-menu/interfaces/quick-menu-messenger';
 
 @Component({
   selector: 'app-palette-item',
@@ -27,10 +28,10 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
-    private elementRef: ElementRef,
+    private elementRef: ElementRef<GridItemHTMLElement>,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>,
     private zone: NgZone
   ) {
 
@@ -42,17 +43,19 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   ngAfterViewInit(): void {
     this.createPluginFromMenu();
     this.paletteBlockGridstackService.addWidget(this.elementRef);
+    this.prepareItemQuickMenu(null);
   }
 
   ngAfterViewChecked(): void {
+
   }
 
-  @HostListener('mouseenter')
-  onMouseEnter(): void {
-    this.prepareItemQuickMenu();
+  @HostListener('mouseenter', ['$event'])
+  onMouseEnter(event: MouseEvent): void {
+    this.prepareItemQuickMenu(event);
   }
 
-  getelementRef(): ElementRef {
+  getelementRef(): ElementRef<GridItemHTMLElement> {
     return this.elementRef;
   }
 
@@ -77,8 +80,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     this.componentRef = this.viewContainerRef.createComponent<any>(factory);
   }
 
-  prepareItemQuickMenu(): void {
-    this.quickMenuMessenger.next(this);
+  prepareItemQuickMenu(event: MouseEvent): void {
+    this.quickMenuMessenger.next({mouseEvent: event, paletteItemComponent: this});
   }
 
 }
