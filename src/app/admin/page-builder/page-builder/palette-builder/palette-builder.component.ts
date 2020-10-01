@@ -10,7 +10,7 @@ import {QuickMenuMessenger} from './palette-item-quick-menu/interfaces/quick-men
 })
 export class PaletteBuilderComponent implements AfterViewChecked{
 
-  @ViewChild('palette') private _palette: ElementRef;
+  @ViewChild('palette') private _palette: ElementRef<HTMLElement>;
   baseBlocks: { image: string, id: number }[];
   isDraggedContent = false;
   private _isResized = false;
@@ -37,11 +37,11 @@ export class PaletteBuilderComponent implements AfterViewChecked{
     this.isDraggedContent = false;
   }
 
-  get palette(): ElementRef<any> {
+  get palette(): ElementRef<HTMLElement> {
     return this._palette;
   }
 
-  set palette(value: ElementRef<any>) {
+  set palette(value: ElementRef<HTMLElement>) {
     this._palette = value;
   }
 

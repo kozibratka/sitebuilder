@@ -14,6 +14,8 @@ import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.
 import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
 import {Subject} from 'rxjs';
 import {QuickMenuMessenger} from '../../palette-item-quick-menu/interfaces/quick-menu-messenger';
+import {ElementPositionMessenger} from '../../../../../../helpers/element/messengers/element-position-messenger';
+import {ElementHelper} from '../../../../../../helpers/element/element-helper';
 
 @Component({
   selector: 'app-palette-item',
@@ -25,7 +27,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   @Input() gridStackNode: GridStackNode;
   @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
   private componentRef: ComponentRef<any>;
-  private lastPosition: string;
+  private lastPosition: ElementPositionMessenger;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -44,16 +46,17 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   ngAfterViewInit(): void {
     this.createPluginFromMenu();
     this.paletteBlockGridstackService.addWidget(this.elementRef);
-    this.lastPosition = JSON.stringify(this.elementRef.nativeElement.getBoundingClientRect().toJSON());
+    this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
     this.prepareItemQuickMenu(null);
   }
 
   ngAfterViewChecked(): void {
-    const currentPosition = JSON.stringify(this.elementRef.nativeElement.getBoundingClientRect().toJSON());
-    if (this.lastPosition !== currentPosition) {
-      this.prepareItemQuickMenu(null);
-      this.lastPosition = currentPosition;
-    }
+    // const currentPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
+    // if (JSON.stringify(this.lastPosition) !== JSON.stringify(currentPosition)) {
+    //   console.log(JSON.stringify(currentPosition));
+    //   this.prepareItemQuickMenu(null);
+    //   this.lastPosition = currentPosition;
+    // }
   }
 
   @HostListener('mouseenter', ['$event'])
@@ -89,5 +92,6 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   prepareItemQuickMenu(event: MouseEvent): void {
     this.quickMenuMessenger.next({mouseEvent: event, paletteItemComponent: this});
   }
+
 
 }
