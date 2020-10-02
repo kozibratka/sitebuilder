@@ -33,7 +33,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   private prepareQuickMenu(): void {
     this.quickMenuMessenger.subscribe(quickMenuMessenger => {
       this.display = 'block';
-      const itemElement = quickMenuMessenger.paletteItemComponent.getelementRef().nativeElement;
+      const itemElement = quickMenuMessenger.paletteGridStackItem;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {
         x: 19,
         y: 28

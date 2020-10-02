@@ -9,12 +9,14 @@ import {
   Renderer2,
   NgZone,
   Output,
-  EventEmitter
+  EventEmitter, Inject
 } from '@angular/core';
-import {GridStackNode} from 'gridstack/dist/gridstack';
+import {GridItemHTMLElement, GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item/palette-item.component';
+import {Subject} from 'rxjs';
+import {QuickMenuMessenger} from '../palette-item-quick-menu/interfaces/quick-menu-messenger';
 
 @Component({
   selector: 'app-palette-block',
@@ -34,6 +36,7 @@ export class PaletteBlockComponent implements AfterViewInit{
     private renderer: Renderer2,
     private ngZone: NgZone,
     private window: Window,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
   }
@@ -43,7 +46,7 @@ export class PaletteBlockComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
+    this.initGridStack();
   }
 
   private prepareResizeHorizontalPalette(event: MouseEvent): void{
@@ -65,6 +68,17 @@ export class PaletteBlockComponent implements AfterViewInit{
       this.resized.emit(false);
       resizeMouseMovePaletteListener();
       mouseUpListener();
+    });
+
+  }
+
+  private initGridStack(): void {
+    this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
+    this.paletteBlockGridstackService.gridStack.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
+      this.quickMenuMessenger.next({paletteGridStackItem: el});
+    });
+    this.paletteBlockGridstackService.gridStack.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
+      this.quickMenuMessenger.next({paletteGridStackItem: el});
     });
 
   }

@@ -1,6 +1,5 @@
-import {PaletteItemComponent} from '../../palette-block/palette-item/palette-item.component';
+import {GridItemHTMLElement} from 'gridstack';
 
 export interface QuickMenuMessenger {
-  mouseEvent: MouseEvent;
-  paletteItemComponent: PaletteItemComponent;
+  paletteGridStackItem: GridItemHTMLElement;
 }

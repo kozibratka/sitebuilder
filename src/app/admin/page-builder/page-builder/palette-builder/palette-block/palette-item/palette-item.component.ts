@@ -45,7 +45,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   ngAfterViewInit(): void {
     this.createPluginFromMenu();
-    this.addGridStackItem();
+    this.paletteBlockGridstackService.addWidget(this.elementRef);
     this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
     this.prepareItemQuickMenu(null);
   }
@@ -84,17 +84,6 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
-    this.quickMenuMessenger.next({mouseEvent: event, paletteItemComponent: this});
+    this.quickMenuMessenger.next({paletteGridStackItem: this.elementRef.nativeElement});
   }
-
-  addGridStackItem(): void {
-    this.paletteBlockGridstackService.addWidget(this.elementRef);
-    this.paletteBlockGridstackService.gridStack.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
-      this.prepareItemQuickMenu(null);
-    });
-    this.paletteBlockGridstackService.gridStack.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
-      this.prepareItemQuickMenu(null);
-    });
-  }
-
 }
