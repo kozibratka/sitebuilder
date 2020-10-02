@@ -45,18 +45,12 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   ngAfterViewInit(): void {
     this.createPluginFromMenu();
-    this.paletteBlockGridstackService.addWidget(this.elementRef);
+    this.addGridStackItem();
     this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
     this.prepareItemQuickMenu(null);
   }
 
   ngAfterViewChecked(): void {
-    // const currentPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
-    // if (JSON.stringify(this.lastPosition) !== JSON.stringify(currentPosition)) {
-    //   console.log(JSON.stringify(currentPosition));
-    //   this.prepareItemQuickMenu(null);
-    //   this.lastPosition = currentPosition;
-    // }
   }
 
   @HostListener('mouseenter', ['$event'])
@@ -93,5 +87,14 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     this.quickMenuMessenger.next({mouseEvent: event, paletteItemComponent: this});
   }
 
+  addGridStackItem(): void {
+    this.paletteBlockGridstackService.addWidget(this.elementRef);
+    this.paletteBlockGridstackService.gridStack.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
+      this.prepareItemQuickMenu(null);
+    });
+    this.paletteBlockGridstackService.gridStack.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
+      this.prepareItemQuickMenu(null);
+    });
+  }
 
 }

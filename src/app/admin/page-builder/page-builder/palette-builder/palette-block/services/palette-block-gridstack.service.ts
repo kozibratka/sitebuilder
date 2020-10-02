@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, ElementRef, Inject, Injectable, NgZone} from '@angular/core';
-import {GridItemHTMLElement, GridStack, GridStackNode} from 'gridstack/dist/gridstack';
+import {ChangeDetectorRef, ElementRef, Injectable, NgZone} from '@angular/core';
+import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
 import {PaletteBlockService} from './palette-block.service';
 import {PaletteItemComponent} from '../palette-item/palette-item.component';
@@ -7,8 +7,8 @@ import {PaletteItemComponent} from '../palette-item/palette-item.component';
 @Injectable()
 export class PaletteBlockGridstackService {
 
-  private gridStack: GridStack;
-  private isInited = false;
+  private _gridStack: GridStack;
+  private isInitied = false;
   private gridstackElement: ElementRef;
   private gridStackNodes: GridStackNode[];
   private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
@@ -28,7 +28,7 @@ export class PaletteBlockGridstackService {
   }
 
   startGridstack(): void {
-      this.gridStack = GridStack.init({
+      this._gridStack = GridStack.init({
         acceptWidgets: ".grid-stack-item-menu",
         column: 12,
         ddPlugin: GridStackDragDrop,
@@ -37,10 +37,10 @@ export class PaletteBlockGridstackService {
         styleInHead: true,
         placeholderText: "Zde bude nový obsah :)",
       }, this.gridstackElement.nativeElement);
-      this.isInited = true;
+      this.isInitied = true;
 
-      (this.gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: any) => {
-        this.gridStack.removeWidget(newWidget.el);
+      (this._gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: any) => {
+        this._gridStack.removeWidget(newWidget.el);
         this.gridStackNodes.push(newWidget);
         this.zone.run(() => {
           this.changeDetectorRef.detectChanges();
@@ -49,8 +49,8 @@ export class PaletteBlockGridstackService {
   }
 
   addWidget(gridstackItemElementRef: ElementRef): void {
-    if (this.isInited) {
-      this.gridStack.addWidget(gridstackItemElementRef.nativeElement);
+    if (this.isInitied) {
+      this._gridStack.addWidget(gridstackItemElementRef.nativeElement);
     }
   }
 
@@ -61,8 +61,8 @@ export class PaletteBlockGridstackService {
     const lastBottomPaletteBlockGridstackItemDirective = paletteBlockGridstackItemDirectiveSorted[0] ?? null;
     this.resizePaletteStartData.mostBottomNumRows = lastBottomPaletteBlockGridstackItemDirective ?
       lastBottomPaletteBlockGridstackItemDirective.getRowsInGrid() : 0;
-    this.resizePaletteStartData.cellHeight = this.gridStack.getCellHeight();
-    this.resizePaletteStartData.startNumRows = this.gridStack.engine.maxRow;
+    this.resizePaletteStartData.cellHeight = this._gridStack.getCellHeight();
+    this.resizePaletteStartData.startNumRows = this._gridStack.engine.maxRow;
   }
 
   resizeHorizontalPalette(event: MouseEvent): void {
@@ -84,9 +84,18 @@ export class PaletteBlockGridstackService {
     if (this.toResizeRows === toMove || toMove < 1) {
       return;
     }
-    this.gridStack.opts.minRow = toMove;
-    this.gridStack.engine.maxRow = toMove;
-    (this.gridStack as any)._updateStyles();
+    this._gridStack.opts.minRow = toMove;
+    this._gridStack.engine.maxRow = toMove;
+    (this._gridStack as any)._updateStyles();
     this.toResizeRows = toMove;
+  }
+
+
+  get gridStack(): GridStack {
+    return this._gridStack;
+  }
+
+  set gridStack(value: GridStack) {
+    this._gridStack = value;
   }
 }
