@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MenuPluginResolverService} from './menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
+import {MenuPluginResolverService} from './menu-builder/menu-plugin-resolvers/services/menu-plugin-resolver.service';
 
 @Component({
   selector: 'app-page-builder',

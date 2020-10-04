@@ -1,6 +1,6 @@
 /// <reference types="jqueryui" />
 import {AfterViewInit, Component, NgZone, OnInit} from '@angular/core';
-import {MenuPluginResolverService} from './services/menu-plugin-resolvers/menu-plugin-resolver.service';
+import {MenuPluginResolverService} from './menu-plugin-resolvers/services/menu-plugin-resolver.service';
 
 @Component({
   selector: 'app-menu-builder',

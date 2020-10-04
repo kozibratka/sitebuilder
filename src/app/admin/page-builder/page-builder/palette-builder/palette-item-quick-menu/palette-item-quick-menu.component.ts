@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostBinding, Inject, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
-import {QuickMenuMessenger} from './interfaces/quick-menu-messenger';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {ElementHelper} from '../../../../../helpers/element/element-helper';
+import {GridItemHTMLElementItemComponent} from '../interfaces/grid-item-htmlelement-item-component';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   private paletteBlockPosition: {x: number, y: number};
 
   constructor(
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
 
@@ -31,9 +31,9 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   }
 
   private prepareQuickMenu(): void {
-    this.quickMenuMessenger.subscribe(quickMenuMessenger => {
+    this.quickMenuMessenger.subscribe(paletteItemElement => {
       this.display = 'block';
-      const itemElement = quickMenuMessenger.paletteGridStackItem;
+      const itemElement = paletteItemElement;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {
         x: 19,
         y: 28

@@ -1,12 +1,12 @@
 import {AfterViewChecked, Component, ElementRef, ViewChild, ViewChildren} from '@angular/core';
 import {Subject} from 'rxjs';
-import {QuickMenuMessenger} from './palette-item-quick-menu/interfaces/quick-menu-messenger';
+import {GridItemHTMLElementItemComponent} from './interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-palette-builder',
   templateUrl: './palette-builder.component.html',
   styleUrls: ['./palette-builder.component.css'],
-  providers: [{provide: 'QuickMenuMessenger', useFactory: () => new Subject<QuickMenuMessenger>()}]
+  providers: [{provide: 'QuickMenuMessenger', useFactory: () => new Subject<GridItemHTMLElementItemComponent>()}]
 })
 export class PaletteBuilderComponent implements AfterViewChecked{
 

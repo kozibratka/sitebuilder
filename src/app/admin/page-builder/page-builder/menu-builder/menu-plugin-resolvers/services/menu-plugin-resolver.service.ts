@@ -1,5 +1,5 @@
 import {Inject, Injectable, Input, Optional} from '@angular/core';
-import {AbstractMenuPluginResolverMessenger} from './abstract-class/abstract-menu-plugin-resolver-messenger';
+import {AbstractMenuPluginResolverMessenger} from '../messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
 
 @Injectable()
 export class MenuPluginResolverService {

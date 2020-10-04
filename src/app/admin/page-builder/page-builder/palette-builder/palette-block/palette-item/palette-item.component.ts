@@ -11,11 +11,11 @@ import {
 } from '@angular/core';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack';
 import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
-import {MenuPluginResolverService} from '../../../menu-builder/services/menu-plugin-resolvers/menu-plugin-resolver.service';
+import {MenuPluginResolverService} from '../../../menu-builder/menu-plugin-resolvers/services/menu-plugin-resolver.service';
 import {Subject} from 'rxjs';
-import {QuickMenuMessenger} from '../../palette-item-quick-menu/interfaces/quick-menu-messenger';
 import {ElementPositionMessenger} from '../../../../../../helpers/element/messengers/element-position-messenger';
 import {ElementHelper} from '../../../../../../helpers/element/element-helper';
+import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-palette-item',
@@ -34,7 +34,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private elementRef: ElementRef<GridItemHTMLElement>,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<QuickMenuMessenger>,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
     private zone: NgZone
   ) {
 
@@ -84,6 +84,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
-    this.quickMenuMessenger.next({paletteGridStackItem: this.elementRef.nativeElement});
+    const itemElement = this.elementRef.nativeElement as GridItemHTMLElementItemComponent;
+    itemElement.paletteItemComponent = this;
+    this.quickMenuMessenger.next(itemElement);
   }
 }
