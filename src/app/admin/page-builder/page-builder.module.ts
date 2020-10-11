@@ -9,6 +9,7 @@ import { PaletteBlockComponent } from './page-builder/palette-builder/palette-bl
 import { MenuPluginResolverDirective } from './page-builder/menu-builder/directives/menu-plugin-resolver.directive';
 import { PaletteItemComponent } from './page-builder/palette-builder/palette-block/palette-item/palette-item.component';
 import { PaletteItemQuickMenuComponent } from './page-builder/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -16,7 +17,8 @@ import { PaletteItemQuickMenuComponent } from './page-builder/palette-builder/pa
   declarations: [PageBuilderComponent, MenuBuilderComponent, PaletteBuilderComponent, DragScrollDirective, PaletteBlockComponent, MenuPluginResolverDirective, PaletteItemComponent, PaletteItemQuickMenuComponent],
   imports: [
     CommonModule,
-    SortablejsModule
+    SortablejsModule,
+    RouterModule
   ],
   exports: [PageBuilderComponent],
   providers: [{provide: Window, useValue: window}]

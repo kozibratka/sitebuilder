@@ -10,7 +10,13 @@ const routes: Routes = [
     children: [
       {
         path: 'page-builder/create',
-        component: PageBuilderComponent
+        component: PageBuilderComponent,
+        children: [
+          {
+            path: 'item-admin',
+            loadChildren: () => import('../plugins/routes-admin/routes-admin.module').then(m => m.RoutesAdminModule)
+          }
+        ]
       },
       {
         path: '',
