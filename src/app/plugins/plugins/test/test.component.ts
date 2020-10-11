@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {BaseAdminComponent} from '../base-admin/base-admin.component';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements OnInit {
+export class TestComponent extends BaseAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor() { super(); }
 
   ngOnInit(): void {
   }

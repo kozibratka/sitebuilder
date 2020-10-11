@@ -11,6 +11,7 @@ import {TestMenuResloverMessengerService} from './plugins/test/services/test-men
   ],
   providers: [
      {provide: AbstractMenuPluginResolverMessenger, useClass: TestMenuResloverMessengerService, multi: true}
-  ]
+  ],
+  declarations: []
 })
 export class PluginsModule { }

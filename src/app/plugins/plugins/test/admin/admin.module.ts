@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BaseAdminModule} from '../../../base-admin/base-admin.module';
+import {BaseAdminModule} from '../../../base-admin-layout/base-admin.module';
 import { ColorSettingsComponent } from './color-settings/color-settings.component';
 import {RouterModule, Routes} from '@angular/router';
-import {AdminComponent} from '../../../base-admin/admin/admin.component';
-import {MenuLabel} from '../../../base-admin/menu-labels/interfaces/menu-label';
+import {AdminComponent} from '../../../base-admin-layout/admin/admin.component';
+import {MenuLabel} from '../../../base-admin-layout/menu-labels/interfaces/menu-label';
 
 const routes: Routes = [
   {
