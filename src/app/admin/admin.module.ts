@@ -10,6 +10,7 @@ import { TestComponent } from './test/test.component';
 import {SortablejsModule} from 'ngx-sortablejs';
 import {PageBuilderModule} from './page-builder/page-builder.module';
 import {PluginsModule} from '../plugins/plugins.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -22,7 +23,8 @@ import {PluginsModule} from '../plugins/plugins.module';
     SortablejsModule.forRoot({ animation: 150 }),
     AdminRoutingModule,
     PageBuilderModule,
-    PluginsModule
+    PluginsModule,
+    NgbModule
   ],
   providers: [],
   exports: [

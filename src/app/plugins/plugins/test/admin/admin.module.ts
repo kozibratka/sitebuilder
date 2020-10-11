@@ -4,7 +4,7 @@ import {BaseAdminModule} from '../../../base-admin/base-admin.module';
 import { ColorSettingsComponent } from './color-settings/color-settings.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from '../../../base-admin/admin/admin.component';
-import {MenuLabel} from '../../../base-admin/interfaces/menu-label';
+import {MenuLabel} from '../../../base-admin/menu-labels/interfaces/menu-label';
 
 const routes: Routes = [
   {

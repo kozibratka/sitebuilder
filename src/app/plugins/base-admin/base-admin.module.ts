@@ -1,11 +1,11 @@
-import {InjectionToken, ModuleWithProviders, NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin/admin.component';
 import {RouterModule} from '@angular/router';
-import {MenuLabel} from './interfaces/menu-label';
+import {MenuLabel} from './menu-labels/interfaces/menu-label';
+import {MENU_LABELS} from './menu-labels/injection-tokens/menu-label';
 
 
-export const MENU_LABELS = new InjectionToken<MenuLabel[]>('menu labels');
 
 @NgModule({
   declarations: [AdminComponent],
