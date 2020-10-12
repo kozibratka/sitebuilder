@@ -10,6 +10,7 @@ import { MenuPluginResolverDirective } from './page-builder/menu-builder/directi
 import { PaletteItemComponent } from './page-builder/palette-builder/palette-block/palette-item/palette-item.component';
 import { PaletteItemQuickMenuComponent } from './page-builder/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
 import {RouterModule} from '@angular/router';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -18,7 +19,8 @@ import {RouterModule} from '@angular/router';
   imports: [
     CommonModule,
     SortablejsModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports: [PageBuilderComponent],
   providers: [{provide: Window, useValue: window}]

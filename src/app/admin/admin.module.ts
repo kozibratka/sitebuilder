@@ -28,7 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [],
   exports: [
-    MenuComponent
+    MenuComponent,
   ],
   bootstrap: [AdminComponent, MenuComponent]
 })

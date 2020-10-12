@@ -10,7 +10,7 @@ import {TestMenuResloverMessengerService} from './plugins/test/services/test-men
     CommonModule
   ],
   providers: [
-     {provide: AbstractMenuPluginResolverMessenger, useClass: TestMenuResloverMessengerService, multi: true}
+     {provide: AbstractMenuPluginResolverMessenger, useClass: TestMenuResloverMessengerService, multi: true},
   ],
   declarations: []
 })

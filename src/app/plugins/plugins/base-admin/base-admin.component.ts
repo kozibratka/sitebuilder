@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injector, OnInit} from '@angular/core';
+import {COMPONENT_CREATED_NOTIFIER} from '../../../admin/shared/modal-for-route/injection-tokens/component-created-notifier';
 
 @Component({
   selector: 'app-base-admin',
@@ -6,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BaseAdminComponent implements OnInit {
 
-  constructor(
 
-  ) { }
+  constructor(
+    protected injector: Injector
+  ) {
+
+  }
 
   ngOnInit(): void {
+    this.injector.get(COMPONENT_CREATED_NOTIFIER).next(true);
   }
 
 }
