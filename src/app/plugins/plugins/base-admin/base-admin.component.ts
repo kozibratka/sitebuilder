@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {COMPONENT_CREATED_NOTIFIER} from '../../../admin/shared/modal-for-route/injection-tokens/component-created-notifier';
+import {ModalForRouteComponent} from '../../../admin/shared/modal-for-route/modal-for-route.component';
 
 @Component({
   selector: 'app-base-admin',
@@ -15,7 +15,7 @@ export class BaseAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.injector.get(COMPONENT_CREATED_NOTIFIER).next(true);
+    this.injector.get(ModalForRouteComponent).schedulerShowModal = true;
   }
 
 }
