@@ -1,6 +1,6 @@
 import {AfterViewChecked, Component, ElementRef, ViewChild, ViewChildren} from '@angular/core';
 import {Subject} from 'rxjs';
-import {GridItemHTMLElementItemComponent} from './interfaces/grid-item-htmlelement-item-component';
+import {GridItemHTMLElementItemComponent} from './tools/interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-palette-builder',

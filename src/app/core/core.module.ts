@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalForRouteComponent } from './modal-for-route/modal-for-route.component';
+import { ModalForRouteComponent } from './components/modal-for-route/modal-for-route.component';
 import {RouterModule} from '@angular/router';
 
 
@@ -11,6 +11,7 @@ import {RouterModule} from '@angular/router';
     CommonModule,
     RouterModule
   ],
-  exports: [ModalForRouteComponent]
+  exports: [ModalForRouteComponent],
+
 })
-export class SharedModule { }
+export class CoreModule { }

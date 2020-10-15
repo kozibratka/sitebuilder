@@ -1,4 +1,7 @@
 import {AfterViewChecked, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {JqueryVersionService} from '../../services/jquery-version.service';
+
+declare const $: any;
 
 @Component({
   selector: 'app-modal-for-route',
@@ -11,6 +14,7 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
   @ViewChild('modalContent') private modalContent: ElementRef<HTMLElement>;
 
   constructor(
+     private jqueryVersionService: JqueryVersionService
   ) { }
 
   ngOnInit(): void {
@@ -20,7 +24,7 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
     if (!this._schedulerShowModal) {
       return;
     }
-    console.log('fffff');
+    (this.jqueryVersionService.jqueryFromAssets('.modal') as any).modal('show');
     this._schedulerShowModal = false;
   }
 

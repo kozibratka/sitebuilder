@@ -12,11 +12,11 @@ import {
   EventEmitter, Inject
 } from '@angular/core';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack/dist/gridstack';
-import {PaletteBlockGridstackService} from './services/palette-block-gridstack.service';
+import {PaletteBlockGridstackService} from './tools/services/palette-block-gridstack.service';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item/palette-item.component';
 import {Subject} from 'rxjs';
-import {GridItemHTMLElementItemComponent} from '../interfaces/grid-item-htmlelement-item-component';
+import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-palette-block',

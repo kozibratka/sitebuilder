@@ -2,7 +2,7 @@ import {ChangeDetectorRef, ElementRef, Injectable, NgZone} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
 import {PaletteBlockService} from './palette-block.service';
-import {PaletteItemComponent} from '../palette-item/palette-item.component';
+import {PaletteItemComponent} from '../../palette-item/palette-item.component';
 
 @Injectable()
 export class PaletteBlockGridstackService {

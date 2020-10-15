@@ -1,5 +1,5 @@
 import * as documentOffset from 'document-offset';
-import {ElementPositionMessenger} from './messengers/element-position-messenger';
+import {ElementPositionMessenger} from '../messengers/element-position-messenger';
 
 
 export class ElementHelper {

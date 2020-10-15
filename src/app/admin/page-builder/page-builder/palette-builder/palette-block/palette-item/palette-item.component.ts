@@ -10,12 +10,12 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack';
-import {PaletteBlockGridstackService} from '../services/palette-block-gridstack.service';
-import {MenuPluginResolverService} from '../../../menu-builder/menu-plugin-resolvers/services/menu-plugin-resolver.service';
+import {PaletteBlockGridstackService} from '../tools/services/palette-block-gridstack.service';
+import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-resolver.service';
 import {Subject} from 'rxjs';
-import {ElementPositionMessenger} from '../../../../../../helpers/element/messengers/element-position-messenger';
-import {ElementHelper} from '../../../../../../helpers/element/element-helper';
-import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';
+import {ElementPositionMessenger} from '../../../../../../core/messengers/element-position-messenger';
+import {ElementHelper} from '../../../../../../core/helpers/element-helper';
+import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-palette-item',

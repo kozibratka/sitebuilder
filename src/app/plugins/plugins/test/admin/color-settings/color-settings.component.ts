@@ -8,7 +8,9 @@ import {BaseAdminComponent} from '../../../base-admin/base-admin.component';
 })
 export class ColorSettingsComponent extends BaseAdminComponent implements OnInit {
 
-  constructor(injector: Injector) { super(injector); }
+  constructor(injector: Injector) {
+    super(injector);
+  }
 
   ngOnInit(): void {
     super.ngOnInit();

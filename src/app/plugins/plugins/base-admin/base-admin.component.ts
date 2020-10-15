@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {ModalForRouteComponent} from '../../../admin/shared/modal-for-route/modal-for-route.component';
+import {ModalForRouteComponent} from '../../../core/components/modal-for-route/modal-for-route.component';
 
 @Component({
   selector: 'app-base-admin',

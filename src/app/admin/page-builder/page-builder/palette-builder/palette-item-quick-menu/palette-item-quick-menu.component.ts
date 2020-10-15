@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostBinding, Inject, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {PaletteBuilderComponent} from '../palette-builder.component';
-import {ElementHelper} from '../../../../../helpers/element/element-helper';
-import {GridItemHTMLElementItemComponent} from '../interfaces/grid-item-htmlelement-item-component';
+import {ElementHelper} from '../../../../../core/helpers/element-helper';
+import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
 
 
 @Component({
