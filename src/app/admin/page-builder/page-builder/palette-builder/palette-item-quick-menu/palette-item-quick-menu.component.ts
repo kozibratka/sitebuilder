@@ -1,8 +1,9 @@
-import {Component, ElementRef, HostBinding, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, HostBinding, HostListener, Inject, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {ElementHelper} from '../../../../../core/helpers/element-helper';
 import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -17,11 +18,14 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   @HostBinding('style.display') display;
   @HostBinding('style.width') width;
 
-  private paletteBlockPosition: {x: number, y: number};
+  private paletteBlockPosition: { x: number, y: number };
+  private selectedItemForMenu: GridItemHTMLElementItemComponent;
 
   constructor(
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
-    private paletteBuilderComponent: PaletteBuilderComponent
+    private paletteBuilderComponent: PaletteBuilderComponent,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
 
   }
@@ -30,10 +34,15 @@ export class PaletteItemQuickMenuComponent implements OnInit {
     this.prepareQuickMenu();
   }
 
+  @HostListener('click')
+  onClick(): void {
+    this.openItemMenu();
+  }
+
   private prepareQuickMenu(): void {
     this.quickMenuMessenger.subscribe(paletteItemElement => {
       this.display = 'block';
-      const itemElement = paletteItemElement;
+      const itemElement = this.selectedItemForMenu = paletteItemElement;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {
         x: 19,
         y: 28
@@ -43,6 +52,13 @@ export class PaletteItemQuickMenuComponent implements OnInit {
       this.leftPosition = position.x + 'px';
       this.topPosition = position.y + 'px';
     });
+  }
+
+  private openItemMenu(){
+    const link = this.selectedItemForMenu.paletteItemComponent.componentRef.instance.getLink();
+    link.commands[0] = 'item-admin/' + link.commands[0];
+
+    this.router.navigate(link.commands, {relativeTo: this.route});
   }
 
 }

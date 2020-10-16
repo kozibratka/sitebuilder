@@ -16,6 +16,7 @@ import {Subject} from 'rxjs';
 import {ElementPositionMessenger} from '../../../../../../core/messengers/element-position-messenger';
 import {ElementHelper} from '../../../../../../core/helpers/element-helper';
 import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
+import {LinkGenerateAble} from '../../../../../../core/interfaces/link-generate-able';
 
 @Component({
   selector: 'app-palette-item',
@@ -26,7 +27,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   @Input() gridStackNode: GridStackNode;
   @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
-  private componentRef: ComponentRef<any>;
+  private _componentRef: ComponentRef<LinkGenerateAble>;
   private lastPosition: ElementPositionMessenger;
 
   constructor(
@@ -74,13 +75,21 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     return this.getHeightInGrid() + this.getYPositionInGrid();
   }
 
+  get componentRef(): ComponentRef<LinkGenerateAble> {
+    return this._componentRef;
+  }
+
+  set componentRef(value: ComponentRef<LinkGenerateAble>) {
+    this._componentRef = value;
+  }
+
   createPluginFromMenu(): void {
     if (!this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger) {
       return;
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(
       this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass);
-    this.componentRef = this.viewContainerRef.createComponent<any>(factory);
+    this._componentRef = this.viewContainerRef.createComponent<LinkGenerateAble>(factory);
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
