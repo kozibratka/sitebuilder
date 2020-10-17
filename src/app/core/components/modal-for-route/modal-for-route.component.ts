@@ -1,5 +1,6 @@
 import {AfterViewChecked, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {JqueryVersionService} from '../../services/jquery-version.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare const $: any;
 
@@ -14,8 +15,11 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
   @ViewChild('modalContent') private modalContent: ElementRef<HTMLElement>;
 
   constructor(
-     private jqueryVersionService: JqueryVersionService
-  ) { }
+    private jqueryVersionService: JqueryVersionService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -24,7 +28,10 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
     if (!this._schedulerShowModal) {
       return;
     }
-    (this.jqueryVersionService.jqueryFromAssets('.modal') as any).modal('show');
+    (this.jqueryVersionService.jqueryFromAssets(this.modalContent.nativeElement) as any).modal('show');
+    this.jqueryVersionService.jqueryFromAssets(this.modalContent.nativeElement).on('hidden.bs.modal', (e) => {
+      this.router.navigate(['./'], {relativeTo: this.route});
+    });
     this._schedulerShowModal = false;
   }
 
