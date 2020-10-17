@@ -57,7 +57,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   private openItemMenu(){
     const link = this.selectedItemForMenu.paletteItemComponent.componentRef.instance.getLink();
     link.commands[0] = 'item-admin/' + link.commands[0];
-
+    this.display = 'none';
     this.router.navigate(link.commands, {relativeTo: this.route});
   }
 

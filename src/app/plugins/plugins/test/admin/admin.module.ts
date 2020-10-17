@@ -5,6 +5,7 @@ import { ColorSettingsComponent } from './color-settings/color-settings.componen
 import {RouterModule, Routes} from '@angular/router';
 import {AdminComponent} from '../../../base-admin-layout/admin/admin.component';
 import {MenuLabel} from '../../../base-admin-layout/menu-labels/interfaces/menu-label';
+import { BasePluginAdminComponent } from './base-plugin-admin/base-plugin-admin.component';
 
 const routes: Routes = [
   {
