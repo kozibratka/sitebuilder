@@ -1,7 +1,7 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {JqueryVersionService} from '../../services/jquery-version.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ModalParametersMesseneger} from '../../messengers/modal-for-route/modal-parameters-messeneger';
+import {ModalParametersMesseneger} from './tools/messengers/modal-for-route/modal-parameters-messeneger';
 
 declare const $: any;
 
