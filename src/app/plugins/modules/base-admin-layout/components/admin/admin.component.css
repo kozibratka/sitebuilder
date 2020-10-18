@@ -1,0 +1,37 @@
+.nav-sidebar a{
+  color: #c2c7d0;
+}
+
+.nav-sidebar a.active{
+  color: #fff;
+}
+
+.col-menu{
+  background-color: #343a40;
+}
+
+.card{
+  margin-bottom: initial;
+}
+
+.nav-sidebar{
+  padding: 10px 0;
+}
+
+.dialog-buttons{
+  float: right;
+  margin-top: 15px;
+}
+
+.cancel-button{
+  margin: 0 5px;
+}
+
+.nav-link {
+  padding: 0.3rem 0rem;
+}
+
+.nav-item:hover>a:not(.active){
+  background-color: rgba(255,255,255,.1);
+  color: #fff;
+}

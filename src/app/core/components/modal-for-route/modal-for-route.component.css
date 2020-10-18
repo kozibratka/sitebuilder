@@ -1,0 +1,11 @@
+.modal-header{
+  border-bottom: 1px solid lightgrey;
+}
+
+.modal-footer{
+  border-top: 0;
+}
+
+.modal-content{
+  background: #f4f6f9;
+}
