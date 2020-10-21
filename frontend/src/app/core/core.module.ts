@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalForRouteComponent } from './components/modal-for-route/modal-for-route.component';
+import { ModalForRouteComponent } from './components/modal-for-route-component/modal-for-route.component';
 import {RouterModule} from '@angular/router';
 
 

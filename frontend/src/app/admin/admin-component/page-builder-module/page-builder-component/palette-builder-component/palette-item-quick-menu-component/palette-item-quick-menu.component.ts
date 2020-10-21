@@ -1,8 +1,8 @@
 import {Component, ElementRef, HostBinding, HostListener, Inject, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
-import {PaletteBuilderComponent} from '../../palette-builder.component';
-import {ElementHelper} from '../../../../../../../../../../core/helpers/element-helper';
-import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
+import {PaletteBuilderComponent} from '../palette-builder.component';
+import {ElementHelper} from '../../../../../../core/helpers/element-helper';
+import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
 import {ActivatedRoute, Router} from '@angular/router';
 
 

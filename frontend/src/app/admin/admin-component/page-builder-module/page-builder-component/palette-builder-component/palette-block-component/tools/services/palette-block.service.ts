@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {PaletteItemComponent} from '../../components/palette-item/palette-item.component';
+import {PaletteItemComponent} from '../../palette-item-component/palette-item.component';
 
 @Injectable({
   providedIn: 'root'

@@ -10,13 +10,13 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack';
-import {PaletteBlockGridstackService} from '../../tools/services/palette-block-gridstack.service';
-import {MenuPluginResolverService} from '../../../../../tools/services/menu-plugin-resolver.service';
+import {PaletteBlockGridstackService} from '../tools/services/palette-block-gridstack.service';
+import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-resolver.service';
 import {Subject} from 'rxjs';
-import {ElementPositionMessenger} from '../../../../../../../../../../../../core/messengers/element-position/element-position-messenger';
-import {ElementHelper} from '../../../../../../../../../../../../core/helpers/element-helper';
-import {GridItemHTMLElementItemComponent} from '../../../../tools/interfaces/grid-item-htmlelement-item-component';
-import {LinkGenerateAble} from '../../../../../../../../../../../../core/interfaces/link-generate-able';
+import {ElementPositionMessenger} from '../../../../../../../core/messengers/element-position/element-position-messenger';
+import {ElementHelper} from '../../../../../../../core/helpers/element-helper';
+import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
+import {LinkGenerateAble} from '../../../../../../../core/interfaces/link-generate-able';
 
 @Component({
   selector: 'app-palette-item',

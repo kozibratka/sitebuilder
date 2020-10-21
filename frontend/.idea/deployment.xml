@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="Startel">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="ftp.starnetcz.cz">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="starnet.cz">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

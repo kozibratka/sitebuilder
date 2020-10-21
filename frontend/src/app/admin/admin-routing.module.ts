@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from '../components/admin/components/dashboard/dashboard.component';
-import {PageBuilderComponent} from '../components/admin/modules/page-builder/components/page-builder/page-builder.component';
+import {PageBuilderComponent} from './admin-component/page-builder-module/page-builder-component/page-builder.component';
+import {DashboardComponent} from './admin-component/dashboard-component/dashboard.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
         children: [
           {
             path: 'item-admin',
-            loadChildren: () => import('../../plugins/modules/routes-admin.module').then(m => m.RoutesAdminModule)
+            loadChildren: () => import('../plugins/modules/routes-admin.module').then(m => m.RoutesAdminModule)
           }
         ]
       },

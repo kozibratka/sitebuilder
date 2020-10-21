@@ -13,10 +13,10 @@ import {
 } from '@angular/core';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './tools/services/palette-block-gridstack.service';
-import {PaletteBuilderComponent} from '../../palette-builder.component';
-import {PaletteItemComponent} from './components/palette-item/palette-item.component';
+import {PaletteBuilderComponent} from '../palette-builder.component';
+import {PaletteItemComponent} from './palette-item-component/palette-item.component';
 import {Subject} from 'rxjs';
-import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
+import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-palette-block',
