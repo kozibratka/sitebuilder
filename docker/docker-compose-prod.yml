@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql:
+    environment:
+      - MYSQL_ROOT_PASSWORD=ag59#grh1@G2hR5
+    networks:
+      webnet:
+        ipv4_address: 10.22.0.3
+    volumes:
+      - sitebuilder_dev_sql-volume:/var/lib/mysql
+      - config/mysql/dev:/etc/mysql/conf.d
+
+  backend:
+    ports:
+      - "80:80"
+    networks:
+      webnet:
+        ipv4_address: 10.22.0.4
+    volumes:
+      - /var/www/public:/var/www/public
+      - config/nginx/backend-prod/nginx.conf:/etc/nginx/nginx.conf
+      - config/nginx/backend-prod/sites-available:/etc/nginx/sites-available
+      - config/nginx/backend-prod/conf.d:etc/nginx/conf.d
+
+networks:
+  webnet:
+    ipam:
+      config:
+        - subnet: 10.22.0.0/24
+
+volumes:
+  sitebuilder_prod_sql-volume:
