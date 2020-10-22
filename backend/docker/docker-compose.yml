@@ -4,6 +4,8 @@ services:
     image: mysql:8.0.21
     command: --default-authentication-plugin=mysql_native_password
 
-  backend:
+  backend-nginx:
     image: nginx:1.19.3
 
+  php-fpm:
+    build: images/php-fpm
