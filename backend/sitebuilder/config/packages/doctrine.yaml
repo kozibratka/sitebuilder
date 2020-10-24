@@ -6,7 +6,7 @@ doctrine:
                 dbname:           sitebuilder
                 user:             root
                 password:         '%env(resolve:DATABASE_PASS)%'
-                host:             10.3.0.3
+                host:             '%env(resolve:DB_HOST)%'
                 server_version:   '8.0.21'
 
         # IMPORTANT: You MUST configure your server version,
