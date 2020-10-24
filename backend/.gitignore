@@ -1,2 +1,3 @@
 /sitebuilder/vendor/
 /sitebuilder/var/
+/sitebuilder/.env.local
