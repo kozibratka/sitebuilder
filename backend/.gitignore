@@ -1,3 +1,4 @@
 /sitebuilder/vendor/
 /sitebuilder/var/
 /sitebuilder/.env.local
+/sitebuilder/migrations/

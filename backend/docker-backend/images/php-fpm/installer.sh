@@ -1,7 +1,8 @@
 #!/bin/bash
 
 apt-get update
-apt-get install zip -y
+apt-get install -y zip wget nano vim
+docker-php-ext-install pdo_mysql
 
 if [ "$NODE_ENV" == "dev-local" ]; then
   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
