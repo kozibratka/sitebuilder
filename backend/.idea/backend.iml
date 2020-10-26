@@ -24,6 +24,9 @@
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/doctrine/reflection" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/doctrine/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/jms/metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/jms/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/jms/serializer-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/laminas/laminas-eventmanager" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/laminas/laminas-zendframework-bridge" />

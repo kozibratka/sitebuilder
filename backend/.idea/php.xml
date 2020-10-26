@@ -109,7 +109,10 @@
       <path value="$PROJECT_DIR$/sitebuilder/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/sitebuilder/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/sitebuilder/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/sitebuilder/vendor/jms/metadata" />
+      <path value="$PROJECT_DIR$/sitebuilder/vendor/jms/serializer" />
+      <path value="$PROJECT_DIR$/sitebuilder/vendor/jms/serializer-bundle" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
 </project>
