@@ -1,17 +1,17 @@
 <?php
 
-
-namespace App\Entity;
+namespace App\Entity\Authorization;
 
 
 use Doctrine\ORM\Mapping as ORM;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -24,6 +24,11 @@ class User
      * @ORM\Column(type="string")
      */
     private string $email;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private string $password;
 
     public function getId(): int
     {
@@ -43,5 +48,28 @@ class User
     public function setEmail(string $email)
     {
         $this->email = $email;
+    }
+
+    public function getRoles()
+    {
+        return ['user'];
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getSalt()
+    {
+    }
+
+    public function getUsername()
+    {
+        $this->getEmail();
+    }
+
+    public function eraseCredentials()
+    {
     }
 }

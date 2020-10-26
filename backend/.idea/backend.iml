@@ -30,7 +30,10 @@
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/laminas/laminas-eventmanager" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/laminas/laminas-zendframework-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/lexik/jwt-authentication-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/namshi/jose" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/ocramius/proxy-manager" />
       <excludeFolder url="file://$MODULE_DIR$/sitebuilder/vendor/phpdocumentor/reflection-common" />

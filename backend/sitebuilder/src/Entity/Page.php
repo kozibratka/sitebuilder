@@ -4,6 +4,7 @@
 namespace App\Entity;
 
 
+use App\Entity\Authorization\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,7 +26,7 @@ class Page
     private string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Authorization\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private User $user;
