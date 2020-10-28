@@ -51,7 +51,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['user'];
+        return ['ROLE_USER'];
     }
 
     public function getPassword(): string
@@ -65,7 +65,7 @@ class User implements UserInterface
 
     public function getUsername()
     {
-        $this->getEmail();
+        return $this->getEmail();
     }
 
     public function eraseCredentials()
