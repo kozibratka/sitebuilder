@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageBuilderController extends AbstractController
 {
     /**
-     * @Route("/list", name="list")
+     * @Route("/list", name="list", options={"expose"=true})
      */
     public function list(SerializerInterface $serializer)
     {
