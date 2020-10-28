@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Entity\PageBuilder;
 
 
 use App\Entity\Authorization\User;

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\FrontendComponents;
 
 
-use App\Entity\Page;
+use App\Entity\PageBuilder\Page;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("page", name="page_")
  */
-class PageController extends AbstractController
+class PageBuilderController extends AbstractController
 {
     /**
      * @Route("/list", name="list")

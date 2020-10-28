@@ -4,7 +4,6 @@ namespace App\Entity\Authorization;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -18,7 +17,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private Integer $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string")
