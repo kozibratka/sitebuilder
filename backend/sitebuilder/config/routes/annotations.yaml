@@ -10,3 +10,5 @@ frontend_components:
     resource: ../../src/Controller/FrontendComponents
     type: annotation
     prefix: /api
+    options:
+        expose: true
