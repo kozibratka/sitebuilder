@@ -1,0 +1,1 @@
+{"base_url":"","routes":{"token_create":{"tokens":[["text","\/token\/create"]],"defaults":[],"requirements":[],"hosttokens":[],"methods":[],"schemes":[]},"page_list":{"tokens":[["text","\/api\/page\/list"]],"defaults":[],"requirements":[],"hosttokens":[],"methods":[],"schemes":[]}},"prefix":"","host":"localhost","port":"","scheme":"http","locale":[]}
