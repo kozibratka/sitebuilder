@@ -115,6 +115,8 @@
       <path value="$PROJECT_DIR$/sitebuilder/vendor/namshi/jose" />
       <path value="$PROJECT_DIR$/sitebuilder/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/sitebuilder/vendor/lexik/jwt-authentication-bundle" />
+      <path value="$PROJECT_DIR$/sitebuilder/vendor/friendsofsymfony/jsrouting-bundle" />
+      <path value="$PROJECT_DIR$/sitebuilder/vendor/willdurand/jsonp-callback-validator" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
