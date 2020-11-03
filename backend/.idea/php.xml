@@ -117,6 +117,7 @@
       <path value="$PROJECT_DIR$/sitebuilder/vendor/lexik/jwt-authentication-bundle" />
       <path value="$PROJECT_DIR$/sitebuilder/vendor/friendsofsymfony/jsrouting-bundle" />
       <path value="$PROJECT_DIR$/sitebuilder/vendor/willdurand/jsonp-callback-validator" />
+      <path value="$PROJECT_DIR$/sitebuilder/vendor/nelmio/cors-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
