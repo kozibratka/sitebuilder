@@ -9,6 +9,13 @@ kernel:
 frontend_components:
     resource: ../../src/Controller/FrontendComponents
     type: annotation
-    prefix: /api
+    prefix: /frontend-components
+    options:
+        expose: true
+
+security:
+    resource: ../../src/Controller/Security
+    type: annotation
+    prefix: /security
     options:
         expose: true

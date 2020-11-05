@@ -10,17 +10,17 @@ security:
                 property: 'email'
     firewalls:
         login:
-            pattern: ^/token
+            pattern: ^/security/token
             stateless: true
             anonymous: true
             json_login:
-                check_path: /token/create
+                check_path: /security/token/create
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 username_path: email
 
         api:
-            pattern:   ^/api
+            pattern:   ^/
             stateless: true
             guard:
                 authenticators:
@@ -34,5 +34,5 @@ security:
             lazy: true
 
     access_control:
-         - { path: ^/api, roles: ROLE_USER }
-         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/security/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/, roles: ROLE_USER }

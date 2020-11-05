@@ -1,11 +1,10 @@
 <?php
 
 
-namespace App\Controller\Authorization;
+namespace App\Controller\Security;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -16,7 +15,7 @@ class TokenController extends AbstractController
     /**
      * @Route("/create", name="create")
      */
-    public function createToken(Request $request) {
+    public function createToken() {
         return new JsonResponse(['yes new token']);
     }
 }
