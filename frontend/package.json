@@ -24,6 +24,7 @@
     "bootstrap": "^4.5.0",
     "document-offset": "^1.0.4",
     "gridstack": "^2.0.0",
+    "jwt-decode": "^3.1.1",
     "ngx-sortablejs": "^3.1.4",
     "rxjs": "~6.5.5",
     "sortablejs": "^1.10.2",
