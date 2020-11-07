@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
+import {LoginClientService} from '../../../core/services/login-client/login-client.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +8,8 @@ import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfon
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private sf: SymfonyApiClientService) {
-
+  constructor(private sf: LoginClientService) {
+    sf.tryLogin('email@email.cz', 'heslo').subscribe(test => {}, error => {});
   }
 
   ngOnInit(): void {

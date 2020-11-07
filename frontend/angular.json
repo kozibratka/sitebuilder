@@ -39,7 +39,8 @@
               "src/assets/admin_lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
               "src/assets/admin_lte/plugins/daterangepicker/daterangepicker.css",
               "src/assets/admin_lte/plugins/summernote/summernote-bs4.css",
-              "node_modules/gridstack/dist/gridstack.css"
+              "node_modules/gridstack/dist/gridstack.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/admin_lte/plugins/jquery/jquery.js",

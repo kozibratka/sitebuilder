@@ -3,49 +3,56 @@ import jwt_decode from 'jwt-decode';
 import {SymfonyApiClientService} from '../symfony-api/symfony-api-client.service';
 import {catchError, tap} from 'rxjs/operators';
 import {TokenInterface} from '../symfony-api/interfaces/token-interface';
-import {HttpErrorResponse} from '@angular/common/http';
-import {throwError} from 'rxjs';
+import {HttpResponseToasterService} from '../http-response-toaster.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginClientService {
 
-  private decodedToken: {exp: Date} = null;
+  private _decodedToken: {exp: number} = null;
 
-  constructor(private symfonyApiClient: SymfonyApiClientService) {
-
+  constructor(
+    private symfonyApiClient: SymfonyApiClientService,
+    private httpResponseToasterService: HttpResponseToasterService
+  ) {
   }
 
-  tryLogin(username: string, password: string) {
-    this.symfonyApiClient.refreshToken(username, password).pipe(
-      catchError(this.loginErrorHandle),
-      tap(token => { this.getDecodedAccessToken(token); }),
-      );
+
+  get decodedToken(): { exp: number } {
+    return this._decodedToken;
+  }
+
+  set decodedToken(value: { exp: number }) {
+    this._decodedToken = value;
+  }
+
+  tryLogin(username: string, password: string): Observable<TokenInterface> {
+    return this.symfonyApiClient.refreshToken(username, password).pipe(
+      tap(
+        token => {
+          this.decodeAccessToken(token);
+        },
+        error => this.httpResponseToasterService.showError(error)
+      ),
+    );
   }
 
   isLoggedIn(): boolean {
-    if (!this.decodedToken) {
+    if (!this._decodedToken) {
       return false;
     }
-    if (this.decodedToken.exp < new Date()) {
+    if (new Date(this._decodedToken.exp * 1000) < new Date()) {
       return false;
     }
   }
 
-  getDecodedAccessToken(token: TokenInterface): unknown {
+  decodeAccessToken(token: TokenInterface): unknown {
     try {
-      this.symfonyApiClient.token = jwt_decode(token.token) as any;
+      this.decodedToken = jwt_decode(token.token) as any;
     } catch (Error) {
       return null;
     }
-  }
-
-  private loginErrorHandle(error: HttpErrorResponse) {
-    if
-
-
-    return throwError(
-      'Something bad happened; please try again later.');
   }
 }

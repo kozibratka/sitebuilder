@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
-import {Observable, Observer, Subject} from 'rxjs';
-import {switchMap, tap} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Observable, Observer, Subject, throwError} from 'rxjs';
+import {catchError, switchMap, tap} from 'rxjs/operators';
 import Routing from './external-library/router';
 import {TokenInterface} from './interfaces/token-interface';
 
@@ -26,7 +26,9 @@ export class SymfonyApiClientService {
     this.status = 'inProgress';
     return this.httpClient.get(environment.backendUrl + environment.backendRoutesPath,
       {responseType: 'json', headers: {fetchRoutes :  'true'}
-      }).pipe(tap(response => {
+      }).pipe(
+        catchError(this.handleErrorRoute),
+        tap(response => {
         this.status = 'done';
         this.urlFetchNotification$.next(response);
     }));
@@ -54,8 +56,8 @@ export class SymfonyApiClientService {
     );
   }
 
-  refreshToken(username: string, password: string): Observable<TokenInterface> {
-    return this.post<TokenInterface>('token_create', {email: 'email@email.cz', password: 'heslo'})
+  refreshToken(username: string, passwordText: string): Observable<TokenInterface> {
+    return this.post<TokenInterface>('token_create', {email: username, password: passwordText})
       .pipe(tap((token) => {
         this._token = token;
       }));
@@ -86,5 +88,16 @@ export class SymfonyApiClientService {
         break;
     }
     return routesFromBackend$;
+  }
+
+   handleErrorRoute(error: HttpErrorResponse): Observable<never> {
+    let completedMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      completedMessage = 'Nepodařilo se kontaktovat server pro získání routy. Zkontrolujte stav vašeho připojení.';
+    } else {
+      completedMessage =  'Došlo k chybě při získání routy na server. Opakute akci později. Kód chyby: ' + error.status;
+    }
+
+    return throwError(completedMessage);
   }
 }

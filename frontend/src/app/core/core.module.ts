@@ -4,6 +4,8 @@ import { ModalForRouteComponent } from './components/modal-for-route-component/m
 import {RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RoutesInterceptor} from './services/symfony-api/interceptors/routes.interceptor';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 
@@ -12,7 +14,9 @@ import {RoutesInterceptor} from './services/symfony-api/interceptors/routes.inte
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   exports: [ModalForRouteComponent],
   providers: [
