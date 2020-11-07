@@ -2,3 +2,4 @@
 /sitebuilder/var/
 /sitebuilder/.env.local
 /sitebuilder/migrations/
+/.idea
