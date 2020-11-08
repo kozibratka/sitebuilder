@@ -1,10 +1,9 @@
 <?php
 
 
-namespace App\Entity\PageBuilder;
+namespace App\Entity;
 
 
-use App\Entity\Authorization\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

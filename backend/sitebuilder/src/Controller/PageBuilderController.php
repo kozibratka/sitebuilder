@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Controller\FrontendComponents;
+namespace App\Controller;
 
 
-use App\Entity\PageBuilder\Page;
+use App\Entity\Page;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

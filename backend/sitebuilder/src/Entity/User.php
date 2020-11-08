@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Entity\Authorization;
+namespace App\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @UniqueEntity("email")
  */
 class User implements UserInterface
 {
@@ -21,11 +24,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Email
      */
     private string $email;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min="6", allowEmptyString=false)
      */
     private string $password;
 
