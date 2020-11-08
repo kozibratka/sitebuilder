@@ -10,7 +10,7 @@ import { MenuPluginResolverDirective } from './page-builder-component/menu-build
 import { PaletteItemComponent } from './page-builder-component/palette-builder-component/palette-block-component/palette-item-component/palette-item.component';
 import { PaletteItemQuickMenuComponent } from './page-builder-component/palette-builder-component/palette-item-quick-menu-component/palette-item-quick-menu.component';
 import {RouterModule} from '@angular/router';
-import {CoreModule} from '../../../core/core.module';
+import {CoreModule} from '../../../../../core/core.module';
 
 
 

@@ -1,19 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuComponent } from './menu-component/menu.component';
-import {AdminComponent} from './admin-component/admin.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {AdminRoutingModule} from './admin-routing.module';
 import {RouterModule} from '@angular/router';
-import { DashboardComponent } from './admin-component/dashboard-component/dashboard.component';
-import { TestComponent } from './admin-component/test-component/test.component';
 import {SortablejsModule} from 'ngx-sortablejs';
-import {PageBuilderModule} from './admin-component/page-builder-module/page-builder.module';
 import {PluginsModule} from '../plugins/plugins.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AdminComponent} from './entry-route/administration-component/admin-component/admin.component';
+import {MenuComponent} from './entry-route/administration-component/menu-component/menu.component';
+import {DashboardComponent} from './entry-route/administration-component/admin-component/dashboard-component/dashboard.component';
+import {LoginComponent} from './entry-route/authorization-component/login-component/login.component';
+import {AdministrationComponent} from './entry-route/administration-component/administration.component';
+import {AuthorizationComponent} from './entry-route/authorization-component/authorization.component';
+import {PageBuilderModule} from './entry-route/administration-component/admin-component/page-builder-module/page-builder.module';
+import { EntryRouteComponent } from './entry-route/entry-route.component';
+import { RegistrationComponent } from './entry-route/authorization-component/registration/registration.component';
 
 @NgModule({
-  declarations: [AdminComponent, MenuComponent, DashboardComponent, TestComponent],
+  declarations: [
+    AdminComponent,
+    MenuComponent,
+    DashboardComponent,
+    LoginComponent,
+    AdministrationComponent,
+    AuthorizationComponent,
+    EntryRouteComponent,
+    RegistrationComponent
+  ],
   imports: [
     BrowserModule,
     CommonModule,
@@ -28,6 +41,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   exports: [
     MenuComponent,
   ],
-  bootstrap: [AdminComponent, MenuComponent]
+  bootstrap: [EntryRouteComponent]
 })
 export class AdminModule { }
