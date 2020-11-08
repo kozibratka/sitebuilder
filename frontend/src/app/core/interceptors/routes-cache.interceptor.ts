@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
 @Injectable()
-export class RoutesInterceptor implements HttpInterceptor {
+export class RoutesCacheInterceptor implements HttpInterceptor {
 
   private cache = new Map<HttpRequest<any>, HttpResponse<string>>();
 

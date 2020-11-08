@@ -3,8 +3,8 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Observable, Observer, Subject, throwError} from 'rxjs';
 import {catchError, switchMap, tap} from 'rxjs/operators';
-import Routing from './external-library/router';
-import {TokenInterface} from './interfaces/token-interface';
+import Routing from '../../external-library/router';
+import {TokenInterface} from '../../interfaces/token-interface';
 
 
 @Injectable({

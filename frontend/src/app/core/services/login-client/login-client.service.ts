@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import {SymfonyApiClientService} from '../symfony-api/symfony-api-client.service';
 import {catchError, tap} from 'rxjs/operators';
-import {TokenInterface} from '../symfony-api/interfaces/token-interface';
+import {TokenInterface} from '../../interfaces/token-interface';
 import {HttpResponseToasterService} from '../http-response-toaster.service';
 import {Observable} from 'rxjs';
 

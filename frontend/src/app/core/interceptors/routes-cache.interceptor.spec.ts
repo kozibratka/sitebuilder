@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RoutesInterceptor } from './routes.interceptor';
+import { RoutesCacheInterceptor } from './routes-cache.interceptor';
 
 describe('RoutesInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      RoutesInterceptor
+      RoutesCacheInterceptor
       ]
   }));
 
   it('should be created', () => {
-    const interceptor: RoutesInterceptor = TestBed.inject(RoutesInterceptor);
+    const interceptor: RoutesCacheInterceptor = TestBed.inject(RoutesCacheInterceptor);
     expect(interceptor).toBeTruthy();
   });
 });

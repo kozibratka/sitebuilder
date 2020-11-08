@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalForRouteComponent } from './components/modal-for-route-component/modal-for-route.component';
 import {RouterModule} from '@angular/router';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {RoutesInterceptor} from './services/symfony-api/interceptors/routes.interceptor';
+import {RoutesCacheInterceptor} from './interceptors/routes-cache.interceptor';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -20,7 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   exports: [ModalForRouteComponent],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: RoutesInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RoutesCacheInterceptor, multi: true },
   ]
 })
 export class CoreModule { }
