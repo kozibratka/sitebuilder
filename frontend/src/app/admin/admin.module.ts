@@ -12,8 +12,6 @@ import {PageBuilderModule} from './admin-component/page-builder-module/page-buil
 import {PluginsModule} from '../plugins/plugins.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-
-
 @NgModule({
   declarations: [AdminComponent, MenuComponent, DashboardComponent, TestComponent],
   imports: [

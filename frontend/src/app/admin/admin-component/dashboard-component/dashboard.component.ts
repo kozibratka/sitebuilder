@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginClientService} from '../../../core/services/login-client/login-client.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,11 +7,12 @@ import {LoginClientService} from '../../../core/services/login-client/login-clie
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private sf: LoginClientService) {
-    sf.tryLogin('email@email.cz', 'heslo').subscribe(test => {}, error => {});
+  constructor() {
+
   }
 
   ngOnInit(): void {
+    // this.sf.tryLogin('email@email.cz', 'heslo').subscribe(test => {}, error => {});
   }
 
 }
