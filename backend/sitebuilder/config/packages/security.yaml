@@ -19,6 +19,11 @@ security:
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 username_path: email
 
+        register:
+            pattern: ^/user/registration
+            stateless: true
+            anonymous: true
+
         api:
             pattern:   ^/
             stateless: true
@@ -35,4 +40,5 @@ security:
 
     access_control:
          - { path: ^/security/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/user/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/, roles: ROLE_USER }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +20,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Serializer\Exclude()
      */
     private int $id;
 
@@ -62,6 +64,10 @@ class User implements UserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function setPassword(string $password) {
+        $this->password = $password;
     }
 
     public function getSalt()

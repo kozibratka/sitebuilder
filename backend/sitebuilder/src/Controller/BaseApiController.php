@@ -19,4 +19,10 @@ class BaseApiController extends AbstractController
 
         return JsonResponse::fromJsonString($serialized, $statusCode);
     }
+
+    public function persist($entity) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($entity);
+        $entityManager->flush();
+    }
 }
