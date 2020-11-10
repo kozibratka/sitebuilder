@@ -3,7 +3,6 @@ import jwt_decode from 'jwt-decode';
 import {SymfonyApiClientService} from '../symfony-api/symfony-api-client.service';
 import {catchError, tap} from 'rxjs/operators';
 import {TokenInterface} from '../../interfaces/token-interface';
-import {HttpResponseToasterService} from '../http-response-toaster.service';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -15,7 +14,6 @@ export class LoginClientService {
 
   constructor(
     private symfonyApiClient: SymfonyApiClientService,
-    private httpResponseToasterService: HttpResponseToasterService
   ) {
   }
 
@@ -33,8 +31,7 @@ export class LoginClientService {
       tap(
         token => {
           this.decodeAccessToken(token);
-        },
-        error => this.httpResponseToasterService.showError(error)
+        }
       ),
     );
   }
