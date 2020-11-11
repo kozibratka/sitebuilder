@@ -15,6 +15,7 @@ import {AuthorizationComponent} from './entry-route/authorization-component/auth
 import {PageBuilderModule} from './entry-route/administration-component/admin-component/page-builder-module/page-builder.module';
 import { EntryRouteComponent } from './entry-route/entry-route.component';
 import { RegistrationComponent } from './entry-route/authorization-component/registration/registration.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,16 +28,17 @@ import { RegistrationComponent } from './entry-route/authorization-component/reg
     EntryRouteComponent,
     RegistrationComponent
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    RouterModule,
-    SortablejsModule.forRoot({ animation: 150 }),
-    AdminRoutingModule,
-    PageBuilderModule,
-    PluginsModule,
-    NgbModule
-  ],
+    imports: [
+        BrowserModule,
+        CommonModule,
+        RouterModule,
+        SortablejsModule.forRoot({animation: 150}),
+        AdminRoutingModule,
+        PageBuilderModule,
+        PluginsModule,
+        NgbModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   exports: [
     MenuComponent,
