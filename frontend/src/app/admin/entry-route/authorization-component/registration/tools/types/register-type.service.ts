@@ -16,16 +16,17 @@ export class RegisterTypeService {
       email: [''],
       passwordFirst: [''],
       passwordSecond: ['']
-    }, {asyncValidators: this.createValidator()});
-
+    }, {asyncValidators: this.createValidator(), updateOn: 'submit'});
+    form.updateValueAndValidity();
     return form;
   }
 
   createValidator(): (AbstractControl) => Observable<ValidationErrors | null> {
     return (abstractControl: AbstractControl) => {
       return new Observable<ValidationErrors | null>(subscriber => {
-        console.log(abstractControl.value);
-        subscriber.next({aloha: 'faawfaw'});
+        abstractControl.setErrors({gagwag: 'wagawg'});
+
+        subscriber.next(null);
       });
     };
   }
