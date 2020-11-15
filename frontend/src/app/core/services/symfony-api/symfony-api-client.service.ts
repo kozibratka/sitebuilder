@@ -34,32 +34,32 @@ export class SymfonyApiClientService {
     }));
   }
 
-  get<T>(routeName: string): Observable<T> {
+  get<T>(routeName: string): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
         const path = Routing.generate(routeName);
-        return this.httpClient.get<T>(environment.backendUrl + path);
+        return this.httpClient.get<T>(environment.backendUrl + path, { observe: 'response' });
       })
     );
   }
 
-  post<T>(routeName: string, data): Observable<T> {
+  post<T>(routeName: string, data): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
         const path = Routing.generate(routeName);
-        return this.httpClient.post<T>(environment.backendUrl + path, data);
+        return this.httpClient.post<T>(environment.backendUrl + path, data, { observe: 'response' });
       })
     );
   }
 
-  refreshToken(username: string, passwordText: string): Observable<TokenInterface> {
+  refreshToken(username: string, passwordText: string): Observable<HttpResponse<TokenInterface>> {
     return this.post<TokenInterface>('token_create', {email: username, password: passwordText})
-      .pipe(tap((token) => {
-        this._token = token;
+      .pipe(tap((httpResponse) => {
+        this._token = httpResponse.body;
       }));
   }
 

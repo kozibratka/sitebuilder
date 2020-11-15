@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RegisterTypeService } from './register-type.service';
+import { RegisterFormService } from './register-form.service';
 
 describe('RegisterTypeService', () => {
-  let service: RegisterTypeService;
+  let service: RegisterFormService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RegisterTypeService);
+    service = TestBed.inject(RegisterFormService);
   });
 
   it('should be created', () => {

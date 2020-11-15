@@ -26,6 +26,12 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Length(min="3", allowEmptyString=false)
+     */
+    private string $fullName;
+
+    /**
+     * @ORM\Column(type="string")
      * @Assert\Email
      */
     private string $email;
@@ -81,5 +87,15 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function getFullName(): string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName)
+    {
+        $this->fullName = $fullName;
     }
 }

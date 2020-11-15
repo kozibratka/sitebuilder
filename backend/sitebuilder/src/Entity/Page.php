@@ -25,7 +25,7 @@ class Page
     private string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Authorization\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private User $user;

@@ -23,6 +23,6 @@ class UserController extends BaseApiController
             $this->persist($user);
             return $this->jsonResponseSimple($user, 201);
         }
-        return $this->jsonResponseSimple($form->getErrors(true), 200);
+        return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
     }
 }

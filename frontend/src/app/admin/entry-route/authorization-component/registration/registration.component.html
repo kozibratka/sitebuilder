@@ -1,4 +1,4 @@
-<form (ngSubmit)="sendForm()" [formGroup]="registrationForm">
+<form [formGroup]="registrationForm">
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="Celé jméno" formControlName="fullName">
     <div class="input-group-append">
@@ -15,19 +15,21 @@
       </div>
     </div>
   </div>
-  <div class="input-group mb-3">
-    <input type="password" class="form-control" placeholder="Heslo" formControlName="passwordFirst">
-    <div class="input-group-append">
-      <div class="input-group-text">
-        <span class="fas fa-lock"></span>
+  <div formGroupName="password">
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" placeholder="Heslo" formControlName="first">
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <span class="fas fa-lock"></span>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="input-group mb-3">
-    <input type="password" class="form-control" placeholder="Heslo znovu" formControlName="passwordSecond">
-    <div class="input-group-append">
-      <div class="input-group-text">
-        <span class="fas fa-lock"></span>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" placeholder="Heslo znovu" formControlName="second">
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <span class="fas fa-lock"></span>
+        </div>
       </div>
     </div>
   </div>

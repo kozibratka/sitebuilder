@@ -4,6 +4,7 @@ import {SymfonyApiClientService} from '../symfony-api/symfony-api-client.service
 import {catchError, tap} from 'rxjs/operators';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {Observable} from 'rxjs';
+import {HttpResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,11 @@ export class LoginClientService {
     this._decodedToken = value;
   }
 
-  tryLogin(username: string, password: string): Observable<TokenInterface> {
+  tryLogin(username: string, password: string): Observable<HttpResponse<TokenInterface>> {
     return this.symfonyApiClient.refreshToken(username, password).pipe(
       tap(
-        token => {
-          this.decodeAccessToken(token);
+        httpResponse => {
+          this.decodeAccessToken(httpResponse.body);
         }
       ),
     );
