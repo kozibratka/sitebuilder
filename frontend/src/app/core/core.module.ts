@@ -6,11 +6,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RoutesCacheInterceptor} from './interceptors/routes-cache.interceptor';
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FormErrorDirective } from './directives/form-error/form-error.directive';
+import { ErrorMessageComponent } from './directives/form-error/tools/components/error-message/error-message.component';
 
 
 
 @NgModule({
-  declarations: [ModalForRouteComponent],
+  declarations: [ModalForRouteComponent, FormErrorDirective, ErrorMessageComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -18,7 +20,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  exports: [ModalForRouteComponent],
+  exports: [ModalForRouteComponent, FormErrorDirective],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RoutesCacheInterceptor, multi: true },
   ]

@@ -34,7 +34,7 @@ export abstract class AbstractApiFormService {
     const iterate = (errors, form: AbstractControl) => {
       Object.keys(errors).forEach(key => {
         if (Array.isArray(errors[key])){
-          form.get(key).setErrors(errors[key], {emitEvent: false});
+          form.get(key).setErrors(errors[key], {emitEvent: true});
         } else  {
           iterate(errors[key], form.get(key));
         }

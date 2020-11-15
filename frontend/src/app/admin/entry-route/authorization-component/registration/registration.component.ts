@@ -14,8 +14,6 @@ export class RegistrationComponent implements OnInit {
   constructor(private loginClientService: LoginClientService, private registerTypeService: RegisterFormService) {
     this.registrationForm = this.registerTypeService.createForm();
     this.registrationForm.statusChanges.subscribe(status => {
-      console.log(status);
-      console.log(this.registrationForm.get('email'));
       if (status === 'VALID'){
         console.log('validní...muzu odeslat');
       }

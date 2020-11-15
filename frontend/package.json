@@ -27,7 +27,7 @@
     "jwt-decode": "^3.1.1",
     "ngx-sortablejs": "^3.1.4",
     "ngx-toastr": "^13.1.0",
-    "rxjs": "~6.5.5",
+    "rxjs": "^6.5.5",
     "sortablejs": "^1.10.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
