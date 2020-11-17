@@ -45,13 +45,13 @@ export class SymfonyApiClientService {
     );
   }
 
-  post<T>(routeName: string, data): Observable<HttpResponse<T>> {
+  post<T>(routeName: string, data, headersOptions?: HttpHeaders | { [header: string]: string | string[]; }): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
         const path = Routing.generate(routeName);
-        return this.httpClient.post<T>(environment.backendUrl + path, data, { observe: 'response' });
+        return this.httpClient.post<T>(environment.backendUrl + path, data, { observe: 'response', headers: headersOptions });
       })
     );
   }
