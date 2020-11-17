@@ -15,7 +15,6 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm = this.registerTypeService.createForm();
     this.registrationForm.statusChanges.subscribe(status => {
       if (status === 'VALID'){
-        console.log('validní...muzu odeslat');
       }
     });
   }

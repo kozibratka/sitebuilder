@@ -1,6 +1,6 @@
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors} from '@angular/forms';
 import {Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
+import {ChangeDetectorRef, Injectable} from '@angular/core';
 import {SymfonyApiClientService} from '../services/symfony-api/symfony-api-client.service';
 
 @Injectable({
@@ -8,7 +8,10 @@ import {SymfonyApiClientService} from '../services/symfony-api/symfony-api-clien
 })
 export abstract class AbstractApiFormService {
 
-  constructor(protected formBuilder: FormBuilder, protected symfonyApiClientService: SymfonyApiClientService) {
+  constructor(
+    protected formBuilder: FormBuilder,
+    protected symfonyApiClientService: SymfonyApiClientService
+  ) {
   }
 
   abstract createForm(): FormGroup;

@@ -1,7 +1,7 @@
 import {
   AfterContentInit,
   ComponentFactoryResolver, ContentChild,
-  Directive, Optional, Self,
+  Directive, ElementRef, OnDestroy, Optional, Renderer2, Self,
   ViewContainerRef
 } from '@angular/core';
 import {NgControl} from '@angular/forms';
@@ -10,44 +10,58 @@ import {ErrorMessageComponent} from './tools/components/error-message/error-mess
 @Directive({
   selector: '[appFormError]'
 })
-export class FormErrorDirective implements AfterContentInit{
+export class FormErrorDirective implements AfterContentInit, OnDestroy{
 
   @ContentChild(NgControl, {read: NgControl}) formInput: NgControl;
+  @ContentChild(NgControl, {read: ElementRef}) formInputElementRef: ElementRef;
   @ContentChild('errorFormContainer', {read: ViewContainerRef}) errorFormContainer: ViewContainerRef;
   private errorMessageComonent: ErrorMessageComponent;
+  private cleanErrorMessageListenerFnc: () => void;
 
   constructor(
     private resolve: ComponentFactoryResolver,
+    private renderer2: Renderer2,
+    private elementRef: ElementRef,
     @Optional() @Self() private selfInput?: NgControl,
-    private selfViewContainer?: ViewContainerRef
+    private selfViewContainer?: ViewContainerRef,
   ) {
   }
 
   ngAfterContentInit(): void {
-    let container: ViewContainerRef;
     if (this.selfInput || !this.errorFormContainer) {
-      container = this.selfViewContainer;
+      this.errorFormContainer = this.selfViewContainer;
     }
     else {
-      container = this.errorFormContainer;
+      this.selfInput = this.formInput;
+      this.formInputElementRef = this.elementRef;
     }
-    this.formInput.statusChanges.subscribe(status => {
-      console.log(status);
-      this.clearMessage(container);
+    this.selfInput.statusChanges.subscribe(status => {
+      this.clearMessage();
       if (status === 'INVALID') {
-        this.createErrorMessage(container);
+        this.createErrorMessage();
       }
+    });
+    this.registerErrorMessageClean();
+  }
+
+  ngOnDestroy(): void {
+    this.cleanErrorMessageListenerFnc();
+  }
+
+  createErrorMessage(): void {
+    const factory = this.resolve.resolveComponentFactory(ErrorMessageComponent);
+    this.errorMessageComonent = this.errorFormContainer.createComponent<ErrorMessageComponent>(factory).instance;
+    this.errorMessageComonent.errors = this.selfInput.errors;
+  }
+
+  registerErrorMessageClean(): void {
+    this.cleanErrorMessageListenerFnc = this.renderer2.listen(this.formInputElementRef.nativeElement, 'blur', (event) => {
+      this.clearMessage();
     });
   }
 
-  createErrorMessage(container: ViewContainerRef): void {
-    const factory = this.resolve.resolveComponentFactory(ErrorMessageComponent);
-    this.errorMessageComonent = container.createComponent<ErrorMessageComponent>(factory).instance;
-    this.errorMessageComonent.errors = this.formInput.errors;
-  }
-
-  clearMessage(container: ViewContainerRef): void {
-    container.clear();
+  clearMessage(): void {
+    this.errorFormContainer.clear();
   }
 
 }
