@@ -32,3 +32,11 @@ services:
     App\EventListener\RequestJsonToArrayListener:
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+    App\EventListener\Doctrine\UserPasswordEncodeListener:
+        tags:
+            -
+                name: doctrine.orm.entity_listener
+                event: prePersist
+                entity: 'App\Entity\User'
+

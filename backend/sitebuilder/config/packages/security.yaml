@@ -1,12 +1,12 @@
 security:
     encoders:
-        App\Entity\Authorization\User:
+        App\Entity\User:
             algorithm: 'auto'
 
     providers:
         users:
             entity:
-                class: 'App\Entity\Authorization\User'
+                class: 'App\Entity\User'
                 property: 'email'
     firewalls:
         login:
