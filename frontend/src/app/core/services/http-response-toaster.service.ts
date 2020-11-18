@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {HttpErrorResponse} from '@angular/common/http';
+import {NotifierService} from './notifier.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpResponseToasterService {
 
-  constructor(private toastr: ToastrService) {
+  constructor(private notifierService: NotifierService) {
   }
 
   showError(error: string | HttpErrorResponse, codeStatus?: number, errorMessage?: string): void {
@@ -41,6 +42,6 @@ export class HttpResponseToasterService {
     } else {
       completedMessage = error;
     }
-    this.toastr.error(completedMessage);
+    this.notifierService.notify(completedMessage, 'error');
   }
 }

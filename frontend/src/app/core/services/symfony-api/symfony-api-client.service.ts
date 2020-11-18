@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {Observable, Observer, Subject, throwError} from 'rxjs';
 import {catchError, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../external-library/router';
@@ -34,13 +34,18 @@ export class SymfonyApiClientService {
     }));
   }
 
-  get<T>(routeName: string): Observable<HttpResponse<T>> {
+  get<T = {}>(routeName: string, querySegmentParam?: string[]): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
-        const path = Routing.generate(routeName);
-        return this.httpClient.get<T>(environment.backendUrl + path, { observe: 'response' });
+        let path = Routing.generate(routeName);
+        if (querySegmentParam) {
+            querySegmentParam.forEach(value => {
+            path += '/' + value;
+          });
+        }
+        return this.httpClient.get<T>(environment.backendUrl + path, {observe: 'response'});
       })
     );
   }

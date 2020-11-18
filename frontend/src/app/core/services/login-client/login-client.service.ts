@@ -37,9 +37,9 @@ export class LoginClientService {
     );
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn(): boolean | null {
     if (!this._decodedToken) {
-      return false;
+      return null;
     }
     if (new Date(this._decodedToken.exp * 1000) < new Date()) {
       return false;

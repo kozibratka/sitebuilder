@@ -7,11 +7,14 @@ import {AdministrationComponent} from './entry-route/administration-component/ad
 import {AuthorizationComponent} from './entry-route/authorization-component/authorization.component';
 import {RegistrationComponent} from './entry-route/authorization-component/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization-component/login-component/login.component';
+import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdministrationComponent,
+    canActivate: [RouteRoleGuardService],
+    canActivateChild: [RouteRoleGuardService],
     children: [
       {
         path: 'page-builder/create',
