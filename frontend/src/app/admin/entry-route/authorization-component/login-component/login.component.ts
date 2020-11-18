@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoginFormService} from './tools/forms/login-form.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginFormService: LoginFormService) {
+    let loginForm = this.loginFormService.createForm();
+    loginForm.statusChanges.subscribe()
+    if (status === 'VALID') {
+
+    }
+  }
 
   ngOnInit(): void {
   }
