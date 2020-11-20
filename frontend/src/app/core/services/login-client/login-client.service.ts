@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
 import {SymfonyApiClientService} from '../symfony-api/symfony-api-client.service';
-import {catchError, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {Observable} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
@@ -11,44 +11,28 @@ import {HttpResponse} from '@angular/common/http';
 })
 export class LoginClientService {
 
-  private _decodedToken: {exp: number} = null;
-
   constructor(
     private symfonyApiClient: SymfonyApiClientService,
   ) {
   }
 
-
-  get decodedToken(): { exp: number } {
-    return this._decodedToken;
-  }
-
-  set decodedToken(value: { exp: number }) {
-    this._decodedToken = value;
-  }
-
   tryLogin(username: string, password: string): Observable<HttpResponse<TokenInterface>> {
-    return this.symfonyApiClient.refreshToken(username, password).pipe(
-      tap(
-        httpResponse => {
-          this.decodeAccessToken(httpResponse.body);
-        }
-      ),
-    );
+    return this.symfonyApiClient.refreshToken(username, password);
   }
 
   isLoggedIn(): boolean | null {
-    if (!this._decodedToken) {
+    const decoded = this.decodeAccessToken(this.symfonyApiClient.token);
+    if (!decoded) {
       return null;
     }
-    if (new Date(this._decodedToken.exp * 1000) < new Date()) {
+    if (new Date(decoded.exp * 1000) < new Date()) {
       return false;
     }
   }
 
-  decodeAccessToken(token: TokenInterface): unknown {
+  decodeAccessToken(token: string): {exp: number} {
     try {
-      this.decodedToken = jwt_decode(token.token) as any;
+      return jwt_decode(token) as any;
     } catch (Error) {
       return null;
     }

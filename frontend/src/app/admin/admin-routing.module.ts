@@ -14,7 +14,6 @@ const routes: Routes = [
     path: 'admin',
     component: AdministrationComponent,
     canActivate: [RouteRoleGuardService],
-    canActivateChild: [RouteRoleGuardService],
     children: [
       {
         path: 'page-builder/create',

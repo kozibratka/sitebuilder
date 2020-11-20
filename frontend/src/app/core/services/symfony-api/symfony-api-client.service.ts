@@ -14,49 +14,52 @@ export class SymfonyApiClientService {
 
   private status: 'none' | 'inProgress' | 'done' = 'none';
   private urlFetchNotification$ = new Subject<object>();
-  private _token: TokenInterface;
 
   constructor(private httpClient: HttpClient) {
-    // this.get<object>('token_create').subscribe(value => {
-    //   console.log(value);
-    // });
   }
 
   private downloadRoutes(): Observable<object> {
     this.status = 'inProgress';
     return this.httpClient.get(environment.backendUrl + environment.backendRoutesPath,
-      {responseType: 'json', headers: {fetchRoutes :  'true'}
+      {
+        responseType: 'json', headers: {fetchRoutes: 'true'}
       }).pipe(
-        catchError(this.handleErrorRoute),
-        tap(response => {
+      catchError(this.handleErrorRoute),
+      tap(response => {
         this.status = 'done';
         this.urlFetchNotification$.next(response);
-    }));
+      }));
   }
 
-  get<T = {}>(routeName: string, querySegmentParam?: string[]): Observable<HttpResponse<T>> {
+  get<T = {}>(routeName: string, querySegmentParam?: string[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
         let path = Routing.generate(routeName);
         if (querySegmentParam) {
-            querySegmentParam.forEach(value => {
+          querySegmentParam.forEach(value => {
             path += '/' + value;
           });
         }
-        return this.httpClient.get<T>(environment.backendUrl + path, {observe: 'response'});
+        return this.httpClient.get<T>(environment.backendUrl + path, {
+          observe: 'response',
+          headers: this.prepareHeader(headersOptions)
+        });
       })
     );
   }
 
-  post<T>(routeName: string, data, headersOptions?: HttpHeaders | { [header: string]: string | string[]; }): Observable<HttpResponse<T>> {
+  post<T>(routeName: string, data, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
         const path = Routing.generate(routeName);
-        return this.httpClient.post<T>(environment.backendUrl + path, data, { observe: 'response', headers: headersOptions });
+        return this.httpClient.post<T>(environment.backendUrl + path, data, {
+          observe: 'response',
+          headers: this.prepareHeader(headersOptions)
+        });
       })
     );
   }
@@ -64,22 +67,29 @@ export class SymfonyApiClientService {
   refreshToken(username: string, passwordText: string): Observable<HttpResponse<TokenInterface>> {
     return this.post<TokenInterface>('token_create', {email: username, password: passwordText})
       .pipe(tap((httpResponse) => {
-        this._token = httpResponse.body;
+        this.token = httpResponse.body.token;
       }));
   }
 
-
-  get token(): TokenInterface {
-    return this._token;
+  private prepareHeader(headersOptions: { [header: string]: string } = {}): { [header: string]: string } {
+    if (this.token) {
+      headersOptions.Authorization = 'Bearer ' + this.token;
+    }
+    return headersOptions;
   }
 
-  set token(value: TokenInterface) {
-    this._token = value;
+
+  get token(): string {
+    return localStorage.getItem('token');
+  }
+
+  set token(value: string) {
+    localStorage.setItem('token', value);
   }
 
   private tryGetRoutes(): Observable<object> {
     let routesFromBackend$: Observable<object>;
-    switch (this.status){
+    switch (this.status) {
       case 'done':
       case 'none':
         routesFromBackend$ = this.downloadRoutes();
@@ -95,12 +105,12 @@ export class SymfonyApiClientService {
     return routesFromBackend$;
   }
 
-   handleErrorRoute(error: HttpErrorResponse): Observable<never> {
+  handleErrorRoute(error: HttpErrorResponse): Observable<never> {
     let completedMessage = '';
     if (error.error instanceof ErrorEvent) {
       completedMessage = 'Nepodařilo se kontaktovat server pro získání routy. Zkontrolujte stav vašeho připojení.';
     } else {
-      completedMessage =  'Došlo k chybě při získání routy na server. Opakute akci později. Kód chyby: ' + error.status;
+      completedMessage = 'Došlo k chybě při získání routy na server. Opakute akci později. Kód chyby: ' + error.status;
     }
 
     return throwError(completedMessage);

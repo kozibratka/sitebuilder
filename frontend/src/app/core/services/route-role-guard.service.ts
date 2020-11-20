@@ -34,7 +34,7 @@ export class RouteRoleGuardService implements CanActivate {
       return this.router.parseUrl('/authorization/login');
     }
 
-    return this.symfonyApiClientService.get<{ result: false | true }>('role_check', ['aloha']).pipe(
+    return this.symfonyApiClientService.get<{ result: false | true }>('role_check', ['ROLE_USER']).pipe(
       map(value => {
         if (value.body.result === true) {
           return true;
