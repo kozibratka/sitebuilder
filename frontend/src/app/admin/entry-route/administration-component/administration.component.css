@@ -1,0 +1,12 @@
+.user-menu>a {
+  position: relative;
+  display: block;
+  padding: 7px 15px;
+}
+
+.user-menu>.dropdown-menu {
+  position: absolute;
+  right: 0;
+  left: auto;
+}
+

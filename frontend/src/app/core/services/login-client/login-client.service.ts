@@ -30,6 +30,10 @@ export class LoginClientService {
     }
   }
 
+  logout(): void {
+    this.symfonyApiClient.token = '';
+  }
+
   decodeAccessToken(token: string): {exp: number} {
     try {
       return jwt_decode(token) as any;

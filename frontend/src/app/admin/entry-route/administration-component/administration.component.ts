@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {LoginClientService} from '../../../core/services/login-client/login-client.service';
+import {NotifierService} from '../../../core/services/notifier.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-administration',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private loginClientService: LoginClientService,
+    private notifierService: NotifierService,
+    private route: Router
+  ) {
+  }
 
   ngOnInit(): void {
+  }
+
+  logout(): void {
+    this.loginClientService.logout();
+    this.notifierService.notify('Byl jste úspěšně odhlášen', 'success');
+    this.route.navigate(['/authorization/login']);
   }
 
 }

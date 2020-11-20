@@ -25,6 +25,7 @@
     "document-offset": "^1.0.4",
     "gridstack": "^2.0.0",
     "jwt-decode": "^3.1.1",
+    "ngx-gravatar": "^10.0.0",
     "ngx-sortablejs": "^3.1.4",
     "ngx-toastr": "^13.1.0",
     "rxjs": "^6.5.5",

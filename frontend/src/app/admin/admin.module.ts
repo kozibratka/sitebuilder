@@ -17,6 +17,7 @@ import { EntryRouteComponent } from './entry-route/entry-route.component';
 import { RegistrationComponent } from './entry-route/authorization-component/registration/registration.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from '../core/core.module';
+import {GravatarModule} from 'ngx-gravatar';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {CoreModule} from '../core/core.module';
     PluginsModule,
     NgbModule,
     ReactiveFormsModule,
-    CoreModule
+    CoreModule,
+    GravatarModule
   ],
   providers: [],
   exports: [
