@@ -1,6 +1,6 @@
-<form [formGroup]="loginForm">
-  <div appFormError class="form-group">
-    <div #errorFormContainer class="input-group">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div  class="input-group">
       <input type="email" class="form-control" placeholder="Email" formControlName="email">
       <div class="input-group-append">
         <div class="input-group-text">
@@ -8,15 +8,21 @@
         </div>
       </div>
     </div>
+    <div class="small text-danger" *ngIf="email.invalid && (email.touched) && email.errors.required">
+      Toto pole je povinné
+    </div>
   </div>
-  <div appFormError class="form-group">
-    <div #errorFormContainer class="input-group">
+  <div class="form-group">
+    <div class="input-group">
       <input type="password" class="form-control" placeholder="Heslo" formControlName="password">
       <div class="input-group-append">
         <div class="input-group-text">
           <span class="fas fa-lock"></span>
         </div>
       </div>
+    </div>
+    <div class="small text-danger" *ngIf="password.invalid && (password.touched) && password.errors.required">
+      Toto pole je povinné
     </div>
   </div>
   <div class="row">

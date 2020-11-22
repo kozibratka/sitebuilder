@@ -24,7 +24,7 @@ export class SymfonyApiClientService {
       {
         responseType: 'json', headers: {fetchRoutes: 'true'}
       }).pipe(
-      catchError(this.handleErrorRoute),
+      catchError(this.handleErrorRoute.bind(this)),
       tap(response => {
         this.status = 'done';
         this.urlFetchNotification$.next(response);
@@ -107,6 +107,7 @@ export class SymfonyApiClientService {
 
   handleErrorRoute(error: HttpErrorResponse): Observable<never> {
     let completedMessage = '';
+    this.status = 'none';
     if (error.error instanceof ErrorEvent) {
       completedMessage = 'Nepodařilo se kontaktovat server pro získání routy. Zkontrolujte stav vašeho připojení.';
     } else {
