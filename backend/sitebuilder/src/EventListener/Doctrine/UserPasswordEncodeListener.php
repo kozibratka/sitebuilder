@@ -3,9 +3,7 @@
 
 namespace App\EventListener\Doctrine;
 
-
 use App\Entity\User;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserPasswordEncodeListener
@@ -17,7 +15,7 @@ class UserPasswordEncodeListener
         $this->userPasswordEncoder = $userPasswordEncoder;
     }
 
-    public function prePersist(User $user, LifecycleEventArgs $event)
+    public function prePersist(User $user)
     {
         $encodedPassword = $this->userPasswordEncoder->encodePassword($user, $user->getPassword());
         $user->setPassword($encodedPassword);

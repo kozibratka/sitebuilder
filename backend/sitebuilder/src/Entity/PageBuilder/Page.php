@@ -1,9 +1,10 @@
 <?php
 
+namespace App\Entity\PageBuilder;
 
-namespace App\Entity;
-
-
+use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,6 +30,16 @@ class Page
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private User $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\PageBlock", mappedBy="page")
+     */
+    private Collection $pageBlocks;
+
+    public function __construct()
+    {
+        $this->pageBlocks = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -58,5 +69,15 @@ class Page
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    public function getPageBlocks(): Collection
+    {
+        return $this->pageBlocks;
+    }
+
+    public function setPageBlocks(Collection $pageBlocks)
+    {
+        $this->pageBlocks = $pageBlocks;
     }
 }
