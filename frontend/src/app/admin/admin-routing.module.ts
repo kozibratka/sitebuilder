@@ -21,7 +21,7 @@ const routes: Routes = [
         children: [
           {
             path: 'item-admin',
-            loadChildren: () => import('../plugins/modules/routes-admin.module').then(m => m.RoutesAdminModule)
+            loadChildren: () => import('../plugins/routes-admin.module').then(m => m.RoutesAdminModule)
           }
         ]
       },

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {TestComponent} from '../../test.component';
-import {AbstractMenuPluginResolverMessenger} from '../../../../../admin/entry-route/administration-component/admin-component/page-builder-module/page-builder-component/tools/messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
+import {TestPluginComponent} from '../../test-plugin.component';
+import {AbstractMenuPluginResolverMessenger} from '../../../../admin/entry-route/administration-component/admin-component/page-builder-module/page-builder-component/tools/messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class TestMenuResloverMessengerService extends AbstractMenuPluginResolver
   constructor() { super(); }
 
   get componentClass(): new(...args: any[]) => {} {
-    return TestComponent;
+    return TestPluginComponent;
   }
 
   getMenuImage(): string {

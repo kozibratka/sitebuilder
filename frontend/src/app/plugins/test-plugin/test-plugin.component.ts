@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {LinkGenerateAble} from '../../../core/interfaces/link-generate-able';
+import {LinkGenerateAble} from '../../core/interfaces/link-generate-able';
 import {NavigationExtras} from '@angular/router';
 
 @Component({
   selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  templateUrl: './test-plugin.component.html',
+  styleUrls: ['./test-plugin.component.css']
 })
-export class TestComponent implements OnInit, LinkGenerateAble {
+export class TestPluginComponent implements OnInit, LinkGenerateAble {
 
   constructor() {  }
 

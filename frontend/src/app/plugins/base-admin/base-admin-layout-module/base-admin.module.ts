@@ -1,9 +1,9 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminComponent } from './components/admin/admin.component';
 import {RouterModule} from '@angular/router';
-import {MenuLabel} from './components/admin/tools/interfaces/menu-label';
-import {MENU_LABELS} from './components/admin/tools/injection-tokens/menu-label';
+import {AdminComponent} from './admin-component/admin.component';
+import {MenuLabel} from './admin-component/tools/interfaces/menu-label';
+import {MENU_LABELS} from './admin-component/tools/injection-tokens/menu-label';
 
 
 

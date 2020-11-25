@@ -1,6 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {BaseAdminComponent} from '../../../../../base-admin/base-admin.component';
-import {ModalParametersMesseneger} from '../../../../../../../core/components/modal-for-route-component/tools/messengers/modal-for-route/modal-parameters-messeneger';
+import {BaseAdminComponent} from '../../../../base-admin/base-admin.component';
+import {ModalParametersMesseneger} from '../../../../../core/components/modal-for-route-component/tools/messengers/modal-for-route/modal-parameters-messeneger';
 
 @Component({
   selector: 'app-base-plugin-admin',
