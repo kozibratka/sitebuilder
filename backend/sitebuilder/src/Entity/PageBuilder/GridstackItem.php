@@ -4,6 +4,7 @@
 namespace App\Entity\PageBuilder;
 
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,6 +45,11 @@ class GridstackItem
      * @ORM\Column(type="integer")
      */
     private int $y;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\plugin\BasePlugin", inversedBy="gridstackItem")
+     */
+    private Collection $plugins;
 
     public function getId(): int
     {
@@ -103,5 +109,15 @@ class GridstackItem
     public function setY(int $y)
     {
         $this->y = $y;
+    }
+
+    public function getPlugins(): Collection
+    {
+        return $this->plugins;
+    }
+
+    public function setPlugins(Collection $plugins)
+    {
+        $this->plugins = $plugins;
     }
 }
