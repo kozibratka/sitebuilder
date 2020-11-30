@@ -4,8 +4,9 @@
 namespace App\Entity\PageBuilder;
 
 
-use Doctrine\Common\Collections\Collection;
+use App\Entity\PageBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -23,6 +24,7 @@ class GridstackItem
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\PageBlock", inversedBy="gridstackItems")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Serializer\Exclude()
      */
     private PageBlock $pageBlock;
 
@@ -49,7 +51,7 @@ class GridstackItem
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\plugin\BasePlugin", inversedBy="gridstackItem")
      */
-    private Collection $plugins;
+    private BasePlugin $plugin;
 
     public function getId(): int
     {
@@ -111,13 +113,13 @@ class GridstackItem
         $this->y = $y;
     }
 
-    public function getPlugins(): Collection
+    public function getPlugin(): BasePlugin
     {
-        return $this->plugins;
+        return $this->plugin;
     }
 
-    public function setPlugins(Collection $plugins)
+    public function setPlugin(BasePlugin $plugin)
     {
-        $this->plugins = $plugins;
+        $this->plugin = $plugin;
     }
 }

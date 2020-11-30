@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Entity\PageBuilder\plugin;
-
+namespace App\Entity\PageBuilder\Plugin;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,25 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
 class TextPlugin extends BasePlugin
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
-
-    /**
      * @ORM\Column(type="text")
      */
     private string $text;
 
-    public function getId(): int
+    public function __construct()
     {
-        return $this->id;
-    }
-
-    public function setId(int $id)
-    {
-        $this->id = $id;
+        $this->identifier = 'text_plugin';
     }
 
     public function getText(): string

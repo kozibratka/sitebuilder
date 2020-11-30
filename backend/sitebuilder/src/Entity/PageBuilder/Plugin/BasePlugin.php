@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Entity\PageBuilder\plugin;
+namespace App\Entity\PageBuilder\Plugin;
 
 
 use App\Entity\PageBuilder\GridstackItem;
 use Doctrine\ORM\Mapping as ORM;
-use ReflectionClass;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -25,15 +25,11 @@ abstract class BasePlugin
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="plugins")
+     * @Serializer\Exclude()
      */
     private ?GridstackItem $gridstackItem;
 
-    private string $identifier;
-
-    public function __construct()
-    {
-        $this->identifier = (new ReflectionClass($this))->getShortName();
-    }
+    protected string $identifier;
 
     public function getId(): int
     {
@@ -53,5 +49,15 @@ abstract class BasePlugin
     public function setGridstackItem(?GridstackItem $gridstackItem)
     {
         $this->gridstackItem = $gridstackItem;
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(string $identifier)
+    {
+        $this->identifier = $identifier;
     }
 }
