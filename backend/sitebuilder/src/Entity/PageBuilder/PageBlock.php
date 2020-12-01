@@ -3,6 +3,7 @@
 
 namespace App\Entity\PageBuilder;
 
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,6 +36,12 @@ class PageBlock
      * @ORM\Column(type="integer")
      */
     private int $order;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private User $user;
 
     public function __construct()
     {
@@ -79,5 +86,15 @@ class PageBlock
     public function setOrder(int $order)
     {
         $this->order = $order;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 }

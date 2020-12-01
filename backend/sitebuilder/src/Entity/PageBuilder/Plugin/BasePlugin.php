@@ -5,6 +5,7 @@ namespace App\Entity\PageBuilder\Plugin;
 
 
 use App\Entity\PageBuilder\GridstackItem;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -28,6 +29,12 @@ abstract class BasePlugin
      * @Serializer\Exclude()
      */
     private ?GridstackItem $gridstackItem;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private User $user;
 
     protected string $identifier;
 
@@ -59,5 +66,15 @@ abstract class BasePlugin
     public function setIdentifier(string $identifier)
     {
         $this->identifier = $identifier;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
     }
 }
