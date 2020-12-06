@@ -7,6 +7,7 @@ namespace App\Entity\PageBuilder\Plugin;
 use App\Entity\PageBuilder\GridstackItem;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
@@ -32,7 +33,9 @@ abstract class BasePlugin
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
+     * @Gedmo\Blameable(on="create")
+     * @Serializer\Exclude()
      */
     private User $user;
 

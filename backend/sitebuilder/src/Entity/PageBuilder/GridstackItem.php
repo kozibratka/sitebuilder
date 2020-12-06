@@ -49,7 +49,7 @@ class GridstackItem
     private int $y;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\plugin\BasePlugin", inversedBy="gridstackItem")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\plugin\BasePlugin", inversedBy="gridstackItem", cascade="persist")
      */
     private BasePlugin $plugin;
 
