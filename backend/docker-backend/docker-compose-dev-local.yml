@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   mysql:
     environment:
@@ -30,6 +30,16 @@ services:
       - ../sitebuilder:/var/www
     environment:
       - NODE_ENV=dev-local
+
+#  php-fpm-8.0:
+#    networks:
+#      docker_webnet:
+#        ipv4_address: 10.3.0.7
+#    volumes:
+#      - ../sitebuilder:/var/www
+#    build:
+#      args:
+#        NODE_ENV: dev-local
 
   adminer:
     image: adminer:latest
