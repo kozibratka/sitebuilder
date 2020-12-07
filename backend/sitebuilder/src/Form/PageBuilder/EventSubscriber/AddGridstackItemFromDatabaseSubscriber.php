@@ -22,5 +22,8 @@ class AddGridstackItemFromDatabaseSubscriber implements EventSubscriberInterface
 
     public function onPreSubmit(FormEvent $event): void {
         //$submitedData = $event->getData();
+//        $modelData = $event->getForm()->getViewData();
+//        if($modelData) {
+//        }
     }
 }

@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -40,6 +41,7 @@ class PageBlock
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Gedmo\Blameable(on="create")
      */
     private User $user;
 
@@ -73,9 +75,16 @@ class PageBlock
         return $this->gridstackItems;
     }
 
-    public function setGridstackItems(Collection $gridstackItems)
+    public function addGridstackItem(GridstackItem $gridstackItem): self
     {
-        $this->gridstackItems = $gridstackItems;
+        $this->gridstackItems->add($gridstackItem);
+        return $this;
+    }
+
+    public function removeGridstackItem(GridstackItem $gridstackItem): self
+    {
+        $this->gridstackItems->removeElement($gridstackItem);
+        return $this;
     }
 
     public function getOrder(): int

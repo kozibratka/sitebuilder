@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
@@ -28,11 +29,12 @@ class Page
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Gedmo\Blameable(on="create")
      */
     private User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\PageBlock", mappedBy="page")
+     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\PageBlock", mappedBy="page", cascade={"persist"})
      */
     private Collection $pageBlocks;
 
@@ -76,8 +78,12 @@ class Page
         return $this->pageBlocks;
     }
 
-    public function setPageBlocks(Collection $pageBlocks)
-    {
-        $this->pageBlocks = $pageBlocks;
+    public function addPageBlock(PageBlock $pageBlock) {
+        $pageBlock->setPage($this);
+        $this->pageBlocks->add($pageBlock);
+    }
+
+    public function removePageBlock(PageBlock $pageBlock) {
+        $this->pageBlocks->removeElement($pageBlock);
     }
 }

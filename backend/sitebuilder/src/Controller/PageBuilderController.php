@@ -5,15 +5,16 @@ namespace App\Controller;
 
 
 use App\Entity\PageBuilder\Page;
+use App\Form\PageBuilder\PageType;
 use JMS\Serializer\SerializerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("page", name="page_")
  */
-class PageBuilderController extends AbstractController
+class PageBuilderController extends BaseApiController
 {
     /**
      * @Route("/list", name="list")
@@ -24,5 +25,30 @@ class PageBuilderController extends AbstractController
         $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['user' => $user]);
 
         return JsonResponse::fromJsonString($serializer->serialize($pages, 'json'));
+    }
+
+    /**
+     * @Route("/create", name="create")
+     */
+    public function create(Request $request)
+    {
+        $form = $this->createForm(PageType::class);
+        $form->submit($request->request->all(), false);
+        if($form->isValid()) {
+            $page = $form->getData();
+            $this->persist($page);
+            return $this->jsonResponseSimple($page, 201);
+        }
+
+        return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
+    }
+
+    /**
+     * @Route("/update/{id}", name="update")
+     */
+    public function update(SerializerInterface $serializer, Page $page)
+    {
+
+
     }
 }
