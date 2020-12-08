@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -29,19 +30,15 @@ class PageBlock
     private Page $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="pageBlock")
+     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="pageBlock", cascade={"persist"})
      */
     private Collection $gridstackItems;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private int $order;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Gedmo\Blameable(on="create")
+     * @Serializer\Exclude()
      */
     private User $user;
 
@@ -85,16 +82,6 @@ class PageBlock
     {
         $this->gridstackItems->removeElement($gridstackItem);
         return $this;
-    }
-
-    public function getOrder(): int
-    {
-        return $this->order;
-    }
-
-    public function setOrder(int $order)
-    {
-        $this->order = $order;
     }
 
     public function getUser(): User

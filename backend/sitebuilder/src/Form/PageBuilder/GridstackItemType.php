@@ -30,7 +30,7 @@ class GridstackItemType extends AbstractType
             ->add('x')
             ->add('y')
             ->addEventSubscriber($this->addPluginFieldSubscriber)
-            ->addEventSubscriber($this->addGridstackItemFromDatabaseSubscriber)
+            //->addEventSubscriber($this->addGridstackItemFromDatabaseSubscriber)
             ;
     }
 
