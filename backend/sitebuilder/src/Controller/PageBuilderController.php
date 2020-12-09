@@ -46,9 +46,16 @@ class PageBuilderController extends BaseApiController
     /**
      * @Route("/update/{id}", name="update")
      */
-    public function update(SerializerInterface $serializer, Page $page)
+    public function update(Request $request, Page $page)
     {
+        $form = $this->createForm(PageType::class, $page);
+        $form->submit($request->request->all(), false);
+        if($form->isValid()) {
+            $page = $form->getData();
+            $this->persist($page);
+            return $this->jsonResponseSimple($page, 201);
+        }
 
-
+        return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
     }
 }

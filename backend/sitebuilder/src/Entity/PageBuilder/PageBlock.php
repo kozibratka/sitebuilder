@@ -74,6 +74,7 @@ class PageBlock
 
     public function addGridstackItem(GridstackItem $gridstackItem): self
     {
+        $gridstackItem->setPageBlock($this);
         $this->gridstackItems->add($gridstackItem);
         return $this;
     }

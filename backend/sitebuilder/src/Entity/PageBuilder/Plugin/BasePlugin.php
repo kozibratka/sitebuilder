@@ -26,7 +26,7 @@ abstract class BasePlugin
     private int $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="plugins")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="plugin")
      * @Serializer\Exclude()
      */
     private ?GridstackItem $gridstackItem;
