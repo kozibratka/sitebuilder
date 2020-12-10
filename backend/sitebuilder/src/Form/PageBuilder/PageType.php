@@ -21,7 +21,8 @@ class PageType extends AbstractType
                 [
                     'entry_type' => PageBlockType::class,
                     'allow_add' => true,
-                    'allow_delete' => true
+                    'allow_delete' => true,
+                    'by_reference' => false
                 ]
             );
     }

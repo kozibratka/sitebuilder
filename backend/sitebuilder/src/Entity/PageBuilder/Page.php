@@ -36,7 +36,7 @@ class Page
     private User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\PageBlock", mappedBy="page", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\PageBlock", mappedBy="page", cascade={"persist"}, orphanRemoval=true)
      */
     private Collection $pageBlocks;
 

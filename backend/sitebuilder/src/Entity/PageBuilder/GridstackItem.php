@@ -49,8 +49,7 @@ class GridstackItem
     private int $y;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PageBuilder\Plugin\BasePlugin", inversedBy="gridstackItem", cascade={"persist"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\OneToOne(targetEntity="App\Entity\PageBuilder\Plugin\BasePlugin", inversedBy="gridstackItem", cascade={"persist", "remove"})
      */
     private BasePlugin $plugin;
 

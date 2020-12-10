@@ -39,7 +39,7 @@ abstract class BasePlugin
      */
     private User $user;
 
-    protected string $identifier;
+    protected ?string $identifier = null;
 
     public function getId(): int
     {
@@ -61,7 +61,7 @@ abstract class BasePlugin
         $this->gridstackItem = $gridstackItem;
     }
 
-    public function getIdentifier(): string
+    public function getIdentifier(): ?string
     {
         return $this->identifier;
     }

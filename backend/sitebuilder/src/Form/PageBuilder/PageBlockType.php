@@ -18,7 +18,8 @@ class PageBlockType extends AbstractType
             ->add('gridstackItems', CollectionType::class, [
                 'entry_type' => GridstackItemType::class,
                 'allow_add' => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'by_reference' => false
             ])
             ;
     }

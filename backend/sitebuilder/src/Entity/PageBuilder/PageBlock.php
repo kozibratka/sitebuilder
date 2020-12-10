@@ -30,7 +30,7 @@ class PageBlock
     private Page $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="pageBlock", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
      */
     private Collection $gridstackItems;
 
