@@ -5,7 +5,6 @@ namespace App\Form\PageBuilder;
 
 
 use App\Entity\PageBuilder\GridstackItem;
-use App\Form\PageBuilder\EventSubscriber\AddGridstackItemFromDatabaseSubscriber;
 use App\Form\PageBuilder\EventSubscriber\AddPluginFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,8 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GridstackItemType extends AbstractType
 {
-    /** @required  */
-    public AddGridstackItemFromDatabaseSubscriber $addGridstackItemFromDatabaseSubscriber;
     private $addPluginFieldSubscriber;
 
     public function __construct(AddPluginFieldSubscriber $addPluginFieldSubscriber)
@@ -30,8 +27,7 @@ class GridstackItemType extends AbstractType
             ->add('x')
             ->add('y')
             ->addEventSubscriber($this->addPluginFieldSubscriber)
-            //->addEventSubscriber($this->addGridstackItemFromDatabaseSubscriber)
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

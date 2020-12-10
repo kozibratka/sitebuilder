@@ -2,6 +2,8 @@
 
 namespace App\Form\PageBuilder\EventSubscriber;
 
+use App\Entity\PageBuilder\GridstackItem;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -9,6 +11,8 @@ use Traversable;
 
 class AddPluginFieldSubscriber implements EventSubscriberInterface
 {
+    /** @required  */
+    public EntityManagerInterface $em;
     private $pluginServices;
 
     public function __construct(Traversable $pluginServices)
@@ -33,6 +37,12 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
         $plugin = $data['plugin']['basePlugin'];
         $identifier = $plugin['identifier'];
         $formClass = $this->pluginServices[$identifier]->getFormClass();
+        if(isset($data['id'])) {
+            $gridstackItem = $this->em->getRepository(GridstackItem::class)->find($data['id']);
+            if($gridstackItem) {
+                $form->setData($gridstackItem);
+            }
+        }
         $form->add('plugin', $formClass);
     }
 
