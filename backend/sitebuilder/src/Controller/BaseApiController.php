@@ -34,6 +34,13 @@ class BaseApiController extends AbstractController
         $entityManager->flush();
     }
 
+    public function removeEntity($entity)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($entity);
+        $entityManager->flush();
+    }
+
     protected function getErrorsFromForm(FormInterface $form)
     {
         $errors = array();

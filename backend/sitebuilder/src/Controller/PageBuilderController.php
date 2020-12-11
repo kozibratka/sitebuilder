@@ -58,4 +58,14 @@ class PageBuilderController extends BaseApiController
 
         return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
     }
+
+    /**
+     * @Route("/remove/{id}", name="remove")
+     */
+    public function remove(Page $page)
+    {
+        $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
+        $this->removeEntity($page);
+        return new JsonResponse();
+    }
 }
