@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use App\Entity\PageBuilder\Page;
 use App\Form\PageBuilder\PageType;
-use JMS\Serializer\SerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,12 +18,11 @@ class PageBuilderController extends BaseApiController
     /**
      * @Route("/list", name="list")
      */
-    public function list(SerializerInterface $serializer)
+    public function list()
     {
         $user = $this->getUser();
         $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['user' => $user]);
-
-        return JsonResponse::fromJsonString($serializer->serialize($pages, 'json'));
+        return $this->jsonResponseSimple($pages);
     }
 
     /**
@@ -39,8 +37,7 @@ class PageBuilderController extends BaseApiController
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
         }
-
-        return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
+        return $this->invalidFormResponse($form);
     }
 
     /**
@@ -52,11 +49,11 @@ class PageBuilderController extends BaseApiController
         $form->submit($request->request->all(), false);
         if($form->isValid()) {
             $page = $form->getData();
+            $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
         }
-
-        return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
+        return $this->invalidFormResponse($form);
     }
 
     /**
@@ -64,7 +61,7 @@ class PageBuilderController extends BaseApiController
      */
     public function remove(Page $page)
     {
-        $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
+        $this->denyAccessUnlessGranted('page_builder_voter',$page);
         $this->removeEntity($page);
         return new JsonResponse();
     }

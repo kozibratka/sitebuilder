@@ -3,6 +3,7 @@
 namespace App\Form\PageBuilder\EventSubscriber;
 
 use App\Entity\PageBuilder\GridstackItem;
+use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -41,6 +42,8 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $gridstackItem = $this->em->getRepository(GridstackItem::class)->find($data['id']);
             if($gridstackItem) {
                 $form->setData($gridstackItem);
+            }else{
+                throw new CustomErrorMessageException('Pokoušíte se upravit element, který se již smazaný');
             }
         }
         $form->add('plugin', $formClass);

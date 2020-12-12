@@ -41,6 +41,14 @@ class BaseApiController extends AbstractController
         $entityManager->flush();
     }
 
+    public function invalidFormResponse(FormInterface $form)
+    {
+        $jsonResponse = $this->jsonResponseSimple($form);
+        $jsonResponse->headers->set('Content-Type', 'application/invalid-form+json');
+        $jsonResponse->setStatusCode(400);
+        return $jsonResponse;
+    }
+
     protected function getErrorsFromForm(FormInterface $form)
     {
         $errors = array();
