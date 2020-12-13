@@ -18,6 +18,7 @@ import { RegistrationComponent } from './entry-route/authorization-component/reg
 import {ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from '../core/core.module';
 import {GravatarModule} from 'ngx-gravatar';
+import { WebListComponent } from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {GravatarModule} from 'ngx-gravatar';
     AdministrationComponent,
     AuthorizationComponent,
     EntryRouteComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    WebListComponent
   ],
   imports: [
     BrowserModule,

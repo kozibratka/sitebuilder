@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {
+  title = 'Dashboard';
+
+  constructor(
+    @Inject('title') private title$: Subject<string>
+  ) {
 
   }
 
   ngOnInit(): void {
-    // this.sf.tryLogin('email@email.cz', 'heslo').subscribe(test => {}, error => {});
+    this.title$.next(this.title);
   }
 
 }

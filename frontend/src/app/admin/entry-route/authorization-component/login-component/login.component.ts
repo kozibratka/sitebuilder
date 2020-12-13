@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {LoginFormService} from './tools/forms/login-form.service';
 import {AbstractControl, FormGroup} from '@angular/forms';
 import {LoginClientService} from '../../../../core/services/login-client/login-client.service';
@@ -12,8 +12,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
   private internal = 0;
+
   constructor(
     private loginFormService: LoginFormService,
     private loginClientService: LoginClientService,

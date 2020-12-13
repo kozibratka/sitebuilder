@@ -8,6 +8,7 @@ import {AuthorizationComponent} from './entry-route/authorization-component/auth
 import {RegistrationComponent} from './entry-route/authorization-component/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization-component/login-component/login.component';
 import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
+import {WebListComponent} from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,15 @@ const routes: Routes = [
     component: AdministrationComponent,
     canActivate: [RouteRoleGuardService],
     children: [
+      {
+        path: 'web',
+        children: [
+          {
+            path: 'list',
+            component: WebListComponent
+          }
+        ]
+      },
       {
         path: 'page-builder/create',
         component: PageBuilderComponent,

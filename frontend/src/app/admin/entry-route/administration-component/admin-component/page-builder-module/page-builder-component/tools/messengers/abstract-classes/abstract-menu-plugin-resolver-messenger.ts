@@ -6,4 +6,6 @@ export abstract class AbstractMenuPluginResolverMessenger {
   abstract get componentClass(): new(...args: any[]) => {};
 
   abstract get menuImageGridSize(): number;
+
+  abstract get identifier(): string;
 }

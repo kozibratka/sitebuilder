@@ -25,4 +25,7 @@ export class TestMenuResloverMessengerService extends AbstractMenuPluginResolver
     return {x: 2, y: 2};
   }
 
+  get identifier(): string {
+    return 'test_plugin';
+  }
 }
