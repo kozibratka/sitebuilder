@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entity\PageBuilder;
+namespace App\Entity\SiteBuilder;
 
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,13 +24,13 @@ class PageBlock
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\Page", inversedBy="pageBlocks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Page", inversedBy="pageBlocks")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private Page $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\GridstackItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
      */
     private Collection $gridstackItems;
 

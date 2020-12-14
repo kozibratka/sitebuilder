@@ -4,7 +4,7 @@
 namespace App\Service\Plugin;
 
 
-use App\Form\PageBuilder\Plugin\ImagePluginType;
+use App\Form\SiteBuilder\Plugin\ImagePluginType;
 
 class ImagePluginService
 {

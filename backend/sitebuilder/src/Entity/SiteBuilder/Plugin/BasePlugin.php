@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Entity\PageBuilder\Plugin;
+namespace App\Entity\SiteBuilder\Plugin;
 
 
-use App\Entity\PageBuilder\GridstackItem;
+use App\Entity\SiteBuilder\GridstackItem;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -26,7 +26,7 @@ abstract class BasePlugin
     private int $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PageBuilder\GridstackItem", mappedBy="plugin")
+     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\GridstackItem", mappedBy="plugin")
      * @Serializer\Exclude()
      */
     private ?GridstackItem $gridstackItem;

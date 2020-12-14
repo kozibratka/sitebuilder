@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\PageBuilder\Plugin;
+namespace App\Form\SiteBuilder\Plugin;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

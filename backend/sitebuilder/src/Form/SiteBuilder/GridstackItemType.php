@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Form\PageBuilder;
+namespace App\Form\SiteBuilder;
 
 
-use App\Entity\PageBuilder\GridstackItem;
-use App\Form\PageBuilder\EventSubscriber\AddPluginFieldSubscriber;
+use App\Entity\SiteBuilder\GridstackItem;
+use App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

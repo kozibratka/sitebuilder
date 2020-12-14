@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Form\PageBuilder;
+namespace App\Form\SiteBuilder;
 
 
-use App\Entity\PageBuilder\Page;
+use App\Entity\SiteBuilder\Page;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;

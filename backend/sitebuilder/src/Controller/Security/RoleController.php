@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller\Security;
-
 
 use App\Controller\BaseApiController;
 use Symfony\Component\Routing\Annotation\Route;

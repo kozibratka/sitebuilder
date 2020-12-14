@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\PageBuilder\Plugin;
+namespace App\Entity\SiteBuilder\Plugin;
 
 use Doctrine\ORM\Mapping as ORM;
 

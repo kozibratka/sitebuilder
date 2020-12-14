@@ -1,11 +1,12 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\SiteBuilder;
 
 
-use App\Entity\PageBuilder\Page;
-use App\Form\PageBuilder\PageType;
+use App\Controller\BaseApiController;
+use App\Entity\SiteBuilder\Page;
+use App\Form\SiteBuilder\PageType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("page", name="page_")
  */
-class PageBuilderController extends BaseApiController
+class PageController extends BaseApiController
 {
     /**
      * @Route("/list", name="list")

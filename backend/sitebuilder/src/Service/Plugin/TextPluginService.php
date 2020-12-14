@@ -2,7 +2,7 @@
 
 namespace App\Service\Plugin;
 
-use App\Form\PageBuilder\Plugin\TextPluginType;
+use App\Form\SiteBuilder\Plugin\TextPluginType;
 
 class TextPluginService
 {

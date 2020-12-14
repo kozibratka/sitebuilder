@@ -3,8 +3,8 @@
 
 namespace App\Controller;
 
-use App\Form\PageBuilder\GridstackItemType;
-use App\Form\PageBuilder\Plugin\TextPluginType;
+use App\Form\SiteBuilder\GridstackItemType;
+use App\Form\SiteBuilder\Plugin\TextPluginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 

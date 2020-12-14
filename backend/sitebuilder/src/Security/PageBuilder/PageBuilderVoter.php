@@ -4,10 +4,10 @@
 namespace App\Security\PageBuilder;
 
 
-use App\Entity\PageBuilder\GridstackItem;
-use App\Entity\PageBuilder\Page;
-use App\Entity\PageBuilder\PageBlock;
-use App\Entity\PageBuilder\Plugin\BasePlugin;
+use App\Entity\SiteBuilder\GridstackItem;
+use App\Entity\SiteBuilder\Page;
+use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 

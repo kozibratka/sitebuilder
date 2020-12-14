@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Entity\PageBuilder;
+namespace App\Entity\SiteBuilder;
 
 
-use App\Entity\PageBuilder\Plugin\BasePlugin;
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -22,7 +22,7 @@ class GridstackItem
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PageBuilder\PageBlock", inversedBy="gridstackItems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\PageBlock", inversedBy="gridstackItems")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Serializer\Exclude()
      */
@@ -49,7 +49,7 @@ class GridstackItem
     private int $y;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\PageBuilder\Plugin\BasePlugin", inversedBy="gridstackItem", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", inversedBy="gridstackItem", cascade={"persist", "remove"})
      */
     private BasePlugin $plugin;
 

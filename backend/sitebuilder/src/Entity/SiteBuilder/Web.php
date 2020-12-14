@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Entity\PageBuilder;
+
+namespace App\Entity\SiteBuilder;
+
 
 use App\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
- * @ORM\Table(name="page")
+ * @ORM\Entity
+ * @ORM\Table(name="web")
  */
-class Page
+class Web
 {
     /**
      * @ORM\Id
@@ -30,20 +29,13 @@ class Page
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Gedmo\Blameable(on="create")
-     * @Serializer\Exclude()
      */
     private User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PageBuilder\PageBlock", mappedBy="page", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web")
      */
-    private Collection $pageBlocks;
-
-    public function __construct()
-    {
-        $this->pageBlocks = new ArrayCollection();
-    }
+    private Collection $pages;
 
     public function getId(): int
     {
@@ -75,17 +67,13 @@ class Page
         $this->user = $user;
     }
 
-    public function getPageBlocks(): Collection
+    public function getPages(): Collection
     {
-        return $this->pageBlocks;
+        return $this->pages;
     }
 
-    public function addPageBlock(PageBlock $pageBlock) {
-        $pageBlock->setPage($this);
-        $this->pageBlocks->add($pageBlock);
-    }
-
-    public function removePageBlock(PageBlock $pageBlock) {
-        $this->pageBlocks->removeElement($pageBlock);
+    public function setPages(Collection $pages)
+    {
+        $this->pages = $pages;
     }
 }

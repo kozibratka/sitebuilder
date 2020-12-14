@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form\PageBuilder\EventSubscriber;
+namespace App\Form\SiteBuilder\EventSubscriber;
 
-use App\Entity\PageBuilder\GridstackItem;
+use App\Entity\SiteBuilder\GridstackItem;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
