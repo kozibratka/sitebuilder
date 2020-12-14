@@ -19,6 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CoreModule} from '../core/core.module';
 import {GravatarModule} from 'ngx-gravatar';
 import { WebListComponent } from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { WebListComponent } from './entry-route/administration-component/admin-c
     NgbModule,
     ReactiveFormsModule,
     CoreModule,
-    GravatarModule
+    GravatarModule,
+    MatTableModule,
   ],
   providers: [],
   exports: [

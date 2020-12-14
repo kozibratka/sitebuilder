@@ -39,6 +39,7 @@ class Web
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web")
+     * @Serializer\Exclude()
      */
     private Collection $pages;
 
