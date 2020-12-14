@@ -8,6 +8,7 @@ use App\Entity\SiteBuilder\GridstackItem;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
+use App\Entity\SiteBuilder\Web;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -33,6 +34,15 @@ class PageBuilderWithChildrenVoter extends Voter
     {
         $user = null;
         switch (true) {
+            case $subject instanceof Web:
+                $user = $subject->getUser();
+                foreach ($subject->getPages() as $page) {
+                    $result = $this->voteOnAttribute($attribute, $page, $token);
+                    if(!$result) {
+                        return false;
+                    }
+                }
+                break;
             case $subject instanceof Page:
                 $user = $subject->getUser();
                 foreach ($subject->getPageBlocks() as $pageBlock) {

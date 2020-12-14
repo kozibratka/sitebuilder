@@ -5,8 +5,11 @@ namespace App\Entity\SiteBuilder;
 
 
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -29,6 +32,8 @@ class Web
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Gedmo\Blameable(on="create")
+     * @Serializer\Exclude()
      */
     private User $user;
 
@@ -36,6 +41,11 @@ class Web
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web")
      */
     private Collection $pages;
+
+    public function __construct()
+    {
+        $this->pages = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -75,5 +85,14 @@ class Web
     public function setPages(Collection $pages)
     {
         $this->pages = $pages;
+    }
+
+    public function addPage(Page $page) {
+        $page->setWeb($this);
+        $this->pages->add($page);
+    }
+
+    public function removePage(Page $page) {
+        $this->pages->removeElement($page);
     }
 }

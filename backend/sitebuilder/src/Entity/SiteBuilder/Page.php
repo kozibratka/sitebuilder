@@ -43,6 +43,7 @@ class Page
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Web", inversedBy="pages")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Serializer\Exclude()
      */
     private Web $web;
 

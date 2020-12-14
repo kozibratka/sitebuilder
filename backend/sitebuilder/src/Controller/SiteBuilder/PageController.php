@@ -6,6 +6,7 @@ namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Page;
+use App\Entity\SiteBuilder\Web;
 use App\Form\SiteBuilder\PageType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,14 +28,15 @@ class PageController extends BaseApiController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/create/{id}", name="create")
      */
-    public function create(Request $request)
+    public function create(Request $request, Web $web)
     {
         $form = $this->createForm(PageType::class);
         $form->submit($request->request->all(), false);
         if($form->isValid()) {
             $page = $form->getData();
+            $web->addPage($page);
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
         }
