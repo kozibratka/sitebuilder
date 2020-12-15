@@ -9,6 +9,7 @@ import {RegistrationComponent} from './entry-route/authorization-component/regis
 import {LoginComponent} from './entry-route/authorization-component/login-component/login.component';
 import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
 import {WebListComponent} from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
+import {WebListResolverService} from './entry-route/administration-component/admin-component/web-component/web-list/tools/route-resolvers/web-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
         children: [
           {
             path: 'list',
-            component: WebListComponent
+            component: WebListComponent,
+            resolve: {webList: WebListResolverService}
           }
         ]
       },

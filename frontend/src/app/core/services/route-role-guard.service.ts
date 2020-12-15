@@ -34,9 +34,9 @@ export class RouteRoleGuardService implements CanActivate {
       return this.router.parseUrl('/authorization/login');
     }
 
-    return this.symfonyApiClientService.get<{ result: false | true }>('role_check', ['ROLE_USER']).pipe(
+    return this.symfonyApiClientService.get<false | true>('role_check', ['ROLE_USER']).pipe(
       map(value => {
-        if (value.body.result === true) {
+        if (value.body === true) {
           return true;
         }
         this.notifierService.notify('Nemáte dostatečné oprávnění k tomuto zdroji', 'error');
