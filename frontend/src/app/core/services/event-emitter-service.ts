@@ -5,7 +5,7 @@ import {Subject, Subscription} from 'rxjs';
 export class EventEmitterService<T = unknown> {
 
   private subjectComunicators: Map<string, Subject<T>> = new Map<string, Subject<T>>();
-  private subscriptions = new Map<string, WeakMap<(status: T) => void, Subscription>>();
+  private subscriptions = new Map<string, Map<(status: T) => void, Subscription>>();
 
   constructor() {
   }
@@ -20,20 +20,20 @@ export class EventEmitterService<T = unknown> {
   registerCallback(eventName: string, callback: (status: T) => void): void {
     let subject$ = this.subjectComunicators.get(eventName);
     if (subject$ === undefined) {
-      this.createNewSubject(eventName);
+      this.subjectComunicators.set(eventName, new Subject<T>());
       subject$ = this.subjectComunicators.get(eventName);
+      this.subscriptions.set(eventName, new Map<(status: T) => void, Subscription>());
     }
     const subscription = subject$.subscribe(callback);
-    const weakMap = new WeakMap<(status: T) => void, Subscription>();
-    weakMap.set(callback, subscription);
-    this.subscriptions.set(eventName, weakMap);
+    this.subscriptions.get(eventName).set(callback, subscription);
   }
 
   unregisterCallback(eventName: string, callback: (status: T) => void): void {
     this.subscriptions.get(eventName)?.get(callback)?.unsubscribe();
-  }
-
-  private createNewSubject(name: string): void {
-    this.subjectComunicators.set(name, new Subject<T>());
+    this.subscriptions.get(eventName)?.delete(callback);
+    if(!this.subscriptions.get(eventName)?.size){
+      this.subscriptions.delete(eventName);
+      this.subjectComunicators.delete(eventName);
+    }
   }
 }
