@@ -20,6 +20,7 @@ import {CoreModule} from '../core/core.module';
 import {GravatarModule} from 'ngx-gravatar';
 import { WebListComponent } from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -33,20 +34,21 @@ import {MatTableModule} from '@angular/material/table';
     RegistrationComponent,
     WebListComponent
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    RouterModule,
-    SortablejsModule.forRoot({animation: 150}),
-    AdminRoutingModule,
-    PageBuilderModule,
-    PluginsModule,
-    NgbModule,
-    ReactiveFormsModule,
-    CoreModule,
-    GravatarModule,
-    MatTableModule,
-  ],
+    imports: [
+        BrowserModule,
+        CommonModule,
+        RouterModule,
+        SortablejsModule.forRoot({animation: 150}),
+        AdminRoutingModule,
+        PageBuilderModule,
+        PluginsModule,
+        NgbModule,
+        ReactiveFormsModule,
+        CoreModule,
+        GravatarModule,
+        MatTableModule,
+        MatProgressBarModule,
+    ],
   providers: [],
   exports: [
     MenuComponent,

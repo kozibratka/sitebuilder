@@ -23,9 +23,6 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.loginFormService.createForm();
-    this.loginForm.statusChanges.subscribe(value => {
-      console.log('wagawg');
-    });
   }
 
   ngOnInit(): void {

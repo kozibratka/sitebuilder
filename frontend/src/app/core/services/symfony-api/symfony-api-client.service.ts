@@ -5,6 +5,7 @@ import {Observable, Observer, Subject, throwError} from 'rxjs';
 import {catchError, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../external-library/router';
 import {TokenInterface} from '../../interfaces/token-interface';
+import {EventEmitterService} from '../event-emitter-service';
 
 
 @Injectable({
@@ -15,7 +16,10 @@ export class SymfonyApiClientService {
   private status: 'none' | 'inProgress' | 'done' = 'none';
   private urlFetchNotification$ = new Subject<object>();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private eventEmitterService: EventEmitterService
+  ) {
   }
 
   private downloadRoutes(): Observable<object> {
@@ -46,11 +50,17 @@ export class SymfonyApiClientService {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
         });
-      })
+      }), tap(
+        {
+          error: err => this.eventEmitterService.emit('asyncApiCall', false),
+          complete: () => this.eventEmitterService.emit('asyncApiCall', false)
+        }
+      )
     );
   }
 
   post<T>(routeName: string, data, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
+    this.eventEmitterService.emit('asyncApiCall', true);
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -60,7 +70,12 @@ export class SymfonyApiClientService {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
         });
-      })
+      }), tap(
+        {
+          error: err => this.eventEmitterService.emit('asyncApiCall', false),
+          complete: () => this.eventEmitterService.emit('asyncApiCall', false)
+        }
+      )
     );
   }
 
