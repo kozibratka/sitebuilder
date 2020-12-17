@@ -5,7 +5,7 @@ import {Subject, Subscription} from 'rxjs';
 export class EventEmitterService<T = unknown> {
 
   private subjectComunicators: Map<string, Subject<T>> = new Map<string, Subject<T>>();
-  private subscriptions = new Map<string, Map<(status: T) => void, Subscription>>();
+  private subscriptions = new Map<string, WeakMap<(status: T) => void, Subscription>>();
 
   constructor() {
   }
@@ -24,16 +24,12 @@ export class EventEmitterService<T = unknown> {
       subject$ = this.subjectComunicators.get(eventName);
     }
     const subscription = subject$.subscribe(callback);
-    const weakMap = new Map<(status: T) => void, Subscription>();
+    const weakMap = new WeakMap<(status: T) => void, Subscription>();
     weakMap.set(callback, subscription);
     this.subscriptions.set(eventName, weakMap);
   }
 
   unregisterCallback(eventName: string, callback: (status: T) => void): void {
-
-    let data = this.subscriptions.get(eventName);
-    console.log(data);
-
     this.subscriptions.get(eventName)?.get(callback)?.unsubscribe();
   }
 

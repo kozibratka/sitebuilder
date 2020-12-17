@@ -8,17 +8,20 @@ export class HiderElementDirective implements OnInit, OnDestroy{
 
   @Input('appHiderElement') uniqeId: string;
   @HostBinding('style.display') display = 'none';
+  callback = this.changeStatus.bind(this);
 
   constructor(
     private asyncComunicatorService: EventEmitterService<boolean>
   ) {
+
   }
 
   ngOnInit(): void {
-    this.asyncComunicatorService.registerCallback(this.uniqeId, this.changeStatus.bind(this));
+    this.asyncComunicatorService.registerCallback(this.uniqeId, this.callback);
   }
 
   changeStatus(asyncPost: boolean): void {
+    console.log(asyncPost);
     if (asyncPost) {
       this.display = 'block';
     } else {
@@ -27,7 +30,7 @@ export class HiderElementDirective implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.asyncComunicatorService.unregisterCallback(this.uniqeId, this.changeStatus.bind(this));
+    this.asyncComunicatorService.unregisterCallback(this.uniqeId, this.callback);
   }
 
 }
