@@ -5,7 +5,7 @@
   </div>
 
   <div class="card">
-    <mat-progress-bar appHiderElement="asyncApiCall" class="progres-line" mode="indeterminate"></mat-progress-bar>
+    <mat-progress-bar appHiderElement [showOn]="symfonyApiCallEvent.startSendLogin" [hideOn]="symfonyApiCallEvent.stopSendLogin" class="progres-line" mode="indeterminate"></mat-progress-bar>
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
       <router-outlet></router-outlet>

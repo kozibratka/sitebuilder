@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
-import {Observable, Observer, Subject, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../external-library/router';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {EventEmitterService} from '../event-emitter-service';
+import {Event} from './tools/constants/event';
 
 
 @Injectable({
@@ -36,6 +37,7 @@ export class SymfonyApiClientService {
   }
 
   get<T = {}>(routeName: string, querySegmentParam?: string[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
+    this.eventEmitterService.emit(Event.PRE_SEND, true);
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -52,15 +54,15 @@ export class SymfonyApiClientService {
         });
       }), tap(
         {
-          error: err => this.eventEmitterService.emit('asyncApiCall', false),
-          complete: () => this.eventEmitterService.emit('asyncApiCall', false)
+          error: err => this.eventEmitterService.emit(Event.POST_SEND, false),
+          complete: () => this.eventEmitterService.emit(Event.POST_SEND, false)
         }
       )
     );
   }
 
   post<T>(routeName: string, data, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
-    this.eventEmitterService.emit('asyncApiCall', true);
+    this.eventEmitterService.emit(Event.PRE_SEND, true);
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -72,8 +74,8 @@ export class SymfonyApiClientService {
         });
       }), tap(
         {
-          error: err => this.eventEmitterService.emit('asyncApiCall', false),
-          complete: () => this.eventEmitterService.emit('asyncApiCall', false)
+          error: err => this.eventEmitterService.emit(Event.POST_SEND, false),
+          complete: () => this.eventEmitterService.emit(Event.POST_SEND, false)
         }
       )
     );

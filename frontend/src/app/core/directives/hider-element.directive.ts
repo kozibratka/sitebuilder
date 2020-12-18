@@ -6,7 +6,8 @@ import {EventEmitterService} from '../services/event-emitter-service';
 })
 export class HiderElementDirective implements OnInit, OnDestroy{
 
-  @Input('appHiderElement') uniqeId: string;
+  @Input() showOn: string;
+  @Input() hideOn: string;
   @HostBinding('style.display') display = 'none';
   callback = this.changeStatus.bind(this);
 
@@ -17,10 +18,10 @@ export class HiderElementDirective implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.asyncComunicatorService.registerCallback(this.uniqeId, this.callback);
+    this.asyncComunicatorService.registerCallback([this.showOn, this.hideOn], this.callback);
   }
 
-  changeStatus(asyncPost: boolean): void {
+  changeStatus(eventName: string, asyncPost: boolean): void {
     console.log(asyncPost);
     if (asyncPost) {
       this.display = 'block';
@@ -30,7 +31,7 @@ export class HiderElementDirective implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.asyncComunicatorService.unregisterCallback(this.uniqeId, this.callback);
+    this.asyncComunicatorService.unregisterCallback([this.showOn, this.hideOn], this.callback);
   }
 
 }
