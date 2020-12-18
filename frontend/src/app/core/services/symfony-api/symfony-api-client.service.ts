@@ -38,6 +38,7 @@ export class SymfonyApiClientService {
 
   get<T = {}>(routeName: string, querySegmentParam?: string[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     this.eventEmitterService.emit(Event.PRE_SEND_GET, true);
+    this.eventEmitterService.emit(Event.PRE_SEND, true);
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -57,12 +58,18 @@ export class SymfonyApiClientService {
           error: err => this.eventEmitterService.emit(Event.POST_SEND_GET, false),
           complete: () => this.eventEmitterService.emit(Event.POST_SEND_GET, false)
         }
+      ), tap(
+        {
+          error: err => this.eventEmitterService.emit(Event.POST_SEND, false),
+          complete: () => this.eventEmitterService.emit(Event.POST_SEND, false)
+        }
       )
     );
   }
 
   post<T>(routeName: string, data, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     this.eventEmitterService.emit(Event.PRE_SEND_POST, true);
+    this.eventEmitterService.emit(Event.PRE_SEND, true);
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -76,6 +83,11 @@ export class SymfonyApiClientService {
         {
           error: err => this.eventEmitterService.emit(Event.POST_SEND_POST, false),
           complete: () => this.eventEmitterService.emit(Event.POST_SEND_POST, false)
+        }
+      ), tap(
+        {
+          error: err => this.eventEmitterService.emit(Event.POST_SEND, false),
+          complete: () => this.eventEmitterService.emit(Event.POST_SEND, false)
         }
       )
     );

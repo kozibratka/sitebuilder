@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoginClientService} from '../../../core/services/login-client/login-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Router} from '@angular/router';
+import {Event} from '../../../core/services/symfony-api/tools/constants/event';
 
 @Component({
   selector: 'app-administration',
@@ -9,6 +10,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./administration.component.css']
 })
 export class AdministrationComponent implements OnInit {
+
+  symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND, stopSendLogin: Event.POST_SEND};
 
   constructor(
     private loginClientService: LoginClientService,
