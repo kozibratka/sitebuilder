@@ -22,8 +22,7 @@ export class HiderElementDirective implements OnInit, OnDestroy{
   }
 
   changeStatus(eventName: string, asyncPost: boolean): void {
-    console.log(asyncPost);
-    if (asyncPost) {
+    if (eventName === this.showOn) {
       this.display = 'block';
     } else {
       this.display = 'none';

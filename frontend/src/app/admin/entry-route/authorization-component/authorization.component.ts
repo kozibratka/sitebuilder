@@ -8,7 +8,7 @@ import {Event} from '../../../core/services/symfony-api/tools/constants/event';
 })
 export class AuthorizationComponent implements OnInit {
 
-  symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND, stopSendLogin: Event.POST_SEND};
+  symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND_POST, stopSendLogin: Event.POST_SEND_POST};
 
   constructor() { }
 
