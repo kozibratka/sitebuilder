@@ -1,0 +1,20 @@
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Vytvořit web</h3>
+  </div> <!-- /.card-body -->
+  <div class="card-body">
+    <form [formGroup]="createWebForm">
+      <input type="text" class="form-control" placeholder="Název webu" formControlName="name">
+      <div class="container-fluid mt-3">
+        <div class="row justify-content-end">
+          <button routerLink="../list" mat-button>Zpět na výpis webů</button>
+          <button type="submit" mat-raised-button color="primary" class="ml-2"><i class="material-icons">add</i>Uložit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.card-body -->
+</div>
+
+
+

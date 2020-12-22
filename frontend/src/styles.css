@@ -35,3 +35,8 @@ a:not([href]){
   -moz-user-select: none;
   user-select: none
 }
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background: #28a745 linear-gradient(180deg,#48b461,#28a745) repeat-x!important;
+  color: #fff;
+}

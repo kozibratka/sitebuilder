@@ -10,6 +10,7 @@ import {LoginComponent} from './entry-route/authorization-component/login-compon
 import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
 import {WebListComponent} from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
 import {WebListResolverService} from './entry-route/administration-component/admin-component/web-component/web-list/tools/route-resolvers/web-list-resolver.service';
+import {WebCreateComponent} from './entry-route/administration-component/admin-component/web-component/web-create/web-create.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
             component: WebListComponent,
             resolve: {webList: WebListResolverService},
             runGuardsAndResolvers: 'always',
+          },
+          {
+            path: 'create',
+            component: WebCreateComponent
           }
         ]
       },

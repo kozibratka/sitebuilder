@@ -19,7 +19,8 @@ class BaseApiController extends AbstractController
     }
 
     public function jsonResponseSimple($data, $statusCode = 200) {
-        $serialized = $this->serializer->serialize($data, 'json');
+        $onlyValidForm = $this->requestStack->getCurrentRequest()->headers->get('validform');
+        $serialized = $this->serializer->serialize(!$onlyValidForm ? $data : [], 'json');
 
         return JsonResponse::fromJsonString($serialized, $statusCode);
     }

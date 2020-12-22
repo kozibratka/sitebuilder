@@ -24,6 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { RemoveWebDialogComponent } from './entry-route/administration-component/admin-component/web-component/web-list/tools/components/remove-web-dialog/remove-web-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { WebCreateComponent } from './entry-route/administration-component/admin-component/web-component/web-create/web-create.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MatButtonModule} from '@angular/material/button';
     EntryRouteComponent,
     RegistrationComponent,
     WebListComponent,
-    RemoveWebDialogComponent
+    RemoveWebDialogComponent,
+    WebCreateComponent
   ],
   imports: [
     BrowserModule,
