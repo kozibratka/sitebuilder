@@ -36,7 +36,7 @@ export class SymfonyApiClientService {
       }));
   }
 
-  get<T = {}>(routeName: string, querySegmentParam?: string[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
+  get<T = {}>(routeName: string, querySegmentParam?: (string | number)[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     this.eventEmitterService.emit(Event.PRE_SEND_GET, true);
     this.eventEmitterService.emit(Event.PRE_SEND, true);
     const routesFromBackend$ = this.tryGetRoutes();

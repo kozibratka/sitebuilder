@@ -21,6 +21,9 @@ import {GravatarModule} from 'ngx-gravatar';
 import { WebListComponent } from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { RemoveWebDialogComponent } from './entry-route/administration-component/admin-component/web-component/web-list/tools/components/remove-web-dialog/remove-web-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -32,23 +35,26 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AuthorizationComponent,
     EntryRouteComponent,
     RegistrationComponent,
-    WebListComponent
+    WebListComponent,
+    RemoveWebDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        CommonModule,
-        RouterModule,
-        SortablejsModule.forRoot({animation: 150}),
-        AdminRoutingModule,
-        PageBuilderModule,
-        PluginsModule,
-        NgbModule,
-        ReactiveFormsModule,
-        CoreModule,
-        GravatarModule,
-        MatTableModule,
-        MatProgressBarModule,
-    ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    RouterModule,
+    SortablejsModule.forRoot({animation: 150}),
+    AdminRoutingModule,
+    PageBuilderModule,
+    PluginsModule,
+    NgbModule,
+    ReactiveFormsModule,
+    CoreModule,
+    GravatarModule,
+    MatTableModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatButtonModule,
+  ],
   providers: [],
   exports: [
     MenuComponent,

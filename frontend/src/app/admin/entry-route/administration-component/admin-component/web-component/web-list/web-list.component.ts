@@ -1,27 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
-
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {WebInterface} from './tools/interfaces/web-interface';
+import {MatDialog} from '@angular/material/dialog';
+import {RemoveWebDialogComponent} from './tools/components/remove-web-dialog/remove-web-dialog.component';
+import {filter, switchMap} from 'rxjs/operators';
+import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
+import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
+import {NotifierService} from '../../../../../../core/services/notifier.service';
 
 @Component({
   selector: 'app-web-list',
@@ -30,12 +15,40 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class WebListComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[];
+  dataToTable: WebInterface[] = [];
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private dialog: MatDialog,
+    private symfonyApiClientService: SymfonyApiClientService,
+    private httpResponseToasterService: HttpResponseToasterService,
+    private notifierService: NotifierService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.dataToTable = data.webList;
+    });
+    this.displayedColumns = ['name', 'action'];
   }
 
+  openRemoveWebDialog(webId: number): void {
+    const dialogRef = this.dialog.open(RemoveWebDialogComponent);
+    dialogRef.afterClosed().pipe(filter(value => {
+        return value;
+      }
+      ),
+      switchMap(value => {
+        return this.symfonyApiClientService.get('web_remove', [webId]);
+      })
+    ).subscribe({
+      next: () => {
+        this.notifierService.notify('Web byl úspěšně smazán');
+        this.router.navigate(['./'], { relativeTo: this.route });
+        },
+      error: err => this.httpResponseToasterService.showError(err)
+    });
+  }
 }

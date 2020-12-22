@@ -38,7 +38,7 @@ class Web
     private User $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web")
+     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
      * @Serializer\Exclude()
      */
     private Collection $pages;

@@ -9,7 +9,7 @@ export class NotifierService {
   constructor(private toastrService: ToastrService) {
   }
 
-  notify(message: string, type: 'error' | 'success' | 'warning'): void {
+  notify(message: string, type: 'error' | 'success' | 'warning' = 'success'): void {
     switch (type) {
       case 'error':
         this.toastrService.error(message);

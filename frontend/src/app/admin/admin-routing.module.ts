@@ -23,7 +23,8 @@ const routes: Routes = [
           {
             path: 'list',
             component: WebListComponent,
-            resolve: {webList: WebListResolverService}
+            resolve: {webList: WebListResolverService},
+            runGuardsAndResolvers: 'always',
           }
         ]
       },
@@ -68,7 +69,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})
   ]
 })
 export class AdminRoutingModule { }
