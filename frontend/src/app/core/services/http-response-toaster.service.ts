@@ -28,7 +28,7 @@ export class HttpResponseToasterService {
             completedMessage = 'Operace zamítnuta. Ujistěte se, že máte dostatečná práva.';
             break;
           case 401:
-            completedMessage = 'Nesprávné přihlašovací údaje.';
+            completedMessage = 'Nesprávné přihlašovací údaje nebo token expiroval. Zkuste se prosím znovu přihlásit';
             break;
           default:
             completedMessage = 'Neočekávaná chyba serveru. Kód chyby: ' + error.status;

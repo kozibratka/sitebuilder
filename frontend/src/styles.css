@@ -28,3 +28,10 @@
 td i {
   vertical-align: bottom;
 }
+
+a:not([href]){
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none
+}
