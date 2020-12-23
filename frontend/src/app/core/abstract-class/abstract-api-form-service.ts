@@ -20,7 +20,7 @@ export abstract class AbstractApiFormService {
     return (abstractControl: AbstractControl) => {
       return new Observable<ValidationErrors | null>(validationSubscriber => {
         if (abstractControl.touched) {
-          this.symfonyApiClientService.post<{}>(path, abstractControl.value, {validform: 'true'}).subscribe((httpResponse) => {
+          this.symfonyApiClientService.post<{}>(path, abstractControl.value, null, {validform: 'true'}).subscribe((httpResponse) => {
             const body = httpResponse.body;
             if (httpResponse.status !== expectedHttpStatus && Object.keys(body).length) {
               this.supplyValidationErrors(body, abstractControl);

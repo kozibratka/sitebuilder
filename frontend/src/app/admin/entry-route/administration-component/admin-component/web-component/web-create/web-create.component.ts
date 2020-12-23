@@ -5,6 +5,7 @@ import {SymfonyApiClientService} from '../../../../../../core/services/symfony-a
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../core/services/notifier.service';
+import {WebInterface} from '../web-list/tools/interfaces/web-interface';
 
 @Component({
   selector: 'app-web-create',
@@ -19,25 +20,50 @@ export class WebCreateComponent implements OnInit {
     private webFormService: WebFormService,
     private symfonyApiClientService: SymfonyApiClientService,
     private router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService
   ) {
+  }
+
+  ngOnInit(): void {
+    if (this.route.snapshot.url[0].path === 'create') {
+      this.createWeb();
+    } else {
+      this.updateWeb();
+    }
+  }
+
+  createWeb(): void {
     this.createWebForm = this.webFormService.createForm();
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        symfonyApiClientService.post('web_create', this.createWebForm.value).subscribe({
+        this.symfonyApiClientService.post('web_create', this.createWebForm.value).subscribe({
           next: () => {
             this.notifierService.notify('Web byl úspěšně vytvořen');
-            this.router.navigate(['../list'], { relativeTo: this.route });
-            },
+            this.router.navigate(['list'], { relativeTo: this.route.parent });
+          },
           error: err => this.httpResponseToasterService.showError(err)
         });
       }
     });
   }
 
-  ngOnInit(): void {
+  updateWeb(): void {
+    const webDetail: WebInterface = this.route.snapshot.data.webDetail;
+    this.createWebForm = this.webFormService.createForm();
+    this.createWebForm.patchValue(webDetail);
+    this.createWebForm.statusChanges.subscribe(status => {
+      if (status === 'VALID') {
+        this.symfonyApiClientService.post('web_update', this.createWebForm.value, [webDetail.id]).subscribe({
+          next: () => {
+            this.notifierService.notify('Web byl úspěšně upraven');
+            this.router.navigate(['list'], { relativeTo: this.route.parent });
+          },
+          error: err => this.httpResponseToasterService.showError(err)
+        });
+      }
+    });
   }
 
 }

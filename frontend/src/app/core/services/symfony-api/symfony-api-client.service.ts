@@ -67,14 +67,19 @@ export class SymfonyApiClientService {
     );
   }
 
-  post<T>(routeName: string, data, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
+  post<T>(routeName: string, data, querySegmentParam?: (string | number)[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     this.eventEmitterService.emit(Event.PRE_SEND_POST, true);
     this.eventEmitterService.emit(Event.PRE_SEND, true);
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
-        const path = Routing.generate(routeName);
+        let path = Routing.generate(routeName);
+        if (querySegmentParam) {
+          querySegmentParam.forEach(value => {
+            path += '/' + value;
+          });
+        }
         return this.httpClient.post<T>(environment.backendUrl + path, data, {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)

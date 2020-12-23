@@ -11,6 +11,7 @@ import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
 import {WebListComponent} from './entry-route/administration-component/admin-component/web-component/web-list/web-list.component';
 import {WebListResolverService} from './entry-route/administration-component/admin-component/web-component/web-list/tools/route-resolvers/web-list-resolver.service';
 import {WebCreateComponent} from './entry-route/administration-component/admin-component/web-component/web-create/web-create.component';
+import {WebDetailResolverService} from './entry-route/administration-component/admin-component/web-component/web-create/tools/route-resolvers/web-detail-resolver.service';
 
 const routes: Routes = [
   {
@@ -30,6 +31,11 @@ const routes: Routes = [
           {
             path: 'create',
             component: WebCreateComponent
+          },
+          {
+            path: 'update/:id',
+            component: WebCreateComponent,
+            resolve: {webDetail: WebDetailResolverService},
           }
         ]
       },

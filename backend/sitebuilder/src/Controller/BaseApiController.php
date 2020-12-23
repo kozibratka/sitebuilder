@@ -35,6 +35,11 @@ class BaseApiController extends AbstractController
         $entityManager->flush();
     }
 
+    public function flush() {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+    }
+
     public function removeEntity($entity)
     {
         $entityManager = $this->getDoctrine()->getManager();
