@@ -34,15 +34,23 @@ export abstract class AbstractApiFormService {
   }
 
   supplyValidationErrors(validationErrors: {}, abstractControl: AbstractControl): void {
+    const baseErrors: string[] = [];
     const iterate = (errors, form: AbstractControl) => {
       Object.keys(errors).forEach(key => {
         if (Array.isArray(errors[key])){
           form.get(key).setErrors(errors[key], {emitEvent: true});
-        } else  {
+        }
+        else if (typeof errors[key] === 'string') {
+          baseErrors.push(errors[key]);
+        }
+        else  {
           iterate(errors[key], form.get(key));
         }
       });
     };
+    if (baseErrors.length) {
+      abstractControl.setErrors(baseErrors, {emitEvent: true});
+    }
     iterate(validationErrors, abstractControl);
   }
 }

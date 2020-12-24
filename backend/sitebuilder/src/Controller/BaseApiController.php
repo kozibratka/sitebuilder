@@ -49,7 +49,7 @@ class BaseApiController extends AbstractController
 
     public function invalidFormResponse(FormInterface $form)
     {
-        $jsonResponse = $this->jsonResponseSimple($form);
+        $jsonResponse = $this->jsonResponseSimple($this->getErrorsFromForm($form));
         $jsonResponse->headers->set('Content-Type', 'application/invalid-form+json');
         $jsonResponse->setStatusCode(400);
         return $jsonResponse;

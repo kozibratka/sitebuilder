@@ -10,7 +10,7 @@ import {ErrorMessageComponent} from './tools/components/error-message/error-mess
 @Directive({
   selector: '[appFormError]'
 })
-export class FormErrorDirective implements AfterContentInit, OnDestroy{
+export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
 
   @ContentChild(NgControl, {read: NgControl}) formInput: NgControl;
   @ContentChild(NgControl, {read: ElementRef}) formInputElementRef: ElementRef;
