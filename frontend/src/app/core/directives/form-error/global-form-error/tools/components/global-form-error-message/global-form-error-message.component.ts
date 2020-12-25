@@ -8,10 +8,11 @@ import {ValidationErrors} from '@angular/forms';
 })
 export class GlobalFormErrorMessageComponent implements OnInit {
 
-  private _errors: ValidationErrors;
+  private _errors: ValidationErrors = {};
   objectKeys = Object.keys;
 
   constructor() {
+
   }
 
   ngOnInit(): void {

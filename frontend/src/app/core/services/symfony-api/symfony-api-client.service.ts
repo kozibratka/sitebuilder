@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Observable, Subject, throwError} from 'rxjs';
+import {Observable, of, Subject, throwError} from 'rxjs';
 import {catchError, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../external-library/router';
 import {TokenInterface} from '../../interfaces/token-interface';

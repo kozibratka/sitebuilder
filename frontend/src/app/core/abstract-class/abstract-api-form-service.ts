@@ -2,6 +2,7 @@ import {AbstractControl, FormBuilder, FormGroup, ValidationErrors} from '@angula
 import {Observable} from 'rxjs';
 import {ChangeDetectorRef, Injectable} from '@angular/core';
 import {SymfonyApiClientService} from '../services/symfony-api/symfony-api-client.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,17 @@ export abstract class AbstractApiFormService {
     return (abstractControl: AbstractControl) => {
       return new Observable<ValidationErrors | null>(validationSubscriber => {
         if (abstractControl.touched) {
-          this.symfonyApiClientService.post<{}>(path, abstractControl.value, null, {validform: 'true'}).subscribe((httpResponse) => {
-            const body = httpResponse.body;
-            if (httpResponse.status !== expectedHttpStatus && Object.keys(body).length) {
-              this.supplyValidationErrors(body, abstractControl);
-            }
-            validationSubscriber.next(null);
-            validationSubscriber.complete();
-          });
+          this.symfonyApiClientService.post<{}>(path, abstractControl.value, null, {validform: 'true'}).subscribe(
+            {error: (err: HttpErrorResponse) => {
+                if (err.status === 400 && err.headers.get('Content-Type') === 'application/invalid-form+json') {
+                  this.supplyValidationErrors(err.error, abstractControl);
+                }
+              },
+              next: val => {
+                validationSubscriber.next(null);
+                validationSubscriber.complete();
+              }
+            });
         }
       });
     };
@@ -41,6 +45,7 @@ export abstract class AbstractApiFormService {
           form.get(key).setErrors(errors[key], {emitEvent: true});
         }
         else if (typeof errors[key] === 'string') {
+          console.log('ddddddddd');
           baseErrors.push(errors[key]);
         }
         else  {
@@ -48,9 +53,9 @@ export abstract class AbstractApiFormService {
         }
       });
     };
+    iterate(validationErrors, abstractControl);
     if (baseErrors.length) {
       abstractControl.setErrors(baseErrors, {emitEvent: true});
     }
-    iterate(validationErrors, abstractControl);
   }
 }

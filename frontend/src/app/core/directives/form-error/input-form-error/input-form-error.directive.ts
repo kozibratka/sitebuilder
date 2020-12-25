@@ -28,15 +28,18 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
   }
 
   ngAfterContentInit(): void {
-    if (this.selfInput || !this.errorFormContainer) {
+    if (this.selfInput) {
       this.errorFormContainer = this.selfViewContainer;
-    }
-    else {
-      this.selfInput = this.formInput;
       this.formInputElementRef = this.elementRef;
+    } else {
+      if (!this.errorFormContainer) {
+        this.errorFormContainer = this.selfViewContainer;
+      }
+      this.selfInput = this.formInput;
     }
     this.selfInput.statusChanges.subscribe(status => {
-      this.clearMessage();
+      //this.clearMessage();
+      console.log(status);
       if (status === 'INVALID') {
         this.createErrorMessage();
       }

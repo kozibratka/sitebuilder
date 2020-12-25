@@ -1,5 +1,5 @@
-import {AfterContentInit, ComponentFactoryResolver, ContentChild, Directive, ViewContainerRef} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {AfterContentInit, ComponentFactoryResolver, ContentChild, Directive, Host, Optional, Self, ViewContainerRef} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, FormGroupDirective} from '@angular/forms';
 import {GlobalFormErrorMessageComponent} from './tools/components/global-form-error-message/global-form-error-message.component';
 
 @Directive({
@@ -10,7 +10,7 @@ export class GlobalFormErrorDirective implements AfterContentInit{
   @ContentChild('globalFormErrors', {read: ViewContainerRef}) globalFormErrorsContainer: ViewContainerRef;
 
   constructor(
-    private selfFormControl: FormControl,
+    @Self() private selfFormControl: FormGroupDirective,
     private resolve: ComponentFactoryResolver,
   ) { }
 
@@ -26,7 +26,7 @@ export class GlobalFormErrorDirective implements AfterContentInit{
   createErrorMessage(): void {
     const factory = this.resolve.resolveComponentFactory(GlobalFormErrorMessageComponent);
     const errorMessageComonent = this.globalFormErrorsContainer.createComponent<GlobalFormErrorMessageComponent>(factory).instance;
-    errorMessageComonent.errors = this.selfFormControl.errors;
+    errorMessageComonent.errors = this.selfFormControl.errors ?? {};
   }
 
 }

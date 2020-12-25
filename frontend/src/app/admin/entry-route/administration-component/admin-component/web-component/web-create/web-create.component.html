@@ -5,7 +5,7 @@
   <div class="card-body">
     <form [formGroup]="createWebForm" appGlobalFormError>
       <ng-container #globalFormErrors></ng-container>
-      <input type="text" class="form-control" placeholder="Název webu" formControlName="name">
+      <input appFormError type="text" class="form-control" placeholder="Název webu" formControlName="name">
       <div class="container-fluid mt-3">
         <div class="row justify-content-end">
           <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button>Zpět na seznam webů</a>
