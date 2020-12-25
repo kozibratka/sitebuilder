@@ -8,8 +8,7 @@ import {FormGroup} from '@angular/forms';
 export class WebFormService extends AbstractApiFormService{
   createForm(): FormGroup {
     return this.formBuilder.group({
-      name: [''],
-      ddd: 'ddd'
+      name: ['']
     }, {asyncValidators: this.createValidator('web_create'), updateOn: 'submit'});
   }
 
