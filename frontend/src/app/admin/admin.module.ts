@@ -25,6 +25,8 @@ import { RemoveWebDialogComponent } from './entry-route/administration-component
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { WebCreateComponent } from './entry-route/administration-component/admin-component/web-component/web-create/web-create.component';
+import { PageCreateComponent } from './entry-route/administration-component/admin-component/page-component/page-create/page-create.component';
+import { PageListComponent } from './entry-route/administration-component/admin-component/page-component/page-list/page-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { WebCreateComponent } from './entry-route/administration-component/admin
     RegistrationComponent,
     WebListComponent,
     RemoveWebDialogComponent,
-    WebCreateComponent
+    WebCreateComponent,
+    PageCreateComponent,
+    PageListComponent
   ],
   imports: [
     BrowserModule,

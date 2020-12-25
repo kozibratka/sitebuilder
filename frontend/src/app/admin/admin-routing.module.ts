@@ -12,6 +12,8 @@ import {WebListComponent} from './entry-route/administration-component/admin-com
 import {WebListResolverService} from './entry-route/administration-component/admin-component/web-component/web-list/tools/route-resolvers/web-list-resolver.service';
 import {WebCreateComponent} from './entry-route/administration-component/admin-component/web-component/web-create/web-create.component';
 import {WebDetailResolverService} from './entry-route/administration-component/admin-component/web-component/web-create/tools/route-resolvers/web-detail-resolver.service';
+import {PageListComponent} from './entry-route/administration-component/admin-component/page-component/page-list/page-list.component';
+import {PageListResolverService} from './entry-route/administration-component/admin-component/page-component/page-list/tools/route-resolvers/page-list-resolver.service';
 
 const routes: Routes = [
   {
@@ -36,6 +38,17 @@ const routes: Routes = [
             path: 'update/:id',
             component: WebCreateComponent,
             resolve: {webDetail: WebDetailResolverService},
+          }
+        ]
+      },
+      {
+        path: 'page/:webId',
+        children: [
+          {
+            path: 'list',
+            component: PageListComponent,
+            resolve: {pageList: PageListResolverService},
+            runGuardsAndResolvers: 'always',
           }
         ]
       },

@@ -18,12 +18,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class PageController extends BaseApiController
 {
     /**
-     * @Route("/list", name="list")
+     * @Route("/list/{id}", name="list")
      */
-    public function list()
+    public function list(Web $web)
     {
-        $user = $this->getUser();
-        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['user' => $user]);
+        $this->denyAccessUnlessGranted('page_builder_voter',$web);
+        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['web' => $web]);
         return $this->jsonResponseSimple($pages);
     }
 
