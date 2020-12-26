@@ -1,1 +1,21 @@
-<p>page-create works!</p>
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Vytvořit stránku</h3>
+  </div> <!-- /.card-body -->
+  <div class="card-body">
+    <form [formGroup]="createPageForm" appGlobalFormError>
+      <ng-container #globalFormErrors></ng-container>
+      <input appFormError type="text" class="form-control" placeholder="Název stránky" formControlName="name">
+      <div class="container-fluid mt-3">
+        <div class="row justify-content-end">
+          <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button>Zpět na seznam stránek</a>
+          <button type="submit" mat-raised-button color="primary" class="ml-2"><i class="material-icons">add</i>Uložit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.card-body -->
+</div>
+
+
+

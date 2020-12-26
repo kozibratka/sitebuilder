@@ -15,13 +15,13 @@ export abstract class AbstractApiFormService {
   ) {
   }
 
-  abstract createForm(): FormGroup;
+  abstract createForm(querySegment?: (string | number)[]): FormGroup;
 
-  createValidator(path: string, expectedHttpStatus = 201): (AbstractControl) => Observable<ValidationErrors | null> {
+  createValidator(path: string, querySegment?: (string | number)[]): (AbstractControl) => Observable<ValidationErrors | null> {
     return (abstractControl: AbstractControl) => {
       return new Observable<ValidationErrors | null>(validationSubscriber => {
         if (abstractControl.touched) {
-          this.symfonyApiClientService.post<{}>(path, abstractControl.value, null, {validform: 'true'}).subscribe(
+          this.symfonyApiClientService.post<{}>(path, abstractControl.value, querySegment, {validform: 'true'}).subscribe(
             {error: (err: HttpErrorResponse) => {
                 if (err.status === 400 && err.headers.get('Content-Type') === 'application/invalid-form+json') {
                   this.supplyValidationErrors(err.error, abstractControl);
@@ -45,7 +45,6 @@ export abstract class AbstractApiFormService {
           form.get(key).setErrors(errors[key], {emitEvent: true});
         }
         else if (typeof errors[key] === 'string') {
-          console.log('ddddddddd');
           baseErrors.push(errors[key]);
         }
         else  {

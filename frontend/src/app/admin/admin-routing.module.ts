@@ -14,6 +14,8 @@ import {WebCreateComponent} from './entry-route/administration-component/admin-c
 import {WebDetailResolverService} from './entry-route/administration-component/admin-component/web-component/web-create/tools/route-resolvers/web-detail-resolver.service';
 import {PageListComponent} from './entry-route/administration-component/admin-component/page-component/page-list/page-list.component';
 import {PageListResolverService} from './entry-route/administration-component/admin-component/page-component/page-list/tools/route-resolvers/page-list-resolver.service';
+import {PageCreateComponent} from './entry-route/administration-component/admin-component/page-component/page-create/page-create.component';
+import {PageDetailResolverService} from './entry-route/administration-component/admin-component/page-component/page-create/tools/route-resolvers/page-detail-resolver.service';
 
 const routes: Routes = [
   {
@@ -49,6 +51,19 @@ const routes: Routes = [
             component: PageListComponent,
             resolve: {pageList: PageListResolverService},
             runGuardsAndResolvers: 'always',
+          },
+          {
+            path: 'update/:id',
+            component: PageCreateComponent,
+            resolve: {pageDetail: PageDetailResolverService},
+          },
+          {
+            path: 'create',
+            component: PageCreateComponent
+          },
+          {
+            path: 'page-builder/:id',
+            component: PageListComponent
           }
         ]
       },

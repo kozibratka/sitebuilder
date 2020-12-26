@@ -28,6 +28,15 @@ class PageController extends BaseApiController
     }
 
     /**
+     * @Route("/read/{id}", name="read")
+     */
+    public function read(Page $page)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter', $page);
+        return $this->jsonResponseSimple($page);
+    }
+
+    /**
      * @Route("/create/{id}", name="create")
      */
     public function create(Request $request, Web $web)

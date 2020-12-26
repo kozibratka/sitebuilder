@@ -27,6 +27,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { WebCreateComponent } from './entry-route/administration-component/admin-component/web-component/web-create/web-create.component';
 import { PageCreateComponent } from './entry-route/administration-component/admin-component/page-component/page-create/page-create.component';
 import { PageListComponent } from './entry-route/administration-component/admin-component/page-component/page-list/page-list.component';
+import { RemovePageDialogComponent } from './entry-route/administration-component/admin-component/page-component/page-list/tools/components/remove-page-dialog/remove-page-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PageListComponent } from './entry-route/administration-component/admin-
     RemoveWebDialogComponent,
     WebCreateComponent,
     PageCreateComponent,
-    PageListComponent
+    PageListComponent,
+    RemovePageDialogComponent
   ],
   imports: [
     BrowserModule,
