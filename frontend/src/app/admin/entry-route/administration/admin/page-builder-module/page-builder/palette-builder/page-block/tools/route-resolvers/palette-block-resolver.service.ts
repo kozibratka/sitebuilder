@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {WebInterface} from '../../../../../../web/tools/interfaces/web-interface';
 import {SymfonyApiClientService} from '../../../../../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../../../../../core/services/http-response-toaster.service';
 import {Observable, throwError} from 'rxjs';
