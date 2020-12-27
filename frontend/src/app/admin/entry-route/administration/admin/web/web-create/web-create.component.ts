@@ -5,7 +5,7 @@ import {SymfonyApiClientService} from '../../../../../../core/services/symfony-a
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../core/services/notifier.service';
-import {WebInterface} from '../web-list/tools/interfaces/web-interface';
+import {WebInterface} from '../tools/interfaces/web-interface';
 
 @Component({
   selector: 'app-web-create',

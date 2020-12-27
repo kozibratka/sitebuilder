@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {WebInterface} from '../../../../web-component/web-list/tools/interfaces/web-interface';
+import {PageInterface} from '../../../tools/interfaces/page-interface';
 import {SymfonyApiClientService} from '../../../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../../../core/services/http-response-toaster.service';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {PageInterface} from '../../../page-list/tools/interfaces/page-interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PageDetailResolverService implements Resolve<PageInterface> {
+export class PageListResolverService implements Resolve<PageInterface[]> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {
-    return this.symfonyApiClientService.get<WebInterface>('page_read', [route.paramMap.get('id')]).pipe(catchError(err => {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface[]> {
+    const webId = route.paramMap.get('webId');
+    return this.symfonyApiClientService.get<PageInterface[]>('page_list', [webId]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

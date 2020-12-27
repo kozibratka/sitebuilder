@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PageInterface} from './tools/interfaces/page-interface';
+import {PageInterface} from '../tools/interfaces/page-interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {WebInterface} from '../../web-component/web-list/tools/interfaces/web-interface';
 import {FormGroup} from '@angular/forms';
 import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '../../../../../../core/services/notifier.service';
 import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
 import {PageFormService} from './tools/forms/page-form.service';
+import {WebInterface} from '../../web/tools/interfaces/web-interface';
 
 @Component({
   selector: 'app-page-create',

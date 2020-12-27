@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {TestPluginComponent} from '../../test-plugin.component';
-import {AbstractMenuPluginResolverMessenger} from '../../../../admin/entry-route/administration-component/admin-component/page-builder-module/page-builder-component/tools/messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
+import {AbstractMenuPluginResolverMessenger} from '../../../../admin/entry-route/administration/admin/page-builder-module/page-builder-component/tools/messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
 
 @Injectable({
   providedIn: 'root'
