@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaletteBlockComponent } from './palette-block.component';
+import { PageBlockComponent } from './page-block.component';
 
 describe('PaletteBlockComponent', () => {
-  let component: PaletteBlockComponent;
-  let fixture: ComponentFixture<PaletteBlockComponent>;
+  let component: PageBlockComponent;
+  let fixture: ComponentFixture<PageBlockComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaletteBlockComponent ]
+      declarations: [ PageBlockComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaletteBlockComponent);
+    fixture = TestBed.createComponent(PageBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

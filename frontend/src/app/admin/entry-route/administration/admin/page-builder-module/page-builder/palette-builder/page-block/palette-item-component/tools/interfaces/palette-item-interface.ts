@@ -1,4 +1,4 @@
-export interface PaletteItemSettingsInterface<T> {
+export interface PaletteItemInterface<T> {
   id: number;
   width: number;
   height: number;

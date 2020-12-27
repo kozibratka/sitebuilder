@@ -11,7 +11,7 @@ import {PageListComponent} from './entry-route/administration/admin/page/page-li
 import {PageListResolverService} from './entry-route/administration/admin/page/page-list/tools/route-resolvers/page-list-resolver.service';
 import {PageCreateComponent} from './entry-route/administration/admin/page/page-create/page-create.component';
 import {PageDetailResolverService} from './entry-route/administration/admin/page/page-create/tools/route-resolvers/page-detail-resolver.service';
-import {PageBuilderComponent} from './entry-route/administration/admin/page-builder-module/page-builder-component/page-builder.component';
+import {PageBuilderComponent} from './entry-route/administration/admin/page-builder-module/page-builder/page-builder.component';
 import {DashboardComponent} from './entry-route/administration/admin/dashboard/dashboard.component';
 import {AuthorizationComponent} from './entry-route/authorization/authorization.component';
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';

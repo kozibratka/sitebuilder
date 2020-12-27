@@ -20,11 +20,11 @@ import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-ht
 
 @Component({
   selector: 'app-palette-block',
-  templateUrl: './palette-block.component.html',
-  styleUrls: ['./palette-block.component.css'],
+  templateUrl: './page-block.component.html',
+  styleUrls: ['./page-block.component.css'],
   viewProviders: [{provide: PaletteBlockGridstackService}]
 })
-export class PaletteBlockComponent implements AfterViewInit{
+export class PageBlockComponent implements AfterViewInit{
 
   @ViewChild('palette_content') paletteContent: ElementRef;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
