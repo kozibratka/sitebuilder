@@ -63,7 +63,13 @@ const routes: Routes = [
           },
           {
             path: 'page-builder/:id',
-            component: PageListComponent
+            component: PageBuilderComponent,
+            children: [
+              {
+                path: 'item-admin',
+                loadChildren: () => import('../plugins/routes-admin.module').then(m => m.RoutesAdminModule)
+              }
+            ]
           }
         ]
       },
