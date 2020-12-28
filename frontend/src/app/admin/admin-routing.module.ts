@@ -16,6 +16,7 @@ import {DashboardComponent} from './entry-route/administration/admin/dashboard/d
 import {AuthorizationComponent} from './entry-route/authorization/authorization.component';
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization/login/login.component';
+import {PageBlockResolverService} from './entry-route/administration/admin/page-builder-module/page-builder/palette-builder/page-block/tools/route-resolvers/page-block-resolver.service';
 
 
 const routes: Routes = [
@@ -65,6 +66,7 @@ const routes: Routes = [
           {
             path: 'page-builder/:pageId',
             component: PageBuilderComponent,
+            resolve: {pageBlocks: PageBlockResolverService},
             children: [
               {
                 path: 'item-admin',

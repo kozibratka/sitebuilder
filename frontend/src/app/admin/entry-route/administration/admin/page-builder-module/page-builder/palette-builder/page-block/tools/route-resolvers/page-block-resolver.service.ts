@@ -5,11 +5,12 @@ import {HttpResponseToasterService} from '../../../../../../../../../../core/ser
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {PageBlockInterface} from '../interfaces/page-block-interface';
+import {PageInterface} from '../../../../../../page/tools/interfaces/page-interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaletteBlockResolverService implements Resolve<PageBlockInterface[]>{
+export class PageBlockResolverService implements Resolve<PageBlockInterface[]>{
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -17,11 +18,11 @@ export class PaletteBlockResolverService implements Resolve<PageBlockInterface[]
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageBlockInterface[]> {
-    return this.symfonyApiClientService.get<PageBlockInterface[]>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
+    return this.symfonyApiClientService.get<PageInterface>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
-      return httpResponse.body;
+      return httpResponse.body.pageBlocks;
     }));
   }
 }

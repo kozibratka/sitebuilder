@@ -5,7 +5,6 @@ import {HttpResponseToasterService} from '../../../../../../../../core/services/
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {PageInterface} from '../../../tools/interfaces/page-interface';
-import {WebInterface} from '../../../../web/tools/interfaces/web-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +16,8 @@ export class PageDetailResolverService implements Resolve<PageInterface> {
     private httpResponseToasterService: HttpResponseToasterService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {
-    return this.symfonyApiClientService.get<WebInterface>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface> {
+    return this.symfonyApiClientService.get<PageInterface>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
