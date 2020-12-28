@@ -38,7 +38,7 @@ const routes: Routes = [
             component: WebCreateComponent
           },
           {
-            path: 'update/:id',
+            path: 'update/:webId',
             component: WebCreateComponent,
             resolve: {webDetail: WebDetailResolverService},
           }
@@ -54,7 +54,7 @@ const routes: Routes = [
             runGuardsAndResolvers: 'always',
           },
           {
-            path: 'update/:id',
+            path: 'update/:pageId',
             component: PageCreateComponent,
             resolve: {pageDetail: PageDetailResolverService},
           },
@@ -63,7 +63,7 @@ const routes: Routes = [
             component: PageCreateComponent
           },
           {
-            path: 'page-builder/:id',
+            path: 'page-builder/:pageId',
             component: PageBuilderComponent,
             children: [
               {

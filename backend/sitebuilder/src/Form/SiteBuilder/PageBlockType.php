@@ -15,8 +15,8 @@ class PageBlockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('gridstackItems', CollectionType::class, [
-                'entry_type' => GridstackItemType::class,
+            ->add('paletteGridItems', CollectionType::class, [
+                'entry_type' => PaletteGridItem::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false

@@ -30,9 +30,9 @@ class PageBlock
     private Page $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\GridstackItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="PaletteGridItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
      */
-    private Collection $gridstackItems;
+    private Collection $paletteGridItems;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -44,7 +44,7 @@ class PageBlock
 
     public function __construct()
     {
-        $this->gridstackItems = new ArrayCollection();
+        $this->paletteGridItems = new ArrayCollection();
     }
 
     public function getId(): int
@@ -67,21 +67,21 @@ class PageBlock
         $this->page = $page;
     }
 
-    public function getGridstackItems(): Collection
+    public function getPaletteGridItems(): Collection
     {
-        return $this->gridstackItems;
+        return $this->paletteGridItems;
     }
 
-    public function addGridstackItem(GridstackItem $gridstackItem): self
+    public function addPaletteGridItem(PaletteGridItem $paletteGridItem): self
     {
-        $gridstackItem->setPageBlock($this);
-        $this->gridstackItems->add($gridstackItem);
+        $paletteGridItem->setPageBlock($this);
+        $this->paletteGridItems->add($paletteGridItem);
         return $this;
     }
 
-    public function removeGridstackItem(GridstackItem $gridstackItem): self
+    public function removePaletteGridItem(PaletteGridItem $paletteGridItem): self
     {
-        $this->gridstackItems->removeElement($gridstackItem);
+        $this->paletteGridItems->removeElement($paletteGridItem);
         return $this;
     }
 

@@ -12,7 +12,7 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Entity
  * @ORM\Table(name="gridstack_item")
  */
-class GridstackItem
+class PaletteGridItem
 {
     /**
      * @ORM\Id
@@ -22,7 +22,7 @@ class GridstackItem
     private int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\PageBlock", inversedBy="gridstackItems")
+     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\PageBlock", inversedBy="paletteGridItems")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Serializer\Exclude()
      */
@@ -49,7 +49,7 @@ class GridstackItem
     private int $y;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", inversedBy="gridstackItem", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", inversedBy="paletteGridItem", cascade={"persist", "remove"})
      */
     private BasePlugin $plugin;
 

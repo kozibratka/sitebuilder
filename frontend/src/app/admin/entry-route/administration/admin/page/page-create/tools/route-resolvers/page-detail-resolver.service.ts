@@ -18,7 +18,7 @@ export class PageDetailResolverService implements Resolve<PageInterface> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {
-    return this.symfonyApiClientService.get<WebInterface>('page_read', [route.paramMap.get('id')]).pipe(catchError(err => {
+    return this.symfonyApiClientService.get<WebInterface>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

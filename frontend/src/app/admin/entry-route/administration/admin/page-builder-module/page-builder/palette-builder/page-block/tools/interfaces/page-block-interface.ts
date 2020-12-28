@@ -1,6 +1,6 @@
-import {PaletteItemInterface} from '../../palette-item-component/tools/interfaces/palette-item-interface';
+import {PaletteGridItemInterface} from '../../palette-item-component/tools/interfaces/palette-grid-item-interface';
 
 export interface PageBlockInterface {
   id: number;
-  paletteItems: PaletteItemInterface<any>[];
+  paletteGridItems: PaletteGridItemInterface<any>[];
 }

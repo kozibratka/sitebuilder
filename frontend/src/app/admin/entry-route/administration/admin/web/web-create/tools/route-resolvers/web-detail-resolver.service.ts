@@ -17,7 +17,7 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {
-    return this.symfonyApiClientService.get<WebInterface>('web_read', [route.paramMap.get('id')]).pipe(catchError(err => {
+    return this.symfonyApiClientService.get<WebInterface>('web_read', [route.paramMap.get('webId')]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

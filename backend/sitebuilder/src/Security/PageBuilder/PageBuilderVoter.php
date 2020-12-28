@@ -4,7 +4,7 @@
 namespace App\Security\PageBuilder;
 
 
-use App\Entity\SiteBuilder\GridstackItem;
+use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
@@ -35,7 +35,7 @@ class PageBuilderVoter extends Voter
             case $subject instanceof PageBlock:
                 $user = $subject->getUser();
                 break;
-            case $subject instanceof GridstackItem:
+            case $subject instanceof PaletteGridItem:
                 $user = $subject->getPageBlock()->getUser();
                 break;
             case $subject instanceof BasePlugin:

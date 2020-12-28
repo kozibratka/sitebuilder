@@ -3,14 +3,13 @@
 
 namespace App\Form\SiteBuilder;
 
-
-use App\Entity\SiteBuilder\GridstackItem;
+use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GridstackItemType extends AbstractType
+class PaletteGridItemType extends AbstractType
 {
     private $addPluginFieldSubscriber;
 
@@ -33,7 +32,7 @@ class GridstackItemType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => GridstackItem::class,
+            'data_class' => PaletteGridItem::class,
         ]);
     }
 }

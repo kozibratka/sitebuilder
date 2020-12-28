@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-use App\Form\SiteBuilder\GridstackItemType;
+use App\Form\SiteBuilder\PaletteGridItem;
 use App\Form\SiteBuilder\Plugin\TextPluginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,7 +34,7 @@ class TestController extends BaseApiController
      */
     public function createGridstackItem(Request $request)
     {
-        $form = $this->createForm(GridstackItemType::class);
+        $form = $this->createForm(PaletteGridItem::class);
         $form->submit($request->request->all(), false);
         if($form->isValid()) {
             $data = $form->getData();

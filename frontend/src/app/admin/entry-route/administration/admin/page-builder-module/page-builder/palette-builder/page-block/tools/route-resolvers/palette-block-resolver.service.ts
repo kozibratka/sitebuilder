@@ -17,7 +17,7 @@ export class PaletteBlockResolverService implements Resolve<PageBlockInterface[]
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageBlockInterface[]> {
-    return this.symfonyApiClientService.get<PageBlockInterface[]>('web_list').pipe(catchError(err => {
+    return this.symfonyApiClientService.get<PageBlockInterface[]>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

@@ -4,7 +4,7 @@
 namespace App\Entity\SiteBuilder\Plugin;
 
 
-use App\Entity\SiteBuilder\GridstackItem;
+use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -26,10 +26,10 @@ abstract class BasePlugin
     private int $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\GridstackItem", mappedBy="plugin")
+     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\PaletteGridItem", mappedBy="plugin")
      * @Serializer\Exclude()
      */
-    private ?GridstackItem $gridstackItem;
+    private ?PaletteGridItem $paletteGridItem;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -51,14 +51,14 @@ abstract class BasePlugin
         $this->id = $id;
     }
 
-    public function getGridstackItem(): ?GridstackItem
+    public function getPaletteGridItem(): ?PaletteGridItem
     {
-        return $this->gridstackItem;
+        return $this->paletteGridItem;
     }
 
-    public function setGridstackItem(?GridstackItem $gridstackItem)
+    public function setpaletteGridItem(?PaletteGridItem $paletteGridItem)
     {
-        $this->gridstackItem = $gridstackItem;
+        $this->paletteGridItem = $paletteGridItem;
     }
 
     public function getIdentifier(): ?string

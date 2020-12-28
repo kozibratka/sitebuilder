@@ -4,7 +4,7 @@
 namespace App\Security\PageBuilder;
 
 
-use App\Entity\SiteBuilder\GridstackItem;
+use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
@@ -54,14 +54,14 @@ class PageBuilderWithChildrenVoter extends Voter
                 break;
             case $subject instanceof PageBlock:
                 $user = $subject->getUser();
-                foreach ($subject->getGridstackItems() as $gridstackItem) {
-                    $result = $this->voteOnAttribute($attribute, $gridstackItem, $token);
+                foreach ($subject->getPaletteGridItems() as $paletteGridItem) {
+                    $result = $this->voteOnAttribute($attribute, $paletteGridItem, $token);
                     if(!$result) {
                         return false;
                     }
                 }
                 break;
-            case $subject instanceof GridstackItem:
+            case $subject instanceof PaletteGridItem:
                 $user = $subject->getPageBlock()->getUser();
                 $result = $this->voteOnAttribute($attribute, $subject->getPlugin(), $token);
                 if(!$result) {
