@@ -21,13 +21,13 @@ import {LoginComponent} from './entry-route/authorization/login/login.component'
 import {AdministrationComponent} from './entry-route/administration/administration.component';
 import {AuthorizationComponent} from './entry-route/authorization/authorization.component';
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
-import {WebListComponent} from './entry-route/administration/admin/web/web-list/web-list.component';
-import {RemoveWebDialogComponent} from './entry-route/administration/admin/web/web-list/tools/components/remove-web-dialog/remove-web-dialog.component';
-import {WebCreateComponent} from './entry-route/administration/admin/web/web-create/web-create.component';
-import {PageCreateComponent} from './entry-route/administration/admin/page/page-create/page-create.component';
-import {PageListComponent} from './entry-route/administration/admin/page/page-list/page-list.component';
-import {RemovePageDialogComponent} from './entry-route/administration/admin/page/page-list/tools/components/remove-page-dialog/remove-page-dialog.component';
-import {PageBuilderModule} from './entry-route/administration/admin/page-builder-module/page-builder.module';
+import {WebListComponent} from './entry-route/administration/admin/site-builder/web/web-list/web-list.component';
+import {RemoveWebDialogComponent} from './entry-route/administration/admin/site-builder/web/web-list/tools/components/remove-web-dialog/remove-web-dialog.component';
+import {WebCreateComponent} from './entry-route/administration/admin/site-builder/web/web-create/web-create.component';
+import {PageCreateComponent} from './entry-route/administration/admin/site-builder/page/page-create/page-create.component';
+import {PageListComponent} from './entry-route/administration/admin/site-builder/page/page-list/page-list.component';
+import {RemovePageDialogComponent} from './entry-route/administration/admin/site-builder/page/page-list/tools/components/remove-page-dialog/remove-page-dialog.component';
+import {PageBuilderModule} from './entry-route/administration/admin/site-builder/page-builder-module/page-builder.module';
 
 @NgModule({
   declarations: [

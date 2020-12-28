@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
 import {AdministrationComponent} from './entry-route/administration/administration.component';
-import {WebListComponent} from './entry-route/administration/admin/web/web-list/web-list.component';
-import {WebListResolverService} from './entry-route/administration/admin/web/web-list/tools/route-resolvers/web-list-resolver.service';
-import {WebCreateComponent} from './entry-route/administration/admin/web/web-create/web-create.component';
-import {WebDetailResolverService} from './entry-route/administration/admin/web/web-create/tools/route-resolvers/web-detail-resolver.service';
-import {PageListComponent} from './entry-route/administration/admin/page/page-list/page-list.component';
-import {PageListResolverService} from './entry-route/administration/admin/page/page-list/tools/route-resolvers/page-list-resolver.service';
-import {PageCreateComponent} from './entry-route/administration/admin/page/page-create/page-create.component';
-import {PageDetailResolverService} from './entry-route/administration/admin/page/page-create/tools/route-resolvers/page-detail-resolver.service';
-import {PageBuilderComponent} from './entry-route/administration/admin/page-builder-module/page-builder/page-builder.component';
+import {WebListComponent} from './entry-route/administration/admin/site-builder/web/web-list/web-list.component';
+import {WebListResolverService} from './entry-route/administration/admin/site-builder/web/web-list/tools/route-resolvers/web-list-resolver.service';
+import {WebCreateComponent} from './entry-route/administration/admin/site-builder/web/web-create/web-create.component';
+import {WebDetailResolverService} from './entry-route/administration/admin/site-builder/web/web-create/tools/route-resolvers/web-detail-resolver.service';
+import {PageListComponent} from './entry-route/administration/admin/site-builder/page/page-list/page-list.component';
+import {PageListResolverService} from './entry-route/administration/admin/site-builder/page/page-list/tools/route-resolvers/page-list-resolver.service';
+import {PageCreateComponent} from './entry-route/administration/admin/site-builder/page/page-create/page-create.component';
+import {PageDetailResolverService} from './entry-route/administration/admin/site-builder/page/page-create/tools/route-resolvers/page-detail-resolver.service';
+import {PageBuilderComponent} from './entry-route/administration/admin/site-builder/page-builder-module/page-builder/page-builder.component';
 import {DashboardComponent} from './entry-route/administration/admin/dashboard/dashboard.component';
 import {AuthorizationComponent} from './entry-route/authorization/authorization.component';
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization/login/login.component';
-import {PageBlockResolverService} from './entry-route/administration/admin/page-builder-module/page-builder/palette-builder/page-block/tools/route-resolvers/page-block-resolver.service';
+import {PageBuilderResolverService} from './entry-route/administration/admin/site-builder/page-builder-module/page-builder/tools/route-resolvers/page-builder-resolver.service';
 
 
 const routes: Routes = [
@@ -66,7 +66,7 @@ const routes: Routes = [
           {
             path: 'page-builder/:pageId',
             component: PageBuilderComponent,
-            resolve: {pageBlocks: PageBlockResolverService},
+            resolve: {pageBlocks: PageBuilderResolverService},
             children: [
               {
                 path: 'item-admin',
