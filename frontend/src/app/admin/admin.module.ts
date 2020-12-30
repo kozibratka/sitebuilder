@@ -27,7 +27,14 @@ import {WebCreateComponent} from './entry-route/administration/admin/site-builde
 import {PageCreateComponent} from './entry-route/administration/admin/site-builder/page/page-create/page-create.component';
 import {PageListComponent} from './entry-route/administration/admin/site-builder/page/page-list/page-list.component';
 import {RemovePageDialogComponent} from './entry-route/administration/admin/site-builder/page/page-list/tools/components/remove-page-dialog/remove-page-dialog.component';
-import {PageBuilderModule} from './entry-route/administration/admin/site-builder/page-builder-module/page-builder.module';
+import {PageBuilderComponent} from './entry-route/administration/admin/site-builder/page-builder/page-builder.component';
+import {MenuBuilderComponent} from './entry-route/administration/admin/site-builder/page-builder/menu-builder/menu-builder.component';
+import {PaletteBuilderComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/palette-builder.component';
+import {DragScrollDirective} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/tools/directives/drag-scroll-directive';
+import {PageBlockComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/page-block.component';
+import {MenuPluginResolverDirective} from './entry-route/administration/admin/site-builder/page-builder/menu-builder/tools/directives/menu-plugin-resolver.directive';
+import {PaletteItemComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/palette-item.component';
+import {PaletteItemQuickMenuComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +51,15 @@ import {PageBuilderModule} from './entry-route/administration/admin/site-builder
     WebCreateComponent,
     PageCreateComponent,
     PageListComponent,
-    RemovePageDialogComponent
+    RemovePageDialogComponent,
+    PageBuilderComponent,
+    MenuBuilderComponent,
+    PaletteBuilderComponent,
+    DragScrollDirective,
+    PageBlockComponent,
+    MenuPluginResolverDirective,
+    PaletteItemComponent,
+    PaletteItemQuickMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +67,6 @@ import {PageBuilderModule} from './entry-route/administration/admin/site-builder
     RouterModule,
     SortablejsModule.forRoot({animation: 150}),
     AdminRoutingModule,
-    PageBuilderModule,
     PluginsModule,
     NgbModule,
     ReactiveFormsModule,
@@ -63,7 +77,7 @@ import {PageBuilderModule} from './entry-route/administration/admin/site-builder
     MatDialogModule,
     MatButtonModule,
   ],
-  providers: [],
+  providers: [{provide: Window, useValue: window}],
   exports: [
     MenuComponent,
   ],

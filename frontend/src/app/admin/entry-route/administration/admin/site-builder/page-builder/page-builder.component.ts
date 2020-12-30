@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MenuPluginResolverService} from './tools/services/menu-plugin-resolver.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-page-builder',
@@ -11,7 +12,7 @@ import {MenuPluginResolverService} from './tools/services/menu-plugin-resolver.s
 })
 export class PageBuilderComponent implements OnInit, AfterViewInit {
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngAfterViewInit(): void {

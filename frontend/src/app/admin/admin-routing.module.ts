@@ -11,12 +11,12 @@ import {PageListComponent} from './entry-route/administration/admin/site-builder
 import {PageListResolverService} from './entry-route/administration/admin/site-builder/page/page-list/tools/route-resolvers/page-list-resolver.service';
 import {PageCreateComponent} from './entry-route/administration/admin/site-builder/page/page-create/page-create.component';
 import {PageDetailResolverService} from './entry-route/administration/admin/site-builder/page/page-create/tools/route-resolvers/page-detail-resolver.service';
-import {PageBuilderComponent} from './entry-route/administration/admin/site-builder/page-builder-module/page-builder/page-builder.component';
+import {PageBuilderComponent} from './entry-route/administration/admin/site-builder/page-builder/page-builder.component';
 import {DashboardComponent} from './entry-route/administration/admin/dashboard/dashboard.component';
 import {AuthorizationComponent} from './entry-route/authorization/authorization.component';
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization/login/login.component';
-import {PageBuilderResolverService} from './entry-route/administration/admin/site-builder/page-builder-module/page-builder/tools/route-resolvers/page-builder-resolver.service';
+import {PageBuilderResolverService} from './entry-route/administration/admin/site-builder/page-builder/tools/route-resolvers/page-builder-resolver.service';
 
 
 const routes: Routes = [
