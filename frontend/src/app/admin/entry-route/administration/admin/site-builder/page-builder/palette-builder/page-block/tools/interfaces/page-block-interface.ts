@@ -2,5 +2,6 @@ import {PaletteGridItemInterface} from '../../palette-item-component/tools/inter
 
 export interface PageBlockInterface {
   id: number;
+  height: number;
   paletteGridItems: PaletteGridItemInterface<any>[];
 }

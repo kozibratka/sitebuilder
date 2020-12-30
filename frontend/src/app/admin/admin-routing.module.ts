@@ -66,7 +66,7 @@ const routes: Routes = [
           {
             path: 'page-builder/:pageId',
             component: PageBuilderComponent,
-            resolve: {pageBlocks: PageBuilderResolverService},
+            resolve: {pageDetail: PageBuilderResolverService},
             children: [
               {
                 path: 'item-admin',

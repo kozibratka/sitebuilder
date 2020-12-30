@@ -24,6 +24,11 @@ class PageBlock
     private int $id;
 
     /**
+     * @ORM\Column(type="integer", options={"default" : 1})
+     */
+    private int $height = 1;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Page", inversedBy="pageBlocks")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
@@ -93,5 +98,15 @@ class PageBlock
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(int $height)
+    {
+        $this->height = $height;
     }
 }

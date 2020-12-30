@@ -1,6 +1,8 @@
-import {AfterViewChecked, Component, ElementRef, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild, ViewChildren} from '@angular/core';
 import {Subject} from 'rxjs';
 import {GridItemHTMLElementItemComponent} from './tools/interfaces/grid-item-htmlelement-item-component';
+import {PageInterface} from '../../tools/interfaces/page-interface';
+import {PageBlockInterface} from './page-block/tools/interfaces/page-block-interface';
 
 @Component({
   selector: 'app-palette-builder',
@@ -8,21 +10,20 @@ import {GridItemHTMLElementItemComponent} from './tools/interfaces/grid-item-htm
   styleUrls: ['./palette-builder.component.css'],
   providers: [{provide: 'QuickMenuMessenger', useFactory: () => new Subject<GridItemHTMLElementItemComponent>()}]
 })
-export class PaletteBuilderComponent implements AfterViewChecked{
+export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 
   @ViewChild('palette') private _palette: ElementRef<HTMLElement>;
-  baseBlocks: { image: string, id: number }[];
+  @Input() pageDetail: PageInterface;
+  baseBlocks: PageBlockInterface[];
   isDraggedContent = false;
   private _isResized = false;
 
   constructor(
   ) {
-    this.baseBlocks = [
-      {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
-      {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
-      {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
-      {image: 'https://via.placeholder.com/300/000458?text=2', id: 1},
-    ];
+  }
+
+  ngOnInit(): void {
+    this.baseBlocks = this.pageDetail.pageBlocks;
   }
 
   ngAfterViewChecked(): void {
