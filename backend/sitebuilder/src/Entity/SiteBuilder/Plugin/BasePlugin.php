@@ -39,7 +39,9 @@ abstract class BasePlugin
      */
     private User $user;
 
-    protected ?string $identifier = null;
+    public ?string $identifier = null;
+
+    abstract public function setIdentifier();
 
     public function getId(): int
     {
@@ -64,11 +66,6 @@ abstract class BasePlugin
     public function getIdentifier(): ?string
     {
         return $this->identifier;
-    }
-
-    public function setIdentifier(string $identifier)
-    {
-        $this->identifier = $identifier;
     }
 
     public function getUser(): User

@@ -1,8 +1,5 @@
-export interface PaletteGridItemInterface<T> {
-  id: number;
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-  plugin: T;
+import {GridStackNode} from 'gridstack/dist/gridstack';
+
+export interface PaletteGridItemInterface extends GridStackNode{
+  plugin: {identifier: string};
 }

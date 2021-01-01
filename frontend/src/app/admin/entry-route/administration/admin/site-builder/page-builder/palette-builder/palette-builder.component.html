@@ -14,7 +14,7 @@
       [sortablejs]="baseBlocks"
       [sortablejsOptions]="{ group: 'shared', scroll: false, handle: '.handle' }">
       <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of baseBlocks">
-        <app-palette-block (resized)="isResized=$event"></app-palette-block>
+        <app-palette-block [pageBlock]="item" (resized)="isResized=$event"></app-palette-block>
       </li>
     </ul>
 

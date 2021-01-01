@@ -9,7 +9,7 @@ import {
   Renderer2,
   NgZone,
   Output,
-  EventEmitter, Inject
+  EventEmitter, Inject, Input, OnInit
 } from '@angular/core';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockGridstackService} from './tools/services/palette-block-gridstack.service';
@@ -17,6 +17,8 @@ import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item-component/palette-item.component';
 import {Subject} from 'rxjs';
 import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
+import {PageBlockInterface} from './tools/interfaces/page-block-interface';
+import {PaletteGridItemInterface} from './palette-item-component/tools/interfaces/palette-grid-item-interface';
 
 @Component({
   selector: 'app-palette-block',
@@ -24,12 +26,13 @@ import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-ht
   styleUrls: ['./page-block.component.css'],
   viewProviders: [{provide: PaletteBlockGridstackService}]
 })
-export class PageBlockComponent implements AfterViewInit{
+export class PageBlockComponent implements OnInit, AfterViewInit{
 
   @ViewChild('palette_content') paletteContent: ElementRef;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @Output() resized = new EventEmitter<boolean>();
-  gridNodes: GridStackNode[] = [];
+  @Input() pageBlock: PageBlockInterface;
+  gridNodes: PaletteGridItemInterface[] = [];
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -41,12 +44,18 @@ export class PageBlockComponent implements AfterViewInit{
   ) {
   }
 
-  @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
-    this.prepareResizeHorizontalPalette(event);
+  ngOnInit(): void {
+    if (this.pageBlock.paletteGridItems) {
+      this.gridNodes = this.pageBlock.paletteGridItems;
+    }
   }
 
   ngAfterViewInit(): void {
     this.initGridStack();
+  }
+
+  @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
+    this.prepareResizeHorizontalPalette(event);
   }
 
   private prepareResizeHorizontalPalette(event: MouseEvent): void{

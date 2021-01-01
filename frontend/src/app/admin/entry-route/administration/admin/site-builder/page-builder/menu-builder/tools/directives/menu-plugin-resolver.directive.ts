@@ -1,5 +1,5 @@
 import {Directive, HostListener, Inject, Input} from '@angular/core';
-import {AbstractMenuPluginResolverMessenger} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
+import {AbstractMenuPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-resolver.service';
 
 @Directive({
@@ -7,7 +7,7 @@ import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-res
 })
 export class MenuPluginResolverDirective {
 
-  @Input() abstractMenuPluginResolverMessenger: AbstractMenuPluginResolverMessenger;
+  @Input() abstractMenuPluginResolverMessenger: AbstractMenuPluginResolver;
 
   constructor(
     private menuPluginResolverService: MenuPluginResolverService

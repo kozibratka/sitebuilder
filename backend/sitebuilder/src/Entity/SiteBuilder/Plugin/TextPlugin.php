@@ -15,7 +15,7 @@ class TextPlugin extends BasePlugin
      */
     private string $text;
 
-    public function __construct()
+    public function setIdentifier()
     {
         $this->identifier = 'text_plugin';
     }

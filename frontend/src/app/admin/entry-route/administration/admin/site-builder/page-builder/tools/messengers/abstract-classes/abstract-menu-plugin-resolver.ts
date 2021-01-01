@@ -1,4 +1,4 @@
-export abstract class AbstractMenuPluginResolverMessenger {
+export abstract class AbstractMenuPluginResolver {
   abstract getMenuImage(): string;
 
   abstract get menuImageSize(): { x: number, y: number };

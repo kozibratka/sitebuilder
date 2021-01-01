@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {TestPluginComponent} from '../../test-plugin.component';
-import {AbstractMenuPluginResolverMessenger} from '../../../../admin/entry-route/administration/admin/site-builder/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver-messenger';
+import {AbstractMenuPluginResolver} from '../../../../admin/entry-route/administration/admin/site-builder/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TestMenuResloverMessengerService extends AbstractMenuPluginResolverMessenger{
+export class TestMenuResloverService extends AbstractMenuPluginResolver{
 
   constructor() { super(); }
 

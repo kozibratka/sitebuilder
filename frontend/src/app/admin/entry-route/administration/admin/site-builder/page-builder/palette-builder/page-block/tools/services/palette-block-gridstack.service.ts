@@ -3,6 +3,7 @@ import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
 import {PaletteBlockService} from './palette-block.service';
 import {PaletteItemComponent} from '../../palette-item-component/palette-item.component';
+import {PaletteGridItemInterface} from '../../palette-item-component/tools/interfaces/palette-grid-item-interface';
 
 @Injectable()
 export class PaletteBlockGridstackService {
@@ -10,7 +11,7 @@ export class PaletteBlockGridstackService {
   private _gridStack: GridStack;
   private isInitied = false;
   private gridstackElement: ElementRef;
-  private gridStackNodes: GridStackNode[];
+  private gridStackNodes: PaletteGridItemInterface[];
   private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
   private toResizeRows = 0;
 
@@ -21,7 +22,7 @@ export class PaletteBlockGridstackService {
 
   }
 
-  init(elementRef: ElementRef, gridStackNodes: GridStackNode[]): void {
+  init(elementRef: ElementRef, gridStackNodes: PaletteGridItemInterface[]): void {
     this.gridstackElement = elementRef;
     this.gridStackNodes = gridStackNodes;
     this.startGridstack();
@@ -39,9 +40,11 @@ export class PaletteBlockGridstackService {
       }, this.gridstackElement.nativeElement);
       this.isInitied = true;
 
-      (this._gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: any) => {
+      (this._gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
         this._gridStack.removeWidget(newWidget.el);
-        this.gridStackNodes.push(newWidget);
+        const newWidgetTmp = newWidget as PaletteGridItemInterface;
+        newWidgetTmp.plugin = {identifier: 'none'};
+        this.gridStackNodes.push(newWidgetTmp);
         this.zone.run(() => {
           this.changeDetectorRef.detectChanges();
         });

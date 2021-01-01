@@ -15,7 +15,7 @@ class ImagePlugin extends BasePlugin
      */
     private string $url;
 
-    public function __construct()
+    public function setIdentifier()
     {
         $this->identifier = 'image_plugin';
     }

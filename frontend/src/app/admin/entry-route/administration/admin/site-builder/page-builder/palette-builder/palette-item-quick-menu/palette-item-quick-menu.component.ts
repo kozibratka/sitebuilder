@@ -18,7 +18,6 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   @HostBinding('style.display') display;
   @HostBinding('style.width') width;
 
-  private paletteBlockPosition: { x: number, y: number };
   private selectedItemForMenu: GridItemHTMLElementItemComponent;
 
   constructor(
