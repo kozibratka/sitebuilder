@@ -3,7 +3,6 @@
 
 namespace App\Controller;
 
-use App\Form\SiteBuilder\PaletteGridItem;
 use App\Form\SiteBuilder\Plugin\TextPluginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

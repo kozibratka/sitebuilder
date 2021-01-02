@@ -35,7 +35,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
         if (!isset($data['plugin'])) {
             return;
         }
-        $plugin = $data['plugin']['basePlugin'];
+        $plugin = $data['plugin'];
         $identifier = $plugin['identifier'];
         $formClass = $this->pluginServices[$identifier]->getFormClass();
         if(isset($data['id'])) {
