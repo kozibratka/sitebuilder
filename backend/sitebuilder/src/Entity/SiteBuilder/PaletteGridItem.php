@@ -7,6 +7,7 @@ namespace App\Entity\SiteBuilder;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -19,7 +20,7 @@ class PaletteGridItem
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\PageBlock", inversedBy="paletteGridItems")
@@ -40,8 +41,9 @@ class PaletteGridItem
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
-    private int $x;
+    private ?int $x;
 
     /**
      * @ORM\Column(type="integer")
@@ -50,15 +52,16 @@ class PaletteGridItem
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", inversedBy="paletteGridItem", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private BasePlugin $plugin;
 
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -93,12 +96,12 @@ class PaletteGridItem
         $this->height = $height;
     }
 
-    public function getX(): int
+    public function getX(): ?int
     {
         return $this->x;
     }
 
-    public function setX(int $x)
+    public function setX(?int $x)
     {
         $this->x = $x;
     }

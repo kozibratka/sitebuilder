@@ -9,7 +9,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {GridItemHTMLElement, GridStackNode} from 'gridstack';
+import {GridItemHTMLElement} from 'gridstack';
 import {PaletteBlockGridstackService} from '../tools/services/palette-block-gridstack.service';
 import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-resolver.service';
 import {Subject} from 'rxjs';

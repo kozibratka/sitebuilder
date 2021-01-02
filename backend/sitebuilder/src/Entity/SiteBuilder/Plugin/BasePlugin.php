@@ -23,7 +23,7 @@ abstract class BasePlugin
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\PaletteGridItem", mappedBy="plugin")
@@ -43,12 +43,12 @@ abstract class BasePlugin
 
     abstract public function setIdentifier();
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId(?int $id)
     {
         $this->id = $id;
     }

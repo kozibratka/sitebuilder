@@ -21,6 +21,7 @@
     <ul
       class="menu-block"
       [sortablejs]="baseBlocks"
+      [sortablejsCloneFunction]="clonePageBlock"
       [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false} }">
       <li *ngFor="let item of baseBlocks">
         <img alt="" src="{{item.image}}">

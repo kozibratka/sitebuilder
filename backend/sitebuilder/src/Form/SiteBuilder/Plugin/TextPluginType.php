@@ -14,7 +14,6 @@ class TextPluginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('text')
-            //->add('basePlugin', BasePluginType::class, ['data_class' => TextPlugin::class])
             ;
     }
 

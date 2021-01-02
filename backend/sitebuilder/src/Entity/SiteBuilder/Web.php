@@ -42,6 +42,7 @@ class Web
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
      * @Serializer\Exclude()
+     * @Assert\Valid()
      */
     private Collection $pages;
 

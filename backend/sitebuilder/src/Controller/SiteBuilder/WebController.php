@@ -27,7 +27,7 @@ class WebController extends BaseApiController
     /**
      * @Route("/read/{id}", name="read")
      */
-    public function read(Request $request, Web $web)
+    public function read(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
         return $this->jsonResponseSimple($web);
@@ -39,7 +39,7 @@ class WebController extends BaseApiController
     public function create(Request $request)
     {
         $form = $this->createForm(WebType::class);
-        $form->submit($request->request->all(), false);
+        $form->submit($request->request->all());
         if($form->isValid()) {
             $web = $form->getData();
             $this->persist($web);
@@ -54,7 +54,7 @@ class WebController extends BaseApiController
     public function update(Request $request, Web $web)
     {
         $form = $this->createForm(WebType::class, $web);
-        $form->submit($request->request->all(), false);
+        $form->submit($request->request->all());
         if($form->isValid()) {
             $web = $form->getData();
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$web);

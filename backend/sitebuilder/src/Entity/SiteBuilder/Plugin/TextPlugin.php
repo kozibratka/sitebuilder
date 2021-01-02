@@ -15,19 +15,19 @@ class TextPlugin extends BasePlugin
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
      */
-    private string $text;
+    private ?string $text;
 
     public function setIdentifier()
     {
         $this->identifier = 'text_plugin';
     }
 
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
 
-    public function setText(string $text)
+    public function setText(?string $text)
     {
         $this->text = $text;
     }

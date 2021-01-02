@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -25,8 +26,9 @@ class PageBlock
 
     /**
      * @ORM\Column(type="integer", options={"default" : 1})
+     * @Assert\NotBlank()
      */
-    private int $height = 1;
+    private $height = 1;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Page", inversedBy="pageBlocks")
@@ -36,6 +38,7 @@ class PageBlock
 
     /**
      * @ORM\OneToMany(targetEntity="PaletteGridItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid()
      */
     private Collection $paletteGridItems;
 
@@ -45,7 +48,7 @@ class PageBlock
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
-    private User $user;
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -90,7 +93,7 @@ class PageBlock
         return $this;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
@@ -100,12 +103,12 @@ class PageBlock
         $this->user = $user;
     }
 
-    public function getHeight(): int
+    public function getHeight()
     {
         return $this->height;
     }
 
-    public function setHeight(int $height)
+    public function setHeight($height)
     {
         $this->height = $height;
     }

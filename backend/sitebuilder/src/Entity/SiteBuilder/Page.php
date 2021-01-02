@@ -35,10 +35,11 @@ class Page
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
-    private User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\PageBlock", mappedBy="page", cascade={"persist"}, orphanRemoval=true)
+     * @Assert\Valid()
      */
     private Collection $pageBlocks;
 
@@ -74,7 +75,7 @@ class Page
         $this->name = $name;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }

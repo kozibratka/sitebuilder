@@ -1,6 +1,7 @@
 /// <reference types="jqueryui" />
 import {AfterViewInit, Component, NgZone, OnInit} from '@angular/core';
 import {MenuPluginResolverService} from '../tools/services/menu-plugin-resolver.service';
+import {PageBlockInterface} from '../palette-builder/page-block/tools/interfaces/page-block-interface';
 
 @Component({
   selector: 'app-menu-builder',
@@ -16,8 +17,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     private zone: NgZone
   ) {
     this.baseBlocks = [
-      {image: 'https://via.placeholder.com/300/000000?text=2', id: 1},
-      {image: 'https://via.placeholder.com/300/008254?text=5', id: 2}
+      {image: 'https://via.placeholder.com/300/000000?text=2', id: 1}
     ];
   }
 
@@ -35,6 +35,11 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
+  }
+
+  clonePageBlock = (item) => {
+    const pageBlock: PageBlockInterface = {height: 1, paletteGridItems: []};
+    return pageBlock; // this is what happens if sortablejsCloneFunction is not provided. Add your stuff here
   }
 
 }
