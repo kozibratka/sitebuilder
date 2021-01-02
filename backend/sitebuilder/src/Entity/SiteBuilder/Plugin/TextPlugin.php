@@ -3,6 +3,7 @@
 namespace App\Entity\SiteBuilder\Plugin;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -12,6 +13,7 @@ class TextPlugin extends BasePlugin
 {
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private string $text;
 

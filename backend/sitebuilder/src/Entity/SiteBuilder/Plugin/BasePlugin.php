@@ -37,7 +37,7 @@ abstract class BasePlugin
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
-    private User $user;
+    private ?User $user = null;
 
     public ?string $identifier = null;
 
@@ -68,7 +68,7 @@ abstract class BasePlugin
         return $this->identifier;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }

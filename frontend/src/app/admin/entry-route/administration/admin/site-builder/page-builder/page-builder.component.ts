@@ -34,6 +34,7 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   save(): void {
+    console.log(this.pageDetail);
     this.symfonyApiClientService.post('page_update', this.pageDetail, [this.pageDetail.id]).subscribe({
       next: () => {
         this.notifierService.notify('Úpravy byly úspěšně uloženy');

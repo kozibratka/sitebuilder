@@ -42,9 +42,7 @@ export class PaletteBlockGridstackService {
 
       (this._gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
         this._gridStack.removeWidget(newWidget.el);
-        const newWidgetTmp = newWidget as PaletteGridItemInterface;
-        newWidgetTmp.plugin = {identifier: 'none'};
-        this.gridStackNodes.push(newWidgetTmp);
+        this.createPaletteGridItem(newWidget);
         this.zone.run(() => {
           this.changeDetectorRef.detectChanges();
         });
@@ -93,6 +91,14 @@ export class PaletteBlockGridstackService {
     this.toResizeRows = toMove;
   }
 
+  createPaletteGridItem(newWidget: GridStackNode): void {
+    const newWidgetTmp: PaletteGridItemInterface = {plugin: {identifier: 'none'}};
+    newWidgetTmp.width = newWidget.width;
+    newWidgetTmp.height = newWidget.height;
+    newWidgetTmp.x = newWidget.x;
+    newWidgetTmp.y = newWidget.y;
+    this.gridStackNodes.push(newWidgetTmp);
+  }
 
   get gridStack(): GridStack {
     return this._gridStack;

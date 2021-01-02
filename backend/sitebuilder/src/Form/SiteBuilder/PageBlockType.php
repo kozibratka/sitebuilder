@@ -7,7 +7,6 @@ namespace App\Form\SiteBuilder;
 use App\Entity\SiteBuilder\PageBlock;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +15,6 @@ class PageBlockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("id", TextType::class, ['mapped' => false])
             ->add("height")
             ->add('paletteGridItems', CollectionType::class, [
                 'entry_type' => PaletteGridItemType::class,
@@ -31,6 +29,7 @@ class PageBlockType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PageBlock::class,
+            'allow_extra_fields' => true
         ]);
     }
 }

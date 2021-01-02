@@ -7,7 +7,6 @@ namespace App\Form\SiteBuilder;
 use App\Entity\SiteBuilder\Page;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +15,6 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name')
-            ->add('id', TextType::class, ['mapped' => false])
             ->add(
                 'pageBlocks',
                 CollectionType::class,
@@ -34,6 +32,7 @@ class PageType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => Page::class,
+                'allow_extra_fields' => true
             ]
         );
     }

@@ -89,6 +89,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     let componentClass: new(...args: any[]) => {};
     if (this.gridStackNode.plugin.identifier === 'none') {
       componentClass = this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass;
+      this.gridStackNode.plugin.identifier = this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.identifier;
     } else {
       componentClass = this.getComponentFromIdentifier();
     }

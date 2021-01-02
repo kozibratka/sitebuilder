@@ -13,14 +13,13 @@ class BasePluginType extends AbstractType
     {
         $builder->add('id', null, ['required' => false])
             ->add('identifier')
-            ->add('pluginType', TextType::class, ['mapped' => false])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-//        $resolver->setDefaults([
-//            'inherit_data' => true,
-//        ]);
+        $resolver->setDefaults([
+            'allow_extra_fields' => true,
+        ]);
     }
 }
