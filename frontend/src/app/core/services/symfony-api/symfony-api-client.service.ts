@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Observable, of, Subject, throwError} from 'rxjs';
-import {catchError, switchMap, tap} from 'rxjs/operators';
+import {Observable, Subject, throwError} from 'rxjs';
+import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../external-library/router';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {EventEmitterService} from '../event-emitter-service';
@@ -16,6 +16,7 @@ export class SymfonyApiClientService {
 
   private status: 'none' | 'inProgress' | 'done' = 'none';
   private urlFetchNotification$ = new Subject<object>();
+  private counterRequest = {post: 0, get: 0, all: 0};
 
   constructor(
     private httpClient: HttpClient,
@@ -37,8 +38,7 @@ export class SymfonyApiClientService {
   }
 
   get<T = {}>(routeName: string, querySegmentParam?: (string | number)[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
-    this.eventEmitterService.emit(Event.PRE_SEND_GET, true);
-    this.eventEmitterService.emit(Event.PRE_SEND, true);
+    this.emitPreSend('get');
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -53,23 +53,12 @@ export class SymfonyApiClientService {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
         });
-      }), tap(
-        {
-          error: err => this.eventEmitterService.emit(Event.POST_SEND_GET, false),
-          complete: () => this.eventEmitterService.emit(Event.POST_SEND_GET, false)
-        }
-      ), tap(
-        {
-          error: err => this.eventEmitterService.emit(Event.POST_SEND, false),
-          complete: () => this.eventEmitterService.emit(Event.POST_SEND, false)
-        }
-      )
+      }), finalize(this.generatePostSendCallbacks('get'))
     );
   }
 
   post<T>(routeName: string, data, querySegmentParam?: (string | number)[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
-    this.eventEmitterService.emit(Event.PRE_SEND_POST, true);
-    this.eventEmitterService.emit(Event.PRE_SEND, true);
+    this.emitPreSend('post');
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -84,17 +73,7 @@ export class SymfonyApiClientService {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
         });
-      }), tap(
-        {
-          error: err => this.eventEmitterService.emit(Event.POST_SEND_POST, false),
-          complete: () => this.eventEmitterService.emit(Event.POST_SEND_POST, false)
-        }
-      ), tap(
-        {
-          error: err => this.eventEmitterService.emit(Event.POST_SEND, false),
-          complete: () => this.eventEmitterService.emit(Event.POST_SEND, false)
-        }
-      )
+      }), finalize(this.generatePostSendCallbacks('post'))
     );
   }
 
@@ -149,5 +128,39 @@ export class SymfonyApiClientService {
     }
 
     return throwError(completedMessage);
+  }
+
+  emitPreSend(type: 'get' | 'post'): void {
+    if (type === 'get') {
+      ++this.counterRequest.get;
+      this.eventEmitterService.emit(Event.PRE_SEND_GET, true);
+    } else {
+      ++this.counterRequest.post;
+      this.eventEmitterService.emit(Event.PRE_SEND_POST, true);
+    }
+    ++this.counterRequest.all;
+    this.eventEmitterService.emit(Event.PRE_SEND, true);
+  }
+
+  generatePostSendCallbacks(type: 'get' | 'post'): (err?: any) => void {
+    return () => {
+      setTimeout(() => {
+        if (type === 'get') {
+          --this.counterRequest.get;
+          if (!this.counterRequest.get) {
+            this.eventEmitterService.emit(Event.POST_SEND_GET, false);
+          }
+        } else {
+          --this.counterRequest.post;
+          if (!this.counterRequest.post) {
+            this.eventEmitterService.emit(Event.POST_SEND_POST, false);
+          }
+        }
+        --this.counterRequest.all;
+        if (!this.counterRequest.all) {
+          this.eventEmitterService.emit(Event.POST_SEND, false);
+        }
+      }, 0);
+    };
   }
 }
