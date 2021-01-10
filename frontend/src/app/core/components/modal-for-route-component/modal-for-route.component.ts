@@ -1,7 +1,6 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {JqueryVersionService} from '../../services/jquery-version.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ModalParametersMesseneger} from './tools/messengers/modal-for-route/modal-parameters-messeneger';
 
 declare const $: any;
 
@@ -12,7 +11,7 @@ declare const $: any;
 })
 export class ModalForRouteComponent implements OnInit, AfterViewChecked {
 
-  private _schedulerShowModal: ModalParametersMesseneger;
+  private _schedulerShowModal: boolean;
   @ViewChild('modalContent') private modalContent: ElementRef<HTMLElement>;
   title = '';
 
@@ -36,7 +35,6 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
     if (!this._schedulerShowModal) {
       return;
     }
-    this.title = this.schedulerShowModal.title;
     (this.jqueryVersionService.jqueryFromAssets(this.modalContent.nativeElement) as any).modal('show');
     this.jqueryVersionService.jqueryFromAssets(this.modalContent.nativeElement).on('hidden.bs.modal', (e) => {
       this.router.navigate(['./'], {relativeTo: this.route});
@@ -45,11 +43,11 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
     this.cd.detectChanges();
   }
 
-  get schedulerShowModal(): ModalParametersMesseneger {
+  get schedulerShowModal(): boolean {
     return this._schedulerShowModal;
   }
 
-  set schedulerShowModal(value: ModalParametersMesseneger) {
+  set schedulerShowModal(value: boolean) {
 
     this._schedulerShowModal = value;
   }

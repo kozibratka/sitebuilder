@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {WebFormService} from './tools/forms/web-form.service';
 import {SymfonyApiClientService} from '../../../../../../../core/services/symfony-api/symfony-api-client.service';

@@ -16,9 +16,9 @@ import {Subject} from 'rxjs';
 import {ElementPositionMessenger} from '../../../../../../../../../core/messengers/element-position/element-position-messenger';
 import {ElementHelper} from '../../../../../../../../../core/helpers/element-helper';
 import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
-import {LinkGenerateAble} from '../../../../../../../../../core/interfaces/link-generate-able';
 import {PaletteGridItemInterface} from './tools/interfaces/palette-grid-item-interface';
 import {AbstractMenuPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {PluginComponentInterface} from './tools/interfaces/plugin-component-interface';
 
 @Component({
   selector: 'app-palette-item',
@@ -29,7 +29,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   @Input() gridStackNode: PaletteGridItemInterface;
   @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
-  private _componentRef: ComponentRef<LinkGenerateAble>;
+  private _componentRef: ComponentRef<PluginComponentInterface>;
   private lastPosition: ElementPositionMessenger;
 
   constructor(
@@ -77,11 +77,11 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     return this.getHeightInGrid() + this.getYPositionInGrid();
   }
 
-  get componentRef(): ComponentRef<LinkGenerateAble> {
+  get componentRef(): ComponentRef<PluginComponentInterface> {
     return this._componentRef;
   }
 
-  set componentRef(value: ComponentRef<LinkGenerateAble>) {
+  set componentRef(value: ComponentRef<PluginComponentInterface>) {
     this._componentRef = value;
   }
 
@@ -89,12 +89,12 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     let componentClass: new(...args: any[]) => {};
     if (this.gridStackNode.plugin.identifier === 'none') {
       componentClass = this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass;
-      this.gridStackNode.plugin.identifier = this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.identifier;
     } else {
       componentClass = this.getComponentFromIdentifier();
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
-    this._componentRef = this.viewContainerRef.createComponent<LinkGenerateAble>(factory);
+    this._componentRef = this.viewContainerRef.createComponent<PluginComponentInterface>(factory);
+    this._componentRef.instance.initializeSettings(this.gridStackNode.plugin, this.gridStackNode.plugin.identifier !== 'none');
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
