@@ -4,6 +4,8 @@ import {PaletteBuilderComponent} from '../palette-builder.component';
 import {ElementHelper} from '../../../../../../../../core/helpers/element-helper';
 import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FlashDataService} from '../../../../../../../../core/services/flash-data.service';
+import {PluginComponentInterface} from '../page-block/palette-item-component/tools/interfaces/plugin-component-interface';
 
 
 @Component({
@@ -25,6 +27,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
     private paletteBuilderComponent: PaletteBuilderComponent,
     private router: Router,
     private route: ActivatedRoute,
+    private flashData: FlashDataService<PluginComponentInterface>
   ) {
 
   }
@@ -54,8 +57,10 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   }
 
   private openItemMenu(): void{
-    const link = this.selectedItemForMenu.paletteItemComponent.componentRef.instance.getLink();
+    const selectedComponent = this.selectedItemForMenu.paletteItemComponent.componentRef.instance;
+    const link = selectedComponent.getLink();
     link.commands[0] = 'item-admin/' + link.commands[0];
+    this.flashData.add('selectedComponent', selectedComponent);
     this.display = 'none';
     this.router.navigate(link.commands, {relativeTo: this.route});
   }

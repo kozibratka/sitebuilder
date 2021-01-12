@@ -28,7 +28,7 @@ import {PluginComponentInterface} from './tools/interfaces/plugin-component-inte
 export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   @Input() gridStackNode: PaletteGridItemInterface;
-  @ViewChild('itemTemplate', {read: ViewContainerRef}) viewContainerRef: ViewContainerRef;
+  @ViewChild('itemTemplate', {read: ViewContainerRef, static: true}) viewContainerRef: ViewContainerRef;
   private _componentRef: ComponentRef<PluginComponentInterface>;
   private lastPosition: ElementPositionMessenger;
 
@@ -45,12 +45,13 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
     this.createPlugin();
     this.paletteBlockGridstackService.addWidget(this.elementRef);
     this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   ngAfterViewChecked(): void {

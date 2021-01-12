@@ -1,0 +1,23 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FlashDataService<T> {
+
+  private flashData: Map<string, T> = new Map<string, T>();
+
+  constructor() { }
+
+  add(name: string, data: T): void
+  {
+    this.flashData.set(name, data);
+  }
+
+  get(name: string): T
+  {
+    const data = this.flashData.get(name);
+    this.flashData.delete(name);
+    return data;
+  }
+}

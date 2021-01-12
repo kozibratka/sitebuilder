@@ -1,17 +1,11 @@
 import {Injector} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {FlashDataService} from '../../../core/services/flash-data.service';
 
 export abstract class BaseSettingsAbstract<T> {
-  protected component: T;
+  private seletedComponent: T;
 
   constructor(injector: Injector) {
-    injector.get(ActivatedRoute).data.subscribe(data => {
-      this.setComponent(data.component);
-    });
-  }
-
-  setComponent(component: T): void {
-    this.component = component;
+    this.seletedComponent = injector.get(FlashDataService).get('selectedComponent');
   }
 
 }

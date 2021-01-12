@@ -1,7 +1,10 @@
-import {AfterViewChecked, Component, Inject, Input, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnInit} from '@angular/core';
 import {MenuLabel} from './tools/interfaces/menu-label';
 import {MENU_LABELS} from './tools/injection-tokens/menu-label';
 import {ModalForRouteComponent} from '../../../core/components/modal-for-route-component/modal-for-route.component';
+import {PluginComponentInterface} from '../../../admin/entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/tools/interfaces/plugin-component-interface';
+import {Router} from '@angular/router';
+import {FlashDataService} from '../../../core/services/flash-data.service';
 
 @Component({
   selector: 'app-admin',
@@ -13,18 +16,21 @@ import {ModalForRouteComponent} from '../../../core/components/modal-for-route-c
 })
 export class AdminComponent implements OnInit, AfterViewChecked {
 
-  private pluginAdminChanged = false;
+  selectedComponent: PluginComponentInterface;
 
   constructor(
     @Inject(MENU_LABELS) private menuLabels: MenuLabel[],
     @Inject('modalTitle') public modalTitle: string,
-    private modalForRouteComponent: ModalForRouteComponent
+    private modalForRouteComponent: ModalForRouteComponent,
+    private flashData: FlashDataService<PluginComponentInterface>
   ) {
+
   }
 
   ngOnInit(): void {
     this.modalForRouteComponent.title = this.modalTitle;
     this.modalForRouteComponent.schedulerShowModal = true;
+    this.selectedComponent = this.flashData.get('selectedComponent');
   }
 
   ngAfterViewChecked(): void {
