@@ -7,22 +7,25 @@ import {FlashDataService} from '../../../core/services/flash-data.service';
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css'],
+  templateUrl: './plugin-admin.component.html',
+  styleUrls: ['./plugin-admin.component.css'],
   providers: [
 
   ]
 })
-export class AdminComponent implements OnInit, AfterViewChecked {
+export class PluginAdminComponent implements OnInit, AfterViewChecked {
 
   selectedComponent: PluginComponentInterface;
+  menuSelected: string;
 
   constructor(
     @Inject('modalTitle') public modalTitle: string,
     @Inject(MENU_LABELS) public menuLabels: MenuLabel[],
+    @Inject('defaultSelectedMenu') public defaultSelectedMenu: string,
     private modalForRouteComponent: ModalForRouteComponent,
     private flashData: FlashDataService<PluginComponentInterface>
   ) {
+    this.menuSelected = defaultSelectedMenu;
   }
 
   ngOnInit(): void {

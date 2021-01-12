@@ -4,7 +4,9 @@ export interface MenuLabel {
 
   label: string;
 
-  path: string;
+  path?: string;
+
+  identifier?: string;
 
   children?: MenuLabel[];
 

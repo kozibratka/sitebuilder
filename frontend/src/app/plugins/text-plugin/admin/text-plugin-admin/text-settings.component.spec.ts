@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextSettingsComponent } from './text-settings.component';
+import { TextPluginAdminComponent } from './text-plugin-admin.component';
 
 describe('TextSettingsComponent', () => {
-  let component: TextSettingsComponent;
-  let fixture: ComponentFixture<TextSettingsComponent>;
+  let component: TextPluginAdminComponent;
+  let fixture: ComponentFixture<TextPluginAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextSettingsComponent ]
+      declarations: [ TextPluginAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TextSettingsComponent);
+    fixture = TestBed.createComponent(TextPluginAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

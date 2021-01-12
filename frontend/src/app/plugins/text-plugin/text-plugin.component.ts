@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, OnInit} from '@angular/core';
 import {NavigationExtras} from '@angular/router';
 import {PluginComponentInterface} from '../../admin/entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/tools/interfaces/plugin-component-interface';
 import {TextPluginSettingsInterface} from './tools/interfaces/text-plugin-settings-interface';
@@ -20,7 +20,7 @@ export class TextPluginComponent extends AbstractPluginComponent<TextPluginSetti
   }
 
   getLink(): { commands: any[]; extras?: NavigationExtras } {
-    return {commands: ['text-plugin/text-settings']};
+    return {commands: ['text-plugin/text-plugin-admin']};
   }
 
   initEmptySettings(): void {

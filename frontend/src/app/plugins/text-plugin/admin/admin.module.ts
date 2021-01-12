@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {AdminComponent} from '../../base-admin/admin/admin.component';
+import {PluginAdminComponent} from '../../base-admin/admin/plugin-admin.component';
 import {MenuLabel} from '../../base-admin/admin/tools/interfaces/menu-label';
 import {BaseAdminModule} from '../../base-admin/base-admin.module';
-import {TextSettingsComponent} from './text-settings/text-settings.component';
+import {TextPluginAdminComponent} from './text-plugin-admin/text-plugin-admin.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
+    component: PluginAdminComponent,
     children: [
-      {path: 'text-settings', component: TextSettingsComponent}
+      {path: 'text-plugin-admin', component: TextPluginAdminComponent}
     ]
   }
 ];
@@ -19,15 +19,15 @@ const routes: Routes = [
 const menu: MenuLabel[] = [
   {
     label: 'nastavení textu',
-    path: 'text-settings'
+    identifier: 'text-settings'
   }
 ];
 
 @NgModule({
-  declarations: [TextSettingsComponent],
+  declarations: [TextPluginAdminComponent],
   imports: [
     CommonModule,
-    BaseAdminModule.menu(menu, 'Nastavení textu'),
+    BaseAdminModule.menu(menu, 'Nastavení textu', 'text-settings'),
     RouterModule.forChild(routes)
   ]
 })

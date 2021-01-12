@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {AdminComponent} from '../../base-admin/admin/admin.component';
+import {PluginAdminComponent} from '../../base-admin/admin/plugin-admin.component';
 import {MenuLabel} from '../../base-admin/admin/tools/interfaces/menu-label';
 import {BaseAdminModule} from '../../base-admin/base-admin.module';
 import {ColorSettingsComponent} from './color-settings/color-settings.component';
@@ -9,7 +9,7 @@ import {ColorSettingsComponent} from './color-settings/color-settings.component'
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
+    component: PluginAdminComponent,
     children: [
       {path: 'color-settings', component: ColorSettingsComponent}
     ]
@@ -19,7 +19,7 @@ const routes: Routes = [
 const menu: MenuLabel[] = [
   {
     label: 'nastavení barvy',
-    path: 'color-settings'
+    identifier: 'color-settings'
   }
 ];
 
@@ -27,7 +27,7 @@ const menu: MenuLabel[] = [
   declarations: [ColorSettingsComponent],
   imports: [
     CommonModule,
-    BaseAdminModule.menu(menu, 'Nastavení testu'),
+    BaseAdminModule.menu(menu, 'Nastavení testu', 'color-settings'),
     RouterModule.forChild(routes)
   ]
 })

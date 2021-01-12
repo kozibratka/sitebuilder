@@ -3,7 +3,7 @@
     <div class="col col-menu">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item" *ngFor="let menuLabel of menuLabels">
-          <a routerLink="{{menuLabel.path}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+          <a (click)="menuSelected = menuLabel.identifier" [class.active]="menuSelected === menuLabel.identifier" class="nav-link">
             <i class="nav-icon far fa-image"></i>
             <p>
               {{menuLabel.label}}
