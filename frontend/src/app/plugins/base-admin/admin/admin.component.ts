@@ -3,7 +3,6 @@ import {MenuLabel} from './tools/interfaces/menu-label';
 import {MENU_LABELS} from './tools/injection-tokens/menu-label';
 import {ModalForRouteComponent} from '../../../core/components/modal-for-route-component/modal-for-route.component';
 import {PluginComponentInterface} from '../../../admin/entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/tools/interfaces/plugin-component-interface';
-import {Router} from '@angular/router';
 import {FlashDataService} from '../../../core/services/flash-data.service';
 
 @Component({
@@ -19,12 +18,11 @@ export class AdminComponent implements OnInit, AfterViewChecked {
   selectedComponent: PluginComponentInterface;
 
   constructor(
-    @Inject(MENU_LABELS) private menuLabels: MenuLabel[],
     @Inject('modalTitle') public modalTitle: string,
+    @Inject(MENU_LABELS) public menuLabels: MenuLabel[],
     private modalForRouteComponent: ModalForRouteComponent,
     private flashData: FlashDataService<PluginComponentInterface>
   ) {
-
   }
 
   ngOnInit(): void {
