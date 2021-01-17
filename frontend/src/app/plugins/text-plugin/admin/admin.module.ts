@@ -5,6 +5,8 @@ import {PluginAdminComponent} from '../../base-admin/admin/plugin-admin.componen
 import {MenuLabel} from '../../base-admin/admin/tools/interfaces/menu-label';
 import {BaseAdminModule} from '../../base-admin/base-admin.module';
 import {TextPluginAdminComponent} from './text-plugin-admin/text-plugin-admin.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CoreModule} from '../../../core/core.module';
 
 const routes: Routes = [
   {
@@ -28,7 +30,9 @@ const menu: MenuLabel[] = [
   imports: [
     CommonModule,
     BaseAdminModule.menu(menu, 'Nastavení textu', 'text-settings'),
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    CoreModule
   ]
 })
 export class AdminModule { }

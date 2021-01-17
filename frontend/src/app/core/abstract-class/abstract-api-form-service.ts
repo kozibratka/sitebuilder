@@ -25,6 +25,8 @@ export abstract class AbstractApiFormService {
             {error: (err: HttpErrorResponse) => {
                 if (err.status === 400 && err.headers.get('Content-Type') === 'application/invalid-form+json') {
                   this.supplyValidationErrors(err.error, abstractControl);
+                  validationSubscriber.next(null);
+                  validationSubscriber.complete();
                 }
               },
               next: val => {
@@ -32,6 +34,12 @@ export abstract class AbstractApiFormService {
                 validationSubscriber.complete();
               }
             });
+        }
+        else {
+          setTimeout(() => {
+            validationSubscriber.next(null);
+            validationSubscriber.complete();
+          }, 0);
         }
       });
     };

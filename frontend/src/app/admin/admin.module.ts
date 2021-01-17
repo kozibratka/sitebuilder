@@ -35,6 +35,7 @@ import {PageBlockComponent} from './entry-route/administration/admin/site-builde
 import {MenuPluginResolverDirective} from './entry-route/administration/admin/site-builder/page-builder/menu-builder/tools/directives/menu-plugin-resolver.directive';
 import {PaletteItemComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/palette-item.component';
 import {PaletteItemQuickMenuComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import {PaletteItemQuickMenuComponent} from './entry-route/administration/admin/
     MatProgressBarModule,
     MatDialogModule,
     MatButtonModule,
+    BrowserAnimationsModule,
   ],
   providers: [{provide: Window, useValue: window}],
   exports: [

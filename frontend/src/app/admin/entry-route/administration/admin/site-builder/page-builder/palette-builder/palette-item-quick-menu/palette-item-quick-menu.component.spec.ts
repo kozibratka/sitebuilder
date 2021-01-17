@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PaletteItemQuickMenuComponent } from './palette-item-quick-menu.component';
 
@@ -6,7 +6,7 @@ describe('PaletteItemQuickMenuComponent', () => {
   let component: PaletteItemQuickMenuComponent;
   let fixture: ComponentFixture<PaletteItemQuickMenuComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PaletteItemQuickMenuComponent ]
     })

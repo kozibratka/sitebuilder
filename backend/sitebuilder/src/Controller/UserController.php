@@ -17,12 +17,12 @@ class UserController extends BaseApiController
      */
     public function registration(Request $request) {
         $form = $this->createForm(UserRegistrationType::class);
-        $form->submit($request->request->all(), false);
+        $form->submit($request->request->all());
         if($form->isValid()) {
             $user = $form->getData();
             $this->persist($user);
             return $this->jsonResponseSimple($user, 201);
         }
-        return $this->jsonResponseSimple($this->getErrorsFromForm($form), 200);
+        return $this->invalidFormResponse($form);
     }
 }

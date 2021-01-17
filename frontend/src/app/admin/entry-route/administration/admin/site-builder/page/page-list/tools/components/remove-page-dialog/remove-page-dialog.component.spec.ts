@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RemovePageDialogComponent } from './remove-page-dialog.component';
 
@@ -6,7 +6,7 @@ describe('RemovePageDialogComponent', () => {
   let component: RemovePageDialogComponent;
   let fixture: ComponentFixture<RemovePageDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RemovePageDialogComponent ]
     })

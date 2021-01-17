@@ -26,19 +26,22 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Length(min="3", allowEmptyString=false)
+     * @Assert\NotBlank
+     * @Assert\Length(min="3")
      */
     private string $fullName;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      * @Assert\Email
      */
     private string $email;
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\Length(min="6", allowEmptyString=false)
+     * @Assert\NotBlank
+     * @Assert\Length(min="6")
      */
     private string $password;
 

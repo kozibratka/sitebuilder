@@ -35,8 +35,7 @@ export class PluginAdminComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
+
+
   }
-
-
-
 }

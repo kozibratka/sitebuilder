@@ -38,8 +38,7 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
       this.selfInput = this.formInput;
     }
     this.selfInput.statusChanges.subscribe(status => {
-      //this.clearMessage();
-      console.log(status);
+      this.clearMessage();
       if (status === 'INVALID') {
         this.createErrorMessage();
       }

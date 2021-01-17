@@ -1,6 +1,12 @@
-<div [ngSwitch]="pluginAdminComponent.menuSelected">
-  <div *ngSwitchCase="'text-settings'">
-    <p>text-settings works!</p>
+<form [formGroup]="adminForm">
+  <div *ngIf="pluginAdminComponent.menuSelected === 'text-settings'" appInputFormErrorGrouper="text-settings">
+    <div>
+      <label for="text">Text:</label>
+      <textarea appFormError id="text" formControlName="text">
+      </textarea>
+    </div>
   </div>
-</div>
+</form>
+
+
 
