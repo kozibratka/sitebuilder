@@ -1,23 +1,22 @@
 import {
-  AfterViewInit,
-  ContentChildren,
+  AfterViewChecked,
   Directive,
   Input,
-  QueryList,
 } from '@angular/core';
-import {FormControlName, NgControl} from '@angular/forms';
 
 @Directive({
   selector: '[appInputFormErrorGrouper]'
 })
-export class InputFormErrorGrouperDirective implements AfterViewInit{
+export class InputFormErrorGrouperDirective implements AfterViewChecked{
 
   @Input('appInputFormErrorGrouper') groupeName: string;
-  @ContentChildren(NgControl, {descendants: true}) formInputs: QueryList<NgControl>;
+  hasError = false;
 
-  constructor() { }
+  constructor() {
 
-  ngAfterViewInit(): void {
-    console.log(this.formInputs);
+  }
+
+  ngAfterViewChecked(): void {
+    this.hasError = false;
   }
 }

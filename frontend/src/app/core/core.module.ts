@@ -9,21 +9,20 @@ import { InputFormErrorDirective } from './directives/form-error/input-form-erro
 import { ErrorMessageComponent } from './directives/form-error/input-form-error/tools/components/error-message/error-message.component';
 import { HiderElementDirective } from './directives/hider-element.directive';
 import {EventEmitterService} from './services/event-emitter-service';
-import { GlobalFormErrorMessageComponent } from './directives/form-error/global-form-error/tools/components/global-form-error-message/global-form-error-message.component';
-import {GlobalFormErrorDirective} from './directives/form-error/global-form-error/global-form-error.directive';
 import { InputFormErrorGrouperDirective } from './directives/form-error/input-form-error-grouper.directive';
+import { GlobalFormErrorComponent } from './components/global-form-error/global-form-error.component';
 
 
 
 @NgModule({
-  declarations: [ModalForRouteComponent, InputFormErrorDirective, ErrorMessageComponent, HiderElementDirective, GlobalFormErrorDirective, GlobalFormErrorMessageComponent, InputFormErrorGrouperDirective],
+  declarations: [ModalForRouteComponent, InputFormErrorDirective, ErrorMessageComponent, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
-  exports: [ModalForRouteComponent, InputFormErrorDirective, HiderElementDirective, GlobalFormErrorDirective, InputFormErrorGrouperDirective],
+    exports: [ModalForRouteComponent, InputFormErrorDirective, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent],
   providers: [
     EventEmitterService,
     { provide: HTTP_INTERCEPTORS, useClass: RoutesCacheInterceptor, multi: true },
