@@ -20,6 +20,7 @@ export class TextPluginAdminComponent extends BaseAdminAbstractComponent<TextPlu
   ) {
     super(injector);
     this.adminForm = textPluginFormService.createForm();
+    this.registerInvalidFormEvent(this.adminForm);
   }
 
   ngOnInit(): void {

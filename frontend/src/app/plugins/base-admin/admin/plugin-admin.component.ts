@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, DoCheck, Inject, OnInit} from '@angular/core';
+import {AfterViewChecked, Component, DoCheck, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MenuLabel} from './tools/interfaces/menu-label';
 import {MENU_LABELS} from './tools/injection-tokens/menu-label';
 import {ModalForRouteComponent} from '../../../core/components/modal-for-route-component/modal-for-route.component';
@@ -6,7 +6,7 @@ import {PluginComponentInterface} from '../../../admin/entry-route/administratio
 import {FlashDataService} from '../../../core/services/flash-data.service';
 import {BaseAdminAbstractComponent} from '../../tools/components/base-admin-abstract.component';
 import {AbstractPluginComponent} from '../../tools/abstract-class/abstract-plugin-component';
-import {InputFormErrorGrouperDirective} from '../../../core/directives/form-error/input-form-error-grouper.directive';
+import {EventEmitterService} from '../../../core/services/event-emitter-service';
 
 @Component({
   selector: 'app-admin',
@@ -16,20 +16,24 @@ import {InputFormErrorGrouperDirective} from '../../../core/directives/form-erro
 
   ]
 })
-export class PluginAdminComponent implements OnInit, AfterViewChecked, DoCheck {
+export class PluginAdminComponent implements OnInit, AfterViewChecked, DoCheck, OnDestroy {
 
   selectedComponent: PluginComponentInterface;
   menuSelected: string;
   pluginAdmin: BaseAdminAbstractComponent<AbstractPluginComponent<any>>;
+  scheduleFormErrorSwitchMenu = false;
+  scheduleForErrorSwitchMenuCallback = this.scheduleForErrorFormSwitchMenu.bind(this);
 
   constructor(
     @Inject('modalTitle') public modalTitle: string,
     @Inject(MENU_LABELS) public menuLabels: MenuLabel[],
     @Inject('defaultSelectedMenu') public defaultSelectedMenu: string,
     private modalForRouteComponent: ModalForRouteComponent,
-    private flashData: FlashDataService<PluginComponentInterface>
+    private flashData: FlashDataService<PluginComponentInterface>,
+    private eventEmitterService: EventEmitterService<boolean>
   ) {
     this.menuSelected = defaultSelectedMenu;
+    this.eventEmitterService.registerCallback('pluginAdminSettingsInvalid', this.scheduleForErrorSwitchMenuCallback);
   }
 
   ngOnInit(): void {
@@ -39,14 +43,21 @@ export class PluginAdminComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   ngAfterViewChecked(): void {
+  }
 
-
+  ngOnDestroy(): void {
+    this.eventEmitterService.unregisterCallback('pluginAdminSettingsInvalid', this.scheduleForErrorSwitchMenuCallback);
   }
 
   ngDoCheck(): void {
-    if (this.pluginAdmin) {
+    if (this.pluginAdmin && this.scheduleFormErrorSwitchMenu) {
       this.switchToMenuBasedOnErrorFromForm();
+      this.scheduleFormErrorSwitchMenu = false;
     }
+  }
+
+  scheduleForErrorFormSwitchMenu(eventName, status): void {
+    this.scheduleFormErrorSwitchMenu = true;
   }
 
   switchToMenuBasedOnErrorFromForm(): void {
