@@ -32,6 +32,7 @@ export class TextPluginAdminComponent extends BaseAdminAbstractComponent<TextPlu
   }
 
   submit(): void {
+    // this.adminForm.markAsTouched();
     this.adminForm.updateValueAndValidity();
   }
 

@@ -80,7 +80,7 @@ export class PluginAdminComponent implements OnInit, AfterViewChecked, DoCheck, 
   }
 
   submitAdminSettings(): void {
-
+    this.pluginAdmin.submit();
   }
 
 }
