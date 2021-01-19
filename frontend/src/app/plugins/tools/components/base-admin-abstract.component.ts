@@ -27,4 +27,6 @@ export abstract class BaseAdminAbstractComponent<T>{
     });
   }
 
+  abstract submit(): void;
+
 }

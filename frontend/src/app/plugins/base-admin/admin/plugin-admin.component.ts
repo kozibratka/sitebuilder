@@ -79,4 +79,8 @@ export class PluginAdminComponent implements OnInit, AfterViewChecked, DoCheck, 
     this.pluginAdmin = pluginAdmin;
   }
 
+  submitAdminSettings(): void {
+
+  }
+
 }

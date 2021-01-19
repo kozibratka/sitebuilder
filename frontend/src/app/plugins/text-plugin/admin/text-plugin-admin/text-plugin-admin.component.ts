@@ -31,4 +31,8 @@ export class TextPluginAdminComponent extends BaseAdminAbstractComponent<TextPlu
     console.log(this.inputFormErrorGrouperDirectives);
   }
 
+  submit(): void {
+    this.adminForm.updateValueAndValidity();
+  }
+
 }
