@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LoginClientService} from '../../../core/services/login-client/login-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Event} from '../../../core/services/symfony-api/tools/constants/event';
 import {WebInterface} from './tools/interfaces/web-interface';
 import {WebDetailResolverService} from './tools/route-resolvers/web-detail-resolver.service';
+import {MatSelect} from '@angular/material/select';
 
 @Component({
   selector: 'app-administration',
@@ -13,9 +14,10 @@ import {WebDetailResolverService} from './tools/route-resolvers/web-detail-resol
 })
 export class AdministrationComponent implements OnInit {
 
+  @ViewChild(MatSelect, {static: true}) matSelect: MatSelect;
   symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND, stopSendLogin: Event.POST_SEND};
   websSelect: WebInterface[] = [];
-  selectedWeb: number;
+  private _selectedWeb: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,9 +42,22 @@ export class AdministrationComponent implements OnInit {
 
   private initSelectWeb(webs: WebInterface[]): void {
     this.websSelect = webs;
-    if (!this.selectedWeb) {
-      this.selectedWeb = this.websSelect[0].id;
-      this.webDetailResolverService.selectedId = this.selectedWeb;
+    if (!this._selectedWeb) {
+      this._selectedWeb = this.websSelect[0].id;
+      this.webDetailResolverService.selectedId = this._selectedWeb;
     }
+  }
+
+
+  get selectedWeb(): number {
+    return this._selectedWeb;
+  }
+
+  set selectedWeb(value: number) {
+    if (value === 0) {
+      this.matSelect.value = this._selectedWeb;
+      return;
+    }
+    this._selectedWeb = value;
   }
 }

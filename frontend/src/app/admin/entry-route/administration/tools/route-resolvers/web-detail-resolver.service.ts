@@ -15,7 +15,7 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private httpResponseToasterService: HttpResponseToasterService
+    private httpResponseToasterService: HttpResponseToasterService,
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {

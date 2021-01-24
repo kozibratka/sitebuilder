@@ -23,8 +23,7 @@ export class WebCreateComponent implements OnInit {
     private router: Router,
     public route: ActivatedRoute,
     private notifierService: NotifierService,
-    private httpResponseToasterService: HttpResponseToasterService,
-    private webDetailResolverService: WebDetailResolverService
+    private httpResponseToasterService: HttpResponseToasterService
   ) {
   }
 
@@ -57,7 +56,7 @@ export class WebCreateComponent implements OnInit {
     this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('web_update', this.createWebForm.value, [this.webDetailResolverService.selectedId]).subscribe({
+        this.symfonyApiClientService.post('web_update', this.createWebForm.value, [webDetail.id]).subscribe({
           next: () => {
             this.notifierService.notify('Web byl úspěšně upraven');
             this.router.navigate(['list'], { relativeTo: this.route.parent });

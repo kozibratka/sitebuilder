@@ -87,6 +87,7 @@ const routes: Routes = [
       },
       {
         path: '',
+        resolve: {webDetail: WebDetailResolverService},
         component: DashboardComponent
       }
     ]

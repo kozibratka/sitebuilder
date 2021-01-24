@@ -28,11 +28,14 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <div class="nav-link">
-                    <mat-form-field appearance="legacy">
-                      <mat-select [(value)]="selectedWeb">
-                        <mat-option [value]="option.id" *ngFor="let option of websSelect">{{ option.name }}</mat-option>
-                      </mat-select>
-                    </mat-form-field>
+            <mat-form-field appearance="legacy">
+              <mat-select [(value)]="selectedWeb">
+                <mat-option [value]="option.id" *ngFor="let option of websSelect">{{ option.name }}</mat-option>
+                <a [routerLink]="['/admin/web/list']">
+                  <mat-option [value]="0" class="text-center"><a class="text-center">Správa webů...</a></mat-option>
+                </a>
+              </mat-select>
+            </mat-form-field>
         </div>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">

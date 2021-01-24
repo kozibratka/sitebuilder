@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {WebInterface} from '../interfaces/web-interface';
 import {SymfonyApiClientService} from '../../../../../core/services/symfony-api/symfony-api-client.service';
@@ -9,18 +9,22 @@ import {HttpResponseToasterService} from '../../../../../core/services/http-resp
 @Injectable({
   providedIn: 'root'
 })
-export class WebListResolverService implements Resolve<WebInterface[]>{
+export class WebListResolverService implements Resolve<WebInterface[]> {
+
+  webList: WebInterface[];
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService
-  ) { }
+  ) {
+  }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface[]> {
     return this.symfonyApiClientService.get<WebInterface[]>('web_list').pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
+      this.webList = httpResponse.body;
       return httpResponse.body;
     }));
   }
