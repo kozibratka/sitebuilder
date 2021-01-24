@@ -32,7 +32,7 @@
               <mat-select [(value)]="selectedWeb">
                 <mat-option [value]="option.id" *ngFor="let option of websSelect">{{ option.name }}</mat-option>
                 <a [routerLink]="['/admin/web/list']">
-                  <mat-option [value]="0" class="text-center"><a class="text-center">Správa webů...</a></mat-option>
+                  <mat-option [value]="0" class="text-center text-primary"><a class="text-center">Správa webů...</a></mat-option>
                 </a>
               </mat-select>
             </mat-form-field>
