@@ -5,6 +5,7 @@ import {SymfonyApiClientService} from '../../../../../../../../../core/services/
 import {HttpResponseToasterService} from '../../../../../../../../../core/services/http-response-toaster.service';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
+import {WebDetailResolverService} from '../../../../../../tools/route-resolvers/web-detail-resolver.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ export class PageListResolverService implements Resolve<PageInterface[]> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private httpResponseToasterService: HttpResponseToasterService
+    private httpResponseToasterService: HttpResponseToasterService,
+    private webDetailResolverService: WebDetailResolverService
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface[]> {
-    const webId = route.paramMap.get('webId');
+    const webId = this.webDetailResolverService.selectedId;
     return this.symfonyApiClientService.get<PageInterface[]>('page_list', [webId]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);

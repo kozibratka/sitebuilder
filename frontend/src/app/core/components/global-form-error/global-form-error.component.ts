@@ -19,24 +19,21 @@ import {InputFormErrorGrouperDirective} from '../../directives/form-error/input-
 })
 export class GlobalFormErrorComponent implements AfterContentInit{
 
-  @ContentChild('globalFormErrors', {read: ViewContainerRef}) globalFormErrorsContainer: ViewContainerRef;
-  errors: ValidationErrors;
+  errors: ValidationErrors = {};
   objectKeys = Object.keys;
 
   constructor(
-    @Self() @Optional() private selfFormControl: FormGroupDirective,
     @Host() @Optional() private parentFormControl: FormGroupDirective,
     @Host() @Optional() private inputFormErrorGrouperDirective: InputFormErrorGrouperDirective,
   ) { }
 
   ngAfterContentInit(): void {
-    if (!this.selfFormControl) {
-      this.selfFormControl = this.parentFormControl;
+    if (!this.parentFormControl) {
+      return;
     }
-    this.selfFormControl.statusChanges.subscribe(status => {
-      this.globalFormErrorsContainer.clear();
+    this.parentFormControl.statusChanges.subscribe(status => {
       if (status === 'INVALID') {
-        this.errors = this.selfFormControl.errors ?? {};
+        this.errors = this.parentFormControl.errors ?? {};
         if (this.inputFormErrorGrouperDirective) {
           this.inputFormErrorGrouperDirective.hasError = true;
         }

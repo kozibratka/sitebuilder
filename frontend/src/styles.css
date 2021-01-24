@@ -40,3 +40,7 @@ a:not([href]){
   background: #28a745 linear-gradient(180deg,#48b461,#28a745) repeat-x!important;
   color: #fff;
 }
+
+.cdk-overlay-container{
+  z-index: 2000 !important;
+}

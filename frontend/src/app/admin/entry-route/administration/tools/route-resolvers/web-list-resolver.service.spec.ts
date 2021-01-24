@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
+import {WebListResolverService} from './web-list-resolver.service';
 
-import { WebResolverService } from './web-list-resolver.service';
+
 
 describe('WebResolverService', () => {
-  let service: WebResolverService;
+  let service: WebListResolverService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(WebResolverService);
+    service = TestBed.inject(WebListResolverService);
   });
 
   it('should be created', () => {

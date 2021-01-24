@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
 import {AdministrationComponent} from './entry-route/administration/administration.component';
 import {WebListComponent} from './entry-route/administration/admin/site-builder/web/web-list/web-list.component';
-import {WebListResolverService} from './entry-route/administration/admin/site-builder/web/web-list/tools/route-resolvers/web-list-resolver.service';
+import {WebListResolverService} from './entry-route/administration/tools/route-resolvers/web-list-resolver.service';
 import {WebCreateComponent} from './entry-route/administration/admin/site-builder/web/web-create/web-create.component';
-import {WebDetailResolverService} from './entry-route/administration/admin/site-builder/web/web-create/tools/route-resolvers/web-detail-resolver.service';
+import {WebDetailResolverService} from './entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {PageListComponent} from './entry-route/administration/admin/site-builder/page/page-list/page-list.component';
 import {PageListResolverService} from './entry-route/administration/admin/site-builder/page/page-list/tools/route-resolvers/page-list-resolver.service';
 import {PageCreateComponent} from './entry-route/administration/admin/site-builder/page/page-create/page-create.component';
@@ -24,6 +24,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdministrationComponent,
     canActivate: [RouteRoleGuardService],
+    resolve: {webList: WebListResolverService},
     children: [
       {
         path: 'web',
@@ -31,8 +32,6 @@ const routes: Routes = [
           {
             path: 'list',
             component: WebListComponent,
-            resolve: {webList: WebListResolverService},
-            runGuardsAndResolvers: 'always',
           },
           {
             path: 'create',
@@ -46,7 +45,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'page/:webId',
+        path: 'page',
         children: [
           {
             path: 'list',

@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '../../../../../../../core/services/notifier.service';
 import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
 import {PageFormService} from './tools/forms/page-form.service';
-import {WebInterface} from '../../web/tools/interfaces/web-interface';
+import {WebInterface} from '../../../../tools/interfaces/web-interface';
+import {WebDetailResolverService} from '../../../../tools/route-resolvers/web-detail-resolver.service';
 
 @Component({
   selector: 'app-page-create',
@@ -23,12 +24,12 @@ export class PageCreateComponent implements OnInit {
     private router: Router,
     public route: ActivatedRoute,
     private notifierService: NotifierService,
-    private httpResponseToasterService: HttpResponseToasterService
+    private httpResponseToasterService: HttpResponseToasterService,
+    private webDetailResolverService: WebDetailResolverService
   ) {
   }
 
   ngOnInit(): void {
-    this.webId = this.route.snapshot.paramMap.get('webId');
     if (this.route.snapshot.url[0].path === 'create') {
       this.createPage();
     } else {
@@ -37,10 +38,10 @@ export class PageCreateComponent implements OnInit {
   }
 
   createPage(): void {
-    this.createPageForm = this.pageFormService.createForm([this.webId]);
+    this.createPageForm = this.pageFormService.createForm([this.webDetailResolverService.selectedId]);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('page_create', this.createPageForm.value, [this.webId]).subscribe({
+        this.symfonyApiClientService.post('page_create', this.createPageForm.value, [this.webDetailResolverService.selectedId]).subscribe({
           next: () => {
             this.notifierService.notify('Stránka byla úspěšně vytvořena');
             this.router.navigate(['list'], { relativeTo: this.route.parent });
@@ -53,7 +54,7 @@ export class PageCreateComponent implements OnInit {
 
   updatePage(): void {
     const pageDetail: WebInterface = this.route.snapshot.data.pageDetail;
-    this.createPageForm = this.pageFormService.createForm([this.webId]);
+    this.createPageForm = this.pageFormService.createForm([this.webDetailResolverService.selectedId]);
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {

@@ -36,6 +36,8 @@ import {MenuPluginResolverDirective} from './entry-route/administration/admin/si
 import {PaletteItemComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/palette-item.component';
 import {PaletteItemQuickMenuComponent} from './entry-route/administration/admin/site-builder/page-builder/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatDialogModule,
     MatButtonModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [{provide: Window, useValue: window}],
   exports: [

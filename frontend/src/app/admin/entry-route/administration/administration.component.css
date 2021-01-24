@@ -15,3 +15,11 @@
   position: fixed;
 }
 
+:host ::ng-deep .mat-form-field-infix {
+  border-top: .0em solid black !important;
+}
+
+:host ::ng-deep .cdk-overlay-pane {
+  z-index: 2000 !important;
+}
+

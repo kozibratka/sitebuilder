@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WebInterface} from '../tools/interfaces/web-interface';
+import {WebInterface} from '../../../../tools/interfaces/web-interface';
 import {MatDialog} from '@angular/material/dialog';
 import {RemoveWebDialogComponent} from './tools/components/remove-web-dialog/remove-web-dialog.component';
 import {filter, switchMap} from 'rxjs/operators';
