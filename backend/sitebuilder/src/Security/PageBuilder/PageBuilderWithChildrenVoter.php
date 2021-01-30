@@ -63,7 +63,7 @@ class PageBuilderWithChildrenVoter extends Voter
                 break;
             case $subject instanceof PaletteGridItem:
                 $user = $subject->getPageBlock()->getUser();
-                $result = $this->voteOnAttribute($attribute, $subject->getPlugin(), $token);
+                $result = $this->voteOnAttribute($attribute, $subject->getPluginGlobal(), $token);
                 if(!$result) {
                     return false;
                 }

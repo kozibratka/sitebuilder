@@ -46,7 +46,8 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
                 throw new CustomErrorMessageException('Pokoušíte se upravit element, který se již smazaný');
             }
         }
-        $form->add('plugin', $formClass);
+        $form->add('pluginGlobal', $formClass);
+        $form->add('pluginLocal', $formClass);
     }
 
 }

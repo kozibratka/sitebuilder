@@ -46,6 +46,12 @@ class Web
      */
     private Collection $pages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
+     * @Serializer\Exclude()
+     */
+    private Collection $plugins;
+
     public function __construct()
     {
         $this->pages = new ArrayCollection();
@@ -98,5 +104,15 @@ class Web
 
     public function removePage(Page $page) {
         $this->pages->removeElement($page);
+    }
+
+    public function getPlugins(): Collection
+    {
+        return $this->plugins;
+    }
+
+    public function setPlugins(Collection $plugins)
+    {
+        $this->plugins = $plugins;
     }
 }
