@@ -48,10 +48,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             }
         }
         if(isset($data['pluginGlobal'])) {
-            $basePlugin = $this->em->getRepository(BasePlugin::class)->find($data['pluginGlobal']);
-            if($basePlugin) {
-                $form->add('pluginGlobal', EntityType::class, ['class' => get_class($basePlugin)]);
-            }
+            $form->add('pluginGlobal', EntityType::class, ['class' => BasePlugin::class]);
         }
         else {
             $form->add('pluginLocal', $formClass);
