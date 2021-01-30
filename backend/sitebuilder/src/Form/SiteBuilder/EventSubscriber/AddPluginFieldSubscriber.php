@@ -3,8 +3,10 @@
 namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\SiteBuilder\PaletteGridItem;
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -32,12 +34,11 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $form = $event->getForm();
-        if (!isset($data['plugin'])) {
-            return;
+        $plugin = $data['pluginLocal'] ?? null;
+        if($plugin) {
+            $identifier = $plugin['identifier'];
+            $formClass = $this->pluginServices[$identifier]->getFormClass();
         }
-        $plugin = $data['plugin'];
-        $identifier = $plugin['identifier'];
-        $formClass = $this->pluginServices[$identifier]->getFormClass();
         if(isset($data['id'])) {
             $paletteGridItem = $this->em->getRepository(PaletteGridItem::class)->find($data['id']);
             if($paletteGridItem) {
@@ -46,8 +47,15 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
                 throw new CustomErrorMessageException('Pokoušíte se upravit element, který se již smazaný');
             }
         }
-        $form->add('pluginGlobal', $formClass);
-        $form->add('pluginLocal', $formClass);
+        if(isset($data['pluginGlobal'])) {
+            $basePlugin = $this->em->getRepository(BasePlugin::class)->find($data['pluginGlobal']);
+            if($basePlugin) {
+                $form->add('pluginGlobal', EntityType::class, ['class' => get_class($basePlugin)]);
+            }
+        }
+        else {
+            $form->add('pluginLocal', $formClass);
+        }
     }
 
 }
