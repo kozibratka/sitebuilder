@@ -56,8 +56,6 @@ abstract class BasePlugin
 
     abstract public function setIdentifier();
 
-
-
     public function getId(): ?int
     {
         return $this->id;
