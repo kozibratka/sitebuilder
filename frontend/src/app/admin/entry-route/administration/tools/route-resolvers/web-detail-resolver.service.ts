@@ -15,12 +15,12 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private httpResponseToasterService: HttpResponseToasterService,
-    private route: ActivatedRoute,
+    private httpResponseToasterService: HttpResponseToasterService
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {
-    return this.symfonyApiClientService.get<WebInterface>('web_read', [this.selectedId]).pipe(catchError(err => {
+    const webId = route.paramMap.get('webId') ? route.paramMap.get('webId') : this.selectedId;
+    return this.symfonyApiClientService.get<WebInterface>('web_read', [webId]).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
