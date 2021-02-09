@@ -76,16 +76,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'page-builder/create',
-        component: PageBuilderComponent,
-        children: [
-          {
-            path: 'item-admin',
-            loadChildren: () => import('../plugins/routes-admin.module').then(m => m.RoutesAdminModule)
-          }
-        ]
-      },
-      {
         path: '',
         resolve: {webDetail: WebDetailResolverService},
         component: DashboardComponent

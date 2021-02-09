@@ -44,7 +44,6 @@ export class AdministrationComponent implements OnInit {
     this.websSelect = webs;
     if (!this._selectedWeb) {
       this._selectedWeb = this.websSelect[0].id;
-      this.webDetailResolverService.selectedId = this._selectedWeb;
     }
   }
 
@@ -59,5 +58,7 @@ export class AdministrationComponent implements OnInit {
       return;
     }
     this._selectedWeb = value;
+    this.webDetailResolverService.selectedId = value;
+    this.router.navigate(['/admin']);
   }
 }

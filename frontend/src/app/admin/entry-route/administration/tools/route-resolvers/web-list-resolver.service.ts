@@ -5,6 +5,7 @@ import {SymfonyApiClientService} from '../../../../../core/services/symfony-api/
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../../../../../core/services/http-response-toaster.service';
+import {WebDetailResolverService} from './web-detail-resolver.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class WebListResolverService implements Resolve<WebInterface[]> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private httpResponseToasterService: HttpResponseToasterService
+    private httpResponseToasterService: HttpResponseToasterService,
+    private webDetailResolverService: WebDetailResolverService
   ) {
   }
 
@@ -25,6 +27,9 @@ export class WebListResolverService implements Resolve<WebInterface[]> {
       return throwError(err);
     }), map(httpResponse => {
       this.webList = httpResponse.body;
+      if (this.webList.length) {
+        this.webDetailResolverService.selectedId = this.webList[0].id;
+      }
       return httpResponse.body;
     }));
   }

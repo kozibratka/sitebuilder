@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {WebInterface} from '../interfaces/web-interface';
 import {SymfonyApiClientService} from '../../../../../core/services/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../core/services/http-response-toaster.service';
@@ -16,6 +16,7 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService,
+    private route: ActivatedRoute,
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<WebInterface> {
