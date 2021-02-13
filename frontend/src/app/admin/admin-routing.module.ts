@@ -78,7 +78,8 @@ const routes: Routes = [
       {
         path: '',
         resolve: {webDetail: WebDetailResolverService},
-        component: DashboardComponent
+        component: DashboardComponent,
+        runGuardsAndResolvers: 'always',
       }
     ]
   },
