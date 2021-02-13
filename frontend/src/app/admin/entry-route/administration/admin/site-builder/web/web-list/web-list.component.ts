@@ -9,6 +9,7 @@ import {HttpResponseToasterService} from '../../../../../../../core/services/htt
 import {NotifierService} from '../../../../../../../core/services/notifier.service';
 import {WebListResolverService} from '../../../../tools/route-resolvers/web-list-resolver.service';
 import {WebDetailResolverService} from '../../../../tools/route-resolvers/web-detail-resolver.service';
+import {AdministrationComponent} from '../../../../administration.component';
 
 @Component({
   selector: 'app-web-list',
@@ -28,7 +29,8 @@ export class WebListComponent implements OnInit {
     private notifierService: NotifierService,
     private router: Router,
     private webListResolverService: WebListResolverService,
-    private webDetailResolverService: WebDetailResolverService
+    private webDetailResolverService: WebDetailResolverService,
+    private administrationComponent: AdministrationComponent
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +58,7 @@ export class WebListComponent implements OnInit {
 
   switchToWeb(id: number): void {
     this.webDetailResolverService.selectedId = id;
+    this.administrationComponent.refreshSelectedWebSelectbox();
     this.router.navigate(['/admin']);
   }
 }

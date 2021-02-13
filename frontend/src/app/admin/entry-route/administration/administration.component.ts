@@ -40,6 +40,10 @@ export class AdministrationComponent implements OnInit {
     this.router.navigate(['/authorization/login']);
   }
 
+  refreshSelectedWebSelectbox(): void {
+    this._selectedWeb = this.webDetailResolverService.selectedId;
+  }
+
   private initSelectWeb(webs: WebInterface[]): void {
     this.websSelect = webs;
     if (!this._selectedWeb) {
