@@ -44,10 +44,10 @@ export class GlobalPluginsResolver implements Resolve<Map<string, BasePluginInte
     }
     sortedBasePluginInterface.forEach((value, key, map1) => {
       value.sort((a, b) => {
-        if (a.identifier > b.identifier) {
+        if (a.name > b.name) {
           return 1;
         }
-        if (a.identifier < b.identifier) {
+        if (a.name < b.name) {
           return -1;
         }
         return 0;
