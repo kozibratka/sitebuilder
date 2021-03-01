@@ -14,9 +14,7 @@ import {catchError, map} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class GlobalPluginsResolver implements Resolve<BasePluginInterface[]> {
-
-
+export class GlobalPluginsResolver implements Resolve<Map<string, BasePluginInterface[]>> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -25,14 +23,36 @@ export class GlobalPluginsResolver implements Resolve<BasePluginInterface[]> {
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BasePluginInterface[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Map<string, BasePluginInterface[]>> {
     const selectedWeb = this.webDetailResolverService.selectedId;
     return this.symfonyApiClientService.get<BasePluginInterface[]>('plugin_global_list', [selectedWeb])
       .pipe(catchError(err => {
-      this.httpResponseToasterService.showError(err);
-      return throwError(err);
-    }), map(httpResponse => {
-      return httpResponse.body;
-    }));
+        this.httpResponseToasterService.showError(err);
+        return throwError(err);
+      }), map(httpResponse => {
+        return this.sortGlobalPlugins(httpResponse.body);
+      }));
+  }
+
+  sortGlobalPlugins(globalPlugins: BasePluginInterface[]): Map<string, BasePluginInterface[]> {
+    const sortedBasePluginInterface = new Map<string, BasePluginInterface[]>();
+    for (const plugin of globalPlugins) {
+      if (!sortedBasePluginInterface.has(plugin.identifier)) {
+        sortedBasePluginInterface.set(plugin.identifier, new Array<BasePluginInterface>());
+      }
+      sortedBasePluginInterface.get(plugin.identifier).push(plugin);
+    }
+    sortedBasePluginInterface.forEach((value, key, map1) => {
+      value.sort((a, b) => {
+        if (a.identifier > b.identifier) {
+          return 1;
+        }
+        if (a.identifier < b.identifier) {
+          return -1;
+        }
+        return 0;
+      });
+    });
+    return sortedBasePluginInterface;
   }
 }
