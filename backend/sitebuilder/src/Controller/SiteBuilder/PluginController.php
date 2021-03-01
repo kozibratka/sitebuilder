@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PluginController extends BaseApiController
 {
     /**
-     * @Route("/list-global/{id}", name="list")
+     * @Route("/list-global/{id}", name="global_list")
      */
     public function listGlobal(Web $web)
     {

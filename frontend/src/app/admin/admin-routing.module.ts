@@ -17,6 +17,7 @@ import {AuthorizationComponent} from './entry-route/authorization/authorization.
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization/login/login.component';
 import {PageBuilderResolverService} from './entry-route/administration/admin/site-builder/page-builder/tools/route-resolvers/page-builder-resolver.service';
+import {GlobalPluginsResolver} from './entry-route/administration/admin/tools/route-resolvers/global-plugins.resolver';
 
 
 const routes: Routes = [
@@ -65,7 +66,7 @@ const routes: Routes = [
           {
             path: 'page-builder/:pageId',
             component: PageBuilderComponent,
-            resolve: {pageDetail: PageBuilderResolverService},
+            resolve: {pageDetail: PageBuilderResolverService, globalPlugins: GlobalPluginsResolver},
             children: [
               {
                 path: 'item-admin',

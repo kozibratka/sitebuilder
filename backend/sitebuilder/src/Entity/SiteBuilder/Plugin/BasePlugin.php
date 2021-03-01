@@ -27,6 +27,11 @@ abstract class BasePlugin
     private ?int $id;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private ?string $name = null;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\PaletteGridItem", mappedBy="pluginGlobal")
      * @Serializer\Exclude()
      */
@@ -99,5 +104,15 @@ abstract class BasePlugin
     public function setWeb(Web $web)
     {
         $this->web = $web;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name)
+    {
+        $this->name = $name;
     }
 }

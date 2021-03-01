@@ -1,5 +1,5 @@
-import {PluginSettingsInterface} from '../../../tools/interfaces/plugin-settings-interface';
+import {BasePluginInterface} from '../../../../admin/entry-route/administration/admin/tools/interfaces/base-plugin-interface';
 
-export interface TextPluginSettingsInterface extends PluginSettingsInterface{
+export interface TextPluginSettingsInterface extends BasePluginInterface{
   text: string;
 }
