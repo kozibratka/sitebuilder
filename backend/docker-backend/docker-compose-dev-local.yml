@@ -4,17 +4,17 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=ag58#grg1@G8hR5
     networks:
-      docker_webnet:
+      docker_network_sitebuilder:
         ipv4_address: 10.3.0.3
     volumes:
-      - sitebuilder_dev_local_sql-volume:/var/lib/mysql
+      - ./db-volume:/var/lib/mysql
       - ./config/mysql/dev:/etc/mysql/conf.d
 
   backend-nginx:
     ports:
       - "8000:80"
     networks:
-      docker_webnet:
+      docker_network_sitebuilder:
         ipv4_address: 10.3.0.4
     volumes:
       - ../sitebuilder:/var/www
@@ -24,7 +24,7 @@ services:
 
   php-fpm:
     networks:
-      docker_webnet:
+      docker_network_sitebuilder:
         ipv4_address: 10.3.0.6
     volumes:
       - ../sitebuilder:/var/www
@@ -44,16 +44,13 @@ services:
   adminer:
     image: adminer:latest
     networks:
-      docker_webnet:
+      docker_network_sitebuilder:
         ipv4_address: 10.3.0.5
     ports:
       - 8080:8080
 
 networks:
-  docker_webnet:
+  docker_network_sitebuilder:
     ipam:
       config:
         - subnet: 10.3.0.0/24
-
-volumes:
-  sitebuilder_dev_local_sql-volume:
