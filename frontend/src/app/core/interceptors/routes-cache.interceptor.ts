@@ -8,7 +8,8 @@ export class RoutesCacheInterceptor implements HttpInterceptor {
 
   private cache = new Map<HttpRequest<any>, HttpResponse<string>>();
 
-  constructor() {}
+  constructor() {
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (!request.headers.has('fetchroutes')) {

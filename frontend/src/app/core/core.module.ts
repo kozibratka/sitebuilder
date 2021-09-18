@@ -25,7 +25,6 @@ import { GlobalFormErrorComponent } from './components/global-form-error/global-
     exports: [ModalForRouteComponent, InputFormErrorDirective, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent],
   providers: [
     EventEmitterService,
-    { provide: HTTP_INTERCEPTORS, useClass: RoutesCacheInterceptor, multi: true },
   ]
 })
 export class CoreModule { }
