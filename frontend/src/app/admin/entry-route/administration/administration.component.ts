@@ -46,7 +46,7 @@ export class AdministrationComponent implements OnInit {
 
   private initSelectWeb(webs: WebInterface[]): void {
     this.websSelect = webs;
-    if (!this._selectedWeb) {
+    if (!this._selectedWeb && this.websSelect.length) {
       this._selectedWeb = this.websSelect[0].id;
     }
   }

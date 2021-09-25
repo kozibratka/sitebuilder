@@ -1,3 +1,4 @@
 This value is already used.: Tato hodnota je již používána.
 This value is not a valid email address.: Tato hodnota není validní emailová adresa.
 This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.: Příliš krátké. Zadejte alespoň {{ limit }} znaků.
+This value should not be blank.: Tato hodnota nesmí být prázdná

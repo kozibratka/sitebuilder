@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import {RouteRoleGuardService} from '../core/services/route-role-guard.service';
+import {RouteRoleGuardService} from '../core/guards/route-role-guard.service';
 import {AdministrationComponent} from './entry-route/administration/administration.component';
 import {WebListComponent} from './entry-route/administration/admin/site-builder/web/web-list/web-list.component';
 import {WebListResolverService} from './entry-route/administration/tools/route-resolvers/web-list-resolver.service';
@@ -18,14 +18,16 @@ import {RegistrationComponent} from './entry-route/authorization/registration/re
 import {LoginComponent} from './entry-route/authorization/login/login.component';
 import {PageBuilderResolverService} from './entry-route/administration/admin/site-builder/page-builder/tools/route-resolvers/page-builder-resolver.service';
 import {GlobalPluginsResolver} from './entry-route/administration/admin/tools/route-resolvers/global-plugins.resolver';
+import {WebListGuard} from './entry-route/administration/tools/guards/web-list.guard';
 
 
 const routes: Routes = [
   {
     path: 'admin',
     component: AdministrationComponent,
-    canActivate: [RouteRoleGuardService],
+    canActivate: [RouteRoleGuardService, WebListGuard],
     resolve: {webList: WebListResolverService},
+    runGuardsAndResolvers: 'always',
     children: [
       {
         path: 'web',

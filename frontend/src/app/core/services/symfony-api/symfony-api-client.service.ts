@@ -7,6 +7,7 @@ import Routing from '../../external-library/router';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {EventEmitterService} from '../event-emitter-service';
 import {Event} from './tools/constants/event';
+import {logger} from 'codelyzer/util/logger';
 
 
 @Injectable({
@@ -109,7 +110,8 @@ export class SymfonyApiClientService {
         break;
       default:
         routesFromBackend$ = new Observable<object>(subscriber => {
-          this.urlFetchNotification$.subscribe(downloadedRoutes => {
+          const unsubscribe = this.urlFetchNotification$.subscribe(downloadedRoutes => {
+            unsubscribe.unsubscribe();
             subscriber.next(downloadedRoutes);
           });
         });

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {LoginClientService} from './login-client/login-client.service';
-import {NotifierService} from './notifier.service';
-import {SymfonyApiClientService} from './symfony-api/symfony-api-client.service';
+import {LoginClientService} from '../services/login-client/login-client.service';
+import {NotifierService} from '../services/notifier.service';
+import {SymfonyApiClientService} from '../services/symfony-api/symfony-api-client.service';
 import {catchError, map} from 'rxjs/operators';
-import {HttpResponseToasterService} from './http-response-toaster.service';
+import {HttpResponseToasterService} from '../services/http-response-toaster.service';
 
 @Injectable({
   providedIn: 'root'
