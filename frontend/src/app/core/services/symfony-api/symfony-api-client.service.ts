@@ -7,8 +7,6 @@ import Routing from '../../external-library/router';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {EventEmitterService} from '../event-emitter-service';
 import {Event} from './tools/constants/event';
-import {logger} from 'codelyzer/util/logger';
-
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +52,8 @@ export class SymfonyApiClientService {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
         });
-      }), finalize(this.generatePostSendCallbacks('get'))
+      }),
+      finalize(this.generatePostSendCallbacks('get'))
     );
   }
 

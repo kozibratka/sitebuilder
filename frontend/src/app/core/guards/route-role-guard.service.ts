@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {LoginClientService} from '../services/login-client/login-client.service';
 import {NotifierService} from '../services/notifier.service';
 import {SymfonyApiClientService} from '../services/symfony-api/symfony-api-client.service';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../services/http-response-toaster.service';
 
 @Injectable({
@@ -47,6 +47,26 @@ export class RouteRoleGuardService implements CanActivate {
         return of(this.router.parseUrl('/authorization/login'));
       }),
     );
+
+    // return new Observable(subscriber => {
+    //   this.symfonyApiClientService.get<false | true>('role_check', ['ROLE_USER']).pipe(
+    //     map(value => {
+    //       if (value.body === true) {
+    //         return true;
+    //       }
+    //       this.notifierService.notify('Nemáte dostatečné oprávnění k tomuto zdroji', 'error');
+    //       return false;
+    //     }),
+    //     catchError((error) => {
+    //       this.httpResponseToasterService.showError(error);
+    //       return of(this.router.parseUrl('/authorization/login'));
+    //     }),
+    //   ).subscribe(value => {
+    //     subscriber.next(value);
+    //   });
+    //
+    //   return null;
+    // });
   }
 
 
