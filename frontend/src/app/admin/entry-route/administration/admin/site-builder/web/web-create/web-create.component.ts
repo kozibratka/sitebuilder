@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../../core/services/notifier.service';
 import {WebInterface} from '../../../../tools/interfaces/web-interface';
-import {WebDetailResolverService} from '../../../../tools/route-resolvers/web-detail-resolver.service';
+import {WebListGuard} from '../../../../tools/guards/web-list.guard';
 
 @Component({
   selector: 'app-web-create',
@@ -23,7 +23,8 @@ export class WebCreateComponent implements OnInit {
     private router: Router,
     public route: ActivatedRoute,
     private notifierService: NotifierService,
-    private httpResponseToasterService: HttpResponseToasterService
+    private httpResponseToasterService: HttpResponseToasterService,
+    public webListGuard: WebListGuard
   ) {
   }
 
@@ -42,6 +43,7 @@ export class WebCreateComponent implements OnInit {
         this.symfonyApiClientService.post('web_create', this.createWebForm.value).subscribe({
           next: () => {
             this.notifierService.notify('Web byl úspěšně vytvořen');
+            this.webListGuard.isBlocked = false;
             this.router.navigate(['list'], { relativeTo: this.route.parent });
           },
           error: err => this.httpResponseToasterService.showError(err)

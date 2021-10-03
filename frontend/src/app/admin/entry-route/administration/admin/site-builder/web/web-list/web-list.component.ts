@@ -7,9 +7,9 @@ import {filter, switchMap} from 'rxjs/operators';
 import {SymfonyApiClientService} from '../../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../../core/services/notifier.service';
-import {WebListResolverService} from '../../../../tools/route-resolvers/web-list-resolver.service';
 import {WebDetailResolverService} from '../../../../tools/route-resolvers/web-detail-resolver.service';
 import {AdministrationComponent} from '../../../../administration.component';
+import {WebListGuard} from '../../../../tools/guards/web-list.guard';
 
 @Component({
   selector: 'app-web-list',
@@ -28,13 +28,15 @@ export class WebListComponent implements OnInit {
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
     private router: Router,
-    private webListResolverService: WebListResolverService,
     private webDetailResolverService: WebDetailResolverService,
-    private administrationComponent: AdministrationComponent
+    private administrationComponent: AdministrationComponent,
+    public webListGuard: WebListGuard
   ) { }
 
   ngOnInit(): void {
-    this.dataToTable = this.webListResolverService.webList;
+    this.route.root.firstChild.data.subscribe(data => {
+      this.dataToTable = data.webList;
+    });
     this.displayedColumns = ['name', 'action'];
   }
 

@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {RouteRoleGuardService} from '../core/guards/route-role-guard.service';
 import {AdministrationComponent} from './entry-route/administration/administration.component';
 import {WebListComponent} from './entry-route/administration/admin/site-builder/web/web-list/web-list.component';
-import {WebListResolverService} from './entry-route/administration/tools/route-resolvers/web-list-resolver.service';
 import {WebCreateComponent} from './entry-route/administration/admin/site-builder/web/web-create/web-create.component';
 import {WebDetailResolverService} from './entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {PageListComponent} from './entry-route/administration/admin/site-builder/page/page-list/page-list.component';
@@ -26,7 +25,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdministrationComponent,
     canActivate: [RouteRoleGuardService, WebListGuard],
-    resolve: {webList: WebListResolverService},
+    resolve: {webList: WebListGuard},
     runGuardsAndResolvers: 'always',
     children: [
       {

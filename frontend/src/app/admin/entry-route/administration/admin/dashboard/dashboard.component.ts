@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.title$.next(this.title);
     this.route.data.subscribe(data => {
-      console.log('aloha');
     });
   }
 
