@@ -1,39 +1,27 @@
-import {AfterViewInit, Component, Injector, OnInit, ViewChildren} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TextPluginComponent} from '../../text-plugin.component';
-import {BaseAdminAbstractComponent} from '../../../tools/components/base-admin-abstract.component';
 import {FormGroup} from '@angular/forms';
-import {TextPluginFormService} from './tools/forms/text-plugin-form.service';
-import {InputFormErrorGrouperDirective} from '../../../../core/directives/form-error/input-form-error-grouper.directive';
+import {AbstractAdminSetting} from '../../../tools/abstract-class/abstract-admin-setting';
+import {TextPluginSettingsInterface} from '../../tools/interfaces/text-plugin-settings-interface';
 
 @Component({
   selector: 'app-text-settings',
   templateUrl: './text-plugin-admin.component.html',
   styleUrls: ['./text-plugin-admin.component.css']
 })
-export class TextPluginAdminComponent extends BaseAdminAbstractComponent<TextPluginComponent> implements OnInit, AfterViewInit{
+export class TextPluginAdminComponent extends AbstractAdminSetting<TextPluginSettingsInterface> implements OnInit{
 
   adminForm: FormGroup;
 
   constructor(
-    injector: Injector,
-    textPluginFormService: TextPluginFormService
   ) {
-    super(injector);
-    this.adminForm = textPluginFormService.createForm();
-    this.registerInvalidFormEvent(this.adminForm);
+    super();
   }
 
   ngOnInit(): void {
-
-  }
-
-  ngAfterViewInit(): void {
-    console.log(this.inputFormErrorGrouperDirectives);
   }
 
   submit(): void {
-    this.adminForm.markAsTouched();
-    this.adminForm.updateValueAndValidity();
   }
 
 }

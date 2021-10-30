@@ -38,6 +38,7 @@ import {PaletteItemQuickMenuComponent} from './entry-route/administration/admin/
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -64,25 +65,26 @@ import {MatSelectModule} from '@angular/material/select';
     PaletteItemComponent,
     PaletteItemQuickMenuComponent
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    RouterModule,
-    SortablejsModule.forRoot({animation: 150}),
-    AdminRoutingModule,
-    PluginsModule,
-    NgbModule,
-    ReactiveFormsModule,
-    CoreModule,
-    GravatarModule,
-    MatTableModule,
-    MatProgressBarModule,
-    MatDialogModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-  ],
+    imports: [
+        BrowserModule,
+        CommonModule,
+        RouterModule,
+        SortablejsModule.forRoot({animation: 150}),
+        AdminRoutingModule,
+        PluginsModule,
+        NgbModule,
+        ReactiveFormsModule,
+        CoreModule,
+        GravatarModule,
+        MatTableModule,
+        MatProgressBarModule,
+        MatDialogModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        DragDropModule,
+    ],
   providers: [{provide: Window, useValue: window}],
   exports: [
     MenuComponent,

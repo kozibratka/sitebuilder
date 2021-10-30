@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AbstractMenuPluginResolver} from '../../../../admin/entry-route/administration/admin/site-builder/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {TextPluginComponent} from '../../text-plugin.component';
+import {PluginIdentifier} from '../../../tools/constants/plugin-identifier';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,6 @@ export class TextMenuResolverService extends AbstractMenuPluginResolver{
   }
 
   get identifier(): string {
-    return 'text_plugin';
+    return PluginIdentifier.TEXT_PLUGIN;
   }
 }

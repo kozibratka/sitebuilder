@@ -25,4 +25,30 @@ export class ElementHelper {
 
     return new ElementPositionMessenger(xPosition, yPosition);
   }
+
+  public static centerToViewportInDocument(htmlElement: HTMLElement) {
+    const documentViewportTop = document.body.scrollTop;
+    const documentViewportLeft = document.body.scrollLeft;
+    const elementWidth = htmlElement.offsetWidth;
+    const elementHeight = htmlElement.offsetHeight;
+    const destinationXInDocument = (window.innerWidth / 2) - (elementWidth / 2);
+    const destinationYInDocument = ((window.innerHeight) / 2) - (elementHeight / 2);
+    const rect = htmlElement.getBoundingClientRect();
+    const top = rect.top + document.body.scrollTop;
+    const left = rect.left + document.body.scrollLeft;
+    let differenceY = destinationYInDocument - top + documentViewportTop;
+    let differenceX = destinationXInDocument - left + documentViewportLeft;
+    if (differenceY && htmlElement.style.top) {
+      differenceY = parseInt(htmlElement.style.top, 10) + differenceY;
+    } else if (htmlElement.style.top) {
+      differenceY = parseInt(htmlElement.style.top, 10);
+    }
+    if (differenceX && htmlElement.style.left) {
+      differenceX = parseInt(htmlElement.style.left, 10) + differenceX;
+    } else if (htmlElement.style.left) {
+      differenceX = parseInt(htmlElement.style.left, 10);
+    }
+
+    return new ElementPositionMessenger(differenceX, differenceY);
+  }
 }

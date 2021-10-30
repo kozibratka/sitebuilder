@@ -84,10 +84,10 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
   private initGridStack(): void {
     this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
     this.paletteBlockGridstackService.gridStack.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuMessenger.next(el as GridItemHTMLElementItemComponent);
+      this.quickMenuMessenger.next(null);
     });
     this.paletteBlockGridstackService.gridStack.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuMessenger.next(el as GridItemHTMLElementItemComponent);
+      this.quickMenuMessenger.next(null);
     });
 
   }

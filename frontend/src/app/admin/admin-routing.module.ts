@@ -67,13 +67,7 @@ const routes: Routes = [
           {
             path: 'page-builder/:pageId',
             component: PageBuilderComponent,
-            resolve: {pageDetail: PageBuilderResolverService, globalPlugins: GlobalPluginsResolver},
-            children: [
-              {
-                path: 'item-admin',
-                loadChildren: () => import('../plugins/routes-admin.module').then(m => m.RoutesAdminModule)
-              }
-            ]
+            resolve: {pageDetail: PageBuilderResolverService/*, globalPlugins: GlobalPluginsResolver*/}
           }
         ]
       },

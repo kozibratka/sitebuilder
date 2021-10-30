@@ -10,18 +10,21 @@ import { HiderElementDirective } from './directives/hider-element.directive';
 import {EventEmitterService} from './services/event-emitter-service';
 import { InputFormErrorGrouperDirective } from './directives/form-error/input-form-error-grouper.directive';
 import { GlobalFormErrorComponent } from './components/global-form-error/global-form-error.component';
+import { MoveAbleSettingsComponent } from './components/move-able-settings/move-able-settings.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
 @NgModule({
-  declarations: [ModalForRouteComponent, InputFormErrorDirective, ErrorMessageComponent, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent],
+  declarations: [ModalForRouteComponent, InputFormErrorDirective, ErrorMessageComponent, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent, MoveAbleSettingsComponent],
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
+    DragDropModule,
     ToastrModule.forRoot(),
   ],
-    exports: [ModalForRouteComponent, InputFormErrorDirective, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent],
+    exports: [ModalForRouteComponent, InputFormErrorDirective, HiderElementDirective, InputFormErrorGrouperDirective, GlobalFormErrorComponent, MoveAbleSettingsComponent],
   providers: [
     EventEmitterService,
   ]

@@ -33,13 +33,20 @@ export class EventEmitterService<T = unknown> {
     });
   }
 
-  unregisterCallback(eventNames: string | string[], callback: (eventName: string, status: T) => void): void {
+  unregisterCallback(eventNames: string | string[], callback: (eventName: string, status: T) => void = null): void {
     if (!Array.isArray(eventNames)){
       eventNames = [eventNames];
     }
     eventNames.forEach((eventName, index) => {
-      this.subscriptions.get(eventName)?.get(callback)?.unsubscribe();
-      this.subscriptions.get(eventName)?.delete(callback);
+      if (!callback) {
+        this.subscriptions.get(eventName).forEach((value, key, map) => {
+          value.unsubscribe();
+        });
+        this.subscriptions.get(eventName).clear();
+      } else {
+        this.subscriptions.get(eventName)?.get(callback)?.unsubscribe();
+        this.subscriptions.get(eventName)?.delete(callback);
+      }
       if (!this.subscriptions.get(eventName)?.size){
         this.subscriptions.delete(eventName);
         this.subjectComunicators.delete(eventName);

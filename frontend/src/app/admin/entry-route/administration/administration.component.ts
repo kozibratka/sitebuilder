@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {LoginClientService} from '../../../core/services/login-client/login-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -7,6 +7,7 @@ import {WebInterface} from './tools/interfaces/web-interface';
 import {WebDetailResolverService} from './tools/route-resolvers/web-detail-resolver.service';
 import {MatSelect} from '@angular/material/select';
 import {WebListGuard} from './tools/guards/web-list.guard';
+import {EventEmitterService} from '../../../core/services/event-emitter-service';
 
 @Component({
   selector: 'app-administration',
@@ -26,8 +27,13 @@ export class AdministrationComponent implements OnInit {
     private notifierService: NotifierService,
     private router: Router,
     private webDetailResolverService: WebDetailResolverService,
-    private webListGuard: WebListGuard
+    private webListGuard: WebListGuard,
+    private eventEmitterService: EventEmitterService<boolean>
   ) {
+  }
+  @HostListener('click')
+  click(): void {
+    this.eventEmitterService.emit(Event.ADMINISTRATION_ELSEWHERE_CLICK, true);
   }
 
   ngOnInit(): void {

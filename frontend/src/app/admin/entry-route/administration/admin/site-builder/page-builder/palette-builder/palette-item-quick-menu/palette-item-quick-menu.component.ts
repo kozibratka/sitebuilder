@@ -1,11 +1,9 @@
-import {Component, ElementRef, HostBinding, HostListener, Inject, OnInit} from '@angular/core';
+import {Component, HostBinding, HostListener, Inject, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {ElementHelper} from '../../../../../../../../core/helpers/element-helper';
-import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FlashDataService} from '../../../../../../../../core/services/flash-data.service';
-import {PluginComponentInterface} from '../page-block/palette-item-component/tools/interfaces/plugin-component-interface';
+import {MoveAbleSettingsManagerService} from '../../../../../../../../core/components/move-able-settings/tools/Services/move-able-settings-manager.service';
+import {PaletteItemComponent} from '../page-block/palette-item-component/palette-item.component';
 
 
 @Component({
@@ -20,14 +18,13 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   @HostBinding('style.display') display;
   @HostBinding('style.width') width;
 
-  private selectedItemForMenu: GridItemHTMLElementItemComponent;
+  private selectedItemForMenu: PaletteItemComponent;
+  private lastMouserOveredElement = null;
 
   constructor(
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     private paletteBuilderComponent: PaletteBuilderComponent,
-    private router: Router,
-    private route: ActivatedRoute,
-    private flashData: FlashDataService<PluginComponentInterface>
+    private moveAbleSettingsManagerService: MoveAbleSettingsManagerService,
   ) {
 
   }
@@ -42,9 +39,11 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   }
 
   private prepareQuickMenu(): void {
-    this.quickMenuMessenger.subscribe(paletteItemElement => {
+    this.quickMenuMessenger.subscribe((paletteItemElement) => {
+      paletteItemElement = this.lastMouserOveredElement = paletteItemElement ? paletteItemElement : this.lastMouserOveredElement;
       this.display = 'block';
-      const itemElement = this.selectedItemForMenu = paletteItemElement;
+      this.selectedItemForMenu = paletteItemElement;
+      const itemElement = paletteItemElement.elementRef.nativeElement;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {
         x: 19,
         y: 28
@@ -57,12 +56,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   }
 
   private openItemMenu(): void{
-    const selectedComponent = this.selectedItemForMenu.paletteItemComponent.componentRef.instance;
-    const link = selectedComponent.getLink();
-    link.commands[0] = 'item-admin/' + link.commands[0];
-    this.flashData.add('selectedComponent', selectedComponent);
     this.display = 'none';
-    this.router.navigate(link.commands, {relativeTo: this.route});
+    this.moveAbleSettingsManagerService.registerComponent(this.selectedItemForMenu.componentRef.instance);
   }
-
 }

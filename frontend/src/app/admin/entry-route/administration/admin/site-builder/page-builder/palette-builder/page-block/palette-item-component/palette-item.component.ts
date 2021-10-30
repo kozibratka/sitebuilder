@@ -15,10 +15,9 @@ import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-res
 import {Subject} from 'rxjs';
 import {ElementPositionMessenger} from '../../../../../../../../../core/messengers/element-position/element-position-messenger';
 import {ElementHelper} from '../../../../../../../../../core/helpers/element-helper';
-import {GridItemHTMLElementItemComponent} from '../../tools/interfaces/grid-item-htmlelement-item-component';
 import {PaletteGridItemInterface} from './tools/interfaces/palette-grid-item-interface';
 import {AbstractMenuPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
-import {PluginComponentInterface} from './tools/interfaces/plugin-component-interface';
+import {AbstractPlugin} from '../../../../../../../../../plugins/tools/abstract-class/abstract-plugin';
 
 @Component({
   selector: 'app-palette-item',
@@ -29,15 +28,15 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   @Input() gridStackNode: PaletteGridItemInterface;
   @ViewChild('itemTemplate', {read: ViewContainerRef, static: true}) viewContainerRef: ViewContainerRef;
-  private _componentRef: ComponentRef<PluginComponentInterface>;
+  private _componentRef: ComponentRef<AbstractPlugin<any>>;
   private lastPosition: ElementPositionMessenger;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
-    private elementRef: ElementRef<GridItemHTMLElement>,
+    public elementRef: ElementRef<GridItemHTMLElement>,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
+    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     @Inject(AbstractMenuPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractMenuPluginResolver[],
     private zone: NgZone
   ) {
@@ -78,11 +77,11 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     return this.getHeightInGrid() + this.getYPositionInGrid();
   }
 
-  get componentRef(): ComponentRef<PluginComponentInterface> {
+  get componentRef(): ComponentRef<AbstractPlugin<any>> {
     return this._componentRef;
   }
 
-  set componentRef(value: ComponentRef<PluginComponentInterface>) {
+  set componentRef(value: ComponentRef<AbstractPlugin<any>>) {
     this._componentRef = value;
   }
 
@@ -94,14 +93,12 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
       componentClass = this.getComponentFromIdentifier();
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
-    this._componentRef = this.viewContainerRef.createComponent<PluginComponentInterface>(factory);
+    this._componentRef = this.viewContainerRef.createComponent<AbstractPlugin<any>>(factory);
     this._componentRef.instance.initializeSettings(this.gridStackNode.plugin, this.gridStackNode.plugin.identifier !== 'none');
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
-    const itemElement = this.elementRef.nativeElement as GridItemHTMLElementItemComponent;
-    itemElement.paletteItemComponent = this;
-    this.quickMenuMessenger.next(itemElement);
+    this.quickMenuMessenger.next(this);
   }
 
   getComponentFromIdentifier(): new(...args: any[]) => {} {

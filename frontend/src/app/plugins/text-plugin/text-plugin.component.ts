@@ -1,26 +1,22 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
-import {NavigationExtras} from '@angular/router';
-import {PluginComponentInterface} from '../../admin/entry-route/administration/admin/site-builder/page-builder/palette-builder/page-block/palette-item-component/tools/interfaces/plugin-component-interface';
+import {Component, OnInit, Type} from '@angular/core';
 import {TextPluginSettingsInterface} from './tools/interfaces/text-plugin-settings-interface';
-import {AbstractPluginComponent} from '../tools/abstract-class/abstract-plugin-component';
+import {AbstractPlugin} from '../tools/abstract-class/abstract-plugin';
+import {SettingSubjectAbleInterface} from '../../core/components/move-able-settings/tools/interfaces/setting-subject-able-interface';
+import {TextPluginAdminComponent} from './admin/text-plugin-admin/text-plugin-admin.component';
 
 @Component({
   selector: 'app-text-plugin',
   templateUrl: './text-plugin.component.html',
   styleUrls: ['./text-plugin.component.css']
 })
-export class TextPluginComponent extends AbstractPluginComponent<TextPluginSettingsInterface>
-  implements OnInit, PluginComponentInterface, AfterViewChecked {
+export class TextPluginComponent extends AbstractPlugin<TextPluginSettingsInterface>
+  implements OnInit {
 
   constructor() {
     super();
   }
 
   ngOnInit(): void {
-  }
-
-  getLink(): { commands: any[]; extras?: NavigationExtras } {
-    return {commands: ['text-plugin/text-plugin-admin']};
   }
 
   initEmptySettings(): void {
@@ -31,6 +27,13 @@ export class TextPluginComponent extends AbstractPluginComponent<TextPluginSetti
   refreshView(): void {
   }
 
-  ngAfterViewChecked(): void {
+  getSettingItems(): { menuImage?: string; label: string; path: string; component: Type<SettingSubjectAbleInterface> }[] {
+    return [
+      {
+        label: 'Text',
+        component: TextPluginAdminComponent,
+        path: ''
+      }
+    ];
   }
 }
