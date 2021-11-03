@@ -30,13 +30,13 @@ export class PaletteBlockGridstackService {
 
   startGridstack(): void {
       this._gridStack = GridStack.init({
-        acceptWidgets: ".grid-stack-item-menu",
+        acceptWidgets: '.grid-stack-item-menu',
         column: 12,
         ddPlugin: GridStackDragDrop,
         float: true,
         row: 3,
         styleInHead: true,
-        placeholderText: "Zde bude nový obsah :)",
+        placeholderText: 'Zde bude nový obsah :)',
       }, this.gridstackElement.nativeElement);
       this.isInitied = true;
 
