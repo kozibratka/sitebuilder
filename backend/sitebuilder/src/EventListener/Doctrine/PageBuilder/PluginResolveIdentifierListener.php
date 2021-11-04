@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\EventListener\Doctrine;
+namespace App\EventListener\Doctrine\PageBuilder;
 
 
 use App\Entity\SiteBuilder\Plugin\BasePlugin;

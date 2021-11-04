@@ -60,7 +60,6 @@ class PageController extends BaseApiController
         $form = $this->createForm(PageType::class, $page);
         $form->submit($request->request->all());
         if($form->isSubmitted() && $form->isValid()) {
-            $page = $form->getData();
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);

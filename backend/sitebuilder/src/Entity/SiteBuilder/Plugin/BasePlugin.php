@@ -27,7 +27,7 @@ abstract class BasePlugin
     private ?int $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private ?string $name = null;
 
@@ -50,7 +50,7 @@ abstract class BasePlugin
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Serializer\Exclude()
      */
-    private ?Web $web;
+    private ?Web $web = null;
 
     public ?string $identifier = null;
 
@@ -96,12 +96,12 @@ abstract class BasePlugin
         $this->user = $user;
     }
 
-    public function getWeb(): Web
+    public function getWeb(): ?Web
     {
         return $this->web;
     }
 
-    public function setWeb(Web $web)
+    public function setWeb(?Web $web)
     {
         $this->web = $web;
     }
