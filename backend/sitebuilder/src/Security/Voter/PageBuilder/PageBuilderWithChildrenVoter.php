@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Security\PageBuilder;
-
+namespace App\Security\Voter\PageBuilder;
 
 use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Page;
@@ -63,7 +61,7 @@ class PageBuilderWithChildrenVoter extends Voter
                 break;
             case $subject instanceof PaletteGridItem:
                 $user = $subject->getPageBlock()->getUser();
-                $result = $this->voteOnAttribute($attribute, $subject->getPluginGlobal(), $token);
+                $result = $this->voteOnAttribute($attribute, $subject->getPlugin(), $token);
                 if(!$result) {
                     return false;
                 }

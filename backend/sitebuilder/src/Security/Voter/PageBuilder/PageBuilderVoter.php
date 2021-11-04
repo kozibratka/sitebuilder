@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Security\PageBuilder;
+namespace App\Security\Voter\PageBuilder;
 
 
 use App\Entity\SiteBuilder\PaletteGridItem;

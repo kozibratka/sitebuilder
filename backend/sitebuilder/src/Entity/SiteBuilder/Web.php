@@ -11,10 +11,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppValidator;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="web")
+ * @ORM\Table(name="web",
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="web_unique",columns={"user_id", "name"})}
+ *     )
+ * @AppValidator\UniqueEntityWithUser(fields={"name", "user"})
  */
 class Web
 {
@@ -37,7 +41,7 @@ class Web
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
-    private User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
@@ -77,12 +81,12 @@ class Web
         $this->name = $name;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(User $user)
+    public function setUser(?User $user)
     {
         $this->user = $user;
     }

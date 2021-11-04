@@ -34,7 +34,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $form = $event->getForm();
-        $plugin = $data['pluginLocal'] ?? null;
+        $plugin = $data['plugin'] ?? null;
         if($plugin) {
             $identifier = $plugin['identifier'];
             $formClass = $this->pluginServices[$identifier]->getFormClass();
@@ -47,11 +47,13 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
                 throw new CustomErrorMessageException('Pokoušíte se upravit element, který se již smazaný');
             }
         }
-        if(isset($data['pluginGlobal'])) {
-            $form->add('pluginGlobal', EntityType::class, ['class' => BasePlugin::class, 'choice_value' => 'id']);
-        }
-        else if(isset($data['pluginLocal'])) {
-            $form->add('pluginLocal', $formClass);
+        if($plugin) {
+            if($plugin['id'] ?? null) {
+                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choice_value' => 'id']);
+            }
+            else  {
+                $form->add('plugin', $formClass);
+            }
         }
     }
 

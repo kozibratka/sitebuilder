@@ -53,13 +53,7 @@ class PaletteGridItem
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", inversedBy="paletteGridItems", cascade={"persist"})
      */
-    private ?BasePlugin $pluginGlobal = null;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", cascade={"persist", "remove"})
-     * @Assert\Valid()
-     */
-    private ?BasePlugin $pluginLocal = null;
+    private ?BasePlugin $plugin = null;
 
     public function getId()
     {
@@ -121,23 +115,13 @@ class PaletteGridItem
         $this->y = $y;
     }
 
-    public function getPluginGlobal(): ?BasePlugin
+    public function getPlugin(): ?BasePlugin
     {
-        return $this->pluginGlobal;
+        return $this->plugin;
     }
 
-    public function setPluginGlobal(BasePlugin $pluginGlobal)
+    public function setPlugin(BasePlugin $plugin)
     {
-        $this->pluginGlobal = $pluginGlobal;
-    }
-
-    public function getPluginLocal(): ?BasePlugin
-    {
-        return $this->pluginLocal;
-    }
-
-    public function setPluginLocal(BasePlugin $pluginLocal)
-    {
-        $this->pluginLocal = $pluginLocal;
+        $this->plugin = $plugin;
     }
 }
