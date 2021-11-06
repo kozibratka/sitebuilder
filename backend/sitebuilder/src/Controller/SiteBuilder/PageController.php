@@ -42,7 +42,7 @@ class PageController extends BaseApiController
     public function create(Request $request, Web $web)
     {
         $form = $this->createForm(PageType::class);
-        $form->submit($request->request->all(), false);
+        $form->submit($request->request->all());
         if($form->isValid()) {
             $page = $form->getData();
             $web->addPage($page);
@@ -58,7 +58,7 @@ class PageController extends BaseApiController
     public function update(Request $request, Page $page)
     {
         $form = $this->createForm(PageType::class, $page);
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
             $this->persist($page);

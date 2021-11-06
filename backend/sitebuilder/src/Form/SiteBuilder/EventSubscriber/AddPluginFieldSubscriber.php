@@ -6,6 +6,7 @@ use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Plugin\TextPlugin;
 use App\Exception\CustomErrorMessageException;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -19,6 +20,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     /** @required  */
     public EntityManagerInterface $em;
     private $pluginServices;
+    private $toRemovePlugin = [];
 
     public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager)
     {
@@ -29,6 +31,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SUBMIT => 'onPreSubmit',
+            FormEvents::POST_SUBMIT => 'onPostSubmit',
         ];
     }
 
@@ -50,15 +53,31 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             }
         }
         if($plugin) {
+            $pluginChoices = new ArrayCollection($this->entityManager->getRepository(BasePlugin::class)->findAll());
+            /** @var PaletteGridItem $paletteGridItem */
+            $paletteGridItem = $form->getData();
             if($plugin['id'] ?? null) {
+                if($paletteGridItem?->getPlugin() && !$paletteGridItem->getPlugin()->getWeb()) {
+                    $this->toRemovePlugin[] = $paletteGridItem->getPlugin();
+                }
                 $data['plugin'] = $plugin['id'];
                 $event->setData($data);
-                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choices' => $this->entityManager->getRepository(BasePlugin::class)->findAll() ]);
+                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choices' => $pluginChoices ]);
             }
             else  {
-                $form->add('plugin', $formClass, ['mapped' => false]);
+                if($paletteGridItem?->getPlugin()?->getWeb()) {
+                    $paletteGridItem->setPlugin(null);
+                }
+                $form->add('plugin', $formClass);
             }
         }
+    }
+
+    public function onPostSubmit() {
+        foreach ($this->toRemovePlugin as $item) {
+            $this->entityManager->remove($item);
+        }
+        $this->toRemovePlugin = [];
     }
 
 }

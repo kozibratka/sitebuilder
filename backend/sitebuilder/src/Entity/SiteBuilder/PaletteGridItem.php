@@ -120,9 +120,11 @@ class PaletteGridItem
         return $this->plugin;
     }
 
-    public function setPlugin(BasePlugin $plugin)
+    public function setPlugin(?BasePlugin $plugin)
     {
         $this->plugin = $plugin;
-        $this->plugin->addPaletteGridItem($this);
+        if($plugin) {
+            $this->plugin->addPaletteGridItem($this);
+        }
     }
 }
