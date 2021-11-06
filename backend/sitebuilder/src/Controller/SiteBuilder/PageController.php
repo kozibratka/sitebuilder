@@ -42,7 +42,7 @@ class PageController extends BaseApiController
     public function create(Request $request, Web $web)
     {
         $form = $this->createForm(PageType::class);
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
         if($form->isValid()) {
             $page = $form->getData();
             $web->addPage($page);

@@ -12,6 +12,7 @@ class BasePluginType extends AbstractType
     {
         $builder->add('id')
             ->add('identifier')
+            ->add('name')
         ;
     }
 

@@ -4,8 +4,10 @@ namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
+use App\Entity\SiteBuilder\Plugin\TextPlugin;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -18,7 +20,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     public EntityManagerInterface $em;
     private $pluginServices;
 
-    public function __construct(Traversable $pluginServices)
+    public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager)
     {
         $this->pluginServices = iterator_to_array($pluginServices);
     }
@@ -35,7 +37,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
         $plugin = $data['plugin'] ?? null;
-        if($plugin) {
+        if($plugin && $plugin['identifier']) {
             $identifier = $plugin['identifier'];
             $formClass = $this->pluginServices[$identifier]->getFormClass();
         }
@@ -44,15 +46,17 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             if($paletteGridItem) {
                 $form->setData($paletteGridItem);
             }else{
-                throw new CustomErrorMessageException('Pokoušíte se upravit element, který se již smazaný');
+                throw new CustomErrorMessageException('Pokoušíte se upravit element, který je již smazaný');
             }
         }
         if($plugin) {
             if($plugin['id'] ?? null) {
-                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choice_value' => 'id']);
+                $data['plugin'] = $plugin['id'];
+                $event->setData($data);
+                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choices' => $this->entityManager->getRepository(BasePlugin::class)->findAll() ]);
             }
             else  {
-                $form->add('plugin', $formClass);
+                $form->add('plugin', $formClass, ['mapped' => false]);
             }
         }
     }

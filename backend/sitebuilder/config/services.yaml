@@ -53,6 +53,11 @@ services:
               event: postLoad
               entity: 'App\Entity\SiteBuilder\Plugin\PaletteGridItem'
 
+    App\EventListener\Doctrine\PageBuilder\BasePluginListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, event: prePersist, entity: 'App\Entity\SiteBuilder\Plugin\BasePlugin' }
+            - { name: doctrine.orm.entity_listener, event: preUpdate, entity: 'App\Entity\SiteBuilder\Plugin\BasePlugin' }
+
     App\Service\Plugin\TextPluginService:
         tags:
             - { name: 'plugin_service', key: 'text_plugin' }

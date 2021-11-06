@@ -3,6 +3,7 @@
 
 namespace App\Entity\SiteBuilder\Plugin;
 
+use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Web;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -32,7 +33,7 @@ abstract class BasePlugin
     private ?string $name = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\PaletteGridItem", mappedBy="pluginGlobal")
+     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\PaletteGridItem", mappedBy="plugin")
      * @Serializer\Exclude()
      */
     private Collection $paletteGridItems;
@@ -79,6 +80,17 @@ abstract class BasePlugin
     public function setPaletteGridItems(Collection $paletteGridItems)
     {
         $this->paletteGridItems = $paletteGridItems;
+    }
+
+    public function addPaletteGridItem(PaletteGridItem $paletteGridItem)
+    {
+        if(!$this->paletteGridItems->contains($paletteGridItem)) {
+            $this->paletteGridItems->add($paletteGridItem);
+        }
+    }
+
+    public function removePaletteGridItem(PaletteGridItem $paletteGridItem) {
+        $this->paletteGridItems->removeElement($paletteGridItem);
     }
 
     public function getIdentifier(): ?string
