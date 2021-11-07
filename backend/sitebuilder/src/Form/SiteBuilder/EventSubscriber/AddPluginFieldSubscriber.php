@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Security\Core\Security;
 use Traversable;
 
 class AddPluginFieldSubscriber implements EventSubscriberInterface
@@ -22,7 +23,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     private $pluginServices;
     private $toRemovePlugin = [];
 
-    public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager)
+    public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager, private Security $security)
     {
         $this->pluginServices = iterator_to_array($pluginServices);
     }
@@ -53,7 +54,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             }
         }
         if($plugin) {
-            $pluginChoices = new ArrayCollection($this->entityManager->getRepository(BasePlugin::class)->findAll());
+            $pluginChoices = new ArrayCollection($this->entityManager->getRepository(BasePlugin::class)->findBy(['user' => $this->security->getUser()]));
             /** @var PaletteGridItem $paletteGridItem */
             $paletteGridItem = $form->getData();
             if($plugin['id'] ?? null) {
