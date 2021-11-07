@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AbstractApiFormService} from '../../../../../../../../../core/abstract-class/abstract-api-form-service';
+import {AbstractApiFormService} from '../../../../../../../../core/abstract-class/abstract-api-form-service';
 import {FormGroup} from '@angular/forms';
 
 @Injectable({

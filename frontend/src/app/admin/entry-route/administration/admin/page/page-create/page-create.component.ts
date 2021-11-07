@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {SymfonyApiClientService} from '../../../../../../../core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NotifierService} from '../../../../../../../core/services/notifier.service';
-import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
+import {NotifierService} from '../../../../../../core/services/notifier.service';
+import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
 import {PageFormService} from './tools/forms/page-form.service';
-import {WebInterface} from '../../../../tools/interfaces/web-interface';
-import {WebDetailResolverService} from '../../../../tools/route-resolvers/web-detail-resolver.service';
+import {WebInterface} from '../../../tools/interfaces/web-interface';
+import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
 
 @Component({
   selector: 'app-page-create',

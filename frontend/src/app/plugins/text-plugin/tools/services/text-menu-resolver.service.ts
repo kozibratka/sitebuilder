@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AbstractMenuPluginResolver} from '../../../../admin/entry-route/administration/admin/site-builder/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {AbstractMenuPluginResolver} from '../../../../admin/entry-route/administration/admin/page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {TextPluginComponent} from '../../text-plugin.component';
 import {PluginIdentifier} from '../../../tools/constants/plugin-identifier';
 

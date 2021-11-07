@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WebInterface} from '../../../../tools/interfaces/web-interface';
+import {WebInterface} from '../../../tools/interfaces/web-interface';
 import {MatDialog} from '@angular/material/dialog';
 import {RemoveWebDialogComponent} from './tools/components/remove-web-dialog/remove-web-dialog.component';
 import {filter, switchMap} from 'rxjs/operators';
-import {SymfonyApiClientService} from '../../../../../../../core/services/symfony-api/symfony-api-client.service';
-import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
-import {NotifierService} from '../../../../../../../core/services/notifier.service';
-import {WebDetailResolverService} from '../../../../tools/route-resolvers/web-detail-resolver.service';
-import {AdministrationComponent} from '../../../../administration.component';
-import {WebListGuard} from '../../../../tools/guards/web-list.guard';
+import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
+import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
+import {NotifierService} from '../../../../../../core/services/notifier.service';
+import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
+import {AdministrationComponent} from '../../../administration.component';
+import {WebListGuard} from '../../../tools/guards/web-list.guard';
 
 @Component({
   selector: 'app-web-list',

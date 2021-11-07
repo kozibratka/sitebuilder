@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {WebFormService} from './tools/forms/web-form.service';
-import {SymfonyApiClientService} from '../../../../../../../core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
-import {NotifierService} from '../../../../../../../core/services/notifier.service';
-import {WebInterface} from '../../../../tools/interfaces/web-interface';
-import {WebListGuard} from '../../../../tools/guards/web-list.guard';
+import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
+import {NotifierService} from '../../../../../../core/services/notifier.service';
+import {WebInterface} from '../../../tools/interfaces/web-interface';
+import {WebListGuard} from '../../../tools/guards/web-list.guard';
 
 @Component({
   selector: 'app-web-create',

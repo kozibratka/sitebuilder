@@ -12,6 +12,7 @@ import {catchError, map} from 'rxjs/operators';
 export class WebDetailResolverService implements Resolve<WebInterface> {
 
   selectedId: number;
+  webDetail: WebInterface;
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -24,7 +25,8 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
-      return httpResponse.body;
+      this.webDetail = httpResponse.body;
+      return this.webDetail;
     }));
   }
 }

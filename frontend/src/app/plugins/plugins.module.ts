@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AbstractMenuPluginResolver} from '../admin/entry-route/administration/admin/site-builder/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {AbstractMenuPluginResolver} from '../admin/entry-route/administration/admin/page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {TextMenuResolverService} from './text-plugin/tools/services/text-menu-resolver.service';
 
 @NgModule({

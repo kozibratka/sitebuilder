@@ -18,6 +18,7 @@ import {ElementHelper} from '../../../../../../../../../core/helpers/element-hel
 import {PaletteGridItemInterface} from './tools/interfaces/palette-grid-item-interface';
 import {AbstractMenuPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {AbstractPlugin} from '../../../../../../../../../plugins/tools/abstract-class/abstract-plugin';
+import {WebDetailResolverService} from '../../../../../../tools/route-resolvers/web-detail-resolver.service';
 
 @Component({
   selector: 'app-palette-item',
@@ -36,6 +37,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     public elementRef: ElementRef<GridItemHTMLElement>,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
+    private webDetailResolverService: WebDetailResolverService,
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     @Inject(AbstractMenuPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractMenuPluginResolver[],
     private zone: NgZone
@@ -94,7 +96,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
     this._componentRef = this.viewContainerRef.createComponent<AbstractPlugin<any>>(factory);
-    this._componentRef.instance.initializeSettings(this.gridStackNode.plugin, this.gridStackNode.plugin.identifier !== 'none');
+    this._componentRef.instance.initializeSettings(this.gridStackNode.plugin,
+      this.gridStackNode.plugin.identifier !== 'none', this.webDetailResolverService.webDetail.plugins);
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {

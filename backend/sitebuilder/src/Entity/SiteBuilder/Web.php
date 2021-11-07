@@ -52,7 +52,6 @@ class Web
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
-     * @Serializer\Exclude()
      */
     private Collection $plugins;
 

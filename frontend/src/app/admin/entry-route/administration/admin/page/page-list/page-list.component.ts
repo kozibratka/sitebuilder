@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {PageInterface} from '../../tools/interfaces/page-interface';
+import {PageInterface} from '../tools/interfaces/page-interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {SymfonyApiClientService} from '../../../../../../../core/services/symfony-api/symfony-api-client.service';
-import {HttpResponseToasterService} from '../../../../../../../core/services/http-response-toaster.service';
-import {NotifierService} from '../../../../../../../core/services/notifier.service';
+import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
+import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
+import {NotifierService} from '../../../../../../core/services/notifier.service';
 import {filter, switchMap} from 'rxjs/operators';
 import {RemovePageDialogComponent} from './tools/components/remove-page-dialog/remove-page-dialog.component';
 

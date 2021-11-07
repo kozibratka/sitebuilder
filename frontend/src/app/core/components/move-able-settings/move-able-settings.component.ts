@@ -30,7 +30,7 @@ export class MoveAbleSettingsComponent implements OnInit, OnDestroy {
   @HostBinding('style.left') left = '0px';
   @HostBinding('style.top') top = '0px';
   items: {label: string, path: string, component: Type<SettingSubjectAbleInterface>}[] = [];
-  subjectForSetting: SettingAbleInterface = null;
+  subjectForSetting: SettingAbleInterface<any> = null;
   private _indexSelected: number;
   private allowHide = true;
 
@@ -60,7 +60,7 @@ export class MoveAbleSettingsComponent implements OnInit, OnDestroy {
     this.allowHide = true;
   }
 
-  registerComponent(settingAble: SettingAbleInterface): void {
+  registerComponent(settingAble: SettingAbleInterface<any>): void {
     this.items = settingAble.getSettingItems();
     this.subjectForSetting = settingAble;
     this.indexSelected = 0;
