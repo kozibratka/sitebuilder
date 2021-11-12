@@ -25,8 +25,7 @@ const routes: Routes = [
     path: 'admin',
     component: AdministrationComponent,
     canActivate: [RouteRoleGuardService, WebListGuard],
-    resolve: {webList: WebListGuard},
-    runGuardsAndResolvers: 'always',
+    resolve: {webList: WebListGuard, webDetail: WebDetailResolverService},
     children: [
       {
         path: 'web',
@@ -42,7 +41,6 @@ const routes: Routes = [
           {
             path: 'update/:webId',
             component: WebCreateComponent,
-            resolve: {webDetail: WebDetailResolverService},
           }
         ]
       },
@@ -73,9 +71,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        resolve: {webDetail: WebDetailResolverService},
         component: DashboardComponent,
-        runGuardsAndResolvers: 'always',
       }
     ]
   },

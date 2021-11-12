@@ -18,7 +18,7 @@ import {PaletteItemComponent} from './palette-item-component/palette-item.compon
 import {Subject} from 'rxjs';
 import {GridItemHTMLElementItemComponent} from '../tools/interfaces/grid-item-htmlelement-item-component';
 import {PageBlockInterface} from './tools/interfaces/page-block-interface';
-import {PaletteGridItemInterface} from './palette-item-component/tools/interfaces/palette-grid-item-interface';
+import {PaletteItemConfig} from './palette-item-component/tools/interfaces/palette-item-config';
 
 @Component({
   selector: 'app-palette-block',
@@ -28,11 +28,11 @@ import {PaletteGridItemInterface} from './palette-item-component/tools/interface
 })
 export class PageBlockComponent implements OnInit, AfterViewInit{
 
-  @ViewChild('palette_content') paletteContent: ElementRef;
+  @ViewChild('palette_content', {static: true}) paletteContent: ElementRef;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @Output() resized = new EventEmitter<boolean>();
   @Input() pageBlock: PageBlockInterface;
-  gridNodes: PaletteGridItemInterface[] = [];
+  gridNodes: PaletteItemConfig[] = [];
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -48,10 +48,10 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
     if (this.pageBlock.paletteGridItems) {
       this.gridNodes = this.pageBlock.paletteGridItems;
     }
+    this.initGridStack();
   }
 
   ngAfterViewInit(): void {
-    this.initGridStack();
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
@@ -70,7 +70,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
       resizeMouseMovePaletteListener = this.renderer.listen(
         this.paletteBuilderComponent.palette.nativeElement,
         'mousemove',
-        (event) => this.paletteBlockGridstackService.resizeHorizontalPalette(event)
+        (mouseEvent) => this.paletteBlockGridstackService.resizeHorizontalPalette(mouseEvent)
       );
     });
     const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {

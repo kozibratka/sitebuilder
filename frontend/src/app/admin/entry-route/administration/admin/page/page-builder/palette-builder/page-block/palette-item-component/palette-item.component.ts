@@ -4,7 +4,7 @@ import {
   Component, ComponentFactory,
   ComponentFactoryResolver, ComponentRef,
   ElementRef, HostListener, Inject,
-  Input, NgZone,
+  Input,
   OnInit,
   ViewChild,
   ViewContainerRef
@@ -15,7 +15,7 @@ import {MenuPluginResolverService} from '../../../tools/services/menu-plugin-res
 import {Subject} from 'rxjs';
 import {ElementPositionMessenger} from '../../../../../../../../../core/messengers/element-position/element-position-messenger';
 import {ElementHelper} from '../../../../../../../../../core/helpers/element-helper';
-import {PaletteGridItemInterface} from './tools/interfaces/palette-grid-item-interface';
+import {PaletteItemConfig} from './tools/interfaces/palette-item-config';
 import {AbstractMenuPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {AbstractPlugin} from '../../../../../../../../../plugins/tools/abstract-class/abstract-plugin';
 import {WebDetailResolverService} from '../../../../../../tools/route-resolvers/web-detail-resolver.service';
@@ -27,7 +27,7 @@ import {WebDetailResolverService} from '../../../../../../tools/route-resolvers/
 })
 export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
-  @Input() gridStackNode: PaletteGridItemInterface;
+  @Input() paletteItemConfig: PaletteItemConfig;
   @ViewChild('itemTemplate', {read: ViewContainerRef, static: true}) viewContainerRef: ViewContainerRef;
   private _componentRef: ComponentRef<AbstractPlugin<any>>;
   private lastPosition: ElementPositionMessenger;
@@ -40,14 +40,13 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private webDetailResolverService: WebDetailResolverService,
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     @Inject(AbstractMenuPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractMenuPluginResolver[],
-    private zone: NgZone
   ) {
 
   }
 
   ngOnInit(): void {
     this.createPlugin();
-    this.paletteBlockGridstackService.addWidget(this.elementRef);
+    this.paletteBlockGridstackService.addWidget(this);
     this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
   }
 
@@ -89,15 +88,15 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   createPlugin(): void {
     let componentClass: new(...args: any[]) => {};
-    if (this.gridStackNode.plugin.identifier === 'none') {
+    if (this.paletteItemConfig.plugin.identifier === 'none') {
       componentClass = this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass;
     } else {
       componentClass = this.getComponentFromIdentifier();
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
     this._componentRef = this.viewContainerRef.createComponent<AbstractPlugin<any>>(factory);
-    this._componentRef.instance.initializeSettings(this.gridStackNode.plugin,
-      this.gridStackNode.plugin.identifier !== 'none', this.webDetailResolverService.webDetail.plugins);
+    this._componentRef.instance.initializeSettings(this.paletteItemConfig.plugin,
+      this.paletteItemConfig.plugin.identifier !== 'none', this.webDetailResolverService.webDetail.plugins);
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
@@ -106,7 +105,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   getComponentFromIdentifier(): new(...args: any[]) => {} {
     return this._abstractMenuPluginResolverMessenger.find(value => {
-      return value.identifier === this.gridStackNode.plugin.identifier;
+      return value.identifier === this.paletteItemConfig.plugin.identifier;
     }).componentClass;
   }
 }

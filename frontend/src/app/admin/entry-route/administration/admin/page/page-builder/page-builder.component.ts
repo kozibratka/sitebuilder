@@ -5,6 +5,9 @@ import {PageInterface} from '../tools/interfaces/page-interface';
 import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../../../../core/services/notifier.service';
 import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
+import {Helper} from '../../../../../../core/helpers/helper';
+import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
+import {ArrayHelper} from '../../../../../../core/helpers/array-helper';
 
 @Component({
   selector: 'app-page-builder',
@@ -22,7 +25,8 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private symfonyApiClientService: SymfonyApiClientService,
     private notifierService: NotifierService,
-    private httpResponseToasterService: HttpResponseToasterService
+    private httpResponseToasterService: HttpResponseToasterService,
+    private webDetailResolverService: WebDetailResolverService
   ) {
   }
 
@@ -34,8 +38,10 @@ export class PageBuilderComponent implements OnInit, AfterViewInit {
   }
 
   save(): void {
-    this.symfonyApiClientService.post('page_update', this.pageDetail, [this.pageDetail.id]).subscribe({
-      next: () => {
+    this.symfonyApiClientService.post<PageInterface>('page_update', this.pageDetail, [this.pageDetail.id]).subscribe({
+      next: (response) => {
+        ArrayHelper.syncArrayOfObjects(response.body.pageBlocks, this.pageDetail.pageBlocks); // refresh blocks, items...
+        this.webDetailResolverService.refresh();
         this.notifierService.notify('Úpravy byly úspěšně uloženy');
       },
       error: err => this.httpResponseToasterService.showError(err)

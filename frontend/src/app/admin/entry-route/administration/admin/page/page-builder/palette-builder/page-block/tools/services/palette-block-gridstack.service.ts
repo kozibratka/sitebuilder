@@ -3,15 +3,14 @@ import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {GridStackDragDrop} from '../3rd-party-modificators/grid-stack-drag-drop';
 import {PaletteBlockService} from './palette-block.service';
 import {PaletteItemComponent} from '../../palette-item-component/palette-item.component';
-import {PaletteGridItemInterface} from '../../palette-item-component/tools/interfaces/palette-grid-item-interface';
+import {PaletteItemConfig} from '../../palette-item-component/tools/interfaces/palette-item-config';
 
 @Injectable()
 export class PaletteBlockGridstackService {
 
   private _gridStack: GridStack;
-  private isInitied = false;
   private gridstackElement: ElementRef;
-  private gridStackNodes: PaletteGridItemInterface[];
+  private gridStackNodes: PaletteItemConfig[];
   private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
   private toResizeRows = 0;
 
@@ -22,7 +21,7 @@ export class PaletteBlockGridstackService {
 
   }
 
-  init(elementRef: ElementRef, gridStackNodes: PaletteGridItemInterface[]): void {
+  init(elementRef: ElementRef, gridStackNodes: PaletteItemConfig[]): void {
     this.gridstackElement = elementRef;
     this.gridStackNodes = gridStackNodes;
     this.startGridstack();
@@ -38,21 +37,26 @@ export class PaletteBlockGridstackService {
         styleInHead: true,
         placeholderText: 'Zde bude nový obsah :)',
       }, this.gridstackElement.nativeElement);
-      this.isInitied = true;
 
       (this._gridStack as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
         this._gridStack.removeWidget(newWidget.el);
-        this.createPaletteGridItem(newWidget);
+        this.createGridItemOnDropNew(newWidget);
         this.zone.run(() => {
           this.changeDetectorRef.detectChanges();
         });
       });
+      (this._gridStack as any).on('change', (event: Event, items: GridStackNode[]) => {
+        const paleteItem = this.gridStackNodes.find(value => value.gridstackNode === items[0]);
+        if (paleteItem) {
+          this.updatePaletteItemGridProperty(items[0], paleteItem);
+        }
+      });
   }
 
-  addWidget(gridstackItemElementRef: ElementRef): void {
-    if (this.isInitied) {
-      this._gridStack.addWidget(gridstackItemElementRef.nativeElement);
-    }
+  addWidget(paletteItemComponent: PaletteItemComponent) {
+    this._gridStack.addWidget(paletteItemComponent.elementRef.nativeElement, paletteItemComponent.paletteItemConfig);
+    paletteItemComponent.paletteItemConfig.gridstackNode = paletteItemComponent.elementRef.nativeElement.gridstackNode;
+
   }
 
   prepareResizeHorizontalPalette(paletteItemComponents: PaletteItemComponent[], mouseEvent: MouseEvent): void {
@@ -91,13 +95,17 @@ export class PaletteBlockGridstackService {
     this.toResizeRows = toMove;
   }
 
-  createPaletteGridItem(newWidget: GridStackNode): void {
-    const newWidgetTmp: PaletteGridItemInterface = {plugin: {identifier: 'none'}};
-    newWidgetTmp.width = newWidget.width;
-    newWidgetTmp.height = newWidget.height;
-    newWidgetTmp.x = newWidget.x;
-    newWidgetTmp.y = newWidget.y;
+  createGridItemOnDropNew(newWidget: GridStackNode): void {
+    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none'}};
+    this.updatePaletteItemGridProperty(newWidget, newWidgetTmp);
     this.gridStackNodes.push(newWidgetTmp);
+  }
+
+  updatePaletteItemGridProperty(gridNode: GridStackNode, paletteItem: PaletteItemConfig) {
+    paletteItem.x = gridNode.x;
+    paletteItem.y = gridNode.y;
+    paletteItem.width = gridNode.width;
+    paletteItem.height = gridNode.height;
   }
 
   get gridStack(): GridStack {

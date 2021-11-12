@@ -1,5 +1,6 @@
 import {GridStackNode} from 'gridstack/dist/gridstack';
 
-export interface PaletteGridItemInterface extends GridStackNode{
+export interface PaletteItemConfig extends GridStackNode{
   plugin: {identifier: string};
+  gridstackNode?: GridStackNode;
 }
