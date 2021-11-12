@@ -10,9 +10,10 @@ export class PaletteBlockGridstackService {
 
   private _gridStack: GridStack;
   private gridstackElement: ElementRef;
-  private gridStackNodes: PaletteItemConfig[];
+  private paletteItemConfigs: PaletteItemConfig[];
   private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
   private toResizeRows = 0;
+  private paletteItemComponents: PaletteItemComponent[] = [];
 
   constructor(private zone: NgZone,
               private changeDetectorRef: ChangeDetectorRef,
@@ -23,7 +24,7 @@ export class PaletteBlockGridstackService {
 
   init(elementRef: ElementRef, gridStackNodes: PaletteItemConfig[]): void {
     this.gridstackElement = elementRef;
-    this.gridStackNodes = gridStackNodes;
+    this.paletteItemConfigs = gridStackNodes;
     this.startGridstack();
   }
 
@@ -46,17 +47,16 @@ export class PaletteBlockGridstackService {
         });
       });
       (this._gridStack as any).on('change', (event: Event, items: GridStackNode[]) => {
-        const paleteItem = this.gridStackNodes.find(value => value.gridstackNode === items[0]);
+        const paleteItem = this.paletteItemComponents.find(value => value.elementRef.nativeElement.gridstackNode === items[0]);
         if (paleteItem) {
-          this.updatePaletteItemGridProperty(items[0], paleteItem);
+          this.updatePaletteItemGridProperty(items[0], paleteItem.paletteItemConfig);
         }
       });
   }
 
   addWidget(paletteItemComponent: PaletteItemComponent) {
-    this._gridStack.addWidget(paletteItemComponent.elementRef.nativeElement, paletteItemComponent.paletteItemConfig);
-    paletteItemComponent.paletteItemConfig.gridstackNode = paletteItemComponent.elementRef.nativeElement.gridstackNode;
-
+    this._gridStack.addWidget(paletteItemComponent.elementRef.nativeElement, {...paletteItemComponent.paletteItemConfig});
+    this.paletteItemComponents.push(paletteItemComponent);
   }
 
   prepareResizeHorizontalPalette(paletteItemComponents: PaletteItemComponent[], mouseEvent: MouseEvent): void {
@@ -98,7 +98,7 @@ export class PaletteBlockGridstackService {
   createGridItemOnDropNew(newWidget: GridStackNode): void {
     const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none'}};
     this.updatePaletteItemGridProperty(newWidget, newWidgetTmp);
-    this.gridStackNodes.push(newWidgetTmp);
+    this.paletteItemConfigs.push(newWidgetTmp);
   }
 
   updatePaletteItemGridProperty(gridNode: GridStackNode, paletteItem: PaletteItemConfig) {
