@@ -16,8 +16,8 @@ import {AuthorizationComponent} from './entry-route/authorization/authorization.
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization/login/login.component';
 import {PageBuilderResolverService} from './entry-route/administration/admin/page/page-builder/tools/route-resolvers/page-builder-resolver.service';
-import {GlobalPluginsResolver} from './entry-route/administration/admin/tools/route-resolvers/global-plugins.resolver';
 import {WebListGuard} from './entry-route/administration/tools/guards/web-list.guard';
+import {FileComponent} from './entry-route/administration/admin/page/file/file.component';
 
 
 const routes: Routes = [
@@ -68,6 +68,10 @@ const routes: Routes = [
             resolve: {pageDetail: PageBuilderResolverService/*, globalPlugins: GlobalPluginsResolver*/}
           }
         ]
+      },
+      {
+        path: 'file',
+        component: FileComponent
       },
       {
         path: '',

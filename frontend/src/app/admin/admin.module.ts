@@ -39,6 +39,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {FileManagerModule} from '../core/modules/file-manager/file-manager.module';
+import { FileComponent } from './entry-route/administration/admin/page/file/file.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     PageBlockComponent,
     MenuPluginResolverDirective,
     PaletteItemComponent,
-    PaletteItemQuickMenuComponent
+    PaletteItemQuickMenuComponent,
+    FileComponent
   ],
     imports: [
         BrowserModule,
@@ -84,6 +87,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MatFormFieldModule,
         MatSelectModule,
         DragDropModule,
+        FileManagerModule
     ],
   providers: [{provide: Window, useValue: window}],
   exports: [
