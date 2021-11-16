@@ -8,7 +8,7 @@ import {PluginsModule} from '../plugins/plugins.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EntryRouteComponent } from './entry-route/entry-route.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CoreModule} from '../core/core.module';
+import {CoreModule} from '../shared/core/core.module';
 import {GravatarModule} from 'ngx-gravatar';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -39,7 +39,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {FileManagerModule} from '../core/modules/file-manager/file-manager.module';
+import {FileManagerModule} from '../shared/file-manager/file-manager.module';
 import { FileComponent } from './entry-route/administration/admin/page/file/file.component';
 
 @NgModule({

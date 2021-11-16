@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import {RouteRoleGuardService} from '../core/guards/route-role-guard.service';
+import {RouteRoleGuardService} from '../shared/core/guards/route-role-guard.service';
 import {AdministrationComponent} from './entry-route/administration/administration.component';
 import {WebListComponent} from './entry-route/administration/admin/web/web-list/web-list.component';
 import {WebCreateComponent} from './entry-route/administration/admin/web/web-create/web-create.component';

@@ -3,8 +3,8 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import {Observable, of, throwError} from 'rxjs';
 import {WebInterface} from '../interfaces/web-interface';
 import {catchError, map} from 'rxjs/operators';
-import {SymfonyApiClientService} from '../../../../../core/services/symfony-api/symfony-api-client.service';
-import {HttpResponseToasterService} from '../../../../../core/services/http-response-toaster.service';
+import {SymfonyApiClientService} from '../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {HttpResponseToasterService} from '../../../../../shared/core/services/http-response-toaster.service';
 import {WebDetailResolverService} from '../route-resolvers/web-detail-resolver.service';
 
 @Injectable({

@@ -1,13 +1,13 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {LoginClientService} from '../../../core/services/login-client/login-client.service';
-import {NotifierService} from '../../../core/services/notifier.service';
+import {LoginClientService} from '../../../shared/core/services/login-client/login-client.service';
+import {NotifierService} from '../../../shared/core/services/notifier.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Event} from '../../../core/services/symfony-api/tools/constants/event';
+import {Event} from '../../../shared/core/services/symfony-api/tools/constants/event';
 import {WebInterface} from './tools/interfaces/web-interface';
 import {WebDetailResolverService} from './tools/route-resolvers/web-detail-resolver.service';
 import {MatSelect} from '@angular/material/select';
 import {WebListGuard} from './tools/guards/web-list.guard';
-import {EventEmitterService} from '../../../core/services/event-emitter-service';
+import {EventEmitterService} from '../../../shared/core/services/event-emitter-service';
 
 @Component({
   selector: 'app-administration',

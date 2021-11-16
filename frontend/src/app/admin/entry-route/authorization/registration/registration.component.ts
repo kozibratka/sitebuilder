@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginClientService} from '../../../../core/services/login-client/login-client.service';
+import {LoginClientService} from '../../../../shared/core/services/login-client/login-client.service';
 import {RegisterFormService} from './tools/forms/register-form.service';
 import {FormGroup} from '@angular/forms';
-import {SymfonyApiClientService} from '../../../../core/services/symfony-api/symfony-api-client.service';
 import {Router} from '@angular/router';
-import {HttpResponseToasterService} from '../../../../core/services/http-response-toaster.service';
+import {SymfonyApiClientService} from '../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {HttpResponseToasterService} from '../../../../shared/core/services/http-response-toaster.service';
 
 @Component({
   selector: 'app-registration',

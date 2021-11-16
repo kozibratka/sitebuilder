@@ -2,12 +2,11 @@ import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core
 import {MenuPluginResolverService} from './tools/services/menu-plugin-resolver.service';
 import {ActivatedRoute} from '@angular/router';
 import {PageInterface} from '../tools/interfaces/page-interface';
-import {SymfonyApiClientService} from '../../../../../../core/services/symfony-api/symfony-api-client.service';
-import {NotifierService} from '../../../../../../core/services/notifier.service';
-import {HttpResponseToasterService} from '../../../../../../core/services/http-response-toaster.service';
-import {Helper} from '../../../../../../core/helpers/helper';
+import {SymfonyApiClientService} from '../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
+import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
 import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
-import {ArrayHelper} from '../../../../../../core/helpers/array-helper';
+import {ArrayHelper} from '../../../../../../shared/core/helpers/array-helper';
 
 @Component({
   selector: 'app-page-builder',

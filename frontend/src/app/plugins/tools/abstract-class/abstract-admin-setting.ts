@@ -1,4 +1,4 @@
-import {SettingSubjectAbleInterface} from '../../../core/components/move-able-settings/tools/interfaces/setting-subject-able-interface';
+import {SettingSubjectAbleInterface} from '../../../shared/core/components/move-able-settings/tools/interfaces/setting-subject-able-interface';
 import {AbstractPlugin} from './abstract-plugin';
 import {BasePlugSettingsinInterface} from '../interfaces/base-plug-settingsin-interface';
 

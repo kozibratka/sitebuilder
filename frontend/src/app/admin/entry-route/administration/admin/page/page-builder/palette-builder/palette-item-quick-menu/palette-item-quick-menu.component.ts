@@ -1,8 +1,8 @@
 import {Component, HostBinding, HostListener, Inject, OnInit} from '@angular/core';
 import {Subject} from 'rxjs';
 import {PaletteBuilderComponent} from '../palette-builder.component';
-import {ElementHelper} from '../../../../../../../../core/helpers/element-helper';
-import {MoveAbleSettingsManagerService} from '../../../../../../../../core/components/move-able-settings/tools/Services/move-able-settings-manager.service';
+import {ElementHelper} from '../../../../../../../../shared/core/helpers/element-helper';
+import {MoveAbleSettingsManagerService} from '../../../../../../../../shared/core/components/move-able-settings/tools/Services/move-able-settings-manager.service';
 import {PaletteItemComponent} from '../page-block/palette-item-component/palette-item.component';
 
 
