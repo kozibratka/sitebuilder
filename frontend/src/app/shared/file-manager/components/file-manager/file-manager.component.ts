@@ -1,10 +1,11 @@
 import {AfterViewInit, Component} from '@angular/core';
-import {MatTreeFlatDataSource} from '@angular/material/tree';
+import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
-import {DirectoryTreeFlattenerHelper} from '../../helpers/directory-tree-flattener-helper';
 import {of} from 'rxjs';
+import {MatTreeService} from '../../../core/services/mat-tree.service';
+import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
 
 
 const TREE_DATA: any[] = [
@@ -23,14 +24,18 @@ export class FileManagerComponent implements AfterViewInit {
 
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
-  hasDirectoryChild = DirectoryTreeFlattenerHelper.getHasDirectoryChildCallback();
-  treeControl = DirectoryTreeFlattenerHelper.getDirectoryTreeControl();
+  hasDirectoryChild;
+  treeControl;
+  flatTreeNode: Map<string, FlatDirectoryTreeInterface>;
+  currentPath: string;
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private webDetailResolverService: WebDetailResolverService
+    private webDetailResolverService: WebDetailResolverService,
+    private matTreeService: MatTreeService<DirectoryTreeInterface, FlatDirectoryTreeInterface>
   ) {
-
+    this.hasDirectoryChild = matTreeService.getHasDirectoryChildCallback();
+    this.treeControl = matTreeService.getDirectoryTreeControl();
   }
 
   ngAfterViewInit() {
@@ -41,17 +46,32 @@ export class FileManagerComponent implements AfterViewInit {
   }
 
   loadDirectoryTree() {
+    this.flatTreeNode.clear();
+    const transformerToFlat = (node: DirectoryTreeInterface, level: number) => {
+      const flatNode = {
+        expandable: !!node.children && node.children.length > 0,
+        name: node.name,
+        level,
+        fullPath: node.fullPath,
+        children: []
+      };
+      this.flatTreeNode.set(node.fullPath, flatNode);
+    };
+    of(TREE_DATA).subscribe(value => {
+      this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.matTreeService.getTreeFlattener(transformerToFlat));
+      this.dataSource.data = value;
+    });
+
     // this.symfonyApiClientService.get<DirectoryTreeInterface>('directory_tree_read', [this.webDetailResolverService.webDetail.id])
     //   .subscribe(response => {
     //     this.dataSource = new MatTreeFlatDataSource(this.treeControl,
     //       DirectoryTreeFlattenerHelper.getMatTreeFlattener());
     //     this.dataSource.data = response.body;
     // });
-    of(TREE_DATA).subscribe(value => {
-          this.dataSource = new MatTreeFlatDataSource(this.treeControl,
-            DirectoryTreeFlattenerHelper.getMatTreeFlattener());
-          this.dataSource.data = value;
-    });
+  }
+
+  changeDirectoryFromTree(node: FlatDirectoryTreeInterface) {
+    this.currentPath = node.fullPath;
   }
 
 }

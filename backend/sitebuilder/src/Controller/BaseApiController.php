@@ -31,7 +31,7 @@ class BaseApiController extends AbstractController
             return;
         }
         $entityManager = $this->getDoctrine()->getManager();
-        //$entityManager->persist($entity);
+        $entityManager->persist($entity);
         $entityManager->flush();
     }
 

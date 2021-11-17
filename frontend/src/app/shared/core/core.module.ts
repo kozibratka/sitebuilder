@@ -13,6 +13,7 @@ import { GlobalFormErrorComponent } from './components/global-form-error/global-
 import { MoveAbleSettingsComponent } from './components/move-able-settings/move-able-settings.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {JqueryVersionService} from './services/jquery-version.service';
+import {MatTreeService} from './services/mat-tree.service';
 
 
 
@@ -45,6 +46,7 @@ import {JqueryVersionService} from './services/jquery-version.service';
     EventEmitterService,
     JqueryVersionService,
     EventEmitterService,
+    MatTreeService
 
   ]
 })
