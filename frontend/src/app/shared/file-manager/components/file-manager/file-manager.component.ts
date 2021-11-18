@@ -1,4 +1,4 @@
-import {AfterViewInit, Component} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
@@ -20,13 +20,13 @@ const TREE_DATA: any[] = [
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.css']
 })
-export class FileManagerComponent implements AfterViewInit {
+export class FileManagerComponent implements OnInit {
 
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
   hasDirectoryChild;
   treeControl;
-  flatTreeNode: Map<string, FlatDirectoryTreeInterface>;
+  flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
   currentPath: string;
 
   constructor(
@@ -38,11 +38,8 @@ export class FileManagerComponent implements AfterViewInit {
     this.treeControl = matTreeService.getDirectoryTreeControl();
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-       this.loadDirectoryTree();
-
-    }, 1000);
+  ngOnInit() {
+    this.loadDirectoryTree();
   }
 
   loadDirectoryTree() {
@@ -56,18 +53,14 @@ export class FileManagerComponent implements AfterViewInit {
         children: []
       };
       this.flatTreeNode.set(node.fullPath, flatNode);
+      return flatNode;
     };
-    of(TREE_DATA).subscribe(value => {
-      this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.matTreeService.getTreeFlattener(transformerToFlat));
-      this.dataSource.data = value;
-    });
-
-    // this.symfonyApiClientService.get<DirectoryTreeInterface>('directory_tree_read', [this.webDetailResolverService.webDetail.id])
-    //   .subscribe(response => {
-    //     this.dataSource = new MatTreeFlatDataSource(this.treeControl,
-    //       DirectoryTreeFlattenerHelper.getMatTreeFlattener());
-    //     this.dataSource.data = response.body;
-    // });
+    this.symfonyApiClientService.get<DirectoryTreeInterface>('storage_user_tree')
+      .subscribe(response => {
+        this.dataSource = new MatTreeFlatDataSource(this.treeControl,
+          this.matTreeService.getTreeFlattener(transformerToFlat));
+        this.dataSource.data = response.body;
+      });
   }
 
   changeDirectoryFromTree(node: FlatDirectoryTreeInterface) {
