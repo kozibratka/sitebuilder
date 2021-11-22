@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {MatTreeFlatDataSource} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
@@ -19,7 +19,7 @@ const TREE_DATA: any[] = [
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.css']
 })
-export class FileManagerComponent implements OnInit, AfterViewChecked {
+export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
@@ -38,10 +38,14 @@ export class FileManagerComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-    this.loadDirectoryTree();
   }
 
   ngAfterViewChecked() {
+  }
+
+  ngAfterViewInit() {
+    this.loadDirectoryTree();
+
   }
 
   loadDirectoryTree() {
