@@ -1,4 +1,4 @@
-import {Directive, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {EventEmitterService} from '../services/event-emitter-service';
 
 @Directive({
@@ -12,7 +12,8 @@ export class HiderElementDirective implements OnInit, OnDestroy{
   callback = this.changeStatus.bind(this);
 
   constructor(
-    private asyncComunicatorService: EventEmitterService<boolean>
+    private asyncComunicatorService: EventEmitterService<boolean>,
+    private cd: ChangeDetectorRef
   ) {
 
   }
@@ -24,6 +25,7 @@ export class HiderElementDirective implements OnInit, OnDestroy{
   changeStatus(eventName: string, asyncPost: boolean): void {
     if (eventName === this.showOn) {
       this.display = 'block';
+      //this.cd.detectChanges();
     } else {
       this.display = 'none';
     }

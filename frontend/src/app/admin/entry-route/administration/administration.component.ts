@@ -8,6 +8,7 @@ import {WebDetailResolverService} from './tools/route-resolvers/web-detail-resol
 import {MatSelect} from '@angular/material/select';
 import {WebListGuard} from './tools/guards/web-list.guard';
 import {EventEmitterService} from '../../../shared/core/services/event-emitter-service';
+import {HiderElementDirective} from '../../../shared/core/directives/hider-element.directive';
 
 @Component({
   selector: 'app-administration',
@@ -17,6 +18,7 @@ import {EventEmitterService} from '../../../shared/core/services/event-emitter-s
 export class AdministrationComponent implements OnInit {
 
   @ViewChild(MatSelect, {static: true}) matSelect: MatSelect;
+  @ViewChild(HiderElementDirective, {static: true}) hidder: HiderElementDirective;
   symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND, stopSendLogin: Event.POST_SEND};
   websSelect: WebInterface[] = [];
   private _selectedWeb: number;

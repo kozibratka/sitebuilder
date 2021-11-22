@@ -14,6 +14,7 @@ import { MoveAbleSettingsComponent } from './components/move-able-settings/move-
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {JqueryVersionService} from './services/jquery-version.service';
 import {MatTreeService} from './services/mat-tree.service';
+import { HidderComponent } from './components/hidder/hidder.component';
 
 
 
@@ -25,7 +26,8 @@ import {MatTreeService} from './services/mat-tree.service';
     HiderElementDirective,
     InputFormErrorGrouperDirective,
     GlobalFormErrorComponent,
-    MoveAbleSettingsComponent
+    MoveAbleSettingsComponent,
+    HidderComponent
   ],
   imports: [
     CommonModule,
@@ -34,14 +36,15 @@ import {MatTreeService} from './services/mat-tree.service';
     DragDropModule,
     ToastrModule.forRoot(),
   ],
-  exports: [
-    ModalForRouteComponent,
-    InputFormErrorDirective,
-    HiderElementDirective,
-    InputFormErrorGrouperDirective,
-    GlobalFormErrorComponent,
-    MoveAbleSettingsComponent
-  ],
+    exports: [
+        ModalForRouteComponent,
+        InputFormErrorDirective,
+        HiderElementDirective,
+        InputFormErrorGrouperDirective,
+        GlobalFormErrorComponent,
+        MoveAbleSettingsComponent,
+        HidderComponent
+    ],
   providers: [
     EventEmitterService,
     JqueryVersionService,
