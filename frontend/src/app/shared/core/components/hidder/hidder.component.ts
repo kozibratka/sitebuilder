@@ -8,7 +8,7 @@ import {EventEmitterService} from '../../services/event-emitter-service';
 })
 export class HidderComponent implements OnInit, OnDestroy {
 
-  @HostBinding('style.display') private display = 'block';
+  display = 'none';
   @Input() showOn: string;
   @Input() hideOn: string;
   callback = this.changeStatus.bind(this);
@@ -28,9 +28,7 @@ export class HidderComponent implements OnInit, OnDestroy {
     } else {
       this.display = 'none';
     }
-    console.log('spoustim detection----');
     this.cd.detectChanges();
-    console.log('koncim detection----');
 
   }
 

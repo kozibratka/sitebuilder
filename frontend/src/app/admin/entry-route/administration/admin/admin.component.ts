@@ -27,6 +27,5 @@ export class AdminComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit() {
-
   }
 }
