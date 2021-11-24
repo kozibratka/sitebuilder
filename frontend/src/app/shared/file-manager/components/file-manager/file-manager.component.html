@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
         <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="10" (click)="changeDirectoryFromTree(node)">
@@ -20,8 +20,17 @@
         </mat-tree-node>
       </mat-tree>
     </div>
-    <div class="col-md-8">
-
+    <div class="col-md-9">
+      <div class="row" *ngFor="let files of currentPathContent|async">
+        <div class="col-lg-3 col-xl-2" *ngFor="let file of files">
+          <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+            <div class="file-img-box"><fa-icon [icon]="icons.faCoffee"></fa-icon></div>
+            <a href="#" class="file-download"><i class="fa fa-download"></i></a>
+            <div class="file-man-title"><h5 class="mb-0 text-overflow">{{file.name}}</h5>
+              <p class="mb-0"><small>{{file.size}}</small></p></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

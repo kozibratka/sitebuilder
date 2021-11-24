@@ -73,8 +73,10 @@ export class SymfonyApiClientService {
         return this.httpClient.post<T>(environment.backendUrl + path, data, {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
-        });
-      }), finalize(this.generatePostSendCallbacks('post'))
+        }).pipe(
+          finalize(this.generatePostSendCallbacks('post'))
+        );
+      })
     );
   }
 
@@ -147,6 +149,7 @@ export class SymfonyApiClientService {
   generatePostSendCallbacks(type: 'get' | 'post'): (err?: any) => void {
     return () => {
       setTimeout(() => {
+        console.log('ddd');
         if (type === 'get') {
           --this.counterRequest.get;
           if (!this.counterRequest.get) {

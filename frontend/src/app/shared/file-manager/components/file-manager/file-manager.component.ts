@@ -5,6 +5,11 @@ import {WebDetailResolverService} from '../../../../admin/entry-route/administra
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
 import {MatTreeService} from '../../../core/services/mat-tree.service';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import * as _ from 'underscore';
+import {FileInfoInterface} from '../../interfaces/file-info-interface';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
 const TREE_DATA: any[] = [
@@ -26,7 +31,9 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   hasDirectoryChild;
   treeControl;
   flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
-  currentPath: string;
+  currentPath = '/';
+  currentPathContent: Observable<FileInfoInterface[][]> = null;
+  icons = {faCoffee};
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -45,7 +52,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
 
   ngAfterViewInit() {
     this.loadDirectoryTree();
-
+    this.reloadContent();
   }
 
   loadDirectoryTree() {
@@ -61,7 +68,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       this.flatTreeNode.set(node.fullPath, flatNode);
       return flatNode;
     };
-    this.symfonyApiClientService.get<DirectoryTreeInterface>('storage_user_tree')
+    this.symfonyApiClientService.get<DirectoryTreeInterface>('user_storage_directory_tree')
       .subscribe(response => {
         this.dataSource = new MatTreeFlatDataSource(this.treeControl,
           this.matTreeService.getTreeFlattener(transformerToFlat));
@@ -71,6 +78,16 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
 
   changeDirectoryFromTree(node: FlatDirectoryTreeInterface) {
     this.currentPath = node.fullPath;
+    this.reloadContent();
+  }
+
+  reloadContent() {
+    this.currentPathContent = this.symfonyApiClientService.post<FileInfoInterface[]>('user_storage_directory_content', {path: this.currentPath})
+      .pipe(
+        map(response => {
+          return _.chunk(response.body, 4);
+        })
+      );
   }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\User;
+use App\Helper\Helper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -35,6 +36,10 @@ class StorageService
         return $this->createDirectoryTree($directories);
     }
 
+    public function getPathInUserRoot(string $path, UserInterface $user) {
+        return $this->getUserRootStorage($user).'/'.$path;
+    }
+
     public function createDirectoryTree(Finder $finder) {
         $tree = [];
         $treeGeneratorCallback = function($path, array &$actualArray, array $fullPath = []) use(&$treeGeneratorCallback) {
@@ -61,5 +66,18 @@ class StorageService
             $treeGeneratorCallback($path->getRelativePathname(), $tree);
         }
         return $tree;
+    }
+
+    public function getUserDirectoryContent($path, UserInterface $user) {
+        $this->finder->depth('== 0');
+        $finder = $this->finder->in($this->getPathInUserRoot($path, $user));
+        $files = [];
+        foreach ($finder as $file) {
+            $fileData['type'] = $file->getType();
+            $fileData['name'] = $file->getFilename();
+            $fileData['size'] = Helper::getSize($file->getSize());
+            $files[] = $fileData;
+        }
+        return $files;
     }
 }

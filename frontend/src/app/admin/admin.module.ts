@@ -41,6 +41,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FileManagerModule} from '../shared/file-manager/file-manager.module';
 import { FileComponent } from './entry-route/administration/admin/page/file/file.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { FileComponent } from './entry-route/administration/admin/page/file/file
         MatFormFieldModule,
         MatSelectModule,
         DragDropModule,
-        FileManagerModule
+        FileManagerModule,
+        FontAwesomeModule
     ],
   providers: [{provide: Window, useValue: window}],
   exports: [
