@@ -7,7 +7,6 @@ import {MatTreeService} from '../../../core/services/mat-tree.service';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import * as _ from 'underscore';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,7 +31,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   treeControl;
   flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
   currentPath = '/';
-  currentPathContent: Observable<FileInfoInterface[][]> = null;
+  currentPathContent: Observable<FileInfoInterface[]> = null;
   icons = {faCoffee};
 
   constructor(
@@ -85,7 +84,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     this.currentPathContent = this.symfonyApiClientService.post<FileInfoInterface[]>('user_storage_directory_content', {path: this.currentPath})
       .pipe(
         map(response => {
-          return _.chunk(response.body, 4);
+          return response.body;
         })
       );
   }
