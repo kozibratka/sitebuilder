@@ -149,7 +149,6 @@ export class SymfonyApiClientService {
   generatePostSendCallbacks(type: 'get' | 'post'): (err?: any) => void {
     return () => {
       setTimeout(() => {
-        console.log('ddd');
         if (type === 'get') {
           --this.counterRequest.get;
           if (!this.counterRequest.get) {

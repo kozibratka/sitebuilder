@@ -65,6 +65,12 @@ class StorageService
         foreach ($finder as $path) {
             $treeGeneratorCallback($path->getRelativePathname(), $tree);
         }
+        $tree = [[
+            'name' => 'Files',
+            'children' => $tree,
+            'fullPath' => ''
+            ]
+        ];
         return $tree;
     }
 

@@ -65,3 +65,17 @@
 h5 {
   font-size: 15px;
 }
+
+.folder {
+  margin-right: 7px;
+}
+
+.mat-tree-node:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.selected-tree-node{
+  color: #e3165b;
+  background-color: #eee;
+}

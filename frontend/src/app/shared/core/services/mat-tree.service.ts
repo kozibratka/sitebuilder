@@ -12,14 +12,12 @@ export class MatTreeService<T extends {children: T[]}, K extends {level: number,
   flatTreeControl: FlatTreeControl<K>;
 
   getTreeFlattener(trrToFlatTransformer: (node: T, level: number) => any) {
-    if (!this.treeFlattener) {
-      this.treeFlattener = new MatTreeFlattener<T, K>(
-        trrToFlatTransformer,
-        node => node.level,
-        node => node.expandable,
-        node => node.children,
-      );
-    }
+    this.treeFlattener = new MatTreeFlattener<T, K>(
+      trrToFlatTransformer,
+      node => node.level,
+      node => node.expandable,
+      node => node.children,
+    );
     return this.treeFlattener;
   }
 

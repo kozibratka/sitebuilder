@@ -8,7 +8,7 @@ import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-i
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faFolder } from '@fortawesome/free-solid-svg-icons';
 
 
 const TREE_DATA: any[] = [
@@ -32,7 +32,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
   currentPath = '/';
   currentPathContent: Observable<FileInfoInterface[]> = null;
-  icons = {faCoffee};
+  icons = {faCoffee, faFolder};
+  selectedTreeNode = null;
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -72,12 +73,14 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
         this.dataSource = new MatTreeFlatDataSource(this.treeControl,
           this.matTreeService.getTreeFlattener(transformerToFlat));
         this.dataSource.data = response.body;
+        this.treeControl.expand(this.flatTreeNode.get(''));
       });
   }
 
   changeDirectoryFromTree(node: FlatDirectoryTreeInterface) {
     this.currentPath = node.fullPath;
     this.reloadContent();
+    this.selectedTreeNode = node;
   }
 
   reloadContent() {
