@@ -20,7 +20,7 @@
       </mat-tree>
     </div>
     <div class="col-10">
-      <div class="row">
+      <div class="row" (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.preventDefault();">
         <div class="col-xl-1 col-sm-2" *ngFor="let file of currentPathContent|async">
           <div class="file-man-box">
             <div class="file-img-box"><fa-icon [icon]="icons.faCoffee"></fa-icon></div>
@@ -33,3 +33,19 @@
     </div>
   </div>
 </div>
+
+
+<mat-menu #areaContextMenu2="matMenu">
+  <button mat-menu-item>Vertebrates</button>
+  <button mat-menu-item>Invertebrates</button>
+</mat-menu>
+
+<ng-template #areaContextMenu>
+  <section class="user-menu">
+    <div>Send to</div>
+    <div>Send to</div>
+    <div>Send to</div>
+    <div>Send to</div>
+    <div>Send to</div>
+  </section>
+</ng-template>

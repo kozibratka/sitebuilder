@@ -5,6 +5,8 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {MatMenuModule} from '@angular/material/menu';
+import {ContextMenuModule} from '../context-menu/context-menu.module';
 
 
 
@@ -13,12 +15,14 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
   exports: [
     FileManagerComponent
   ],
-  imports: [
-    CommonModule,
-    MatTreeModule,
-    MatButtonModule,
-    MatIconModule,
-    FontAwesomeModule,
-  ]
+    imports: [
+        CommonModule,
+        MatTreeModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        FontAwesomeModule,
+        ContextMenuModule
+    ]
 })
 export class FileManagerModule { }

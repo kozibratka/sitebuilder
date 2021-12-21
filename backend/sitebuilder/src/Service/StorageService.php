@@ -25,22 +25,36 @@ class StorageService
         $this->filesystem->mkdir($newUserRootPath);
     }
 
-    public function getUserRootStorage(UserInterface $user) {
-        $rootPath =  $_ENV['FILE_STORAGE_PATH'] ?? null ?: $this->parameterBag->get('kernel.project_dir').'/var/';
-        return $rootPath.$_ENV['USER_STORAGE_PATH_VAR'].$user->getId();
-    }
-
     public function getUserDirectoryTree(UserInterface $user) {
         $userRoot = $this->getUserRootStorage($user);
         $directories = $this->finder->directories()->in($userRoot);
         return $this->createDirectoryTree($directories);
     }
 
-    public function getPathInUserRoot(string $path, UserInterface $user) {
-        return $this->getUserRootStorage($user).'/'.$path;
+    public function getUserDirectoryContent($path, UserInterface $user) {
+        $this->finder->depth('== 0');
+        $finder = $this->finder->in($this->getPathInUserRoot($path, $user));
+        $files = [];
+        foreach ($finder as $file) {
+            $fileData['type'] = $file->getType();
+            $fileData['name'] = $file->getFilename();
+            $fileData['size'] = Helper::getSize($file->getSize());
+            $files[] = $fileData;
+        }
+        return $files;
     }
 
-    public function createDirectoryTree(Finder $finder) {
+    private function getPathInUserRoot(string $path, UserInterface $user) {
+        $rootPath = $resultPath = $this->getUserRootStorage($user);
+        $fullDesiredPath = $this->getUserRootStorage($user).'/'.$path;
+        if(str_starts_with(realpath($fullDesiredPath), realpath($rootPath))) {
+            $resultPath = $fullDesiredPath;
+        }
+
+        return $resultPath;
+    }
+
+    private function createDirectoryTree(Finder $finder) {
         $tree = [];
         $treeGeneratorCallback = function($path, array &$actualArray, array $fullPath = []) use(&$treeGeneratorCallback) {
             $expodedPath = explode('/', $path);
@@ -74,16 +88,8 @@ class StorageService
         return $tree;
     }
 
-    public function getUserDirectoryContent($path, UserInterface $user) {
-        $this->finder->depth('== 0');
-        $finder = $this->finder->in($this->getPathInUserRoot($path, $user));
-        $files = [];
-        foreach ($finder as $file) {
-            $fileData['type'] = $file->getType();
-            $fileData['name'] = $file->getFilename();
-            $fileData['size'] = Helper::getSize($file->getSize());
-            $files[] = $fileData;
-        }
-        return $files;
+    private function getUserRootStorage(UserInterface $user) {
+        $rootPath =  $_ENV['FILE_STORAGE_PATH'] ?? null ?: $this->parameterBag->get('kernel.project_dir').'/var/';
+        return $rootPath.$_ENV['USER_STORAGE_PATH_VAR'].$user->getId();
     }
 }
