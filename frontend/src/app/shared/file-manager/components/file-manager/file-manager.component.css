@@ -6,8 +6,7 @@
 }
 
 .file-man-box {
-  padding: 8px;
-  border: 1px solid #e3eaef;
+  padding: 1px;
   border-radius: 5px;
   position: relative;
   margin-bottom: 7px
@@ -75,8 +74,64 @@ h5 {
   background-color: #eee;
 }
 
+.mat-tree-node {
+  min-height: auto !important;
+}
+
 .selected-tree-node{
   color: #e3165b;
   background-color: #eee;
 }
+
+.header-panel {
+  border-bottom-color: #e0e0e0;
+  box-sizing: content-box;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  background: #fafafa;
+  padding: 5px;
+  border-bottom-style: solid;
+  border-width: 0 0 1px;
+}
+
+.container-fluid {
+  border: 1px solid #e0e0e0;
+}
+
+.file-area {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mini-panel {
+  padding: 6px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+:host .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+::ng-deep mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+}
+
+mat-form-field {
+  font-size: 10px;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+::ng-deep .mat-form-field-subscript-wrapper {
+  display: none;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: .5em;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
 

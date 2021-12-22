@@ -7,6 +7,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MatMenuModule} from '@angular/material/menu';
 import {ContextMenuModule} from '../context-menu/context-menu.module';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -15,14 +18,17 @@ import {ContextMenuModule} from '../context-menu/context-menu.module';
   exports: [
     FileManagerComponent
   ],
-    imports: [
-        CommonModule,
-        MatTreeModule,
-        MatMenuModule,
-        MatButtonModule,
-        MatIconModule,
-        FontAwesomeModule,
-        ContextMenuModule
-    ]
+  imports: [
+    CommonModule,
+    MatTreeModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    FontAwesomeModule,
+    ContextMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule
+  ]
 })
 export class FileManagerModule { }

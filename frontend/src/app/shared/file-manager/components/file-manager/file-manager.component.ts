@@ -8,7 +8,7 @@ import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-i
 import {fromEvent, Observable, Subscription} from 'rxjs';
 import {filter, map, take} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
-import { faCoffee, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {MatMenu} from '@angular/material/menu';
@@ -36,10 +36,11 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
   currentPath = '/';
   currentPathContent: Observable<FileInfoInterface[]> = null;
-  icons = {faCoffee, faFolder};
+  icons = {faCoffee, faFolder, faUpload};
   selectedTreeNode = null;
   overlayRef: OverlayRef | null;
   clickOutsideContextMenuSubscription: Subscription;
+  searchValue = '';
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
