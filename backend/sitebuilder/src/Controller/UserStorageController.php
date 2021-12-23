@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-use App\Service\StorageService;
+use App\Service\UserStorageService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,7 +15,7 @@ class UserStorageController extends BaseApiController
     /**
      * @Route("/directory-tree", name="directory_tree", methods={"GET"})
      */
-    public function readDirectoryTree(StorageService $storageService) {
+    public function readDirectoryTree(UserStorageService $storageService) {
         $userRoot = $storageService->getUserDirectoryTree($this->getUser());
         return $this->jsonResponseSimple($userRoot, 200);
     }
@@ -23,9 +23,23 @@ class UserStorageController extends BaseApiController
     /**
      * @Route("/directory-content", name="directory_content", methods={"POST"})
      */
-    public function readDirectoryContent(Request $request, StorageService $storageService) {
+    public function readDirectoryContent(Request $request, UserStorageService $storageService) {
         $path = $request->request->get('path');
         $content = $storageService->getUserDirectoryContent($path, $this->getUser());
         return $this->jsonResponseSimple($content, 200);
+    }
+
+    /**
+     * @Route("/directory-create", name="directory_create", methods={"POST"})
+     */
+    public function createDirectory(Request $request, UserStorageService $storageService) {
+        $path = $request->request->get('path');
+        $name = $request->request->get('name');
+        try {
+            $storageService->createDirectory($this->getUser(), $path, $name);
+        } catch (\Exception $e) {
+            return $this->errorJsonResponse($e->getMessage());
+        }
+        return $this->jsonResponseSimple();
     }
 }

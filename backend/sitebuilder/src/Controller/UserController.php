@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 use App\Form\UserRegistrationType;
-use App\Service\StorageService;
+use App\Service\UserStorageService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,7 +16,7 @@ class UserController extends BaseApiController
     /**
      * @Route("/registration", name="registration", methods={"POST"})
      */
-    public function registration(Request $request, StorageService $storageService) {
+    public function registration(Request $request, UserStorageService $storageService) {
         $form = $this->createForm(UserRegistrationType::class);
         $form->submit($request->request->all());
         if($form->isValid()) {

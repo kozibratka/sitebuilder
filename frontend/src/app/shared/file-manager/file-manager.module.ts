@@ -10,6 +10,7 @@ import {ContextMenuModule} from '../context-menu/context-menu.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -18,17 +19,18 @@ import {FormsModule} from '@angular/forms';
   exports: [
     FileManagerComponent
   ],
-  imports: [
-    CommonModule,
-    MatTreeModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    FontAwesomeModule,
-    ContextMenuModule,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        MatTreeModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatIconModule,
+        FontAwesomeModule,
+        ContextMenuModule,
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatDialogModule
+    ]
 })
 export class FileManagerModule { }

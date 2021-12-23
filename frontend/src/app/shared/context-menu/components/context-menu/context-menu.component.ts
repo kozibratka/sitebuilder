@@ -1,61 +1,41 @@
-import {Component, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
-import {TemplatePortal} from '@angular/cdk/portal';
-import {fromEvent, Subscription} from 'rxjs';
-import {filter, take} from 'rxjs/operators';
-import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {Component, HostBinding, OnInit, ViewChild} from '@angular/core';
+import {MatMenu, MatMenuTrigger} from '@angular/material/menu';
+import {Point} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-context-menu',
+  selector: 'app-context-menu-v2',
   templateUrl: './context-menu.component.html',
   styleUrls: ['./context-menu.component.css']
 })
-export class ContextMenuComponent {
+export class ContextMenuComponent implements OnInit {
 
-  overlayRef: OverlayRef | null;
-  clickOutsideContextMenuSubscription: Subscription;
+  private _menu: MatMenu;
+  onCloseCallback: () => void;
+  @ViewChild(MatMenuTrigger, {static: true}) private button: MatMenuTrigger;
+  @HostBinding('style.left') left = '0px';
+  @HostBinding('style.top') top = '0px';
 
-  constructor(
-    private overlay: Overlay,
-    public viewContainerRef: ViewContainerRef
-  ) { }
+  constructor() { }
 
-  openContextMenu(mouseEvent: MouseEvent, menuTemplate: TemplateRef<any>) {
-    this.closeContextMenu();
-    const positionStrategy = this.overlay.position()
-      .flexibleConnectedTo({ x: mouseEvent.x, y: mouseEvent.y })
-      .withPositions([
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        }
-      ]);
-
-    this.overlayRef = this.overlay.create({
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.close()
-    });
-
-    this.overlayRef.attach(new TemplatePortal(menuTemplate, this.viewContainerRef));
-    this.clickOutsideContextMenuSubscription = fromEvent<MouseEvent>(document, 'click')
-      .pipe(
-        filter(event => {
-          const clickTarget = event.target as HTMLElement;
-          return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
-        }),
-        take(1)
-      ).subscribe(() => this.closeContextMenu());
+  ngOnInit(): void {
   }
 
-  closeContextMenu() {
-    if (this.clickOutsideContextMenuSubscription) {
-      this.clickOutsideContextMenuSubscription.unsubscribe();
-    }
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-      this.overlayRef = null;
-    }
+  get menu(): MatMenu {
+    return this._menu;
   }
 
+  set menu(value: MatMenu) {
+    this._menu = value;
+  }
+
+  showMenu(position: Point, onCloseCallback: () => void) {
+    this.button.openMenu();
+    this.left = position.x + 'px';
+    this.top = position.y + 'px';
+    this.onCloseCallback = onCloseCallback;
+  }
+
+  menuClose() {
+    this.onCloseCallback();
+  }
 }

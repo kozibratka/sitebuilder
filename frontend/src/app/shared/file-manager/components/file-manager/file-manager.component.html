@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row header-panel">
-    <button mat-stroked-button><fa-icon class="folder" [icon]="icons.faFolder"></fa-icon> Nový adresář</button>
+    <button mat-stroked-button (click)="createDirectoryDialog(createDirectoryTemplate)"><fa-icon class="folder" [icon]="icons.faFolder"></fa-icon> Nový adresář</button>
     <button mat-stroked-button><fa-icon class="folder" [icon]="icons.faUpload"></fa-icon> Nahrát soubor</button>
   </div>
   <div class="row">
@@ -58,12 +58,18 @@
   <button mat-menu-item>Invertebrates</button>
 </mat-menu>
 
-<ng-template #areaContextMenu>
-  <section class="user-menu">
-    <div>Send to</div>
-    <div>Send to</div>
-    <div>Send to</div>
-    <div>Send to</div>
-    <div>Send to</div>
-  </section>
+<ng-template #createDirectoryTemplate>
+  <h1 mat-dialog-title>Vytvoření adresáře</h1>
+  <div mat-dialog-content>
+    <p>Zadejte název nového adresáře</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Název adresáře</mat-label>
+      <input matInput #directoryName>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="">Zrušit</button>
+    <button mat-button [mat-dialog-close]="directoryName.value" cdkFocusInitial>Vytvořit</button>
+  </div>
 </ng-template>
+

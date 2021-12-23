@@ -1,0 +1,8 @@
+:host {
+  position: fixed;
+  visibility: hidden;
+}
+
+:host button{
+  height: 0;
+}

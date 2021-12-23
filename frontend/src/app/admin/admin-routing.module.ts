@@ -17,7 +17,7 @@ import {RegistrationComponent} from './entry-route/authorization/registration/re
 import {LoginComponent} from './entry-route/authorization/login/login.component';
 import {PageBuilderResolverService} from './entry-route/administration/admin/page/page-builder/tools/route-resolvers/page-builder-resolver.service';
 import {WebListGuard} from './entry-route/administration/tools/guards/web-list.guard';
-import {FileComponent} from './entry-route/administration/admin/page/file/file.component';
+import {FileComponent} from './entry-route/administration/admin/file/file.component';
 
 
 const routes: Routes = [

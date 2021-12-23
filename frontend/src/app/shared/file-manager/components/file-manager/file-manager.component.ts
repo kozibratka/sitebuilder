@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {MatTreeFlatDataSource} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
@@ -13,6 +13,9 @@ import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 import {MatMenu} from '@angular/material/menu';
 import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
+import {MatDialog} from '@angular/material/dialog';
+import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
+import {NotifierService} from '../../../core/services/notifier.service';
 
 
 const TREE_DATA: any[] = [
@@ -29,12 +32,13 @@ const TREE_DATA: any[] = [
 })
 export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
+  @ViewChild('createDirectoryTemplate') createDirectoryTemplate: TemplateRef<any>;
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
   hasDirectoryChild;
   treeControl;
   flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
-  currentPath = '/';
+  currentPath = '';
   currentPathContent: Observable<FileInfoInterface[]> = null;
   icons = {faCoffee, faFolder, faUpload};
   selectedTreeNode = null;
@@ -48,7 +52,10 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     private matTreeService: MatTreeService<DirectoryTreeInterface, FlatDirectoryTreeInterface>,
     private overlay: Overlay,
     public viewContainerRef: ViewContainerRef,
-    private contextMenuService: ContextMenuService
+    private contextMenuService: ContextMenuService,
+    public dialog: MatDialog,
+    private httpResponseToasterService: HttpResponseToasterService,
+    private notifierService: NotifierService
   ) {
     this.hasDirectoryChild = matTreeService.getHasDirectoryChildCallback();
     this.treeControl = matTreeService.getDirectoryTreeControl();
@@ -146,4 +153,18 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     }
   }
 
+  createDirectoryDialog(templateRef: TemplateRef<any>) {
+    this.dialog.open(templateRef).afterClosed().subscribe(value => {
+      if (value) {
+        this.symfonyApiClientService.post('user_storage_directory_create', {path: this.currentPath, name: value}).subscribe({
+          next: value1 => {
+            this.notifierService.notify('Adresář byl úspěšně vytvořen');
+            this.reloadContent();
+            //this.loadDirectoryTree();
+          },
+          error: err => this.httpResponseToasterService.showError(err)
+        });
+      }
+    });
+  }
 }

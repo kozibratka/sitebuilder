@@ -19,4 +19,8 @@ class Helper
 
         return $bytes;
     }
+
+    public static function validFileName($name) {
+        return strpbrk($name, "\\/?%*:|\"<>") === FALSE;
+    }
 }

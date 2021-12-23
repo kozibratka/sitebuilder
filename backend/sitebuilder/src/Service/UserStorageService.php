@@ -8,13 +8,14 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class StorageService
+class UserStorageService
 {
     private $filesystem;
     private Finder $finder;
 
-    public function __construct(private ParameterBagInterface $parameterBag)
+    public function __construct(private ParameterBagInterface $parameterBag, private TranslatorInterface $translator)
     {
         $this->filesystem = new Filesystem();
         $this->finder = new Finder();
@@ -33,7 +34,7 @@ class StorageService
 
     public function getUserDirectoryContent($path, UserInterface $user) {
         $this->finder->depth('== 0');
-        $finder = $this->finder->in($this->getPathInUserRoot($path, $user));
+        $finder = $this->finder->in($this->getValidUserPath($path, $user));
         $files = [];
         foreach ($finder as $file) {
             $fileData['type'] = $file->getType();
@@ -44,14 +45,23 @@ class StorageService
         return $files;
     }
 
-    private function getPathInUserRoot(string $path, UserInterface $user) {
+    public function createDirectory(UserInterface $user, string $path, string $name) {
+        if (!Helper::validFileName($name)) {
+            throw new \Exception($this->translator->trans('Invalid directory name'));
+        }
+        $path = $this->getValidUserPath($path, $user);
+        $filesystem = new Filesystem();
+        $filesystem->mkdir($path.'/'.$name);
+    }
+
+    private function getValidUserPath(string $path, UserInterface $user) {
         $rootPath = $resultPath = $this->getUserRootStorage($user);
-        $fullDesiredPath = $this->getUserRootStorage($user).'/'.$path;
+        $fullDesiredPath = $this->getUserRootStorage($user).'/'.trim($path, '/');
         if(str_starts_with(realpath($fullDesiredPath), realpath($rootPath))) {
             $resultPath = $fullDesiredPath;
         }
 
-        return $resultPath;
+        return '/'.trim($resultPath, '/');
     }
 
     private function createDirectoryTree(Finder $finder) {

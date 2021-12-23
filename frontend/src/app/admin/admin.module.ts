@@ -40,7 +40,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FileManagerModule} from '../shared/file-manager/file-manager.module';
-import { FileComponent } from './entry-route/administration/admin/page/file/file.component';
+import { FileComponent } from './entry-route/administration/admin/file/file.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
