@@ -1,0 +1,11 @@
+:hover {
+  cursor: pointer;
+}
+
+:host{
+  font-size: 0.9rem;
+}
+
+.arrow {
+  margin: 0 5px;
+}

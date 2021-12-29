@@ -31,7 +31,7 @@ export class HttpResponseToasterService {
             completedMessage = 'Nesprávné přihlašovací údaje nebo token expiroval. Zkuste se prosím znovu přihlásit';
             break;
           case 400:
-            completedMessage = error.message ? error.message : 'Server nemůže zpracovat požadavek';
+            completedMessage = error.error ? error.error : 'Server nemůže zpracovat požadavek';
             break;
           default:
             completedMessage = 'Neočekávaná chyba serveru. Kód chyby: ' + error.status;

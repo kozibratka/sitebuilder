@@ -11,6 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import {CoreModule} from '../core/core.module';
 
 
 
@@ -30,7 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatInputModule,
         MatFormFieldModule,
         FormsModule,
-        MatDialogModule
+        MatDialogModule,
+        CoreModule
     ]
 })
 export class FileManagerModule { }

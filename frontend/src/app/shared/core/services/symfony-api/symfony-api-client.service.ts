@@ -52,9 +52,10 @@ export class SymfonyApiClientService {
         return this.httpClient.get<T>(environment.backendUrl + path, {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
-        });
-      }),
-      finalize(this.generatePostSendCallbacks('get'))
+        }).pipe(
+          finalize(this.generatePostSendCallbacks('post'))
+        );
+      })
     );
   }
 

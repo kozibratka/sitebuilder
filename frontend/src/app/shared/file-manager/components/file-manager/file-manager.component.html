@@ -26,7 +26,7 @@
     <div class="col-10 file-area">
       <div class="row mini-panel">
         <div class="col-8">
-          nav > aloha
+          <app-directory-mini-navigation [currentPath]="currentPath" (pathEmitter)="changeCurrentPath($event)"></app-directory-mini-navigation>
         </div>
         <div class="col-4 text-right">
           <mat-form-field class="example-form-field" appearance="fill">

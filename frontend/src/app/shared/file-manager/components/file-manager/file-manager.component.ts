@@ -68,8 +68,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   ngAfterViewInit() {
-    this.loadDirectoryTree();
-    this.reloadContent();
+    this.reloadAreas();
   }
 
   loadDirectoryTree() {
@@ -159,12 +158,22 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
         this.symfonyApiClientService.post('user_storage_directory_create', {path: this.currentPath, name: value}).subscribe({
           next: value1 => {
             this.notifierService.notify('Adresář byl úspěšně vytvořen');
-            this.reloadContent();
-            //this.loadDirectoryTree();
+            this.reloadAreas();
           },
-          error: err => this.httpResponseToasterService.showError(err)
+          error: err => {
+             this.httpResponseToasterService.showError(err); }
         });
       }
     });
+  }
+
+  reloadAreas() {
+    this.reloadContent();
+    this.loadDirectoryTree();
+  }
+
+  changeCurrentPath(path: string) {
+    this.currentPath = path;
+    this.reloadContent();
   }
 }
