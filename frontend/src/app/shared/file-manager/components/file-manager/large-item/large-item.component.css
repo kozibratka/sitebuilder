@@ -1,7 +1,3 @@
-app-directory-mini-navigation {
-  vertical-align: sub;
-}
-
 .card-box {
   padding: 20px;
   border-radius: 3px;
@@ -48,6 +44,7 @@ app-directory-mini-navigation {
 
 .file-man-box .file-man-title {
   padding-right: 0px;
+  text-align: center;
 }
 
 .file-man-box:hover {
@@ -73,20 +70,6 @@ h5 {
   margin-right: 7px;
 }
 
-.mat-tree-node:hover {
-  cursor: pointer;
-  background-color: #eee;
-}
-
-.mat-tree-node {
-  min-height: auto !important;
-}
-
-.selected-tree-node{
-  color: #e3165b;
-  background-color: #eee;
-}
-
 .header-panel {
   border-bottom-color: #e0e0e0;
   box-sizing: content-box;
@@ -102,45 +85,25 @@ h5 {
   border: 1px solid #e0e0e0;
 }
 
-.file-area {
-  border-left: 1px solid #e0e0e0;
-  background-color: white;
+.material-icons {
+  font-size: 3em;
+  width: 100%;
+  vertical-align: text-bottom;
+  cursor: default;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
-.mini-panel {
-  padding: 6px;
-  border-bottom: 1px solid #e0e0e0;
+mat-checkbox {
+  position: absolute;
 }
 
-:host .mat-form-field-wrapper {
-  padding-bottom: 0 !important;
-}
 
-::ng-deep mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
-  margin: 0;
-}
 
-mat-form-field {
-  font-size: 10px;
-}
-
-mat-form-field input {
-  font-size: 15px;
-}
-
-::ng-deep .mat-form-field-wrapper {
-  padding-bottom: 0;
-}
-::ng-deep .mat-form-field-subscript-wrapper {
-  display: none;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-  padding: .5em;
-}
-
-::ng-deep .mat-form-field-underline {
-  display: none;
-}
 
 

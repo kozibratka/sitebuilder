@@ -38,14 +38,9 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row" (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.preventDefault();">
-        <div class="col-xl-1 col-sm-2" *ngFor="let file of currentPathContent|async">
-          <div class="file-man-box">
-            <div class="file-img-box"><fa-icon [icon]="icons.faCoffee"></fa-icon></div>
-            <div class="file-man-title">
-              <p class="mb-0 text-overflow"><small>{{file.name}}</small></p>
-            </div>
-          </div>
+      <div (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.preventDefault();">
+        <div class="row">
+          <app-large-item class="col-xl-1 col-sm-2" *ngFor="let file of currentPathContent|async" [file]="file"></app-large-item>
         </div>
       </div>
     </div>

@@ -12,11 +12,13 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {CoreModule} from '../core/core.module';
+import { LargeItemComponent } from './components/file-manager/large-item/large-item.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
 @NgModule({
-  declarations: [FileManagerComponent],
+  declarations: [FileManagerComponent, LargeItemComponent],
   exports: [
     FileManagerComponent
   ],
@@ -32,7 +34,8 @@ import {CoreModule} from '../core/core.module';
         MatFormFieldModule,
         FormsModule,
         MatDialogModule,
-        CoreModule
+        CoreModule,
+        MatCheckboxModule
     ]
 })
 export class FileManagerModule { }
