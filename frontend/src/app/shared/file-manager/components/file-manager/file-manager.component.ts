@@ -1,4 +1,14 @@
-import {AfterViewChecked, AfterViewInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnInit, QueryList,
+  TemplateRef,
+  ViewChild,
+  ViewChildren,
+  ViewContainerRef
+} from '@angular/core';
 import {MatTreeFlatDataSource} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
@@ -6,7 +16,7 @@ import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface'
 import {MatTreeService} from '../../../core/services/mat-tree.service';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
 import {fromEvent, Observable, Subscription} from 'rxjs';
-import {filter, map, take} from 'rxjs/operators';
+import {filter, last, map, take} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
@@ -16,6 +26,7 @@ import {ContextMenuService} from '../../../context-menu/services/context-menu.se
 import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../core/services/notifier.service';
+import {LargeItemComponent} from './large-item/large-item.component';
 
 
 const TREE_DATA: any[] = [
@@ -33,6 +44,8 @@ const TREE_DATA: any[] = [
 export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
   @ViewChild('createDirectoryTemplate') createDirectoryTemplate: TemplateRef<any>;
+  @ViewChildren(LargeItemComponent) files: QueryList<LargeItemComponent>;
+  lastSelectedFile: LargeItemComponent = null;
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
   hasDirectoryChild;
@@ -69,6 +82,16 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
 
   ngAfterViewInit() {
     this.reloadAreas();
+  }
+
+  @HostListener('click')
+  click() {
+      this.files.forEach(item => {
+        if ((this.lastSelectedFile && item !== this.lastSelectedFile) || !this.lastSelectedFile) {
+          item.selected = false;
+        }
+      });
+      this.lastSelectedFile = null;
   }
 
   loadDirectoryTree() {
@@ -172,8 +195,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     this.loadDirectoryTree();
   }
 
-  changeCurrentPath(path: string) {
-    this.currentPath = path;
+  changeCurrentPath(path: string, addPath = false) {
+    this.currentPath = addPath ? this.currentPath + '/' + path : path;
     this.reloadContent();
   }
 }

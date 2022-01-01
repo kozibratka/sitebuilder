@@ -15,6 +15,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {JqueryVersionService} from './services/jquery-version.service';
 import {MatTreeService} from './services/mat-tree.service';
 import { HidderComponent } from './components/hidder/hidder.component';
+import { DirectoryMiniNavigationComponent } from './components/directory-mini-navigation/directory-mini-navigation.component';
 
 
 
@@ -27,7 +28,8 @@ import { HidderComponent } from './components/hidder/hidder.component';
     InputFormErrorGrouperDirective,
     GlobalFormErrorComponent,
     MoveAbleSettingsComponent,
-    HidderComponent
+    HidderComponent,
+    DirectoryMiniNavigationComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { HidderComponent } from './components/hidder/hidder.component';
         InputFormErrorGrouperDirective,
         GlobalFormErrorComponent,
         MoveAbleSettingsComponent,
-        HidderComponent
+        HidderComponent,
+        DirectoryMiniNavigationComponent
     ],
   providers: [
     EventEmitterService,
