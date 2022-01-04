@@ -9,7 +9,7 @@ import {
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {MatTreeFlatDataSource} from '@angular/material/tree';
+import {MatTreeFlatDataSource, MatTreeNode} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
@@ -27,6 +27,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {LargeItemComponent} from './large-item/large-item.component';
+import {FlatTreeControl} from '@angular/cdk/tree';
 
 
 const TREE_DATA: any[] = [
@@ -49,7 +50,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
   hasDirectoryChild;
-  treeControl;
+  treeControl: FlatTreeControl<FlatDirectoryTreeInterface>;
   flatTreeNode = new Map<string, FlatDirectoryTreeInterface>();
   currentPath = '';
   currentPathContent: Observable<FileInfoInterface[]> = null;
@@ -196,7 +197,16 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   changeCurrentPath(path: string, addPath = false) {
-    this.currentPath = addPath ? this.currentPath + '/' + path : path;
+    this.currentPath = addPath ? (this.currentPath + '/' + path).replace(/^\//, '') : path;
     this.reloadContent();
+    this.treeControl.dataNodes.forEach(value => {
+      if (value.fullPath === this.currentPath) {
+        this.treeControl.expand(value);
+        this.matTreeService.getParents(value).forEach(value1 => {
+          this.treeControl.expand(value1);
+        });
+        this.selectedTreeNode = value;
+      }
+    });
   }
 }

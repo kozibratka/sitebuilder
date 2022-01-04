@@ -35,4 +35,17 @@ export class MatTreeService<T extends {children: T[]}, K extends {level: number,
     return (_: number, node: K) => node.expandable;
   }
 
+  getParents(startPositionData: K, parents: K[] = []): K[] {
+    let level = this.flatTreeControl.getLevel(startPositionData);
+    let index = this.flatTreeControl.dataNodes.indexOf(startPositionData);
+    for (; index >= 0; --index) {
+      const data = this.flatTreeControl.dataNodes[index];
+      if (this.flatTreeControl.getLevel(data) < level) {
+        parents.push(data);
+        --level;
+      }
+    }
+    return parents;
+  }
+
 }
