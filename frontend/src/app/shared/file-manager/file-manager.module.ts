@@ -6,7 +6,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MatMenuModule} from '@angular/material/menu';
-import {ContextMenuModule} from '../context-menu/context-menu.module';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
@@ -29,7 +28,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatButtonModule,
         MatIconModule,
         FontAwesomeModule,
-        ContextMenuModule,
         MatInputModule,
         MatFormFieldModule,
         FormsModule,

@@ -48,10 +48,21 @@
 </div>
 
 
-<mat-menu #areaContextMenu2="matMenu">
-  <button mat-menu-item>Vertebrates</button>
-  <button mat-menu-item>Invertebrates</button>
-</mat-menu>
+<ng-template #areaContextMenu2>
+  <section class="user-menu">
+    <div>Delete</div>
+    <div>Delete</div>
+    <div (mouseover)="openContextSubMenuS2($event, areaContextMenuSub2); $event.preventDefault();">Send tawf awf  afafawfo</div>
+    <div>Delete</div>
+  </section>
+</ng-template>
+
+<ng-template #areaContextMenuSub2>
+  <section class="user-menu">
+    <div>sub1</div>
+    <div>sub2</div>
+  </section>
+</ng-template>
 
 <ng-template #createDirectoryTemplate>
   <h1 mat-dialog-title>Vytvoření adresáře</h1>

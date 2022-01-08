@@ -21,21 +21,12 @@ import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {MatMenu} from '@angular/material/menu';
-import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
+import {ContextMenuService} from '../../../core/services/context-menu.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {LargeItemComponent} from './large-item/large-item.component';
 import {FlatTreeControl} from '@angular/cdk/tree';
-
-
-const TREE_DATA: any[] = [
-  {
-    name: 'Fruit',
-    children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
-  }
-];
 
 @Component({
   selector: 'app-file-manager',
@@ -133,8 +124,12 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       );
   }
 
-  openContextMenu2(mouseEvent: MouseEvent, matMenu: MatMenu) {
-    this.contextMenuService.showMenu(mouseEvent, matMenu, this.viewContainerRef);
+  openContextMenu2(target: MouseEvent, menu: TemplateRef<any>) {
+    this.contextMenuService.open(target, {}, menu, this.viewContainerRef);
+  }
+
+  openContextSubMenuS2(parent: MouseEvent, menu: TemplateRef<any>) {
+    this.contextMenuService.open(parent, {}, menu, this.viewContainerRef, true);
   }
 
   openContextMenu(mouseEvent: MouseEvent, menuTemplate: TemplateRef<any>) {
