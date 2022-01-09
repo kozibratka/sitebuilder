@@ -48,19 +48,23 @@
 </div>
 
 
-<ng-template #areaContextMenu2>
+<ng-template appContextMenuRoot #areaContextMenu2="contextMenuRootDirective">
   <section class="user-menu">
-    <div>Delete</div>
-    <div>Delete</div>
-    <div (mouseover)="openContextSubMenuS2($event, areaContextMenuSub2); $event.preventDefault();">Send tawf awf  afafawfo</div>
-    <div>Delete</div>
+    <div appContextMenuItem>Delete</div>
+    <div appContextMenuItem>Delete</div>
+    <div appContextMenuItem [subMenu]="areaContextMenuSub2">Send tawf awf  afafawfo</div>
+    <div appContextMenuItem>Delete</div>
   </section>
 </ng-template>
 
-<ng-template #areaContextMenuSub2>
+<ng-template appContextMenuRoot #areaContextMenuSub2="contextMenuRootDirective">
   <section class="user-menu">
-    <div>sub1</div>
-    <div>sub2</div>
+    <div appContextMenuItem>sub1</div>
+    <div appContextMenuItem>sub2 sefsef se fsf</div>
+    <div appContextMenuItem>sub2 sefsef se fsf</div>
+    <div appContextMenuItem>sub2 sefsef se fsf</div>
+    <div appContextMenuItem>sub2 sefsef se fsf</div>
+    <div appContextMenuItem>sub2 sefsef se fsf</div>
   </section>
 </ng-template>
 

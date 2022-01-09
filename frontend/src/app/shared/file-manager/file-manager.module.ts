@@ -13,6 +13,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {CoreModule} from '../core/core.module';
 import { LargeItemComponent } from './components/file-manager/large-item/large-item.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ContextMenuModule} from '../context-menu/context-menu.module';
 
 
 
@@ -21,19 +22,20 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
   exports: [
     FileManagerComponent
   ],
-    imports: [
-        CommonModule,
-        MatTreeModule,
-        MatMenuModule,
-        MatButtonModule,
-        MatIconModule,
-        FontAwesomeModule,
-        MatInputModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatDialogModule,
-        CoreModule,
-        MatCheckboxModule
-    ]
+  imports: [
+    CommonModule,
+    MatTreeModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    FontAwesomeModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDialogModule,
+    CoreModule,
+    MatCheckboxModule,
+    ContextMenuModule
+  ]
 })
 export class FileManagerModule { }

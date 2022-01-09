@@ -16,17 +16,18 @@ import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface'
 import {MatTreeService} from '../../../core/services/mat-tree.service';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
 import {fromEvent, Observable, Subscription} from 'rxjs';
-import {filter, last, map, take} from 'rxjs/operators';
+import {filter, map, take} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {ContextMenuService} from '../../../core/services/context-menu.service';
+import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {LargeItemComponent} from './large-item/large-item.component';
 import {FlatTreeControl} from '@angular/cdk/tree';
+import {ContextMenuRootDirective} from '../../../context-menu/directives/context-menu-root.directive';
 
 @Component({
   selector: 'app-file-manager',
@@ -124,12 +125,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       );
   }
 
-  openContextMenu2(target: MouseEvent, menu: TemplateRef<any>) {
-    this.contextMenuService.open(target, {}, menu, this.viewContainerRef);
-  }
-
-  openContextSubMenuS2(parent: MouseEvent, menu: TemplateRef<any>) {
-    this.contextMenuService.open(parent, {}, menu, this.viewContainerRef, true);
+  openContextMenu2(target: MouseEvent, menu: ContextMenuRootDirective) {
+    this.contextMenuService.open({targetElement: target, containerRef: this.viewContainerRef, subMenu: menu});
   }
 
   openContextMenu(mouseEvent: MouseEvent, menuTemplate: TemplateRef<any>) {
