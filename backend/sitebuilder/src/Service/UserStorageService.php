@@ -32,9 +32,12 @@ class UserStorageService
         return $this->createDirectoryTree($directories);
     }
 
-    public function getUserDirectoryContent($path, UserInterface $user) {
+    public function getUserDirectoryContent($path, UserInterface $user, $term = '') {
         $this->finder->depth('== 0');
         $finder = $this->finder->in($this->getValidUserPath($path, $user));
+        if ($term) {
+            $finder->name("*$term*")->depth('< 99');;
+        }
         $files = [];
         foreach ($finder as $file) {
             $fileData['type'] = $file->getType();

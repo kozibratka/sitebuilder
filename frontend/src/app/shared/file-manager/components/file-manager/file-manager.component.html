@@ -30,10 +30,10 @@
         </div>
         <div class="col-4 text-right">
           <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" [(ngModel)]="searchValue" placeholder="Vyhledat soubor..." >
+            <input #searchInput matInput type="text" [(ngModel)]="searchValue" placeholder="Vyhledat soubor..." >
             <mat-icon matPrefix>search</mat-icon>
             <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-              <mat-icon>close</mat-icon>
+              <mat-icon (click)="reloadContent()">close</mat-icon>
             </button>
           </mat-form-field>
         </div>

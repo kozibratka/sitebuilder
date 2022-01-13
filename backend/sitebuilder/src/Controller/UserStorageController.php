@@ -30,6 +30,16 @@ class UserStorageController extends BaseApiController
     }
 
     /**
+     * @Route("/search", name="directory_search", methods={"POST"})
+     */
+    public function search(Request $request, UserStorageService $storageService) {
+        $term = $request->request->get('term');
+        $path = $request->request->get('path');
+        $content = $storageService->getUserDirectoryContent($path, $this->getUser(), $term);
+        return $this->jsonResponseSimple($content, 200);
+    }
+
+    /**
      * @Route("/directory-create", name="directory_create", methods={"POST"})
      */
     public function createDirectory(Request $request, UserStorageService $storageService) {

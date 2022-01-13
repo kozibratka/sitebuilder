@@ -11,6 +11,7 @@ export class ContextMenuRootDirective implements OnInit{
 
   @Input()level: number;
   selectedItem$ = new Subject<{subMenu: ContextMenuRootDirective, target: ElementRef}>();
+  menuItemClear$ = new Subject<ElementRef>();
 
   constructor(
     public templateRef: TemplateRef<any>,
@@ -20,6 +21,7 @@ export class ContextMenuRootDirective implements OnInit{
 
   ngOnInit() {
     this.selectedItem$.subscribe(value => {
+      this.menuItemClear$.next(value.target);
       this.contextMenuService.open({currentMenu: this, subMenu: value.subMenu,
         targetElement: value.target, containerRef: this.viewContainerRef});
     });

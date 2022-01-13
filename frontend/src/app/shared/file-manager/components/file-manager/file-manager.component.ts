@@ -1,22 +1,22 @@
 import {
   AfterViewChecked,
   AfterViewInit,
-  Component,
-  HostListener,
+  Component, ElementRef,
+  HostListener, OnDestroy,
   OnInit, QueryList,
   TemplateRef,
   ViewChild,
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeNode} from '@angular/material/tree';
+import {MatTreeFlatDataSource} from '@angular/material/tree';
 import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
 import {MatTreeService} from '../../../core/services/mat-tree.service';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
-import {fromEvent, Observable, Subscription} from 'rxjs';
-import {filter, map, take} from 'rxjs/operators';
+import {fromEvent, Observable, Subscription, timer} from 'rxjs';
+import {debounce, filter, map, take, tap} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
 import {Overlay, OverlayRef} from '@angular/cdk/overlay';
@@ -34,9 +34,10 @@ import {ContextMenuRootDirective} from '../../../context-menu/directives/context
   templateUrl: './file-manager.component.html',
   styleUrls: ['./file-manager.component.css']
 })
-export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit {
+export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
 
   @ViewChild('createDirectoryTemplate') createDirectoryTemplate: TemplateRef<any>;
+  @ViewChild('searchInput', {static: true}) searchInput: ElementRef;
   @ViewChildren(LargeItemComponent) files: QueryList<LargeItemComponent>;
   lastSelectedFile: LargeItemComponent = null;
   directoryTreeSource: DirectoryTreeInterface[];
@@ -51,6 +52,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   overlayRef: OverlayRef | null;
   clickOutsideContextMenuSubscription: Subscription;
   searchValue = '';
+  searchInputSubscription: Subscription;
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -68,6 +70,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   ngOnInit() {
+    this.registerSearchFiles();
   }
 
   ngAfterViewChecked() {
@@ -75,6 +78,12 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
 
   ngAfterViewInit() {
     this.reloadAreas();
+  }
+
+  ngOnDestroy() {
+    if (this.searchInputSubscription) {
+      this.searchInputSubscription.unsubscribe();
+    }
   }
 
   @HostListener('click')
@@ -125,6 +134,25 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       );
   }
 
+  registerSearchFiles() {
+    this.searchInputSubscription = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'keyup').pipe(
+        debounce(() => timer(1000)),
+        tap(value => {
+          if (!!!value) {
+            this.reloadContent();
+            return;
+          }
+          this.currentPathContent = this.symfonyApiClientService.post<FileInfoInterface[]>('user_storage_directory_search',
+            {term: (value.target as HTMLInputElement).value, path: this.currentPath})
+            .pipe(
+              map(response => {
+                return response.body;
+              })
+            );
+        })
+    ).subscribe();
+  }
+
   openContextMenu2(target: MouseEvent, menu: ContextMenuRootDirective) {
     this.contextMenuService.open({targetElement: target, containerRef: this.viewContainerRef, subMenu: menu});
   }
@@ -172,7 +200,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     this.dialog.open(templateRef).afterClosed().subscribe(value => {
       if (value) {
         this.symfonyApiClientService.post('user_storage_directory_create', {path: this.currentPath, name: value}).subscribe({
-          next: value1 => {
+          next: () => {
             this.notifierService.notify('Adresář byl úspěšně vytvořen');
             this.reloadAreas();
           },
