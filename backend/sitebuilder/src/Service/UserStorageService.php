@@ -34,7 +34,7 @@ class UserStorageService
 
     public function getUserDirectoryContent($path, UserInterface $user, $term = '') {
         $this->finder->depth('== 0');
-        $finder = $this->finder->in($this->getValidUserPath($path, $user));
+        $finder = $this->finder->in($this->getValidUserServerPath($path, $user));
         if ($term) {
             $finder->name("*$term*")->depth('< 99');;
         }
@@ -43,6 +43,7 @@ class UserStorageService
             $fileData['type'] = $file->getType();
             $fileData['name'] = $file->getFilename();
             $fileData['size'] = Helper::getSize($file->getSize());
+            $fileData['path'] = $this->getValidUserPath($file->getRealPath(), $user);
             $files[] = $fileData;
         }
         return $files;
@@ -52,12 +53,12 @@ class UserStorageService
         if (!Helper::validFileName($name)) {
             throw new \Exception($this->translator->trans('Invalid directory name'));
         }
-        $path = $this->getValidUserPath($path, $user);
+        $path = $this->getValidUserServerPath($path, $user);
         $filesystem = new Filesystem();
         $filesystem->mkdir($path.'/'.$name);
     }
 
-    private function getValidUserPath(string $path, UserInterface $user) {
+    private function getValidUserServerPath(string $path, UserInterface $user) {
         $rootPath = $resultPath = $this->getUserRootStorage($user);
         $fullDesiredPath = $this->getUserRootStorage($user).'/'.trim($path, '/');
         if(str_starts_with(realpath($fullDesiredPath), realpath($rootPath))) {
@@ -65,6 +66,12 @@ class UserStorageService
         }
 
         return '/'.trim($resultPath, '/');
+    }
+
+    private function getValidUserPath(string $path, UserInterface $user) {
+        $rootPath = $this->getUserRootStorage($user);
+        $pos = strpos($path, $rootPath);
+        return trim(substr_replace($path, '', $pos, strlen($rootPath)), '/');
     }
 
     private function createDirectoryTree(Finder $finder) {

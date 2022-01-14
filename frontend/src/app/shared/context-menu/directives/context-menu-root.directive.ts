@@ -23,7 +23,7 @@ export class ContextMenuRootDirective implements OnInit{
     this.selectedItem$.subscribe(value => {
       this.menuItemClear$.next(value.target);
       this.contextMenuService.open({currentMenu: this, subMenu: value.subMenu,
-        targetElement: value.target, containerRef: this.viewContainerRef});
+          targetElement: value.target, containerRef: this.viewContainerRef});
     });
   }
 

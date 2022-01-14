@@ -38,19 +38,28 @@
           </mat-form-field>
         </div>
       </div>
-      <div (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.preventDefault();">
+      <div (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.stopPropagation(); $event.preventDefault();">
         <div class="row">
-          <app-large-item class="col-xl-1 col-sm-2" *ngFor="let file of currentPathContent|async" [file]="file" (lastSelected)="lastSelectedFile=$event" (changeDirectory)="changeCurrentPath($event, true)"></app-large-item>
+          <app-large-item #fileItem class="col-xl-1 col-sm-2" *ngFor="let file of currentPathContent|async" [file]="file"
+                          (lastSelected)="lastSelectedFile=$event"
+                          (changeDirectory)="changeCurrentPath($event, false)"
+                          (contextMenuEmmitter)="openContextMenuItem($event, areaContextMenuItem, fileItem)">
+          </app-large-item>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<ng-template appContextMenuRoot #areaContextMenuItem="contextMenuRootDirective">
+  <section class="user-menu">
+    <div appContextMenuItem>Smazat</div>
+  </section>
+</ng-template>
 
 <ng-template appContextMenuRoot #areaContextMenu2="contextMenuRootDirective">
   <section class="user-menu">
-    <div appContextMenuItem>Delete</div>
+    <div appContextMenuItem>Aloha</div>
     <div appContextMenuItem>Delete</div>
     <div appContextMenuItem [subMenu]="areaContextMenuSub2">Send tawf awf  afafawfo</div>
     <div appContextMenuItem>Delete</div>

@@ -9,6 +9,7 @@ export class LargeItemComponent implements OnInit {
 
   @Input() file;
   @Output() lastSelected = new EventEmitter<LargeItemComponent>();
+  @Output() contextMenuEmmitter = new EventEmitter<any>();
   @Output() changeDirectory = new EventEmitter<string>();
   selected = false;
 
@@ -24,9 +25,17 @@ export class LargeItemComponent implements OnInit {
     this.lastSelected.emit(this);
   }
 
+  @HostListener('contextmenu', ['$event'])
+  contextmenu(event: any) {
+    event.stopPropagation(); event.preventDefault();
+    this.selected = true;
+    this.lastSelected.emit(this);
+    this.contextMenuEmmitter.emit(event);
+  }
+
   @HostListener('dblclick')
   dblclick() {
-    this.changeDirectory.emit(this.file.name);
+    this.changeDirectory.emit(this.file.path);
   }
 
 }

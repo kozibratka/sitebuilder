@@ -19,7 +19,10 @@ export class ContextMenuService {
   ) {
   }
 
-  open(selectedMenuItemInterface: SelectedMenuItemInterface) {
+  open(selectedMenuItemInterface: SelectedMenuItemInterface, close = false) {
+    if (close) {
+      this.close();
+    }
     let target: {x, y} | ElementRef;
     if (!selectedMenuItemInterface.currentMenu) {
       const mouseEvent = selectedMenuItemInterface.targetElement as MouseEvent;
@@ -38,6 +41,8 @@ export class ContextMenuService {
             value.overlayRef.dispose();
           });
           this.overlayRef = _.dropRight(this.overlayRef, toDispose.length);
+        } else if (this.overlayRef[index + 1].menu === selectedMenuItemInterface.subMenu) {
+          return;
         }
       }
     }

@@ -19,8 +19,6 @@ import {fromEvent, Observable, Subscription, timer} from 'rxjs';
 import {debounce, filter, map, take, tap} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
-import {Overlay, OverlayRef} from '@angular/cdk/overlay';
-import {TemplatePortal} from '@angular/cdk/portal';
 import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
@@ -49,7 +47,6 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   currentPathContent: Observable<FileInfoInterface[]> = null;
   icons = {faCoffee, faFolder, faUpload};
   selectedTreeNode = null;
-  overlayRef: OverlayRef | null;
   clickOutsideContextMenuSubscription: Subscription;
   searchValue = '';
   searchInputSubscription: Subscription;
@@ -58,7 +55,6 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     private symfonyApiClientService: SymfonyApiClientService,
     private webDetailResolverService: WebDetailResolverService,
     private matTreeService: MatTreeService<DirectoryTreeInterface, FlatDirectoryTreeInterface>,
-    private overlay: Overlay,
     public viewContainerRef: ViewContainerRef,
     private contextMenuService: ContextMenuService,
     public dialog: MatDialog,
@@ -88,12 +84,16 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
 
   @HostListener('click')
   click() {
-      this.files.forEach(item => {
-        if ((this.lastSelectedFile && item !== this.lastSelectedFile) || !this.lastSelectedFile) {
-          item.selected = false;
-        }
-      });
+      this.unselectedNotSelectedItems();
       this.lastSelectedFile = null;
+  }
+
+  unselectedNotSelectedItems() {
+    this.files.forEach(item => {
+      if ((this.lastSelectedFile && item !== this.lastSelectedFile) || !this.lastSelectedFile) {
+        item.selected = false;
+      }
+    });
   }
 
   loadDirectoryTree() {
@@ -154,46 +154,13 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   openContextMenu2(target: MouseEvent, menu: ContextMenuRootDirective) {
-    this.contextMenuService.open({targetElement: target, containerRef: this.viewContainerRef, subMenu: menu});
+    this.contextMenuService.open({targetElement: target, containerRef: this.viewContainerRef, subMenu: menu}, true);
   }
 
-  openContextMenu(mouseEvent: MouseEvent, menuTemplate: TemplateRef<any>) {
-    this.closeContextMenu();
-    const positionStrategy = this.overlay.position()
-      .flexibleConnectedTo({ x: mouseEvent.x, y: mouseEvent.y })
-      .withPositions([
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        }
-      ]);
-
-    this.overlayRef = this.overlay.create({
-      positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.close()
-    });
-
-    this.overlayRef.attach(new TemplatePortal(menuTemplate, this.viewContainerRef));
-    this.clickOutsideContextMenuSubscription = fromEvent<MouseEvent>(document, 'click')
-      .pipe(
-        filter(event => {
-          const clickTarget = event.target as HTMLElement;
-          return !!this.overlayRef && !this.overlayRef.overlayElement.contains(clickTarget);
-        }),
-        take(1)
-      ).subscribe(() => this.closeContextMenu());
-  }
-
-  closeContextMenu() {
-    if (this.clickOutsideContextMenuSubscription) {
-      this.clickOutsideContextMenuSubscription.unsubscribe();
-    }
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-      this.overlayRef = null;
-    }
+  openContextMenuItem(target: MouseEvent, menu: ContextMenuRootDirective, selectedItem: LargeItemComponent) {
+    this.lastSelectedFile = selectedItem;
+    this.unselectedNotSelectedItems();
+    this.contextMenuService.open({targetElement: target, containerRef: this.viewContainerRef, subMenu: menu}, true);
   }
 
   createDirectoryDialog(templateRef: TemplateRef<any>) {
