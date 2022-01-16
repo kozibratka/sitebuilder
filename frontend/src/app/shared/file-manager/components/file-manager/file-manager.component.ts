@@ -16,7 +16,7 @@ import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface'
 import {MatTreeService} from '../../../core/services/mat-tree.service';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
 import {fromEvent, Observable, Subscription, timer} from 'rxjs';
-import {debounce, filter, map, take, tap} from 'rxjs/operators';
+import {debounce, filter, finalize, map, take, tap} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
 import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
@@ -26,6 +26,7 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {LargeItemComponent} from './large-item/large-item.component';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {ContextMenuRootDirective} from '../../../context-menu/directives/context-menu-root.directive';
+import {HttpEventType, HttpResponseBase} from '@angular/common/http';
 
 @Component({
   selector: 'app-file-manager',
@@ -50,6 +51,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   clickOutsideContextMenuSubscription: Subscription;
   searchValue = '';
   searchInputSubscription: Subscription;
+  uploadProgress: number;
+  uploadSub: Subscription;
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -195,5 +198,34 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
         this.selectedTreeNode = value;
       }
     });
+  }
+
+  uploadFiles(event) {
+    const formData = new FormData();
+    let index = 0;
+    for (const file of event.target.files as File[]) {
+      formData.append((index++).toString(), file);
+    }
+    const upload$ = this.symfonyApiClientService.post('user_storage_upload_files', formData, null, {}, {
+      reportProgress: true,
+      observe: 'events'
+    } ).pipe(
+      finalize(() => this.reset())
+    );
+    upload$.subscribe((value: any) => {
+      if (value.type === HttpEventType.UploadProgress) {
+        this.uploadProgress = Math.round(100 * (value.loaded / value.total));
+      }
+    });
+  }
+
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = null;
+    this.uploadSub = null;
   }
 }

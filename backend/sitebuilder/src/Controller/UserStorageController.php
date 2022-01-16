@@ -52,4 +52,21 @@ class UserStorageController extends BaseApiController
         }
         return $this->jsonResponseSimple();
     }
+
+    /**
+     * @Route("/upload-files", name="upload_files", methods={"POST"})
+     */
+    public function uploadFiles(Request $request, UserStorageService $storageService) {
+        $path = $request->request->get('path');
+        $files = [];
+        $files = $request->files->all();
+        echo "<pre>";\Doctrine\Common\Util\Debug::dump('fffff');die();
+//        foreach($files as $file) {
+//            echo "<pre>";\Doctrine\Common\Util\Debug::dump($file);
+//        }
+
+
+
+        return $this->jsonResponseSimple();
+    }
 }
