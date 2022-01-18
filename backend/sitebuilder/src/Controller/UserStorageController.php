@@ -68,4 +68,15 @@ class UserStorageController extends BaseApiController
 
         return $this->jsonResponseSimple();
     }
+
+    /**
+     * @Route("/remove-files", name="remove_files", methods={"POST"})
+     */
+    public function removeFiles(Request $request, UserStorageService $storageService) {
+        $path = $request->request->get('path');
+        $files = $request->request->get('files');
+        $storageService->removeFiles([$files], $path, $this->getUser());
+
+        return $this->jsonResponseSimple();
+    }
 }

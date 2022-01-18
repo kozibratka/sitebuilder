@@ -234,6 +234,13 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     });
   }
 
+  removeFiles() {
+    this.symfonyApiClientService.post('user_storage_remove_files', {path: this.currentPath, files: this.lastSelectedFile.file.name}).
+    subscribe(value => {
+      this.notifierService.notify('Soubory smazány');
+    });
+  }
+
   snackDismiss(snack: MatSnackBarRef<any>) {
     setTimeout(() => snack.dismiss(), 2000);
   }

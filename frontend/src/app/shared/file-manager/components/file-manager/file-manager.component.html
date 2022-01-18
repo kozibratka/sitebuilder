@@ -54,7 +54,7 @@
 
 <ng-template appContextMenuRoot #areaContextMenuItem="contextMenuRootDirective">
   <section class="user-menu">
-    <div appContextMenuItem>Smazat</div>
+    <div appContextMenuItem (click)="removeFiles()">Smazat</div>
   </section>
 </ng-template>
 

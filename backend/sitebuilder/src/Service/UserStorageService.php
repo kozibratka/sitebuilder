@@ -60,6 +60,14 @@ class UserStorageService
         $filesystem->mkdir($path.'/'.$name);
     }
 
+    public function removeFiles(array $files, string $path, UserInterface $user) {
+        $path = $this->getValidUserServerPath($path, $user);
+        $filesystem = new Filesystem();
+        foreach ($files as $file) {
+            $filesystem->remove($path.'/'.$file);
+        }
+    }
+
     public function uploadFile(UploadedFile $file, string $path, UserInterface $user) {
         $realPath = $this->getValidUserServerPath($path, $user);
         $file->move($realPath, $file->getClientOriginalName());
