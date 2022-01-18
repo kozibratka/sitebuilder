@@ -27,6 +27,7 @@ import {LargeItemComponent} from './large-item/large-item.component';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {ContextMenuRootDirective} from '../../../context-menu/directives/context-menu-root.directive';
 import {HttpEventType, HttpResponseBase} from '@angular/common/http';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-file-manager',
@@ -36,6 +37,7 @@ import {HttpEventType, HttpResponseBase} from '@angular/common/http';
 export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
 
   @ViewChild('createDirectoryTemplate') createDirectoryTemplate: TemplateRef<any>;
+  @ViewChild('uploadProgressTemplate') uploadProgressTemplate: TemplateRef<any>;
   @ViewChild('searchInput', {static: true}) searchInput: ElementRef;
   @ViewChildren(LargeItemComponent) files: QueryList<LargeItemComponent>;
   lastSelectedFile: LargeItemComponent = null;
@@ -51,8 +53,9 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   clickOutsideContextMenuSubscription: Subscription;
   searchValue = '';
   searchInputSubscription: Subscription;
-  uploadProgress: number;
+  uploadProgress = 0;
   uploadSub: Subscription;
+  uploadMessage = '';
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -62,7 +65,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     private contextMenuService: ContextMenuService,
     public dialog: MatDialog,
     private httpResponseToasterService: HttpResponseToasterService,
-    private notifierService: NotifierService
+    private notifierService: NotifierService,
+    private snackBar: MatSnackBar
   ) {
     this.hasDirectoryChild = matTreeService.getHasDirectoryChildCallback();
     this.treeControl = matTreeService.getDirectoryTreeControl();
@@ -206,17 +210,32 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     for (const file of event.target.files as File[]) {
       formData.append((index++).toString(), file);
     }
+    let firstRun = true;
+    let snack: MatSnackBarRef<any>;
+    formData.append('path', this.currentPath);
     const upload$ = this.symfonyApiClientService.post('user_storage_upload_files', formData, null, {}, {
       reportProgress: true,
       observe: 'events'
     } ).pipe(
-      finalize(() => this.reset())
+      finalize(() => {firstRun = false; this.snackDismiss(snack); })
     );
     upload$.subscribe((value: any) => {
+      if (firstRun) {
+        snack = this.snackBar.openFromTemplate(this.uploadProgressTemplate);
+        firstRun = false;
+      }
       if (value.type === HttpEventType.UploadProgress) {
         this.uploadProgress = Math.round(100 * (value.loaded / value.total));
+      } else if (value.type === HttpEventType.Response) {
+        this.uploadMessage = 'Nahráno';
       }
+    }, error => {
+      this.uploadMessage = 'Některé soubory se nepodařilo nahrát';
     });
+  }
+
+  snackDismiss(snack: MatSnackBarRef<any>) {
+    setTimeout(() => snack.dismiss(), 2000);
   }
 
   cancelUpload() {

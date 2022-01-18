@@ -93,3 +93,12 @@
   </div>
 </ng-template>
 
+<ng-template #uploadProgressTemplate>
+  <div *ngIf="uploadProgress < 100; else uploadedTemplate">
+    Nahrává se {{uploadProgress}}%
+  </div>
+  <ng-template #uploadedTemplate>
+    {{uploadMessage}}
+  </ng-template>
+</ng-template>
+

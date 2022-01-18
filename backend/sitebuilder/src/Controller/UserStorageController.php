@@ -4,6 +4,8 @@
 namespace App\Controller;
 
 use App\Service\UserStorageService;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -58,14 +60,11 @@ class UserStorageController extends BaseApiController
      */
     public function uploadFiles(Request $request, UserStorageService $storageService) {
         $path = $request->request->get('path');
-        $files = [];
-        $files = $request->files->all();
-        echo "<pre>";\Doctrine\Common\Util\Debug::dump('fffff');die();
-//        foreach($files as $file) {
-//            echo "<pre>";\Doctrine\Common\Util\Debug::dump($file);
-//        }
-
-
+        /** @var UploadedFile[] $files */
+        $files = $request->files;
+        foreach($files as $file) {
+            $storageService->uploadFile($file, $path, $this->getUser());
+        }
 
         return $this->jsonResponseSimple();
     }

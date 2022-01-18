@@ -7,6 +7,8 @@ use App\Helper\Helper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -56,6 +58,11 @@ class UserStorageService
         $path = $this->getValidUserServerPath($path, $user);
         $filesystem = new Filesystem();
         $filesystem->mkdir($path.'/'.$name);
+    }
+
+    public function uploadFile(UploadedFile $file, string $path, UserInterface $user) {
+        $realPath = $this->getValidUserServerPath($path, $user);
+        $file->move($realPath, $file->getClientOriginalName());
     }
 
     private function getValidUserServerPath(string $path, UserInterface $user) {

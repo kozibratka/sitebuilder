@@ -14,6 +14,7 @@ import {CoreModule} from '../core/core.module';
 import { LargeItemComponent } from './components/file-manager/large-item/large-item.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ContextMenuModule} from '../context-menu/context-menu.module';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -35,7 +36,8 @@ import {ContextMenuModule} from '../context-menu/context-menu.module';
     MatDialogModule,
     CoreModule,
     MatCheckboxModule,
-    ContextMenuModule
+    ContextMenuModule,
+    MatSnackBarModule
   ]
 })
 export class FileManagerModule { }
