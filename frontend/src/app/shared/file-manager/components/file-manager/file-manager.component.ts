@@ -28,6 +28,7 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {ContextMenuRootDirective} from '../../../context-menu/directives/context-menu-root.directive';
 import {HttpEventType, HttpResponseBase} from '@angular/common/http';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-file-manager',
@@ -56,6 +57,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   uploadProgress = 0;
   uploadSub: Subscription;
   uploadMessage = '';
+  orderBy: 'name' | 'size' | 'modified' = 'name';
+  orderByOrder: 'asc' | 'desc' = 'asc';
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -136,7 +139,10 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       {path: this.currentPath})
       .pipe(
         map(response => {
-          return response.body;
+          let resp = response.body;
+          resp = _.orderBy(resp, [this.orderBy], [this.orderByOrder]);
+
+          return resp;
         })
       );
   }
@@ -217,7 +223,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       reportProgress: true,
       observe: 'events'
     } ).pipe(
-      finalize(() => {firstRun = false; this.snackDismiss(snack); })
+      finalize(() => {firstRun = false; this.snackDismiss(snack); this.reloadContent(); })
     );
     upload$.subscribe((value: any) => {
       if (firstRun) {
@@ -237,6 +243,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   removeFiles() {
     this.symfonyApiClientService.post('user_storage_remove_files', {path: this.currentPath, files: this.lastSelectedFile.file.name}).
     subscribe(value => {
+      this.reloadAreas();
       this.notifierService.notify('Soubory smazány');
     });
   }

@@ -1,5 +1,6 @@
 <div class="file-man-box" [class.selected]="selected">
-  <div class="file-img-box"><mat-icon>folder</mat-icon></div>
+  <div class="file-img-box">
+    <app-icon-resolver [name]="file.name" [path]="file.publicPath" height="75" [fileType]="file.type"></app-icon-resolver></div>
   <div class="file-man-title">
     <p class="mb-0 text-overflow"><small>{{file.name}}</small></p>
   </div>

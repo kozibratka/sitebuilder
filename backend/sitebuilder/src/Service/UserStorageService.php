@@ -7,7 +7,7 @@ use App\Helper\Helper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -45,7 +45,9 @@ class UserStorageService
             $fileData['type'] = $file->getType();
             $fileData['name'] = $file->getFilename();
             $fileData['size'] = Helper::getSize($file->getSize());
+            $fileData['publicPath'] = $this->getPublicPathFile($file);
             $fileData['path'] = $this->getValidUserPath($file->getRealPath(), $user);
+            $fileData['modified'] = (new \DateTime())->setTimestamp(filemtime($file->getRealPath()))->format(\DateTimeInterface::ATOM);
             $files[] = $fileData;
         }
         return $files;
@@ -123,8 +125,24 @@ class UserStorageService
         return $tree;
     }
 
+    public function getPublicPathFile(SplFileInfo $fileInfo) {
+        return $this->getMyUrl().str_replace($_SERVER['DOCUMENT_ROOT'], '', $fileInfo->getPathname());
+    }
+
+    public function getMyUrl()
+    {
+        $protocol = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) ? 'https://' : 'http://';
+        $server = $_SERVER['SERVER_NAME'];
+        $port = isset($_ENV['PUBLIC_SERVER_PORT']) ? ':'.$_SERVER['PUBLIC_SERVER_PORT'] : '';
+        if(!$port) {
+            $port = $_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '';
+        }
+
+        return $protocol.$server.$port;
+    }
+
     private function getUserRootStorage(UserInterface $user) {
-        $rootPath =  $_ENV['FILE_STORAGE_PATH'] ?? null ?: $this->parameterBag->get('kernel.project_dir').'/var/';
+        $rootPath =  $_ENV['FILE_STORAGE_PATH'] ?? null ?: ($this->parameterBag->get('kernel.project_dir').'/public/storage/');
         return $rootPath.$_ENV['USER_STORAGE_PATH_VAR'].$user->getId();
     }
 }

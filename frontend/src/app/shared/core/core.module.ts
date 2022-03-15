@@ -16,6 +16,9 @@ import {JqueryVersionService} from './services/jquery-version.service';
 import {MatTreeService} from './services/mat-tree.service';
 import { HidderComponent } from './components/hidder/hidder.component';
 import { DirectoryMiniNavigationComponent } from './components/directory-mini-navigation/directory-mini-navigation.component';
+import { IconResolverComponent } from './components/icon-resolver/icon-resolver.component';
+import {MatIconModule} from '@angular/material/icon';
+import {FileIconsModule} from 'ngx-file-icons';
 
 
 
@@ -29,7 +32,8 @@ import { DirectoryMiniNavigationComponent } from './components/directory-mini-na
     GlobalFormErrorComponent,
     MoveAbleSettingsComponent,
     HidderComponent,
-    DirectoryMiniNavigationComponent
+    DirectoryMiniNavigationComponent,
+    IconResolverComponent
   ],
   imports: [
     CommonModule,
@@ -37,17 +41,20 @@ import { DirectoryMiniNavigationComponent } from './components/directory-mini-na
     HttpClientModule,
     DragDropModule,
     ToastrModule.forRoot(),
+    MatIconModule,
+    FileIconsModule,
   ],
-    exports: [
-        ModalForRouteComponent,
-        InputFormErrorDirective,
-        HiderElementDirective,
-        InputFormErrorGrouperDirective,
-        GlobalFormErrorComponent,
-        MoveAbleSettingsComponent,
-        HidderComponent,
-        DirectoryMiniNavigationComponent
-    ],
+  exports: [
+    ModalForRouteComponent,
+    InputFormErrorDirective,
+    HiderElementDirective,
+    InputFormErrorGrouperDirective,
+    GlobalFormErrorComponent,
+    MoveAbleSettingsComponent,
+    HidderComponent,
+    DirectoryMiniNavigationComponent,
+    IconResolverComponent
+  ],
   providers: [
     EventEmitterService,
     JqueryVersionService,

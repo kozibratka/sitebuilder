@@ -54,27 +54,23 @@
 
 <ng-template appContextMenuRoot #areaContextMenuItem="contextMenuRootDirective">
   <section class="user-menu">
-    <div appContextMenuItem (click)="removeFiles()">Smazat</div>
+    <div class="item" appContextMenuItem (click)="removeFiles()"><mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>Smazat</div>
   </section>
 </ng-template>
 
 <ng-template appContextMenuRoot #areaContextMenu2="contextMenuRootDirective">
   <section class="user-menu">
-    <div appContextMenuItem>Aloha</div>
-    <div appContextMenuItem>Delete</div>
-    <div appContextMenuItem [subMenu]="areaContextMenuSub2">Send tawf awf  afafawfo</div>
-    <div appContextMenuItem>Delete</div>
+    <div class="item" appContextMenuItem [subMenu]="sorting"><mat-icon aria-hidden="false" aria-label="Example home icon">sort</mat-icon><span class="menu-text">Seřadit</span> <span class="e-icons e-caret"></span></div>
+    <div class="item" appContextMenuItem><mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon> Smazat</div>
   </section>
 </ng-template>
 
-<ng-template appContextMenuRoot #areaContextMenuSub2="contextMenuRootDirective">
+<ng-template appContextMenuRoot #sorting="contextMenuRootDirective">
   <section class="user-menu">
-    <div appContextMenuItem>sub1</div>
-    <div appContextMenuItem>sub2 sefsef se fsf</div>
-    <div appContextMenuItem>sub2 sefsef se fsf</div>
-    <div appContextMenuItem>sub2 sefsef se fsf</div>
-    <div appContextMenuItem>sub2 sefsef se fsf</div>
-    <div appContextMenuItem>sub2 sefsef se fsf</div>
+    <div class="item" appContextMenuItem><mat-icon [class.invisible]="orderBy!='name'" aria-hidden="false" aria-label="Example home icon">check</mat-icon>Název</div>
+    <div class="delimiter"></div>
+    <div class="item"  appContextMenuItem><mat-icon [class.invisible]="orderByOrder!='asc'" aria-hidden="false" aria-label="Example home icon">check</mat-icon>Vzestupně</div>
+    <div class="item"  appContextMenuItem><mat-icon [class.invisible]="orderByOrder!='desc'" aria-hidden="false" aria-label="Example home icon">check</mat-icon>Sestupně</div>
   </section>
 </ng-template>
 

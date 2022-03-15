@@ -189,7 +189,7 @@ mat-form-field input {
   border-bottom: 1px solid #eee;
 }
 
-.user-menu div {
+.user-menu .item {
   cursor: pointer;
   display: block;
   text-decoration: none;
@@ -205,15 +205,29 @@ mat-form-field input {
   background-color: #333;
 }
 
-
-.user-menu div::before {
-  content: '';
-  float: left;
-  margin-right: 0.75em;
-  width: 0.5em;
-  height: 1em;
-  display: inline-block;
+.user-menu mat-icon {
+  vertical-align: middle;
+  font-size: 21px;
 }
+
+.user-menu .menu-text {
+  vertical-align: middle;
+}
+
+.delimiter {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0,0,0,0.12);
+}
+
+  /*.user-menu div::before {*/
+/*  content: '';*/
+/*  float: left;*/
+/*  margin-right: 0.75em;*/
+/*  width: 0.5em;*/
+/*  height: 1em;*/
+/*  display: inline-block;*/
+/*}*/
 
 .is-fadingIn {
   -webkit-animation: fadeIn 0.1s ease-out;
@@ -227,6 +241,19 @@ mat-form-field input {
   animation: fadeOut 0.1s ease-out;
   opacity: 0.0;
   display: block;
+}
+
+.e-caret {
+  position: absolute;
+  right: 8px;
+}
+
+.e-caret::before {
+  content:'\25BA'
+}
+
+[appcontextmenuitem] {
+  position: relative;
 }
 /* ---- */
 

@@ -35,7 +35,9 @@ export class LargeItemComponent implements OnInit {
 
   @HostListener('dblclick')
   dblclick() {
-    this.changeDirectory.emit(this.file.path);
+    if (this.file.type === 'dir') {
+      this.changeDirectory.emit(this.file.path);
+    }
   }
 
 }
