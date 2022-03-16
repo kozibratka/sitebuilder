@@ -1,4 +1,4 @@
-import {Directive, ElementRef, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
+import {Directive, ElementRef, HostBinding, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {Subject} from 'rxjs';
 import {ContextMenuService} from '../services/context-menu.service';
 import {ContextMenuItemDirective} from './context-menu-item.directive';

@@ -57,8 +57,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   uploadProgress = 0;
   uploadSub: Subscription;
   uploadMessage = '';
-  orderBy: 'name' | 'size' | 'modified' = 'name';
-  orderByOrder: 'asc' | 'desc' = 'asc';
+  private _orderBy: 'name' | 'size' | 'modified' = 'name';
+  private _orderByOrder: 'asc' | 'desc' = 'asc';
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -140,7 +140,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       .pipe(
         map(response => {
           let resp = response.body;
-          resp = _.orderBy(resp, [this.orderBy], [this.orderByOrder]);
+          resp = _.orderBy(resp, [this._orderBy], [this._orderByOrder]);
 
           return resp;
         })
@@ -260,5 +260,24 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   reset() {
     this.uploadProgress = null;
     this.uploadSub = null;
+  }
+
+  get orderByOrder(): 'asc' | 'desc' {
+    return this._orderByOrder;
+  }
+
+  set orderByOrder(value: 'asc' | 'desc') {
+    this._orderByOrder = value;
+    this.reloadContent();
+  }
+
+
+  get orderBy(): 'name' | 'size' | 'modified' {
+    return this._orderBy;
+  }
+
+  set orderBy(value: 'name' | 'size' | 'modified') {
+    this._orderBy = value;
+    this.reloadContent();
   }
 }

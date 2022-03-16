@@ -53,24 +53,24 @@
 </div>
 
 <ng-template appContextMenuRoot #areaContextMenuItem="contextMenuRootDirective">
-  <section class="user-menu">
-    <div class="item" appContextMenuItem (click)="removeFiles()"><mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>Smazat</div>
+  <section class="app-context-menu-root">
+    <div class="item" appContextMenuItem (click)="removeFiles()"><mat-icon>delete</mat-icon>Smazat</div>
   </section>
 </ng-template>
 
 <ng-template appContextMenuRoot #areaContextMenu2="contextMenuRootDirective">
-  <section class="user-menu">
-    <div class="item" appContextMenuItem [subMenu]="sorting"><mat-icon aria-hidden="false" aria-label="Example home icon">sort</mat-icon><span class="menu-text">Seřadit</span> <span class="e-icons e-caret"></span></div>
-    <div class="item" appContextMenuItem><mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon> Smazat</div>
+  <section class="app-context-menu-root">
+    <div class="item" appContextMenuItem [subMenu]="sorting"><mat-icon>sort</mat-icon><span class="menu-text">Seřadit</span> <span class="e-icons e-caret"></span></div>
+    <div class="item" appContextMenuItem (click)="createDirectoryDialog(createDirectoryTemplate)"><mat-icon >folder</mat-icon> Nový adresář</div>
   </section>
 </ng-template>
 
 <ng-template appContextMenuRoot #sorting="contextMenuRootDirective">
-  <section class="user-menu">
-    <div class="item" appContextMenuItem><mat-icon [class.invisible]="orderBy!='name'" aria-hidden="false" aria-label="Example home icon">check</mat-icon>Název</div>
+  <section class="app-context-menu-root">
+    <div class="item" appContextMenuItem><mat-icon [class.invisible]="orderBy!='name'">check</mat-icon>Název</div>
     <div class="delimiter"></div>
-    <div class="item"  appContextMenuItem><mat-icon [class.invisible]="orderByOrder!='asc'" aria-hidden="false" aria-label="Example home icon">check</mat-icon>Vzestupně</div>
-    <div class="item"  appContextMenuItem><mat-icon [class.invisible]="orderByOrder!='desc'" aria-hidden="false" aria-label="Example home icon">check</mat-icon>Sestupně</div>
+    <div class="item" appContextMenuItem (click)="orderByOrder = 'asc'"><mat-icon [class.invisible]="orderByOrder!='asc'">check</mat-icon>Vzestupně</div>
+    <div class="item" appContextMenuItem (click)="orderByOrder = 'desc'"><mat-icon [class.invisible]="orderByOrder!='desc'">check</mat-icon>Sestupně</div>
   </section>
 </ng-template>
 

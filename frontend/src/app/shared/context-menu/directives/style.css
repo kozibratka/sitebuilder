@@ -1,0 +1,102 @@
+.app-context-menu-root .collection {
+  padding-left: 0;
+  list-style-type: none;
+  margin: .5rem 0 1rem 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.app-context-menu-root .collection-item {
+  background-color: #fff;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+  list-style-type: none;
+}
+
+.app-context-menu-root .my-menu {
+  background-color: #fff;
+  border: 1px solid rosybrown;
+  padding: 20px;
+}
+
+
+.app-context-menu-root {
+  background-color: #fafafa;
+  padding: 4pt;
+  font-size: 10pt;
+  z-index: 1000;
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
+  border-radius: 4pt;
+  padding: 0.5em 0 0.5em 0;
+  animation: fadeIn 0.1s ease-out;
+  opacity:1.0;
+  display:block;
+}
+
+
+.app-context-menu-root hr {
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+.app-context-menu-root .item {
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  color: #333;
+  padding: 0.5em 2em 0.5em 0.75em;
+  max-width: 18em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-context-menu-root div:hover {
+  background-color: #333;
+}
+
+.app-context-menu-root mat-icon {
+  vertical-align: middle;
+  font-size: 21px;
+}
+
+.app-context-menu-root .menu-text {
+  vertical-align: middle;
+}
+
+.app-context-menu-root .delimiter {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0,0,0,0.12);
+}
+
+.app-context-menu-root .is-fadingIn {
+  -webkit-animation: fadeIn 0.1s ease-out;
+  animation: fadeIn 0.1s ease-out;
+  opacity: 1.0;
+  display: block;
+}
+
+.app-context-menu-root .is-fadingOut {
+  -webkit-animation: fadeOut 0.1s ease-out;
+  animation: fadeOut 0.1s ease-out;
+  opacity: 0.0;
+  display: block;
+}
+
+.app-context-menu-root .e-caret {
+  position: absolute;
+  right: 8px;
+}
+
+.app-context-menu-root .e-caret::before {
+  content:'\25BA'
+}
+
+.app-context-menu-root [appcontextmenuitem] {
+  position: relative;
+}
