@@ -26,9 +26,10 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {LargeItemComponent} from './large-item/large-item.component';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {ContextMenuRootDirective} from '../../../context-menu/directives/context-menu-root.directive';
-import {HttpEventType, HttpResponseBase} from '@angular/common/http';
+import {HttpEventType} from '@angular/common/http';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 import * as _ from 'lodash';
+import {SelectContainerComponent} from 'ngx-drag-to-select';
 
 @Component({
   selector: 'app-file-manager',
@@ -41,7 +42,9 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   @ViewChild('uploadProgressTemplate') uploadProgressTemplate: TemplateRef<any>;
   @ViewChild('searchInput', {static: true}) searchInput: ElementRef;
   @ViewChildren(LargeItemComponent) files: QueryList<LargeItemComponent>;
-  lastSelectedFile: LargeItemComponent = null;
+  @ViewChild(SelectContainerComponent) selectContainer: SelectContainerComponent;
+  private _lastSelectedFile: LargeItemComponent = null;
+  selectedItems: LargeItemComponent[];
   directoryTreeSource: DirectoryTreeInterface[];
   dataSource: any = [];
   hasDirectoryChild;
@@ -90,20 +93,6 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
     if (this.searchInputSubscription) {
       this.searchInputSubscription.unsubscribe();
     }
-  }
-
-  @HostListener('click')
-  click() {
-      this.unselectedNotSelectedItems();
-      this.lastSelectedFile = null;
-  }
-
-  unselectedNotSelectedItems() {
-    this.files.forEach(item => {
-      if ((this.lastSelectedFile && item !== this.lastSelectedFile) || !this.lastSelectedFile) {
-        item.selected = false;
-      }
-    });
   }
 
   loadDirectoryTree() {
@@ -171,8 +160,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   openContextMenuItem(target: MouseEvent, menu: ContextMenuRootDirective, selectedItem: LargeItemComponent) {
-    this.lastSelectedFile = selectedItem;
-    this.unselectedNotSelectedItems();
+    this._lastSelectedFile = selectedItem;
     this.contextMenuService.open({targetElement: target, containerRef: this.viewContainerRef, subMenu: menu}, true);
   }
 
@@ -241,7 +229,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   removeFiles() {
-    this.symfonyApiClientService.post('user_storage_remove_files', {path: this.currentPath, files: this.lastSelectedFile.file.name}).
+    this.symfonyApiClientService.post('user_storage_remove_files', {path: this.currentPath, files: this.selectedItems.map(value => value.file.name)}).
     subscribe(value => {
       this.reloadAreas();
       this.notifierService.notify('Soubory smazány');
@@ -279,5 +267,15 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   set orderBy(value: 'name' | 'size' | 'modified') {
     this._orderBy = value;
     this.reloadContent();
+  }
+
+
+  get lastSelectedFile(): LargeItemComponent {
+    return this._lastSelectedFile;
+  }
+
+  set lastSelectedFile(value: LargeItemComponent) {
+    this.selectContainer.selectItems(item => item === value);
+    this._lastSelectedFile = value;
   }
 }

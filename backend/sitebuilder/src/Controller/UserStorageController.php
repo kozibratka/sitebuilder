@@ -74,7 +74,7 @@ class UserStorageController extends BaseApiController
     public function removeFiles(Request $request, UserStorageService $storageService) {
         $path = $request->request->get('path');
         $files = $request->request->get('files');
-        $storageService->removeFiles([$files], $path, $this->getUser());
+        $storageService->removeFiles($files, $path, $this->getUser());
 
         return $this->jsonResponseSimple();
     }

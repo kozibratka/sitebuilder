@@ -15,6 +15,7 @@ import { LargeItemComponent } from './components/file-manager/large-item/large-i
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ContextMenuModule} from '../context-menu/context-menu.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {DragToSelectModule} from 'ngx-drag-to-select';
 
 
 
@@ -37,7 +38,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     CoreModule,
     MatCheckboxModule,
     ContextMenuModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DragToSelectModule.forRoot()
   ]
 })
 export class FileManagerModule { }

@@ -35,6 +35,7 @@
     "jwt-decode": "^3.1.1",
     "lodash": "^4.17.21",
     "material-design-icons": "^3.0.1",
+    "ngx-drag-to-select": "^4.2.1",
     "ngx-file-icons": "0.0.3",
     "ngx-gravatar": "^10.0.0",
     "ngx-sortablejs": "^3.1.4",
