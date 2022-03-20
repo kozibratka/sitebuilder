@@ -42,6 +42,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {FileManagerModule} from '../shared/file-manager/file-manager.module';
 import { FileComponent } from './entry-route/administration/admin/file/file.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ArticleListComponent } from './entry-route/administration/admin/article/article-list/article-list.component';
+import {TestComponent} from './entry-route/administration/admin/test/test.component';
+import { TestDirectiveDirective } from './entry-route/administration/admin/test/test-directive.directive';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MenuPluginResolverDirective,
     PaletteItemComponent,
     PaletteItemQuickMenuComponent,
-    FileComponent
+    FileComponent,
+    ArticleListComponent,
+    TestComponent,
+    TestDirectiveDirective
   ],
     imports: [
         BrowserModule,

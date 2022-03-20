@@ -18,6 +18,8 @@ import {LoginComponent} from './entry-route/authorization/login/login.component'
 import {PageBuilderResolverService} from './entry-route/administration/admin/page/page-builder/tools/route-resolvers/page-builder-resolver.service';
 import {WebListGuard} from './entry-route/administration/tools/guards/web-list.guard';
 import {FileComponent} from './entry-route/administration/admin/file/file.component';
+import {ArticleListComponent} from './entry-route/administration/admin/article/article-list/article-list.component';
+import {ArticleListResolverService} from './entry-route/administration/admin/article/article-list/tools/route-resolvers/article-list-resolver.service';
 
 
 const routes: Routes = [
@@ -72,6 +74,16 @@ const routes: Routes = [
       {
         path: 'file',
         component: FileComponent
+      },
+      {
+        path: 'article',
+        children: [
+          {
+            path: 'list',
+            component: ArticleListComponent,
+            resolve: {articleList: ArticleListResolverService},
+          },
+        ]
       },
       {
         path: '',
