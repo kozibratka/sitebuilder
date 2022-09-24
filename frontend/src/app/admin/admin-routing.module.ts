@@ -7,7 +7,6 @@ import {WebListComponent} from './entry-route/administration/admin/web/web-list/
 import {WebCreateComponent} from './entry-route/administration/admin/web/web-create/web-create.component';
 import {WebDetailResolverService} from './entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {PageListComponent} from './entry-route/administration/admin/page/page-list/page-list.component';
-import {PageListResolverService} from './entry-route/administration/admin/page/page-list/tools/route-resolvers/page-list-resolver.service';
 import {PageCreateComponent} from './entry-route/administration/admin/page/page-create/page-create.component';
 import {PageDetailResolverService} from './entry-route/administration/admin/page/page-create/tools/route-resolvers/page-detail-resolver.service';
 import {PageBuilderComponent} from './entry-route/administration/admin/page/page-builder/page-builder.component';
@@ -16,18 +15,17 @@ import {AuthorizationComponent} from './entry-route/authorization/authorization.
 import {RegistrationComponent} from './entry-route/authorization/registration/registration.component';
 import {LoginComponent} from './entry-route/authorization/login/login.component';
 import {PageBuilderResolverService} from './entry-route/administration/admin/page/page-builder/tools/route-resolvers/page-builder-resolver.service';
-import {WebListGuard} from './entry-route/administration/tools/guards/web-list.guard';
+import {WebListResolverGuard} from './entry-route/administration/tools/guards/web-list-resolver.service';
 import {FileComponent} from './entry-route/administration/admin/file/file.component';
-import {ArticleListComponent} from './entry-route/administration/admin/article/article-list/article-list.component';
-import {ArticleListResolverService} from './entry-route/administration/admin/article/article-list/tools/route-resolvers/article-list-resolver.service';
+import {GenericResolver} from '../shared/core/services/resolver/generic.resolver';
 
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: 'admin/:webId',
     component: AdministrationComponent,
-    canActivate: [RouteRoleGuardService, WebListGuard],
-    resolve: {webList: WebListGuard, webDetail: WebDetailResolverService},
+    canActivate: [RouteRoleGuardService, WebListResolverGuard],
+    resolve: {webList: WebListResolverGuard, webDetail: WebDetailResolverService},
     children: [
       {
         path: 'web',
@@ -52,7 +50,9 @@ const routes: Routes = [
           {
             path: 'list',
             component: PageListComponent,
-            resolve: {pageList: PageListResolverService},
+            // resolve: {pageList: PageListResolverService},
+            resolve: {pageList: GenericResolver},
+            data: {resolverConfig: {data: {route: 'page_list'}, queryDataMap: {webId: 'id'}}},
             runGuardsAndResolvers: 'always',
           },
           {
@@ -76,14 +76,8 @@ const routes: Routes = [
         component: FileComponent
       },
       {
-        path: 'article',
-        children: [
-          {
-            path: 'list',
-            component: ArticleListComponent,
-            resolve: {articleList: ArticleListResolverService},
-          },
-        ]
+        path: 'plugin',
+        loadChildren: () => import('./entry-route/administration/admin/plugin/plugin.module').then(m => m.PluginModule)
       },
       {
         path: '',
@@ -93,7 +87,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/admin',
+    redirectTo: '/authorization/login',
     pathMatch: 'full'
   },
   {

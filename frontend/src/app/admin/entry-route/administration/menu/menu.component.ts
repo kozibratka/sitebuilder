@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WebDetailResolverService} from '../tools/route-resolvers/web-detail-resolver.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public webDetailResolverService: WebDetailResolverService
+  ) { }
 
   ngOnInit(): void {
   }

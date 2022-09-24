@@ -4,11 +4,9 @@ namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
-use App\Entity\SiteBuilder\Plugin\TextPlugin;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;

@@ -66,6 +66,9 @@ services:
         tags:
             - { name: 'plugin_service', key: 'image_plugin' }
 
+    App\Service\Plugin\PluginService:
+        arguments: [!tagged { tag: 'plugin_service', index_by: 'key' }]
+
     App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber:
         arguments: [!tagged { tag: 'plugin_service', index_by: 'key' }]
 

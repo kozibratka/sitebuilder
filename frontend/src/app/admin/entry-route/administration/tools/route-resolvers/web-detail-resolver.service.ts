@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {WebInterface} from '../interfaces/web-interface';
-import {SymfonyApiClientService} from '../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../shared/core/services/http-response-toaster.service';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -11,7 +11,7 @@ import {catchError, map} from 'rxjs/operators';
 })
 export class WebDetailResolverService implements Resolve<WebInterface> {
 
-  selectedId: number;
+  selectedId = 0;
   webDetail: WebInterface = {plugins: [], id: 0, name: ''}; // persist reference
 
   constructor(
@@ -20,8 +20,13 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot = null, state: RouterStateSnapshot = null): Observable<WebInterface> {
-    const webId = route && route.paramMap.get('webId') ? route.paramMap.get('webId') : this.selectedId;
-    return this.symfonyApiClientService.get<WebInterface>('web_read', [webId]).pipe(catchError(err => {
+    if (route && route.paramMap.has('webId')) {
+      this.selectedId = parseInt(route.paramMap.get('webId'), null);
+    }
+    if (!this.selectedId) {
+      return null;
+    }
+    return this.symfonyApiClientService.get<WebInterface>('web_read', {id: this.selectedId}).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

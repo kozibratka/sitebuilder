@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {LoginClientService} from '../services/login-client/login-client.service';
+import {LoginClientService} from '../services/api/login-api/login-client/login-client.service';
 import {NotifierService} from '../services/notifier.service';
-import {SymfonyApiClientService} from '../services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../services/api/symfony-api/symfony-api-client.service';
 import {catchError, map, tap} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../services/http-response-toaster.service';
 import {CoreModule} from '../core.module';
@@ -35,7 +35,7 @@ export class RouteRoleGuardService implements CanActivate {
       return this.router.parseUrl('/authorization/login');
     }
 
-    return this.symfonyApiClientService.get<false | true>('role_check', ['ROLE_USER']).pipe(
+    return this.symfonyApiClientService.get<false | true>('role_check', {roleName: 'ROLE_USER'}).pipe(
       map(value => {
         if (value.body === true) {
           return true;

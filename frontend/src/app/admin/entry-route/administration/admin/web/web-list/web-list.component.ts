@@ -4,12 +4,12 @@ import {WebInterface} from '../../../tools/interfaces/web-interface';
 import {MatDialog} from '@angular/material/dialog';
 import {RemoveWebDialogComponent} from './tools/components/remove-web-dialog/remove-web-dialog.component';
 import {filter, switchMap} from 'rxjs/operators';
-import {SymfonyApiClientService} from '../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
 import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
 import {AdministrationComponent} from '../../../administration.component';
-import {WebListGuard} from '../../../tools/guards/web-list.guard';
+import {WebListResolverGuard} from '../../../tools/guards/web-list-resolver.service';
 
 @Component({
   selector: 'app-web-list',
@@ -30,7 +30,7 @@ export class WebListComponent implements OnInit {
     private router: Router,
     private webDetailResolverService: WebDetailResolverService,
     private administrationComponent: AdministrationComponent,
-    public webListGuard: WebListGuard
+    public webListGuard: WebListResolverGuard
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class WebListComponent implements OnInit {
       }
       ),
       switchMap(value => {
-        return this.symfonyApiClientService.get('web_remove', [webId]);
+        return this.symfonyApiClientService.get('web_remove', {id: webId});
       })
     ).subscribe({
       next: () => {
@@ -59,8 +59,7 @@ export class WebListComponent implements OnInit {
   }
 
   switchToWeb(id: number): void {
-    this.webDetailResolverService.selectedId = id;
     this.administrationComponent.refreshSelectedWebSelectbox();
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin', id]);
   }
 }

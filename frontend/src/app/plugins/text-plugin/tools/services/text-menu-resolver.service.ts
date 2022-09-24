@@ -29,4 +29,12 @@ export class TextMenuResolverService extends AbstractMenuPluginResolver{
   get identifier(): string {
     return PluginIdentifier.TEXT_PLUGIN;
   }
+
+  get description(): string {
+    return 'Tvorba článku, který můžete umístit kamkoliv na vaše stránky.';
+  }
+
+  get name(): string {
+    return 'Textový editor';
+  }
 }

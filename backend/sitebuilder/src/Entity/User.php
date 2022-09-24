@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 
+use App\Entity\SiteBuilder\Web;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -22,28 +25,39 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @Serializer\Exclude()
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(min="3")
      */
-    private string $fullName;
+    private string $fullName = '';
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Email
      */
-    private string $email;
+    private string $email = '';
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(min="6")
+     * @Serializer\Exclude()
      */
-    private string $password;
+    private string $password = '';
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Web", mappedBy="user", cascade={"persist"})
+     */
+    private Collection $webs;
+
+    public function __construct()
+    {
+        $this->webs = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -100,6 +114,28 @@ class User implements UserInterface
     public function setFullName(string $fullName)
     {
         $this->fullName = $fullName;
+    }
+
+    public function getWebs(): ArrayCollection|Collection
+    {
+        return $this->webs;
+    }
+
+    public function setWebs(ArrayCollection|Collection $webs)
+    {
+        $this->webs = $webs;
+    }
+
+    public function addWeb(Web $web)
+    {
+        if(!$this->webs->contains($web)) {
+            $this->webs->add($web);
+            $web->setUser($this);
+        }
+    }
+
+    public function removeWeb(Web $web) {
+        $this->webs->removeElement($web);
     }
 
     public function getUserIdentifier(): string

@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
   <li class="nav-item">
-    <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+    <a [routerLink]="['/admin', webDetailResolverService.selectedId]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
       <i class="nav-icon far fa-image"></i>
       <p>
         Úvodní stránka
@@ -24,10 +24,10 @@
     </a>
   </li>
   <li class="nav-item">
-    <a routerLink="article/list" routerLinkActive="active" class="nav-link">
+    <a routerLink="plugin/list-available" routerLinkActive="active" class="nav-link">
       <i class="nav-icon fas fa-copy"></i>
       <p>
-        Moje články
+        Pluginy
       </p>
     </a>
   </li>

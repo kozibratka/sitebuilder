@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use App\Entity\SiteBuilder\Web;
+use App\Entity\User;
 use App\Form\UserRegistrationType;
 use App\Service\UserStorageService;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +22,11 @@ class UserController extends BaseApiController
         $form = $this->createForm(UserRegistrationType::class);
         $form->submit($request->request->all());
         if($form->isValid()) {
+            /** @var User $user */
             $user = $form->getData();
+            $newWeb = (new Web())->setName('Můj nový web');
+            $user->addWeb($newWeb);
+
             $this->persist($user);
             $storageService->createStorageForNewUser($user);
 

@@ -1,10 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {LoginFormService} from './tools/forms/login-form.service';
 import {AbstractControl, FormGroup} from '@angular/forms';
-import {LoginClientService} from '../../../../shared/core/services/login-client/login-client.service';
+import {LoginClientService} from '../../../../shared/core/services/api/login-api/login-client/login-client.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {HttpResponseToasterService} from '../../../../shared/core/services/http-response-toaster.service';
 import {Router} from '@angular/router';
+import {WebListResolverGuard} from '../../administration/tools/guards/web-list-resolver.service';
 
 @Component({
   selector: 'app-login',
@@ -20,12 +21,16 @@ export class LoginComponent implements OnInit {
     private loginFormService: LoginFormService,
     private loginClientService: LoginClientService,
     private httpResponseToasterService: HttpResponseToasterService,
-    private router: Router
+    private router: Router,
+    private webListResolver: WebListResolverGuard
   ) {
     this.loginForm = this.loginFormService.createForm();
   }
 
   ngOnInit(): void {
+    if (this.loginClientService.isLoggedIn()) {
+      this.router.navigate(['admin', 0]);
+    }
   }
 
   onSubmit(): void {
@@ -35,7 +40,7 @@ export class LoginComponent implements OnInit {
     }
     this.loginClientService.tryLogin(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe({
       next: httpResponse => {
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin', 0]);
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 401) {

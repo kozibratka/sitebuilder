@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {WebFormService} from './tools/forms/web-form.service';
-import {SymfonyApiClientService} from '../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
 import {WebInterface} from '../../../tools/interfaces/web-interface';
-import {WebListGuard} from '../../../tools/guards/web-list.guard';
+import {WebListResolverGuard} from '../../../tools/guards/web-list-resolver.service';
 
 @Component({
   selector: 'app-web-create',
@@ -24,7 +24,7 @@ export class WebCreateComponent implements OnInit {
     public route: ActivatedRoute,
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
-    public webListGuard: WebListGuard
+    public webListGuard: WebListResolverGuard
   ) {
   }
 
@@ -43,7 +43,6 @@ export class WebCreateComponent implements OnInit {
         this.symfonyApiClientService.post('web_create', this.createWebForm.value).subscribe({
           next: () => {
             this.notifierService.notify('Web byl úspěšně vytvořen');
-            this.webListGuard.isBlocked = false;
             this.router.navigate(['list'], { relativeTo: this.route.parent });
           },
           error: err => this.httpResponseToasterService.showError(err)
@@ -58,7 +57,7 @@ export class WebCreateComponent implements OnInit {
     this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('web_update', this.createWebForm.value, [webDetail.id]).subscribe({
+        this.symfonyApiClientService.post('web_update', this.createWebForm.value, {id: webDetail.id}).subscribe({
           next: () => {
             this.notifierService.notify('Web byl úspěšně upraven');
             this.router.navigate(['list'], { relativeTo: this.route.parent });

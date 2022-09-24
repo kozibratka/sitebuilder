@@ -1,12 +1,12 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {LoginClientService} from '../../../shared/core/services/login-client/login-client.service';
+import {LoginClientService} from '../../../shared/core/services/api/login-api/login-client/login-client.service';
 import {NotifierService} from '../../../shared/core/services/notifier.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Event} from '../../../shared/core/services/symfony-api/tools/constants/event';
+import {Event} from '../../../shared/core/services/api/symfony-api/tools/constants/event';
 import {WebInterface} from './tools/interfaces/web-interface';
 import {WebDetailResolverService} from './tools/route-resolvers/web-detail-resolver.service';
 import {MatSelect} from '@angular/material/select';
-import {WebListGuard} from './tools/guards/web-list.guard';
+import {WebListResolverGuard} from './tools/guards/web-list-resolver.service';
 import {EventEmitterService} from '../../../shared/core/services/event-emitter-service';
 import {HiderElementDirective} from '../../../shared/core/directives/hider-element.directive';
 
@@ -29,7 +29,7 @@ export class AdministrationComponent implements OnInit {
     private notifierService: NotifierService,
     private router: Router,
     private webDetailResolverService: WebDetailResolverService,
-    private webListGuard: WebListGuard,
+    private webListGuard: WebListResolverGuard,
     private eventEmitterService: EventEmitterService<boolean>
   ) {
   }
@@ -72,7 +72,6 @@ export class AdministrationComponent implements OnInit {
       return;
     }
     this._selectedWeb = value;
-    this.webDetailResolverService.selectedId = value;
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin', value]);
   }
 }

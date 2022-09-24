@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../../../environments/environment';
+import {environment} from '../../../../../../environments/environment';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
-import Routing from '../../external-library/router';
-import {TokenInterface} from '../../interfaces/token-interface';
-import {EventEmitterService} from '../event-emitter-service';
+import Routing from '../../../external-library/router';
+import {TokenInterface} from '../interfaces/token-interface';
+import {EventEmitterService} from '../../event-emitter-service';
 import {Event} from './tools/constants/event';
-import {CoreModule} from '../../core.module';
+import {CoreModule} from '../../../core.module';
 
 @Injectable({
   providedIn: CoreModule
@@ -37,18 +37,18 @@ export class SymfonyApiClientService {
       }));
   }
 
-  get<T = {}>(routeName: string, querySegmentParam?: (string | number)[], headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
+  get<T = {}>(routeName: string, querySegmentParam?: {}, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
     this.emitPreSend('get');
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
-        let path = Routing.generate(routeName);
-        if (querySegmentParam) {
-          querySegmentParam.forEach(value => {
-            path += '/' + value;
-          });
-        }
+        const path = Routing.generate(routeName, querySegmentParam);
+        // if (querySegmentParam) {
+        //   querySegmentParam.forEach(value => {
+        //     path += '/' + value;
+        //   });
+        // }
         return this.httpClient.get<T>(environment.backendUrl + path, {
           observe: 'response',
           headers: this.prepareHeader(headersOptions)
@@ -59,18 +59,18 @@ export class SymfonyApiClientService {
     );
   }
 
-  post<T>(routeName: string, data, querySegmentParam?: (string | number)[], headersOptions: { [header: string]: string } = {}, requestOptions = {}): Observable<HttpResponse<T>> {
+  post<T = any>(routeName: string, data, querySegmentParam?: {}, headersOptions: { [header: string]: string } = {}, requestOptions = {}): Observable<HttpResponse<T>> {
     this.emitPreSend('post');
     const routesFromBackend$ = this.tryGetRoutes();
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
-        let path = Routing.generate(routeName);
-        if (querySegmentParam) {
-          querySegmentParam.forEach(value => {
-            path += '/' + value;
-          });
-        }
+        const path = Routing.generate(routeName, querySegmentParam);
+        // if (querySegmentParam) {
+        //   querySegmentParam.forEach(value => {
+        //     path += '/' + value;
+        //   });
+        // }
         return this.httpClient.post<T>(environment.backendUrl + path, data, {
           observe: 'response',
           ...requestOptions,

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { WebListGuard } from './web-list.guard';
+import { WebListResolverGuard } from './web-list-resolver.service';
 
 describe('WebListGuard', () => {
-  let guard: WebListGuard;
+  let guard: WebListResolverGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(WebListGuard);
+    guard = TestBed.inject(WebListResolverGuard);
   });
 
   it('should be created', () => {

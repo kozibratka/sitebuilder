@@ -8,4 +8,8 @@ export abstract class AbstractMenuPluginResolver {
   abstract get menuImageGridSize(): number;
 
   abstract get identifier(): string;
+
+  abstract get description(): string;
+
+  abstract get name(): string;
 }

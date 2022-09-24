@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -18,9 +19,12 @@ class BaseApiController extends AbstractController
         $this->requestStack = $requestStack;
     }
 
-    public function jsonResponseSimple($data = [], $statusCode = 200, $isInvalidForm = false) {
+    public function jsonResponseSimple($data = [], $statusCode = 200, $isInvalidForm = false, string $group = 'Default') {
         $onlyValidForm = $this->requestStack->getCurrentRequest()->headers->get('validform');
-        $serialized = $this->serializer->serialize((!$onlyValidForm || $isInvalidForm) ? $data : [], 'json');
+        $context = SerializationContext::create();
+        $context->enableMaxDepthChecks();
+        $context->setGroups($group);
+        $serialized = $this->serializer->serialize((!$onlyValidForm || $isInvalidForm) ? $data : [], 'json', $context);
 
         return JsonResponse::fromJsonString($serialized, $statusCode);
     }

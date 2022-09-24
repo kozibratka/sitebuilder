@@ -27,16 +27,16 @@ class Web
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
-    private string $name;
+    private string $name = '';
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="webs")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
@@ -58,6 +58,7 @@ class Web
     public function __construct()
     {
         $this->pages = new ArrayCollection();
+        $this->plugins = new ArrayCollection();
     }
 
     public function getId(): int
@@ -78,6 +79,8 @@ class Web
     public function setName(string $name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     public function getUser(): ?User

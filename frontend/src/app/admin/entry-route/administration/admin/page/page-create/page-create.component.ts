@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {SymfonyApiClientService} from '../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
@@ -41,7 +41,7 @@ export class PageCreateComponent implements OnInit {
     this.createPageForm = this.pageFormService.createForm([this.webDetailResolverService.selectedId]);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('page_create', this.createPageForm.value, [this.webDetailResolverService.selectedId]).subscribe({
+        this.symfonyApiClientService.post('page_create', this.createPageForm.value, {id: this.webDetailResolverService.selectedId}).subscribe({
           next: () => {
             this.notifierService.notify('Stránka byla úspěšně vytvořena');
             this.router.navigate(['list'], { relativeTo: this.route.parent });
@@ -58,7 +58,7 @@ export class PageCreateComponent implements OnInit {
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('page_update', this.createPageForm.value, [pageDetail.id]).subscribe({
+        this.symfonyApiClientService.post('page_update', this.createPageForm.value, {id: pageDetail.id}).subscribe({
           next: () => {
             this.notifierService.notify('Stránka byla úspěšně upravena');
             this.router.navigate(['list'], { relativeTo: this.route.parent });

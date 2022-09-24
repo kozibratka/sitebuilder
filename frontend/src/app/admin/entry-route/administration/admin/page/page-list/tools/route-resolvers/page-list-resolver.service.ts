@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {PageInterface} from '../../../tools/interfaces/page-interface';
-import {SymfonyApiClientService} from '../../../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../../../shared/core/services/http-response-toaster.service';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class PageListResolverService implements Resolve<PageInterface[]> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface[]> {
     const webId = this.webDetailResolverService.selectedId;
-    return this.symfonyApiClientService.get<PageInterface[]>('page_list', [webId]).pipe(catchError(err => {
+    return this.symfonyApiClientService.get<PageInterface[]>('page_list', {id: webId}).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

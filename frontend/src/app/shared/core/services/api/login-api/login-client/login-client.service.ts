@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
-import {SymfonyApiClientService} from '../symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../symfony-api/symfony-api-client.service';
 import {tap} from 'rxjs/operators';
 import {TokenInterface} from '../../interfaces/token-interface';
 import {Observable} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
-import {CoreModule} from '../../core.module';
+import {CoreModule} from '../../../../core.module';
 
 @Injectable({
   providedIn: CoreModule

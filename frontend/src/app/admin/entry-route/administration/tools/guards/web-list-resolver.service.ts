@@ -3,14 +3,14 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import {Observable, of, throwError} from 'rxjs';
 import {WebInterface} from '../interfaces/web-interface';
 import {catchError, map} from 'rxjs/operators';
-import {SymfonyApiClientService} from '../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../shared/core/services/http-response-toaster.service';
 import {WebDetailResolverService} from '../route-resolvers/web-detail-resolver.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebListGuard implements CanActivate, Resolve<any> {
+export class WebListResolverGuard implements CanActivate, Resolve<any> {
 
   webList: WebInterface[] = [];
   isBlocked = false;
@@ -19,28 +19,31 @@ export class WebListGuard implements CanActivate, Resolve<any> {
     private router: Router,
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService,
-    private webDetailResolverService: WebDetailResolverService,
   ) {
 
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    const webId = parseInt(route.paramMap.get('webId'), null);
     return this.symfonyApiClientService.get<WebInterface[]>('web_list').pipe(
       map(value => {
         this.webList = value.body;
         if (route.firstChild && route.firstChild.url.length && route.firstChild.url[0].path === 'web') {
           return true;
         }
+        if (!webId) {
+          if (!this.webList.length) {
+            return this.router.parseUrl('/admin/0/web/list');
+          } else {
+            return this.router.createUrlTree(['/admin', this.webList[0].id]);
+          }
+        }
         if (this.webList.length) {
-          this.webDetailResolverService.selectedId = this.webList[0].id;
           this.isBlocked = false;
           return true;
         } else {
           this.isBlocked = true;
-          return this.router.parseUrl(route.url[0] + '/web/list');
+          return this.router.parseUrl('/admin/0/web/list');
         }
       }),
       catchError((error) => {
@@ -51,6 +54,7 @@ export class WebListGuard implements CanActivate, Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    console.log(this.webList);
     return this.webList;
   }
 }

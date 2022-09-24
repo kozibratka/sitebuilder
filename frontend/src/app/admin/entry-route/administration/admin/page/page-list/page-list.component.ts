@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageInterface} from '../tools/interfaces/page-interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import {SymfonyApiClientService} from '../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
 import {filter, switchMap} from 'rxjs/operators';
@@ -41,7 +41,7 @@ export class PageListComponent implements OnInit {
       }
       ),
       switchMap(value => {
-        return this.symfonyApiClientService.get('page_remove', [pageId]);
+        return this.symfonyApiClientService.get('page_remove', {id: pageId});
       })
     ).subscribe({
       next: () => {

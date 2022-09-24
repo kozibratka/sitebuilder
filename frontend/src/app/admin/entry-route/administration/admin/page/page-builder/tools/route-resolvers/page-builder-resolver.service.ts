@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
-import {SymfonyApiClientService} from '../../../../../../../../shared/core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../../../shared/core/services/http-response-toaster.service';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class PageBuilderResolverService implements Resolve<PageInterface>{
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface> {
-    return this.symfonyApiClientService.get<PageInterface>('page_read', [route.paramMap.get('pageId')]).pipe(catchError(err => {
+    return this.symfonyApiClientService.get<PageInterface>('page_read', {id: route.paramMap.get('pageId')}).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {

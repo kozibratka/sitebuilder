@@ -10,7 +10,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {MatTreeFlatDataSource} from '@angular/material/tree';
-import {SymfonyApiClientService} from '../../../core/services/symfony-api/symfony-api-client.service';
+import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {WebDetailResolverService} from '../../../../admin/entry-route/administration/tools/route-resolvers/web-detail-resolver.service';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
 import {MatTreeService} from '../../../core/services/mat-tree.service';

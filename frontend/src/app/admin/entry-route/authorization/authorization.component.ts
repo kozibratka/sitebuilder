@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Event} from '../../../shared/core/services/symfony-api/tools/constants/event';
+import {Event} from '../../../shared/core/services/api/symfony-api/tools/constants/event';
 
 @Component({
   selector: 'app-authorization',
