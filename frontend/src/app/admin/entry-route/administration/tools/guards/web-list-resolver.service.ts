@@ -54,7 +54,6 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    console.log(this.webList);
     return this.webList;
   }
 }

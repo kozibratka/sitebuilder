@@ -3,7 +3,7 @@
 namespace App\Service\Plugin;
 use Traversable;
 
-class PluginService
+class PluginServiceService
 {
     private array $pluginServices;
 

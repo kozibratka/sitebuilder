@@ -5,7 +5,8 @@ namespace App\Controller\SiteBuilder;
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
-use App\Service\Plugin\PluginService;
+use App\Service\Plugin\PluginServiceService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -26,10 +27,46 @@ class PluginController extends BaseApiController
     /**
      * @Route("/list-by-identifier/{id}/{identifier}", name="list_by_identifier")
      */
-    public function listByIdentifier(Web $web, $identifier, PluginService $pluginService)
+    public function listByIdentifier(Web $web, $identifier, PluginServiceService $pluginService)
     {
+        $this->denyAccessUnlessGranted('page_builder_voter',$web);
         $entityClass = $pluginService->getPluginServiceByIdentifier($identifier)->getEntityClass();
         $plugins = $this->getDoctrine()->getRepository($entityClass)->findBy(['web' => $web]);
         return $this->jsonResponseSimple($plugins);
+    }
+
+    /**
+     * @Route("/create/{id}/{identifier}", name="create")
+     */
+    public function create(Request $request, Web $web, $identifier, PluginServiceService $pluginServiceService)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter',$web);
+        $pluginService = $pluginServiceService->getPluginServiceByIdentifier($identifier);
+        $form = $this->createForm($pluginService->getFormClass());
+        $form->submit($request->request->all());
+        if($form->isValid()) {
+            /** @var BasePlugin $plugin */
+            $plugin = $form->getData();
+            $plugin->setWeb($web);
+            $this->persist($plugin);
+            return $this->jsonResponseSimple($plugin, 201);
+        }
+        return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/update/{id}", name="update")
+     */
+    public function update(Request $request, BasePlugin $basePlugin, PluginServiceService $pluginServiceService)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter',$basePlugin);
+        $pluginService = $pluginServiceService->getPluginServiceByIdentifier($basePlugin->getIdentifier());
+        $form = $this->createForm($pluginService->getFormClass());
+        $form->submit($request->request->all());
+        if($form->isValid()) {
+            $this->flush();
+            return $this->jsonResponseSimple($basePlugin, 201);
+        }
+        return $this->invalidFormResponse($form);
     }
 }

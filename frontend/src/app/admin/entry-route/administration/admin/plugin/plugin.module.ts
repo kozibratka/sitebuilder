@@ -5,20 +5,26 @@ import { PluginComponent } from './plugin.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {ListAvailableComponent} from './list-available/list-available.component';
-import { ListComponent } from './list/list.component';
+import {ListCreatedComponent} from './list-created/list-created.component';
+import {MatButtonModule} from '@angular/material/button';
+import { CreatePluginComponent } from './create-plugin/create-plugin.component';
+import { UpdatePluginComponent } from './update-plugin/update-plugin.component';
 
 
 @NgModule({
   declarations: [
     PluginComponent,
     ListAvailableComponent,
-    ListComponent
+    ListCreatedComponent,
+    CreatePluginComponent,
+    UpdatePluginComponent
   ],
   imports: [
     CommonModule,
     PluginRoutingModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class PluginModule { }

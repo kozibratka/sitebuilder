@@ -3,17 +3,30 @@ import { RouterModule, Routes } from '@angular/router';
 import { PluginComponent } from './plugin.component';
 import {GlobalPluginsResolver} from '../tools/route-resolvers/global-plugins.resolver';
 import {ListAvailableComponent} from './list-available/list-available.component';
-import {ListComponent} from './list/list.component';
 import {GenericResolver} from '../../../../../shared/core/services/resolver/generic.resolver';
+import {ListCreatedComponent} from './list-created/list-created.component';
+import {CreatePluginComponent} from './create-plugin/create-plugin.component';
+import {UpdatePluginComponent} from './update-plugin/update-plugin.component';
 
 const routes: Routes = [
   {path: '', component: PluginComponent},
   {path: 'list-available', component: ListAvailableComponent, resolve: {globalPlugins: GlobalPluginsResolver}},
   {
     path: 'list-created/:identifier',
-    component: ListComponent,
+    component: ListCreatedComponent,
     resolve: {plugins: GenericResolver},
-    data: {resolverConfig: {data: {route: 'plugin_list_by_identifier'}, queryDataMap: {webId: 'id', identifier: 'identifier'}}}},
+    data: {resolverConfig: {data: {route: 'plugin_list_by_identifier'}, queryDataMap: {webId: 'id', identifier: 'identifier'}}}
+  },
+  {
+    path: 'create/:identifier',
+    component: CreatePluginComponent,
+  },
+  {
+    path: 'update/:plugin',
+    component: UpdatePluginComponent,
+    resolve: {plugins: GenericResolver},
+    data: {resolverConfig: {data: {route: 'plugin_update'}, queryDataMap: {plugin: 'id'}}}
+  },
 ];
 
 @NgModule({

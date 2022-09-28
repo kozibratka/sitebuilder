@@ -5,6 +5,8 @@ export abstract class AbstractMenuPluginResolver {
 
   abstract get componentClass(): new(...args: any[]) => {};
 
+  abstract get adminComponentClass(): new(...args: any[]) => {};
+
   abstract get menuImageGridSize(): number;
 
   abstract get identifier(): string;
