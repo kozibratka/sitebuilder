@@ -26,14 +26,4 @@ export class TextPluginComponent extends AbstractPlugin<TextPluginSettingsInterf
 
   refreshView(): void {
   }
-
-  getSettingItems(): { menuImage?: string; label: string; path: string; component: Type<SettingSubjectAbleInterface> }[] {
-    return [
-      {
-        label: 'Text',
-        component: TextPluginAdminComponent,
-        path: ''
-      }
-    ];
-  }
 }

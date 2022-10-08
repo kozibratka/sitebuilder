@@ -61,17 +61,17 @@ export class MoveAbleSettingsComponent implements OnInit, OnDestroy {
   }
 
   registerComponent(settingAble: SettingAbleInterface<any>): void {
-    this.items = settingAble.getSettingItems();
-    this.subjectForSetting = settingAble;
-    this.indexSelected = 0;
-    this.allowHide = false;
-    setTimeout(() => {
-      this.display = 'block';
-      this.elementRef.nativeElement.style.display = 'block';
-      const centerPosition = ElementHelper.centerToViewportInDocument(this.elementRef.nativeElement);
-      this.left = centerPosition.x + 'px';
-      this.top = centerPosition.y + 'px';
-    }, 0);
+    // this.items = settingAble.getSettingItems();
+    // this.subjectForSetting = settingAble;
+    // this.indexSelected = 0;
+    // this.allowHide = false;
+    // setTimeout(() => {
+    //   this.display = 'block';
+    //   this.elementRef.nativeElement.style.display = 'block';
+    //   const centerPosition = ElementHelper.centerToViewportInDocument(this.elementRef.nativeElement);
+    //   this.left = centerPosition.x + 'px';
+    //   this.top = centerPosition.y + 'px';
+    // }, 0);
   }
 
   submitAdminSettings(): void {

@@ -14,7 +14,7 @@ import {HttpResponse} from '@angular/common/http';
 import {AdminFormService} from '../forms/admin-form.service';
 
 @Directive()
-export class AbstractAdminSetting<T extends BasePlugSettingsinInterface> implements SettingSubjectAbleInterface{
+export abstract class AbstractAdminSetting<T extends BasePlugSettingsinInterface> implements SettingSubjectAbleInterface{
   subject: AbstractPlugin<T>;
   settings: T;
   webId: number;
@@ -25,9 +25,16 @@ export class AbstractAdminSetting<T extends BasePlugSettingsinInterface> impleme
     private symfonyApiClientService: SymfonyApiClientService,
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
-    private fb: FormBuilder,
+    protected fb: FormBuilder,
     private adminFormService: AdminFormService
   ) {
+  }
+
+  abstract createAdminForm(settings: T): void;
+
+  initForm(settings?: T) {
+    this.settings = settings;
+    this.createAdminForm(settings);
   }
 
   setSubject(instance: AbstractPlugin<T>) {
@@ -35,11 +42,11 @@ export class AbstractAdminSetting<T extends BasePlugSettingsinInterface> impleme
     this.settings = instance.settings;
   }
 
-  createForm() {
+  createForm(formFields: {}) {
     const formRoute = !this.settings ? 'plugin_create' : 'plugin_update';
     const routeParams = !this.settings ? {id: this.webId, identifier: this.menuResolver.identifier} : {id: this.settings.id};
     this.adminFormService.formRoute = formRoute;
-    const form = this.adminFormService.createForm(routeParams);
+    const form = this.adminFormService.createForm(routeParams, formFields);
     form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         let post: Observable<HttpResponse<T>>;

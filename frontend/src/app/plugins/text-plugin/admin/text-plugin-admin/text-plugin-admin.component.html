@@ -1,4 +1,16 @@
-<p>It works Admin</p>
+<form [formGroup]="adminForm">
+  <input appFormError type="text" class="form-control" placeholder="Název" formControlName="name">
+  <input appFormError type="text" class="form-control" placeholder="Text" formControlName="text">
+  <div class="container-fluid mt-3">
+    <div class="row justify-content-end">
+      <a [routerLink]="['../../list-created', menuResolver.identifier]" mat-button>Zpět na vytvořených pluginů</a>
+      <button type="submit" mat-raised-button color="primary" class="ml-2"><i class="material-icons">add</i>Uložit
+      </button>
+    </div>
+  </div>
+
+</form>
+
 
 
 

@@ -1,18 +1,13 @@
 import {
   Component,
-  ComponentFactory,
-  ComponentFactoryResolver,
-  ElementRef,
   OnInit,
-  TemplateRef,
   ViewChild,
-  ViewContainerRef
 } from '@angular/core';
 import {PluginResolverService} from '../../../../../../plugins/tools/services/plugin-resolver.service';
 import {ActivatedRoute} from '@angular/router';
 import {AbstractMenuPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
-import {AbstractAdminSetting} from '../../../../../../plugins/tools/abstract-class/abstract-admin-setting';
 import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
+import {MiniAdminComponent} from '../../../../../../shared/core/components/mini-admin/mini-admin.component';
 
 @Component({
   selector: 'app-create-plugin',
@@ -21,12 +16,11 @@ import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detai
 })
 export class CreatePluginComponent implements OnInit {
   pluginResolver: AbstractMenuPluginResolver;
-  @ViewChild(TemplateRef, {static: true, read: ViewContainerRef}) private destination: ViewContainerRef;
+  @ViewChild(MiniAdminComponent, {static: true}) private miniAdminComponent: MiniAdminComponent;
 
   constructor(
     private route: ActivatedRoute,
     private pluginResolverService: PluginResolverService,
-    private resolver: ComponentFactoryResolver,
     private webDetailResolverService: WebDetailResolverService
   ) { }
 
@@ -34,10 +28,9 @@ export class CreatePluginComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const identifier = params.get('identifier');
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(identifier);
-      const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.pluginResolver.adminComponentClass);
-      const adminComponent = this.destination.createComponent<AbstractAdminSetting<any>>(factory);
-      adminComponent.instance.menuResolver = this.pluginResolver;
-      adminComponent.instance.webId = this.webDetailResolverService.selectedId;
+      this.miniAdminComponent.settings = this.pluginResolver;
+      this.miniAdminComponent.headerName = 'Vytvoření pluginu ' + this.pluginResolver.name;
+      this.miniAdminComponent.showContent(this.pluginResolver.adminComponentsClass()[0].component);
     });
   }
 

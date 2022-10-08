@@ -15,8 +15,14 @@ export class TextMenuResolverService extends AbstractMenuPluginResolver{
     return TextPluginComponent;
   }
 
-  get adminComponentClass(): new(...args: any[]) => {} {
-    return TextPluginAdminComponent;
+  adminComponentsClass() {
+    return [
+      {
+        label: 'Text',
+        component: TextPluginAdminComponent,
+        path: ''
+      }
+    ];
   }
 
   getMenuImage(): string {

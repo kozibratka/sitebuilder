@@ -1,6 +1,4 @@
 import {SettingAbleInterface} from '../../../shared/core/components/move-able-settings/tools/interfaces/setting-able-interface';
-import {SettingSubjectAbleInterface} from '../../../shared/core/components/move-able-settings/tools/interfaces/setting-subject-able-interface';
-import {Type} from '@angular/core';
 import {BasePlugSettingsinInterface} from '../interfaces/base-plug-settingsin-interface';
 
 export abstract class AbstractPlugin<T extends BasePlugSettingsinInterface> implements SettingAbleInterface<T>{
@@ -10,8 +8,6 @@ export abstract class AbstractPlugin<T extends BasePlugSettingsinInterface> impl
   abstract initEmptySettings(): void;
 
   abstract refreshView(): void;
-
-  abstract getSettingItems(): { menuImage?: string; label: string; path: string; component: Type<SettingSubjectAbleInterface> }[];
 
   initializeSettings(settings: {}, isFromDatabase: boolean, globalSettings: T[]): void {
     this.settings = settings as T;

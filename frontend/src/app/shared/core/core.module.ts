@@ -19,6 +19,8 @@ import { DirectoryMiniNavigationComponent } from './components/directory-mini-na
 import { IconResolverComponent } from './components/icon-resolver/icon-resolver.component';
 import {MatIconModule} from '@angular/material/icon';
 import {FileIconsModule} from 'ngx-file-icons';
+import { MoveableModalComponent } from './components/moveable-modal/moveable-modal.component';
+import { MiniAdminComponent } from './components/mini-admin/mini-admin.component';
 
 
 
@@ -33,7 +35,9 @@ import {FileIconsModule} from 'ngx-file-icons';
     MoveAbleSettingsComponent,
     HidderComponent,
     DirectoryMiniNavigationComponent,
-    IconResolverComponent
+    IconResolverComponent,
+    MoveableModalComponent,
+    MiniAdminComponent,
   ],
   imports: [
     CommonModule,
@@ -53,7 +57,8 @@ import {FileIconsModule} from 'ngx-file-icons';
     MoveAbleSettingsComponent,
     HidderComponent,
     DirectoryMiniNavigationComponent,
-    IconResolverComponent
+    IconResolverComponent,
+    MiniAdminComponent
   ],
   providers: [
     EventEmitterService,

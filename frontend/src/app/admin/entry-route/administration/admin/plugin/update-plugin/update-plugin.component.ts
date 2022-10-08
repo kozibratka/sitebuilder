@@ -22,9 +22,9 @@ export class UpdatePluginComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
-      const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.pluginResolver.adminComponentClass);
+      const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.pluginResolver.adminComponentsClass()[0].component);
       const instance = this.destination.createComponent<AbstractAdminSetting<any>>(factory).instance;
-      instance.settings = data.plugin;
+      instance.initForm(data.plugin);
     });
   }
 

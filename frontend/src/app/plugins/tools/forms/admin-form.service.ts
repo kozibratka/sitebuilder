@@ -8,9 +8,14 @@ import {FormGroup} from '@angular/forms';
 export class AdminFormService extends AbstractApiFormService {
   formRoute: string;
 
-  createForm(querySegment): FormGroup {
-    return this.formBuilder.group({
-      name: ''
-    }, {asyncValidators: this.createValidator(this.formRoute, querySegment), updateOn: 'submit'});
+  createForm(querySegment, formFields: {}): FormGroup {
+    let fields = {
+      name: ['']
+    };
+    if (formFields) {
+      fields = {...fields, ...formFields};
+    }
+
+    return this.formBuilder.group(fields, {asyncValidators: this.createValidator(this.formRoute, querySegment), updateOn: 'submit'});
   }
 }
