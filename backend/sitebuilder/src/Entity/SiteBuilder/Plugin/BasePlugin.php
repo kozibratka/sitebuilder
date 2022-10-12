@@ -11,7 +11,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity(
+    fields: ['name', 'web', 'identifier'],
+    errorPath: 'name',
+    message: 'This value is already used.',
+)]
 /**
  * @ORM\Entity
  * @ORM\Table(name="base_plugin")

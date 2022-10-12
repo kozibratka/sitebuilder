@@ -10,6 +10,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { CreatePluginComponent } from './create-plugin/create-plugin.component';
 import { UpdatePluginComponent } from './update-plugin/update-plugin.component';
 import {CoreModule} from '../../../../../shared/core/core.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -18,15 +19,16 @@ import {CoreModule} from '../../../../../shared/core/core.module';
     ListAvailableComponent,
     ListCreatedComponent,
     CreatePluginComponent,
-    UpdatePluginComponent
+    UpdatePluginComponent,
   ],
-    imports: [
-        CommonModule,
-        PluginRoutingModule,
-        MatTableModule,
-        MatIconModule,
-        MatButtonModule,
-        CoreModule
-    ]
+  imports: [
+    CommonModule,
+    PluginRoutingModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    CoreModule,
+    ReactiveFormsModule
+  ]
 })
 export class PluginModule { }

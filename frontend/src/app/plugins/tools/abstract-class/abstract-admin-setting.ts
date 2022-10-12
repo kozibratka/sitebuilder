@@ -43,18 +43,14 @@ export abstract class AbstractAdminSetting<T extends BasePlugSettingsinInterface
   }
 
   createForm(formFields: {}) {
-    const formRoute = !this.settings ? 'plugin_create' : 'plugin_update';
+    const formRoute = 'plugin_update';
     const routeParams = !this.settings ? {id: this.webId, identifier: this.menuResolver.identifier} : {id: this.settings.id};
     this.adminFormService.formRoute = formRoute;
     const form = this.adminFormService.createForm(routeParams, formFields);
     form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         let post: Observable<HttpResponse<T>>;
-        if (!this.settings) {
-          post = this.symfonyApiClientService.post(formRoute, form.value, routeParams);
-        } else {
-          post = this.symfonyApiClientService.post(formRoute, form.value, routeParams);
-        }
+        post = this.symfonyApiClientService.post(formRoute, form.value, routeParams);
         post.subscribe({
           next: (value) => {
             let message = '';

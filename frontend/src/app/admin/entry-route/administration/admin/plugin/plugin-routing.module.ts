@@ -22,9 +22,15 @@ const routes: Routes = [
     component: CreatePluginComponent,
   },
   {
+    path: 'setting/:plugin',
+    component: CreatePluginComponent,
+    resolve: {plugin: GenericResolver},
+    data: {resolverConfig: {data: {route: 'plugin_update'}, queryDataMap: {plugin: 'id'}}}
+  },
+  {
     path: 'update/:plugin',
     component: UpdatePluginComponent,
-    resolve: {plugins: GenericResolver},
+    resolve: {plugin: GenericResolver},
     data: {resolverConfig: {data: {route: 'plugin_update'}, queryDataMap: {plugin: 'id'}}}
   },
 ];
