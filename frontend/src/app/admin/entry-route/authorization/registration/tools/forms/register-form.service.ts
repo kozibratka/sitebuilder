@@ -6,7 +6,7 @@ import {AbstractApiFormService} from '../../../../../../shared/core/services/for
   providedIn: 'root'
 })
 export class RegisterFormService extends AbstractApiFormService{
-  createForm(): FormGroup {
+  createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup {
     return this.formBuilder.group({
       fullName: [''],
       email: [''],
@@ -14,7 +14,7 @@ export class RegisterFormService extends AbstractApiFormService{
         first: '',
         second: ''
       }),
-    }, {asyncValidators: this.createValidator('user_registration'), updateOn: 'submit'});
+    }, {asyncValidators: this.createValidator(data), updateOn: 'submit'});
   }
 
 }

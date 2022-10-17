@@ -21,7 +21,7 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private httpResponseToasterService: HttpResponseToasterService
   ) {
-    this.registrationForm = this.registerTypeService.createForm();
+    this.registrationForm = this.registerTypeService.createForm({path: 'user_registration'});
     this.registrationForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         symfonyApiClientService.post('user_registration', this.registrationForm.value).subscribe(httpResponse => {

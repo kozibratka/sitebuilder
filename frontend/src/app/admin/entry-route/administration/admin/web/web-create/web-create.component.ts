@@ -37,7 +37,7 @@ export class WebCreateComponent implements OnInit {
   }
 
   createWeb(): void {
-    this.createWebForm = this.webFormService.createForm();
+    this.createWebForm = this.webFormService.createForm({path: 'web_create'});
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.symfonyApiClientService.post('web_create', this.createWebForm.value).subscribe({
@@ -53,7 +53,7 @@ export class WebCreateComponent implements OnInit {
 
   updateWeb(): void {
     const webDetail: WebInterface = this.route.snapshot.data.webDetail;
-    this.createWebForm = this.webFormService.createForm();
+    this.createWebForm = this.webFormService.createForm({path: 'web_create', querySegment: {id: webDetail.id}});
     this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {

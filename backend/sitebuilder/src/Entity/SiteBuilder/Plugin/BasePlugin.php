@@ -14,7 +14,7 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity(
-    fields: ['name', 'web', 'identifier'],
+    fields: ['name', 'web'],
     errorPath: 'name',
     message: 'This value is already used.',
 )]

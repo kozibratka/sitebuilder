@@ -6,10 +6,10 @@ import {FormGroup} from '@angular/forms';
   providedIn: 'root'
 })
 export class PluginFormService extends AbstractApiFormService{
-  createForm(querySegment?: (string | number)[]): FormGroup {
+  createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup {
     return this.formBuilder.group({
       name: ['']
-    }, {asyncValidators: this.createValidator('plugin_create', querySegment), updateOn: 'submit'});
+    }, {asyncValidators: this.createValidator(data), updateOn: 'submit'});
   }
 
 }

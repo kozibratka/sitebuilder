@@ -38,7 +38,7 @@ export class PageCreateComponent implements OnInit {
   }
 
   createPage(): void {
-    this.createPageForm = this.pageFormService.createForm([this.webDetailResolverService.selectedId]);
+    this.createPageForm = this.pageFormService.createForm({path: 'page_create', querySegment: {id: this.webDetailResolverService.selectedId}});
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.symfonyApiClientService.post('page_create', this.createPageForm.value, {id: this.webDetailResolverService.selectedId}).subscribe({
@@ -54,7 +54,7 @@ export class PageCreateComponent implements OnInit {
 
   updatePage(): void {
     const pageDetail: WebInterface = this.route.snapshot.data.pageDetail;
-    this.createPageForm = this.pageFormService.createForm([this.webDetailResolverService.selectedId]);
+    this.createPageForm = this.pageFormService.createForm({path: 'page_update', querySegment: {id: pageDetail.id}});
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {

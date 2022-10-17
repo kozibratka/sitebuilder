@@ -48,7 +48,7 @@ export class CreatePluginComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const identifier = params.get('identifier');
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(identifier);
-      this.createForm = this.pluginFormService.createForm([this.webDetailResolverService.selectedId]);
+      this.createForm = this.pluginFormService.createForm({path: 'plugin_create', querySegment: {id: this.webDetailResolverService.selectedId, identifier}});
       this.createForm.statusChanges.subscribe(status => {
         if (status === 'VALID') {
           this.symfonyApiClientService.post<BasePlugSettingsinInterface>('plugin_create', this.createForm.value, {id: this.webDetailResolverService.selectedId, identifier}).subscribe({
@@ -66,7 +66,7 @@ export class CreatePluginComponent implements OnInit {
   updatePlugin() {
     const plugin: BasePlugSettingsinInterface = this.route.snapshot.data.plugin;
     this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(plugin.identifier);
-    this.createForm = this.pluginFormService.createForm([this.webDetailResolverService.selectedId]);
+    this.createForm = this.pluginFormService.createForm({path: 'plugin_update', querySegment: {id: plugin.id}});
     this.createForm.patchValue(plugin);
     this.createForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {

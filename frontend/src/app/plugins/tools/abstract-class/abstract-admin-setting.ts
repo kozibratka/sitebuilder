@@ -46,7 +46,7 @@ export abstract class AbstractAdminSetting<T extends BasePlugSettingsinInterface
     const formRoute = 'plugin_update';
     const routeParams = !this.settings ? {id: this.webId, identifier: this.menuResolver.identifier} : {id: this.settings.id};
     this.adminFormService.formRoute = formRoute;
-    const form = this.adminFormService.createForm(routeParams, formFields);
+    const form = this.adminFormService.createForm({querySegment: routeParams, formFields});
     form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         let post: Observable<HttpResponse<T>>;

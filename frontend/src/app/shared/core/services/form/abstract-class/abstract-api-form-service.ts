@@ -15,13 +15,13 @@ export abstract class AbstractApiFormService {
   ) {
   }
 
-  abstract createForm(querySegment?: (string | number)[], formFields?: {}): FormGroup;
+  abstract createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup;
 
-  createValidator(path: string, querySegment?: (string | number)[]): (AbstractControl) => Observable<ValidationErrors | null> {
+  createValidator(data: {querySegment?: {}, formFields?: {}, path?: string}): (AbstractControl) => Observable<ValidationErrors | null> {
     return (abstractControl: AbstractControl) => {
       return new Observable<ValidationErrors | null>(validationSubscriber => {
         if (abstractControl.touched) {
-          this.symfonyApiClientService.post<{}>(path, abstractControl.value, querySegment, {validform: 'true'}).subscribe(
+          this.symfonyApiClientService.post<{}>(data.path, abstractControl.value, data.querySegment, {validform: 'true'}).subscribe(
             {error: (err: HttpErrorResponse) => {
                 if (err.status === 400 && err.headers.get('Content-Type') === 'application/invalid-form+json') {
                   this.supplyValidationErrors(err.error, abstractControl);

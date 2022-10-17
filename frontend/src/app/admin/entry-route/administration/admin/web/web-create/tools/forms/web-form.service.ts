@@ -6,10 +6,10 @@ import {FormGroup} from '@angular/forms';
   providedIn: 'root'
 })
 export class WebFormService extends AbstractApiFormService{
-  createForm(): FormGroup {
+  createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup {
     return this.formBuilder.group({
       name: ['']
-    }, {asyncValidators: this.createValidator('web_create'), updateOn: 'submit'});
+    }, {asyncValidators: this.createValidator(data), updateOn: 'submit'});
   }
 
 }

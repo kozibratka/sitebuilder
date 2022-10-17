@@ -43,7 +43,7 @@ class PluginController extends BaseApiController
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
         $pluginService = $pluginServiceService->getPluginServiceByIdentifier($identifier);
         $form = $this->createForm($pluginService->getFormClass());
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
         if($form->isValid()) {
             /** @var BasePlugin $plugin */
             $plugin = $form->getData();
@@ -62,7 +62,7 @@ class PluginController extends BaseApiController
         $this->denyAccessUnlessGranted('page_builder_voter',$basePlugin);
         $pluginService = $pluginServiceService->getPluginServiceByIdentifier($basePlugin->getIdentifier());
         $form = $this->createForm($pluginService->getFormClass());
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
         if($form->isValid()) {
             $this->flush();
             return $this->jsonResponseSimple($basePlugin, 201);
