@@ -1,9 +1,16 @@
 <div class="card card-primary card-outline">
   <div class="card-header">
-    <h3 class="card-title">Úprava plugin <b>{{pluginResolver.name}}</b></h3>
+    <h3 class="card-title">Úprava pluginu <b>{{pluginResolver.name}}<ng-container *ngIf="pluginSetting"> - {{pluginSetting.name}}</ng-container></b></h3>
   </div> <!-- /.card-body -->
   <div class="card-body">
     <ng-template></ng-template>
+    <div class="container-fluid mt-3">
+      <div class="row justify-content-end">
+        <a [routerLink]="['../../list-created', pluginResolver.identifier]" mat-button>Zpět na vytvořených pluginů</a>
+        <button type="submit" mat-raised-button color="primary" class="ml-2"><i class="material-icons">add</i>Uložit
+        </button>
+      </div>
+    </div>
   </div><!-- /.card-body -->
 </div>
 

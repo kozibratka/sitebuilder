@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {PluginResolverService} from '../../../../../../plugins/tools/services/plugin-resolver.service';
 import {AbstractMenuPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
 import {AbstractAdminSetting} from '../../../../../../plugins/tools/abstract-class/abstract-admin-setting';
+import {BasePlugSettingsinInterface} from '../../../../../../plugins/tools/interfaces/base-plug-settingsin-interface';
 
 @Component({
   selector: 'app-update-plugin',
@@ -12,6 +13,7 @@ import {AbstractAdminSetting} from '../../../../../../plugins/tools/abstract-cla
 export class UpdatePluginComponent implements OnInit {
   pluginResolver: AbstractMenuPluginResolver;
   @ViewChild(TemplateRef, {static: true, read: ViewContainerRef}) private destination: ViewContainerRef;
+  pluginSetting: BasePlugSettingsinInterface;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +23,7 @@ export class UpdatePluginComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
+      this.pluginSetting = data.plugin;
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
       const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.pluginResolver.adminComponentsClass()[0].component);
       const instance = this.destination.createComponent<AbstractAdminSetting<any>>(factory).instance;
