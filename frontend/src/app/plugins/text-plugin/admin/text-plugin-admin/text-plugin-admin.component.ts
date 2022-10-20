@@ -16,10 +16,11 @@ export class TextPluginAdminComponent extends AbstractAdminSetting<TextPluginSet
   }
 
   createAdminForm(settings: TextPluginSettingsInterface) {
-    this.adminForm = this.createForm(
+    this.adminForm = this.adminFormService.createForm(
       {
         text: ['']
-      }
+      },
+      settings
     );
     if (this.settings) {
       this.adminForm.patchValue(this.settings);

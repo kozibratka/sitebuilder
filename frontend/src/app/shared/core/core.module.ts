@@ -21,6 +21,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {FileIconsModule} from 'ngx-file-icons';
 import { MoveableModalComponent } from './components/moveable-modal/moveable-modal.component';
 import { MiniAdminComponent } from './components/mini-admin/mini-admin.component';
+import { RemoveDialogComponent } from '../../admin/entry-route/administration/admin/plugin/list-created/tools/components/remove-dialog/remove-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -38,6 +41,7 @@ import { MiniAdminComponent } from './components/mini-admin/mini-admin.component
     IconResolverComponent,
     MoveableModalComponent,
     MiniAdminComponent,
+    RemoveDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +51,8 @@ import { MiniAdminComponent } from './components/mini-admin/mini-admin.component
     ToastrModule.forRoot(),
     MatIconModule,
     FileIconsModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   exports: [
     ModalForRouteComponent,

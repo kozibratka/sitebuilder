@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
-import {AbstractApiFormService} from '../../../shared/core/services/form/abstract-class/abstract-api-form-service';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {BasePlugSettingsinInterface} from '../interfaces/base-plug-settingsin-interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminFormService extends AbstractApiFormService {
+export class AdminFormService {
   formRoute: string;
 
-  createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup {
-    let fields = {
-      name: ['']
-    };
-    if (data.formFields) {
-      fields = {...fields, ...data.formFields};
-    }
 
-    return this.formBuilder.group(fields, {asyncValidators: this.createValidator(data), updateOn: 'submit'});
+  constructor(private formBuilder: FormBuilder) {
+  }
+
+  createForm(formFields: {}, settings: BasePlugSettingsinInterface): FormGroup {
+    const form = this.formBuilder.group(formFields);
+    form.statusChanges.subscribe(status => {
+      if (status === 'VALID') {
+        const formValue = form.value as BasePlugSettingsinInterface;
+        Object.assign(settings, formValue);
+      }
+    });
+    return form;
   }
 }

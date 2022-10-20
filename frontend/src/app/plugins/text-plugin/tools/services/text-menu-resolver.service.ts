@@ -46,6 +46,6 @@ export class TextMenuResolverService extends AbstractMenuPluginResolver{
   }
 
   get name(): string {
-    return 'Textový editor';
+    return 'Článek';
   }
 }

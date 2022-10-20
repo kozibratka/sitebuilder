@@ -6,6 +6,7 @@ use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
 use App\Service\Plugin\PluginServiceService;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -61,12 +62,25 @@ class PluginController extends BaseApiController
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$basePlugin);
         $pluginService = $pluginServiceService->getPluginServiceByIdentifier($basePlugin->getIdentifier());
-        $form = $this->createForm($pluginService->getFormClass());
+        $form = $this->createForm($pluginService->getFormClass(), $basePlugin);
         $form->submit($request->request->all(), false);
         if($form->isValid()) {
             $this->flush();
             return $this->jsonResponseSimple($basePlugin, 201);
         }
         return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/remove/{id}", name="remove")
+     */
+    public function remove(Request $request, BasePlugin $basePlugin, ManagerRegistry $doctrine)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter',$basePlugin);
+        $em = $doctrine->getManager();
+        $em->remove($basePlugin);
+        $em->flush();
+        return $this->jsonResponseSimple($basePlugin, 201);
+
     }
 }

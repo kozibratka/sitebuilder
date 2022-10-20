@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'list-created/:identifier',
     component: ListCreatedComponent,
     resolve: {plugins: GenericResolver},
-    data: {resolverConfig: {data: {route: 'plugin_list_by_identifier'}, queryDataMap: {webId: 'id', identifier: 'identifier'}}}
+    data: {resolverConfig: {data: {route: 'plugin_list_by_identifier'}, queryDataMap: {webId: 'id', identifier: 'identifier'}}},
+    runGuardsAndResolvers: 'always',
   },
   {
     path: 'create/:identifier',
