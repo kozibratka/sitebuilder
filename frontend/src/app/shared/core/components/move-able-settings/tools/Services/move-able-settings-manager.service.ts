@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MoveAbleSettingsComponent} from '../../move-able-settings.component';
 import {SettingAbleInterface} from '../interfaces/setting-able-interface';
-import {BasePlugSettingsinInterface} from '../../../../../../plugins/tools/interfaces/base-plug-settingsin-interface';
+import {BasePlugConfigInterface} from '../../../../../../plugins/tools/interfaces/base-plug-config-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class MoveAbleSettingsManagerService {
     this.moveAbleSettingsComponent = moveAbleSettingsComponent;
   }
 
-  registerComponent(settingAbleInterface: SettingAbleInterface<BasePlugSettingsinInterface>): void {
+  registerComponent(settingAbleInterface: SettingAbleInterface<BasePlugConfigInterface>): void {
     this.moveAbleSettingsComponent.registerComponent(settingAbleInterface);
   }
 }

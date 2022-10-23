@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {WebDetailResolverService} from '../../../tools/route-resolvers/web-detail-resolver.service';
-import {BasePlugSettingsinInterface} from '../../../../../../plugins/tools/interfaces/base-plug-settingsin-interface';
+import {BasePlugConfigInterface} from '../../../../../../plugins/tools/interfaces/base-plug-config-interface';
 import {catchError, map} from 'rxjs/operators';
 import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
@@ -14,7 +14,7 @@ import {HttpResponseToasterService} from '../../../../../../shared/core/services
 @Injectable({
   providedIn: 'root'
 })
-export class GlobalPluginsResolver implements Resolve<BasePlugSettingsinInterface[]> {
+export class GlobalPluginsResolver implements Resolve<BasePlugConfigInterface[]> {
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -23,9 +23,9 @@ export class GlobalPluginsResolver implements Resolve<BasePlugSettingsinInterfac
   ) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BasePlugSettingsinInterface[]> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BasePlugConfigInterface[]> {
     const selectedWeb = this.webDetailResolverService.selectedId;
-    return this.symfonyApiClientService.get<BasePlugSettingsinInterface[]>('plugin_global_list', {id: selectedWeb})
+    return this.symfonyApiClientService.get<BasePlugConfigInterface[]>('plugin_global_list', {id: selectedWeb})
       .pipe(catchError(err => {
         this.httpResponseToasterService.showError(err);
         return throwError(err);
@@ -35,11 +35,11 @@ export class GlobalPluginsResolver implements Resolve<BasePlugSettingsinInterfac
       }));
   }
 
-  sortGlobalPlugins(globalPlugins: BasePlugSettingsinInterface[]): Map<string, BasePlugSettingsinInterface[]> {
-    const sortedBasePluginInterface = new Map<string, BasePlugSettingsinInterface[]>();
+  sortGlobalPlugins(globalPlugins: BasePlugConfigInterface[]): Map<string, BasePlugConfigInterface[]> {
+    const sortedBasePluginInterface = new Map<string, BasePlugConfigInterface[]>();
     for (const plugin of globalPlugins) {
       if (!sortedBasePluginInterface.has(plugin.identifier)) {
-        sortedBasePluginInterface.set(plugin.identifier, new Array<BasePlugSettingsinInterface>());
+        sortedBasePluginInterface.set(plugin.identifier, new Array<BasePlugConfigInterface>());
       }
       sortedBasePluginInterface.get(plugin.identifier).push(plugin);
     }

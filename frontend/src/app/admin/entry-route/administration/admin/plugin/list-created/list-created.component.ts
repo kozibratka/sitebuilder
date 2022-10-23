@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AbstractMenuPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {AbstractPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-plugin-resolver';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BasePlugSettingsinInterface} from '../../../../../../plugins/tools/interfaces/base-plug-settingsin-interface';
+import {BasePlugConfigInterface} from '../../../../../../plugins/tools/interfaces/base-plug-config-interface';
 import {filter, switchMap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
-import {RemoveDialogComponent} from './tools/components/remove-dialog/remove-dialog.component';
+import {RemoveDialogComponent} from './remove-dialog/remove-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -15,14 +15,14 @@ import {RemoveDialogComponent} from './tools/components/remove-dialog/remove-dia
   styleUrls: ['./list-created.component.css']
 })
 export class ListCreatedComponent implements OnInit {
-  createdPlugins: BasePlugSettingsinInterface[] = [];
+  createdPlugins: BasePlugConfigInterface[] = [];
   displayedColumns = ['name', 'action'];
-  pluginResolver: AbstractMenuPluginResolver;
+  pluginResolver: AbstractPluginResolver;
 
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    @Inject(AbstractMenuPluginResolver) private abstractMenuPluginResolvers: AbstractMenuPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractMenuPluginResolvers: AbstractPluginResolver[],
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
@@ -39,7 +39,7 @@ export class ListCreatedComponent implements OnInit {
     });
   }
 
-  openRemoveWebDialog(pluginSettings: BasePlugSettingsinInterface): void {
+  openRemoveWebDialog(pluginSettings: BasePlugConfigInterface): void {
     const dialogRef = this.dialog.open(RemoveDialogComponent, {data: {name: this.pluginResolver.name}});
     dialogRef.afterClosed().pipe(filter(value => {
           return value;

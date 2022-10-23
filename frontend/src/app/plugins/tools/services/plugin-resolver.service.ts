@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {
-  AbstractMenuPluginResolver
-} from '../../../admin/entry-route/administration/admin/page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+  AbstractPluginResolver
+} from '../../../admin/entry-route/administration/admin/page/page-builder/tools/messengers/abstract-classes/abstract-plugin-resolver';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import {
 export class PluginResolverService {
 
   constructor(
-    @Inject(AbstractMenuPluginResolver) private abstractMenuPluginResolvers: AbstractMenuPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractMenuPluginResolvers: AbstractPluginResolver[],
   ) { }
 
   getPluginResolverByIdentifier(identifier: string) {

@@ -21,7 +21,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {FileIconsModule} from 'ngx-file-icons';
 import { MoveableModalComponent } from './components/moveable-modal/moveable-modal.component';
 import { MiniAdminComponent } from './components/mini-admin/mini-admin.component';
-import { RemoveDialogComponent } from '../../admin/entry-route/administration/admin/plugin/list-created/tools/components/remove-dialog/remove-dialog.component';
+import { RemoveDialogComponent } from '../../admin/entry-route/administration/admin/plugin/list-created/remove-dialog/remove-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 
@@ -54,18 +54,19 @@ import {MatButtonModule} from '@angular/material/button';
     MatDialogModule,
     MatButtonModule,
   ],
-  exports: [
-    ModalForRouteComponent,
-    InputFormErrorDirective,
-    HiderElementDirective,
-    InputFormErrorGrouperDirective,
-    GlobalFormErrorComponent,
-    MoveAbleSettingsComponent,
-    HidderComponent,
-    DirectoryMiniNavigationComponent,
-    IconResolverComponent,
-    MiniAdminComponent
-  ],
+    exports: [
+        ModalForRouteComponent,
+        InputFormErrorDirective,
+        HiderElementDirective,
+        InputFormErrorGrouperDirective,
+        GlobalFormErrorComponent,
+        MoveAbleSettingsComponent,
+        HidderComponent,
+        DirectoryMiniNavigationComponent,
+        IconResolverComponent,
+        MiniAdminComponent,
+        MoveableModalComponent
+    ],
   providers: [
     EventEmitterService,
     JqueryVersionService,

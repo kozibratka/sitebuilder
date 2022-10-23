@@ -49,13 +49,13 @@ export class PaletteBlockGridstackService {
       (this._gridStack as any).on('change', (event: Event, items: GridStackNode[]) => {
         const paleteItem = this.paletteItemComponents.find(value => value.elementRef.nativeElement.gridstackNode === items[0]);
         if (paleteItem) {
-          this.updatePaletteItemGridProperty(items[0], paleteItem.paletteItemConfig);
+          this.updatePaletteItemGridProperty(items[0], paleteItem.gridItemConfig);
         }
       });
   }
 
   addWidget(paletteItemComponent: PaletteItemComponent) {
-    this._gridStack.addWidget(paletteItemComponent.elementRef.nativeElement, {...paletteItemComponent.paletteItemConfig});
+    this._gridStack.addWidget(paletteItemComponent.elementRef.nativeElement, {...paletteItemComponent.gridItemConfig});
     this.paletteItemComponents.push(paletteItemComponent);
   }
 

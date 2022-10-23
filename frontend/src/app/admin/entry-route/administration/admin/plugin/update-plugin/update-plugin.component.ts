@@ -1,12 +1,17 @@
-import {Component, ComponentFactory, ComponentFactoryResolver, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PluginResolverService} from '../../../../../../plugins/tools/services/plugin-resolver.service';
-import {AbstractMenuPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
-import {AbstractAdminSetting} from '../../../../../../plugins/tools/abstract-class/abstract-admin-setting';
-import {BasePlugSettingsinInterface} from '../../../../../../plugins/tools/interfaces/base-plug-settingsin-interface';
+import {AbstractPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-plugin-resolver';
+import {BasePlugConfigInterface} from '../../../../../../plugins/tools/interfaces/base-plug-config-interface';
 import {SymfonyApiClientService} from '../../../../../../shared/core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../../../../shared/core/services/http-response-toaster.service';
 import {NotifierService} from '../../../../../../shared/core/services/notifier.service';
+import {MiniAdminComponent} from '../../../../../../shared/core/components/mini-admin/mini-admin.component';
 
 @Component({
   selector: 'app-update-plugin',
@@ -14,9 +19,9 @@ import {NotifierService} from '../../../../../../shared/core/services/notifier.s
   styleUrls: ['./update-plugin.component.css']
 })
 export class UpdatePluginComponent implements OnInit {
-  pluginResolver: AbstractMenuPluginResolver;
-  @ViewChild('adminContent', {static: true, read: ViewContainerRef}) private destination: ViewContainerRef;
-  pluginSetting: BasePlugSettingsinInterface;
+  pluginResolver: AbstractPluginResolver;
+  @ViewChild('miniAdmin', {read: MiniAdminComponent}) private miniAdmin: MiniAdminComponent;
+  pluginSetting: BasePlugConfigInterface;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,9 +37,7 @@ export class UpdatePluginComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.pluginSetting = data.plugin;
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
-      const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(this.pluginResolver.adminComponentsClass()[0].component);
-      const instance = this.destination.createComponent<AbstractAdminSetting<any>>(factory).instance;
-      instance.initForm(data.plugin);
+      this.miniAdmin.setAdminAble(this.pluginResolver, data.plugin);
     });
   }
 

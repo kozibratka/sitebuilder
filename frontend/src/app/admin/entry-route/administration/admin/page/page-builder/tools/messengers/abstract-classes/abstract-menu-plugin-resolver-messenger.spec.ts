@@ -1,7 +1,7 @@
-import { AbstractMenuPluginResolver } from './abstract-menu-plugin-resolver';
+import { AbstractPluginResolver } from './abstract-plugin-resolver';
 
 describe('AbstractMenuPluginResolverMessenger', () => {
   it('should create an instance', () => {
-    expect(new AbstractMenuPluginResolver()).toBeTruthy();
+    expect(new AbstractPluginResolver()).toBeTruthy();
   });
 });

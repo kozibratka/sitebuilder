@@ -1,26 +1,26 @@
 import {Inject, Injectable, Input, Optional} from '@angular/core';
-import {AbstractMenuPluginResolver} from '../messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {AbstractPluginResolver} from '../messengers/abstract-classes/abstract-plugin-resolver';
 
 @Injectable()
 export class MenuPluginResolverService {
 
-  private _selectedAbstractMenuPluginResolverMessenger: AbstractMenuPluginResolver;
+  private _selectedAbstractPluginResolverMessenger: AbstractPluginResolver;
 
   constructor(
-    @Inject(AbstractMenuPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractMenuPluginResolver[]
+    @Inject(AbstractPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractPluginResolver[]
   ) {
 
   }
 
-  get selectedAbstractMenuPluginResolverMessenger(): AbstractMenuPluginResolver {
-    return this._selectedAbstractMenuPluginResolverMessenger;
+  get selectedAbstractPluginResolverMessenger(): AbstractPluginResolver {
+    return this._selectedAbstractPluginResolverMessenger;
   }
 
-  set selectedAbstractMenuPluginResolverMessenger(value: AbstractMenuPluginResolver) {
-    this._selectedAbstractMenuPluginResolverMessenger = value;
+  set selectedAbstractPluginResolverMessenger(value: AbstractPluginResolver) {
+    this._selectedAbstractPluginResolverMessenger = value;
   }
 
-  get abstractMenuPluginResolverMessenger(): AbstractMenuPluginResolver[] {
+  get abstractMenuPluginResolverMessenger(): AbstractPluginResolver[] {
     return this._abstractMenuPluginResolverMessenger;
   }
 }

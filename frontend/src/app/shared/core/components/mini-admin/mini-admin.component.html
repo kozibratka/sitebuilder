@@ -1,4 +1,4 @@
-<div class="card card-primary card-outline">
+<div *ngIf="adminAble" class="card card-primary card-outline">
   <div class="card-header">
     <h3 class="card-title" *ngIf="headerName"><span class="logo">{{headerName}}</span></h3>
   </div> <!-- /.card-body -->
@@ -7,7 +7,7 @@
       <nav id="sidebar">
         <h1><span class="logo">Menu</span></h1>
         <ul class="list-unstyled components mb-5">
-          <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of settings.adminComponentsClass();">
+          <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass();">
             <a href="#" (click)="showContent(setting.component);$event.preventDefault()">
               <span class="fa fa-chevron-right mr-3"></span>{{setting.label}}</a>
           </li>
@@ -22,37 +22,6 @@
     </div>
   </div><!-- /.card-body -->
 </div>
-
-
-
-
-<!--<div class="container">-->
-<!--  <div class="row">-->
-<!--    <div class="col col-menu">-->
-<!--      <ul class="nav nav-pills nav-sidebar" data-widget="treeview" role="menu" data-accordion="false">-->
-<!--        <li class="nav-item" *ngFor="let item of items; index as i">-->
-<!--          <a (click)="indexSelected = i" [class.active]="indexSelected === i" class="nav-link">-->
-<!--            <i class="nav-icon far fa-image"></i>-->
-<!--            <p>-->
-<!--              {{item.label}}-->
-<!--            </p>-->
-<!--          </a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--    <div class="col-9">-->
-<!--      <div class="card card-primary card-outline">-->
-<!--        <div class="card-body">-->
-<!--          <ng-container #settingContent></ng-container>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <div class="dialog-buttons">-->
-<!--    <button type="button" (click)="submitAdminSettings()" class="btn btn-primary save-button">Hotovo</button>-->
-<!--  </div>-->
-<!--</div>-->
-
 
 
 

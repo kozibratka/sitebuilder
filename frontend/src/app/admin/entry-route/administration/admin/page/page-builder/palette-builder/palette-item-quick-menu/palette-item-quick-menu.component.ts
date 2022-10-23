@@ -4,6 +4,9 @@ import {PaletteBuilderComponent} from '../palette-builder.component';
 import {ElementHelper} from '../../../../../../../../shared/core/helpers/element-helper';
 import {MoveAbleSettingsManagerService} from '../../../../../../../../shared/core/components/move-able-settings/tools/Services/move-able-settings-manager.service';
 import {PaletteItemComponent} from '../page-block/palette-item-component/palette-item.component';
+import {MoveableModalService} from '../../../../../../../../shared/core/components/moveable-modal/tools/services/moveable-modal.service';
+import {MiniAdminComponent} from '../../../../../../../../shared/core/components/mini-admin/mini-admin.component';
+import {PluginResolverService} from '../../../../../../../../plugins/tools/services/plugin-resolver.service';
 
 
 @Component({
@@ -25,6 +28,8 @@ export class PaletteItemQuickMenuComponent implements OnInit {
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     private paletteBuilderComponent: PaletteBuilderComponent,
     private moveAbleSettingsManagerService: MoveAbleSettingsManagerService,
+    private moveableModalService: MoveableModalService,
+    private pluginResolverService: PluginResolverService
   ) {
 
   }
@@ -57,6 +62,13 @@ export class PaletteItemQuickMenuComponent implements OnInit {
 
   private openItemMenu(): void{
     this.display = 'none';
-    this.moveAbleSettingsManagerService.registerComponent(this.selectedItemForMenu.componentRef.instance);
+    const plugin = this.selectedItemForMenu.componentRef.instance;
+    this.moveAbleSettingsManagerService.registerComponent(plugin);
+    const miniAdmin = this.moveableModalService.moveableModalComponent.content as MiniAdminComponent;
+    const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
+      this.selectedItemForMenu.componentRef.instance.settings.identifier
+    );
+    miniAdmin.setAdminAble(pluginResolver, plugin.settings);
+    this.moveableModalService.show();
   }
 }

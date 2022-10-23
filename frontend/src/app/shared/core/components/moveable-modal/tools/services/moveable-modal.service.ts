@@ -1,4 +1,4 @@
-import {Injectable, Type} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {MoveableModalComponent} from '../../moveable-modal.component';
 
 @Injectable({
@@ -11,11 +11,11 @@ export class MoveableModalService {
   constructor() {
   }
 
-  registerModal(moveAbleSettingsComponent: MoveableModalComponent): void {
-    this.moveableModalComponent = moveAbleSettingsComponent;
+  registerModal(moveableModalComponent: MoveableModalComponent): void {
+    this.moveableModalComponent = moveableModalComponent;
   }
 
-  registerComponent(component: Type<any>): void {
-    this.moveableModalComponent.registerComponent(component, null);
+  show(): void {
+    this.moveableModalComponent.show();
   }
 }

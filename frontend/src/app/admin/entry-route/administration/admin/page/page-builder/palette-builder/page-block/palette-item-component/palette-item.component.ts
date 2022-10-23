@@ -16,7 +16,7 @@ import {Subject} from 'rxjs';
 import {ElementPositionMessenger} from '../../../../../../../../../shared/core/messengers/element-position/element-position-messenger';
 import {ElementHelper} from '../../../../../../../../../shared/core/helpers/element-helper';
 import {PaletteItemConfig} from './tools/interfaces/palette-item-config';
-import {AbstractMenuPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {AbstractPluginResolver} from '../../../tools/messengers/abstract-classes/abstract-plugin-resolver';
 import {AbstractPlugin} from '../../../../../../../../../plugins/tools/abstract-class/abstract-plugin';
 import {WebDetailResolverService} from '../../../../../../tools/route-resolvers/web-detail-resolver.service';
 
@@ -27,8 +27,8 @@ import {WebDetailResolverService} from '../../../../../../tools/route-resolvers/
 })
 export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
-  @Input() paletteItemConfig: PaletteItemConfig;
-  @ViewChild('itemTemplate', {read: ViewContainerRef, static: true}) viewContainerRef: ViewContainerRef;
+  @Input() gridItemConfig: PaletteItemConfig;
+  @ViewChild('itemTemplate', {read: ViewContainerRef, static: true}) pluginContainer: ViewContainerRef;
   private _componentRef: ComponentRef<AbstractPlugin<any>>;
   private lastPosition: ElementPositionMessenger;
 
@@ -39,7 +39,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private resolver: ComponentFactoryResolver,
     private webDetailResolverService: WebDetailResolverService,
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
-    @Inject(AbstractMenuPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractMenuPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
   ) {
 
   }
@@ -88,15 +88,15 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   createPlugin(): void {
     let componentClass: new(...args: any[]) => {};
-    if (this.paletteItemConfig.plugin.identifier === 'none') {
-      componentClass = this.menuPluginResolverService.selectedAbstractMenuPluginResolverMessenger.componentClass;
+    if (this.gridItemConfig.plugin.identifier === 'none') {
+      componentClass = this.menuPluginResolverService.selectedAbstractPluginResolverMessenger.componentClass;
     } else {
       componentClass = this.getComponentFromIdentifier();
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
-    this._componentRef = this.viewContainerRef.createComponent<AbstractPlugin<any>>(factory);
-    this._componentRef.instance.initializeSettings(this.paletteItemConfig.plugin,
-      this.paletteItemConfig.plugin.identifier !== 'none', this.webDetailResolverService.webDetail.plugins);
+    this._componentRef = this.pluginContainer.createComponent<AbstractPlugin<any>>(factory);
+    this._componentRef.instance.initializeSettings(this.gridItemConfig.plugin,
+      this.gridItemConfig.plugin.identifier !== 'none', this.webDetailResolverService.webDetail.plugins);
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
@@ -104,8 +104,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   getComponentFromIdentifier(): new(...args: any[]) => {} {
-    return this._abstractMenuPluginResolverMessenger.find(value => {
-      return value.identifier === this.paletteItemConfig.plugin.identifier;
+    return this.abstractPluginResolver.find(value => {
+      return value.identifier === this.gridItemConfig.plugin.identifier;
     }).componentClass;
   }
 }

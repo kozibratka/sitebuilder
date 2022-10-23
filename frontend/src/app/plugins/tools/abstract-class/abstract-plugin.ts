@@ -1,7 +1,7 @@
 import {SettingAbleInterface} from '../../../shared/core/components/move-able-settings/tools/interfaces/setting-able-interface';
-import {BasePlugSettingsinInterface} from '../interfaces/base-plug-settingsin-interface';
+import {BasePlugConfigInterface} from '../interfaces/base-plug-config-interface';
 
-export abstract class AbstractPlugin<T extends BasePlugSettingsinInterface> implements SettingAbleInterface<T>{
+export abstract class AbstractPlugin<T extends BasePlugConfigInterface> implements SettingAbleInterface<T>{
   settings: T;
   globalSettings: T[];
 

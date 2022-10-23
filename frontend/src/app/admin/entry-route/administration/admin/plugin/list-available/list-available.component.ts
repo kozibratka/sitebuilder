@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {AbstractMenuPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-menu-plugin-resolver';
+import {AbstractPluginResolver} from '../../page/page-builder/tools/messengers/abstract-classes/abstract-plugin-resolver';
 import {ActivatedRoute} from '@angular/router';
-import {BasePlugSettingsinInterface} from '../../../../../../plugins/tools/interfaces/base-plug-settingsin-interface';
+import {BasePlugConfigInterface} from '../../../../../../plugins/tools/interfaces/base-plug-config-interface';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,18 +11,18 @@ import * as _ from 'lodash';
 })
 export class ListAvailableComponent implements OnInit {
 
-  availableDisabledPlugins: AbstractMenuPluginResolver[] = [];
-  availableEnabledPlugins: AbstractMenuPluginResolver[] = [];
+  availableDisabledPlugins: AbstractPluginResolver[] = [];
+  availableEnabledPlugins: AbstractPluginResolver[] = [];
   displayedColumns = ['name', 'description', 'action'];
 
   constructor(
-    @Inject(AbstractMenuPluginResolver) public abstractMenuPluginResolver: AbstractMenuPluginResolver[],
+    @Inject(AbstractPluginResolver) public abstractMenuPluginResolver: AbstractPluginResolver[],
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      const globalPlugins = data.globalPlugins as BasePlugSettingsinInterface[];
+      const globalPlugins = data.globalPlugins as BasePlugConfigInterface[];
       this.abstractMenuPluginResolver.forEach(param => {
         if (_.find(globalPlugins, {identifier: param.identifier})) {
           this.availableEnabledPlugins.push(param);
