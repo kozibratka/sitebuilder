@@ -1,12 +1,6 @@
-<div *ngIf="adminAble" class="card card-primary card-outline">
-  <div class="card-header">
-    <h3 class="card-title" *ngIf="headerName"><span class="logo">{{headerName}}</span></h3>
-  </div> <!-- /.card-body -->
-  <div class="card-body">
     <div class="wrapper d-flex align-items-stretch">
       <nav id="sidebar">
-        <h1><span class="logo">Menu</span></h1>
-        <ul class="list-unstyled components mb-5">
+        <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass();">
             <a href="#" (click)="showContent(setting.component);$event.preventDefault()">
               <span class="fa fa-chevron-right mr-3"></span>{{setting.label}}</a>
@@ -16,12 +10,10 @@
 
       <div id="content" class="p-4 p-md-5 pt-5">
         <div class="content-block">
-          <ng-container #content></ng-container>
+          <ng-container #content1></ng-container>
         </div>
       </div>
     </div>
-  </div><!-- /.card-body -->
-</div>
 
 
 

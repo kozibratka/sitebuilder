@@ -33,10 +33,6 @@ export class AdministrationComponent implements OnInit {
     private eventEmitterService: EventEmitterService<boolean>
   ) {
   }
-  @HostListener('click')
-  click(): void {
-    this.eventEmitterService.emit(Event.ADMINISTRATION_ELSEWHERE_CLICK, true);
-  }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {

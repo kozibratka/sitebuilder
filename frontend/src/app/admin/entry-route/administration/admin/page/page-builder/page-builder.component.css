@@ -3,3 +3,15 @@
   top: 74px;
   right: 19px;
 }
+
+.global-plugin-selector {
+  border-bottom: 1px solid black;
+}
+
+.add-global-plugin {
+  position: absolute;
+  float: right;
+  bottom: 5px;
+  right: 5px;
+  line-height: 20px;
+}

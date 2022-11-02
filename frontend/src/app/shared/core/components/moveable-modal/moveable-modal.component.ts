@@ -20,42 +20,33 @@ import {EventEmitterService} from '../../services/event-emitter-service';
 })
 export class MoveableModalComponent implements OnInit, OnDestroy {
 
-  @ContentChild('content') content: any;
+  @ContentChild('modalContent') content: any;
   @HostBinding('style.display') display = 'block';
   @HostBinding('style.left') left = '0px';
   @HostBinding('style.top') top = '0px';
-  private allowHide = true;
+  title = '';
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private elementRef: ElementRef,
     private moveableModalService: MoveableModalService,
-    private eventEmitterService: EventEmitterService<boolean>,
   ) { }
 
   ngOnInit(): void {
     this.moveableModalService.registerModal(this);
-    this.eventEmitterService.registerCallback(Event.ADMINISTRATION_ELSEWHERE_CLICK, (eventName, status) => {
-      this.close();
-    });
     this.display = 'none';
   }
 
   ngOnDestroy() {
-    this.eventEmitterService.unregisterCallback(Event.ADMINISTRATION_ELSEWHERE_CLICK);
   }
 
   @HostListener('click', ['$event'])
   click(event: any) {
     event.stopPropagation(); event.preventDefault();
-    this.allowHide = false;
   }
 
   close() {
-    if (this.allowHide && this.display !== 'none') {
-      this.display = 'none';
-    }
-    this.allowHide = true;
+    this.display = 'none';
   }
 
   show(): void {
@@ -64,7 +55,7 @@ export class MoveableModalComponent implements OnInit, OnDestroy {
       this.elementRef.nativeElement.style.display = 'block';
       const centerPosition = ElementHelper.centerToViewportInDocument(this.elementRef.nativeElement);
       this.left = centerPosition.x + 'px';
-      this.top = centerPosition.y + 'px';
+      this.top = centerPosition.y - (centerPosition.y / 100 * 40) + 'px';
     }, 0);
   }
 }

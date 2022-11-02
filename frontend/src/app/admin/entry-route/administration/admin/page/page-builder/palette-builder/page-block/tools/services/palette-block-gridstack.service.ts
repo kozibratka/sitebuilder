@@ -96,7 +96,7 @@ export class PaletteBlockGridstackService {
   }
 
   createGridItemOnDropNew(newWidget: GridStackNode): void {
-    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none'}};
+    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none', id: null, name: ''}};
     this.updatePaletteItemGridProperty(newWidget, newWidgetTmp);
     this.paletteItemConfigs.push(newWidgetTmp);
   }

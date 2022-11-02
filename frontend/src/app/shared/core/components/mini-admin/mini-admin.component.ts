@@ -9,7 +9,7 @@ import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
 })
 export class MiniAdminComponent implements OnInit {
 
-  @ViewChild('content', {read: ViewContainerRef, static: true}) content: ViewContainerRef;
+  @ViewChild('content1', {read: ViewContainerRef, static: true}) content1: ViewContainerRef;
   adminAble: AdminAbleInterface;
   selectedComponent: new() => any;
   headerName = '';
@@ -24,9 +24,9 @@ export class MiniAdminComponent implements OnInit {
 
   showContent(component: new() => SettingAbleInterface) {
     this.selectedComponent = component;
-    this.content.clear();
+    this.content1.clear();
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-    const admin = this.content.createComponent<SettingAbleInterface>(componentFactory).instance;
+    const admin = this.content1.createComponent<SettingAbleInterface>(componentFactory).instance;
     admin.settings = this.settings;
   }
 

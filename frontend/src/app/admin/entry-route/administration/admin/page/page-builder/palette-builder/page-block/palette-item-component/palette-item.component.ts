@@ -88,15 +88,15 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   createPlugin(): void {
     let componentClass: new(...args: any[]) => {};
-    if (this.gridItemConfig.plugin.identifier === 'none') {
+    const isNewPlugin = !!!this.gridItemConfig.plugin.id;
+    if (isNewPlugin) {
       componentClass = this.menuPluginResolverService.selectedAbstractPluginResolverMessenger.componentClass;
     } else {
       componentClass = this.getComponentFromIdentifier();
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
     this._componentRef = this.pluginContainer.createComponent<AbstractPlugin<any>>(factory);
-    this._componentRef.instance.initializeSettings(this.gridItemConfig.plugin,
-      this.gridItemConfig.plugin.identifier !== 'none', this.webDetailResolverService.webDetail.plugins);
+    this._componentRef.instance.initializeSettings(isNewPlugin ? null : this.gridItemConfig.plugin);
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {

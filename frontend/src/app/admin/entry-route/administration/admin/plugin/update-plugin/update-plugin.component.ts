@@ -20,7 +20,7 @@ import {MiniAdminComponent} from '../../../../../../shared/core/components/mini-
 })
 export class UpdatePluginComponent implements OnInit {
   pluginResolver: AbstractPluginResolver;
-  @ViewChild('miniAdmin', {read: MiniAdminComponent}) private miniAdmin: MiniAdminComponent;
+  @ViewChild('miniAdmin', {read: MiniAdminComponent, static: true}) private miniAdmin: MiniAdminComponent;
   pluginSetting: BasePlugConfigInterface;
 
   constructor(

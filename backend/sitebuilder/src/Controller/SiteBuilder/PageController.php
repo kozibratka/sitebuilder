@@ -6,6 +6,7 @@ namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Page;
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
 use App\Form\SiteBuilder\PageType;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,9 +31,15 @@ class PageController extends BaseApiController
     /**
      * @Route("/read/{id}", name="read")
      */
-    public function read(Page $page)
+    public function read(Request $request, Page $page)
     {
         $this->denyAccessUnlessGranted('page_builder_voter', $page);
+        $withGlobalPlugins = $request->query->get('withGlobalPlugins');
+        if($withGlobalPlugins) {
+            $globalPlugins = $this->getDoctrine()->getRepository(BasePlugin::class)->findBy(['web' => $page->getWeb()]);
+            $page->setGlobalPlugins($globalPlugins);
+        }
+
         return $this->jsonResponseSimple($page);
     }
 

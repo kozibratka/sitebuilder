@@ -1,5 +1,5 @@
 export interface BasePlugConfigInterface {
-  id: number;
+  id?: number;
   identifier: string;
-  name: string;
+  name?: string;
 }

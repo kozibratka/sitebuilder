@@ -1,28 +1,17 @@
-import {SettingAbleInterface} from '../../../shared/core/components/move-able-settings/tools/interfaces/setting-able-interface';
 import {BasePlugConfigInterface} from '../interfaces/base-plug-config-interface';
 
-export abstract class AbstractPlugin<T extends BasePlugConfigInterface> implements SettingAbleInterface<T>{
+export abstract class AbstractPlugin<T extends BasePlugConfigInterface>{
   settings: T;
-  globalSettings: T[];
 
-  abstract initEmptySettings(): void;
+  abstract initEmptySettings(): T;
 
   abstract refreshView(): void;
 
-  initializeSettings(settings: {}, isFromDatabase: boolean, globalSettings: T[]): void {
-    this.settings = settings as T;
-    if (!isFromDatabase) {
-      this.initEmptySettings();
+  initializeSettings(settings: {}): void {
+    if (!settings) {
+      this.settings = this.initEmptySettings();
+    } else {
+      this.settings = settings as T;
     }
-    this.globalSettings = globalSettings;
-  }
-
-  getGlobalSettings(): { name: string; settings: T }[] {
-    const filtered = this.globalSettings.filter(value => value.identifier === this.settings.identifier);
-    return filtered.map((value) => ({name: value.name, settings: value}));
-  }
-
-  setFromGlobalSettings(settings: T) {
-    this.settings = settings;
   }
 }

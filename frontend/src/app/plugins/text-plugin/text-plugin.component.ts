@@ -1,8 +1,6 @@
-import {Component, OnInit, Type} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TextPluginConfigInterface} from './tools/interfaces/text-plugin-config-interface';
 import {AbstractPlugin} from '../tools/abstract-class/abstract-plugin';
-import {SettingSubjectAbleInterface} from '../../shared/core/components/move-able-settings/tools/interfaces/setting-subject-able-interface';
-import {TextPluginAdminComponent} from './admin/text-plugin-admin/text-plugin-admin.component';
 
 @Component({
   selector: 'app-text-plugin',
@@ -19,9 +17,11 @@ export class TextPluginComponent extends AbstractPlugin<TextPluginConfigInterfac
   ngOnInit(): void {
   }
 
-  initEmptySettings(): void {
-    this.settings.identifier = 'text_plugin';
-    this.settings.text = 'Text plugin';
+  initEmptySettings(): TextPluginConfigInterface {
+    return {
+      identifier: 'text_plugin',
+      text: 'Text plugin'
+    };
   }
 
   refreshView(): void {

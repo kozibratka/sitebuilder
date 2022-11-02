@@ -2,11 +2,11 @@ import {Component, HostBinding, HostListener, Inject, OnInit} from '@angular/cor
 import {Subject} from 'rxjs';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {ElementHelper} from '../../../../../../../../shared/core/helpers/element-helper';
-import {MoveAbleSettingsManagerService} from '../../../../../../../../shared/core/components/move-able-settings/tools/Services/move-able-settings-manager.service';
 import {PaletteItemComponent} from '../page-block/palette-item-component/palette-item.component';
 import {MoveableModalService} from '../../../../../../../../shared/core/components/moveable-modal/tools/services/moveable-modal.service';
 import {MiniAdminComponent} from '../../../../../../../../shared/core/components/mini-admin/mini-admin.component';
 import {PluginResolverService} from '../../../../../../../../plugins/tools/services/plugin-resolver.service';
+import {PageBuilderComponent} from '../../page-builder.component';
 
 
 @Component({
@@ -27,9 +27,9 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   constructor(
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     private paletteBuilderComponent: PaletteBuilderComponent,
-    private moveAbleSettingsManagerService: MoveAbleSettingsManagerService,
     private moveableModalService: MoveableModalService,
-    private pluginResolverService: PluginResolverService
+    private pluginResolverService: PluginResolverService,
+    private pageBuilderComponent: PageBuilderComponent
   ) {
 
   }
@@ -63,11 +63,12 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   private openItemMenu(): void{
     this.display = 'none';
     const plugin = this.selectedItemForMenu.componentRef.instance;
-    this.moveAbleSettingsManagerService.registerComponent(plugin);
     const miniAdmin = this.moveableModalService.moveableModalComponent.content as MiniAdminComponent;
     const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
       this.selectedItemForMenu.componentRef.instance.settings.identifier
     );
+    this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
+    this.pageBuilderComponent.moveableModalComponent.title = 'Úprava pluginu: ' + pluginResolver.name;
     miniAdmin.setAdminAble(pluginResolver, plugin.settings);
     this.moveableModalService.show();
   }

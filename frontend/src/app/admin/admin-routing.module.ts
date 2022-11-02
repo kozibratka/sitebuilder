@@ -18,6 +18,7 @@ import {PageBuilderResolverService} from './entry-route/administration/admin/pag
 import {WebListResolverGuard} from './entry-route/administration/tools/guards/web-list-resolver.service';
 import {FileComponent} from './entry-route/administration/admin/file/file.component';
 import {GenericResolver} from '../shared/core/services/resolver/generic.resolver';
+import {GlobalPluginsResolver} from './entry-route/administration/admin/tools/route-resolvers/global-plugins.resolver';
 
 
 const routes: Routes = [
@@ -67,7 +68,8 @@ const routes: Routes = [
           {
             path: 'page-builder/:pageId',
             component: PageBuilderComponent,
-            resolve: {pageDetail: PageBuilderResolverService/*, globalPlugins: GlobalPluginsResolver*/}
+            resolve: {pageDetail: PageBuilderResolverService},
+            data: {withGlobalPlugins: true},
           }
         ]
       },

@@ -1,0 +1,29 @@
+:host{
+  position: absolute;
+  width: 50%;
+  z-index: 9999;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.move-line {
+  height: 33px;
+  background: #2f89fc;
+  width: 100%;
+  cursor: move;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid #2f89fc;
+}
+
+.close-icon {
+  font-size: 19px;
+  color: white;
+  cursor: pointer;
+}
+
+.header-title {
+  margin-left: 11px;
+  color: white;
+  vertical-align: middle;
+}

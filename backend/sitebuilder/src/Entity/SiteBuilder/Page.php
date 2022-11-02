@@ -2,6 +2,7 @@
 
 namespace App\Entity\SiteBuilder;
 
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -51,6 +52,8 @@ class Page
      * @Serializer\Exclude()
      */
     private Web $web;
+
+    private array $globalPlugins = [];
 
     public function __construct()
     {
@@ -109,5 +112,15 @@ class Page
     public function setWeb(Web $web)
     {
         $this->web = $web;
+    }
+
+    public function getGlobalPlugins(): array
+    {
+        return $this->globalPlugins;
+    }
+
+    public function setGlobalPlugins(array $globalPlugins)
+    {
+        $this->globalPlugins = $globalPlugins;
     }
 }
