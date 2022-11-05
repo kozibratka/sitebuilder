@@ -5,7 +5,12 @@
   <div class="card-body">
     <form [formGroup]="createPageForm">
       <app-global-form-error></app-global-form-error>
-      <input appFormError type="text" class="form-control" placeholder="Název stránky" formControlName="name">
+      <label for="name">Název stráky:</label>
+      <input appFormError (keyup)="refreshUrlInput($event)" type="text" class="form-control" placeholder="Název stránky" formControlName="name" id="name">
+      <label class="mt-3" for="url">Url stráky:</label>
+      <input appFormError type="text" class="form-control" placeholder="Url stránky" formControlName="url" id="url">
+      <label class="mt-3" for="description">Popis stráky:</label>
+      <textarea appFormError type="text" class="form-control" placeholder="Popis stránky" formControlName="description" id="description"></textarea>
       <div class="container-fluid mt-3">
         <div class="row justify-content-end">
           <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button>Zpět na seznam stránek</a>

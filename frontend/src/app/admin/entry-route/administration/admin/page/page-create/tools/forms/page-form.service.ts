@@ -8,7 +8,9 @@ import {FormGroup} from '@angular/forms';
 export class PageFormService extends AbstractApiFormService{
   createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup {
     return this.formBuilder.group({
-      name: ['']
+      name: [''],
+      url: [''],
+      description: ['']
     }, {asyncValidators: this.createValidator(data), updateOn: 'submit'});
   }
 

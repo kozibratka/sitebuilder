@@ -17,6 +17,8 @@ export class PageCreateComponent implements OnInit {
 
   createPageForm: FormGroup;
   webId: string;
+  pageName: string;
+  urlPage: string;
 
   constructor(
     private pageFormService: PageFormService,
@@ -38,13 +40,16 @@ export class PageCreateComponent implements OnInit {
   }
 
   createPage(): void {
-    this.createPageForm = this.pageFormService.createForm({path: 'page_create', querySegment: {id: this.webDetailResolverService.selectedId}});
+    this.createPageForm = this.pageFormService.createForm({
+      path: 'page_create',
+      querySegment: {id: this.webDetailResolverService.selectedId}
+    });
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.symfonyApiClientService.post('page_create', this.createPageForm.value, {id: this.webDetailResolverService.selectedId}).subscribe({
           next: () => {
             this.notifierService.notify('Stránka byla úspěšně vytvořena');
-            this.router.navigate(['list'], { relativeTo: this.route.parent });
+            this.router.navigate(['list'], {relativeTo: this.route.parent});
           },
           error: err => this.httpResponseToasterService.showError(err)
         });
@@ -67,6 +72,11 @@ export class PageCreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  refreshUrlInput(event: Event) {
+    const pageName = (event.target as HTMLInputElement).value;
+    this.createPageForm.patchValue({url: pageName.replaceAll(' ', '-').toLowerCase()}, {emitEvent: false});
   }
 
 }

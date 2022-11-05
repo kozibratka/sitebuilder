@@ -2,13 +2,13 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Security\Validator as AppValidator;
 
@@ -17,6 +17,14 @@ use App\Security\Validator as AppValidator;
  * @ORM\Table(name="page")
  * @AppValidator\UniqueEntityWithUser(fields={"name", "user"})
  */
+#[UniqueEntity(
+    fields: ['name', 'web'],
+    errorPath: 'name',
+)]
+#[UniqueEntity(
+    fields: ['url', 'web'],
+    errorPath: 'url',
+)]
 class Page
 {
     /**
@@ -52,6 +60,17 @@ class Page
      * @Serializer\Exclude()
      */
     private Web $web;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     */
+    private string $url;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $description = '';
 
     private array $globalPlugins = [];
 
@@ -122,5 +141,25 @@ class Page
     public function setGlobalPlugins(array $globalPlugins)
     {
         $this->globalPlugins = $globalPlugins;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url)
+    {
+        $this->url = $url;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description)
+    {
+        $this->description = $description;
     }
 }

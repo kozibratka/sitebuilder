@@ -14,7 +14,9 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
+        $builder->add('name',null, ['empty_data' => ''])
+            ->add('url', null, ['empty_data' => ''])
+            ->add('description')
             ->add(
                 'pageBlocks',
                 CollectionType::class,
