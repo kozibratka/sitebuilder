@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AbstractPluginResolver} from '../../../../admin/entry-route/administration/admin/page/page-builder/tools/messengers/abstract-classes/abstract-plugin-resolver';
 import {TextPluginComponent} from '../../text-plugin.component';
 import {PluginIdentifier} from '../../../tools/constants/plugin-identifier';
 import {TextPluginAdminComponent} from '../../admin/text-plugin-admin/text-plugin-admin.component';
+import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
 
 @Injectable({
   providedIn: 'root'

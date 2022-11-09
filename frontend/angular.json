@@ -32,7 +32,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/ngx-drag-to-select/ngx-drag-to-select.css",
-              "src/app/shared/context-menu/directives/style.css",
+              "src/app/core/modules/context-menu/directives/style.css",
               "src/assets/admin_lte/plugins/fontawesome-free/css/all.min.css",
               "src/assets/admin_lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "src/assets/admin_lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -90,6 +90,11 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "public": {
+              "outputPath": "dist/frontend-public",
+              "index": "src/public-index.html",
+              "main": "src/public-main.ts"
             }
           }
         },
@@ -101,6 +106,10 @@
           "configurations": {
             "production": {
               "browserTarget": "frontend-admin:build:production"
+            },
+            "public": {
+              "browserTarget": "frontend-admin:build:public",
+              "port": 4201
             }
           }
         },

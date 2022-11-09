@@ -1,0 +1,43 @@
+<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+  <li class="nav-item">
+    <a [routerLink]="['/admin', webDetailResolverService.selectedId]" routerLinkActive="active" (click)="title.setTitle('Úvodní stránka')"
+       [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+    <i class="nav-icon far fa-image"></i>
+      <p>
+        Úvodní stránka
+      </p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="web/list" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Moje weby')">
+      <i class="nav-icon fas fa-copy"></i>
+      <p>
+        Moje weby
+      </p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="page/list" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Moje stránky')">
+      <i class="nav-icon fas fa-copy"></i>
+      <p>
+        Moje stránky
+      </p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="plugin/list-available" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Seznam pluginů')">
+      <i class="nav-icon fas fa-copy"></i>
+      <p>
+        Seznam pluginů
+      </p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="file" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Soubory')">
+      <i class="nav-icon fas fa-copy"></i>
+      <p>
+        Soubory
+      </p>
+    </a>
+  </li>
+</ul>

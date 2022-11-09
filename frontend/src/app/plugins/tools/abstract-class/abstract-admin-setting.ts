@@ -2,10 +2,8 @@ import {AbstractPlugin} from './abstract-plugin';
 import {BasePlugConfigInterface} from '../interfaces/base-plug-config-interface';
 import {FormBuilder} from '@angular/forms';
 import {Directive} from '@angular/core';
-import {
-  AbstractPluginResolver
-} from '../../../admin/entry-route/administration/admin/page/page-builder/tools/messengers/abstract-classes/abstract-plugin-resolver';
 import {AdminFormService} from '../forms/admin-form.service';
+import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 
 @Directive()
 export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
