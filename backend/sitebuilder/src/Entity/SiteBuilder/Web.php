@@ -55,6 +55,16 @@ class Web
      */
     private Collection $plugins;
 
+    /**
+     * @ORM\Column(type="json", nullable=true)
+     */
+    private ?string $pagePreview = null;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $previewPath = null;
+
     public function __construct()
     {
         $this->pages = new ArrayCollection();
@@ -120,5 +130,25 @@ class Web
     public function setPlugins(Collection $plugins)
     {
         $this->plugins = $plugins;
+    }
+
+    public function getPagePreview(): ?string
+    {
+        return $this->pagePreview;
+    }
+
+    public function setPagePreview(?string $pagePreview)
+    {
+        $this->pagePreview = $pagePreview;
+    }
+
+    public function getPreviewPath(): ?string
+    {
+        return $this->previewPath;
+    }
+
+    public function setPreviewPath(?string $previewPath)
+    {
+        $this->previewPath = $previewPath;
     }
 }

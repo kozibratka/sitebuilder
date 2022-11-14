@@ -4,6 +4,12 @@
   right: 19px;
 }
 
+.preview-builder{
+  position: absolute;
+  top: 74px;
+  right: 120px;
+}
+
 .global-plugin-selector {
   border-bottom: 1px solid black;
 }

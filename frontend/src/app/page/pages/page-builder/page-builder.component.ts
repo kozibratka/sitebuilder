@@ -11,6 +11,7 @@ import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/sy
 import {ArrayHelper} from '../../../core/helpers/array-helper';
 import {PluginResolverService} from '../../../plugins/tools/services/plugin-resolver.service';
 import {NotifierService} from '../../../core/services/notifier.service';
+import {DomainInfoService} from '../../../core/services/domain-info.service';
 
 @Component({
   selector: 'app-page-builder',
@@ -34,7 +35,8 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
     private webDetailResolverService: WebDetailResolverService,
-    private pluginResolverService: PluginResolverService
+    private pluginResolverService: PluginResolverService,
+    private domainInfoService: DomainInfoService
   ) {
   }
 
@@ -57,6 +59,17 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
         ArrayHelper.syncArrayOfObjects(response.body.pageBlocks, this.pageDetail.pageBlocks); // refresh blocks, items...
         this.webDetailResolverService.refresh();
         this.notifierService.notify('Úpravy byly úspěšně uloženy');
+      },
+      error: err => this.httpResponseToasterService.showError(err)
+    });
+  }
+
+  preview(): void {
+    this.symfonyApiClientService.post<{hash: string}>('web_set_preview', this.webDetailResolverService.webDetail, {id: this.webDetailResolverService.selectedId}).subscribe({
+      next: (response) => {
+        const previewHash = response.body.hash;
+        const redirectUrl = this.domainInfoService.getPreviewHostname() + `?previewHash=${previewHash}&pageId=${this.pageDetail.id}`;
+        window.open(redirectUrl, '_blank');
       },
       error: err => this.httpResponseToasterService.showError(err)
     });

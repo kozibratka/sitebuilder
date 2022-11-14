@@ -8,6 +8,7 @@ use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
+use App\Form\SiteBuilder\PagePreviewType;
 use App\Form\SiteBuilder\PageType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,5 +83,37 @@ class PageController extends BaseApiController
         $this->denyAccessUnlessGranted('page_builder_voter',$page);
         $this->removeEntity($page);
         return new JsonResponse();
+    }
+
+    /**
+     * @Route("/set-preview/{id}", name="set_preview")
+     */
+    public function setPagePreview(Request $request, Web $web)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter', $web);
+        $form = $this->createForm(PagePreviewType::class, $web);
+        $form->submit($request->request->all());
+        if($form->isValid()) {
+            $web = $form->getData();
+            $this->flush();
+            return $this->jsonResponseSimple($web, 201);
+        }
+        return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/get-preview/{id}", name="get_preview")
+     */
+    public function getPagePreview(Request $request, Web $web)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter', $web);
+        $previewPath = $request->request->get('previewPath');
+        if ($web->getPreviewPath() === $previewPath) {
+            $pageJson = $web->getPagePreview();
+            return JsonResponse::fromJsonString($pageJson);
+        } else {
+            $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $previewPath]);
+            return $this->jsonResponseSimple($page);
+        }
     }
 }

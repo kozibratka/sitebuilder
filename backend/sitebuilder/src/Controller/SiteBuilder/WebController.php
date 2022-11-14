@@ -4,6 +4,7 @@ namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Web;
+use App\Form\SiteBuilder\PagePreviewType;
 use App\Form\SiteBuilder\WebType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
