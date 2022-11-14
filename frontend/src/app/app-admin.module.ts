@@ -11,7 +11,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {AdminComponent} from './administration/admin/admin.component';
-import {PaletteItemComponent} from './page/components/palette-builder/page-block/palette-item-component/palette-item.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -29,7 +28,6 @@ import {LayoutModule} from './layout/layout.module';
 @NgModule({
   declarations: [
     AdminComponent,
-    PaletteItemComponent,
     TestComponent,
     TestDirectiveDirective,
     AppAdminComponent

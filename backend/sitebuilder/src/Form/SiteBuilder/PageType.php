@@ -17,6 +17,7 @@ class PageType extends AbstractType
         $builder->add('name',null, ['empty_data' => ''])
             ->add('url', null, ['empty_data' => ''])
             ->add('description')
+            ->add('isPreview')
             ->add(
                 'pageBlocks',
                 CollectionType::class,

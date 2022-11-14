@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AppAdminModule} from '../app-admin.module';
 import { PublicComponent } from './pages/public/public.component';
-import {Routes} from '@angular/router';
-import {GenericResolver} from '../core/services/resolver/generic.resolver';
+import {RouterModule, Routes} from '@angular/router';
 import {AppPublicComponent} from './app-public.component';
+import {PageResolver} from './services/page.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: PublicComponent,
-    resolve: {page: GenericResolver},
+    resolve: {page: PageResolver},
   }
 ];
 @NgModule({
@@ -18,10 +18,11 @@ const routes: Routes = [
     PublicComponent,
     AppPublicComponent
   ],
-  imports: [
-    CommonModule,
-    AppAdminModule
-  ],
+    imports: [
+        CommonModule,
+        AppAdminModule,
+        RouterModule
+    ],
   bootstrap: [AppPublicComponent]
 })
 export class PublicModule { }

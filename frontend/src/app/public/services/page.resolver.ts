@@ -23,28 +23,21 @@ export class PageResolver implements Resolve<PageInterface> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface> {
+    const url = window.location.pathname;
     if (this.domainInfoService.isPreviewHostname()) {   // is preview
-      const urlParams = new URLSearchParams(window.location.search);
-      let pageId = null;
-      if (urlParams.get('previewHash') && urlParams.get('pageId')) {
-        localStorage.setItem('previewHash', urlParams.get('previewHash'));
-        pageId = urlParams.get('pageId');
-      }
-      const previewHash = localStorage.getItem('previewHash');
-      return this.symfonyApiClientService.get<PageInterface>('web_set_preview', {id: route.paramMap.get('pageId')}).pipe(catchError(err => {
+      return this.symfonyApiClientService.get<PageInterface>('page_get_preview', {url}).pipe(catchError(err => {
         this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;
       }));
-    } else {
-      return this.symfonyApiClientService.get<PageInterface>('web_set_preview', {id: route.paramMap.get('pageId')}).pipe(catchError(err => {
+    } else {  // is public
+      return this.symfonyApiClientService.get<PageInterface>('page_get_public', {url}).pipe(catchError(err => {
         this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;
       }));
-
     }
   }
 }

@@ -22,7 +22,7 @@ use App\Security\Validator as AppValidator;
     errorPath: 'name',
 )]
 #[UniqueEntity(
-    fields: ['url', 'web'],
+    fields: ['url', 'web', 'isPreview '],
     errorPath: 'url',
 )]
 class Page
@@ -71,6 +71,11 @@ class Page
      * @ORM\Column(type="string", nullable=true)
      */
     private ?string $description = '';
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private ?bool $isPreview = false;
 
     private array $globalPlugins = [];
 
@@ -161,5 +166,15 @@ class Page
     public function setDescription(?string $description)
     {
         $this->description = $description;
+    }
+
+    public function getIsPreview(): ?bool
+    {
+        return $this->isPreview;
+    }
+
+    public function setIsPreview(?bool $isPreview)
+    {
+        $this->isPreview = $isPreview;
     }
 }

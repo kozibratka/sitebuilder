@@ -1,6 +1,7 @@
 import {Type} from '@angular/core';
 import {AdminAbleInterface} from '../../../core/components/mini-admin/tools/interfaces/admin-able-interface';
 import {SettingAbleInterface} from '../../../core/components/mini-admin/tools/interfaces/setting-able-interface';
+import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
 
 export abstract class AbstractPluginResolver implements AdminAbleInterface{
   abstract getMenuImage(): string;
@@ -18,4 +19,6 @@ export abstract class AbstractPluginResolver implements AdminAbleInterface{
   abstract get description(): string;
 
   abstract get name(): string;
+
+  abstract get defaultSettings(): BasePlugConfigInterface;
 }

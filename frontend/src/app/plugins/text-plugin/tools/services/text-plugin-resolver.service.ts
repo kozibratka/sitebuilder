@@ -3,6 +3,8 @@ import {TextPluginComponent} from '../../text-plugin.component';
 import {PluginIdentifier} from '../../../tools/constants/plugin-identifier';
 import {TextPluginAdminComponent} from '../../admin/text-plugin-admin/text-plugin-admin.component';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
+import {BasePlugConfigInterface} from '../../../tools/interfaces/base-plug-config-interface';
+import {TextPluginConfigInterface} from '../interfaces/text-plugin-config-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +49,12 @@ export class TextPluginResolverService extends AbstractPluginResolver{
 
   get name(): string {
     return 'Článek';
+  }
+
+  get defaultSettings(): TextPluginConfigInterface {
+    return {
+      identifier: this.identifier,
+      text: 'Toto je krásný twxt',
+    };
   }
 }

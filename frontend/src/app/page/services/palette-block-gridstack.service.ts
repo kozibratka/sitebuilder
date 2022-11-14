@@ -4,6 +4,7 @@ import {PaletteBlockService} from './palette-block.service';
 import {PaletteItemConfig} from '../interfaces/palette-item-config';
 import {GridStackDragDrop} from './grid-stack-drag-drop';
 import {PaletteItemComponent} from '../components/palette-builder/page-block/palette-item-component/palette-item.component';
+import {MenuPluginResolverService} from './menu-plugin-resolver.service';
 
 @Injectable()
 export class PaletteBlockGridstackService {
@@ -17,7 +18,8 @@ export class PaletteBlockGridstackService {
 
   constructor(private zone: NgZone,
               private changeDetectorRef: ChangeDetectorRef,
-              private paletteBlockService: PaletteBlockService
+              private paletteBlockService: PaletteBlockService,
+              private menuPluginResolverService: MenuPluginResolverService
   ) {
 
   }
@@ -96,7 +98,7 @@ export class PaletteBlockGridstackService {
   }
 
   createGridItemOnDropNew(newWidget: GridStackNode): void {
-    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none', id: null, name: ''}};
+    const newWidgetTmp: PaletteItemConfig = {plugin: this.menuPluginResolverService.selectedAbstractPluginResolverMessenger.defaultSettings};
     this.updatePaletteItemGridProperty(newWidget, newWidgetTmp);
     this.paletteItemConfigs.push(newWidgetTmp);
   }

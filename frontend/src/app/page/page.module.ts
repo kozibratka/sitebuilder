@@ -21,6 +21,7 @@ import {CoreModule} from '../core/core.module';
 import {PaletteItemQuickMenuComponent} from './components/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
 import {DragScrollDirective} from './directives/drag-scroll-directive';
 import {MenuPluginResolverDirective} from './directives/menu-plugin-resolver.directive';
+import {PaletteItemComponent} from './components/palette-builder/page-block/palette-item-component/palette-item.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
     RemovePageDialogComponent,
     MenuBuilderComponent,
     PaletteBuilderComponent,
+    PaletteItemComponent,
     PaletteItemQuickMenuComponent,
     DragScrollDirective,
     MenuPluginResolverDirective

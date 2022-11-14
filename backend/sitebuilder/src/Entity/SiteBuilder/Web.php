@@ -55,16 +55,6 @@ class Web
      */
     private Collection $plugins;
 
-    /**
-     * @ORM\Column(type="json", nullable=true)
-     */
-    private ?string $pagePreview = null;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private ?string $previewPath = null;
-
     public function __construct()
     {
         $this->pages = new ArrayCollection();

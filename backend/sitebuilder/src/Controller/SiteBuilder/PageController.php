@@ -10,6 +10,7 @@ use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
 use App\Form\SiteBuilder\PagePreviewType;
 use App\Form\SiteBuilder\PageType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class PageController extends BaseApiController
     public function list(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
-        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['web' => $web]);
+        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['web' => $web, 'isPreview' => false]);
         return $this->jsonResponseSimple($pages);
     }
 
@@ -47,12 +48,20 @@ class PageController extends BaseApiController
     /**
      * @Route("/create/{id}", name="create")
      */
-    public function create(Request $request, Web $web)
+    public function create(Request $request, Web $web, ManagerRegistry $doctrine)
     {
+        $entityManager = $doctrine->getManager();
         $form = $this->createForm(PageType::class);
         $form->submit($request->request->all());
         if($form->isValid()) {
+            /** @var Page $page */
             $page = $form->getData();
+            if ($page->getIsPreview()) {
+                $previewPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['web' => $page->getWeb(), 'isPreview' => true]);
+                if ($previewPage) {
+                    $entityManager->remove($previewPage);
+                }
+            }
             $web->addPage($page);
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
@@ -86,34 +95,27 @@ class PageController extends BaseApiController
     }
 
     /**
-     * @Route("/set-preview/{id}", name="set_preview")
+     * @Route("/get-preview", name="get_preview")
      */
-    public function setPagePreview(Request $request, Web $web)
+    public function getPagePreview(Request $request)
     {
-        $this->denyAccessUnlessGranted('page_builder_voter', $web);
-        $form = $this->createForm(PagePreviewType::class, $web);
-        $form->submit($request->request->all());
-        if($form->isValid()) {
-            $web = $form->getData();
-            $this->flush();
-            return $this->jsonResponseSimple($web, 201);
+        $url = $request->request->get('url');
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url, 'isPreview' => true]);
+        if (!$page) {
+            $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url]);
         }
-        return $this->invalidFormResponse($form);
+
+        return $this->jsonResponseSimple($page ?? [], 201);
     }
 
     /**
-     * @Route("/get-preview/{id}", name="get_preview")
+     * @Route("/get-public", name="get_public")
      */
-    public function getPagePreview(Request $request, Web $web)
+    public function getPagePublic(Request $request)
     {
-        $this->denyAccessUnlessGranted('page_builder_voter', $web);
-        $previewPath = $request->request->get('previewPath');
-        if ($web->getPreviewPath() === $previewPath) {
-            $pageJson = $web->getPagePreview();
-            return JsonResponse::fromJsonString($pageJson);
-        } else {
-            $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $previewPath]);
-            return $this->jsonResponseSimple($page);
-        }
+        $url = $request->request->get('url');
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url, 'isPreview' => false]);
+
+        return $this->jsonResponseSimple($page ?? [], 201);
     }
 }
