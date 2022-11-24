@@ -36,7 +36,7 @@ export class PaletteBlockGridstackService {
         column: 12,
         ddPlugin: GridStackDragDrop,
         float: true,
-        row: 3,
+        row: 6,
         styleInHead: true,
         placeholderText: 'Zde bude nový obsah :)',
       }, this.gridstackElement.nativeElement);
@@ -98,7 +98,7 @@ export class PaletteBlockGridstackService {
   }
 
   createGridItemOnDropNew(newWidget: GridStackNode): void {
-    const newWidgetTmp: PaletteItemConfig = {plugin: this.menuPluginResolverService.selectedAbstractPluginResolverMessenger.defaultSettings};
+    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none', id: null, name: null}};
     this.updatePaletteItemGridProperty(newWidget, newWidgetTmp);
     this.paletteItemConfigs.push(newWidgetTmp);
   }

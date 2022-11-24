@@ -11,6 +11,7 @@ import {
   Output,
   EventEmitter, Inject, Input, OnInit
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import {GridItemHTMLElement, GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item-component/palette-item.component';
@@ -40,6 +41,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
     private ngZone: NgZone,
     private window: Window,
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
+    @Inject(DOCUMENT) private document: Document,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
   }
@@ -68,7 +70,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
     let resizeMouseMovePaletteListener: () => void;
     this.ngZone.runOutsideAngular(() => {
       resizeMouseMovePaletteListener = this.renderer.listen(
-        this.paletteBuilderComponent.palette.nativeElement,
+        this.document,
         'mousemove',
         (mouseEvent) => this.paletteBlockGridstackService.resizeHorizontalPalette(mouseEvent)
       );

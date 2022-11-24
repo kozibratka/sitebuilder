@@ -1,1 +1,18 @@
-<p>public works!</p>
+<ul
+  class="palette-block list-group listing-area clearfix">
+  <li class="list-group-item palette-item" *ngFor="let pageBlock of pageDetail.pageBlocks">
+    <div class="block-content grid-stack">
+      <app-public-grid-item
+        class="grid-stack-item"
+        [gridItemConfig]="gridNode"
+        *ngFor="let gridNode of pageBlock.paletteGridItems"
+        [attr.gs-x]=gridNode.x
+        [attr.gs-y]=gridNode.y
+        [attr.gs-w]=gridNode.width
+        [attr.gs-h]=gridNode.height
+      >
+      </app-public-grid-item>
+    </div>
+  </li>
+</ul>
+

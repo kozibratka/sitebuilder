@@ -96,7 +96,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     }
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
     this._componentRef = this.pluginContainer.createComponent<AbstractPlugin<any>>(factory);
-    this._componentRef.instance.initializeSettings(isNewPlugin ? null : this.gridItemConfig.plugin);
+    this._componentRef.instance.initializeSettings(this.gridItemConfig.plugin);
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {

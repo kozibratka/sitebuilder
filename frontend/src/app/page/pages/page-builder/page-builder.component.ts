@@ -65,10 +65,10 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   preview(): void {
-    this.symfonyApiClientService.post<{hash: string}>('page_create', {isPreview: true, ...this.pageDetail}, {id: this.webDetailResolverService.selectedId}).subscribe({
+    const previewPageData = {...this.pageDetail, isPreview: true, globalPlugins: null};
+    this.symfonyApiClientService.post<{hash: string}>('page_create_preview', previewPageData, {id: this.webDetailResolverService.selectedId}).subscribe({
       next: (response) => {
-        const previewHash = response.body.hash;
-        const redirectUrl = this.domainInfoService.getPreviewHostname() + `/${this.pageDetail.url}`;
+        const redirectUrl = this.domainInfoService.getPreviewHostname() + `/${this.pageDetail.url}?webId=${this.webDetailResolverService.selectedId}`;
         window.open(redirectUrl, '_blank');
       },
       error: err => this.httpResponseToasterService.showError(err)

@@ -24,6 +24,11 @@ security:
             stateless: true
             anonymous: true
 
+        public:
+            pattern: ^/page/(get-preview|get-public)
+            stateless: true
+            anonymous: true
+
         api:
             pattern:   ^/
             stateless: true
@@ -41,4 +46,6 @@ security:
     access_control:
          - { path: ^/security/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/user/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/page/get-preview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/page/get-public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/, roles: ROLE_USER }

@@ -10,19 +10,17 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Security\Validator as AppValidator;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
  * @ORM\Table(name="page")
- * @AppValidator\UniqueEntityWithUser(fields={"name", "user"})
  */
 #[UniqueEntity(
-    fields: ['name', 'web'],
+    fields: ['name', 'web', 'isPreview'],
     errorPath: 'name',
 )]
 #[UniqueEntity(
-    fields: ['url', 'web', 'isPreview '],
+    fields: ['url', 'web', 'isPreview'],
     errorPath: 'url',
 )]
 class Page

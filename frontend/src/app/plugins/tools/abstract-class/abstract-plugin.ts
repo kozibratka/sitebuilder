@@ -7,9 +7,9 @@ export abstract class AbstractPlugin<T extends BasePlugConfigInterface>{
 
   abstract refreshView(): void;
 
-  initializeSettings(settings: {}): void {
-    if (!settings) {
-      this.settings = this.initEmptySettings();
+  initializeSettings(settings: BasePlugConfigInterface): void {
+    if (!settings.id) {
+      this.settings = Object.assign(settings, this.initEmptySettings());
     } else {
       this.settings = settings as T;
     }

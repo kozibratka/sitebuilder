@@ -63,6 +63,9 @@ const routes: Routes = [
     DragScrollDirective,
     MenuPluginResolverDirective
   ],
+  exports: [
+    PaletteItemComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

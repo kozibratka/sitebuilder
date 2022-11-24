@@ -19,6 +19,4 @@ export abstract class AbstractPluginResolver implements AdminAbleInterface{
   abstract get description(): string;
 
   abstract get name(): string;
-
-  abstract get defaultSettings(): BasePlugConfigInterface;
 }

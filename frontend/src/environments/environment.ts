@@ -8,7 +8,7 @@ export const environment = {
   backendRoutesPath: '/routes/fos_js_routes.json',
   hostname: 'www.sitebuilder.cz',
   previewSubdomain: 'preview',
-  localhostPreviewPort: '4001'
+  localhostPreviewPort: '4201'
 };
 
 /*

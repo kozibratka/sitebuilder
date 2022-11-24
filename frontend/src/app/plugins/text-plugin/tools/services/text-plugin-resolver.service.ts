@@ -50,11 +50,4 @@ export class TextPluginResolverService extends AbstractPluginResolver{
   get name(): string {
     return 'Článek';
   }
-
-  get defaultSettings(): TextPluginConfigInterface {
-    return {
-      identifier: this.identifier,
-      text: 'Toto je krásný twxt',
-    };
-  }
 }

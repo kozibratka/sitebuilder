@@ -5,24 +5,28 @@ import { PublicComponent } from './pages/public/public.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AppPublicComponent} from './app-public.component';
 import {PageResolver} from './services/page.resolver';
+import {PageModule} from '../page/page.module';
+import {PublicGridItemComponent} from './components/public-grid-item/public-grid-item.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: '**',
     component: PublicComponent,
-    resolve: {page: PageResolver},
+    resolve: {pageDetail: PageResolver},
   }
 ];
 @NgModule({
   declarations: [
     PublicComponent,
-    AppPublicComponent
+    AppPublicComponent,
+    PublicGridItemComponent
   ],
-    imports: [
-        CommonModule,
-        AppAdminModule,
-        RouterModule
-    ],
+  imports: [
+    CommonModule,
+    AppAdminModule,
+    RouterModule.forRoot(routes),
+    PageModule,
+  ],
   bootstrap: [AppPublicComponent]
 })
 export class PublicModule { }

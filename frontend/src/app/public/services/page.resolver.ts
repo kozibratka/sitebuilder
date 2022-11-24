@@ -23,16 +23,22 @@ export class PageResolver implements Resolve<PageInterface> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface> {
-    const url = window.location.pathname;
+    const url = window.location.pathname.substring(1);
     if (this.domainInfoService.isPreviewHostname()) {   // is preview
-      return this.symfonyApiClientService.get<PageInterface>('page_get_preview', {url}).pipe(catchError(err => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let webId = urlParams.get('webId');
+      if (webId) {
+        localStorage.setItem('webId', webId);
+      }
+      webId = localStorage.getItem('webId');
+      return this.symfonyApiClientService.get<PageInterface>('page_get_preview', {id: webId, url}).pipe(catchError(err => {
         this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;
       }));
     } else {  // is public
-      return this.symfonyApiClientService.get<PageInterface>('page_get_public', {url}).pipe(catchError(err => {
+      return this.symfonyApiClientService.get<PageInterface>('page_get_public', {hostname: location.hostname, url}).pipe(catchError(err => {
         this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
