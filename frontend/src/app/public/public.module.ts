@@ -7,6 +7,7 @@ import {AppPublicComponent} from './app-public.component';
 import {PageResolver} from './services/page.resolver';
 import {PageModule} from '../page/page.module';
 import {PublicGridItemComponent} from './components/public-grid-item/public-grid-item.component';
+import { PublicPageBlockComponent } from './components/public-page-block/public-page-block.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
   declarations: [
     PublicComponent,
     AppPublicComponent,
-    PublicGridItemComponent
+    PublicGridItemComponent,
+    PublicPageBlockComponent
   ],
   imports: [
     CommonModule,

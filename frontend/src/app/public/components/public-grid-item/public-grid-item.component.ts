@@ -2,7 +2,7 @@ import {
   Component,
   ComponentFactory,
   ComponentFactoryResolver,
-  ComponentRef,
+  ComponentRef, ElementRef,
   Inject,
   Input,
   OnInit,
@@ -13,6 +13,9 @@ import {AbstractPlugin} from '../../../plugins/tools/abstract-class/abstract-plu
 import {PaletteItemConfig} from '../../../page/interfaces/palette-item-config';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
+import {PaletteBlockGridstackService} from '../../../page/services/palette-block-gridstack.service';
+import {GridItemHTMLElement} from 'gridstack';
+import {PublicPageBlockComponent} from '../public-page-block/public-page-block.component';
 
 @Component({
   selector: 'app-public-grid-item',
@@ -22,15 +25,19 @@ import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-pl
 export class PublicGridItemComponent implements OnInit {
 
   @Input() gridItemConfig: PaletteItemConfig;
-  @ViewChild(ViewContainerRef, {read: ViewContainerRef, static: true}) container: ViewContainerRef;
-  private resolver: ComponentFactoryResolver;
+  @ViewChild('container', {read: ViewContainerRef, static: true}) container: ViewContainerRef;
   private component: ComponentRef<AbstractPlugin<BasePlugConfigInterface>>;
 
   constructor(
+    private paletteBlockGridstackService: PaletteBlockGridstackService,
     @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
+    public elementRef: ElementRef<GridItemHTMLElement>,
+    private publicPageBlockComponent: PublicPageBlockComponent,
+    private resolver: ComponentFactoryResolver,
   ) { }
 
   ngOnInit(): void {
+    this.createPlugin();
   }
 
   createPlugin(): void {
@@ -39,6 +46,7 @@ export class PublicGridItemComponent implements OnInit {
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
     this.component = this.container.createComponent<AbstractPlugin<BasePlugConfigInterface>>(factory);
     this.component.instance.initializeSettings(this.gridItemConfig.plugin);
+    this.paletteBlockGridstackService.addWidgetPublic(this, this.publicPageBlockComponent.paletteContent.nativeElement);
   }
 
   getComponentFromIdentifier(): new(...args: any[]) => {} {

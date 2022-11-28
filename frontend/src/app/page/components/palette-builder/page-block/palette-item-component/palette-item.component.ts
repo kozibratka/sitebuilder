@@ -19,6 +19,7 @@ import {ElementPositionMessenger} from '../../../../../core/messengers/element-p
 import {ElementHelper} from '../../../../../core/helpers/element-helper';
 import {PaletteItemConfig} from '../../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../../services/palette-block-gridstack.service';
+import {PageBlockComponent} from '../page-block.component';
 
 @Component({
   selector: 'app-palette-item',
@@ -34,6 +35,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
+    private pageBlockComponent: PageBlockComponent,
     public elementRef: ElementRef<GridItemHTMLElement>,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
@@ -46,7 +48,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   ngOnInit(): void {
     this.createPlugin();
-    this.paletteBlockGridstackService.addWidget(this);
+    this.paletteBlockGridstackService.addWidget(this, this.pageBlockComponent.paletteContent.nativeElement);
     this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
   }
 

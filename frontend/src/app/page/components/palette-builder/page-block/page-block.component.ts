@@ -9,10 +9,10 @@ import {
   Renderer2,
   NgZone,
   Output,
-  EventEmitter, Inject, Input, OnInit
+  EventEmitter, Inject, Input, OnInit, ChangeDetectorRef
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import {GridItemHTMLElement, GridStackNode} from 'gridstack/dist/gridstack';
+import {GridItemHTMLElement} from 'gridstack/dist/gridstack';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item-component/palette-item.component';
 import {Subject} from 'rxjs';
@@ -25,7 +25,6 @@ import {PaletteBlockGridstackService} from '../../../services/palette-block-grid
   selector: 'app-palette-block',
   templateUrl: './page-block.component.html',
   styleUrls: ['./page-block.component.css'],
-  viewProviders: [{provide: PaletteBlockGridstackService}]
 })
 export class PageBlockComponent implements OnInit, AfterViewInit{
 
@@ -37,6 +36,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
+    private changeDetectorRef: ChangeDetectorRef,
     private renderer: Renderer2,
     private ngZone: NgZone,
     private window: Window,
@@ -66,13 +66,15 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
       return;
     }
     this.resized.emit(true);
-    this.paletteBlockGridstackService.prepareResizeHorizontalPalette(this.paletteItemComponents.toArray(), event);
+    this.paletteBlockGridstackService.
+    prepareResizeHorizontalPalette(this.paletteItemComponents.toArray(), event, this.paletteContent.nativeElement);
     let resizeMouseMovePaletteListener: () => void;
     this.ngZone.runOutsideAngular(() => {
       resizeMouseMovePaletteListener = this.renderer.listen(
         this.document,
         'mousemove',
-        (mouseEvent) => this.paletteBlockGridstackService.resizeHorizontalPalette(mouseEvent)
+        (mouseEvent) => this.paletteBlockGridstackService.
+        resizeHorizontalPalette(mouseEvent, this.paletteContent.nativeElement, this.pageBlock)
       );
     });
     const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
@@ -84,11 +86,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
   }
 
   private initGridStack(): void {
-    this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes);
-    this.paletteBlockGridstackService.gridStack.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
+    this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes, this.pageBlock, this.changeDetectorRef);
+    this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement).
+    on('dragstop', (event: Event, el: GridItemHTMLElement) => {
       this.quickMenuMessenger.next(null);
     });
-    this.paletteBlockGridstackService.gridStack.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
+    this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement).
+    on('resizestop', (event: Event, el: GridItemHTMLElement) => {
       this.quickMenuMessenger.next(null);
     });
 
