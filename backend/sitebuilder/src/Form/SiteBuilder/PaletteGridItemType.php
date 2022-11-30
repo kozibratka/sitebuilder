@@ -20,7 +20,9 @@ class PaletteGridItemType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('id', null, ['required' => false])
+        $this->addPluginFieldSubscriber->isPreview = $options['is_preview'];
+        $builder
+            ->add('id', null, ['required' => false])
             ->add('width')
             ->add('height')
             ->add('x')
@@ -33,6 +35,7 @@ class PaletteGridItemType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PaletteGridItem::class,
+            'is_preview' => false,
         ]);
     }
 }

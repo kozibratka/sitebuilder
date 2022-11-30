@@ -20,7 +20,8 @@ class PageBlockType extends AbstractType
                 'entry_type' => PaletteGridItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'entry_options' => ['is_preview' => false]
             ])
             ;
     }
@@ -29,7 +30,8 @@ class PageBlockType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PageBlock::class,
-            'allow_extra_fields' => true
+            'allow_extra_fields' => true,
+            'is_preview' => false,
         ]);
     }
 }

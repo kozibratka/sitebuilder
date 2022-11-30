@@ -3,11 +3,8 @@
 namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\SiteBuilder\PaletteGridItem;
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Exception\CustomErrorMessageException;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -20,6 +17,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     public EntityManagerInterface $em;
     private $pluginServices;
     private $toRemovePlugin = [];
+    public $isPreview = false;
 
     public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager, private Security $security)
     {
@@ -30,7 +28,6 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SUBMIT => 'onPreSubmit',
-            FormEvents::POST_SUBMIT => 'onPostSubmit',
         ];
     }
 
@@ -50,33 +47,12 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             }else{
                 throw new CustomErrorMessageException('Pokoušíte se upravit element, který je již smazaný');
             }
-        }
-        if($plugin) {
-            $pluginChoices = new ArrayCollection($this->entityManager->getRepository(BasePlugin::class)->findBy(['user' => $this->security->getUser()]));
+        } else {
             /** @var PaletteGridItem $paletteGridItem */
-            $paletteGridItem = $form->getData();
-            if($plugin['id'] ?? null) {
-                if($paletteGridItem?->getPlugin() && !$paletteGridItem->getPlugin()->getWeb()) {
-                    $this->toRemovePlugin[] = $paletteGridItem->getPlugin();
-                }
-                $data['plugin'] = $plugin['id'];
-                $event->setData($data);
-                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choices' => $pluginChoices ]);
-            }
-            else  {
-                if($paletteGridItem?->getPlugin()?->getWeb()) {
-                    $paletteGridItem->setPlugin(null);
-                }
-                $form->add('plugin', $formClass);
-            }
+            $paletteGridItem = new PaletteGridItem();
+            $form->setData($paletteGridItem);
         }
-    }
 
-    public function onPostSubmit() {
-        foreach ($this->toRemovePlugin as $item) {
-            $this->entityManager->remove($item);
-        }
-        $this->toRemovePlugin = [];
+        $form->add('plugin', $formClass);
     }
-
 }

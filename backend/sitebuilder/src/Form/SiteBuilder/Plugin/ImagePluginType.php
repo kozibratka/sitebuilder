@@ -14,7 +14,6 @@ class ImagePluginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('url')
-            ->add('basePlugin', BasePluginType::class, ['data_class' => ImagePlugin::class])
         ;
     }
 
@@ -23,5 +22,10 @@ class ImagePluginType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ImagePlugin::class,
         ]);
+    }
+
+    public function getParent()
+    {
+        return BasePluginType::class;
     }
 }

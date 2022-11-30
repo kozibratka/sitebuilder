@@ -50,18 +50,11 @@ class PageController extends BaseApiController
      */
     public function create(Request $request, Web $web, ManagerRegistry $doctrine)
     {
-        $entityManager = $doctrine->getManager();
         $form = $this->createForm(PageType::class);
         $form->submit($request->request->all());
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */
             $page = $form->getData();
-            if ($page->getIsPreview()) {
-                $previewPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['web' => $page->getWeb(), 'isPreview' => true]);
-                if ($previewPage) {
-                    $entityManager->remove($previewPage);
-                }
-            }
             $web->addPage($page);
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
@@ -77,7 +70,7 @@ class PageController extends BaseApiController
         $this->denyAccessUnlessGranted('page_builder_voter', $web);
         $entityManager = $doctrine->getManager();
         $previewPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['web' => $web, 'isPreview' => true]);
-        $form = $this->createForm(PageType::class, $previewPage);
+        $form = $this->createForm(PageType::class, $previewPage, ['is_preview' => true]);
         $form->submit($request->request->all());
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */
