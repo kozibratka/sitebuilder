@@ -3,8 +3,10 @@
 namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\SiteBuilder\PaletteGridItem;
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -13,10 +15,7 @@ use Traversable;
 
 class AddPluginFieldSubscriber implements EventSubscriberInterface
 {
-    /** @required  */
-    public EntityManagerInterface $em;
     private $pluginServices;
-    private $toRemovePlugin = [];
     public $isPreview = false;
 
     public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager, private Security $security)
@@ -41,7 +40,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $formClass = $this->pluginServices[$identifier]->getFormClass();
         }
         if(isset($data['id'])) {
-            $paletteGridItem = $this->em->getRepository(PaletteGridItem::class)->find($data['id']);
+            $paletteGridItem = $this->entityManager->getRepository(PaletteGridItem::class)->find($data['id']);
             if($paletteGridItem) {
                 $form->setData($paletteGridItem);
             }else{
@@ -52,7 +51,14 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $paletteGridItem = new PaletteGridItem();
             $form->setData($paletteGridItem);
         }
-
+        if(isset($plugin['id'])) {
+            $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
+            if($pluginDb->getWeb()) {
+                $data['plugin'] = ['id' => $plugin['id']]; //clear and set only id for entityType
+                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choices' => [$pluginDb]]);
+                return;
+            }
+        }
         $form->add('plugin', $formClass);
     }
 }
