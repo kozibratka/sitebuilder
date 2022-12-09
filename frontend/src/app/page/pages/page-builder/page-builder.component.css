@@ -1,13 +1,9 @@
 .save-builder{
-  position: absolute;
-  top: 74px;
-  right: 19px;
+  /*float: right;*/
 }
 
 .preview-builder{
-  position: absolute;
-  top: 74px;
-  right: 120px;
+  /*float: right;*/
 }
 
 .global-plugin-selector {

@@ -7,6 +7,7 @@ import {WebListResolverGuard} from '../../services/web-list-resolver.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-web-create',
@@ -24,11 +25,13 @@ export class WebCreateComponent implements OnInit {
     public route: ActivatedRoute,
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
-    public webListGuard: WebListResolverGuard
+    public webListGuard: WebListResolverGuard,
+    public title: Title
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Vytvoření webu');
     if (this.route.snapshot.url[0].path === 'create') {
       this.createWeb();
     } else {

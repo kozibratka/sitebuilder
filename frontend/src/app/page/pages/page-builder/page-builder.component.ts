@@ -12,6 +12,7 @@ import {ArrayHelper} from '../../../core/helpers/array-helper';
 import {PluginResolverService} from '../../../plugins/tools/services/plugin-resolver.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {DomainInfoService} from '../../../core/services/domain-info.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page-builder',
@@ -36,7 +37,8 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private httpResponseToasterService: HttpResponseToasterService,
     private webDetailResolverService: WebDetailResolverService,
     private pluginResolverService: PluginResolverService,
-    private domainInfoService: DomainInfoService
+    private domainInfoService: DomainInfoService,
+    public title: Title
   ) {
   }
 
@@ -49,6 +51,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Vytvoření stránky');
     this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
   }

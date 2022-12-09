@@ -7,6 +7,7 @@ import {RemovePageDialogComponent} from '../../components/remove-page-dialog/rem
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../core/services/notifier.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page-list',
@@ -25,9 +26,11 @@ export class PageListComponent implements OnInit {
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
     private router: Router,
+    public title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Moje stránky');
     this.route.data.subscribe(data => {
       this.dataToTable = data.pageList;
     });

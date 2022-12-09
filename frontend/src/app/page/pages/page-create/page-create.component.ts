@@ -7,6 +7,7 @@ import {WebDetailResolverService} from '../../../web/services/web-detail-resolve
 import {NotifierService} from '../../../core/services/notifier.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-page-create',
@@ -27,11 +28,13 @@ export class PageCreateComponent implements OnInit {
     public route: ActivatedRoute,
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
-    private webDetailResolverService: WebDetailResolverService
+    private webDetailResolverService: WebDetailResolverService,
+    public title: Title
   ) {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Vytvoření stránky');
     if (this.route.snapshot.url[0].path === 'create') {
       this.createPage();
     } else {

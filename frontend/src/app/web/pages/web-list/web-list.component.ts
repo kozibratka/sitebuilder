@@ -10,6 +10,7 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {LayoutComponent} from '../../../layout/components/layout/layout.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-web-list',
@@ -30,10 +31,12 @@ export class WebListComponent implements OnInit {
     private router: Router,
     private webDetailResolverService: WebDetailResolverService,
     public webListGuard: WebListResolverGuard,
-    private layoutComponent: LayoutComponent
+    private layoutComponent: LayoutComponent,
+    public title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Moje weby');
     this.route.root.firstChild.data.subscribe(data => {
       this.dataToTable = data.webList;
     });

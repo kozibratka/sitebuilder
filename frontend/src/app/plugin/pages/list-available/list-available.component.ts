@@ -11,8 +11,8 @@ import {AbstractPluginResolver} from '../../../page/services/abstract-classes/ab
 })
 export class ListAvailableComponent implements OnInit {
 
-  availableDisabledPlugins: AbstractPluginResolver[] = [];
-  availableEnabledPlugins: AbstractPluginResolver[] = [];
+  allPlugins: AbstractPluginResolver[] = [];
+  usedPlugins = new Set<string>();
   displayedColumns = ['name', 'description', 'action'];
 
   constructor(
@@ -24,13 +24,16 @@ export class ListAvailableComponent implements OnInit {
     this.route.data.subscribe(data => {
       const globalPlugins = data.globalPlugins as BasePlugConfigInterface[];
       this.abstractMenuPluginResolver.forEach(param => {
+        this.allPlugins.push(param);
         if (_.find(globalPlugins, {identifier: param.identifier})) {
-          this.availableEnabledPlugins.push(param);
-        } else {
-          this.availableDisabledPlugins.push(param);
+          this.usedPlugins.add(param.identifier);
         }
       });
     });
+  }
+
+  isPluginUsed(identifier): boolean {
+    return this.usedPlugins.has(identifier);
   }
 
 }

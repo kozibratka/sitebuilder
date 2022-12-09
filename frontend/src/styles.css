@@ -25,7 +25,3 @@ a:not([href]){
 .cdk-overlay-container{
   z-index: 2000 !important;
 }
-
-.material-icons{
-  line-height: unset;
-}
