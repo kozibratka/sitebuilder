@@ -30,8 +30,4 @@ export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
     this._settings = value;
     this.createAdminForm(this._settings);
   }
-
-  submit(): void {
-    this.adminForm.updateValueAndValidity();
-  }
 }
