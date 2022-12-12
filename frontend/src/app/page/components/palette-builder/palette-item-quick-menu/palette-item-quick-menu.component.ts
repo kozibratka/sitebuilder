@@ -65,7 +65,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
     const plugin = this.selectedItemForMenu.componentRef.instance;
     const miniAdmin = this.moveableModalService.moveableModalComponent.content as MiniAdminComponent;
     const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
-      this.selectedItemForMenu.componentRef.instance.settings.identifier
+      plugin.settings.identifier
     );
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
     this.pageBuilderComponent.moveableModalComponent.title = 'Úprava pluginu: ' + pluginResolver.name;

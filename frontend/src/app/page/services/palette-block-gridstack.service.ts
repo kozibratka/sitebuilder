@@ -29,9 +29,9 @@ export class PaletteBlockGridstackService {
       column: 12,
       ddPlugin: GridStackDragDrop,
       float: true,
+      cellHeight: 30,
       minRow: pageBlock.height,
       styleInHead: true,
-      placeholderText: 'Zde bude nový obsah :)',
     }, block.nativeElement);
     this.gridstackBlocks.set(block.nativeElement, gridstackBlock);
 

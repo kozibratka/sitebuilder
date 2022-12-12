@@ -21,9 +21,9 @@
         <div class="col-md-12 text-right">
           <div>
             Vyberte plugin:
-            <select>
-              <option (click)="null" [value]="">--Nevybráno--</option>
-              <option (click)="initSettingsFromSelect(plugin)" [value]="plugin.id" *ngFor="let plugin of globalPlugins">{{plugin.name}}</option>
+            <select (change)="initSettingsFromSelect($event.target.value)">
+              <option [value]="">--Nevybráno--</option>
+              <option [value]="plugin.id" *ngFor="let plugin of globalPlugins">{{plugin.name}}</option>
             </select>
           </div>
         </div>

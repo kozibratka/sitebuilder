@@ -69,7 +69,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
 
   preview(): void {
     const previewPageData = {...this.pageDetail, isPreview: true, globalPlugins: null};
-    this.symfonyApiClientService.post<{hash: string}>('page_create_preview', previewPageData, {id: this.webDetailResolverService.selectedId}).subscribe({
+    this.symfonyApiClientService.post<{ hash: string }>('page_create_preview', previewPageData, {id: this.webDetailResolverService.selectedId}).subscribe({
       next: (response) => {
         const redirectUrl = this.domainInfoService.getPreviewHostname() + `/${this.pageDetail.url}?webId=${this.webDetailResolverService.selectedId}`;
         window.open(redirectUrl, '_blank');
@@ -82,9 +82,9 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.globalPluginsSelect = this.globalPlugins.filter(value => value.identifier === identifier);
   }
 
-  initSettingsFromSelect(globalPlugin?: BasePlugConfigInterface) {
-    if (globalPlugin) {
-      Object.assign(this.miniAdmin.settings, globalPlugin);
+  initSettingsFromSelect(idGlobalPlugin?: string) {
+    if (idGlobalPlugin) {
+      Object.assign(this.miniAdmin.settings, this.globalPlugins.filter(value => value.id === parseInt(idGlobalPlugin, 10))[0]);
     } else {
       (this.miniAdmin.settings as BasePlugConfigInterface).id = null;
     }
