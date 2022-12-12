@@ -1,6 +1,6 @@
 import {AbstractPlugin} from './abstract-plugin';
 import {BasePlugConfigInterface} from '../interfaces/base-plug-config-interface';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Directive} from '@angular/core';
 import {AdminFormService} from '../forms/admin-form.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
@@ -11,6 +11,7 @@ export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
   private _settings: T;
   webId: number;
   menuResolver: AbstractPluginResolver;
+  adminForm: FormGroup;
 
 
   constructor(
@@ -28,5 +29,9 @@ export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
   set settings(value: T) {
     this._settings = value;
     this.createAdminForm(this._settings);
+  }
+
+  submit(): void {
+    this.adminForm.updateValueAndValidity();
   }
 }

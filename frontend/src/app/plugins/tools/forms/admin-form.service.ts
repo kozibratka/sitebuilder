@@ -20,6 +20,9 @@ export class AdminFormService {
         Object.assign(settings, formValue);
       }
     });
+    if (settings) {
+      form.patchValue(settings);
+    }
     return form;
   }
 }

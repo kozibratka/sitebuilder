@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {AbstractAdminSetting} from '../../../tools/abstract-class/abstract-admin-setting';
 import {TextPluginConfigInterface} from '../../tools/interfaces/text-plugin-config-interface';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'app-text-settings',
@@ -10,7 +12,8 @@ import {TextPluginConfigInterface} from '../../tools/interfaces/text-plugin-conf
 })
 export class TextPluginAdminComponent extends AbstractAdminSetting<TextPluginConfigInterface> implements OnInit{
 
-  adminForm: FormGroup;
+  public Editor = ClassicEditor;
+  public text: string;
 
   ngOnInit(): void {
   }
@@ -22,12 +25,15 @@ export class TextPluginAdminComponent extends AbstractAdminSetting<TextPluginCon
       },
       settings
     );
-    if (this.settings) {
-      this.adminForm.patchValue(this.settings);
-    }
+  }
+
+  public onChange( { editor }: ChangeEvent ) {
+    this.text = editor.getData();
   }
 
   submit(): void {
+    this.adminForm.patchValue({text: this.text});
+    super.submit();
   }
 
 }

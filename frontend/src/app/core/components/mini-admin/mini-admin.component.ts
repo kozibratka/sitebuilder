@@ -14,6 +14,7 @@ export class MiniAdminComponent implements OnInit {
   selectedComponent: new() => any;
   headerName = '';
   settings: any;
+  admin: SettingAbleInterface;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -26,8 +27,8 @@ export class MiniAdminComponent implements OnInit {
     this.selectedComponent = component;
     this.content1.clear();
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-    const admin = this.content1.createComponent<SettingAbleInterface>(componentFactory).instance;
-    admin.settings = this.settings;
+    this.admin = this.content1.createComponent<SettingAbleInterface>(componentFactory).instance;
+    this.admin.settings = this.settings;
   }
 
   setAdminAble(value: AdminAbleInterface, settings: any) {

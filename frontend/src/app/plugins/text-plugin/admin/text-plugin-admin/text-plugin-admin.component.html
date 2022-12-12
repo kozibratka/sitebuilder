@@ -1,6 +1,6 @@
 <form [formGroup]="adminForm">
   <label for="text">Text</label>
-  <textarea id="text" appFormError type="text" class="form-control" placeholder="Text" formControlName="text"></textarea>
+  <ckeditor id="text" [editor]="Editor" [data]="adminForm.get('text').value" (change)="onChange($event)"></ckeditor>
 </form>
 
 

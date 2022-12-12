@@ -38,16 +38,21 @@ export class UpdatePluginComponent implements OnInit {
       this.pluginSetting = data.plugin;
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
       this.miniAdmin.setAdminAble(this.pluginResolver, data.plugin);
+      this.miniAdmin.admin.adminForm.statusChanges.subscribe(status => {
+        if (status === 'VALID') {
+          this.symfonyApiClientService.post('plugin_update', this.pluginSetting, {id: this.pluginSetting.id}).subscribe({
+            next: () => {
+              this.notifierService.notify('Plugin byl úspěšně upraven');
+            },
+            error: err => this.httpResponseToasterService.showError(err)
+          });
+        }
+      });
     });
   }
 
-  onSubmit() {
-    this.symfonyApiClientService.post('plugin_update', this.pluginSetting, {id: this.pluginSetting.id}).subscribe({
-      next: () => {
-        this.notifierService.notify('Plugin byl úspěšně upraven');
-      },
-      error: err => this.httpResponseToasterService.showError(err)
-    });
+  submit() {
+    this.miniAdmin.admin.submit();
   }
 
 }

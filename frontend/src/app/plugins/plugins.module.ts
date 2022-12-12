@@ -7,6 +7,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {CoreModule} from '../core/core.module';
 import {AbstractPluginResolver} from '../page/services/abstract-classes/abstract-plugin-resolver';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import {AbstractPluginResolver} from '../page/services/abstract-classes/abstract
     CoreModule,
     ReactiveFormsModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    CKEditorModule
   ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
