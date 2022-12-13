@@ -54,8 +54,9 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
         if(isset($plugin['id'])) {
             $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
             if($pluginDb->getWeb()) {
-                $data['plugin'] = ['id' => $plugin['id']]; //clear and set only id for entityType
-                $form->add('plugin', EntityType::class, ['class' => BasePlugin::class, 'choices' => [$pluginDb]]);
+                $data['plugin'] = $plugin['id'];
+                $event->setData($data);
+                $form->add('plugin', EntityType::class, ['class' => get_class($pluginDb), 'choices' => [$pluginDb]]);
                 return;
             }
         }
