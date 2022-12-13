@@ -23,7 +23,7 @@
             Vyberte plugin:
             <select (change)="initSettingsFromSelect($event.target.value)">
               <option [value]="">--Nevybráno--</option>
-              <option [value]="plugin.id" *ngFor="let plugin of globalPlugins">{{plugin.name}}</option>
+              <option [selected]="plugin.id === miniAdmin.settings?.id" [value]="plugin.id" *ngFor="let plugin of globalPlugins">{{plugin.name}}</option>
             </select>
           </div>
         </div>
