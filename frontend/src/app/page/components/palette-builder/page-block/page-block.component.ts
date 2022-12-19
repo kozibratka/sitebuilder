@@ -28,7 +28,7 @@ import {PaletteBlockGridstackService} from '../../../services/palette-block-grid
 })
 export class PageBlockComponent implements OnInit, AfterViewInit{
 
-  @ViewChild('palette_content', {static: true}) paletteContent: ElementRef;
+  @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @Output() resized = new EventEmitter<boolean>();
   @Input() pageBlock: PageBlockInterface;

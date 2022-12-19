@@ -35,7 +35,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
-    private pageBlockComponent: PageBlockComponent,
+    public pageBlockComponent: PageBlockComponent,
     public elementRef: ElementRef<GridItemHTMLElement>,
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,

@@ -19,4 +19,6 @@ export abstract class AbstractPluginResolver implements AdminAbleInterface{
   abstract get description(): string;
 
   abstract get name(): string;
+
+  abstract isAutoResizeHeight(): boolean;
 }

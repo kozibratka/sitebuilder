@@ -118,4 +118,22 @@ export class PaletteBlockGridstackService {
     paletteItem.width = gridNode.width;
     paletteItem.height = gridNode.height;
   }
+
+  recalculateGridHeightByContent(gridItem: PaletteItemComponent) {
+    const mustBeDiff = gridItem.gridItemConfig.diffGridAndContentBottomHeightPx;
+    const gridBlockInstance = this.gridstackBlocks.get(gridItem.pageBlockComponent.paletteContent.nativeElement);
+    const cellHeight =  gridBlockInstance.getCellHeight();
+    const actualGridContentDiffPx = this.getBottomDiffPx(gridItem.elementRef.nativeElement, gridItem.pluginContainer.element.nativeElement);
+    const diff = Math.abs(mustBeDiff - actualGridContentDiffPx);
+    const diffInCell = Math.round(diff / cellHeight);
+    const newCellsToAdd = (actualGridContentDiffPx > mustBeDiff) ? -diffInCell : diffInCell;
+    const newCells = gridItem.elementRef.nativeElement.gridstackNode.height + newCellsToAdd;
+    gridBlockInstance.update(gridItem.elementRef.nativeElement, null, null, null, newCells);
+  }
+
+  getBottomDiffPx(element1: HTMLElement, element2: HTMLElement) {
+    const gridRect = element1.getBoundingClientRect();
+    const contentRect = element2.getBoundingClientRect();
+    return Math.abs(gridRect.bottom - contentRect.bottom);
+  }
 }
