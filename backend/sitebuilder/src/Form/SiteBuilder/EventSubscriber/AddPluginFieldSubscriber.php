@@ -39,7 +39,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $identifier = $plugin['identifier'];
             $formClass = $this->pluginServices[$identifier]->getFormClass();
         }
-        if(isset($data['id'])) {
+        if(isset($data['id']) && !$this->isPreview) {
             $paletteGridItem = $this->entityManager->getRepository(PaletteGridItem::class)->find($data['id']);
             if($paletteGridItem) {
                 $form->setData($paletteGridItem);
@@ -51,7 +51,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $paletteGridItem = new PaletteGridItem();
             $form->setData($paletteGridItem);
         }
-        if(isset($plugin['id'])) {
+        if(isset($plugin['id']) && !$this->isPreview) {
             $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
             if($pluginDb->getWeb()) {
                 $data['plugin'] = $plugin['id'];

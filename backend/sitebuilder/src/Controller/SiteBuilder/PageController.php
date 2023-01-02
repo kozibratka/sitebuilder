@@ -70,7 +70,11 @@ class PageController extends BaseApiController
         $this->denyAccessUnlessGranted('page_builder_voter', $web);
         $entityManager = $doctrine->getManager();
         $previewPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['web' => $web, 'isPreview' => true]);
-        $form = $this->createForm(PageType::class, $previewPage, ['is_preview' => true]);
+        if ($previewPage) {
+            $entityManager->remove($previewPage);
+            $entityManager->flush();
+        }
+        $form = $this->createForm(PageType::class, null, ['is_preview' => true]);
         $form->submit($request->request->all());
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */

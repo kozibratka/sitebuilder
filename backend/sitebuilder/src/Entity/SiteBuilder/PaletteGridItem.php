@@ -55,6 +55,11 @@ class PaletteGridItem
      */
     private ?BasePlugin $plugin = null;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $diffGridAndContentBottomHeightPx = null;
+
     public function getId()
     {
         return $this->id;
@@ -126,5 +131,15 @@ class PaletteGridItem
         if($plugin) {
             $this->plugin->addPaletteGridItem($this);
         }
+    }
+
+    public function getDiffGridAndContentBottomHeightPx(): ?int
+    {
+        return $this->diffGridAndContentBottomHeightPx;
+    }
+
+    public function setDiffGridAndContentBottomHeightPx(?int $diffGridAndContentBottomHeightPx)
+    {
+        $this->diffGridAndContentBottomHeightPx = $diffGridAndContentBottomHeightPx;
     }
 }

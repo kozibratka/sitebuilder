@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {ActivatedRoute} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
@@ -13,13 +13,16 @@ import {PluginResolverService} from '../../../plugins/tools/services/plugin-reso
 import {NotifierService} from '../../../core/services/notifier.service';
 import {DomainInfoService} from '../../../core/services/domain-info.service';
 import {Title} from '@angular/platform-browser';
+import {Subject} from 'rxjs';
+import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';
 
 @Component({
   selector: 'app-page-builder',
   templateUrl: './page-builder.component.html',
   styleUrls: ['./page-builder.component.css'],
   providers: [
-    MenuPluginResolverService
+    MenuPluginResolverService,
+    {provide: 'PageBuilderEvent', useFactory: () => new Subject<boolean>()}
   ]
 })
 export class PageBuilderComponent implements OnInit, AfterViewChecked {
@@ -38,7 +41,8 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private webDetailResolverService: WebDetailResolverService,
     private pluginResolverService: PluginResolverService,
     private domainInfoService: DomainInfoService,
-    public title: Title
+    public title: Title,
+    @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
   ) {
   }
 
@@ -57,6 +61,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   save(): void {
+    this.pageBuilderEvent.next(true); // notify listeners
     this.symfonyApiClientService.post<PageInterface>('page_update', this.pageDetail, {id: this.pageDetail.id}).subscribe({
       next: (response) => {
         ArrayHelper.syncArrayOfObjects(response.body.pageBlocks, this.pageDetail.pageBlocks); // refresh blocks, items...
@@ -68,6 +73,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   preview(): void {
+    this.pageBuilderEvent.next(true); // notify listeners
     const previewPageData = {...this.pageDetail, isPreview: true, globalPlugins: null};
     this.symfonyApiClientService.post<{ hash: string }>('page_create_preview', previewPageData, {id: this.webDetailResolverService.selectedId}).subscribe({
       next: (response) => {

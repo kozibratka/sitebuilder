@@ -27,6 +27,7 @@ class PaletteGridItemType extends AbstractType
             ->add('height')
             ->add('x')
             ->add('y')
+            ->add('diffGridAndContentBottomHeightPx')
             ->addEventSubscriber($this->addPluginFieldSubscriber)
         ;
     }

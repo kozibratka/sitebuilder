@@ -54,6 +54,8 @@ export class PaletteBlockGridstackService {
     const gridstackBlock = GridStack.init({
       column: 12,
       staticGrid: true,
+      cellHeight: 30,
+      float: true,
       minRow: pageBlock.height,
       styleInHead: true,
     }, paletteElement.nativeElement);
@@ -119,11 +121,14 @@ export class PaletteBlockGridstackService {
     paletteItem.height = gridNode.height;
   }
 
-  recalculateGridHeightByContent(gridItem: PaletteItemComponent) {
+  recalculateGridHeightByContent(gridItem: PublicGridItemComponent) {
     const mustBeDiff = gridItem.gridItemConfig.diffGridAndContentBottomHeightPx;
+    if (mustBeDiff === null || window.innerWidth < 769) {
+      return;
+    }
     const gridBlockInstance = this.gridstackBlocks.get(gridItem.pageBlockComponent.paletteContent.nativeElement);
     const cellHeight =  gridBlockInstance.getCellHeight();
-    const actualGridContentDiffPx = this.getBottomDiffPx(gridItem.elementRef.nativeElement, gridItem.pluginContainer.element.nativeElement);
+    const actualGridContentDiffPx = this.getBottomDiffPx(gridItem.elementRef.nativeElement, gridItem.gridContent.nativeElement);
     const diff = Math.abs(mustBeDiff - actualGridContentDiffPx);
     const diffInCell = Math.round(diff / cellHeight);
     const newCellsToAdd = (actualGridContentDiffPx > mustBeDiff) ? -diffInCell : diffInCell;

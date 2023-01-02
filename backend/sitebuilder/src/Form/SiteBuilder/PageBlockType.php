@@ -21,7 +21,7 @@ class PageBlockType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'entry_options' => ['is_preview' => false]
+                'entry_options' => ['is_preview' => $options['is_preview']]
             ])
             ;
     }

@@ -4,14 +4,14 @@ import {
   Component, ComponentFactory,
   ComponentFactoryResolver, ComponentRef,
   ElementRef, HostListener, Inject,
-  Input,
+  Input, OnDestroy,
   OnInit,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import {GridItemHTMLElement} from 'gridstack';
 import {MenuPluginResolverService} from '../../../../services/menu-plugin-resolver.service';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {AbstractPluginResolver} from '../../../../services/abstract-classes/abstract-plugin-resolver';
 import {WebDetailResolverService} from '../../../../../web/services/web-detail-resolver.service';
 import {AbstractPlugin} from '../../../../../plugins/tools/abstract-class/abstract-plugin';
@@ -26,12 +26,15 @@ import {PageBlockComponent} from '../page-block.component';
   templateUrl: './palette-item.component.html',
   styleUrls: ['./palette-item.component.css']
 })
-export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChecked {
+export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
 
   @Input() gridItemConfig: PaletteItemConfig;
   @ViewChild('itemTemplate', {read: ViewContainerRef, static: true}) pluginContainer: ViewContainerRef;
+  @ViewChild('gridContent', {read: ElementRef, static: true}) gridContent: ElementRef;
   private _componentRef: ComponentRef<AbstractPlugin<any>>;
   private lastPosition: ElementPositionMessenger;
+  public pluginResolver: AbstractPluginResolver;
+  private pageBuilderEventSubscription: Subscription;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -42,14 +45,27 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private webDetailResolverService: WebDetailResolverService,
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
+    @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
   ) {
 
   }
 
   ngOnInit(): void {
+    const isNewPlugin = !!!this.gridItemConfig.plugin.id;
+    if (isNewPlugin) {
+      this.pluginResolver = this.menuPluginResolverService.selectedAbstractPluginResolverMessenger;
+    } else {
+      this.pluginResolver = this.getResolverFromIdentifier();
+    }
     this.createPlugin();
     this.paletteBlockGridstackService.addWidget(this, this.pageBlockComponent.paletteContent.nativeElement);
     this.lastPosition = ElementHelper.getPositionToDocument(this.elementRef.nativeElement);
+    if (this.pluginResolver.isAutoResizeHeight()) {
+      this.pageBuilderEventSubscription = this.pageBuilderEvent.subscribe(value => {
+        this.gridItemConfig.diffGridAndContentBottomHeightPx =
+          this.paletteBlockGridstackService.getBottomDiffPx(this.elementRef.nativeElement, this.gridContent.nativeElement);
+      });
+    }
   }
 
   ngAfterViewInit(): void {
@@ -57,6 +73,12 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   ngAfterViewChecked(): void {
+  }
+
+  ngOnDestroy(): void {
+    if (this.pageBuilderEventSubscription) {
+      this.pageBuilderEventSubscription.unsubscribe();
+    }
   }
 
   @HostListener('mouseenter', ['$event'])
@@ -90,12 +112,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
 
   createPlugin(): void {
     let componentClass: new(...args: any[]) => {};
-    const isNewPlugin = !!!this.gridItemConfig.plugin.id;
-    if (isNewPlugin) {
-      componentClass = this.menuPluginResolverService.selectedAbstractPluginResolverMessenger.componentClass;
-    } else {
-      componentClass = this.getComponentFromIdentifier();
-    }
+    componentClass = this.pluginResolver.componentClass;
     const factory: ComponentFactory<any> = this.resolver.resolveComponentFactory(componentClass);
     this._componentRef = this.pluginContainer.createComponent<AbstractPlugin<any>>(factory);
     this._componentRef.instance.initializeSettings(this.gridItemConfig.plugin);
@@ -105,9 +122,9 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     this.quickMenuMessenger.next(this);
   }
 
-  getComponentFromIdentifier(): new(...args: any[]) => {} {
+  getResolverFromIdentifier() {
     return this.abstractPluginResolver.find(value => {
       return value.identifier === this.gridItemConfig.plugin.identifier;
-    }).componentClass;
+    });
   }
 }
