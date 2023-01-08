@@ -16,11 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="page")
  */
 #[UniqueEntity(
-    fields: ['name', 'web', 'isPreview'],
+    fields: ['name', 'web'],
     errorPath: 'name',
 )]
 #[UniqueEntity(
-    fields: ['url', 'web', 'isPreview'],
+    fields: ['url', 'web'],
     errorPath: 'url',
 )]
 class Page
@@ -30,7 +30,7 @@ class Page
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
@@ -70,11 +70,6 @@ class Page
      */
     private ?string $description = '';
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     */
-    private ?bool $isPreview = false;
-
     private array $globalPlugins = [];
 
     public function __construct()
@@ -82,7 +77,7 @@ class Page
         $this->pageBlocks = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -164,15 +159,5 @@ class Page
     public function setDescription(?string $description)
     {
         $this->description = $description;
-    }
-
-    public function getIsPreview(): ?bool
-    {
-        return $this->isPreview;
-    }
-
-    public function setIsPreview(?bool $isPreview)
-    {
-        $this->isPreview = $isPreview;
     }
 }

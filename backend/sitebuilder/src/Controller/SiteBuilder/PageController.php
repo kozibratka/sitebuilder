@@ -8,9 +8,9 @@ use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
-use App\Form\SiteBuilder\PagePreviewType;
 use App\Form\SiteBuilder\PageType;
 use Doctrine\Persistence\ManagerRegistry;
+use Predis\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +26,7 @@ class PageController extends BaseApiController
     public function list(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
-        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['web' => $web, 'isPreview' => false]);
+        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['web' => $web]);
         return $this->jsonResponseSimple($pages);
     }
 
@@ -65,15 +65,9 @@ class PageController extends BaseApiController
     /**
      * @Route("/create-preview/{id}", name="create_preview")
      */
-    public function createPreview(Request $request, Web $web, ManagerRegistry $doctrine)
+    public function createPreview(Request $request, Web $web, \Predis\Client $client)
     {
         $this->denyAccessUnlessGranted('page_builder_voter', $web);
-        $entityManager = $doctrine->getManager();
-        $previewPage = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['web' => $web, 'isPreview' => true]);
-        if ($previewPage) {
-            $entityManager->remove($previewPage);
-            $entityManager->flush();
-        }
         $form = $this->createForm(PageType::class, null, ['is_preview' => true]);
         $form->submit($request->request->all());
         if($form->isSubmitted() && $form->isValid()) {
@@ -81,9 +75,9 @@ class PageController extends BaseApiController
             $page = $form->getData();
             $page->setWeb($web);
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
-            $entityManager->persist($page);
-            $entityManager->flush();
-            return $this->jsonResponseSimple($page, 201);
+            $jsonPage = $this->serializer->serialize($page, 'json');
+            $res = $client->set('page_preview_'.$web->getId(), $jsonPage, 'EX', 10);
+            return $this->jsonResponseSimple([], 201);
         }
         return $this->invalidFormResponse($form);
     }
@@ -116,15 +110,11 @@ class PageController extends BaseApiController
     /**
      * @Route("/get-preview/{id}", name="get_preview")
      */
-    public function getPagePreview(Request $request, Web $web)
+    public function getPagePreview(Request $request, Web $web, Client $client)
     {
-        $url = $request->query->get('url');
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['web' => $web, 'url' => $url, 'isPreview' => true]);
-        if (!$page) {
-            $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url]);
-        }
+        $page = $client->get('page_preview_'.$web->getId());
 
-        return $this->jsonResponseSimple($page ?? [], 201);
+        return new JsonResponse($page, json: true);
     }
 
     /**
@@ -133,7 +123,7 @@ class PageController extends BaseApiController
     public function getPagePublic(Request $request, string $domain)
     {
         $url = $request->request->get('url');
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url, 'isPreview' => false]);
+        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url]);
 
         return $this->jsonResponseSimple($page ?? [], 201);
     }

@@ -70,3 +70,7 @@ services:
     App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber:
         arguments: [!tagged { tag: 'plugin_service', index_by: 'key' }]
 
+    Predis\Client:
+        arguments:
+            - host: '%env(REDIS_HOST)%'
+            - port: '%env(int:REDIS_PORT)%'
