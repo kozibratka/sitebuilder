@@ -70,6 +70,12 @@ class Page
      */
     private ?string $description = '';
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Page")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private ?Page $parentForPublic = null;
+
     private array $globalPlugins = [];
 
     public function __construct()
@@ -159,5 +165,24 @@ class Page
     public function setDescription(?string $description)
     {
         $this->description = $description;
+    }
+
+    public function getParentForPublic(): ?Page
+    {
+        return $this->parentForPublic;
+    }
+
+    public function setParentForPublic(?Page $parentForPublic)
+    {
+        $this->parentForPublic = $parentForPublic;
+    }
+
+    public function __clone(): void
+    {
+        $this->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) {
+            $clone = clone $pageBlock;
+            $clone->setPage($this);
+            return $clone;
+        })->toArray());
     }
 }

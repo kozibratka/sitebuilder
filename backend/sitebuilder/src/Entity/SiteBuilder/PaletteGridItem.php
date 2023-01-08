@@ -142,4 +142,9 @@ class PaletteGridItem
     {
         $this->diffGridAndContentBottomHeightPx = $diffGridAndContentBottomHeightPx;
     }
+
+    public function __clone(): void
+    {
+        $this->plugin = clone $this->plugin;
+    }
 }

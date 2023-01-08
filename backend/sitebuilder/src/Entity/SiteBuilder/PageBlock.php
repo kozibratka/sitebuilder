@@ -112,4 +112,13 @@ class PageBlock
     {
         $this->height = $height;
     }
+
+    public function __clone(): void
+    {
+        $this->paletteGridItems = new ArrayCollection($this->paletteGridItems->map(function(PaletteGridItem $paletteGridItem) {
+            $clone = clone $paletteGridItem;
+            $clone->setPageBlock($this);
+            return $clone;
+        })->toArray());
+    }
 }
