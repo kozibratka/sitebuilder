@@ -52,4 +52,12 @@ export class TextPluginResolverService extends AbstractPluginResolver{
   isAutoResizeHeight(): boolean {
     return true;
   }
+
+  gridWidth(): number {
+    return 5;
+  }
+
+  gridHeight(): number {
+    return 5;
+  }
 }

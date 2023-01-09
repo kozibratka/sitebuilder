@@ -7,7 +7,7 @@ export class MenuPluginResolverService {
   private _selectedAbstractPluginResolverMessenger: AbstractPluginResolver;
 
   constructor(
-    @Inject(AbstractPluginResolver) private _abstractMenuPluginResolverMessenger: AbstractPluginResolver[]
+    @Inject(AbstractPluginResolver) private _abstractMenuPluginResolver: AbstractPluginResolver[]
   ) {
 
   }
@@ -20,7 +20,7 @@ export class MenuPluginResolverService {
     this._selectedAbstractPluginResolverMessenger = value;
   }
 
-  get abstractMenuPluginResolverMessenger(): AbstractPluginResolver[] {
-    return this._abstractMenuPluginResolverMessenger;
+  get abstractMenuPluginResolver(): AbstractPluginResolver[] {
+    return this._abstractMenuPluginResolver;
   }
 }

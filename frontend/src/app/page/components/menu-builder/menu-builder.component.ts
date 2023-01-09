@@ -38,7 +38,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   clonePageBlock = (item) => {
-    const pageBlock: PageBlockInterface = {height: 1, paletteGridItems: []};
+    const pageBlock: PageBlockInterface = {height: 20, paletteGridItems: []};
     return pageBlock; // this is what happens if sortablejsCloneFunction is not provided. Add your stuff here
   }
 

@@ -21,4 +21,8 @@ export abstract class AbstractPluginResolver implements AdminAbleInterface{
   abstract get name(): string;
 
   abstract isAutoResizeHeight(): boolean;
+
+  abstract gridWidth(): number;
+
+  abstract gridHeight(): number;
 }
