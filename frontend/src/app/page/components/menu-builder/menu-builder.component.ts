@@ -25,7 +25,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     this.zone.runOutsideAngular(() => {
       $('.menu-element .menu-element-item').draggable({
         revert: 'invalid',
-        handle: 'img',
+        handle: '.icon-move',
         scroll: false,
         appendTo: 'body',
         helper: 'clone'

@@ -30,6 +30,7 @@ export class PaletteBlockGridstackService {
       ddPlugin: GridStackDragDrop,
       float: true,
       cellHeight: 30,
+      handleClass: 'icon-move',
       minRow: pageBlock.height,
       styleInHead: true,
     }, block.nativeElement);
