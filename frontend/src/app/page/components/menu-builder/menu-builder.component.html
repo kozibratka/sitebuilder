@@ -29,9 +29,11 @@
     </ul>
   </div>
   <div class="tab-pane fade menu-element" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-    <div class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.data-gs-width]="abstractMenuPluginResolver.gridWidth()" [attr.data-gs-height]="abstractMenuPluginResolver.gridHeight()">
-        <img class="menu-image"  appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver" src="{{abstractMenuPluginResolver.getMenuImage()}}">
-        <i class="material-icons icon-move">open_with</i>
+    <div (mouseleave)="showMoveIcon = false" (mouseover)="showMoveIcon = true" class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.data-gs-width]="abstractMenuPluginResolver.gridWidth()" [attr.data-gs-height]="abstractMenuPluginResolver.gridHeight()">
+        <img class="menu-image" src="{{abstractMenuPluginResolver.getMenuImage()}}">
+        <app-animation-hider [show] = "showMoveIcon">
+          <i class="material-icons icon-move" appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver">open_with</i>
+        </app-animation-hider>
     </div>
 
   </div>

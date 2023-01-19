@@ -23,6 +23,7 @@ import { MoveableModalComponent } from './components/moveable-modal/moveable-mod
 import { MiniAdminComponent } from './components/mini-admin/mini-admin.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { AnimationHiderComponent } from './components/hidder/animation-hider/animation-hider/animation-hider.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatButtonModule} from '@angular/material/button';
     IconResolverComponent,
     MoveableModalComponent,
     MiniAdminComponent,
+    AnimationHiderComponent,
   ],
   imports: [
     CommonModule,
@@ -50,19 +52,20 @@ import {MatButtonModule} from '@angular/material/button';
     MatDialogModule,
     MatButtonModule,
   ],
-    exports: [
-        ModalForRouteComponent,
-        InputFormErrorDirective,
-        HiderElementDirective,
-        InputFormErrorGrouperDirective,
-        GlobalFormErrorComponent,
-        MoveAbleSettingsComponent,
-        HidderComponent,
-        DirectoryMiniNavigationComponent,
-        IconResolverComponent,
-        MiniAdminComponent,
-        MoveableModalComponent,
-    ],
+  exports: [
+    ModalForRouteComponent,
+    InputFormErrorDirective,
+    HiderElementDirective,
+    InputFormErrorGrouperDirective,
+    GlobalFormErrorComponent,
+    MoveAbleSettingsComponent,
+    HidderComponent,
+    DirectoryMiniNavigationComponent,
+    IconResolverComponent,
+    MiniAdminComponent,
+    MoveableModalComponent,
+    AnimationHiderComponent,
+  ],
   providers: [
     EventEmitterService,
     JqueryVersionService,

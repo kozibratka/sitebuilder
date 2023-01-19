@@ -20,6 +20,7 @@ import {ElementHelper} from '../../../../../core/helpers/element-helper';
 import {PaletteItemConfig} from '../../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../../services/palette-block-gridstack.service';
 import {PageBlockComponent} from '../page-block.component';
+import {AnimationHiderComponent} from '../../../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component';
 
 @Component({
   selector: 'app-palette-item',
@@ -35,6 +36,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   private lastPosition: ElementPositionMessenger;
   public pluginResolver: AbstractPluginResolver;
   private pageBuilderEventSubscription: Subscription;
+  showMoveIcon = false;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -84,6 +86,12 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   @HostListener('mouseenter', ['$event'])
   onMouseEnter(event: MouseEvent): void {
     this.prepareItemQuickMenu(event);
+    this.showMoveIcon = true;
+  }
+
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent): void {
+    this.showMoveIcon = false;
   }
 
   getelementRef(): ElementRef<GridItemHTMLElement> {

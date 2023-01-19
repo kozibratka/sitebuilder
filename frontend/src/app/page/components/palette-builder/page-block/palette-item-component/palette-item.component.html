@@ -1,5 +1,7 @@
 <div class="grid-stack-item-content">
-  <i class="material-icons icon-move">open_with</i>
+  <app-animation-hider [show] = "showMoveIcon">
+    <i class="material-icons icon-move">open_with</i>
+  </app-animation-hider>
   <div #gridContent>
     <ng-container #itemTemplate></ng-container>
   </div>

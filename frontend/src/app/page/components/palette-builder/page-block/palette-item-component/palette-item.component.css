@@ -9,3 +9,8 @@
   outline-color: #007BFF;
 }
 
+.icon-move {
+  position: absolute;
+  cursor: move;
+}
+

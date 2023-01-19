@@ -11,6 +11,7 @@ import {PageBlockInterface} from '../../interfaces/page-block-interface';
 export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   baseBlocks: { image: string, id: number }[];
+  showMoveIcon = false;
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
