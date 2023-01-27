@@ -16,11 +16,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragToSelectModule} from 'ngx-drag-to-select';
 import {ContextMenuModule} from '../context-menu/context-menu.module';
 import {CoreModule} from '../../core.module';
+import { FileManagerDialogComponent } from './components/file-manager-dialog/file-manager-dialog.component';
 
 
 
 @NgModule({
-  declarations: [FileManagerComponent, LargeItemComponent],
+  declarations: [FileManagerComponent, LargeItemComponent, FileManagerDialogComponent],
   exports: [
     FileManagerComponent
   ],

@@ -4,4 +4,5 @@ export interface FileInfoInterface {
   type: string;
   modified: string;
   publicPath: string;
+  path?: string;
 }

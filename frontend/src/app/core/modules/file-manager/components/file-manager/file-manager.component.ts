@@ -12,7 +12,7 @@ import {
 import {MatTreeFlatDataSource} from '@angular/material/tree';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
-import {fromEvent, Observable, Subscription, timer} from 'rxjs';
+import {fromEvent, Observable, Subject, Subscription, timer} from 'rxjs';
 import {debounce, filter, finalize, map, take, tap} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
@@ -30,6 +30,7 @@ import {SymfonyApiClientService} from '../../../../services/api/symfony-api/symf
 import {MatTreeService} from '../../../../services/mat-tree.service';
 import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
 import {NotifierService} from '../../../../services/notifier.service';
+import {FileManagerEvent} from '../../interfaces/file-manager-event';
 
 @Component({
   selector: 'app-file-manager',

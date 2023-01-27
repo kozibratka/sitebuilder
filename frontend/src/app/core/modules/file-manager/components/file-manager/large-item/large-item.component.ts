@@ -1,4 +1,5 @@
 import {Component, HostListener, Input, OnInit, Output,  EventEmitter} from '@angular/core';
+import {FileInfoInterface} from '../../../interfaces/file-info-interface';
 
 @Component({
   selector: 'app-large-item',
@@ -8,7 +9,7 @@ import {Component, HostListener, Input, OnInit, Output,  EventEmitter} from '@an
 })
 export class LargeItemComponent implements OnInit {
 
-  @Input() file;
+  @Input() file: FileInfoInterface;
   @Output() lastSelected = new EventEmitter<LargeItemComponent>();
   @Output() contextMenuEmmitter = new EventEmitter<any>();
   @Output() changeDirectory = new EventEmitter<string>();
