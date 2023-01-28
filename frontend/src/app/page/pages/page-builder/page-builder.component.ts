@@ -15,6 +15,7 @@ import {DomainInfoService} from '../../../core/services/domain-info.service';
 import {Title} from '@angular/platform-browser';
 import {Subject} from 'rxjs';
 import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';
+import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
 
 @Component({
   selector: 'app-page-builder',
@@ -41,6 +42,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private webDetailResolverService: WebDetailResolverService,
     private pluginResolverService: PluginResolverService,
     private domainInfoService: DomainInfoService,
+    private fileManagerModalService: FileManagerModalService,
     public title: Title,
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
   ) {
@@ -58,6 +60,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.title.setTitle('Vytvoření stránky');
     this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
+    this.fileManagerModalService.open();
   }
 
   save(withPublic = null): void {

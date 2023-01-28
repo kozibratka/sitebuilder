@@ -98,6 +98,10 @@ h5 {
   border-width: 0 0 1px;
 }
 
+.manager-body {
+  min-height: 22vw;
+}
+
 .container-fluid {
   border: 1px solid #e0e0e0;
 }

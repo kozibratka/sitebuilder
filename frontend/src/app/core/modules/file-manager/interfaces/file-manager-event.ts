@@ -1,6 +1,6 @@
 import {FileInfoInterface} from './file-info-interface';
 
 export interface FileManagerEvent {
-  eventName: 'selected';
+  eventName: 'selected' | 'close';
   files: FileInfoInterface[];
 }

@@ -4,7 +4,7 @@
     <button mat-stroked-button (click)="createDirectoryDialog(createDirectoryTemplate)"><fa-icon class="folder" [icon]="icons.faFolder"></fa-icon> Nový adresář</button>
     <button mat-stroked-button (click)="fileUploadButton.click()"><fa-icon class="folder" [icon]="icons.faUpload"></fa-icon> Nahrát soubor</button>
   </div>
-  <div class="row">
+  <div class="row manager-body">
     <div class="col-2">
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
         <!-- This is the tree node template for leaf nodes -->
