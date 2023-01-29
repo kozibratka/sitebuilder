@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { PaletteItemComponent } from './palette-item.component';
+import {PaletteItemComponent} from './palette-item.component';
 
 describe('PaletteItemComponent', () => {
   let component: PaletteItemComponent;

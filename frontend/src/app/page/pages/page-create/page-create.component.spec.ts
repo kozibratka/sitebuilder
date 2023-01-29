@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { PageCreateComponent } from './page-create.component';
+import {PageCreateComponent} from './page-create.component';
 
 describe('PageCreateComponent', () => {
   let component: PageCreateComponent;

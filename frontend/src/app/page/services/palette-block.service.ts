@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {PaletteItemComponent} from '../components/palette-builder/page-block/palette-item-component/palette-item.component';
 
 @Injectable({

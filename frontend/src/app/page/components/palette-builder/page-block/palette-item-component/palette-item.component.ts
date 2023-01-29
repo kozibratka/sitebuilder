@@ -1,10 +1,15 @@
 import {
   AfterViewChecked,
   AfterViewInit,
-  Component, ComponentFactory,
-  ComponentFactoryResolver, ComponentRef,
-  ElementRef, HostListener, Inject,
-  Input, OnDestroy,
+  Component,
+  ComponentFactory,
+  ComponentFactoryResolver,
+  ComponentRef,
+  ElementRef,
+  HostListener,
+  Inject,
+  Input,
+  OnDestroy,
   OnInit,
   ViewChild,
   ViewContainerRef
@@ -20,7 +25,6 @@ import {ElementHelper} from '../../../../../core/helpers/element-helper';
 import {PaletteItemConfig} from '../../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../../services/palette-block-gridstack.service';
 import {PageBlockComponent} from '../page-block.component';
-import {AnimationHiderComponent} from '../../../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component';
 
 @Component({
   selector: 'app-palette-item',

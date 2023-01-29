@@ -1,4 +1,4 @@
-import {GridStackDDJQueryUI, $} from 'gridstack';
+import {$, GridStackDDJQueryUI} from 'gridstack';
 
 export class GridStackDragDrop extends GridStackDDJQueryUI{
   on(el, name, callback): GridStackDragDrop {

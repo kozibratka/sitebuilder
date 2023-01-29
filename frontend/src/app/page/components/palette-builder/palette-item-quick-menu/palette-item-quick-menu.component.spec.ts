@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { PaletteItemQuickMenuComponent } from './palette-item-quick-menu.component';
+import {PaletteItemQuickMenuComponent} from './palette-item-quick-menu.component';
 
 describe('PaletteItemQuickMenuComponent', () => {
   let component: PaletteItemQuickMenuComponent;

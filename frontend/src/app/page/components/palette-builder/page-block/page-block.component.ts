@@ -1,17 +1,21 @@
 import {
-  Component,
   AfterViewInit,
-  ViewChild,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
+  EventEmitter,
   HostListener,
-  ViewChildren,
+  Inject,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
   QueryList,
   Renderer2,
-  NgZone,
-  Output,
-  EventEmitter, Inject, Input, OnInit, ChangeDetectorRef
+  ViewChild,
+  ViewChildren
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {DOCUMENT} from '@angular/common';
 import {GridItemHTMLElement} from 'gridstack/dist/gridstack';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item-component/palette-item.component';

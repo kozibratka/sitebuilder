@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
 import {PageInterface} from '../../interfaces/page-interface';
 import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';

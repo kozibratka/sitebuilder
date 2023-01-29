@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {PageListComponent} from './pages/page-list/page-list.component';
 import {PageCreateComponent} from './pages/page-create/page-create.component';
@@ -9,7 +9,6 @@ import {PageBuilderResolverService} from './services/page-builder-resolver.servi
 import {PageBlockComponent} from './components/palette-builder/page-block/page-block.component';
 import {RemovePageDialogComponent} from './components/remove-page-dialog/remove-page-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AppAdminModule} from '../app-admin.module';
 import {MenuBuilderComponent} from './components/menu-builder/menu-builder.component';
 import {PaletteBuilderComponent} from './components/palette-builder/palette-builder.component';
 import {MatButtonModule} from '@angular/material/button';

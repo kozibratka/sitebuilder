@@ -1,4 +1,4 @@
-import {Inject, Injectable, Input, Optional} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {AbstractPluginResolver} from './abstract-classes/abstract-plugin-resolver';
 
 @Injectable()

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { PageBlockComponent } from './page-block.component';
+import {PageBlockComponent} from './page-block.component';
 
 describe('PaletteBlockComponent', () => {
   let component: PageBlockComponent;

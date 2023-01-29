@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, NgZone} from '@angular/core';
+import {Directive, ElementRef, NgZone} from '@angular/core';
 
 enum SpeedScroll {
   low = 1,

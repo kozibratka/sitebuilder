@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PageInterface} from '../../interfaces/page-interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';

@@ -14,7 +14,6 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {DomainInfoService} from '../../../core/services/domain-info.service';
 import {Title} from '@angular/platform-browser';
 import {Subject} from 'rxjs';
-import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';
 import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
 
 @Component({
