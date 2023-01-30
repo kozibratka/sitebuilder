@@ -12,5 +12,7 @@
 .icon-move {
   position: absolute;
   cursor: move;
+  z-index: 9999;
+  color:red;
 }
 

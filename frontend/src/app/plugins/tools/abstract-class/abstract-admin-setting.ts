@@ -7,7 +7,7 @@ import {AbstractPluginResolver} from '../../../page/services/abstract-classes/ab
 
 @Directive()
 export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
-  subject: AbstractPlugin<T>;
+  plugin: AbstractPlugin<T>;
   private _settings: T;
   webId: number;
   menuResolver: AbstractPluginResolver;

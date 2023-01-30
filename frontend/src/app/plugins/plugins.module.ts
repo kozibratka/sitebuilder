@@ -8,6 +8,10 @@ import {RouterModule} from '@angular/router';
 import {CoreModule} from '../core/core.module';
 import {AbstractPluginResolver} from '../page/services/abstract-classes/abstract-plugin-resolver';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import { CarouselBootstrapPluginComponent } from './carousel-bootstrap-plugin/carousel-bootstrap-plugin.component';
+import { CarouselBootstrapImagesAdminComponent } from './carousel-bootstrap-plugin/pages/carousel-bootstrap-images-admin/carousel-bootstrap-images-admin.component';
+import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
+import {CarouselBootstrapPluginResolverService} from './carousel-bootstrap-plugin/services/carousel-bootstrap-plugin-resolver.service';
 
 @NgModule({
   imports: [
@@ -16,13 +20,17 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
     ReactiveFormsModule,
     MatButtonModule,
     RouterModule,
-    CKEditorModule
+    CKEditorModule,
+    NgbCarouselModule
   ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
+     {provide: AbstractPluginResolver, useClass: CarouselBootstrapPluginResolverService, multi: true},
   ],
   declarations: [
-    TextPluginAdminComponent
+    TextPluginAdminComponent,
+    CarouselBootstrapPluginComponent,
+    CarouselBootstrapImagesAdminComponent
   ]
 })
 export class PluginsModule { }
