@@ -1,6 +1,6 @@
 :host {
   transition: top 0.5s, left 0.5s;
-  z-index: 9999;
+  z-index: 1;
   position: absolute;
   display: none;
   text-align: center;

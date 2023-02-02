@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {TextPluginResolverService} from './text-plugin/tools/services/text-plugin-resolver.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TextPluginAdminComponent} from './text-plugin/admin/text-plugin-admin/text-plugin-admin.component';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
@@ -12,6 +12,7 @@ import { CarouselBootstrapPluginComponent } from './carousel-bootstrap-plugin/ca
 import { CarouselBootstrapImagesAdminComponent } from './carousel-bootstrap-plugin/pages/carousel-bootstrap-images-admin/carousel-bootstrap-images-admin.component';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {CarouselBootstrapPluginResolverService} from './carousel-bootstrap-plugin/services/carousel-bootstrap-plugin-resolver.service';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -21,7 +22,9 @@ import {CarouselBootstrapPluginResolverService} from './carousel-bootstrap-plugi
     MatButtonModule,
     RouterModule,
     CKEditorModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    FormsModule,
+    DragDropModule,
   ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
