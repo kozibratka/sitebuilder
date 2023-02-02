@@ -11,10 +11,8 @@ import * as _ from 'lodash';
 })
 export class CarouselBootstrapImagesAdminComponent extends AbstractAdminSetting<CarouselBootstrapConfigInterface> implements OnInit {
 
-  imagesChunks = [];
 
   ngOnInit(): void {
-    this.imagesChunks = _.chunk(this.settings.images, 2);
   }
 
   createAdminForm(settings: CarouselBootstrapConfigInterface) {
@@ -39,7 +37,5 @@ export class CarouselBootstrapImagesAdminComponent extends AbstractAdminSetting<
         event.currentIndex,
       );
     }
-    this.settings.images = _.flatten(this.imagesChunks);
-    this.imagesChunks = _.chunk(this.settings.images, 2);
   }
 }
