@@ -1,7 +1,7 @@
     <div class="wrapper d-flex align-items-stretch">
       <nav id="sidebar">
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
-          <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass();">
+          <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass;">
             <a href="#" (click)="showContent(setting.component);$event.preventDefault()">
               <span class="fa fa-chevron-right mr-3"></span>{{setting.label}}</a>
           </li>
@@ -14,9 +14,6 @@
         </div>
       </div>
     </div>
-
-
-
 
 
 

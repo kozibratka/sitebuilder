@@ -15,15 +15,13 @@ export class TextPluginResolverService extends AbstractPluginResolver{
     return TextPluginComponent;
   }
 
-  adminComponentsClass() {
-    return [
-      {
-        label: 'Text',
-        component: TextPluginAdminComponent,
-        path: ''
-      }
-    ];
-  }
+  adminComponentsClass = [
+    {
+      label: 'Text',
+      component: TextPluginAdminComponent,
+      path: ''
+    }
+  ];
 
   getMenuImage(): string {
     return 'https://via.placeholder.com/300/000000?text=5';

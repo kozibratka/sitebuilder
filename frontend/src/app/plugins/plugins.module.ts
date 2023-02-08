@@ -8,12 +8,16 @@ import {RouterModule} from '@angular/router';
 import {CoreModule} from '../core/core.module';
 import {AbstractPluginResolver} from '../page/services/abstract-classes/abstract-plugin-resolver';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
-import { CarouselBootstrapImagesAdminComponent } from './carousel-bootstrap-plugin/pages/carousel-bootstrap-images-admin/carousel-bootstrap-images-admin.component';
 import {CarouselBootstrapPluginResolverService} from './carousel-bootstrap-plugin/services/carousel-bootstrap-plugin-resolver.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MixedCdkDragDropModule} from 'angular-mixed-cdk-drag-drop';
 import {CarouselBootstrapPluginComponent} from './carousel-bootstrap-plugin/carousel-bootstrap-plugin.component';
 import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
+import {ImagesAdminComponent} from './carousel-bootstrap-plugin/pages/images-admin/images-admin.component';
+import {EffectAdminComponent} from './carousel-bootstrap-plugin/pages/effect-admin/effect-admin.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -28,6 +32,9 @@ import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
     MixedCdkDragDropModule,
     NgbCarousel,
     NgbSlide,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
@@ -35,8 +42,9 @@ import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
   ],
   declarations: [
     TextPluginAdminComponent,
-    CarouselBootstrapImagesAdminComponent,
-    CarouselBootstrapPluginComponent
+    ImagesAdminComponent,
+    CarouselBootstrapPluginComponent,
+    EffectAdminComponent
   ]
 })
 export class PluginsModule { }

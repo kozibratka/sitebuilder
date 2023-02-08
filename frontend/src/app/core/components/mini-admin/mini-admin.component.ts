@@ -34,6 +34,6 @@ export class MiniAdminComponent implements OnInit {
   setAdminAble(value: AdminAbleInterface, settings: any) {
     this.settings = settings;
     this.adminAble = value;
-    this.showContent(this.adminAble.adminComponentsClass()[0].component);
+    this.showContent(this.adminAble.adminComponentsClass[0].component);
   }
 }

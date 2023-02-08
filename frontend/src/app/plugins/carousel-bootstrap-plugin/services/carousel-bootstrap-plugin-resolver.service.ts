@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {CarouselBootstrapPluginComponent} from '../carousel-bootstrap-plugin.component';
 import {PluginIdentifier} from '../../tools/constants/plugin-identifier';
-import {CarouselBootstrapImagesAdminComponent} from '../pages/carousel-bootstrap-images-admin/carousel-bootstrap-images-admin.component';
+import {ImagesAdminComponent} from '../pages/images-admin/images-admin.component';
+import {EffectAdminComponent} from '../pages/effect-admin/effect-admin.component';
 
 
 @Injectable({
@@ -16,15 +17,18 @@ export class CarouselBootstrapPluginResolverService extends AbstractPluginResolv
     return CarouselBootstrapPluginComponent;
   }
 
-  adminComponentsClass() {
-    return [
-      {
-        label: 'Obrázek',
-        component: CarouselBootstrapImagesAdminComponent,
-        path: ''
-      }
-    ];
-  }
+  adminComponentsClass = [
+    {
+      label: 'Obrázky',
+      component: ImagesAdminComponent,
+      path: ''
+    },
+    {
+      label: 'Efekty',
+      component: EffectAdminComponent,
+      path: ''
+    }
+  ];
 
   getMenuImage(): string {
     return 'https://via.placeholder.com/300/000000?text=5';

@@ -25,3 +25,7 @@ a:not([href]){
 .cdk-overlay-container{
   z-index: 2000 !important;
 }
+
+.main-header {
+  z-index: 1!important;
+}

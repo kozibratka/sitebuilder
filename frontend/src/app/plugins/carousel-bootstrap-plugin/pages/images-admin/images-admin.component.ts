@@ -6,10 +6,10 @@ import {FileManagerService} from '../../../../core/modules/file-manager/services
 
 @Component({
   selector: 'app-carousel-bootstrap-images-admin',
-  templateUrl: './carousel-bootstrap-images-admin.component.html',
-  styleUrls: ['./carousel-bootstrap-images-admin.component.css']
+  templateUrl: './images-admin.component.html',
+  styleUrls: ['./images-admin.component.css']
 })
-export class CarouselBootstrapImagesAdminComponent extends AbstractAdminSetting<CarouselBootstrapConfigInterface> implements OnInit {
+export class ImagesAdminComponent extends AbstractAdminSetting<CarouselBootstrapConfigInterface> implements OnInit {
 
   showIconIndex = -2;
 

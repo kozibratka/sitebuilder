@@ -17,6 +17,7 @@ export class AdminFormService {
     form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         const formValue = form.value as BasePlugConfigInterface;
+        console.log(formValue);
         Object.assign(settings, formValue);
       }
     });

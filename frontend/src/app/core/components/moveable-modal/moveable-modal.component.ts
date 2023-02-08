@@ -40,10 +40,11 @@ export class MoveableModalComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  @HostListener('click', ['$event'])
-  click(event: any) {
-    event.stopPropagation(); event.preventDefault();
-  }
+  // pokud aktivní, nefunguje checkobxy v tomto modalu
+  // @HostListener('click', ['$event'])
+  // click(event: any) {
+  //   event.stopPropagation(); event.preventDefault();
+  // }
 
   close() {
     this.display = 'none';
