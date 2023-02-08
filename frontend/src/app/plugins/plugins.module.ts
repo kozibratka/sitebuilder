@@ -8,11 +8,12 @@ import {RouterModule} from '@angular/router';
 import {CoreModule} from '../core/core.module';
 import {AbstractPluginResolver} from '../page/services/abstract-classes/abstract-plugin-resolver';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
-import { CarouselBootstrapPluginComponent } from './carousel-bootstrap-plugin/carousel-bootstrap-plugin.component';
 import { CarouselBootstrapImagesAdminComponent } from './carousel-bootstrap-plugin/pages/carousel-bootstrap-images-admin/carousel-bootstrap-images-admin.component';
-import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {CarouselBootstrapPluginResolverService} from './carousel-bootstrap-plugin/services/carousel-bootstrap-plugin-resolver.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MixedCdkDragDropModule} from 'angular-mixed-cdk-drag-drop';
+import {CarouselBootstrapPluginComponent} from './carousel-bootstrap-plugin/carousel-bootstrap-plugin.component';
+import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -22,9 +23,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule,
     RouterModule,
     CKEditorModule,
-    NgbCarouselModule,
     FormsModule,
     DragDropModule,
+    MixedCdkDragDropModule,
+    NgbCarousel,
+    NgbSlide,
   ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
@@ -32,8 +35,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   ],
   declarations: [
     TextPluginAdminComponent,
-    CarouselBootstrapPluginComponent,
-    CarouselBootstrapImagesAdminComponent
+    CarouselBootstrapImagesAdminComponent,
+    CarouselBootstrapPluginComponent
   ]
 })
 export class PluginsModule { }

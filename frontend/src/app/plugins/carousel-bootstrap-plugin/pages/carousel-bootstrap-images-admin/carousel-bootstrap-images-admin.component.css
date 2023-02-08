@@ -5,3 +5,14 @@
 .image-h1, .image-h2 {
   width: 100%;
 }
+
+.icon-remove {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  color: red;
+}
+
+.icon-remove:hover {
+  cursor: pointer;
+}

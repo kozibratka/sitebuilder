@@ -14,7 +14,6 @@ import { MoveAbleSettingsComponent } from './components/move-able-settings/move-
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {JqueryVersionService} from './services/jquery-version.service';
 import {MatTreeService} from './services/mat-tree.service';
-import { HidderComponent } from './components/hidder/hidder.component';
 import { DirectoryMiniNavigationComponent } from './components/directory-mini-navigation/directory-mini-navigation.component';
 import { IconResolverComponent } from './components/icon-resolver/icon-resolver.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -24,6 +23,7 @@ import { MiniAdminComponent } from './components/mini-admin/mini-admin.component
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { AnimationHiderComponent } from './components/hidder/animation-hider/animation-hider/animation-hider.component';
+import {HidderComponent} from './components/hidder/plain-hider/hidder.component';
 
 @NgModule({
   declarations: [

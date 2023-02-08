@@ -18,7 +18,7 @@
   cursor: row-resize;
 }
 
-/deep/.palette .palette-block > .sortable-ghost
+::ng-deep.palette .palette-block > .sortable-ghost
 {
   width: 100%;
   height: 20px;
@@ -27,7 +27,7 @@
 
 }
 
-/deep/.palette .palette-block > .sortable-ghost > img
+::ng-deep.palette .palette-block > .sortable-ghost > img
 {
   display: none;
 }

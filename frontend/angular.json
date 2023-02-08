@@ -22,7 +22,6 @@
             "main": "src/admin-main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "extractCss": true,
             "aot": true,
             "assets": [
               "src/favicon.ico",
@@ -73,7 +72,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -95,8 +93,21 @@
               "outputPath": "dist/frontend-public",
               "index": "src/public-index.html",
               "main": "src/public-main.ts"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": {
+                "scripts": false,
+                "styles": false,
+                "fonts": false
+              },
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
@@ -162,6 +173,18 @@
           }
         }
       }
-    }},
-  "defaultProject": "frontend-admin"
+    }
+  },
+  "defaultProject": "frontend-admin",
+  "cli": {
+    "analytics": "b2d8dbe9-6d9f-45ae-8f0d-25c3d1672e53"
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
 }

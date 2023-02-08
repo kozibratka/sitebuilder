@@ -3,6 +3,8 @@ import {AbstractAdminSetting} from '../../../tools/abstract-class/abstract-admin
 import {TextPluginConfigInterface} from '../../tools/interfaces/text-plugin-config-interface';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
+import {FormBuilder} from '@angular/forms';
+import {AdminFormService} from '../../../tools/forms/admin-form.service';
 
 @Component({
   selector: 'app-text-settings',
@@ -13,6 +15,13 @@ export class TextPluginAdminComponent extends AbstractAdminSetting<TextPluginCon
 
   public Editor = ClassicEditor;
   public text: string;
+
+  constructor(
+    protected fb: FormBuilder,
+    protected adminFormService: AdminFormService
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
   }

@@ -52,7 +52,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload', relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })
   ]
 })
 export class AppAdminRoutingModule { }

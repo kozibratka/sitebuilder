@@ -1,20 +1,16 @@
-<div id="imagesContainer" cdkDropListGroup>
-    <div class="row" [cdkDropListData]="chunk" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal" *ngFor="let chunk of imagesChunks">
-      <div class="imageContainer col-md-2" *ngFor="let image of chunk" cdkDrag>
-        <img class="image-item" [src]="image.path">
-        <input class="image-h1" type="text" [(ngModel)]="image.h1">
-        <input class="image-h2" type="text" [(ngModel)]="image.h2">
+<div id="imagesContainer">
+    <div class="row" cdkDropListGroup mixedCdkDragDrop [orientation]="'horizontal'" [itemList]="settings.images">
+      <div class="imageContainer col-md-2" *ngFor="let image of settings.images; index as i" cdkDropList mixedCdkDropList>
+        <div (mouseover)="showIconIndex=i" (mouseleave)="showIconIndex=-1"  cdkDrag mixedCdkDragSizeHelper>
+          <img class="image-item" [src]="image.path">
+          <input class="image-h1" type="text" [(ngModel)]="image.h1">
+          <input class="image-h2" type="text" [(ngModel)]="image.h2">
+          <app-animation-hider [show] = "showIconIndex==i">
+            <i class="material-icons icon-remove" (click)="onClickRemoveImageButton(i)">close</i>
+          </app-animation-hider>
+        </div>
       </div>
     </div>
-  <!--  <div class="row" cdkDropListGroup mixedCdkDragDrop [orientation]="'horizontal'" [itemList]="settings.images">-->
-  <!--    <div class="imageContainer col-md-2" *ngFor="let image of settings.images" cdkDropList mixedCdkDropList>-->
-  <!--      <div cdkDrag>-->
-  <!--        <img class="image-item" [src]="image.path">-->
-  <!--        <input class="image-h1" type="text" [(ngModel)]="image.h1">-->
-  <!--        <input class="image-h2" type="text" [(ngModel)]="image.h2">-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
 </div>
 <div class="text-right">
   <button (click)="onClickAddImageButton()" mat-raised-button color="primary"><i class="material-icons">photo</i>Přidat obrázek

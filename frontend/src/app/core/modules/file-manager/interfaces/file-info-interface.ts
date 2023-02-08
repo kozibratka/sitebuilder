@@ -5,4 +5,5 @@ export interface FileInfoInterface {
   modified: string;
   publicPath: string;
   path?: string;
+  mimeType: string;
 }

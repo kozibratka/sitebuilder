@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
-import {EventEmitterService} from '../../services/event-emitter-service';
+import {EventEmitterService} from '../../../services/event-emitter-service';
 
 @Component({
   selector: 'app-hidder',

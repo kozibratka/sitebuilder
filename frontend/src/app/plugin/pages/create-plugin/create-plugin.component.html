@@ -7,7 +7,7 @@
       <app-global-form-error></app-global-form-error>
       <input appFormError type="text" class="form-control" placeholder="Název" formControlName="name">
       <div class="container-fluid mt-3">
-        <div class="row justify-content-end">
+        <div class="d-flex justify-content-end">
           <a [routerLink]="['../../list-created', pluginResolver.identifier]" [replaceUrl]="true" mat-button>Zpět na seznam</a>
           <button type="submit" mat-raised-button color="primary" class="ml-2"><i class="material-icons">add</i>Uložit
           </button>

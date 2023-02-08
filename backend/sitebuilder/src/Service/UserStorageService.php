@@ -44,6 +44,7 @@ class UserStorageService
         foreach ($finder as $file) {
             $fileData['type'] = $file->getType();
             $fileData['name'] = $file->getFilename();
+            $fileData['mimeType'] = mime_content_type($file->getRealPath());
             $fileData['size'] = Helper::getSize($file->getSize());
             $fileData['publicPath'] = $this->getPublicPathFile($file);
             $fileData['path'] = $this->getValidUserPath($file->getRealPath(), $user);

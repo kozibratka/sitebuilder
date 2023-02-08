@@ -1,5 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 

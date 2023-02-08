@@ -59,7 +59,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.title.setTitle('Vytvoření stránky');
     this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
-    this.fileManagerModalService.open();
+    // this.fileManagerModalService.open();
   }
 
   save(withPublic = null): void {

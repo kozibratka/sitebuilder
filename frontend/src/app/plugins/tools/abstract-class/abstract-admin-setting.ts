@@ -15,8 +15,6 @@ export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
 
 
   constructor(
-    protected fb: FormBuilder,
-    protected adminFormService: AdminFormService
   ) {
   }
 

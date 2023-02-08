@@ -55,10 +55,10 @@ export class CarouselBootstrapPluginResolverService extends AbstractPluginResolv
   }
 
   gridWidth(): number {
-    return 5;
+    return 9;
   }
 
   gridHeight(): number {
-    return 5;
+    return 18;
   }
 }
