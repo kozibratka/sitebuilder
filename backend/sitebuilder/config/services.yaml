@@ -60,6 +60,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'text_plugin' }
 
+    App\Service\Plugin\CarouselBootstrapPluginService:
+        tags:
+            - { name: 'plugin_service', key: 'carousel_bootstrap_plugin' }
+
     App\Service\Plugin\ImagePluginService:
         tags:
             - { name: 'plugin_service', key: 'image_plugin' }

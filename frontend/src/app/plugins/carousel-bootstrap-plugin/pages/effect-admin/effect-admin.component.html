@@ -1,8 +1,10 @@
 <form [formGroup]="adminForm">
-    <mat-checkbox class="example-margin" formControlName="autostart">Autostart</mat-checkbox>
-  <mat-form-field class="example-full-width">
-    <mat-label>Interval (ms)</mat-label>
-    <input matInput maxlength="5" placeholder="3000" formControlName="interval">
-  </mat-form-field>
+  <div class="d-flex flex-md-row flex-wrap align-items-center">
+    <mat-checkbox class="example-margin p-2 flex-fill" formControlName="autostart">Autostart</mat-checkbox>
+    <mat-form-field class="example-full-width p-2 flex-fill">
+      <mat-label>Interval (ms)</mat-label>
+      <input matInput maxlength="5" placeholder="3000" formControlName="interval">
+    </mat-form-field>
+  </div>
 </form>
 
