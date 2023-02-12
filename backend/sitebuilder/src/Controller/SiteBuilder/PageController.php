@@ -9,7 +9,6 @@ use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
 use App\Form\SiteBuilder\PageType;
-use App\Repository\PageRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -84,16 +83,16 @@ class PageController extends BaseApiController
     }
 
     /**
-     * @Route("/update/{id}", name="update")
+     * @Route("/update-page-builder/{id}", name="update_page_builder")
      */
     public function update(Request $request, Page $page, ManagerRegistry $doctrine)
     {
         $withPublic = $request->query->get('withPublic');
-        $form = $this->createForm(PageType::class, $page);
+        $form = $this->createForm(PageType::class, $page, ['pageBuilder' => true]);
         $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
-            $this->persist($page);
+            $this->flush();
             if ($withPublic) {
                 $currentPublicPage = $doctrine->getRepository(Page::class)->findOneBy(['parentForPublic' => $page->getId()]);
                 if ($currentPublicPage) {
@@ -103,6 +102,21 @@ class PageController extends BaseApiController
                 $clonePage->setParentForPublic($page);
                 $this->persist($clonePage);
             }
+            return $this->jsonResponseSimple($page, 201);
+        }
+        return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/update-page/{id}", name="update_page")
+     */
+    public function updatePage(Request $request, Page $page, ManagerRegistry $doctrine)
+    {
+        $form = $this->createForm(PageType::class, $page, ['pageBuilder' => false]);
+        $form->submit($request->request->all(), false);
+        if($form->isSubmitted() && $form->isValid()) {
+            $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
+            $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
         }
         return $this->invalidFormResponse($form);

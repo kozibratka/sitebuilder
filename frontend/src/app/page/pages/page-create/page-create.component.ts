@@ -62,11 +62,11 @@ export class PageCreateComponent implements OnInit {
 
   updatePage(): void {
     const pageDetail: WebInterface = this.route.snapshot.data.pageDetail;
-    this.createPageForm = this.pageFormService.createForm({path: 'page_update', querySegment: {id: pageDetail.id}});
+    this.createPageForm = this.pageFormService.createForm({path: 'page_update_page', querySegment: {id: pageDetail.id}});
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('page_update', this.createPageForm.value, {id: pageDetail.id}).subscribe({
+        this.symfonyApiClientService.post('update_page', this.createPageForm.value, {id: pageDetail.id}).subscribe({
           next: () => {
             this.notifierService.notify('Stránka byla úspěšně upravena');
             this.router.navigate(['list'], { relativeTo: this.route.parent });

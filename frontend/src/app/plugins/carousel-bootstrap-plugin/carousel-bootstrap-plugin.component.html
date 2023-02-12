@@ -1,4 +1,4 @@
-<ngb-carousel [interval]="settings.autostart ? settings.interval : 0">
+<ngb-carousel [interval]="settings.autostart ? settings.intervalRotate : 0">
   <ng-template ngbSlide *ngFor="let image of settings.images">
     <div class="picsum-img-wrapper">
       <img [src]="image.path" alt="{{image.h1}}" />

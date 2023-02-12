@@ -64,7 +64,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
 
   save(withPublic = null): void {
     this.pageBuilderEvent.next(true); // notify listeners
-    this.symfonyApiClientService.post<PageInterface>('page_update', this.pageDetail, {id: this.pageDetail.id, withPublic}).subscribe({
+    this.symfonyApiClientService.post<PageInterface>('page_update_page_builder', this.pageDetail, {id: this.pageDetail.id, withPublic}).subscribe({
       next: (response) => {
         ArrayHelper.syncArrayOfObjects(response.body.pageBlocks, this.pageDetail.pageBlocks); // refresh blocks, items...
         this.webDetailResolverService.refresh();

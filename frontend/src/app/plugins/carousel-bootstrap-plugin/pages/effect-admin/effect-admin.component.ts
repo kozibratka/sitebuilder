@@ -21,7 +21,7 @@ export class EffectAdminComponent extends AbstractAdminSetting<CarouselBootstrap
   createAdminForm(settings: CarouselBootstrapConfigInterface): void {
     this.adminForm = this.adminFormService.createForm(
       {
-        interval: [''],
+        intervalRotate: [''],
         autostart: ['']
       },
       settings

@@ -16,11 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="page")
  */
 #[UniqueEntity(
-    fields: ['name', 'web'],
+    fields: ['name', 'web', 'parentForPublic'],
     errorPath: 'name',
 )]
 #[UniqueEntity(
-    fields: ['url', 'web'],
+    fields: ['url', 'web', 'parentForPublic'],
     errorPath: 'url',
 )]
 class Page

@@ -3,5 +3,5 @@ import {BasePlugConfigInterface} from '../../tools/interfaces/base-plug-config-i
 export interface CarouselBootstrapConfigInterface extends BasePlugConfigInterface{
   images: {path: string, h1: string, h2: string}[];
   autostart: boolean;
-  interval: number;
+  intervalRotate: number;
 }

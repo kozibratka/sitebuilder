@@ -4,7 +4,7 @@
 namespace App\Form\SiteBuilder\Plugin\CarouselBootstrapType;
 
 
-use App\Entity\SiteBuilder\Plugin\CarouselBootstrapPlugin;
+use App\Entity\SiteBuilder\Plugin\CarouselBootstrapPlugin\CarouselBootstrapPlugin;
 use App\Form\SiteBuilder\Plugin\BasePluginType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -18,9 +18,14 @@ class CarouselBootstrapType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('interval', TextType::class)
+            ->add('intervalRotate', TextType::class)
             ->add('autostart', CheckboxType::class)
-            ->add('images', CollectionType::class, ['entry_type' => ImageType::class])
+            ->add('images', CollectionType::class, [
+                'entry_type' => CarouselBootstrapImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
         ;
     }
 

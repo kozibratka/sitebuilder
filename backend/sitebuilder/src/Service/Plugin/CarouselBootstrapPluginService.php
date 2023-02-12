@@ -4,7 +4,7 @@
 namespace App\Service\Plugin;
 
 
-use App\Entity\SiteBuilder\Plugin\CarouselBootstrapPlugin;
+use App\Entity\SiteBuilder\Plugin\CarouselBootstrapPlugin\CarouselBootstrapPlugin;
 use App\Form\SiteBuilder\Plugin\CarouselBootstrapType\CarouselBootstrapType;
 
 class CarouselBootstrapPluginService implements PluginInterface

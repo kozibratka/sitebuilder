@@ -23,6 +23,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="base_plugin")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="pluginType", type="string")
+ * @Serializer\Discriminator(
+ *     field = "pluginType",
+ *     disabled = false,
+ *     map = {
+ *          "CarouselBootstrapPlugin" = "App\Entity\SiteBuilder\Plugin\CarouselBootstrapPlugin\CarouselBootstrapPlugin",
+ *          "TextPlugin" = "App\Entity\SiteBuilder\Plugin\TextPlugin"
+ *     })
  */
 abstract class BasePlugin
 {

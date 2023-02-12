@@ -26,7 +26,7 @@ export class CarouselBootstrapPluginComponent extends AbstractPlugin<CarouselBoo
     return {
       identifier: PluginIdentifier.CAROUSEL_BOOTSTRAP_PLUGIN,
       autostart: true,
-      interval: 3000,
+      intervalRotate: 3000,
       images: [
         {h1: 'Text 1', h2: 'Text 2', path: 'https://picsum.photos/id/944/900/500'},
         {h1: 'Text 3', h2: 'Text 4', path: 'https://picsum.photos/id/1011/900/500'},

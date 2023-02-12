@@ -14,9 +14,7 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name',null, ['empty_data' => ''])
-            ->add('url', null, ['empty_data' => ''])
-            ->add('description')
+        $builder
             ->add(
                 'pageBlocks',
                 CollectionType::class,
@@ -28,6 +26,14 @@ class PageType extends AbstractType
                     'entry_options' => ['is_preview' => $options['is_preview']],
                 ]
             );
+        if (!$options['pageBuilder']) {
+            $builder
+                ->add('name',null, ['empty_data' => ''])
+                ->add('url', null, ['empty_data' => ''])
+                ->add('description')
+            ;
+        }
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -37,6 +43,7 @@ class PageType extends AbstractType
                 'data_class' => Page::class,
                 'allow_extra_fields' => true,
                 'is_preview' => false,
+                'pageBuilder' => false,
             ]
         );
     }
