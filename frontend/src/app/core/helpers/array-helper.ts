@@ -19,13 +19,15 @@ export class ArrayHelper {
   }
   static objectWithLevelToNestedArray(objects: {level: number}[]) {
     const levelMap = new Map<number, any[]>();
-    let currentLevel = 0;
+    let currentLevel = -1;
     const treeCallback = (data: {level: number}) => {
-      if (!levelMap.get(data.level)) {
-        const newArray = [];
-        levelMap.set(data.level, newArray);
-        if (data.level > currentLevel) {
+      if (data.level > currentLevel) {
+        if (!data.level) {
+          levelMap.set(data.level, []);
+        } else {
+          const newArray = [];
           levelMap.get(data.level - 1).push(newArray);
+          levelMap.set(data.level, newArray);
         }
       }
       const currentArray = levelMap.get(data.level);
