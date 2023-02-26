@@ -17,4 +17,22 @@ export class ArrayHelper {
       }
     });
   }
+  static objectWithLevelToArray(objects: {level: number}[]) {
+    const levelMap = new Map<number, any[]>();
+    let currentLevel = 0;
+    const treeCallback = (data: {level: number}) => {
+      if (!levelMap.get(data.level)) {
+        const newArray = [];
+        levelMap.set(data.level, newArray);
+        if (data.level > currentLevel) {
+          levelMap.get(data.level - 1).push(newArray);
+        }
+      }
+      const currentArray = levelMap.get(data.level);
+      currentArray.push(data);
+      currentLevel = data.level;
+    };
+    objects.forEach(treeCallback);
+    return levelMap.get(0);
+  }
 }

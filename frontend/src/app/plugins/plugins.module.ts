@@ -18,6 +18,10 @@ import {EffectAdminComponent} from './carousel-bootstrap-plugin/pages/effect-adm
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {SortablejsModule} from 'ngx-sortablejs';
+import {MenuSimplePluginComponent} from './menu-simple-plugin/menu-simple-plugin.component';
+import { MenuAdminComponent } from './menu-simple-plugin/pages/menu-admin/menu-admin.component';
+import {MenuSimplePluginResolverService} from './menu-simple-plugin/services/menu-simple-plugin-resolver.service';
 
 @NgModule({
   imports: [
@@ -35,16 +39,20 @@ import {MatInputModule} from '@angular/material/input';
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
+    SortablejsModule.forRoot({ animation: 150 }),
   ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
      {provide: AbstractPluginResolver, useClass: CarouselBootstrapPluginResolverService, multi: true},
+     {provide: AbstractPluginResolver, useClass: MenuSimplePluginResolverService, multi: true},
   ],
   declarations: [
     TextPluginAdminComponent,
     ImagesAdminComponent,
     CarouselBootstrapPluginComponent,
-    EffectAdminComponent
+    EffectAdminComponent,
+    MenuSimplePluginComponent,
+    MenuAdminComponent,
   ]
 })
 export class PluginsModule { }

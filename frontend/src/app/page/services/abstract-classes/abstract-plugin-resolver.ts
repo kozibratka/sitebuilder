@@ -3,7 +3,7 @@ import {AdminAbleInterface} from '../../../core/components/mini-admin/tools/inte
 import {SettingAbleInterface} from '../../../core/components/mini-admin/tools/interfaces/setting-able-interface';
 
 export abstract class AbstractPluginResolver implements AdminAbleInterface{
-  adminComponentsClass: {menuIcon?: string, label: string, path: string, component: Type<SettingAbleInterface>}[];
+  abstract adminComponentsClass: {menuIcon?: string, label: string, path: string, component: Type<SettingAbleInterface>}[];
 
   abstract getMenuImage(): string;
 
