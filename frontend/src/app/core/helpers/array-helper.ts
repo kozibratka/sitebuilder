@@ -17,7 +17,7 @@ export class ArrayHelper {
       }
     });
   }
-  static objectWithLevelToArray(objects: {level: number}[]) {
+  static objectWithLevelToNestedArray(objects: {level: number}[]) {
     const levelMap = new Map<number, any[]>();
     let currentLevel = 0;
     const treeCallback = (data: {level: number}) => {

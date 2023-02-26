@@ -23,7 +23,7 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
   }
 
   ngOnInit(): void {
-    this.items = ArrayHelper.objectWithLevelToArray(this.settings.items);
+    this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
   }
 
   createAdminForm(settings: MenuSimpleConfigInterface): void {
