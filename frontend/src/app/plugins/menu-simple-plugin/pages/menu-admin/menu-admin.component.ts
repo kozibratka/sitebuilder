@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractAdminSetting} from '../../../tools/abstract-class/abstract-admin-setting';
 import {MenuSimpleConfigInterface} from '../../interfaces/menu-simple-config-interface';
 import {ArrayHelper} from '../../../../core/helpers/array-helper';
+import {MenuItemInterface} from '../../interfaces/menu-item-interface';
 
 @Component({
   selector: 'app-menu-admin',
@@ -10,15 +11,18 @@ import {ArrayHelper} from '../../../../core/helpers/array-helper';
 })
 export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInterface> implements OnInit{
 
-  items = [1, 2, 3, 4, [5, 6]];
-  options: { onUpdate: (event: any) => void };
+  items = [];
+  options;
 
   constructor() {
     super();
     this.options = {
-      onUpdate: (event: any) => {
+      onEnd: (event: any) => {
+        console.log('gesgese');
+        ArrayHelper.recalculateNestedArrayObjectLevel(this.items);
         console.log(this.items);
-      }
+      },
+      group: 'nested', animation: 150, swapThreshold: 0.65, handle: '.handle'
     };
   }
 

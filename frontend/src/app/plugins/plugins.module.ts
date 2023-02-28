@@ -22,6 +22,7 @@ import {SortablejsModule} from 'ngx-sortablejs';
 import {MenuSimplePluginComponent} from './menu-simple-plugin/menu-simple-plugin.component';
 import { MenuAdminComponent } from './menu-simple-plugin/pages/menu-admin/menu-admin.component';
 import {MenuSimplePluginResolverService} from './menu-simple-plugin/services/menu-simple-plugin-resolver.service';
+import { MenuAdminItemComponent } from './menu-simple-plugin/components/menu-admin-item/menu-admin-item.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import {MenuSimplePluginResolverService} from './menu-simple-plugin/services/men
     EffectAdminComponent,
     MenuSimplePluginComponent,
     MenuAdminComponent,
+    MenuAdminItemComponent,
   ]
 })
 export class PluginsModule { }
