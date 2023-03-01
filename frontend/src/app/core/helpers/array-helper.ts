@@ -43,7 +43,7 @@ export class ArrayHelper {
   static recalculateNestedArrayObjectLevel(dataArray: {level: number}[]) {
     const callback = (data: {level: number, children?: []}[], currentLevel = 0) => {
       for (const entry of data) {
-        if (Array.isArray(entry.children)) {
+        if (entry.children.length) {
           callback(entry.children, currentLevel + 1);
         } else {
           entry.level = currentLevel;
@@ -57,7 +57,7 @@ export class ArrayHelper {
     const result = [];
     const callback = (data: {children?: []}[], currentLevel = 0) => {
       for (const entry of data) {
-        if (Array.isArray(entry.children)) {
+        if (entry.children.length) {
           callback(entry.children, currentLevel + 1);
         } else {
           result.push(entry);
