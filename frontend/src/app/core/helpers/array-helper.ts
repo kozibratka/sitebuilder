@@ -20,18 +20,17 @@ export class ArrayHelper {
   static objectWithLevelToNestedArray(objects: {level: number}[]) {
     const levelMap = new Map<number, any[]>();
     let currentLevel = -1;
-    const treeCallback = (data: {level: number}) => {
+    const treeCallback = (data: {level: number, children?: []}) => {
+      if (!data.hasOwnProperty('children')) {
+        data.children = [];
+      }
       if (data.level > currentLevel) {
         if (!data.level) {
           levelMap.set(data.level, []);
         } else {
-          const newArray = [];
           const parentLevelArray = levelMap.get(data.level - 1);
           const lastInParentArray = parentLevelArray[parentLevelArray.length - 1];
-          if (!Array.isArray(lastInParentArray.children)) {
-            lastInParentArray.children = newArray;
-          }
-          levelMap.set(data.level, newArray);
+          levelMap.set(data.level, lastInParentArray.children);
         }
       }
       const currentArray = levelMap.get(data.level);
