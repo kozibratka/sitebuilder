@@ -26,7 +26,11 @@ export class ArrayHelper {
           levelMap.set(data.level, []);
         } else {
           const newArray = [];
-          levelMap.get(data.level - 1).push(newArray);
+          const parentLevelArray = levelMap.get(data.level - 1);
+          const lastInParentArray = parentLevelArray[parentLevelArray.length - 1];
+          if (!Array.isArray(lastInParentArray.children)) {
+            lastInParentArray.children = newArray;
+          }
           levelMap.set(data.level, newArray);
         }
       }
@@ -38,15 +42,31 @@ export class ArrayHelper {
     return levelMap.get(0);
   }
   static recalculateNestedArrayObjectLevel(dataArray: {level: number}[]) {
-    const callback = (data: {level: number}[], currentLevel = 0) => {
+    const callback = (data: {level: number, children?: []}[], currentLevel = 0) => {
       for (const entry of data) {
-        if (Array.isArray(entry)) {
-          callback(entry, currentLevel + 1);
+        if (Array.isArray(entry.children)) {
+          callback(entry.children, currentLevel + 1);
         } else {
           entry.level = currentLevel;
         }
       }
     };
     callback(dataArray);
+  }
+
+  static flatNestedArrayObject(dataArray: {children?: []}[]): any[] {
+    const result = [];
+    const callback = (data: {children?: []}[], currentLevel = 0) => {
+      for (const entry of data) {
+        if (Array.isArray(entry.children)) {
+          callback(entry.children, currentLevel + 1);
+        } else {
+          result.push(entry);
+        }
+      }
+    };
+    callback(dataArray);
+
+    return result;
   }
 }
