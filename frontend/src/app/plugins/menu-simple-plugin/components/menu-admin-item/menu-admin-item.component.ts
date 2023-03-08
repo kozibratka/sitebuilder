@@ -10,7 +10,29 @@ export class MenuAdminItemComponent {
   @Input() items: any[];
   @Input() options: SortableOptions;
 
+  items1 = [1, 2, 3, 4, 5];
+  items2 = ['a', 'b', 'c', 'd', 'e'];
+
+  list = [
+    {name: 1, list: [
+        {name: 3, list: []}
+      ]},
+    {name: 2, list: []}];
+
+
+  list2 = {name: 'Table', list: [
+      {name: 1, list: [
+          {name: 3, list: []}
+        ]},
+      {name: 2, list: []}]};
+  depth = 1;
+
   isArray(data): boolean {
     return Array.isArray(data);
+  }
+
+  datetime() {
+    const d = new Date();
+    return d.toString();
   }
 }

@@ -1,9 +1,17 @@
-<div class="menu-container menu-item level-0" [sortablejs]="items" [sortablejsOptions]=options>
-  <div *ngFor="let item of items">
-    <ng-container *ngIf="isArray(item); else elseBlock">
-      <app-menu-admin-item [items]="item" [options]="options"></app-menu-admin-item>
-    </ng-container>
-    <ng-template #elseBlock><div class="menu-item level-{{item.level}}">{{item.name}}<i class="material-icons icon-move handle float-right">open_with</i></div></ng-template>
+<div *ngFor="let item of items">
+  <div class="menu-item level-{{item.level}}">{{item.name}}<i class="material-icons icon-move handle float-right">open_with</i>
+    {{datetime()}}
+    <div class="empty-item" [sortablejs]="item.children" [sortablejsOptions]=options>
+      <app-menu-admin-item *ngIf="item.children.length;" [items]="item.children"
+                           [options]="options"></app-menu-admin-item>
+    </div>
   </div>
 </div>
+
+
+<!--<div [sortablejs]="list" [sortablejsOptions]="options">-->
+<!--  <div *ngFor="let item of list" style="width: 500px;background-color: grey">-->
+<!--    <app-app-file [options]="options" [item]="item.list" style="cursor:pointer"></app-app-file>-->
+<!--  </div>-->
+<!--</div>-->
 

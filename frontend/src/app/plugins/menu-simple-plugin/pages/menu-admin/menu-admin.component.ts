@@ -18,16 +18,26 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
     super();
     this.options = {
       onEnd: (event: any) => {
-        console.log('gesgese');
-        ArrayHelper.recalculateNestedArrayObjectLevel(this.items);
+        //ArrayHelper.recalculateNestedArrayObjectLevel(this.items);
+        // this.items = ArrayHelper.objectWithLevelToNestedArray([
+        //   {name: 'one', idPage: 4, level: 0},
+        //   {name: 'two', idPage: 5, level: 1},
+        //   {name: 'tree', idPage: 6, level: 0},
+        // ] as any);
         console.log(this.items);
       },
-      group: 'nested', animation: 150, swapThreshold: 0.65, handle: '.handle'
+      group: 'nested', animation: 150, swapThreshold: 0.65, fallbackOnBody: false,
     };
   }
 
   ngOnInit(): void {
     this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
+    console.log(this.items);
+    // setTimeout(() => {
+    //   this.items[0].children.pop();
+    //   this.items.push({name: 'one', idPage: 7, level: 0, children: []});
+    //   console.log(this.items);
+    // }, 3000);
   }
 
   createAdminForm(settings: MenuSimpleConfigInterface): void {

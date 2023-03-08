@@ -1,5 +1,6 @@
 .menu-item {
-  padding: 0.75rem 1.25rem;
+  padding: 10px 0;
+  padding-left: 1.25rem;;
   background-color: #cccccc;
   margin-top: 5px;
   border: 1px solid black;
@@ -24,4 +25,8 @@
 }
 .level-4 {
   background-color: #8c8c8c;
+}
+
+.empty-item {
+  padding: 5px 0;
 }

@@ -23,6 +23,7 @@ import {MenuSimplePluginComponent} from './menu-simple-plugin/menu-simple-plugin
 import { MenuAdminComponent } from './menu-simple-plugin/pages/menu-admin/menu-admin.component';
 import {MenuSimplePluginResolverService} from './menu-simple-plugin/services/menu-simple-plugin-resolver.service';
 import { MenuAdminItemComponent } from './menu-simple-plugin/components/menu-admin-item/menu-admin-item.component';
+import { AppFileComponent } from './menu-simple-plugin/components/app-file/app-file.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { MenuAdminItemComponent } from './menu-simple-plugin/components/menu-adm
     MenuSimplePluginComponent,
     MenuAdminComponent,
     MenuAdminItemComponent,
+    AppFileComponent,
   ]
 })
 export class PluginsModule { }
