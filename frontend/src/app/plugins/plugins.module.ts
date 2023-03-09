@@ -24,25 +24,30 @@ import { MenuAdminComponent } from './menu-simple-plugin/pages/menu-admin/menu-a
 import {MenuSimplePluginResolverService} from './menu-simple-plugin/services/menu-simple-plugin-resolver.service';
 import { MenuAdminItemComponent } from './menu-simple-plugin/components/menu-admin-item/menu-admin-item.component';
 import { AppFileComponent } from './menu-simple-plugin/components/app-file/app-file.component';
+import {MatIconModule} from '@angular/material/icon';
+import { RemoveMenuItemDialogComponent } from './menu-simple-plugin/components/remove-menu-item-dialog/remove-menu-item-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CoreModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    RouterModule,
-    CKEditorModule,
-    FormsModule,
-    DragDropModule,
-    MixedCdkDragDropModule,
-    NgbCarousel,
-    NgbSlide,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatInputModule,
-    SortablejsModule.forRoot({ animation: 150 }),
-  ],
+    imports: [
+        CommonModule,
+        CoreModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        RouterModule,
+        CKEditorModule,
+        FormsModule,
+        DragDropModule,
+        MixedCdkDragDropModule,
+        NgbCarousel,
+        NgbSlide,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatInputModule,
+        SortablejsModule.forRoot({animation: 150}),
+        MatIconModule,
+        MatDialogModule,
+    ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
      {provide: AbstractPluginResolver, useClass: CarouselBootstrapPluginResolverService, multi: true},
@@ -57,6 +62,7 @@ import { AppFileComponent } from './menu-simple-plugin/components/app-file/app-f
     MenuAdminComponent,
     MenuAdminItemComponent,
     AppFileComponent,
+    RemoveMenuItemDialogComponent,
   ]
 })
 export class PluginsModule { }

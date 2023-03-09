@@ -40,11 +40,14 @@ export class ArrayHelper {
     objects.forEach(treeCallback);
     return levelMap.get(0);
   }
-  static recalculateNestedArrayObjectLevel(dataArray: {level: number}[]) {
+  static recalculateNestedArrayObjectLevel(dataArray: {level: number}[], clearChildren = false) {
     const callback = (data: {level: number, children?: []}[], currentLevel = 0) => {
       for (const entry of data) {
         if (entry.children.length) {
           callback(entry.children, currentLevel + 1);
+          if (clearChildren) {
+            entry.children.length = 0;
+          }
         } else {
           entry.level = currentLevel;
         }

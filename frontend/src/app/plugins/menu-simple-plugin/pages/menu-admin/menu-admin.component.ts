@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractAdminSetting} from '../../../tools/abstract-class/abstract-admin-setting';
 import {MenuSimpleConfigInterface} from '../../interfaces/menu-simple-config-interface';
 import {ArrayHelper} from '../../../../core/helpers/array-helper';
@@ -9,7 +9,7 @@ import {MenuItemInterface} from '../../interfaces/menu-item-interface';
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css']
 })
-export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInterface> implements OnInit{
+export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInterface> implements OnInit, OnDestroy{
 
   items = [];
   options;
@@ -18,13 +18,8 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
     super();
     this.options = {
       onEnd: (event: any) => {
-        //ArrayHelper.recalculateNestedArrayObjectLevel(this.items);
-        // this.items = ArrayHelper.objectWithLevelToNestedArray([
-        //   {name: 'one', idPage: 4, level: 0},
-        //   {name: 'two', idPage: 5, level: 1},
-        //   {name: 'tree', idPage: 6, level: 0},
-        // ] as any);
-        console.log(this.items);
+        ArrayHelper.recalculateNestedArrayObjectLevel(this.items);
+        this.refreshSettings();
       },
       group: 'nested', animation: 150, swapThreshold: 0.65, fallbackOnBody: false,
     };
@@ -32,12 +27,19 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
 
   ngOnInit(): void {
     this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
-    console.log(this.items);
-    // setTimeout(() => {
-    //   this.items[0].children.pop();
-    //   this.items.push({name: 'one', idPage: 7, level: 0, children: []});
-    //   console.log(this.items);
-    // }, 3000);
+  }
+
+  ngOnDestroy(): void {
+    ArrayHelper.recalculateNestedArrayObjectLevel(this.items, true);
+  }
+
+  removeItem(sourceArray: [], index: number) {
+    sourceArray.splice(index, 1);
+    this.refreshSettings();
+  }
+
+  refreshSettings() {
+    this.settings.items = ArrayHelper.flatNestedArrayObject(this.items);
   }
 
   createAdminForm(settings: MenuSimpleConfigInterface): void {

@@ -1,5 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Host, Input} from '@angular/core';
 import {SortableOptions} from 'sortablejs';
+import {MenuAdminComponent} from '../../pages/menu-admin/menu-admin.component';
+import {MatDialog} from '@angular/material/dialog';
+import {RemoveMenuItemDialogComponent} from '../remove-menu-item-dialog/remove-menu-item-dialog.component';
 
 @Component({
   selector: 'app-menu-admin-item',
@@ -10,29 +13,18 @@ export class MenuAdminItemComponent {
   @Input() items: any[];
   @Input() options: SortableOptions;
 
-  items1 = [1, 2, 3, 4, 5];
-  items2 = ['a', 'b', 'c', 'd', 'e'];
 
-  list = [
-    {name: 1, list: [
-        {name: 3, list: []}
-      ]},
-    {name: 2, list: []}];
-
-
-  list2 = {name: 'Table', list: [
-      {name: 1, list: [
-          {name: 3, list: []}
-        ]},
-      {name: 2, list: []}]};
-  depth = 1;
-
-  isArray(data): boolean {
-    return Array.isArray(data);
+  constructor(
+    private menuAdminComponent: MenuAdminComponent,
+    private dialog: MatDialog
+  ) {
   }
 
-  datetime() {
-    const d = new Date();
-    return d.toString();
+  remove(sourceArray: [], index: number) {
+    this.dialog.open(RemoveMenuItemDialogComponent).afterClosed().subscribe(value => {
+      if (value) {
+        this.menuAdminComponent.removeItem(sourceArray, index);
+      }
+    });
   }
 }
