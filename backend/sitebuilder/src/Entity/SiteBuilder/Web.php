@@ -26,12 +26,14 @@ class Web
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"webDetail", "Default"})
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Serializer\Groups({"webDetail", "Default"})
      */
     private string $name = '';
 
@@ -45,13 +47,14 @@ class Web
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
-     * @Serializer\Exclude()
+     * @Serializer\Groups({"webDetail"})
      * @Assert\Valid()
      */
     private Collection $pages;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
+     * @Serializer\Groups({"webDetail", "Default"})
      */
     private Collection $plugins;
 

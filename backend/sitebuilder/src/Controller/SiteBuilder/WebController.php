@@ -31,7 +31,7 @@ class WebController extends BaseApiController
     public function read(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
-        return $this->jsonResponseSimple($web);
+        return $this->jsonResponseSimple($web, group: ['webDetail']);
     }
 
     /**

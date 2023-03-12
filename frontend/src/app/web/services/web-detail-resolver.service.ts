@@ -12,7 +12,7 @@ import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfo
 export class WebDetailResolverService implements Resolve<WebInterface> {
 
   selectedId = 0;
-  webDetail: WebInterface = {plugins: [], id: 0, name: ''}; // persist reference
+  webDetail: WebInterface = {plugins: [], id: 0, name: '', pages: []}; // persist reference
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -34,6 +34,7 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
       this.webDetail.id = httpResponse.body.id;
       this.webDetail.plugins.length = 0;
       this.webDetail.plugins.push(...this.webDetail.plugins);
+      this.webDetail.pages = httpResponse.body.pages;
       return this.webDetail;
     }));
   }

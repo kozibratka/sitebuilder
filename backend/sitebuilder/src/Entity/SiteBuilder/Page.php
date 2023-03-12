@@ -29,12 +29,14 @@ class Page
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
+     * @Serializer\Groups({"webDetail", "Default"})
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
+     * @Serializer\Groups({"webDetail", "Default"})
      */
     private string $name;
 

@@ -4,4 +4,5 @@ export interface WebInterface {
   id: number;
   name: string;
   plugins: BasePlugConfigInterface[];
+  pages: {id: number, name: string}[];
 }

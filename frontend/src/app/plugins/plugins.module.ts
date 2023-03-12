@@ -27,6 +27,8 @@ import { AppFileComponent } from './menu-simple-plugin/components/app-file/app-f
 import {MatIconModule} from '@angular/material/icon';
 import { RemoveMenuItemDialogComponent } from './menu-simple-plugin/components/remove-menu-item-dialog/remove-menu-item-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MenuItemSettingsComponent } from './menu-simple-plugin/components/menu-item-settings/menu-item-settings.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
     imports: [
@@ -47,6 +49,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         SortablejsModule.forRoot({animation: 150}),
         MatIconModule,
         MatDialogModule,
+        MatSelectModule,
     ],
   providers: [
      {provide: AbstractPluginResolver, useClass: TextPluginResolverService, multi: true},
@@ -63,6 +66,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MenuAdminItemComponent,
     AppFileComponent,
     RemoveMenuItemDialogComponent,
+    MenuItemSettingsComponent,
   ]
 })
 export class PluginsModule { }
