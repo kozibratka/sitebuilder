@@ -31,7 +31,7 @@ export class MenuAdminItemComponent {
   }
 
   settings(item: MenuItemInterface) {
-    const dialogRef = this.dialog.open(MenuItemSettingsComponent, {data: {item, pages: {}}});
+    const dialogRef = this.dialog.open(MenuItemSettingsComponent, {data: item});
     dialogRef.afterClosed().subscribe(value => {
       if (value) {
         const formSettings = dialogRef.componentInstance.settings;

@@ -4,12 +4,14 @@
     <mat-form-field appearance="fill">
       <mat-label>Název:</mat-label>
       <input matInput formControlName="name">
+      <mat-error *ngIf="settings.get('name').hasError('required')">Toto pole je povinné</mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Stránka: </mat-label>
       <mat-select formControlName="idPage">
         <mat-option *ngFor="let item of pages" [value]="item.id">{{item.name}}</mat-option>
       </mat-select>
+      <mat-error *ngIf="settings.get('idPage').hasError('required')">Toto pole je povinné</mat-error>
     </mat-form-field>
   </form>
 </div>

@@ -3,6 +3,8 @@ import {AbstractAdminSetting} from '../../../tools/abstract-class/abstract-admin
 import {MenuSimpleConfigInterface} from '../../interfaces/menu-simple-config-interface';
 import {ArrayHelper} from '../../../../core/helpers/array-helper';
 import {MenuItemInterface} from '../../interfaces/menu-item-interface';
+import {MenuItemSettingsComponent} from '../../components/menu-item-settings/menu-item-settings.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-menu-admin',
@@ -14,7 +16,9 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
   items = [];
   options;
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog
+  ) {
     super();
     this.options = {
       onEnd: (event: any) => {
@@ -40,6 +44,21 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
 
   refreshSettings() {
     this.settings.items = ArrayHelper.flatNestedArrayObject(this.items);
+  }
+
+  addMenuItem() {
+    const newMenuItem = {level: 0, idPage: 0, name: '', children: []};
+    const dialogRef = this.dialog.open(MenuItemSettingsComponent, {data: newMenuItem});
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        const formSettings = dialogRef.componentInstance.settings;
+        if (formSettings.valid) {
+          Object.assign(newMenuItem, formSettings.value);
+          this.items.push(newMenuItem);
+          this.refreshSettings();
+        }
+      }
+    });
   }
 
   createAdminForm(settings: MenuSimpleConfigInterface): void {

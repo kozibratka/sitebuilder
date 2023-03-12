@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MenuItemInterface} from '../../interfaces/menu-item-interface';
 import {WebDetailResolverService} from '../../../../web/services/web-detail-resolver.service';
@@ -15,15 +15,15 @@ export class MenuItemSettingsComponent {
   constructor(
     private webDetail: WebDetailResolverService,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private data: {item: MenuItemInterface},
+    @Inject(MAT_DIALOG_DATA) private data: MenuItemInterface,
   ) {
     this.pages = this.webDetail.webDetail.pages;
     this.settings = this.fb.group({
-      name: [''],
-      idPage: [''],
+      name: ['', [Validators.required]],
+      idPage: ['', [Validators.required]],
     });
-    if (data.item) {
-      this.settings.patchValue(data.item);
+    if (data) {
+      this.settings.patchValue(data);
     }
   }
 }
