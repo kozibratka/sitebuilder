@@ -37,7 +37,7 @@ export class UpdatePluginComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.pluginSetting = data.plugin;
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
-      this.miniAdmin.setAdminAble(this.pluginResolver, data.plugin);
+      this.miniAdmin.setInitParams({adminAbleInterface: this.pluginResolver, settings: this.pluginSetting});
     });
   }
 

@@ -1,8 +1,7 @@
 import {AbstractPlugin} from './abstract-plugin';
 import {BasePlugConfigInterface} from '../interfaces/base-plug-config-interface';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {Directive} from '@angular/core';
-import {AdminFormService} from '../forms/admin-form.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 
 @Directive()

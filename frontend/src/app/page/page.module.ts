@@ -60,7 +60,7 @@ const routes: Routes = [
     PaletteItemComponent,
     PaletteItemQuickMenuComponent,
     DragScrollDirective,
-    MenuPluginResolverDirective
+    MenuPluginResolverDirective,
   ],
   exports: [
     PaletteItemComponent

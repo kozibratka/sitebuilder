@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {AdminAbleInterface} from './tools/interfaces/admin-able-interface';
 import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
 
@@ -16,9 +16,7 @@ export class MiniAdminComponent implements OnInit {
   settings: any;
   admin: SettingAbleInterface;
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -26,14 +24,13 @@ export class MiniAdminComponent implements OnInit {
   showContent(component: new() => SettingAbleInterface) {
     this.selectedComponent = component;
     this.content1.clear();
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
-    this.admin = this.content1.createComponent<SettingAbleInterface>(componentFactory).instance;
+    this.admin = this.content1.createComponent<SettingAbleInterface>(component).instance;
     this.admin.settings = this.settings;
   }
 
-  setAdminAble(value: AdminAbleInterface, settings: any) {
-    this.settings = settings;
-    this.adminAble = value;
+  setInitParams(params: {adminAbleInterface: AdminAbleInterface, settings: any}) {
+    this.settings = params.settings;
+    this.adminAble = params.adminAbleInterface;
     this.showContent(this.adminAble.adminComponentsClass[0].component);
   }
 }

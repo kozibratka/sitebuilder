@@ -1,7 +1,7 @@
 <div cdkDrag cdkDragRootElement="app-moveable-modal" class="wrapper align-items-stretch">
   <div cdkDragHandle class="move-line">
     <span class="header-title">{{title}}</span>
-    <mat-icon (click)="close()" class="float-right close-icon">close</mat-icon>
+    <mat-icon [mat-dialog-close]="false" class="float-right close-icon">close</mat-icon>
   </div>
-  <ng-content></ng-content>
+  <ng-container></ng-container>
 </div>
