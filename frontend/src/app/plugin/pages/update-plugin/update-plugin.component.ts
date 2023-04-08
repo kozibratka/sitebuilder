@@ -10,7 +10,6 @@ import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/sy
 import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
 import {PluginResolverService} from '../../../plugins/tools/services/plugin-resolver.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
-import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
 import {NotifierService} from '../../../core/services/notifier.service';
 
 @Component({
@@ -20,8 +19,9 @@ import {NotifierService} from '../../../core/services/notifier.service';
 })
 export class UpdatePluginComponent implements OnInit {
   pluginResolver: AbstractPluginResolver;
-  @ViewChild('miniAdmin', {read: MiniAdminComponent, static: true}) private miniAdmin: MiniAdminComponent;
   pluginSetting: BasePlugConfigInterface;
+
+  adminConfig = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +37,7 @@ export class UpdatePluginComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.pluginSetting = data.plugin;
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
-      this.miniAdmin.setInitParams({adminAbleInterface: this.pluginResolver, settings: this.pluginSetting});
+      this.adminConfig = {adminAbleInterface: this.pluginResolver, settings: this.pluginSetting};
     });
   }
 

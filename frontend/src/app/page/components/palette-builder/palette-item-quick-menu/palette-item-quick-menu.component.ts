@@ -8,6 +8,7 @@ import {ElementHelper} from '../../../../core/helpers/element-helper';
 import {MiniAdminComponent} from '../../../../core/components/mini-admin/mini-admin.component';
 import {MoveableModalService} from '../../../../core/components/moveable-modal/services/moveable-modal.service';
 import {AdminAbleInterface} from '../../../../core/components/mini-admin/tools/interfaces/admin-able-interface';
+import {PluginMiniAdminComponent} from '../../../pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 
 
 @Component({
@@ -68,6 +69,10 @@ export class PaletteItemQuickMenuComponent implements OnInit {
       plugin.settings.identifier
     );
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
-    this.moveableModalService.show(MiniAdminComponent, {adminAbleInterface: pluginResolver, settings: plugin.settings});
+    this.moveableModalService.show(PluginMiniAdminComponent, {
+      adminAbleInterface: pluginResolver,
+      settings: plugin.settings,
+      page: this.pageBuilderComponent.pageDetail
+    });
   }
 }

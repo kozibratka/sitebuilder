@@ -48,10 +48,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    if (this.miniAdmin.settings) {
-      const pluginIdentifier = (this.miniAdmin.settings as BasePlugConfigInterface).identifier;
-      const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(pluginIdentifier);
-    }
 
   }
 
@@ -89,13 +85,4 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   refreshGlobalPluginSelect(identifier: string) {
     this.globalPluginsSelect = this.globalPlugins.filter(value => value.identifier === identifier);
   }
-
-  initSettingsFromSelect(idGlobalPlugin?: string) {
-    if (idGlobalPlugin) {
-      Object.assign(this.miniAdmin.settings, this.globalPlugins.filter(value => value.id === parseInt(idGlobalPlugin, 10))[0]);
-    } else {
-      (this.miniAdmin.settings as BasePlugConfigInterface).id = null;
-    }
-  }
-
 }

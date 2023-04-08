@@ -16,7 +16,9 @@ export class MoveableModalService {
       data: {
         contentComponent,
         params
-      }
+      },
+      width: '50%',
+      position: {top: '110px'}
     });
   }
 }

@@ -21,6 +21,7 @@ import {PaletteItemQuickMenuComponent} from './components/palette-builder/palett
 import {DragScrollDirective} from './directives/drag-scroll-directive';
 import {MenuPluginResolverDirective} from './directives/menu-plugin-resolver.directive';
 import {PaletteItemComponent} from './components/palette-builder/page-block/palette-item-component/palette-item.component';
+import { PluginMiniAdminComponent } from './pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
     PaletteItemQuickMenuComponent,
     DragScrollDirective,
     MenuPluginResolverDirective,
+    PluginMiniAdminComponent,
   ],
   exports: [
     PaletteItemComponent

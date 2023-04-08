@@ -1,4 +1,4 @@
-import {Component, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {AdminAbleInterface} from './tools/interfaces/admin-able-interface';
 import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
 
@@ -15,7 +15,6 @@ export class MiniAdminComponent implements OnInit {
   headerName = '';
   settings: any;
   admin: SettingAbleInterface;
-
   constructor() { }
 
   ngOnInit(): void {
@@ -28,9 +27,9 @@ export class MiniAdminComponent implements OnInit {
     this.admin.settings = this.settings;
   }
 
-  setInitParams(params: {adminAbleInterface: AdminAbleInterface, settings: any}) {
-    this.settings = params.settings;
-    this.adminAble = params.adminAbleInterface;
-    this.showContent(this.adminAble.adminComponentsClass[0].component);
+  @Input() set configAdmin(value: AdminAbleInterface & SettingAbleInterface) {
+    this.adminAble = value;
+    this.settings = value.settings;
+    this.showContent(value.adminComponentsClass[0].component);
   }
 }
