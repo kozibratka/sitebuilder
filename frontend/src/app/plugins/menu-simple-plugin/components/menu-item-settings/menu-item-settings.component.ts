@@ -20,9 +20,10 @@ export class MenuItemSettingsComponent {
     this.pages = this.webDetail.webDetail.pages;
     this.settings = this.fb.group({
       name: ['', [Validators.required]],
-      idPage: ['', [Validators.required]],
+      idPage: [null, [Validators.required]],
     });
     if (data) {
+      data.idPage = null;
       this.settings.patchValue(data);
     }
   }

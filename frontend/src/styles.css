@@ -29,3 +29,11 @@ a:not([href]){
 .main-header {
   z-index: 1!important;
 }
+
+.form-control.ng-invalid {
+  border-color: #dc3545;
+}
+
+.form-control.ng-invalid~.invalid-feedback {
+  display: block;
+}

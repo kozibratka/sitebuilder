@@ -76,10 +76,9 @@
   <h1 mat-dialog-title>Vytvoření adresáře</h1>
   <div mat-dialog-content>
     <p>Zadejte název nového adresáře</p>
-    <mat-form-field appearance="fill">
-      <mat-label>Název adresáře</mat-label>
-      <input matInput #directoryName>
-    </mat-form-field>
+    <div class="input-group input-group-sm">
+      <input #directoryName type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Název adresáře">
+    </div>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="">Zrušit</button>

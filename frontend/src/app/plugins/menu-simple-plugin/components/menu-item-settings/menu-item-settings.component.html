@@ -1,18 +1,33 @@
 <h1 mat-dialog-title>Nastavení položky menu</h1>
 <div mat-dialog-content>
   <form [formGroup]="settings">
-    <mat-form-field appearance="fill">
-      <mat-label>Název:</mat-label>
-      <input matInput formControlName="name">
-      <mat-error *ngIf="settings.get('name').hasError('required')">Toto pole je povinné</mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Stránka: </mat-label>
-      <mat-select formControlName="idPage">
-        <mat-option *ngFor="let item of pages" [value]="item.id">{{item.name}}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="settings.get('idPage').hasError('required')">Toto pole je povinné</mat-error>
-    </mat-form-field>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="interval">Název:</label>
+        <input id="interval" formControlName="name" type="text" class="form-control">
+        <div *ngIf="settings.get('name').hasError('required')" class="invalid-feedback">
+          Toto pole je povinné
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="page">Stránka {{!settings.get('idPage').value}}</label>
+        <select class="form-control" required id="page" formControlName="idPage">
+          <option [ngValue]="null" disabled>Vyberte stránku...</option>
+          <option *ngFor="let item of pages" [ngValue]="item.id">{{item.name}}</option>
+        </select>
+        <div *ngIf="settings.get('idPage').hasError('required')" class="invalid-feedback">
+          Toto pole je povinné
+        </div>
+      </div>
+    </div>
+
+<!--    <mat-form-field appearance="fill">-->
+<!--      <mat-label>Stránka: </mat-label>-->
+<!--      <mat-select formControlName="idPage">-->
+<!--        <mat-option *ngFor="let item of pages" [value]="item.id">{{item.name}}</mat-option>-->
+<!--      </mat-select>-->
+<!--      <mat-error *ngIf="settings.get('idPage').hasError('required')">Toto pole je povinné</mat-error>-->
+<!--    </mat-form-field>-->
   </form>
 </div>
 <mat-dialog-actions class="float-right">

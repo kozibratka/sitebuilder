@@ -1,10 +1,16 @@
 <form [formGroup]="adminForm">
   <div class="d-flex flex-md-row flex-wrap align-items-center">
-    <mat-checkbox class="example-margin p-2 flex-fill" formControlName="autostart">Autostart</mat-checkbox>
-    <mat-form-field class="example-full-width p-2 flex-fill">
-      <mat-label>Interval (ms)</mat-label>
-      <input matInput maxlength="5" placeholder="3000" formControlName="intervalRotate">
-    </mat-form-field>
+    <div class="form-group input-group-sm mr-3">
+      <label for="interval">Interval (ms)</label>
+      <input id="interval" formControlName="intervalRotate" type="text" maxlength="5" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="3000">
+    </div>
+    <div class="form-check mt-3">
+      <input class="form-check-input" type="checkbox" value="" id="autostart" formControlName="autostart">
+      <label class="form-check-label" for="autostart">
+        Autostart
+      </label>
+    </div>
+<!--    <mat-checkbox class="example-margin p-2 flex-fill" formControlName="autostart">Autostart</mat-checkbox>-->
   </div>
 </form>
 

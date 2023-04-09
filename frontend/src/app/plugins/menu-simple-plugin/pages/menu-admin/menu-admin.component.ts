@@ -48,7 +48,7 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
 
   addMenuItem() {
     const newMenuItem = {level: 0, idPage: 0, name: '', children: []};
-    const dialogRef = this.dialog.open(MenuItemSettingsComponent, {data: newMenuItem});
+    const dialogRef = this.dialog.open(MenuItemSettingsComponent);
     dialogRef.afterClosed().subscribe(value => {
       if (value) {
         const formSettings = dialogRef.componentInstance.settings;
