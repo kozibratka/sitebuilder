@@ -116,38 +116,6 @@ h5 {
   border-bottom: 1px solid #e0e0e0;
 }
 
-:host .mat-form-field-wrapper {
-  padding-bottom: 0 !important;
-}
-
-::ng-deep mat-form-field.mat-form-field-appearance-outline .mat-form-field-wrapper {
-  margin: 0;
-}
-
-mat-form-field {
-  font-size: 10px;
-}
-
-mat-form-field input {
-  font-size: 15px;
-}
-
-::ng-deep .mat-form-field-wrapper {
-  padding-bottom: 0;
-}
-::ng-deep .mat-form-field-subscript-wrapper {
-  display: none;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-  padding: .5em;
-}
-
-::ng-deep .mat-form-field-underline {
-  display: none;
-}
-
-
 
 
 

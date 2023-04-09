@@ -12,7 +12,7 @@ import {
 import {MatTreeFlatDataSource} from '@angular/material/tree';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
-import {fromEvent, Observable, Subject, Subscription, timer} from 'rxjs';
+import {fromEvent, merge, Observable, Subject, Subscription, timer} from 'rxjs';
 import {debounce, filter, finalize, map, take, tap} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
 import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
@@ -56,7 +56,6 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   icons = {faCoffee, faFolder, faUpload};
   selectedTreeNode = null;
   clickOutsideContextMenuSubscription: Subscription;
-  searchValue = '';
   searchInputSubscription: Subscription;
   uploadProgress = 0;
   uploadSub: Subscription;
@@ -138,7 +137,9 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
   registerSearchFiles() {
-    this.searchInputSubscription = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'keyup').pipe(
+    const keyUpEvent = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'keyup');
+    const searchEvent = fromEvent<KeyboardEvent>(this.searchInput.nativeElement, 'search');
+    this.searchInputSubscription = merge(keyUpEvent, searchEvent).pipe(
         debounce(() => timer(1000)),
         tap(value => {
           if (!!!value) {

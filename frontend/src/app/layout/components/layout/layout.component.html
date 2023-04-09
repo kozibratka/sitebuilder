@@ -30,14 +30,10 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <div class="nav-link">
-            <mat-form-field>
-              <mat-select [(value)]="selectedWeb">
-                <mat-option [value]="option.id" *ngFor="let option of websSelect">{{ option.name }}</mat-option>
-                <a [routerLink]="['/admin/web/list']">
-                  <mat-option [value]="0" class="text-center text-primary"><a class="text-center">Správa webů...</a></mat-option>
-                </a>
-              </mat-select>
-            </mat-form-field>
+          <select class="form-select form-select-sm">
+            <option value="0">Správa webů...</option>
+            <option [selected]="option.id == selectedWeb" *ngFor="let option of websSelect" value="{{option.id}}">{{ option.name }}</option>
+          </select>
         </div>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">

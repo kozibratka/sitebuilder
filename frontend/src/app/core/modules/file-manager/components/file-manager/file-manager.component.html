@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row header-panel">
+  <div class="header-panel d-flex flex-row">
     <input #fileUploadButton type="file" style="display: none" multiple (change)="uploadFiles($event)">
     <button mat-stroked-button (click)="createDirectoryDialog(createDirectoryTemplate)"><fa-icon class="folder" [icon]="icons.faFolder"></fa-icon> Nový adresář</button>
     <button mat-stroked-button (click)="fileUploadButton.click()"><fa-icon class="folder" [icon]="icons.faUpload"></fa-icon> Nahrát soubor</button>
@@ -29,14 +29,12 @@
         <div class="col-8">
           <app-directory-mini-navigation [currentPath]="currentPath" (pathEmitter)="changeCurrentPath($event)"></app-directory-mini-navigation>
         </div>
-        <div class="col-4 text-right">
-          <mat-form-field class="example-form-field" appearance="fill">
-            <input #searchInput matInput type="text" [(ngModel)]="searchValue" placeholder="Vyhledat soubor..." >
-            <mat-icon matPrefix>search</mat-icon>
-            <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-              <mat-icon (click)="reloadContent()">close</mat-icon>
-            </button>
-          </mat-form-field>
+
+        <div class="input-group input-group-sm col-4 text-right">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"><mat-icon matPrefix>search</mat-icon></span>
+          </div>
+          <input #searchInput type="search" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Vyhledat soubor...">
         </div>
       </div>
       <dts-select-container [(selectedItems)]="selectedItems" (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.stopPropagation(); $event.preventDefault();">
