@@ -64,6 +64,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'carousel_bootstrap_plugin' }
 
+    App\Service\Plugin\MenuSimpleService:
+        tags:
+            - { name: 'plugin_service', key: 'menu_simple_plugin' }
+
     App\Service\Plugin\ImagePluginService:
         tags:
             - { name: 'plugin_service', key: 'image_plugin' }
