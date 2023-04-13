@@ -2,7 +2,7 @@
 
 namespace App\Form\SiteBuilder\Plugin\MenuSimpleType;
 
-use App\Entity\SiteBuilder\Plugin\MenuSimple\MenuSimpleItem;
+use App\Entity\SiteBuilder\Plugin\MenuSimple\MenuSimple;
 use App\Form\SiteBuilder\Plugin\BasePluginType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -26,7 +26,7 @@ class MenuSimpleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MenuSimpleItem::class,
+            'data_class' => MenuSimple::class,
         ]);
     }
 

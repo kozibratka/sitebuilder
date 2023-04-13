@@ -4,12 +4,13 @@ namespace App\Form\SiteBuilder\Plugin\MenuSimpleType;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\Plugin\MenuSimple\MenuSimpleItem;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MenuSimpleItemType
+class MenuSimpleItemType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
