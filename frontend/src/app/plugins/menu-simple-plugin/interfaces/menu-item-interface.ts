@@ -1,5 +1,5 @@
 export interface MenuItemInterface {
   name: string;
-  idPage: number;
+  page: number;
   level: number;
 }

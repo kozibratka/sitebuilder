@@ -2,5 +2,5 @@ import {BasePlugConfigInterface} from '../../tools/interfaces/base-plug-config-i
 import {MenuItemInterface} from './menu-item-interface';
 
 export interface MenuSimpleConfigInterface extends BasePlugConfigInterface {
-  items: MenuItemInterface[];
+  menuSimpleItems: MenuItemInterface[];
 }

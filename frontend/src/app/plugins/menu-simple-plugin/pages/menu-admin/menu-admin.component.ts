@@ -30,7 +30,7 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
   }
 
   ngOnInit(): void {
-    this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
+    this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.menuSimpleItems);
   }
 
   ngOnDestroy(): void {
@@ -43,7 +43,7 @@ export class MenuAdminComponent extends AbstractAdminSetting<MenuSimpleConfigInt
   }
 
   refreshSettings() {
-    this.settings.items = ArrayHelper.flatNestedArrayObject(this.items);
+    this.settings.menuSimpleItems = ArrayHelper.flatNestedArrayObject(this.items);
   }
 
   addMenuItem() {

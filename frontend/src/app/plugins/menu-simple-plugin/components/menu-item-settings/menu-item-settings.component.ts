@@ -23,7 +23,7 @@ export class MenuItemSettingsComponent {
       idPage: [null, [Validators.required]],
     });
     if (data) {
-      data.idPage = null;
+      data.page = null;
       this.settings.patchValue(data);
     }
   }

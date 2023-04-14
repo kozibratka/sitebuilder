@@ -34,7 +34,7 @@ export class MenuSimplePluginResolverService extends AbstractPluginResolver {
   }
 
   gridWidth(): number {
-    return 2;
+    return 12;
   }
 
   get identifier(): string {
@@ -43,14 +43,6 @@ export class MenuSimplePluginResolverService extends AbstractPluginResolver {
 
   isAutoResizeHeight(): boolean {
     return false;
-  }
-
-  get menuImageGridSize(): number {
-    return 2;
-  }
-
-  get menuImageSize(): { x: number; y: number } {
-    return {x: 2, y: 2};
   }
 
   get name(): string {

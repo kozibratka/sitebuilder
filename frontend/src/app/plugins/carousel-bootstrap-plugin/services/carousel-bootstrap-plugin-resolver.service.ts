@@ -34,14 +34,6 @@ export class CarouselBootstrapPluginResolverService extends AbstractPluginResolv
     return 'https://via.placeholder.com/300/000000?text=5';
   }
 
-  get menuImageGridSize(): number {
-    return 2;
-  }
-
-  get menuImageSize(): { x: number; y: number } {
-    return {x: 2, y: 2};
-  }
-
   get identifier(): string {
     return PluginIdentifier.CAROUSEL_BOOTSTRAP_PLUGIN;
   }
