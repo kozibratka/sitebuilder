@@ -1,9 +1,0 @@
-
-<div class="items">
-  {{item.name}}
-  <div [sortablejs]="item" [sortablejsOptions]="options" style="min-height: 30px;background-color: red">
-    <div *ngFor="let item of item" style="width: 500px;background-color: grey">
-      <app-app-file  [item]="item.list" [depth]="nextDepth" style="cursor:pointer"></app-app-file>
-    </div>
-  </div>
-</div>
