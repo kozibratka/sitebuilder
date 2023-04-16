@@ -5,14 +5,12 @@ import {CarouselV1Component} from './components/carousel-v1.component';
 import {EffectAdminComponent} from './pages/effect-admin/effect-admin.component';
 import {ImagesAdminComponent} from './pages/images-admin/images-admin.component';
 import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
-import {CdkDropListGroup} from '@angular/cdk/drag-drop';
 import {MixedCdkDragDropModule} from 'angular-mixed-cdk-drag-drop';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {CoreModule} from '../../../../core/core.module';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
-
-
+import {CdkDrag, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -24,7 +22,9 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
     CommonModule,
     NgbCarousel,
     NgbSlide,
+    CdkDropList,
     CdkDropListGroup,
+    CdkDrag,
     MixedCdkDragDropModule,
     CoreModule,
     FormsModule,

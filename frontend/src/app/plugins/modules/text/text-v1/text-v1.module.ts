@@ -5,6 +5,7 @@ import {TextAdminComponent} from './pages/admin/text-admin.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
+import {TextV1ResolverService} from './services/text-v1-resolver.service';
 
 
 
@@ -19,7 +20,7 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
     CKEditorModule
   ],
   providers: [
-    {provide: AbstractPluginResolver, useClass: TextV1Module, multi: true},
+    {provide: AbstractPluginResolver, useClass: TextV1ResolverService, multi: true},
   ],
 })
 export class TextV1Module { }

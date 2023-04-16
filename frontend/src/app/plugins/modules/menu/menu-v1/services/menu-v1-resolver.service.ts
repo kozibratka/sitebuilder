@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {MenuV1Component} from '../components/menu-v1/menu-v1.component';
-import {PluginIdentifier} from '../../../tools/constants/plugin-identifier';
+import {AbstractPluginResolver} from '../../../../../page/services/abstract-classes/abstract-plugin-resolver';
+import {PluginIdentifier} from '../../../../constants/plugin-identifier';
+import {AdminComponent} from '../pages/admin/admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MenuV1ResolverService extends AbstractPluginResolver {
   adminComponentsClass = [
     {
       label: 'Menu',
-      component: MenuV1Component,
+      component: AdminComponent,
       path: ''
     },
   ];

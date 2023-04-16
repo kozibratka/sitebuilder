@@ -10,6 +10,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RemoveItemDialogComponent} from './components/remove-item-dialog/remove-item-dialog.component';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
+import {MenuV1ResolverService} from './services/menu-v1-resolver.service';
 
 
 
@@ -29,7 +30,7 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
     ReactiveFormsModule
   ],
   providers: [
-    {provide: AbstractPluginResolver, useClass: MenuV1Module, multi: true},
+    {provide: AbstractPluginResolver, useClass: MenuV1ResolverService, multi: true},
   ],
 })
 export class MenuV1Module { }
