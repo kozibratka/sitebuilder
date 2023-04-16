@@ -5,16 +5,16 @@ import {PageInterface} from '../../interfaces/page-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
 import {MoveableModalComponent} from '../../../core/components/moveable-modal/moveable-modal.component';
-import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {ArrayHelper} from '../../../core/helpers/array-helper';
-import {PluginResolverService} from '../../../plugins/tools/services/plugin-resolver.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {DomainInfoService} from '../../../core/services/domain-info.service';
 import {Title} from '@angular/platform-browser';
 import {Subject} from 'rxjs';
 import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
+import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
+import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
 
 @Component({
   selector: 'app-page-builder',

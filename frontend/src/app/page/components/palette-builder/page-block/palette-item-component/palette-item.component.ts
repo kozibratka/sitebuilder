@@ -19,12 +19,12 @@ import {MenuPluginResolverService} from '../../../../services/menu-plugin-resolv
 import {Subject, Subscription} from 'rxjs';
 import {AbstractPluginResolver} from '../../../../services/abstract-classes/abstract-plugin-resolver';
 import {WebDetailResolverService} from '../../../../../web/services/web-detail-resolver.service';
-import {AbstractPlugin} from '../../../../../plugins/tools/abstract-class/abstract-plugin';
 import {ElementPositionMessenger} from '../../../../../core/messengers/element-position/element-position-messenger';
 import {ElementHelper} from '../../../../../core/helpers/element-helper';
 import {PaletteItemConfig} from '../../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../../services/palette-block-gridstack.service';
 import {PageBlockComponent} from '../page-block.component';
+import {AbstractPlugin} from '../../../../../plugins/abstract-class/abstract-plugin';
 
 @Component({
   selector: 'app-palette-item',

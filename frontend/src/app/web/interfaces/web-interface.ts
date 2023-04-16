@@ -1,4 +1,4 @@
-import {BasePlugConfigInterface} from '../../plugins/tools/interfaces/base-plug-config-interface';
+import {BasePlugConfigInterface} from '../../plugins/interfaces/base-plug-config-interface';
 
 export interface WebInterface {
   id: number;

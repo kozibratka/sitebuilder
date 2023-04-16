@@ -1,5 +1,5 @@
-import {BasePlugConfigInterface} from '../../plugins/tools/interfaces/base-plug-config-interface';
 import {PageBlockInterface} from './page-block-interface';
+import {BasePlugConfigInterface} from '../../plugins/interfaces/base-plug-config-interface';
 
 export interface PageInterface {
   id: number;

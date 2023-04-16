@@ -7,10 +7,10 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
-import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
-import {PluginResolverService} from '../../../plugins/tools/services/plugin-resolver.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {NotifierService} from '../../../core/services/notifier.service';
+import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
+import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
 
 @Component({
   selector: 'app-update-plugin',

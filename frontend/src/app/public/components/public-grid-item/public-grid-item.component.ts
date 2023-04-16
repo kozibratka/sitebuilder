@@ -9,13 +9,13 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {AbstractPlugin} from '../../../plugins/tools/abstract-class/abstract-plugin';
 import {PaletteItemConfig} from '../../../page/interfaces/palette-item-config';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
-import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
 import {PaletteBlockGridstackService} from '../../../page/services/palette-block-gridstack.service';
 import {GridItemHTMLElement} from 'gridstack';
 import {PublicPageBlockComponent} from '../public-page-block/public-page-block.component';
+import {AbstractPlugin} from '../../../plugins/abstract-class/abstract-plugin';
+import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 
 @Component({
   selector: 'app-public-grid-item',

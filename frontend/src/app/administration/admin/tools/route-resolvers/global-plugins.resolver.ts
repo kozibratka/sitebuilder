@@ -9,7 +9,7 @@ import {WebDetailResolverService} from '../../../../web/services/web-detail-reso
 import {catchError, map} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../../core/services/api/symfony-api/symfony-api-client.service';
-import {BasePlugConfigInterface} from '../../../../plugins/tools/interfaces/base-plug-config-interface';
+import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
 
 @Injectable({
   providedIn: 'root'

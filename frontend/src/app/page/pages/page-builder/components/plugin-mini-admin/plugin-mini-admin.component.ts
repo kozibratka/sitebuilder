@@ -1,9 +1,9 @@
 import {Component, Inject, ViewChild} from '@angular/core';
-import {BasePlugConfigInterface} from '../../../../../plugins/tools/interfaces/base-plug-config-interface';
 import {MiniAdminComponent} from '../../../../../core/components/mini-admin/mini-admin.component';
 import {AdminAbleInterface} from '../../../../../core/components/mini-admin/tools/interfaces/admin-able-interface';
 import {PageInterface} from '../../../../interfaces/page-interface';
 import {SettingAbleInterface} from '../../../../../core/components/mini-admin/tools/interfaces/setting-able-interface';
+import {BasePlugConfigInterface} from '../../../../../plugins/interfaces/base-plug-config-interface';
 
 @Component({
   selector: 'app-plugin-mini-admin',

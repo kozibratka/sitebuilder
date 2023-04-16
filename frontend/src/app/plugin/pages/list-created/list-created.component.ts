@@ -4,10 +4,10 @@ import {filter, switchMap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
-import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {RemoveDialogComponent} from '../../components/remove-dialog/remove-dialog.component';
 import {NotifierService} from '../../../core/services/notifier.service';
+import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 
 @Component({
   selector: 'app-list',

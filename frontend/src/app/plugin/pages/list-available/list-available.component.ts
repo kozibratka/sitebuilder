@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import * as _ from 'lodash';
-import {BasePlugConfigInterface} from '../../../plugins/tools/interfaces/base-plug-config-interface';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
+import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 
 @Component({
   selector: 'app-list',

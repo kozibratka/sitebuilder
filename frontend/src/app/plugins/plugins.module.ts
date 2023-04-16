@@ -15,9 +15,9 @@ import {SortablejsModule} from 'ngx-sortablejs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
-import {CarouselModule} from './carousel/carousel.module';
-import {MenuModule} from './menu/menu.module';
-import {TextModule} from './text/text.module';
+import {CarouselModule} from './modules/carousel/carousel.module';
+import {MenuModule} from './modules/menu/menu.module';
+import {TextModule} from './modules/text/text.module';
 
 @NgModule({
     imports: [
