@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\SiteBuilder\Plugin\MenuV1;
+namespace App\Entity\SiteBuilder\Plugin\Menu\MenuV1;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MenuV1 extends BasePlugin
 {
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Plugin\MenuV1\MenuItemV1", mappedBy="menu", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Item", mappedBy="menu", cascade={"persist"}, orphanRemoval=true)
      */
     protected Collection $items;
 
@@ -23,7 +23,7 @@ class MenuV1 extends BasePlugin
     }
     public function setIdentifier()
     {
-        $this->identifier = 'menu_simple_plugin';
+        $this->identifier = 'menu_v1';
     }
 
     public function getItems(): Collection

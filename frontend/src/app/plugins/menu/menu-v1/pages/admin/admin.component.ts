@@ -29,7 +29,7 @@ export class AdminComponent extends AbstractAdminSetting<ConfigInterface> implem
   }
 
   ngOnInit(): void {
-    this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.menuSimpleItems);
+    this.items = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
   }
 
   ngOnDestroy(): void {
@@ -42,7 +42,7 @@ export class AdminComponent extends AbstractAdminSetting<ConfigInterface> implem
   }
 
   refreshSettings() {
-    this.settings.menuSimpleItems = ArrayHelper.flatNestedArrayObject(this.items);
+    this.settings.items = ArrayHelper.flatNestedArrayObject(this.items);
   }
 
   addMenuItem() {

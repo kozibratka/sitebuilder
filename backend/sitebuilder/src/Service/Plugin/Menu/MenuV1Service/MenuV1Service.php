@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Service\Plugin;
+namespace App\Service\Plugin\Menu\MenuV1Service;
 
-use App\Entity\SiteBuilder\Plugin\MenuV1\MenuV1;
-use App\Form\SiteBuilder\Plugin\MenuV1Type\MenuV1Type;
+use App\Entity\SiteBuilder\Plugin\Menu\MenuV1\MenuV1;
+use App\Form\SiteBuilder\Plugin\Menu\MenuV1Type\MenuV1Type;
+use App\Service\Plugin\PluginInterface;
 
 class MenuV1Service implements PluginInterface
 {

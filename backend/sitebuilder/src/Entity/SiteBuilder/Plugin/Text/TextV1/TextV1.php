@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Entity\SiteBuilder\Plugin;
+namespace App\Entity\SiteBuilder\Plugin\Text\TextV1;
 
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="text_plugin")
+ * @ORM\Table(name="text_v1")
  */
-class TextPlugin extends BasePlugin
+class TextV1 extends BasePlugin
 {
     /**
      * @ORM\Column(type="text")
@@ -24,7 +25,7 @@ class TextPlugin extends BasePlugin
 
     public function setIdentifier()
     {
-        $this->identifier = 'text_plugin';
+        $this->identifier = 'text_v1';
     }
 
     public function getText(): ?string

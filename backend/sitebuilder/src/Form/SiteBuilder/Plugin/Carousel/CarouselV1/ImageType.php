@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Form\SiteBuilder\Plugin\CarouselBootstrapType;
+namespace App\Form\SiteBuilder\Plugin\Carousel\CarouselV1;
 
-use App\Entity\SiteBuilder\Plugin\CarouselV1\CarouselBootstrapPluginImage;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CarouselBootstrapImageType extends AbstractType
+class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

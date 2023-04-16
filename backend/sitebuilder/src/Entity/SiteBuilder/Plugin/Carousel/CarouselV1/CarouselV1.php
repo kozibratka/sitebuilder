@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\SiteBuilder\Plugin\CarouselV1;
+namespace App\Entity\SiteBuilder\Plugin\Carousel\CarouselV1;
 
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="carousel_bootstrap_plugin")
+ * @ORM\Table(name="carousel_v1")
  */
 class CarouselV1 extends BasePlugin
 {
@@ -24,7 +24,7 @@ class CarouselV1 extends BasePlugin
     private ?bool $autostart = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="CarouselImageV1", cascade={"persist"}, orphanRemoval=true, mappedBy="carousel")
+     * @ORM\OneToMany(targetEntity="Image", cascade={"persist"}, orphanRemoval=true, mappedBy="carousel")
      */
     private $images;
 
@@ -36,7 +36,7 @@ class CarouselV1 extends BasePlugin
 
     public function setIdentifier()
     {
-        $this->identifier = 'carousel_bootstrap_plugin';
+        $this->identifier = 'carousel_v1';
     }
 
     public function getText(): ?string

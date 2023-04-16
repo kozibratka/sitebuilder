@@ -56,21 +56,21 @@ services:
             - { name: doctrine.orm.entity_listener, event: prePersist, entity: 'App\Entity\SiteBuilder\Plugin\BasePlugin' }
             - { name: doctrine.orm.entity_listener, event: preUpdate, entity: 'App\Entity\SiteBuilder\Plugin\BasePlugin' }
 
-    App\Service\Plugin\TextPluginService:
+    App\Service\Plugin\Text\TextV1\TextV1Service:
         tags:
-            - { name: 'plugin_service', key: 'text_plugin' }
+            - { name: 'plugin_service', key: 'text_v1' }
 
-    App\Service\Plugin\CarouselBootstrapPluginService:
+    App\Service\Plugin\Carousel\CarouselV1\CarouselV1Service:
         tags:
-            - { name: 'plugin_service', key: 'carousel_bootstrap_plugin' }
+            - { name: 'plugin_service', key: 'carousel_v1' }
 
-    App\Service\Plugin\MenuSimpleService:
+    App\Service\Plugin\Menu\MenuV1Service\MenuV1Service:
         tags:
-            - { name: 'plugin_service', key: 'menu_simple_plugin' }
+            - { name: 'plugin_service', key: 'menu_v1' }
 
-    App\Service\Plugin\ImagePluginService:
+    App\Service\Plugin\Image\ImageV1\ImageV1Service:
         tags:
-            - { name: 'plugin_service', key: 'image_plugin' }
+            - { name: 'plugin_service', key: 'image_v1' }
 
     App\Service\Plugin\PluginServiceService:
         arguments: [!tagged { tag: 'plugin_service', index_by: 'key' }]

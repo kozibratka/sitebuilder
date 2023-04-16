@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-use App\Form\SiteBuilder\Plugin\TextPluginType;
+use App\Form\SiteBuilder\Plugin\Text\TextV1\TextPluginType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 

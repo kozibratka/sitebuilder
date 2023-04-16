@@ -12,7 +12,7 @@ export class MenuV1Component extends AbstractPlugin<ConfigInterface> {
   initEmptySettings(): ConfigInterface {
     return {
       identifier: PluginIdentifier.MENU_V1,
-      menuSimpleItems: [
+      items: [
         {name: 'one', page: 4, level: 0},
         {name: 'two', page: 5, level: 1},
         {name: 'tree', page: 6, level: 0},

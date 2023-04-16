@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Entity\SiteBuilder\Plugin\MenuV1;
+namespace App\Entity\SiteBuilder\Plugin\Menu\MenuV1;
 use App\Entity\SiteBuilder\Page;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="menu_item_v1")
  */
-class MenuItemV1
+class Item
 {
     /**
      * @ORM\Id
@@ -17,7 +18,7 @@ class MenuItemV1
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Plugin\MenuV1\MenuV1", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="MenuV1", inversedBy="items")
      */
     private MenuV1 $menu;
 

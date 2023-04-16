@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Entity\SiteBuilder\Plugin\CarouselV1;
+namespace App\Entity\SiteBuilder\Plugin\Carousel\CarouselV1;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table()
+ * @ORM\Table(name="carousel_image_v1")
  */
-class CarouselImageV1
+class Image
 {
     /**
      * @ORM\Id

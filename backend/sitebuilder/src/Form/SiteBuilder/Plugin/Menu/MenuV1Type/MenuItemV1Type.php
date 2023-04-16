@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form\SiteBuilder\Plugin\MenuV1Type;
+namespace App\Form\SiteBuilder\Plugin\Menu\MenuV1Type;
 use App\Entity\SiteBuilder\Page;
-use App\Entity\SiteBuilder\Plugin\MenuV1\MenuItemV1;
+use App\Entity\SiteBuilder\Plugin\Menu\MenuV1\MenuItemV1;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
