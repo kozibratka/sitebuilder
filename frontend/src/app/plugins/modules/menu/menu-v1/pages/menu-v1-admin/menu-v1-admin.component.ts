@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ConfigInterface} from '../../interfaces/config-interface';
+import {MenuV1ConfigInterface} from '../../interfaces/menu-v1-config-interface';
 import {MatDialog} from '@angular/material/dialog';
 import {ItemSettingsComponent} from '../../components/item-settings/item-settings.component';
 import {AbstractAdminSetting} from '../../../../../abstract-class/abstract-admin-setting';
@@ -7,10 +7,10 @@ import {ArrayHelper} from '../../../../../../core/helpers/array-helper';
 
 @Component({
   selector: 'app-menu-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  templateUrl: './menu-v1-admin.component.html',
+  styleUrls: ['./menu-v1-admin.component.css']
 })
-export class AdminComponent extends AbstractAdminSetting<ConfigInterface> implements OnInit, OnDestroy{
+export class MenuV1AdminComponent extends AbstractAdminSetting<MenuV1ConfigInterface> implements OnInit, OnDestroy{
 
   items = [];
   options;
@@ -60,6 +60,6 @@ export class AdminComponent extends AbstractAdminSetting<ConfigInterface> implem
     });
   }
 
-  createAdminForm(settings: ConfigInterface): void {
+  createAdminForm(settings: MenuV1ConfigInterface): void {
   }
 }

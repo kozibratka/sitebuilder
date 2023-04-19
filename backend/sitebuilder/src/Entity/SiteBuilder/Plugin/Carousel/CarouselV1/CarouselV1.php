@@ -24,7 +24,7 @@ class CarouselV1 extends BasePlugin
     private ?bool $autostart = true;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", cascade={"persist"}, orphanRemoval=true, mappedBy="carousel")
+     * @ORM\OneToMany(targetEntity="CarouselV1Image", cascade={"persist"}, orphanRemoval=true, mappedBy="carousel")
      */
     private $images;
 
@@ -79,7 +79,7 @@ class CarouselV1 extends BasePlugin
         $this->images = $images;
     }
 
-    public function addImage(CarouselImageV1 $image)
+    public function addImage(CarouselV1Image $image)
     {
         $this->images->add($image);
         $image->setCarousel($this);

@@ -2,16 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
 import {FormBuilder} from '@angular/forms';
-import {ConfigInterface} from '../../interfaces/config-interface';
+import {TextV1ConfigInterface} from '../../interfaces/text-v1-config-interface';
 import {AbstractAdminSetting} from '../../../../../abstract-class/abstract-admin-setting';
 import {AdminFormService} from '../../../../../forms/admin-form.service';
 
 @Component({
   selector: 'app-text-settings',
-  templateUrl: './text-admin.component.html',
-  styleUrls: ['./text-admin.component.css']
+  templateUrl: './text-v1-text-admin.component.html',
+  styleUrls: ['./text-v1-text-admin.component.css']
 })
-export class TextAdminComponent extends AbstractAdminSetting<ConfigInterface> implements OnInit{
+export class TextV1TextAdminComponent extends AbstractAdminSetting<TextV1ConfigInterface> implements OnInit{
 
   public Editor = ClassicEditor;
   public text: string;
@@ -26,7 +26,7 @@ export class TextAdminComponent extends AbstractAdminSetting<ConfigInterface> im
   ngOnInit(): void {
   }
 
-  createAdminForm(settings: ConfigInterface) {
+  createAdminForm(settings: TextV1ConfigInterface) {
     this.adminForm = this.adminFormService.createForm(
       {
         text: ['']

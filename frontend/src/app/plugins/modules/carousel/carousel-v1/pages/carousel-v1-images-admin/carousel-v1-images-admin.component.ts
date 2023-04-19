@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ConfigInterface} from '../../interfaces/config-interface';
+import {CarouselV1ConfigInterface} from '../../interfaces/carousel-v1-config-interface';
 import {AbstractAdminSetting} from '../../../../../abstract-class/abstract-admin-setting';
 import {FileManagerModalService} from '../../../../../../core/modules/file-manager/services/file-manager-modal.service';
 import {FileManagerService} from '../../../../../../core/modules/file-manager/services/file-manager.service';
 
 @Component({
   selector: 'app-carousel-bootstrap-images-admin',
-  templateUrl: './images-admin.component.html',
-  styleUrls: ['./images-admin.component.css']
+  templateUrl: './carousel-v1-images-admin.component.html',
+  styleUrls: ['./carousel-v1-images-admin.component.css']
 })
-export class ImagesAdminComponent extends AbstractAdminSetting<ConfigInterface> implements OnInit {
+export class CarouselV1ImagesAdminComponent extends AbstractAdminSetting<CarouselV1ConfigInterface> implements OnInit {
 
   showIconIndex = -2;
 
@@ -23,7 +23,7 @@ export class ImagesAdminComponent extends AbstractAdminSetting<ConfigInterface> 
   ngOnInit(): void {
   }
 
-  createAdminForm(settings: ConfigInterface) {
+  createAdminForm(settings: CarouselV1ConfigInterface) {
   }
 
   onClickAddImageButton() {

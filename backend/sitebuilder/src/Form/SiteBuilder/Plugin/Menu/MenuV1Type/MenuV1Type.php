@@ -15,7 +15,7 @@ class MenuV1Type extends AbstractType
     {
         $builder
             ->add('menuSimpleItems', CollectionType::class, [
-                'entry_type' => MenuItemV1Type::class,
+                'entry_type' => MenuV1ItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

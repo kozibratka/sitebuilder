@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {MenuV1Component} from '../components/menu-v1/menu-v1.component';
 import {AbstractPluginResolver} from '../../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {PluginIdentifier} from '../../../../constants/plugin-identifier';
-import {AdminComponent} from '../pages/admin/admin.component';
+import {MenuV1AdminComponent} from '../pages/menu-v1-admin/menu-v1-admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class MenuV1ResolverService extends AbstractPluginResolver {
   adminComponentsClass = [
     {
       label: 'Menu',
-      component: AdminComponent,
+      component: MenuV1AdminComponent,
       path: ''
     },
   ];

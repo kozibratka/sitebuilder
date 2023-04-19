@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfigInterface} from '../interfaces/config-interface';
+import {CarouselV1ConfigInterface} from '../interfaces/carousel-v1-config-interface';
 import {AbstractPlugin} from '../../../../abstract-class/abstract-plugin';
 import {PluginIdentifier} from '../../../../constants/plugin-identifier';
 
@@ -10,7 +10,7 @@ import {PluginIdentifier} from '../../../../constants/plugin-identifier';
     './carousel-v1.component.css'
   ],
 })
-export class CarouselV1Component extends AbstractPlugin<ConfigInterface> implements OnInit {
+export class CarouselV1Component extends AbstractPlugin<CarouselV1ConfigInterface> implements OnInit {
 
   constructor() {
     super();
@@ -20,7 +20,7 @@ export class CarouselV1Component extends AbstractPlugin<ConfigInterface> impleme
     this.refreshView();
   }
 
-  initEmptySettings(): ConfigInterface {
+  initEmptySettings(): CarouselV1ConfigInterface {
     return {
       identifier: PluginIdentifier.CAROUSEL_V1,
       autostart: true,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ConfigInterface} from '../../interfaces/config-interface';
+import {MenuV1ConfigInterface} from '../../interfaces/menu-v1-config-interface';
 import {AbstractPlugin} from '../../../../../abstract-class/abstract-plugin';
 import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
 
@@ -8,8 +8,8 @@ import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
   templateUrl: './menu-v1.component.html',
   styleUrls: ['./menu-v1.component.css']
 })
-export class MenuV1Component extends AbstractPlugin<ConfigInterface> {
-  initEmptySettings(): ConfigInterface {
+export class MenuV1Component extends AbstractPlugin<MenuV1ConfigInterface> {
+  initEmptySettings(): MenuV1ConfigInterface {
     return {
       identifier: PluginIdentifier.MENU_V1,
       items: [

@@ -6,9 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="carousel_image_v1")
  */
-class Image
+class CarouselV1Image
 {
     /**
      * @ORM\Id

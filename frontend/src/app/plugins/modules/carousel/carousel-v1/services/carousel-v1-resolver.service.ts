@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {ImagesAdminComponent} from '../pages/images-admin/images-admin.component';
-import {EffectAdminComponent} from '../pages/effect-admin/effect-admin.component';
 import {CarouselV1Component} from '../components/carousel-v1.component';
 import {AbstractPluginResolver} from '../../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {PluginIdentifier} from '../../../../constants/plugin-identifier';
+import {CarouselV1ImagesAdminComponent} from '../pages/carousel-v1-images-admin/carousel-v1-images-admin.component';
+import {CarouselV1EffectAdminComponent} from '../pages/carousel-v1-effect-admin/carousel-v1-effect-admin.component';
 
 
 @Injectable({
@@ -20,12 +20,12 @@ export class CarouselV1ResolverService extends AbstractPluginResolver{
   adminComponentsClass = [
     {
       label: 'Obrázky',
-      component: ImagesAdminComponent,
+      component: CarouselV1ImagesAdminComponent,
       path: ''
     },
     {
       label: 'Efekty',
-      component: EffectAdminComponent,
+      component: CarouselV1EffectAdminComponent,
       path: ''
     }
   ];

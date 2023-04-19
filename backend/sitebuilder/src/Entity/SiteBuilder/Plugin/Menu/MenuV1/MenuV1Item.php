@@ -6,9 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="menu_item_v1")
  */
-class Item
+class MenuV1Item
 {
     /**
      * @ORM\Id

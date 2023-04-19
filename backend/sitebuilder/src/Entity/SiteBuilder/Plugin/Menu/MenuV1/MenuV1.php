@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class MenuV1 extends BasePlugin
 {
     /**
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="menu", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="MenuV1Item", mappedBy="menu", cascade={"persist"}, orphanRemoval=true)
      */
     protected Collection $items;
 
@@ -36,14 +36,14 @@ class MenuV1 extends BasePlugin
         $this->items = $items;
     }
 
-    public function addMenuSimpleItem(MenuItemV1 $menuSimpleItem): self
+    public function addMenuSimpleItem(MenuV1Item $menuSimpleItem): self
     {
         $this->items->add($menuSimpleItem);
         $menuSimpleItem->setMenu($this);
         return $this;
     }
 
-    public function removeMenuSimpleItem(MenuItemV1 $menuSimpleItem): self
+    public function removeMenuSimpleItem(MenuV1Item $menuSimpleItem): self
     {
         $this->items->removeElement($menuSimpleItem);
         return $this;

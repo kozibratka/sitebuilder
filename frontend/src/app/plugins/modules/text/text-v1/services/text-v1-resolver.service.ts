@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {TextAdminComponent} from '../pages/admin/text-admin.component';
 import {TextV1Component} from '../components/text-v1/text-v1.component';
 import {AbstractPluginResolver} from '../../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {PluginIdentifier} from '../../../../constants/plugin-identifier';
+import {TextV1TextAdminComponent} from '../pages/text-v1-admin/text-v1-text-admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class TextV1ResolverService extends AbstractPluginResolver{
   adminComponentsClass = [
     {
       label: 'Text',
-      component: TextAdminComponent,
+      component: TextV1TextAdminComponent,
       path: ''
     }
   ];
