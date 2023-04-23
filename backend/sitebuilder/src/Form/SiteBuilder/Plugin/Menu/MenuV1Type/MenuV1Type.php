@@ -14,7 +14,7 @@ class MenuV1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('menuSimpleItems', CollectionType::class, [
+            ->add('items', CollectionType::class, [
                 'entry_type' => MenuV1ItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,

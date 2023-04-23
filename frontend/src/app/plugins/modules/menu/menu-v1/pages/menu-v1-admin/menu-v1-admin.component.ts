@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MenuV1ConfigInterface} from '../../interfaces/menu-v1-config-interface';
 import {MatDialog} from '@angular/material/dialog';
-import {ItemSettingsComponent} from '../../components/item-settings/item-settings.component';
 import {AbstractAdminSetting} from '../../../../../abstract-class/abstract-admin-setting';
 import {ArrayHelper} from '../../../../../../core/helpers/array-helper';
+import {MenuV1ItemSettingsComponent} from '../../components/menu-v1-item-settings/menu-v1-item-settings.component';
 
 @Component({
   selector: 'app-menu-admin',
@@ -47,7 +47,7 @@ export class MenuV1AdminComponent extends AbstractAdminSetting<MenuV1ConfigInter
 
   addMenuItem() {
     const newMenuItem = {level: 0, idPage: 0, name: '', children: []};
-    const dialogRef = this.dialog.open(ItemSettingsComponent);
+    const dialogRef = this.dialog.open(MenuV1ItemSettingsComponent);
     dialogRef.afterClosed().subscribe(value => {
       if (value) {
         const formSettings = dialogRef.componentInstance.settings;

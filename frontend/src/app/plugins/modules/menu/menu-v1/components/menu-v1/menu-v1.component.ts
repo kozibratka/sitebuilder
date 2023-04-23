@@ -13,9 +13,9 @@ export class MenuV1Component extends AbstractPlugin<MenuV1ConfigInterface> {
     return {
       identifier: PluginIdentifier.MENU_V1,
       items: [
-        {name: 'one', page: 4, level: 0},
-        {name: 'two', page: 5, level: 1},
-        {name: 'tree', page: 6, level: 0},
+        {name: 'one', page: null, level: 0},
+        {name: 'two', page: null, level: 1},
+        {name: 'tree', page: null, level: 0},
       ]
     };
   }

@@ -24,7 +24,7 @@ class MenuV1Item
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Page")
      */
-    private Page $page;
+    private ?Page $page = null;
 
     /**
      * @ORM\Column(type="string")
@@ -46,7 +46,7 @@ class MenuV1Item
         $this->menu = $menu;
     }
 
-    public function getPage(): Page
+    public function getPage(): ?Page
     {
         return $this->page;
     }

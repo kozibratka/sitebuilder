@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CarouselV1ResolverService} from './services/carousel-v1-resolver.service';
 import {CarouselV1Component} from './components/carousel-v1.component';
-import {EffectAdminComponent} from './pages/effect-admin/effect-admin.component';
-import {ImagesAdminComponent} from './pages/images-admin/images-admin.component';
 import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
 import {MixedCdkDragDropModule} from 'angular-mixed-cdk-drag-drop';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -11,12 +9,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {CoreModule} from '../../../../core/core.module';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {CdkDrag, CdkDropList, CdkDropListGroup} from '@angular/cdk/drag-drop';
+import {CarouselV1EffectAdminComponent} from './pages/carousel-v1-effect-admin/carousel-v1-effect-admin.component';
+import {CarouselV1ImagesAdminComponent} from './pages/carousel-v1-images-admin/carousel-v1-images-admin.component';
 
 @NgModule({
   declarations: [
     CarouselV1Component,
-    EffectAdminComponent,
-    ImagesAdminComponent
+    CarouselV1EffectAdminComponent,
+    CarouselV1ImagesAdminComponent
   ],
   imports: [
     CommonModule,

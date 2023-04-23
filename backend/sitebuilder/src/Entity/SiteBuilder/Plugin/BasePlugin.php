@@ -27,9 +27,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     field = "pluginType",
  *     disabled = false,
  *     map = {
- *          "CarouselBootstrapPlugin" = "App\Entity\SiteBuilder\Plugin\CarouselBootstrapPlugin\CarouselBootstrapPlugin",
- *          "TextPlugin" = "App\Entity\SiteBuilder\Plugin\TextPlugin",
- *          "MenuSimple" = "App\Entity\SiteBuilder\Plugin\MenuSimple\MenuSimple"
+ *          "CarouselV1" = "App\Entity\SiteBuilder\Plugin\Carousel\CarouselV1\CarouselV1",
+ *          "TextV1" = "App\Entity\SiteBuilder\Plugin\Text\TextV1\TextV1",
+ *          "MenuV1" = "App\Entity\SiteBuilder\Plugin\Menu\MenuV1\MenuV1"
  *
  *     })
  */

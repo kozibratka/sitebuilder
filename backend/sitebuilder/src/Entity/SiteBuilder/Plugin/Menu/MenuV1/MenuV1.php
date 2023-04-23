@@ -36,14 +36,14 @@ class MenuV1 extends BasePlugin
         $this->items = $items;
     }
 
-    public function addMenuSimpleItem(MenuV1Item $menuSimpleItem): self
+    public function addItem(MenuV1Item $menuSimpleItem): self
     {
         $this->items->add($menuSimpleItem);
         $menuSimpleItem->setMenu($this);
         return $this;
     }
 
-    public function removeMenuSimpleItem(MenuV1Item $menuSimpleItem): self
+    public function removeItem(MenuV1Item $menuSimpleItem): self
     {
         $this->items->removeElement($menuSimpleItem);
         return $this;
