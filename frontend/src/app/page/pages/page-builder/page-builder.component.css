@@ -17,3 +17,7 @@
   right: 5px;
   line-height: 20px;
 }
+
+::ng-deep .grid-stack > .grid-stack-item > .ui-resizable-se {
+  filter: invert(12%) sepia(86%) saturate(6645%) hue-rotate(1deg) brightness(89%) contrast(104%) !important;
+}

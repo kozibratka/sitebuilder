@@ -1,9 +1,10 @@
 :host {
-  transition: top 0.5s, left 0.5s;
+  transition: all 0.5s;
   z-index: 1;
   position: absolute;
   display: none;
   text-align: center;
+  padding-bottom: 5px;
 }
 
 .btn-app {

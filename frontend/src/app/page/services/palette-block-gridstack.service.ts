@@ -24,16 +24,22 @@ export class PaletteBlockGridstackService {
   }
 
   init(block: ElementRef, gridStackNodes: PaletteItemConfig[], pageBlock: PageBlockInterface, changeDetectorRef: ChangeDetectorRef): void {
-    const gridstackBlock = GridStack.init({
-      acceptWidgets: '.grid-stack-item-menu',
-      column: 12,
-      ddPlugin: GridStackDragDrop,
-      float: true,
-      cellHeight: 30,
-      handleClass: 'icon-move',
-      minRow: pageBlock.height,
-      styleInHead: true,
-    }, block.nativeElement);
+    let gridstackBlock = null;
+    this.zone.runOutsideAngular(() => {
+      gridstackBlock = GridStack.init({
+        acceptWidgets: '.grid-stack-item-menu',
+        column: 12,
+        ddPlugin: GridStackDragDrop,
+        float: true,
+        margin: 0,
+        cellHeight: '10px',
+        handleClass: 'icon-move',
+        minRow: pageBlock.height,
+        styleInHead: true,
+      }, block.nativeElement);
+
+    });
+
     this.gridstackBlocks.set(block.nativeElement, gridstackBlock);
 
     (gridstackBlock as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
@@ -43,19 +49,20 @@ export class PaletteBlockGridstackService {
         changeDetectorRef.detectChanges();
       });
     });
-    (gridstackBlock as any).on('change', (event: Event, items: GridStackNode[]) => {
-      const paleteItem = this.paletteItemComponents.find(value => value.elementRef.nativeElement.gridstackNode === items[0]);
-      if (paleteItem) {
-        this.updatePaletteItemGridProperty(items[0], paleteItem.gridItemConfig);
-      }
-    });
+    // (gridstackBlock as any).on('change', (event: Event, items: GridStackNode[]) => {
+    //   const paleteItem = this.paletteItemComponents.find(value => value.elementRef.nativeElement.gridstackNode === items[0]);
+    //   if (paleteItem) {
+    //     this.updatePaletteItemGridProperty(items[0], paleteItem.gridItemConfig);
+    //   }
+    // });
   }
 
   startGridStackPalettePublic(pageBlock: PageBlockInterface, paletteElement: ElementRef) {
     const gridstackBlock = GridStack.init({
       column: 12,
       staticGrid: true,
-      cellHeight: 30,
+      margin: 0,
+      cellHeight: '10px',
       float: true,
       minRow: pageBlock.height,
       styleInHead: true,
@@ -64,8 +71,10 @@ export class PaletteBlockGridstackService {
   }
 
   addWidget(paletteItemComponent: PaletteItemComponent, block: HTMLElement) {
-    this.gridstackBlocks.get(block).addWidget(paletteItemComponent.elementRef.nativeElement, {...paletteItemComponent.gridItemConfig});
-    this.paletteItemComponents.push(paletteItemComponent);
+    this.zone.runOutsideAngular(() => {
+      this.gridstackBlocks.get(block).addWidget(paletteItemComponent.elementRef.nativeElement, {...paletteItemComponent.gridItemConfig});
+      this.paletteItemComponents.push(paletteItemComponent);
+    });
   }
 
   addWidgetPublic(paletteItemComponent: PublicGridItemComponent, block: HTMLElement) {

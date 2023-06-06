@@ -27,7 +27,6 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
   }
 
   ngAfterViewChecked(): void {
-
   }
 
   blockDragStart(): void {

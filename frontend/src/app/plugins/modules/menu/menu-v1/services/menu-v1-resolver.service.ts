@@ -30,7 +30,7 @@ export class MenuV1ResolverService extends AbstractPluginResolver {
   }
 
   gridHeight(): number {
-    return 2;
+    return 6;
   }
 
   gridWidth(): number {
