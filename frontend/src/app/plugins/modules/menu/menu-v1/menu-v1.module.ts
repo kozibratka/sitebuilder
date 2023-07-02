@@ -11,6 +11,7 @@ import {MenuV1AdminComponent} from './pages/menu-v1-admin/menu-v1-admin.componen
 import {MenuV1AdminItemComponent} from './components/menu-v1-admin-item/menu-v1-admin-item.component';
 import {MenuV1ItemSettingsComponent} from './components/menu-v1-item-settings/menu-v1-item-settings.component';
 import {MenuV1RemoveItemDialogComponent} from './components/menu-v1-remove-item-dialog/menu-v1-remove-item-dialog.component';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -27,7 +28,8 @@ import {MenuV1RemoveItemDialogComponent} from './components/menu-v1-remove-item-
     MatIconModule,
     SortablejsModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [
     {provide: AbstractPluginResolver, useClass: MenuV1ResolverService, multi: true},

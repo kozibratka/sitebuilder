@@ -60,10 +60,9 @@ export class ArrayHelper {
     const result = [];
     const callback = (data: {children?: []}[], currentLevel = 0) => {
       for (const entry of data) {
+        result.push(entry);
         if (entry.children.length) {
           callback(entry.children, currentLevel + 1);
-        } else {
-          result.push(entry);
         }
       }
     };
