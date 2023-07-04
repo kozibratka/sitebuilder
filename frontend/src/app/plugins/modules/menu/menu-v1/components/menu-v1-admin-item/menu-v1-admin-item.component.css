@@ -1,8 +1,12 @@
 .menu-item {
-  padding: 10px 0;
-  padding-left: 1.25rem;;
+  padding: 5px 0.25rem;;
   margin-top: 5px;
   border: 1px solid black;
+}
+
+.item-line {
+  top: 3px;
+  position: relative;
 }
 
 .handle {

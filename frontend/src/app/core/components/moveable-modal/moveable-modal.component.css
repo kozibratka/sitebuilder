@@ -7,7 +7,7 @@
 /*}*/
 
 .move-line {
-  height: 33px;
+  line-height: 30px;
   background: #2f89fc;
   width: 100%;
   cursor: move;
@@ -17,9 +17,10 @@
 }
 
 .close-icon {
-  font-size: 19px;
   color: white;
   cursor: pointer;
+  margin-right: 2px;
+  vertical-align: middle;
 }
 
 .header-title {

@@ -1,4 +1,4 @@
-    <div class="wrapper d-flex align-items-stretch">
+    <div class="d-flex">
       <nav id="sidebar">
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass;">

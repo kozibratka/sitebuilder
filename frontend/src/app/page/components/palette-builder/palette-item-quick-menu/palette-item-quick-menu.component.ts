@@ -70,7 +70,8 @@ export class PaletteItemQuickMenuComponent implements OnInit {
     this.moveableModalService.show(PluginMiniAdminComponent, {
       adminAbleInterface: pluginResolver,
       settings: plugin.settings,
-      page: this.pageBuilderComponent.pageDetail
+      page: this.pageBuilderComponent.pageDetail,
+      title: pluginResolver.name
     });
   }
 }
