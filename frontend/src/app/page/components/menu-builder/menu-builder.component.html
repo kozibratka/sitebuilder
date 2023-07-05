@@ -5,18 +5,18 @@
     </div> <!-- /.card-body -->
 <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home"
-       role="tab" aria-controls="custom-content-below-home" aria-selected="true">Bloky</a>
+    <a class="nav-link active" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile"
+       role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Prvky</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile"
-       role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Prvky</a>
+    <a class="nav-link" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home"
+       role="tab" aria-controls="custom-content-below-home" aria-selected="true">Bloky</a>
   </li>
 </ul>
   </div>
 
 <div class="tab-content" id="custom-content-below-tabContent">
-  <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel"
+  <div class="tab-pane fade" id="custom-content-below-home" role="tabpanel"
        aria-labelledby="custom-content-below-home-tab">
     <ul
       class="menu-block"
@@ -28,14 +28,14 @@
       </li>
     </ul>
   </div>
-  <div class="tab-pane fade menu-element" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-    <div (mouseleave)="showMoveIcon = false" (mouseover)="showMoveIcon = true" class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.data-gs-width]="abstractMenuPluginResolver.gridWidth()" [attr.data-gs-height]="abstractMenuPluginResolver.gridHeight()">
-        <img class="menu-image" src="{{abstractMenuPluginResolver.getMenuImage()}}">
+  <div class="tab-pane fade menu-element d-flex flex-wrap active show" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
+      <div (mouseleave)="showMoveIcon = false" (mouseover)="showMoveIcon = true" class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.data-gs-width]="abstractMenuPluginResolver.gridWidth()" [attr.data-gs-height]="abstractMenuPluginResolver.gridHeight()">
+        <mat-icon class="menu-image">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
+        <span class="text">{{abstractMenuPluginResolver.name}}</span>
         <app-animation-hider [show] = "showMoveIcon">
           <i class="material-icons icon-move" appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver">open_with</i>
         </app-animation-hider>
-    </div>
-
+      </div>
   </div>
 </div>
 </div>

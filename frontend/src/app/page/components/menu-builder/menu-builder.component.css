@@ -11,8 +11,15 @@
   padding: 10px;
 }
 
-.menu-element-item{
+.menu-element-item:not(.ui-draggable-dragging){
   padding: 10px;
+  width: 50%;
+  text-align: center;
+  font-size: 15px;
+}
+
+.ui-draggable-dragging > .mat-icon, .ui-draggable-dragging > .text {
+  visibility: hidden;
 }
 
 .menu-element-item img{

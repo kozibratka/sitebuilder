@@ -31,7 +31,7 @@ export class CarouselV1ResolverService extends AbstractPluginResolver{
   ];
 
   getMenuImage(): string {
-    return 'https://via.placeholder.com/300/000000?text=5';
+    return 'view_carousel';
   }
 
   get identifier(): string {

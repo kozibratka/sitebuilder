@@ -22,6 +22,7 @@ import {DragScrollDirective} from './directives/drag-scroll-directive';
 import {MenuPluginResolverDirective} from './directives/menu-plugin-resolver.directive';
 import {PaletteItemComponent} from './components/palette-builder/page-block/palette-item-component/palette-item.component';
 import { PluginMiniAdminComponent } from './pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 const routes: Routes = [
@@ -67,15 +68,16 @@ const routes: Routes = [
   exports: [
     PaletteItemComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    CoreModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatTableModule,
-    MatDialogModule,
-    SortablejsModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        CoreModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatTableModule,
+        MatDialogModule,
+        SortablejsModule,
+        MatIconModule,
+    ]
 })
 export class PageModule { }

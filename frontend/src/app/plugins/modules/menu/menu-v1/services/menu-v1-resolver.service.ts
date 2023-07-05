@@ -26,7 +26,7 @@ export class MenuV1ResolverService extends AbstractPluginResolver {
   }
 
   getMenuImage(): string {
-    return 'https://via.placeholder.com/300/000000?text=6';
+    return 'menu';
   }
 
   gridHeight(): number {
@@ -46,6 +46,6 @@ export class MenuV1ResolverService extends AbstractPluginResolver {
   }
 
   get name(): string {
-    return 'Jednoduché menu';
+    return 'Menu v1';
   }
 }

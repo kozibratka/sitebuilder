@@ -24,7 +24,7 @@ export class TextV1ResolverService extends AbstractPluginResolver{
   ];
 
   getMenuImage(): string {
-    return 'https://via.placeholder.com/300/000000?text=5';
+    return 'article';
   }
 
   get identifier(): string {
