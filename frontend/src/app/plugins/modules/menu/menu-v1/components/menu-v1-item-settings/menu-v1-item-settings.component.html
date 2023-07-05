@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Nastavení položky menu</h1>
-<div mat-dialog-content>
-  <form [formGroup]="settings">
+<app-dialog>
+  <ng-container title>Nastavení položky menu</ng-container>
+  <form content [formGroup]="settings">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="interval">Název:</label>
@@ -21,16 +21,12 @@
       </div>
     </div>
 
-<!--    <mat-form-field appearance="fill">-->
-<!--      <mat-label>Stránka: </mat-label>-->
-<!--      <mat-select formControlName="idPage">-->
-<!--        <mat-option *ngFor="let item of pages" [value]="item.id">{{item.name}}</mat-option>-->
-<!--      </mat-select>-->
-<!--      <mat-error *ngIf="settings.get('idPage').hasError('required')">Toto pole je povinné</mat-error>-->
-<!--    </mat-form-field>-->
+    <!--    <mat-form-field appearance="fill">-->
+    <!--      <mat-label>Stránka: </mat-label>-->
+    <!--      <mat-select formControlName="idPage">-->
+    <!--        <mat-option *ngFor="let item of pages" [value]="item.id">{{item.name}}</mat-option>-->
+    <!--      </mat-select>-->
+    <!--      <mat-error *ngIf="settings.get('idPage').hasError('required')">Toto pole je povinné</mat-error>-->
+    <!--    </mat-form-field>-->
   </form>
-</div>
-<mat-dialog-actions class="float-right">
-  <button mat-button [mat-dialog-close] = "false">Zrušit</button>
-  <button mat-button [mat-dialog-close] = "true">Uložit</button>
-</mat-dialog-actions>
+</app-dialog>

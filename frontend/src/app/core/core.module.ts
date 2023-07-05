@@ -24,6 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { AnimationHiderComponent } from './components/hidder/animation-hider/animation-hider/animation-hider.component';
 import {HidderComponent} from './components/hidder/plain-hider/hidder.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {HidderComponent} from './components/hidder/plain-hider/hidder.component'
     MoveableModalComponent,
     MiniAdminComponent,
     AnimationHiderComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -52,20 +54,21 @@ import {HidderComponent} from './components/hidder/plain-hider/hidder.component'
     MatDialogModule,
     MatButtonModule,
   ],
-  exports: [
-    ModalForRouteComponent,
-    InputFormErrorDirective,
-    HiderElementDirective,
-    InputFormErrorGrouperDirective,
-    GlobalFormErrorComponent,
-    MoveAbleSettingsComponent,
-    HidderComponent,
-    DirectoryMiniNavigationComponent,
-    IconResolverComponent,
-    MiniAdminComponent,
-    MoveableModalComponent,
-    AnimationHiderComponent,
-  ],
+    exports: [
+        ModalForRouteComponent,
+        InputFormErrorDirective,
+        HiderElementDirective,
+        InputFormErrorGrouperDirective,
+        GlobalFormErrorComponent,
+        MoveAbleSettingsComponent,
+        HidderComponent,
+        DirectoryMiniNavigationComponent,
+        IconResolverComponent,
+        MiniAdminComponent,
+        MoveableModalComponent,
+        AnimationHiderComponent,
+        DialogComponent,
+    ],
   providers: [
     EventEmitterService,
     JqueryVersionService,

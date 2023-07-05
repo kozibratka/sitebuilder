@@ -1,6 +1,5 @@
-<h1 mat-dialog-title>Smazání položky menu</h1>
-<div mat-dialog-content>Opravdu si přejete smazat položku menu?</div>
-<mat-dialog-actions class="float-right">
-  <button mat-button [mat-dialog-close] = "false">Zrušit</button>
-  <button mat-button [mat-dialog-close]="true">Odstranit</button>
-</mat-dialog-actions>
+<app-dialog>
+  <ng-container title>Smazání položky menu</ng-container>
+  <ng-container content>Opravdu si přejete smazat položku menu?</ng-container>
+  <ng-container save-button>Odstranit</ng-container>
+</app-dialog>
