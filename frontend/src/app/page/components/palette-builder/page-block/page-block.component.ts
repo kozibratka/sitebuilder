@@ -61,7 +61,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
-    this.prepareResizeHorizontalPalette(event);
+    //this.prepareResizeHorizontalPalette(event);
   }
 
   private prepareResizeHorizontalPalette(event: MouseEvent): void{

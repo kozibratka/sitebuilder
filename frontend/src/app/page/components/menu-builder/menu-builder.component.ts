@@ -24,13 +24,13 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
-      $('.menu-element .menu-element-item').draggable({
-        revert: 'invalid',
-        handle: '.icon-move',
-        scroll: false,
-        appendTo: 'body',
-        helper: 'clone'
-      });
+      // $('.menu-element .menu-element-item').draggable({
+      //   revert: 'invalid',
+      //   handle: '.icon-move',
+      //   scroll: false,
+      //   appendTo: 'body',
+      //   helper: 'clone'
+      // });
     });
   }
 

@@ -103,7 +103,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   getHeightInGrid(): number {
-    return this.getelementRef().nativeElement.gridstackNode.height;
+    return this.getelementRef().nativeElement.gridstackNode.h;
   }
 
   getYPositionInGrid(): number {

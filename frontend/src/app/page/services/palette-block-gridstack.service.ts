@@ -2,7 +2,7 @@ import {ChangeDetectorRef, ElementRef, Injectable, NgZone} from '@angular/core';
 import {GridStack, GridStackNode} from 'gridstack/dist/gridstack';
 import {PaletteBlockService} from './palette-block.service';
 import {PaletteItemConfig} from '../interfaces/palette-item-config';
-import {GridStackDragDrop} from './grid-stack-drag-drop';
+// import {GridStackDragDrop} from './grid-stack-drag-drop';
 import {PaletteItemComponent} from '../components/palette-builder/page-block/palette-item-component/palette-item.component';
 import {PageBlockInterface} from '../interfaces/page-block-interface';
 import {PublicGridItemComponent} from '../../public/components/public-grid-item/public-grid-item.component';
@@ -29,20 +29,19 @@ export class PaletteBlockGridstackService {
       gridstackBlock = GridStack.init({
         acceptWidgets: '.grid-stack-item-menu',
         column: 12,
-        ddPlugin: GridStackDragDrop,
+        // ddPlugin: GridStackDragDrop,
         float: true,
         margin: 0,
-        cellHeight: '10px',
+        cellHeight: '20px',
         animate: true,
         handleClass: 'icon-move',
-        minRow: pageBlock.height,
+        // minRow: pageBlock.height,
         styleInHead: true,
       }, block.nativeElement);
 
     });
 
     this.gridstackBlocks.set(block.nativeElement, gridstackBlock);
-
     (gridstackBlock as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
       gridstackBlock.removeWidget(newWidget.el);
       this.createGridItemOnDropNew(newWidget, gridStackNodes);
@@ -63,8 +62,8 @@ export class PaletteBlockGridstackService {
       column: 12,
       staticGrid: true,
       margin: 0,
-      cellHeight: '10px',
-      float: true,
+      // cellHeight: '10px',
+      // float: true,
       minRow: pageBlock.height,
       styleInHead: true,
     }, paletteElement.nativeElement);
@@ -106,14 +105,16 @@ export class PaletteBlockGridstackService {
     } else {
       toMove = this.resizePaletteStartData.startNumRows + moveNumRows;
     }
-    if (toMove < this.resizePaletteStartData.mostBottomNumRows) {
+    if (toMove < 1 && toMove < this.resizePaletteStartData.mostBottomNumRows) {
       return;
     }
     if (this.toResizeRows === toMove || toMove < 1) {
       return;
     }
-    this.gridstackBlocks.get(block).opts.minRow = toMove;
-    this.gridstackBlocks.get(block).engine.maxRow = toMove;
+    console.log(toMove);
+    console.log(block);
+    // this.gridstackBlocks.get(block).opts.minRow = toMove;
+    // this.gridstackBlocks.get(block).engine.maxRow = toMove;
     pageBlock.height = toMove;
     (this.gridstackBlocks.get(block) as any)._updateStyles();
     this.toResizeRows = toMove;
@@ -128,8 +129,8 @@ export class PaletteBlockGridstackService {
   updatePaletteItemGridProperty(gridNode: GridStackNode, paletteItem: PaletteItemConfig) {
     paletteItem.x = gridNode.x;
     paletteItem.y = gridNode.y;
-    paletteItem.width = gridNode.width;
-    paletteItem.height = gridNode.height;
+    paletteItem.w = gridNode.w;
+    paletteItem.h = gridNode.h;
   }
 
   recalculateGridHeightByContent(gridItem: PublicGridItemComponent) {
@@ -143,8 +144,8 @@ export class PaletteBlockGridstackService {
     const diff = Math.abs(mustBeDiff - actualGridContentDiffPx);
     const diffInCell = Math.round(diff / cellHeight);
     const newCellsToAdd = (actualGridContentDiffPx > mustBeDiff) ? -diffInCell : diffInCell;
-    const newCells = gridItem.elementRef.nativeElement.gridstackNode.height + newCellsToAdd;
-    gridBlockInstance.update(gridItem.elementRef.nativeElement, null, null, null, newCells);
+    const newCells = gridItem.elementRef.nativeElement.gridstackNode.h + newCellsToAdd;
+    gridBlockInstance.update(gridItem.elementRef.nativeElement, {h: newCells});
   }
 
   getBottomDiffPx(element1: HTMLElement, element2: HTMLElement) {
