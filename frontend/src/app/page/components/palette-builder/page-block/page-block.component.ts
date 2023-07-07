@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, ApplicationRef,
   ChangeDetectorRef,
   Component,
   ElementRef,
@@ -41,10 +41,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
     private changeDetectorRef: ChangeDetectorRef,
+    private applicationRef: ApplicationRef,
     private renderer: Renderer2,
     private ngZone: NgZone,
     private window: Window,
     @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
+
+    @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject(DOCUMENT) private document: Document,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
@@ -61,7 +64,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
-    //this.prepareResizeHorizontalPalette(event);
+    // this.prepareResizeHorizontalPalette(event);
   }
 
   private prepareResizeHorizontalPalette(event: MouseEvent): void{
@@ -91,13 +94,23 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
 
   private initGridStack(): void {
     this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes, this.pageBlock, this.changeDetectorRef);
-    this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement).
-    on('dragstop', (event: Event, el: GridItemHTMLElement) => {
+    const gridstackBlock = this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement);
+    gridstackBlock.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
       this.quickMenuMessenger.next(null);
+      this.gridItemDragged.next(false);
     });
-    this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement).
-    on('resizestop', (event: Event, el: GridItemHTMLElement) => {
+    gridstackBlock.on('dragstart', (event: Event, el: GridItemHTMLElement) => {
+      this.gridItemDragged.next(true);
+    });
+    gridstackBlock.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
       this.quickMenuMessenger.next(null);
+      this.gridItemDragged.next(false);
+      this.applicationRef.tick();
+
+    });
+    gridstackBlock.on('resizestart', (event: Event, el: GridItemHTMLElement) => {
+      this.gridItemDragged.next(true);
+      this.applicationRef.tick();
     });
 
   }

@@ -8,7 +8,7 @@
     </button>
   </div>
 </div>
-<div class="row">
+<div class="row" [class.grid-item-dragged]="gridDragged$ | async">
   <div class="col-md-2">
     <app-menu-builder></app-menu-builder>
   </div>

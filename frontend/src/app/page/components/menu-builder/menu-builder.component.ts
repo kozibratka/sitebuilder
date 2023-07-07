@@ -1,7 +1,9 @@
 /// <reference types="jqueryui" />
-import {AfterViewInit, Component, NgZone, OnInit} from '@angular/core';
+import {AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnInit, Renderer2} from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
+import {GridStack} from 'gridstack/dist/gridstack';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-menu-builder',
@@ -15,7 +17,13 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
-    private zone: NgZone
+    private zone: NgZone,
+
+    private renderer: Renderer2,
+    private window: Window,
+
+    private applicationRef: ApplicationRef,
+    @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
   ) {
     this.baseBlocks = [
       {image: 'https://via.placeholder.com/300/000000?text=2', id: 1}
@@ -24,6 +32,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
+      GridStack.setupDragIn('.grid-stack-item-menu', { handle: '.icon-move', appendTo: 'body', helper: this.myClone.bind(this) });
       // $('.menu-element .menu-element-item').draggable({
       //   revert: 'invalid',
       //   handle: '.icon-move',
@@ -36,6 +45,18 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
+  }
+
+  myClone(event) {
+    this.gridItemDragged.next(true);
+    const el = event.target.cloneNode(true);
+    el.setAttribute('gs-id', 'foo'); // TEST why clone element is not used directly on drop #2231
+    const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
+      mouseUpListener();
+      this.gridItemDragged.next(false);
+      this.applicationRef.tick();
+    });
+    return el;
   }
 
   clonePageBlock = (item) => {

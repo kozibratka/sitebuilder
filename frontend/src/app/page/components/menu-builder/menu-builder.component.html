@@ -29,7 +29,7 @@
     </ul>
   </div>
   <div class="tab-pane fade menu-element d-flex flex-wrap active show" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-      <div (mouseleave)="showMoveIcon = false" (mouseover)="showMoveIcon = true" class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.data-gs-width]="abstractMenuPluginResolver.gridWidth()" [attr.data-gs-height]="abstractMenuPluginResolver.gridHeight()">
+      <div (mouseleave)="showMoveIcon = false" (mouseover)="showMoveIcon = true" class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.gs-w]="abstractMenuPluginResolver.gridWidth()" [attr.gs-h]="abstractMenuPluginResolver.gridHeight()">
         <mat-icon class="menu-image">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
         <span class="text">{{abstractMenuPluginResolver.name}}</span>
         <app-animation-hider [show] = "showMoveIcon">

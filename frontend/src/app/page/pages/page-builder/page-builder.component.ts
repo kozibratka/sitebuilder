@@ -22,7 +22,8 @@ import {PluginResolverService} from '../../../plugins/services/plugin-resolver.s
   styleUrls: ['./page-builder.component.css'],
   providers: [
     MenuPluginResolverService,
-    {provide: 'PageBuilderEvent', useFactory: () => new Subject<boolean>()}
+    {provide: 'PageBuilderEvent', useFactory: () => new Subject<boolean>()},
+    {provide: 'GridItemDragged', useFactory: () => new Subject<boolean>()}
   ]
 })
 export class PageBuilderComponent implements OnInit, AfterViewChecked {
@@ -44,6 +45,8 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private fileManagerModalService: FileManagerModalService,
     public title: Title,
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
+
+    @Inject('GridItemDragged') public gridDragged$: Subject<boolean>,
   ) {
   }
 

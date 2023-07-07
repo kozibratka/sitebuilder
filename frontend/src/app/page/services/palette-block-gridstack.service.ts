@@ -17,6 +17,7 @@ export class PaletteBlockGridstackService {
   private resizePaletteStartData = {mostBottomNumRows: 0, resizePaletteStartPosition: 0, cellHeight: 0, startNumRows: 0};
   private toResizeRows = 0;
   private paletteItemComponents: PaletteItemComponent[] = [];
+  public gridstackBlock = null;
 
   constructor(private zone: NgZone,
               private paletteBlockService: PaletteBlockService,
@@ -24,9 +25,8 @@ export class PaletteBlockGridstackService {
   }
 
   init(block: ElementRef, gridStackNodes: PaletteItemConfig[], pageBlock: PageBlockInterface, changeDetectorRef: ChangeDetectorRef): void {
-    let gridstackBlock = null;
     this.zone.runOutsideAngular(() => {
-      gridstackBlock = GridStack.init({
+      this.gridstackBlock = GridStack.init({
         acceptWidgets: '.grid-stack-item-menu',
         column: 12,
         // ddPlugin: GridStackDragDrop,
@@ -41,9 +41,9 @@ export class PaletteBlockGridstackService {
 
     });
 
-    this.gridstackBlocks.set(block.nativeElement, gridstackBlock);
-    (gridstackBlock as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
-      gridstackBlock.removeWidget(newWidget.el);
+    this.gridstackBlocks.set(block.nativeElement, this.gridstackBlock);
+    (this.gridstackBlock as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
+      this.gridstackBlock.removeWidget(newWidget.el);
       this.createGridItemOnDropNew(newWidget, gridStackNodes);
       this.zone.run(() => {
         changeDetectorRef.detectChanges();
@@ -111,8 +111,6 @@ export class PaletteBlockGridstackService {
     if (this.toResizeRows === toMove || toMove < 1) {
       return;
     }
-    console.log(toMove);
-    console.log(block);
     // this.gridstackBlocks.get(block).opts.minRow = toMove;
     // this.gridstackBlocks.get(block).engine.maxRow = toMove;
     pageBlock.height = toMove;
