@@ -23,5 +23,12 @@
 }
 
 ::ng-deep .grid-stack-placeholder {
-  background-color: #e6e6e6;
+  background-color: #f2f2f2;
+  outline-width: 1px;
+  outline-color: #007BFF;
+}
+
+::ng-deep .grid-item-dragged .grid-stack-item {
+  outline-width: 1px;
+  outline-color: #007BFF;
 }
