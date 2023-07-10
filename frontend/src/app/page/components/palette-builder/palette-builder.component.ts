@@ -8,7 +8,6 @@ import {PageBlockInterface} from '../../interfaces/page-block-interface';
   selector: 'app-palette-builder',
   templateUrl: './palette-builder.component.html',
   styleUrls: ['./palette-builder.component.css'],
-  providers: [{provide: 'QuickMenuMessenger', useFactory: () => new Subject<GridItemHTMLElementItemComponent>()}]
 })
 export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 

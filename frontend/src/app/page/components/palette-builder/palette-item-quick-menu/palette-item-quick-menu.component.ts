@@ -7,6 +7,7 @@ import {ElementHelper} from '../../../../core/helpers/element-helper';
 import {MoveableModalService} from '../../../../core/components/moveable-modal/services/moveable-modal.service';
 import {PluginMiniAdminComponent} from '../../../pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 import {PluginResolverService} from '../../../../plugins/services/plugin-resolver.service';
+import {QuickMenuService} from '../../../services/quick-menu.service';
 
 
 @Component({
@@ -18,18 +19,19 @@ export class PaletteItemQuickMenuComponent implements OnInit {
 
   @HostBinding('style.left') leftPosition;
   @HostBinding('style.top') topPosition;
-  @HostBinding('style.display') display;
+  @HostBinding('style.display') display = 'none';
   @HostBinding('style.width') width;
 
   private selectedItemForMenu: PaletteItemComponent;
   private lastMouserOveredElement = null;
+  private isEnabled = true;
 
   constructor(
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
     private paletteBuilderComponent: PaletteBuilderComponent,
     private moveableModalService: MoveableModalService,
     private pluginResolverService: PluginResolverService,
-    private pageBuilderComponent: PageBuilderComponent
+    private pageBuilderComponent: PageBuilderComponent,
+    private quickMenuService: QuickMenuService,
   ) {
 
   }
@@ -44,9 +46,20 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   }
 
   private prepareQuickMenu(): void {
-    this.quickMenuMessenger.subscribe((paletteItemElement) => {
-      paletteItemElement = this.lastMouserOveredElement = paletteItemElement ? paletteItemElement : this.lastMouserOveredElement;
+    this.quickMenuService.moveMenu.subscribe((paletteItemElement) => {
+      if (typeof paletteItemElement === 'boolean') {
+        this.isEnabled = paletteItemElement;
+        if (!this.isEnabled) {
+          this.display = 'none';
+        }
+        return;
+      }
+      if (!this.isEnabled) {
+        return;
+      }
       this.display = 'block';
+      paletteItemElement = this.lastMouserOveredElement =
+        paletteItemElement ? paletteItemElement as PaletteItemComponent : this.lastMouserOveredElement as PaletteItemComponent;
       this.selectedItemForMenu = paletteItemElement;
       const itemElement = paletteItemElement.elementRef.nativeElement;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {

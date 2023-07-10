@@ -25,6 +25,7 @@ import {PaletteItemConfig} from '../../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../../services/palette-block-gridstack.service';
 import {PageBlockComponent} from '../page-block.component';
 import {AbstractPlugin} from '../../../../../plugins/abstract-class/abstract-plugin';
+import {QuickMenuService} from '../../../../services/quick-menu.service';
 
 @Component({
   selector: 'app-palette-item',
@@ -49,7 +50,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private menuPluginResolverService: MenuPluginResolverService,
     private resolver: ComponentFactoryResolver,
     private webDetailResolverService: WebDetailResolverService,
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<PaletteItemComponent>,
+    private quickMenuService: QuickMenuService,
     @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
   ) {
@@ -131,7 +132,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
-    this.quickMenuMessenger.next(this);
+    this.quickMenuService.moveMenu.next(this);
   }
 
   getResolverFromIdentifier() {

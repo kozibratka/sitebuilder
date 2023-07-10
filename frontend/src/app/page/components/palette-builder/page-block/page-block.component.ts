@@ -24,6 +24,7 @@ import {PageBlockInterface} from '../../../interfaces/page-block-interface';
 import {GridItemHTMLElementItemComponent} from '../../../interfaces/grid-item-htmlelement-item-component';
 import {PaletteItemConfig} from '../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../services/palette-block-gridstack.service';
+import {QuickMenuService} from '../../../services/quick-menu.service';
 
 @Component({
   selector: 'app-palette-block',
@@ -45,7 +46,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
     private renderer: Renderer2,
     private ngZone: NgZone,
     private window: Window,
-    @Inject('QuickMenuMessenger') private quickMenuMessenger: Subject<GridItemHTMLElementItemComponent>,
+    private quickMenuService: QuickMenuService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject(DOCUMENT) private document: Document,
@@ -96,14 +97,16 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
     this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes, this.pageBlock, this.changeDetectorRef);
     const gridstackBlock = this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement);
     gridstackBlock.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuMessenger.next(null);
+      this.quickMenuService.moveMenu.next(true);
+      this.quickMenuService.moveMenu.next(null);
       this.gridItemDragged.next(false);
     });
     gridstackBlock.on('dragstart', (event: Event, el: GridItemHTMLElement) => {
+      this.quickMenuService.moveMenu.next(false);
       this.gridItemDragged.next(true);
     });
     gridstackBlock.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuMessenger.next(null);
+      this.quickMenuService.moveMenu.next(null);
       this.gridItemDragged.next(false);
       this.applicationRef.tick();
 

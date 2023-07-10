@@ -4,6 +4,8 @@ import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.ser
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {GridStack} from 'gridstack/dist/gridstack';
 import {Subject} from 'rxjs';
+import {PaletteItemComponent} from '../palette-builder/page-block/palette-item-component/palette-item.component';
+import {QuickMenuService} from '../../services/quick-menu.service';
 
 @Component({
   selector: 'app-menu-builder',
@@ -23,6 +25,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     private window: Window,
 
     private applicationRef: ApplicationRef,
+    private quickMenuService: QuickMenuService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
   ) {
     this.baseBlocks = [
@@ -48,10 +51,12 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   myClone(event) {
+    this.quickMenuService.moveMenu.next(false);
     this.gridItemDragged.next(true);
     const el = event.target.cloneNode(true);
     el.setAttribute('gs-id', 'foo'); // TEST why clone element is not used directly on drop #2231
     const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
+      this.quickMenuService.moveMenu.next(true);
       mouseUpListener();
       this.gridItemDragged.next(false);
       this.applicationRef.tick();
