@@ -53,8 +53,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   myClone(event) {
     this.quickMenuService.moveMenu.next(false);
     this.gridItemDragged.next(true);
-    const el = event.target.cloneNode(true);
-    el.setAttribute('gs-id', 'foo'); // TEST why clone element is not used directly on drop #2231
+    const el = (event.target as Node).parentNode.cloneNode(true);
     const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
       this.quickMenuService.moveMenu.next(true);
       mouseUpListener();

@@ -18,10 +18,6 @@
   font-size: 15px;
 }
 
-.ui-draggable-dragging > .mat-icon, .ui-draggable-dragging > .text {
-  visibility: hidden;
-}
-
 .menu-element-item img{
   width: 30%;
 }
