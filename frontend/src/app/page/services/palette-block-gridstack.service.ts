@@ -5,6 +5,7 @@ import {PaletteItemConfig} from '../interfaces/palette-item-config';
 import {PaletteItemComponent} from '../components/palette-builder/page-block/palette-item-component/palette-item.component';
 import {PageBlockInterface} from '../interfaces/page-block-interface';
 import {PublicGridItemComponent} from '../../public/components/public-grid-item/public-grid-item.component';
+import {GridStackEngineCustom} from './grid-stack-engine-custom';
 
 @Injectable(
   {
@@ -25,6 +26,7 @@ export class PaletteBlockGridstackService {
 
   init(block: ElementRef, gridStackNodes: PaletteItemConfig[], pageBlock: PageBlockInterface, changeDetectorRef: ChangeDetectorRef): void {
     this.zone.runOutsideAngular(() => {
+      GridStack.registerEngine(GridStackEngineCustom);
       this.gridstackBlock = GridStack.init({
         acceptWidgets: '.grid-stack-item-menu',
         column: 12,
