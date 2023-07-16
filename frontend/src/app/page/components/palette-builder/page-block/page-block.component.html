@@ -2,7 +2,7 @@
   <div class="block-menu">
     <i class="fas fa-arrows-alt handle"></i>
   </div>
-  <div #palette_content class="block-content grid-stack">
+  <div #palette_content class="block-content grid-stack" [class.dragging-item-bottom]="draggingItemBottom">
     <app-palette-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of gridNodes"></app-palette-item>
   </div>
 </div>

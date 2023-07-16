@@ -3,11 +3,11 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, HostBinding,
   HostListener,
   Inject,
   Input,
-  NgZone,
+  NgZone, OnDestroy,
   OnInit,
   Output,
   QueryList,
@@ -19,7 +19,7 @@ import {DOCUMENT} from '@angular/common';
 import {GridItemHTMLElement} from 'gridstack/dist/gridstack';
 import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item-component/palette-item.component';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {PageBlockInterface} from '../../../interfaces/page-block-interface';
 import {GridItemHTMLElementItemComponent} from '../../../interfaces/grid-item-htmlelement-item-component';
 import {PaletteItemConfig} from '../../../interfaces/palette-item-config';
@@ -31,13 +31,15 @@ import {QuickMenuService} from '../../../services/quick-menu.service';
   templateUrl: './page-block.component.html',
   styleUrls: ['./page-block.component.css'],
 })
-export class PageBlockComponent implements OnInit, AfterViewInit{
+export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @Output() resized = new EventEmitter<boolean>();
   @Input() pageBlock: PageBlockInterface;
   gridNodes: PaletteItemConfig[] = [];
+  draggingItemBottom = false;
+  updateBottomPaddingSubscription: Subscription;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -47,6 +49,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
     private ngZone: NgZone,
     private window: Window,
     private quickMenuService: QuickMenuService,
+    private elementRef: ElementRef,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject(DOCUMENT) private document: Document,
@@ -59,9 +62,14 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
       this.gridNodes = this.pageBlock.paletteGridItems;
     }
     this.initGridStack();
+    this.registerUpdateBlockBottomPadding();
   }
 
   ngAfterViewInit(): void {
+  }
+
+  ngOnDestroy() {
+    this.updateBottomPaddingSubscription.unsubscribe();
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
@@ -115,6 +123,32 @@ export class PageBlockComponent implements OnInit, AfterViewInit{
       this.gridItemDragged.next(true);
       this.applicationRef.tick();
     });
+  }
 
+  private registerUpdateBlockBottomPadding() {
+    let mouseUpListener;
+    this.updateBottomPaddingSubscription = this.gridItemDragged.subscribe(value => {
+      if (value) {
+        mouseUpListener = this.renderer.listen(
+          this.elementRef.nativeElement,
+          'mouseenter',
+          event1 => {
+            if (this.draggingItemBottom) {
+              return;
+            }
+            const heightElement = (event1.currentTarget as HTMLElement).offsetHeight;
+            const offsetY = event1.offsetY;
+            const deviation = Math.abs(heightElement - offsetY);
+            if (deviation <= 30) {
+              this.draggingItemBottom = true;
+              this.changeDetectorRef.detectChanges();
+            }
+          }
+        );
+      } else {
+        this.draggingItemBottom = false;
+        mouseUpListener();
+      }
+    });
   }
 }
