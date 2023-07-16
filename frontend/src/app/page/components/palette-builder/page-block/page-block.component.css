@@ -38,3 +38,8 @@
 .handle:hover{
   cursor: pointer;
 }
+
+.dragging-item-bottom {
+  box-sizing: content-box;
+  padding-bottom: 31px;
+}
