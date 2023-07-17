@@ -35,6 +35,7 @@ export class PaletteBlockGridstackService {
         margin: 0,
         cellHeight: '20px',
         animate: true,
+        draggable: {scroll: false},
         handleClass: 'icon-move',
         // minRow: pageBlock.height,
         styleInHead: true,

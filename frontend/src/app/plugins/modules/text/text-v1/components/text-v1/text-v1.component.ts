@@ -25,4 +25,7 @@ export class TextV1Component extends AbstractPlugin<TextV1ConfigInterface>
 
   refreshView(): void {
   }
+
+  getDisabledStateWhenDraggingItem(): void {
+  }
 }

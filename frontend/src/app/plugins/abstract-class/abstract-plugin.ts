@@ -7,6 +7,8 @@ export abstract class AbstractPlugin<T extends BasePlugConfigInterface>{
 
   abstract refreshView(): void;
 
+  abstract getDisabledStateWhenDraggingItem(): any;
+
   initializeSettings(settings: BasePlugConfigInterface): void {
     if (!settings.id) {
       this.settings = Object.assign(settings, this.initEmptySettings());

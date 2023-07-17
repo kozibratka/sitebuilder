@@ -39,4 +39,8 @@ export class CarouselV1Component extends AbstractPlugin<CarouselV1ConfigInterfac
 
   refreshView(): void {
   }
+
+  getDisabledStateWhenDraggingItem(): any {
+    return {autostart: false};
+  }
 }

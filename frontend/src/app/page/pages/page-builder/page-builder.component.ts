@@ -15,6 +15,7 @@ import {Subject} from 'rxjs';
 import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
+import {MouseMoveScrollDirective} from '../../../core/directives/mouse-move-scroll-directive';
 
 @Component({
   selector: 'app-page-builder',
@@ -29,6 +30,7 @@ import {PluginResolverService} from '../../../plugins/services/plugin-resolver.s
 export class PageBuilderComponent implements OnInit, AfterViewChecked {
 
   @ViewChild(MiniAdminComponent, {static: true}) miniAdmin: MiniAdminComponent;
+  // @ViewChild(MouseMoveScrollDirective, {static: true}) mouseMoveScrollDirective: MouseMoveScrollDirective;
   @ViewChild(MoveableModalComponent, {static: true}) moveableModalComponent: MoveableModalComponent;
   pageDetail: PageInterface;
   globalPlugins: BasePlugConfigInterface[] = [];
@@ -58,6 +60,13 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.title.setTitle('Vytvoření stránky');
     this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
+    // this.gridDragged$.subscribe(value => {
+    //   if (value) {
+    //     this.mouseMoveScrollDirective.enableMouseMoveScroll();
+    //   } else {
+    //     this.mouseMoveScrollDirective.disableMouseMoveScroll();
+    //   }
+    // });
     // this.fileManagerModalService.open();
   }
 

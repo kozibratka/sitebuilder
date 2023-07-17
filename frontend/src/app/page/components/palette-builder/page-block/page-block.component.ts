@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  EventEmitter, HostBinding,
+  EventEmitter,
   HostListener,
   Inject,
   Input,
@@ -21,10 +21,11 @@ import {PaletteBuilderComponent} from '../palette-builder.component';
 import {PaletteItemComponent} from './palette-item-component/palette-item.component';
 import {Subject, Subscription} from 'rxjs';
 import {PageBlockInterface} from '../../../interfaces/page-block-interface';
-import {GridItemHTMLElementItemComponent} from '../../../interfaces/grid-item-htmlelement-item-component';
 import {PaletteItemConfig} from '../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../services/palette-block-gridstack.service';
 import {QuickMenuService} from '../../../services/quick-menu.service';
+import {AbstractPlugin} from '../../../../plugins/abstract-class/abstract-plugin';
+import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
 
 @Component({
   selector: 'app-palette-block',
@@ -40,6 +41,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   gridNodes: PaletteItemConfig[] = [];
   draggingItemBottom = false;
   updateBottomPaddingSubscription: Subscription;
+  private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -62,7 +64,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
       this.gridNodes = this.pageBlock.paletteGridItems;
     }
     this.initGridStack();
-    this.registerUpdateBlockBottomPadding();
+    this.registerOnDraggedItem();
   }
 
   ngAfterViewInit(): void {
@@ -125,10 +127,19 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     });
   }
 
-  private registerUpdateBlockBottomPadding() {
+  private registerOnDraggedItem() {
     // let mouseUpListener;
     this.updateBottomPaddingSubscription = this.gridItemDragged.subscribe(value => {
       if (value) {
+        // disable plugins for performance
+        this.itemStatesBeforeDragging.clear();
+        this.paletteItemComponents.forEach(item => {
+          const plugin = item.componentRef.instance;
+          this.itemStatesBeforeDragging.set(plugin, {...plugin.settings});
+          const offState = item.componentRef.instance.getDisabledStateWhenDraggingItem();
+          Object.assign(plugin.settings, offState);
+
+        });
         this.draggingItemBottom = true;
         this.changeDetectorRef.detectChanges();
         // mouseUpListener = this.renderer.listen(
@@ -148,6 +159,9 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
         //   }
         // );
       } else {
+        this.itemStatesBeforeDragging.forEach((settings, plugin) => {
+          Object.assign(plugin.settings, settings);
+        });
         this.draggingItemBottom = false;
         // mouseUpListener();
       }

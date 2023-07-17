@@ -18,11 +18,11 @@ import {SortablejsModule} from 'ngx-sortablejs';
 import {GenericResolver} from '../core/services/resolver/generic.resolver';
 import {CoreModule} from '../core/core.module';
 import {PaletteItemQuickMenuComponent} from './components/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
-import {DragScrollDirective} from './directives/drag-scroll-directive';
 import {MenuPluginResolverDirective} from './directives/menu-plugin-resolver.directive';
 import {PaletteItemComponent} from './components/palette-builder/page-block/palette-item-component/palette-item.component';
 import { PluginMiniAdminComponent } from './pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MouseMoveScrollDirective} from '../core/directives/mouse-move-scroll-directive';
 
 
 const routes: Routes = [
@@ -61,7 +61,7 @@ const routes: Routes = [
     PaletteBuilderComponent,
     PaletteItemComponent,
     PaletteItemQuickMenuComponent,
-    DragScrollDirective,
+    MouseMoveScrollDirective,
     MenuPluginResolverDirective,
     PluginMiniAdminComponent,
   ],

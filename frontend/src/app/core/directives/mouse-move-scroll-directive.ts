@@ -1,4 +1,4 @@
-import {Directive, ElementRef, NgZone} from '@angular/core';
+import {Directive, ElementRef, Input, NgZone, OnInit, Renderer2} from '@angular/core';
 
 enum SpeedScroll {
   low = 1,
@@ -10,22 +10,35 @@ enum SpeedScroll {
 @Directive({
   selector: '[appSmartPageScroll]'
 })
-export class DragScrollDirective {
+export class MouseMoveScrollDirective implements OnInit{
   private interval: number;
   private actualSpeed: SpeedScroll = SpeedScroll.disabled;
+  private mouseMoveListener;
+  @Input() onDragElement = false;
 
-  constructor(private window: Window, private element: ElementRef, private zone: NgZone) {
-    this.zone.runOutsideAngular(() => {
-      this.element.nativeElement.addEventListener('drag', this.doScroll.bind(this));
-      this.window.addEventListener('dragend', this.unregisterScrollInterval.bind(this));
-    });
+  constructor(private window: Window, private element: ElementRef, private zone: NgZone, private renderer: Renderer2) {
+  }
+
+  ngOnInit(): void {
+    if (this.onDragElement) {
+      this.zone.runOutsideAngular(() => {
+        this.element.nativeElement.addEventListener('drag', this.doScroll.bind(this));
+        this.window.addEventListener('dragend', this.unregisterScrollInterval.bind(this));
+      });
+    }
   }
 
   private doScroll(event: DragEvent): void {
     const mouseY = event.clientY.valueOf();
     const windowY = this.window.innerHeight;
     const positionDown = windowY - mouseY;
-
+    if (positionDown < 20) {
+      if (this.actualSpeed !== SpeedScroll.high) {
+        this.actualSpeed = SpeedScroll.high;
+        this.registerScrollInterval();
+      }
+    }
+    return;
 
     if (mouseY < 20 && mouseY > 0) {
       if (this.actualSpeed !== SpeedScroll.high) {
@@ -82,6 +95,19 @@ export class DragScrollDirective {
         this.actualSpeed = SpeedScroll.disabled;
       }
     }
+  }
+
+  public enableMouseMoveScroll(): void {
+    this.mouseMoveListener = this.renderer.listen(
+      this.element.nativeElement,
+      'mousemove',
+      this.doScroll.bind(this)
+    );
+  }
+
+  public disableMouseMoveScroll(): void {
+    this.mouseMoveListener();
+    this.unregisterScrollInterval();
   }
 
 }

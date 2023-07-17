@@ -22,4 +22,7 @@ export class MenuV1Component extends AbstractPlugin<MenuV1ConfigInterface> {
 
   refreshView(): void {
   }
+
+  getDisabledStateWhenDraggingItem(): void {
+  }
 }
