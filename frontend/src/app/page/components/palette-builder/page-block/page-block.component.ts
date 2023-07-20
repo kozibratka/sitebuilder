@@ -26,6 +26,7 @@ import {PaletteBlockGridstackService} from '../../../services/palette-block-grid
 import {QuickMenuService} from '../../../services/quick-menu.service';
 import {AbstractPlugin} from '../../../../plugins/abstract-class/abstract-plugin';
 import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
+import {PaletteBlockService} from '../../../services/palette-block.service';
 
 @Component({
   selector: 'app-palette-block',
@@ -52,6 +53,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     private window: Window,
     private quickMenuService: QuickMenuService,
     private elementRef: ElementRef,
+    private paletteBlockService: PaletteBlockService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject(DOCUMENT) private document: Document,
@@ -65,6 +67,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     }
     this.initGridStack();
     this.registerOnDraggedItem();
+    this.registerIsResizedOnDrag();
   }
 
   ngAfterViewInit(): void {
@@ -164,6 +167,19 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
         });
         this.draggingItemBottom = false;
         // mouseUpListener();
+      }
+    });
+  }
+  private registerIsResizedOnDrag() {
+    let sizeObserver;
+    this.gridItemDragged.subscribe(value => {
+      if (value) {
+        sizeObserver = new ResizeObserver((entries) => {
+          this.paletteBlockService.isResized$.next(true);
+        });
+        sizeObserver.observe(this.paletteContent.nativeElement);
+      } else {
+        sizeObserver.unobserve(this.paletteContent.nativeElement);
       }
     });
   }

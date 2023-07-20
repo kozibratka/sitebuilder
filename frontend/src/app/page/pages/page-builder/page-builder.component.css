@@ -32,3 +32,7 @@
   outline-width: 1px;
   outline-color: #007BFF;
 }
+
+:host {
+  display: block;
+}

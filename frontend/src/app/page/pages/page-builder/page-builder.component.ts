@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, OnInit, ViewChild} from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {ActivatedRoute} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
@@ -11,11 +11,11 @@ import {ArrayHelper} from '../../../core/helpers/array-helper';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {DomainInfoService} from '../../../core/services/domain-info.service';
 import {Title} from '@angular/platform-browser';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
-import {MouseMoveScrollDirective} from '../../../core/directives/mouse-move-scroll-directive';
+import {PaletteBlockService} from '../../services/palette-block.service';
 
 @Component({
   selector: 'app-page-builder',
@@ -35,6 +35,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   pageDetail: PageInterface;
   globalPlugins: BasePlugConfigInterface[] = [];
   globalPluginsSelect = [];
+  @HostBinding('style.minHeight')minHeight = '0px';
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +46,11 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private pluginResolverService: PluginResolverService,
     private domainInfoService: DomainInfoService,
     private fileManagerModalService: FileManagerModalService,
+    private changeDetectorRef: ChangeDetectorRef,
     public title: Title,
+    public elementRef: ElementRef<HTMLElement>,
+
+    private paletteBlockService: PaletteBlockService,
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
 
     @Inject('GridItemDragged') public gridDragged$: Subject<boolean>,
@@ -60,13 +65,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.title.setTitle('Vytvoření stránky');
     this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
-    // this.gridDragged$.subscribe(value => {
-    //   if (value) {
-    //     this.mouseMoveScrollDirective.enableMouseMoveScroll();
-    //   } else {
-    //     this.mouseMoveScrollDirective.disableMouseMoveScroll();
-    //   }
-    // });
+    this.registerResizedBlockListenerOnDragged();
     // this.fileManagerModalService.open();
   }
 
@@ -92,6 +91,21 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
       },
       error: err => this.httpResponseToasterService.showError(err)
     });
+  }
+  registerResizedBlockListenerOnDragged() {
+    let isDraggedSubscription: Subscription;
+    this.gridDragged$.subscribe(dragged => {
+      if (dragged) {
+        isDraggedSubscription = this.paletteBlockService.isResized$.subscribe(value => {
+          if (this.elementRef.nativeElement.offsetHeight > parseInt(this.minHeight, 10)) {
+            this.minHeight = this.elementRef.nativeElement.offsetHeight.toString() + 'px';
+          }
+        });
+      } else if (isDraggedSubscription) {
+        isDraggedSubscription.unsubscribe();
+      }
+    });
+
   }
 
   refreshGlobalPluginSelect(identifier: string) {
