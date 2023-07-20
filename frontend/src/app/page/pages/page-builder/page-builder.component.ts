@@ -103,6 +103,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
         });
       } else if (isDraggedSubscription) {
         isDraggedSubscription.unsubscribe();
+        this.minHeight = '0px';
       }
     });
 
