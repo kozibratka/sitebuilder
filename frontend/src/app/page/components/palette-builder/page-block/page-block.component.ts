@@ -131,44 +131,35 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   private registerOnDraggedItem() {
-    // let mouseUpListener;
     this.updateBottomPaddingSubscription = this.gridItemDragged.subscribe(value => {
       if (value) {
-        // disable plugins for performance
-        this.itemStatesBeforeDragging.clear();
-        this.paletteItemComponents.forEach(item => {
-          const plugin = item.componentRef.instance;
-          this.itemStatesBeforeDragging.set(plugin, {...plugin.settings});
-          const offState = item.componentRef.instance.getDisabledStateWhenDraggingItem();
-          Object.assign(plugin.settings, offState);
-
-        });
         this.draggingItemBottom = true;
-        this.changeDetectorRef.detectChanges();
-        // mouseUpListener = this.renderer.listen(
-        //   this.elementRef.nativeElement,
-        //   'mouseenter',
-        //   event1 => {
-        //     if (this.draggingItemBottom) {
-        //       return;
-        //     }
-        //     const heightElement = (event1.currentTarget as HTMLElement).offsetHeight;
-        //     const offsetY = event1.offsetY;
-        //     const deviation = Math.abs(heightElement - offsetY);
-        //     if (deviation <= 30) {
-        //       this.draggingItemBottom = true;
-        //       this.changeDetectorRef.detectChanges();
-        //     }
-        //   }
-        // );
+        this.enableDisablePlugins(true);
       } else {
-        this.itemStatesBeforeDragging.forEach((settings, plugin) => {
-          Object.assign(plugin.settings, settings);
-        });
+        this.enableDisablePlugins(false);
         this.draggingItemBottom = false;
-        // mouseUpListener();
       }
     });
+  }
+
+  private enableDisablePlugins(disable = true) {
+    if (disable) {
+      this.itemStatesBeforeDragging.clear();
+      this.paletteItemComponents.forEach(item => {
+        const plugin = item.componentRef.instance;
+        this.itemStatesBeforeDragging.set(plugin, {...plugin.settings});
+        const offState = item.componentRef.instance.getDisabledStateWhenDraggingItem();
+        Object.assign(plugin.settings, offState);
+
+      });
+    } else {
+      this.itemStatesBeforeDragging.forEach((settings, plugin) => {
+        Object.assign(plugin.settings, settings);
+      });
+    }
+
+    this.draggingItemBottom = true;
+    this.changeDetectorRef.detectChanges();
   }
   private registerIsResizedOnDrag() {
     let sizeObserver;
