@@ -37,3 +37,13 @@ a:not([href]){
 .form-control.ng-invalid~.invalid-feedback {
   display: block;
 }
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+body {
+  font-family: 'Source Sans Pro';
+}

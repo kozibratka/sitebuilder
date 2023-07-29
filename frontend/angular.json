@@ -36,7 +36,7 @@
               "src/assets/admin_lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "src/assets/admin_lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
               "src/assets/admin_lte/plugins/jqvmap/jqvmap.min.css",
-              "src/assets/admin_lte/dist/css/adminlte.min.css",
+              "src/assets/admin_lte/dist/css/custom_adminlte.css",
               "src/assets/admin_lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
               "src/assets/admin_lte/plugins/daterangepicker/daterangepicker.css",
               "src/assets/admin_lte/plugins/summernote/summernote-bs4.css",
