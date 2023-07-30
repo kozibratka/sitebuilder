@@ -29,12 +29,13 @@
         <div class="col-8">
           <app-directory-mini-navigation [currentPath]="currentPath" (pathEmitter)="changeCurrentPath($event)"></app-directory-mini-navigation>
         </div>
-
-        <div class="input-group input-group-sm col-4 text-end">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm"><mat-icon matPrefix>search</mat-icon></span>
+        <div class="col-4 text-end">
+          <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm"><mat-icon matPrefix>search</mat-icon></span>
+            </div>
+            <input #searchInput type="search" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Vyhledat soubor...">
           </div>
-          <input #searchInput type="search" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Vyhledat soubor...">
         </div>
       </div>
       <dts-select-container [(selectedItems)]="selectedItems" (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.stopPropagation(); $event.preventDefault();">
