@@ -2,13 +2,14 @@
       <nav id="sidebar">
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass;">
-            <a href="#" (click)="showContent(setting.component);$event.preventDefault()">
+            <a href="#" (click)="showContent(setting.component, setting.label);$event.preventDefault()">
               <span class="fa fa-chevron-right me-3"></span>{{setting.label}}</a>
           </li>
         </ul>
       </nav>
 
       <div id="content" class="p-4 p-md-5 pt-5">
+        <h5>{{label}}</h5>
         <div class="content-block">
           <ng-container #content1></ng-container>
         </div>

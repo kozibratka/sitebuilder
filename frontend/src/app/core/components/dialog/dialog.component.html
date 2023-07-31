@@ -4,7 +4,7 @@
 <div mat-dialog-content>
   <ng-content select="[content]"></ng-content>
 </div>
-<mat-dialog-actions class="float-right">
+<mat-dialog-actions class="float-end">
   <button mat-button [mat-dialog-close] = "false">Zrušit</button>
   <button mat-button [mat-dialog-close] = "true">
     <span #ref><ng-content select="[save-button]"></ng-content></span>

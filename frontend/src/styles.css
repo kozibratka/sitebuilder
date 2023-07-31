@@ -64,3 +64,9 @@ body {
 a {
   text-decoration: none;
 }
+
+.plugin-form-border {
+  padding: 17px;
+  border: 1px solid #dee2e6!important;
+  background-color: #f5f5f5;
+}

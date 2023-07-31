@@ -1,27 +1,3 @@
-<!--<div class="mixed-example-list"-->
-<!--[itemList]="settings.images"-->
-<!--[style.flexDirection]="'row'"-->
-<!--[style.height]="''"-->
-<!--cdkDropListGroup mixedCdkDragDrop-->
-<!--[containerSelector]="''"-->
-<!--[orientation]="'horizontal'"-->
-<!--&gt;-->
-<!--  <div *ngFor="let image of settings.images; index as i" cdkDropList mixedCdkDropList class="imageContainer me-1">-->
-<!--    <div (mouseover)="showIconIndex=i" (mouseleave)="showIconIndex=-1"  cdkDrag mixedCdkDragSizeHelper>-->
-<!--      <img class="image-item" [src]="image.path">-->
-<!--      <input class="image-h1" type="text" [(ngModel)]="image.h1">-->
-<!--      <input class="image-h2" type="text" [(ngModel)]="image.h2">-->
-<!--      <app-animation-hider [show] = "showIconIndex==i">-->
-<!--        <i class="material-icons icon-remove" (click)="onClickRemoveImageButton(i)">close</i>-->
-<!--      </app-animation-hider>-->
-<!--    </div>-->
-<!--    <br>-->
-<!--  </div>-->
-
-
-<!--</div>-->
-
-
 <div class="mixed-example-list"
      style.flexDirection='horizontal'
      style.height=''
@@ -50,29 +26,3 @@
   <button (click)="onClickAddImageButton()" mat-raised-button color="primary" class="my-2"><i class="material-icons">photo</i>Přidat obrázek
   </button>
 </div>
-
-
-
-
-
-
-
-<!--<div id="imagesContainer">-->
-<!--    <div class="d-flex" cdkDropListGroup mixedCdkDragDrop [orientation]="'horizontal'" [itemList]="settings.images">-->
-<!--      <div *ngFor="let image of settings.images; index as i" cdkDropList mixedCdkDropList class="imageContainer me-1">-->
-<!--          <div (mouseover)="showIconIndex=i" (mouseleave)="showIconIndex=-1"  cdkDrag mixedCdkDragSizeHelper>-->
-<!--            <img class="image-item" [src]="image.path">-->
-<!--            <input class="image-h1" type="text" [(ngModel)]="image.h1">-->
-<!--            <input class="image-h2" type="text" [(ngModel)]="image.h2">-->
-<!--            <app-animation-hider [show] = "showIconIndex==i">-->
-<!--              <i class="material-icons icon-remove" (click)="onClickRemoveImageButton(i)">close</i>-->
-<!--            </app-animation-hider>-->
-<!--          </div>-->
-<!--        <br>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="text-end">-->
-<!--  <button (click)="onClickAddImageButton()" mat-raised-button color="primary" class="my-2"><i class="material-icons">photo</i>Přidat obrázek-->
-<!--  </button>-->
-<!--</div>-->

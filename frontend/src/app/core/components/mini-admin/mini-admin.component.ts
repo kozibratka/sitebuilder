@@ -15,21 +15,23 @@ export class MiniAdminComponent implements OnInit {
   headerName = '';
   settings: any;
   admin: SettingAbleInterface;
+  label = '';
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  showContent(component: new() => SettingAbleInterface) {
+  showContent(component: new() => SettingAbleInterface, label: string) {
     this.selectedComponent = component;
     this.content1.clear();
     this.admin = this.content1.createComponent<SettingAbleInterface>(component).instance;
     this.admin.settings = this.settings;
+    this.label = label;
   }
 
   @Input() set configAdmin(value: AdminAbleInterface & SettingAbleInterface) {
     this.adminAble = value;
     this.settings = value.settings;
-    this.showContent(value.adminComponentsClass[0].component);
+    this.showContent(value.adminComponentsClass[0].component, value.adminComponentsClass[0].label);
   }
 }
