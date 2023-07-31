@@ -3,7 +3,7 @@
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass;">
             <a href="#" (click)="showContent(setting.component);$event.preventDefault()">
-              <span class="fa fa-chevron-right mr-3"></span>{{setting.label}}</a>
+              <span class="fa fa-chevron-right me-3"></span>{{setting.label}}</a>
           </li>
         </ul>
       </nav>

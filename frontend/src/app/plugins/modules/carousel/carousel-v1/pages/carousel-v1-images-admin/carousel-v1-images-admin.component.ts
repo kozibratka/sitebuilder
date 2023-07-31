@@ -3,6 +3,8 @@ import {CarouselV1ConfigInterface} from '../../interfaces/carousel-v1-config-int
 import {AbstractAdminSetting} from '../../../../../abstract-class/abstract-admin-setting';
 import {FileManagerModalService} from '../../../../../../core/modules/file-manager/services/file-manager-modal.service';
 import {FileManagerService} from '../../../../../../core/modules/file-manager/services/file-manager.service';
+import {CdkDrag, DropListOrientation, moveItemInArray} from '@angular/cdk/drag-drop';
+import {MixedCdkDragSizeHelperDirective} from 'angular-mixed-cdk-drag-drop';
 
 @Component({
   selector: 'app-carousel-bootstrap-images-admin',
@@ -12,6 +14,11 @@ import {FileManagerService} from '../../../../../../core/modules/file-manager/se
 export class CarouselV1ImagesAdminComponent extends AbstractAdminSetting<CarouselV1ConfigInterface> implements OnInit {
 
   showIconIndex = -2;
+
+  handler = false;
+  orientation: DropListOrientation = 'horizontal';
+  percentWidth = 15;
+  percentHeight = 0;
 
   constructor(
     private fileManagerModalService: FileManagerModalService,
@@ -43,5 +50,13 @@ export class CarouselV1ImagesAdminComponent extends AbstractAdminSetting<Carouse
 
   onClickRemoveImageButton(index: number) {
     this.settings.images.splice(index, 1);
+  }
+
+  onSizeChange(event: { drag: CdkDrag; containerSize: DOMRectReadOnly }) {
+    MixedCdkDragSizeHelperDirective.defaultEmitter(event, Number(this.percentWidth), Number(this.percentHeight));
+  }
+
+  dropped(event: { previousIndex: number; currentIndex: number }) {
+    moveItemInArray(this.settings.images, event.previousIndex, event.currentIndex);
   }
 }
