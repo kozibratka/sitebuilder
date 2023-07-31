@@ -1,0 +1,13 @@
+:host ::ng-deep .carousel-inner {
+  height: 100%;
+}
+
+:host ::ng-deep .carousel-item {
+  height: 100%;
+}
+
+:host ::ng-deep .carousel-item img {
+  height: 100%;
+  width: 100%;
+}
+
