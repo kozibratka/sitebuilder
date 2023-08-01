@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Security\Validator as AppValidator;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\WebRepository")
  * @ORM\Table(name="web",
  *     uniqueConstraints={@ORM\UniqueConstraint(name="web_unique",columns={"user_id", "name"})}
  *     )
@@ -26,14 +26,12 @@ class Web
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     * @Serializer\Groups({"webDetail", "Default"})
      */
     private ?int $id = null;
 
     /**
      * @ORM\Column(type="string")
      * @Assert\NotBlank()
-     * @Serializer\Groups({"webDetail", "Default"})
      */
     private string $name = '';
 
@@ -47,14 +45,12 @@ class Web
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
-     * @Serializer\Groups({"webDetail"})
      * @Assert\Valid()
      */
     private Collection $pages;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
-     * @Serializer\Groups({"webDetail", "Default"})
      */
     private Collection $plugins;
 

@@ -26,7 +26,7 @@ class PageController extends BaseApiController
     public function list(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
-        $pages = $this->getDoctrine()->getRepository(Page::class)->findBy(['web' => $web, 'parentForPublic' => null]);
+        $pages = $this->getDoctrine()->getRepository(Page::class)->getPagesPerWeb($web);
         return $this->jsonResponseSimple($pages);
     }
 
