@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import {Observable, of, throwError} from 'rxjs';
 import {PageInterface} from '../../page/interfaces/page-interface';
-import {DomainInfoService} from '../../core/services/domain-info.service';
+import {SystemInfoService} from '../../core/services/system-info.service';
 import {catchError, map} from 'rxjs/operators';
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
 import {HttpResponseToasterService} from '../../core/services/http-response-toaster.service';
@@ -16,7 +16,7 @@ import {HttpResponseToasterService} from '../../core/services/http-response-toas
 })
 export class PageResolver implements Resolve<PageInterface> {
 
-  constructor(private domainInfoService: DomainInfoService,
+  constructor(private domainInfoService: SystemInfoService,
               private symfonyApiClientService: SymfonyApiClientService,
               private httpResponseToasterService: HttpResponseToasterService
   ) {

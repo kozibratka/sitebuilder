@@ -9,7 +9,7 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {ArrayHelper} from '../../../core/helpers/array-helper';
 import {NotifierService} from '../../../core/services/notifier.service';
-import {DomainInfoService} from '../../../core/services/domain-info.service';
+import {SystemInfoService} from '../../../core/services/system-info.service';
 import {Title} from '@angular/platform-browser';
 import {Subject, Subscription} from 'rxjs';
 import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
@@ -44,7 +44,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private httpResponseToasterService: HttpResponseToasterService,
     private webDetailResolverService: WebDetailResolverService,
     private pluginResolverService: PluginResolverService,
-    private domainInfoService: DomainInfoService,
+    private domainInfoService: SystemInfoService,
     private fileManagerModalService: FileManagerModalService,
     private changeDetectorRef: ChangeDetectorRef,
     public title: Title,
