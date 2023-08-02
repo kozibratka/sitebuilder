@@ -4,29 +4,57 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class=" collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav ms-auto ">
-        <li class="nav-item">
-          <a class="nav-link mx-2 active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="#">Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Company
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Blog</a></li>
-            <li><a class="dropdown-item" href="#">About Us</a></li>
-            <li><a class="dropdown-item" href="#">Contact us</a></li>
-          </ul>
+      <ul [class]="['navbar-nav', 'ms-auto']">
+        <li [class.dropdown]="item.children" class="nav-item" *ngFor="let item of itemsAsNestedArray">
+          <a class="nav-link mx-2" aria-current="page" href="/{{item.pageUrl}}">{{item.name}}</a>
+          <ng-container *ngTemplateOutlet="dropdown; context: {items: item.children}"></ng-container>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<ng-template #dropdown let-items='items'>
+  <ul *ngIf="items" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+    <li *ngFor="let item of items">
+      <a class="dropdown-item" href="{{item.pageUrl}}">{{item.name}}</a>
+    </li>
+  </ul>
+</ng-template>
+
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Expand at sm</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">a
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown03">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form>
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+      </form>
+    </div>
+  </div>
+</nav>
+

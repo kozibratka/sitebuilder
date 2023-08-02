@@ -3,6 +3,7 @@
 namespace App\Entity\SiteBuilder\Plugin\Menu\MenuV1;
 use App\Entity\SiteBuilder\Page;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -74,5 +75,13 @@ class MenuV1Item
     public function setLevel(int $level)
     {
         $this->level = $level;
+    }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getPageUrl(): ?string
+    {
+        return $this->getPage()?->getUrl();
     }
 }

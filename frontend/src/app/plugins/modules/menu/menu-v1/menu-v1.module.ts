@@ -22,7 +22,7 @@ import {CoreModule} from '../../../../core/core.module';
     MenuV1AdminItemComponent,
     MenuV1AdminComponent,
     MenuV1ItemSettingsComponent,
-    MenuV1RemoveItemDialogComponent
+    MenuV1RemoveItemDialogComponent,
   ],
     imports: [
         CommonModule,
