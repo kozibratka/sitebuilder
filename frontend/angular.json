@@ -46,7 +46,7 @@
             "scripts": [
               "src/assets/admin_lte/plugins/jquery/jquery.js",
               "src/assets/admin_lte/plugins/jquery-ui/jquery-ui.min.js",
-              "src/assets/admin_lte/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "src/assets/admin_lte/plugins/chart.js/Chart.min.js",
               "src/assets/admin_lte/plugins/sparklines/sparkline.js",
               "src/assets/admin_lte/plugins/jquery-knob/jquery.knob.min.js",

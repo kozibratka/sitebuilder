@@ -74,3 +74,8 @@ a {
 .deactive-link {
   pointer-events:none;
 }
+
+.grid-stack-item-content:has(.dropdown-toggle.show) {
+  position: initial !important;
+}
+
