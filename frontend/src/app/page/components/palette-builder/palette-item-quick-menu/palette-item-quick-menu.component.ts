@@ -84,7 +84,8 @@ export class PaletteItemQuickMenuComponent implements OnInit {
       adminAbleInterface: pluginResolver,
       settings: plugin.settings,
       page: this.pageBuilderComponent.pageDetail,
-      title: pluginResolver.name
+      title: pluginResolver.name,
+      plugin,
     });
   }
 }

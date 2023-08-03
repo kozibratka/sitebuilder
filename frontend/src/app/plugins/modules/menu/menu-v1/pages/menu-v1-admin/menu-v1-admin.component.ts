@@ -33,7 +33,6 @@ export class MenuV1AdminComponent extends AbstractAdminSetting<MenuV1ConfigInter
   }
 
   ngOnDestroy(): void {
-    ArrayHelper.recalculateNestedArrayObjectLevel(this.items, true);
   }
 
   removeItem(sourceArray: [], index: number) {
@@ -43,6 +42,7 @@ export class MenuV1AdminComponent extends AbstractAdminSetting<MenuV1ConfigInter
 
   refreshSettings() {
     this.settings.items = ArrayHelper.flatNestedArrayObject(this.items);
+    this.contextObject.refreshView();
   }
 
   addMenuItem() {

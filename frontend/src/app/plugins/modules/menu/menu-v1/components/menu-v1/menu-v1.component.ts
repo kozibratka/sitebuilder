@@ -12,7 +12,7 @@ import {ArrayHelper} from '../../../../../../core/helpers/array-helper';
 export class MenuV1Component extends AbstractPlugin<MenuV1ConfigInterface> implements OnInit{
   itemsAsNestedArray = [];
   ngOnInit(): void {
-    this.itemsAsNestedArray = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
+    this.refreshView();
   }
 
   initEmptySettings(): MenuV1ConfigInterface {
@@ -27,6 +27,7 @@ export class MenuV1Component extends AbstractPlugin<MenuV1ConfigInterface> imple
   }
 
   refreshView(): void {
+    this.itemsAsNestedArray = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
   }
 
   getDisabledStateWhenDraggingItem(): void {

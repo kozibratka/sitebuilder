@@ -30,7 +30,7 @@ export class PluginMiniAdminComponent {
     }
   }
 
-  setInitParams(params: {adminAbleInterface: AdminAbleInterface, settings: any, page: PageInterface}) {
-    this.miniAdminParams = {...params.adminAbleInterface, settings: params.settings};
+  setInitParams(params: {adminAbleInterface: AdminAbleInterface, plugin: any}) {
+    this.miniAdminParams = {...params.adminAbleInterface, settings: params.plugin.settings, contextObject: params.plugin};
   }
 }

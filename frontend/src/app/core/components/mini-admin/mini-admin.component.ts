@@ -10,7 +10,7 @@ import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
 export class MiniAdminComponent implements OnInit {
 
   @ViewChild('content1', {read: ViewContainerRef, static: true}) content1: ViewContainerRef;
-  adminAble: AdminAbleInterface;
+  adminAble: AdminAbleInterface & SettingAbleInterface;
   selectedComponent: new() => any;
   headerName = '';
   settings: any;
@@ -26,6 +26,7 @@ export class MiniAdminComponent implements OnInit {
     this.content1.clear();
     this.admin = this.content1.createComponent<SettingAbleInterface>(component).instance;
     this.admin.settings = this.settings;
+    this.admin.contextObject = this.adminAble.contextObject;
     this.label = label;
   }
 
