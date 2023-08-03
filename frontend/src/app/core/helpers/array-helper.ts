@@ -21,6 +21,7 @@ export class ArrayHelper {
     const levelMap = new Map<number, any[]>();
     let currentLevel = -1;
     const treeCallback = (data: {level: number, children?: []}) => {
+      data = {...data};
       if (!data.hasOwnProperty('children')) {
         data.children = [];
       }
