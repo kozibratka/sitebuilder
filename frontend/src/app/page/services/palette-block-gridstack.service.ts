@@ -51,12 +51,12 @@ export class PaletteBlockGridstackService {
         changeDetectorRef.detectChanges();
       });
     });
-    // (gridstackBlock as any).on('change', (event: Event, items: GridStackNode[]) => {
-    //   const paleteItem = this.paletteItemComponents.find(value => value.elementRef.nativeElement.gridstackNode === items[0]);
-    //   if (paleteItem) {
-    //     this.updatePaletteItemGridProperty(items[0], paleteItem.gridItemConfig);
-    //   }
-    // });
+    (this.gridstackBlock as any).on('change', (event: Event, items: GridStackNode[]) => {
+      const paleteItem = this.paletteItemComponents.find(value => value.elementRef.nativeElement.gridstackNode === items[0]);
+      if (paleteItem) {
+        this.updatePaletteItemGridProperty(items[0], paleteItem.gridItemConfig);
+      }
+    });
   }
 
   startGridStackPalettePublic(pageBlock: PageBlockInterface, paletteElement: ElementRef) {

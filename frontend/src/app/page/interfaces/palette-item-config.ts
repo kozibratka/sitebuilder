@@ -4,5 +4,4 @@ import {BasePlugConfigInterface} from '../../plugins/interfaces/base-plug-config
 export interface PaletteItemConfig extends GridStackNode{
   plugin: BasePlugConfigInterface;
   diffGridAndContentBottomHeightPx?: number;
-  height?: number;
 }

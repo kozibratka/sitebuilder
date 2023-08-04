@@ -32,12 +32,12 @@ class PaletteGridItem
     /**
      * @ORM\Column(type="integer")
      */
-    private int $width;
+    private int $w;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private int $height;
+    private int $h;
 
     /**
      * @ORM\Column(type="integer")
@@ -80,24 +80,24 @@ class PaletteGridItem
         $this->pageBlock = $pageBlock;
     }
 
-    public function getWidth(): int
+    public function getW(): int
     {
-        return $this->width;
+        return $this->w;
     }
 
-    public function setWidth(int $width)
+    public function setW(int $w)
     {
-        $this->width = $width;
+        $this->w = $w;
     }
 
-    public function getHeight(): int
+    public function getH(): int
     {
-        return $this->height;
+        return $this->h;
     }
 
-    public function setHeight(int $height)
+    public function setH(int $h)
     {
-        $this->height = $height;
+        $this->h = $h;
     }
 
     public function getX(): ?int

@@ -23,8 +23,8 @@ class PaletteGridItemType extends AbstractType
         $this->addPluginFieldSubscriber->isPreview = $options['is_preview'];
         $builder
             ->add('id', null, ['required' => false])
-            ->add('width')
-            ->add('height')
+            ->add('w')
+            ->add('h')
             ->add('x')
             ->add('y')
             ->add('diffGridAndContentBottomHeightPx')

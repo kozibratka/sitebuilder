@@ -61,7 +61,9 @@ export class ArrayHelper {
     const result = [];
     const callback = (data: {children?: []}[], currentLevel = 0) => {
       for (const entry of data) {
-        result.push(entry);
+        const newData = {...entry};
+        delete newData.children;
+        result.push(newData);
         if (entry.children.length) {
           callback(entry.children, currentLevel + 1);
         }
