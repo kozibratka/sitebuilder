@@ -16,6 +16,16 @@ class MenuV1 extends BasePlugin
      */
     protected Collection $items;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $logoName = null;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private ?string $logoImage = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -47,5 +57,25 @@ class MenuV1 extends BasePlugin
     {
         $this->items->removeElement($menuSimpleItem);
         return $this;
+    }
+
+    public function getLogoName(): ?string
+    {
+        return $this->logoName;
+    }
+
+    public function setLogoName(?string $logoName)
+    {
+        $this->logoName = $logoName;
+    }
+
+    public function getLogoImage(): ?string
+    {
+        return $this->logoImage;
+    }
+
+    public function setLogoImage(?string $logoImage)
+    {
+        $this->logoImage = $logoImage;
     }
 }

@@ -3,6 +3,7 @@ import {MenuV1Component} from '../components/menu-v1/menu-v1.component';
 import {AbstractPluginResolver} from '../../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {PluginIdentifier} from '../../../../constants/plugin-identifier';
 import {MenuV1AdminComponent} from '../pages/menu-v1-admin/menu-v1-admin.component';
+import {MenuV1LogoAdminComponent} from '../pages/menu-v1-logo-admin/menu-v1-logo-admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,11 @@ export class MenuV1ResolverService extends AbstractPluginResolver {
     {
       label: 'Menu',
       component: MenuV1AdminComponent,
+      path: ''
+    },
+    {
+      label: 'Logo',
+      component: MenuV1LogoAdminComponent,
       path: ''
     },
   ];

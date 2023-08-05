@@ -13,6 +13,7 @@ import {MenuV1ItemSettingsComponent} from './components/menu-v1-item-settings/me
 import {MenuV1RemoveItemDialogComponent} from './components/menu-v1-remove-item-dialog/menu-v1-remove-item-dialog.component';
 import {MatButtonModule} from '@angular/material/button';
 import {CoreModule} from '../../../../core/core.module';
+import { MenuV1LogoAdminComponent } from './pages/menu-v1-logo-admin/menu-v1-logo-admin.component';
 
 
 
@@ -23,6 +24,7 @@ import {CoreModule} from '../../../../core/core.module';
     MenuV1AdminComponent,
     MenuV1ItemSettingsComponent,
     MenuV1RemoveItemDialogComponent,
+    MenuV1LogoAdminComponent,
   ],
     imports: [
         CommonModule,

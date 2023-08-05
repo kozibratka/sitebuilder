@@ -3,4 +3,6 @@ import {BasePlugConfigInterface} from '../../../../interfaces/base-plug-config-i
 
 export interface MenuV1ConfigInterface extends BasePlugConfigInterface {
   items: MenuV1ItemInterface[];
+  logoImage: string;
+  logoName: string;
 }

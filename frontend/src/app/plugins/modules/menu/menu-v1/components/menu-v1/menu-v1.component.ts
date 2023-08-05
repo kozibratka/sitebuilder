@@ -18,6 +18,8 @@ export class MenuV1Component extends AbstractPlugin<MenuV1ConfigInterface> imple
   initEmptySettings(): MenuV1ConfigInterface {
     return {
       identifier: PluginIdentifier.MENU_V1,
+      logoImage: '',
+      logoName: 'Logo',
       items: [
         {name: 'one', pageUrl: '', level: 0, page: null},
         {name: 'two', pageUrl: '', level: 1, page: null},
