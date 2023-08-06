@@ -14,6 +14,9 @@ export class SystemInfoService {
   }
 
   isPreviewHostname(): boolean {
+
+    console.log(location.host);
+
     return this.getLocalhostWithPortForPreview() === location.host ||
       environment.hostname.replace('www', environment.previewSubdomain) === window.location.hostname;
   }
@@ -24,7 +27,7 @@ export class SystemInfoService {
   }
 
   getLocalhostWithPortForPreview(): string {
-    return 'http://localhost:' + environment.localhostPreviewPort;
+    return 'localhost:' + environment.localhostPreviewPort;
   }
 
   isSitebuilderDomain(): boolean {

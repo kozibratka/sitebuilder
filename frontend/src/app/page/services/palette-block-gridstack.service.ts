@@ -64,10 +64,10 @@ export class PaletteBlockGridstackService {
       column: 12,
       staticGrid: true,
       margin: 0,
-      // cellHeight: '10px',
-      // float: true,
-      minRow: pageBlock.height,
+      cellHeight: '20px',
+      float: true,
       styleInHead: true,
+      draggable: {scroll: false},
     }, paletteElement.nativeElement);
     this.gridstackBlocks.set(paletteElement.nativeElement, gridstackBlock);
   }

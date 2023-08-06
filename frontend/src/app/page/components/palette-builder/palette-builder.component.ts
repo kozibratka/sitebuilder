@@ -1,7 +1,5 @@
 import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Subject} from 'rxjs';
 import {PageInterface} from '../../interfaces/page-interface';
-import {GridItemHTMLElementItemComponent} from '../../interfaces/grid-item-htmlelement-item-component';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 
 @Component({

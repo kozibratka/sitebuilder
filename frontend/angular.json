@@ -92,7 +92,17 @@
             "public": {
               "outputPath": "dist/frontend-public",
               "index": "src/public-index.html",
-              "main": "src/public-main.ts"
+              "main": "src/public-main.ts",
+              "buildOptimizer": false,
+              "optimization": {
+                "scripts": false,
+                "styles": false,
+                "fonts": false
+              },
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             },
             "development": {
               "buildOptimizer": false,

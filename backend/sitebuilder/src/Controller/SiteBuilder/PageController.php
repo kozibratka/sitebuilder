@@ -76,7 +76,7 @@ class PageController extends BaseApiController
             $page->setWeb($web);
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
             $jsonPage = $this->serializer->serialize($page, 'json');
-            $res = $client->set('page_preview_'.$web->getId(), $jsonPage, 'EX', 10);
+            $res = $client->set('page_preview_'.$web->getId(), $jsonPage, 'EX', 3600);
             return $this->jsonResponseSimple([], 201);
         }
         return $this->invalidFormResponse($form);
