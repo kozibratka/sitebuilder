@@ -29,11 +29,11 @@ export class PaletteBlockGridstackService {
       GridStack.registerEngine(GridStackEngineCustom);
       this.gridstackBlock = GridStack.init({
         acceptWidgets: '.grid-stack-item-menu',
-        column: 12,
+        column: 80,
         // ddPlugin: GridStackDragDrop,
         float: true,
         margin: 0,
-        cellHeight: '20px',
+        // cellHeight: '20px',
         animate: true,
         draggable: {scroll: false},
         handleClass: 'icon-move',

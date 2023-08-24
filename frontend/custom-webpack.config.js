@@ -6,5 +6,5 @@ module.exports = {
       }
     }
   },
-  resolve: {fallback: {"util": false}}
+  resolve: {fallback: {"util": false}},
 };

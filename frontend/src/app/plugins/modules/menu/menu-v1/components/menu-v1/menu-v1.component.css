@@ -1,0 +1,12 @@
+.nav-link {
+  font-size: 0.8vw;
+}
+
+img {
+  height: 2.5vw;
+}
+
+.navbar-brand {
+   padding-top: initial;
+   padding-bottom: initial;
+}

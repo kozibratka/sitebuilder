@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
 import {FormBuilder} from '@angular/forms';
 import {TextV1ConfigInterface} from '../../interfaces/text-v1-config-interface';
@@ -13,7 +13,7 @@ import {AdminFormService} from '../../../../../forms/admin-form.service';
 })
 export class TextV1TextAdminComponent extends AbstractAdminSetting<TextV1ConfigInterface> implements OnInit{
 
-  public Editor = ClassicEditor;
+  public MyEditor: any = Editor;
   public text: string;
 
   constructor(
@@ -24,6 +24,7 @@ export class TextV1TextAdminComponent extends AbstractAdminSetting<TextV1ConfigI
   }
 
   ngOnInit(): void {
+
   }
 
   createAdminForm(settings: TextV1ConfigInterface) {

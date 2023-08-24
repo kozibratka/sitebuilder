@@ -1,0 +1,477 @@
+.gs-80 > .grid-stack-item {
+  width: 1.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="1"] {
+  left: 1.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="2"] {
+  width: 2.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="2"] {
+  left: 2.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="3"] {
+  width: 3.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="3"] {
+  left: 3.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="4"] {
+  width: 5%;
+}
+.gs-80 > .grid-stack-item[gs-x="4"] {
+  left: 5%;
+}
+.gs-80 > .grid-stack-item[gs-w="5"] {
+  width: 6.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="5"] {
+  left: 6.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="6"] {
+  width: 7.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="6"] {
+  left: 7.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="7"] {
+  width: 8.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="7"] {
+  left: 8.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="8"] {
+  width: 10%;
+}
+.gs-80 > .grid-stack-item[gs-x="8"] {
+  left: 10%;
+}
+.gs-80 > .grid-stack-item[gs-w="9"] {
+  width: 11.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="9"] {
+  left: 11.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="10"] {
+  width: 12.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="10"] {
+  left: 12.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="11"] {
+  width: 13.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="11"] {
+  left: 13.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="12"] {
+  width: 15%;
+}
+.gs-80 > .grid-stack-item[gs-x="12"] {
+  left: 15%;
+}
+.gs-80 > .grid-stack-item[gs-w="13"] {
+  width: 16.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="13"] {
+  left: 16.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="14"] {
+  width: 17.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="14"] {
+  left: 17.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="15"] {
+  width: 18.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="15"] {
+  left: 18.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="16"] {
+  width: 20%;
+}
+.gs-80 > .grid-stack-item[gs-x="16"] {
+  left: 20%;
+}
+.gs-80 > .grid-stack-item[gs-w="17"] {
+  width: 21.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="17"] {
+  left: 21.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="18"] {
+  width: 22.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="18"] {
+  left: 22.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="19"] {
+  width: 23.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="19"] {
+  left: 23.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="20"] {
+  width: 25%;
+}
+.gs-80 > .grid-stack-item[gs-x="20"] {
+  left: 25%;
+}
+.gs-80 > .grid-stack-item[gs-w="21"] {
+  width: 26.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="21"] {
+  left: 26.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="22"] {
+  width: 27.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="22"] {
+  left: 27.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="23"] {
+  width: 28.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="23"] {
+  left: 28.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="24"] {
+  width: 30%;
+}
+.gs-80 > .grid-stack-item[gs-x="24"] {
+  left: 30%;
+}
+.gs-80 > .grid-stack-item[gs-w="25"] {
+  width: 31.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="25"] {
+  left: 31.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="26"] {
+  width: 32.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="26"] {
+  left: 32.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="27"] {
+  width: 33.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="27"] {
+  left: 33.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="28"] {
+  width: 35%;
+}
+.gs-80 > .grid-stack-item[gs-x="28"] {
+  left: 35%;
+}
+.gs-80 > .grid-stack-item[gs-w="29"] {
+  width: 36.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="29"] {
+  left: 36.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="30"] {
+  width: 37.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="30"] {
+  left: 37.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="31"] {
+  width: 38.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="31"] {
+  left: 38.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="32"] {
+  width: 40%;
+}
+.gs-80 > .grid-stack-item[gs-x="32"] {
+  left: 40%;
+}
+.gs-80 > .grid-stack-item[gs-w="33"] {
+  width: 41.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="33"] {
+  left: 41.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="34"] {
+  width: 42.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="34"] {
+  left: 42.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="35"] {
+  width: 43.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="35"] {
+  left: 43.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="36"] {
+  width: 45%;
+}
+.gs-80 > .grid-stack-item[gs-x="36"] {
+  left: 45%;
+}
+.gs-80 > .grid-stack-item[gs-w="37"] {
+  width: 46.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="37"] {
+  left: 46.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="38"] {
+  width: 47.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="38"] {
+  left: 47.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="39"] {
+  width: 48.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="39"] {
+  left: 48.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="40"] {
+  width: 50%;
+}
+.gs-80 > .grid-stack-item[gs-x="40"] {
+  left: 50%;
+}
+.gs-80 > .grid-stack-item[gs-w="41"] {
+  width: 51.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="41"] {
+  left: 51.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="42"] {
+  width: 52.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="42"] {
+  left: 52.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="43"] {
+  width: 53.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="43"] {
+  left: 53.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="44"] {
+  width: 55%;
+}
+.gs-80 > .grid-stack-item[gs-x="44"] {
+  left: 55%;
+}
+.gs-80 > .grid-stack-item[gs-w="45"] {
+  width: 56.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="45"] {
+  left: 56.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="46"] {
+  width: 57.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="46"] {
+  left: 57.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="47"] {
+  width: 58.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="47"] {
+  left: 58.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="48"] {
+  width: 60%;
+}
+.gs-80 > .grid-stack-item[gs-x="48"] {
+  left: 60%;
+}
+.gs-80 > .grid-stack-item[gs-w="49"] {
+  width: 61.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="49"] {
+  left: 61.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="50"] {
+  width: 62.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="50"] {
+  left: 62.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="51"] {
+  width: 63.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="51"] {
+  left: 63.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="52"] {
+  width: 65%;
+}
+.gs-80 > .grid-stack-item[gs-x="52"] {
+  left: 65%;
+}
+.gs-80 > .grid-stack-item[gs-w="53"] {
+  width: 66.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="53"] {
+  left: 66.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="54"] {
+  width: 67.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="54"] {
+  left: 67.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="55"] {
+  width: 68.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="55"] {
+  left: 68.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="56"] {
+  width: 70%;
+}
+.gs-80 > .grid-stack-item[gs-x="56"] {
+  left: 70%;
+}
+.gs-80 > .grid-stack-item[gs-w="57"] {
+  width: 71.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="57"] {
+  left: 71.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="58"] {
+  width: 72.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="58"] {
+  left: 72.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="59"] {
+  width: 73.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="59"] {
+  left: 73.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="60"] {
+  width: 75%;
+}
+.gs-80 > .grid-stack-item[gs-x="60"] {
+  left: 75%;
+}
+.gs-80 > .grid-stack-item[gs-w="61"] {
+  width: 76.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="61"] {
+  left: 76.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="62"] {
+  width: 77.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="62"] {
+  left: 77.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="63"] {
+  width: 78.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="63"] {
+  left: 78.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="64"] {
+  width: 80%;
+}
+.gs-80 > .grid-stack-item[gs-x="64"] {
+  left: 80%;
+}
+.gs-80 > .grid-stack-item[gs-w="65"] {
+  width: 81.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="65"] {
+  left: 81.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="66"] {
+  width: 82.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="66"] {
+  left: 82.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="67"] {
+  width: 83.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="67"] {
+  left: 83.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="68"] {
+  width: 85%;
+}
+.gs-80 > .grid-stack-item[gs-x="68"] {
+  left: 85%;
+}
+.gs-80 > .grid-stack-item[gs-w="69"] {
+  width: 86.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="69"] {
+  left: 86.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="70"] {
+  width: 87.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="70"] {
+  left: 87.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="71"] {
+  width: 88.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="71"] {
+  left: 88.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="72"] {
+  width: 90%;
+}
+.gs-80 > .grid-stack-item[gs-x="72"] {
+  left: 90%;
+}
+.gs-80 > .grid-stack-item[gs-w="73"] {
+  width: 91.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="73"] {
+  left: 91.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="74"] {
+  width: 92.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="74"] {
+  left: 92.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="75"] {
+  width: 93.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="75"] {
+  left: 93.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="76"] {
+  width: 95%;
+}
+.gs-80 > .grid-stack-item[gs-x="76"] {
+  left: 95%;
+}
+.gs-80 > .grid-stack-item[gs-w="77"] {
+  width: 96.25%;
+}
+.gs-80 > .grid-stack-item[gs-x="77"] {
+  left: 96.25%;
+}
+.gs-80 > .grid-stack-item[gs-w="78"] {
+  width: 97.5%;
+}
+.gs-80 > .grid-stack-item[gs-x="78"] {
+  left: 97.5%;
+}
+.gs-80 > .grid-stack-item[gs-w="79"] {
+  width: 98.75%;
+}
+.gs-80 > .grid-stack-item[gs-x="79"] {
+  left: 98.75%;
+}
+.gs-80 > .grid-stack-item[gs-w="80"] {
+  width: 100%;
+}
