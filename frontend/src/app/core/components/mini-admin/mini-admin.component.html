@@ -1,5 +1,6 @@
-    <div class="d-flex">
-      <nav id="sidebar">
+<div class="container">
+  <div class="row">
+      <nav class="col-md-4" id="sidebar">
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass;">
             <a href="#" (click)="showContent(setting.component, setting.label);$event.preventDefault()">
@@ -8,13 +9,14 @@
         </ul>
       </nav>
 
-      <div id="content" class="p-4 p-md-5 pt-5">
+      <div id="content" class="col-md-8">
         <h5>{{label}}</h5>
         <div class="content-block">
           <ng-container #content1></ng-container>
         </div>
       </div>
     </div>
+</div>
 
 
 
