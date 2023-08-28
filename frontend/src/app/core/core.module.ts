@@ -25,6 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AnimationHiderComponent } from './components/hidder/animation-hider/animation-hider/animation-hider.component';
 import {HidderComponent} from './components/hidder/plain-hider/hidder.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MiniAdminComponent,
     AnimationHiderComponent,
     DialogComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     CommonModule,
@@ -68,6 +70,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
         MoveableModalComponent,
         AnimationHiderComponent,
         DialogComponent,
+        SafeHtmlPipe,
     ],
   providers: [
     EventEmitterService,

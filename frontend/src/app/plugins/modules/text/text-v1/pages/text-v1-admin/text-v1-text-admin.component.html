@@ -1,6 +1,13 @@
 <form [formGroup]="adminForm">
   <label for="text">Text</label>
-  <ckeditor id="text" [editor]="MyEditor" [data]="settings.text" (change)="onChange($event)"></ckeditor>
+  <ckeditor
+    id="text"
+    [editor]="MyEditor"
+    [data]="settings.text"
+    (change)="onChange($event)"
+    [config]="{mediaEmbed: {previewsInData: true}}"
+  >
+  </ckeditor>
 </form>
 
 

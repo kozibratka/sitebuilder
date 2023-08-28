@@ -37,6 +37,9 @@ export class TextV1TextAdminComponent extends AbstractAdminSetting<TextV1ConfigI
   }
 
   public onChange( { editor }: ChangeEvent ) {
+    if (!editor) {
+      return;
+    }
     const text = editor.getData();
     this.adminForm.patchValue({text});
   }
