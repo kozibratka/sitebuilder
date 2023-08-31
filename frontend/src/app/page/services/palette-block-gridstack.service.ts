@@ -6,6 +6,7 @@ import {PaletteItemComponent} from '../components/palette-builder/page-block/pal
 import {PageBlockInterface} from '../interfaces/page-block-interface';
 import {PublicGridItemComponent} from '../../public/components/public-grid-item/public-grid-item.component';
 import {GridStackEngineCustom} from './grid-stack-engine-custom';
+import {fromEvent} from 'rxjs';
 
 @Injectable(
   {
@@ -18,6 +19,7 @@ export class PaletteBlockGridstackService {
   private toResizeRows = 0;
   private paletteItemComponents: PaletteItemComponent[] = [];
   public gridstackBlock = null;
+  private enabled = true;
 
   constructor(private zone: NgZone,
               private paletteBlockService: PaletteBlockService,
@@ -32,6 +34,7 @@ export class PaletteBlockGridstackService {
         column: 80,
         // ddPlugin: GridStackDragDrop,
         float: true,
+        disableOneColumnMode: true,
         margin: 0,
         // cellHeight: '20px',
         animate: true,
@@ -40,7 +43,7 @@ export class PaletteBlockGridstackService {
         // minRow: pageBlock.height,
         styleInHead: true,
       }, block.nativeElement);
-
+      this.registerResponsiveWindow();
     });
 
     this.gridstackBlocks.set(block.nativeElement, this.gridstackBlock);
@@ -63,6 +66,7 @@ export class PaletteBlockGridstackService {
     const gridstackBlock = GridStack.init({
       column: 12,
       staticGrid: true,
+      disableOneColumnMode: true,
       margin: 0,
       cellHeight: '20px',
       float: true,
@@ -152,5 +156,22 @@ export class PaletteBlockGridstackService {
     const gridRect = element1.getBoundingClientRect();
     const contentRect = element2.getBoundingClientRect();
     return Math.abs(gridRect.bottom - contentRect.bottom);
+  }
+
+  registerResponsiveWindow() {
+    const updateCellHeightCallback = (value) => {
+      const width = document.body.clientWidth;
+      if (width < 700) {
+        this.gridstackBlock.cellHeight(0);
+        this.gridstackBlock.disable();
+        this.enabled = false;
+      } else if (width >= 700) {
+        this.gridstackBlock.cellHeight('auto');
+        this.gridstackBlock.enable();
+        this.enabled = true;
+      }
+    };
+    fromEvent(window, 'resize').subscribe(updateCellHeightCallback);
+    updateCellHeightCallback(null);
   }
 }

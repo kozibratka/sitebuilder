@@ -79,3 +79,26 @@ a {
   position: initial !important;
 }
 
+@media only screen and (max-width: 700px) {
+  body .grid-stack > .grid-stack-item {
+    position: relative;
+    top: initial;
+    left: 0 !important;
+    padding: 0;
+    display: block;
+    width: 100% !important;
+  }
+
+  body .grid-stack > .grid-stack-item > .grid-stack-item-content {
+    margin: 0;
+    position: relative;
+    width: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body .inset-0 {
+    position: relative;
+  }
+}
+
