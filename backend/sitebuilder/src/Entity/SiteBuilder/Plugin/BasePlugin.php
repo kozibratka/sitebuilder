@@ -29,7 +29,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     map = {
  *          "CarouselV1" = "App\Entity\SiteBuilder\Plugin\Carousel\CarouselV1\CarouselV1",
  *          "TextV1" = "App\Entity\SiteBuilder\Plugin\Text\TextV1\TextV1",
- *          "MenuV1" = "App\Entity\SiteBuilder\Plugin\Menu\MenuV1\MenuV1"
+ *          "MenuV1" = "App\Entity\SiteBuilder\Plugin\Menu\MenuV1\MenuV1",
+ *          "ImageV1" = "App\Entity\SiteBuilder\Plugin\Image\ImageV1\ImageV1"
  *
  *     })
  */

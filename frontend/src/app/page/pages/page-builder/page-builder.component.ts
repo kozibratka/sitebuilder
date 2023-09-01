@@ -73,7 +73,8 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.pageBuilderEvent.next(true); // notify listeners
     this.symfonyApiClientService.post<PageInterface>('page_update_page_builder', this.pageDetail, {id: this.pageDetail.id, withPublic}).subscribe({
       next: (response) => {
-        ArrayHelper.syncArrayOfObjects(response.body.pageBlocks, this.pageDetail.pageBlocks); // refresh blocks, items...
+        this.pageDetail = response.body;
+        // ArrayHelper.syncArrayOfObjects(response.body.pageBlocks, this.pageDetail.pageBlocks); // refresh blocks, items...
         this.webDetailResolverService.refresh();
         this.notifierService.notify('Úpravy byly úspěšně uloženy');
       },

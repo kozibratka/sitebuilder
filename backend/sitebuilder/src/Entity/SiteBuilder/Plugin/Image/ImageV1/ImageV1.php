@@ -14,20 +14,20 @@ class ImageV1 extends BasePlugin
     /**
      * @ORM\Column(type="text")
      */
-    private string $url;
+    private string $imagePath;
 
     public function setIdentifier()
     {
         $this->identifier = 'image_v1';
     }
 
-    public function getUrl(): string
+    public function getImagePath(): string
     {
-        return $this->url;
+        return $this->imagePath;
     }
 
-    public function setUrl(string $url)
+    public function setImagePath(string $imagePath)
     {
-        $this->url = $url;
+        $this->imagePath = $imagePath;
     }
 }

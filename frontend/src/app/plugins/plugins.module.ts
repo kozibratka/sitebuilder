@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {CarouselModule} from './modules/carousel/carousel.module';
 import {MenuModule} from './modules/menu/menu.module';
 import {TextModule} from './modules/text/text.module';
+import {ImageModule} from './modules/image/image.module';
 
 @NgModule({
     imports: [
@@ -42,6 +43,7 @@ import {TextModule} from './modules/text/text.module';
         CarouselModule,
         MenuModule,
         TextModule,
+        ImageModule,
     ],
   declarations: [
   ]
