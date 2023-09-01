@@ -24,3 +24,9 @@
 :host > .edit-buttons > i {
   font-size: 12px;
 }
+
+@media only screen and (max-width: 700px) {
+  :host {
+    display: none !important;
+  }
+}

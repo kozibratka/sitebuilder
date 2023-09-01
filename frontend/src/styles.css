@@ -79,6 +79,11 @@ a {
   position: initial !important;
 }
 
+.grid-stack > .grid-stack-item > .grid-stack-item-content {
+  font-size: 0.85vw;
+}
+
+
 @media only screen and (max-width: 700px) {
   body .grid-stack > .grid-stack-item {
     position: relative;
@@ -95,6 +100,7 @@ a {
     width: auto;
     overflow-x: hidden;
     overflow-y: auto;
+    font-size: initial;
   }
 
   body .inset-0 {
