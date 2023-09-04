@@ -10,10 +10,10 @@
       [class.dragged]="isDraggedContent"
       [class.resized]="isResized"
       #palette
-      [sortablejs]="baseBlocks"
+      [sortablejs]="pageDetail.pageBlocks"
       [sortablejsOptions]="{ group: 'shared', scroll: false, handle: '.handle' }">
-      <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of baseBlocks">
-        <app-palette-block [pageBlock]="item" (resized)="isResized=$event"></app-palette-block>
+      <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of pageDetail.pageBlocks; trackBy: trackByBlock">
+        <app-palette-block [test]="item" [pageBlock]="item" (resized)="isResized=$event"></app-palette-block>
       </li>
     </ul>
   </div>

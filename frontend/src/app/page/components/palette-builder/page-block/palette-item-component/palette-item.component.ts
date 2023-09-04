@@ -26,9 +26,10 @@ import {PaletteBlockGridstackService} from '../../../../services/palette-block-g
 import {PageBlockComponent} from '../page-block.component';
 import {AbstractPlugin} from '../../../../../plugins/abstract-class/abstract-plugin';
 import {QuickMenuService} from '../../../../services/quick-menu.service';
+import {StringService} from '../../../../../core/services/string.service';
 
 @Component({
-  selector: 'app-palette-item',
+  selector: 'app-grid-item',
   templateUrl: './palette-item.component.html',
   styleUrls: ['./palette-item.component.css']
 })

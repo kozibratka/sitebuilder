@@ -3,6 +3,6 @@
     <i class="fas fa-arrows-alt handle"></i>
   </div>
   <div #palette_content class="block-content grid-stack" [class.dragging-item-bottom]="draggingItemBottom">
-    <app-palette-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of gridNodes"></app-palette-item>
+    <app-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems; trackBy: trackByGridItem"></app-grid-item>
   </div>
 </div>

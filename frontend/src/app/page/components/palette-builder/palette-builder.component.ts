@@ -1,6 +1,7 @@
 import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {PageInterface} from '../../interfaces/page-interface';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
+import {StringService} from '../../../core/services/string.service';
 
 @Component({
   selector: 'app-palette-builder',
@@ -11,7 +12,6 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 
   @ViewChild('palette') private _palette: ElementRef<HTMLElement>;
   @Input() pageDetail: PageInterface;
-  baseBlocks: PageBlockInterface[];
   isDraggedContent = false;
   private _isResized = false;
 
@@ -20,7 +20,6 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
   }
 
   ngOnInit(): void {
-    this.baseBlocks = this.pageDetail.pageBlocks;
   }
 
   ngAfterViewChecked(): void {
@@ -48,5 +47,12 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 
   set isResized(value: boolean) {
     this._isResized = value;
+  }
+
+  trackByBlock(index, item: PageBlockInterface ) {
+    if (!item.uniqueId) {
+      item.uniqueId = StringService.randomString();
+    }
+    return( item.uniqueId );
   }
 }

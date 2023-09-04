@@ -60,6 +60,7 @@ class PaletteGridItem
      */
     private ?int $diffGridAndContentBottomHeightPx = null;
 
+    private string $uniqueId = '';
     public function getId()
     {
         return $this->id;
@@ -141,6 +142,16 @@ class PaletteGridItem
     public function setDiffGridAndContentBottomHeightPx(?int $diffGridAndContentBottomHeightPx)
     {
         $this->diffGridAndContentBottomHeightPx = $diffGridAndContentBottomHeightPx;
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->uniqueId;
+    }
+
+    public function setUniqueId(string $uniqueId)
+    {
+        $this->uniqueId = $uniqueId;
     }
 
     public function __clone(): void

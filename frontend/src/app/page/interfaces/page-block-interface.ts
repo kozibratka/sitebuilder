@@ -4,4 +4,5 @@ export interface PageBlockInterface {
   id?: number;
   height: number;
   paletteGridItems: PaletteItemConfig[];
+  uniqueId: string;
 }

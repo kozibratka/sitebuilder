@@ -20,6 +20,7 @@ export class PaletteBlockGridstackService {
   private paletteItemComponents: PaletteItemComponent[] = [];
   public gridstackBlock = null;
   private enabled = true;
+  gridStackNodes: PaletteItemConfig[];
 
   constructor(private zone: NgZone,
               private paletteBlockService: PaletteBlockService,
@@ -27,6 +28,7 @@ export class PaletteBlockGridstackService {
   }
 
   init(block: ElementRef, gridStackNodes: PaletteItemConfig[], pageBlock: PageBlockInterface, changeDetectorRef: ChangeDetectorRef): void {
+    this.gridStackNodes = gridStackNodes;
     this.zone.runOutsideAngular(() => {
       GridStack.registerEngine(GridStackEngineCustom);
       this.gridstackBlock = GridStack.init({
@@ -49,7 +51,7 @@ export class PaletteBlockGridstackService {
     this.gridstackBlocks.set(block.nativeElement, this.gridstackBlock);
     (this.gridstackBlock as any).on('dropped', (event: Event, previousWidget: any, newWidget: GridStackNode) => {
       this.gridstackBlock.removeWidget(newWidget.el);
-      this.createGridItemOnDropNew(newWidget, gridStackNodes);
+      this.createGridItemOnDropNew(newWidget, this.gridStackNodes);
       this.zone.run(() => {
         changeDetectorRef.detectChanges();
       });
@@ -125,7 +127,7 @@ export class PaletteBlockGridstackService {
   }
 
   createGridItemOnDropNew(newWidget: GridStackNode, gridStackNodes: PaletteItemConfig[]): void {
-    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none', id: null, name: null}};
+    const newWidgetTmp: PaletteItemConfig = {plugin: {identifier: 'none', id: null, name: null}, uniqueId: ''};
     this.updatePaletteItemGridProperty(newWidget, newWidgetTmp);
     gridStackNodes.push(newWidgetTmp);
   }

@@ -23,7 +23,8 @@ class PageBlockType extends AbstractType
                 'by_reference' => false,
                 'entry_options' => ['is_preview' => $options['is_preview']]
             ])
-            ;
+            ->add('uniqueId')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

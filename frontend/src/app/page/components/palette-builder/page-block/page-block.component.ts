@@ -27,6 +27,7 @@ import {QuickMenuService} from '../../../services/quick-menu.service';
 import {AbstractPlugin} from '../../../../plugins/abstract-class/abstract-plugin';
 import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
 import {PaletteBlockService} from '../../../services/palette-block.service';
+import {StringService} from '../../../../core/services/string.service';
 
 @Component({
   selector: 'app-palette-block',
@@ -38,8 +39,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @Output() resized = new EventEmitter<boolean>();
-  @Input() pageBlock: PageBlockInterface;
-  gridNodes: PaletteItemConfig[] = [];
+  private _pageBlock: PageBlockInterface;
   draggingItemBottom = false;
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
@@ -62,9 +62,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    if (this.pageBlock.paletteGridItems) {
-      this.gridNodes = this.pageBlock.paletteGridItems;
-    }
     this.initGridStack();
     this.registerOnDraggedItem();
     this.registerIsResizedOnDrag();
@@ -81,6 +78,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     // this.prepareResizeHorizontalPalette(event);
   }
 
+  trackByGridItem(index, item: PaletteItemConfig ) {
+    if (!item.uniqueId) {
+      item.uniqueId = StringService.randomString();
+    }
+    return( item.uniqueId );
+  }
+
   private prepareResizeHorizontalPalette(event: MouseEvent): void{
     const actualHeight = this.paletteContent.nativeElement.offsetHeight;
     if (event.offsetY < actualHeight - 7) {
@@ -95,7 +99,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
         this.document,
         'mousemove',
         (mouseEvent) => this.paletteBlockGridstackService.
-        resizeHorizontalPalette(mouseEvent, this.paletteContent.nativeElement, this.pageBlock)
+        resizeHorizontalPalette(mouseEvent, this.paletteContent.nativeElement, this._pageBlock)
       );
     });
     const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
@@ -107,7 +111,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   private initGridStack(): void {
-    this.paletteBlockGridstackService.init(this.paletteContent, this.gridNodes, this.pageBlock, this.changeDetectorRef);
+    this.paletteBlockGridstackService.init(this.paletteContent, this._pageBlock.paletteGridItems, this._pageBlock, this.changeDetectorRef);
     const gridstackBlock = this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement);
     gridstackBlock.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
       this.quickMenuService.moveMenu.next(true);
@@ -173,5 +177,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
         sizeObserver.unobserve(this.paletteContent.nativeElement);
       }
     });
+  }
+  get pageBlock(): PageBlockInterface {
+    return this._pageBlock;
+  }
+  @Input()
+  set pageBlock(value: PageBlockInterface) {
+    this._pageBlock = value;
+    this.paletteBlockGridstackService.gridStackNodes = this._pageBlock.paletteGridItems;
   }
 }
