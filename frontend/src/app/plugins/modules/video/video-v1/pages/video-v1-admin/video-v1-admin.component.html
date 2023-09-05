@@ -1,0 +1,15 @@
+<form [formGroup]="adminForm">
+  <div class="d-flex flex-md-row flex-wrap">
+    <div class="form-check">
+      <label class="form-check-label" for="image">
+        Odkaz na video
+      </label>
+      <div>
+        <div class="mb-3">
+          <label for="input-video" class="form-label">Odkaz na video z youtube</label>
+          <input type="url" class="form-control" id="input-video" [value]="settings.videoPath">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -4,4 +4,5 @@ export class PluginIdentifier {
   static MENU_V1 = 'menu_v1';
 
   static IMAGE_V1 = 'image_v1';
+  static VIDEO_V1 = 'video_v1';
 }
