@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AbstractPlugin} from '../../../../../abstract-class/abstract-plugin';
 import {VideoV1ConfigInterface} from '../../interfaces/video-v1-config-interface';
 import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-v1',
@@ -9,10 +10,18 @@ import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
   styleUrls: ['./video-v1.component.css']
 })
 export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface>{
+
+
+  constructor(
+    private sanitizer: DomSanitizer
+  ) {
+    super();
+  }
+
   initEmptySettings(): VideoV1ConfigInterface {
     return {
       identifier: PluginIdentifier.VIDEO_V1,
-      videoPath: 'https://www.youtube.com/watch?v=2Gg6Seob5Mg&list=PLGmxyVGSCDKvmLInHxJ9VdiwEb82Lxd2E&ab_channel=NOCOPYRIGHTMOTIONGRAPHICS',
+      videoPath: 'https://www.youtube.com/embed?v=2Gg6Seob5Mg&list=PLGmxyVGSCDKvmLInHxJ9VdiwEb82Lxd2E&ab_channel=NOCOPYRIGHTMOTIONGRAPHICS',
     };
   }
 
@@ -20,5 +29,11 @@ export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface>{
   }
 
   getDisabledStateWhenDraggingItem(): void {
+  }
+
+  getVideoUrl() {
+    console.log('fwfw');
+    return '';
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.settings.videoPath);
   }
 }

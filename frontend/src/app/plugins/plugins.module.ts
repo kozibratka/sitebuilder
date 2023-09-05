@@ -19,6 +19,7 @@ import {CarouselModule} from './modules/carousel/carousel.module';
 import {MenuModule} from './modules/menu/menu.module';
 import {TextModule} from './modules/text/text.module';
 import {ImageModule} from './modules/image/image.module';
+import {VideoModule} from './modules/video/video.module';
 
 @NgModule({
     imports: [
@@ -44,6 +45,7 @@ import {ImageModule} from './modules/image/image.module';
         MenuModule,
         TextModule,
         ImageModule,
+        VideoModule,
     ],
   declarations: [
   ]

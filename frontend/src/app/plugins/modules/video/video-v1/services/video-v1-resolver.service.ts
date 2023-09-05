@@ -11,7 +11,7 @@ export class VideoV1ResolverService extends AbstractPluginResolver {
 
   adminComponentsClass = [
     {
-      label: 'Obrázek',
+      label: 'Video',
       component: VideoV1AdminComponent,
       path: ''
     },
@@ -26,7 +26,7 @@ export class VideoV1ResolverService extends AbstractPluginResolver {
   }
 
   getMenuImage(): string {
-    return 'video';
+    return 'play_circle';
   }
 
   gridHeight(): number {
