@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {AfterViewChecked, Component} from '@angular/core';
 import {AbstractPlugin} from '../../../../../abstract-class/abstract-plugin';
 import {VideoV1ConfigInterface} from '../../interfaces/video-v1-config-interface';
 import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
@@ -9,13 +9,17 @@ import {DomSanitizer} from '@angular/platform-browser';
   templateUrl: './video-v1.component.html',
   styleUrls: ['./video-v1.component.css']
 })
-export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface>{
+export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface> implements AfterViewChecked{
 
 
   constructor(
     private sanitizer: DomSanitizer
   ) {
     super();
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('fffwww');
   }
 
   initEmptySettings(): VideoV1ConfigInterface {
@@ -32,8 +36,6 @@ export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface>{
   }
 
   getVideoUrl() {
-    console.log('fwfw');
-    return '';
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.settings.videoPath);
   }
 }
