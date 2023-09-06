@@ -5,6 +5,7 @@ import {VideoV1AdminComponent} from './pages/video-v1-admin/video-v1-admin.compo
 import {ReactiveFormsModule} from '@angular/forms';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {VideoV1ResolverService} from './services/video-v1-resolver.service';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -13,10 +14,11 @@ import {VideoV1ResolverService} from './services/video-v1-resolver.service';
     VideoV1Component,
     VideoV1AdminComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatIconModule
+    ],
   providers: [
     {provide: AbstractPluginResolver, useClass: VideoV1ResolverService, multi: true},
   ],

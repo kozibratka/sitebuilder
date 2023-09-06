@@ -2,7 +2,7 @@ import {AfterViewChecked, Component} from '@angular/core';
 import {AbstractPlugin} from '../../../../../abstract-class/abstract-plugin';
 import {VideoV1ConfigInterface} from '../../interfaces/video-v1-config-interface';
 import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-v1',
@@ -11,6 +11,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface> implements AfterViewChecked{
 
+  sanitizedUrl: SafeResourceUrl;
+  private lastVideoPath: string;
 
   constructor(
     private sanitizer: DomSanitizer
@@ -19,7 +21,6 @@ export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface> imp
   }
 
   ngAfterViewChecked(): void {
-    console.log('fffwww');
   }
 
   initEmptySettings(): VideoV1ConfigInterface {
@@ -32,10 +33,15 @@ export class VideoV1Component extends AbstractPlugin<VideoV1ConfigInterface> imp
   refreshView(): void {
   }
 
-  getDisabledStateWhenDraggingItem(): void {
+  getDisabledStateWhenDraggingItem(): any {
+    return {videoPath: ''};
   }
 
   getVideoUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.settings.videoPath);
+    if (this.settings.videoPath !== this.lastVideoPath) {
+      this.lastVideoPath = this.settings.videoPath;
+      this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.settings.videoPath);
+    }
+    return this.sanitizedUrl;
   }
 }

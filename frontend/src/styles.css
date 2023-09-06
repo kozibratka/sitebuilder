@@ -81,6 +81,7 @@ a {
 
 .grid-stack > .grid-stack-item > .grid-stack-item-content {
   font-size: 0.85vw;
+  overflow-y: hidden !important;
 }
 
 
@@ -99,7 +100,7 @@ a {
     position: relative;
     width: auto;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     font-size: initial;
   }
 

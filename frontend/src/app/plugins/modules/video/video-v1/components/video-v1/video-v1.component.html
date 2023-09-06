@@ -1,4 +1,11 @@
 <div class="video-container">
-<!--<embed [src]="getVideoUrl()" width="560" height="315">-->
+  <iframe *ngIf="settings.videoPath;else other_content" class="frame"
+          [src]="getVideoUrl()">
+  </iframe>
+  <ng-template #other_content>
+    <div class="video-icon-container inset-0">
+      <mat-icon class="video-icon">play_circle</mat-icon>
+    </div>
+  </ng-template>
 </div>
 

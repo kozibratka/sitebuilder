@@ -17,7 +17,6 @@ export class ImageV1Component extends AbstractPlugin<ImageV1ConfigInterface> imp
   }
 
   ngAfterViewChecked(): void {
-    console.log('ffff');
   }
 
   refreshView(): void {
