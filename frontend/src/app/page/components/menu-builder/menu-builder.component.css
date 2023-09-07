@@ -29,10 +29,11 @@
 i.icon-move{
   position: absolute;
   top: 10px;
-  color: red;
+  color: black;
   /*display: none;*/
   left: 11px;
   cursor: move;
+  font-size: 17px;
 }
 
 /*.menu-image:hover + i.icon-move{*/
