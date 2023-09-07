@@ -14,10 +14,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         opacity: 0,
       })),
       transition('show => hide', [
-        animate('0.2s')
+        animate('0.5s')
       ]),
       transition('hide => show', [
-        animate('0.2s')
+        animate('0.5s')
       ]),
     ]),
   ]

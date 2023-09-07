@@ -1,9 +1,14 @@
 <div class="grid-stack-item-content">
-  <app-animation-hider [show] = "showMoveIcon">
-    <i class="material-icons icon-move">open_with</i>
-  </app-animation-hider>
   <div #gridContent class="inset-0">
     <ng-container #itemTemplate></ng-container>
   </div>
+  <app-animation-hider [show] = "showMoveIcon">
+    <div class="frameCover">
+      <div title="Přesunout blok" class="btn draganddrop">
+        <i class="material-icons icon-move">open_with</i>
+      </div>
+    </div>
+  </app-animation-hider>
+
 </div>
 
