@@ -26,7 +26,8 @@ import {PaletteBlockGridstackService} from '../../../../services/palette-block-g
 import {PageBlockComponent} from '../page-block.component';
 import {AbstractPlugin} from '../../../../../plugins/abstract-class/abstract-plugin';
 import {QuickMenuService} from '../../../../services/quick-menu.service';
-import {StringService} from '../../../../../core/services/string.service';
+import {MatDialog} from '@angular/material/dialog';
+import {RemoveGridItemDialogComponent} from '../../../remove-grid-item-dialog/remove-grid-item-dialog.component';
 
 @Component({
   selector: 'app-grid-item',
@@ -54,6 +55,8 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private quickMenuService: QuickMenuService,
     @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
+
+    private dialog: MatDialog
   ) {
 
   }
@@ -98,6 +101,15 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   @HostListener('mouseleave', ['$event'])
   onMouseLeave(event: MouseEvent): void {
     this.showMoveIcon = false;
+  }
+
+  remove() {
+    this.dialog.open(RemoveGridItemDialogComponent).afterClosed().subscribe(value => {
+      if (value) {
+        this.paletteBlockGridstackService.removeWidget(this.elementRef.nativeElement);
+        this.pageBlockComponent.removeGridItem(this);
+      }
+    });
   }
 
   getelementRef(): ElementRef<GridItemHTMLElement> {

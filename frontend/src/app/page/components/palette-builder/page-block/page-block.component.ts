@@ -186,4 +186,10 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     this._pageBlock = value;
     this.paletteBlockGridstackService.gridStackNodes = this._pageBlock.paletteGridItems;
   }
+  removeGridItem(paletteItemComponent: PaletteItemComponent) {
+    const index = this._pageBlock.paletteGridItems.indexOf(paletteItemComponent.gridItemConfig);
+    if (index !== -1) {
+      this._pageBlock.paletteGridItems.splice(index, 1);
+    }
+  }
 }

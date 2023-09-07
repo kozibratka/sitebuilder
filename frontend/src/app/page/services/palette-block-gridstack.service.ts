@@ -176,4 +176,8 @@ export class PaletteBlockGridstackService {
     fromEvent(window, 'resize').subscribe(updateCellHeightCallback);
     updateCellHeightCallback(null);
   }
+
+  removeWidget(element: HTMLElement) {
+    this.gridstackBlock.removeWidget(element);
+  }
 }

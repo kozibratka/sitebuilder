@@ -23,6 +23,7 @@ import {PaletteItemComponent} from './components/palette-builder/page-block/pale
 import { PluginMiniAdminComponent } from './pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MouseMoveScrollDirective} from '../core/directives/mouse-move-scroll-directive';
+import { RemoveGridItemDialogComponent } from './components/remove-grid-item-dialog/remove-grid-item-dialog.component';
 
 
 const routes: Routes = [
@@ -64,6 +65,7 @@ const routes: Routes = [
     MouseMoveScrollDirective,
     MenuPluginResolverDirective,
     PluginMiniAdminComponent,
+    RemoveGridItemDialogComponent,
   ],
   exports: [
     PaletteItemComponent
