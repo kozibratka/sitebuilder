@@ -1,0 +1,7 @@
+<div [ngSwitch]="formData.constructor.name">
+  <div *ngSwitchCase="'TextInput'">
+    <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
+    <input type="text" class="form-control" id="{{uniqueId}}" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">{{formData.helpText}}</div>
+  </div>
+</div>

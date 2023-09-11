@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="form-row row" *ngFor="let rowData of formData">
+    <div class="col" *ngFor="let columnData of rowData">
+      <app-form-input [formData]="columnData"></app-form-input>
+    </div>
+  </div>
+</div>
