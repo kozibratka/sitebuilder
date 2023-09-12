@@ -10,4 +10,5 @@ import {StringService} from '../../../../services/string.service';
 export class FormInputComponent {
   @Input() formData: BaseInput;
   uniqueId = StringService.randomString();
+  showPanel = false;
 }

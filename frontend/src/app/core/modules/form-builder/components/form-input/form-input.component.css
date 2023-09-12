@@ -1,0 +1,21 @@
+.input-panel-left{
+  position: absolute;
+  top: 50%;
+  left: -4%;
+}
+
+.input-panel-right{
+  position: absolute;
+  top: 50%;
+  right: -4%;
+}
+
+.input-panel-top{
+  position: absolute;
+  top: -4%;
+  right: 50%;
+}
+
+.input-container {
+  position: relative;
+}
