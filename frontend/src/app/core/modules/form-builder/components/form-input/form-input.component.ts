@@ -1,6 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BaseInput} from '../../class/base-input';
 import {StringService} from '../../../../services/string.service';
+import {NewInputDescriptionInterface} from '../../interfaces/new-input-description-interface';
 
 @Component({
   selector: 'app-form-input',
@@ -9,6 +10,12 @@ import {StringService} from '../../../../services/string.service';
 })
 export class FormInputComponent {
   @Input() formData: BaseInput;
+
+  @Output() newInput: EventEmitter<NewInputDescriptionInterface> = new EventEmitter();
   uniqueId = StringService.randomString();
   showPanel = false;
+
+  addNewInput(data: NewInputDescriptionInterface) {
+    this.newInput.emit(data);
+  }
 }

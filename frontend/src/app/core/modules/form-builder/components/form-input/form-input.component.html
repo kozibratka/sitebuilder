@@ -3,7 +3,8 @@
     <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
     <input type="text" class="form-control" id="{{uniqueId}}" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">{{formData.helpText}}</div>
-    <app-animation-hider [show]="showPanel">
+  </div>
+  <app-animation-hider [show]="showPanel">
     <div>
       <div class="input-panel input-panel-top">
         <button mat-icon-button>
@@ -19,16 +20,15 @@
         <button mat-icon-button [matMenuTriggerFor]="appMenu" [matMenuTriggerData]="{position: 'right'}">
           <mat-icon>add</mat-icon>
         </button>
-
       </div>
     </div>
-    </app-animation-hider>
-  </div>
+  </app-animation-hider>
+
 </div>
 
 <mat-menu #appMenu="matMenu">
   <ng-template matMenuContent let-position="position">
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Log off {{position}}</button>
+    <button mat-menu-item (click)="addNewInput({position, type: 'TextInput'})">Textové pole</button>
+    <button mat-menu-item (click)="addNewInput({position, type: 'Selectbox'})">Výběr</button>
   </ng-template>
 </mat-menu>
