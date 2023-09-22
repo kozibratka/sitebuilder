@@ -12,6 +12,14 @@ export class FormBuilderComponent {
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {
-    console.log(data, x, y);
+    const position = data.position === 'right' ? y + 1 : y;
+    this.formData[x].splice(position, 0, new TextInput());
+  }
+
+  deleteInput(x: number, y: number) {
+    this.formData[x].splice(y, 1);
+    if (!this.formData[x].length) {
+      this.formData.splice(x, 1);
+    }
   }
 }

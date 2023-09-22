@@ -12,10 +12,15 @@ export class FormInputComponent {
   @Input() formData: BaseInput;
 
   @Output() newInput: EventEmitter<NewInputDescriptionInterface> = new EventEmitter();
+  @Output() removeInput: EventEmitter<boolean> = new EventEmitter();
   uniqueId = StringService.randomString();
   showPanel = false;
 
   addNewInput(data: NewInputDescriptionInterface) {
     this.newInput.emit(data);
+  }
+
+  deleteInput() {
+    this.removeInput.emit(true);
   }
 }

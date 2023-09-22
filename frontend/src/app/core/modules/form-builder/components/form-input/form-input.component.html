@@ -10,6 +10,9 @@
         <button mat-icon-button>
           <mat-icon>settings</mat-icon>
         </button>
+        <button mat-icon-button class="text-danger" (click)="deleteInput()">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
       <div class="input-panel input-panel-left">
         <button mat-icon-button [matMenuTriggerFor]="appMenu" [matMenuTriggerData]="{position: 'left'}">
