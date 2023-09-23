@@ -9,7 +9,7 @@ import {NewInputDescriptionInterface} from '../../interfaces/new-input-descripti
   styleUrls: ['./form-input.component.css']
 })
 export class FormInputComponent {
-  @Input() formData: BaseInput;
+  @Input() formData: any;
   @Input() isNewRowInput = false;
 
   @Output() newInput: EventEmitter<NewInputDescriptionInterface> = new EventEmitter();

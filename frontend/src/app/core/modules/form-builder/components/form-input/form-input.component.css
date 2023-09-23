@@ -44,3 +44,7 @@
 .new-row-input-button {
   background: white;
 }
+
+.textarea-input {
+  resize: none;
+}

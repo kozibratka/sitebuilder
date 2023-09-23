@@ -9,8 +9,23 @@
 <div *ngIf="!isNewRowInput" class="input-container" [ngSwitch]="formData.constructor.name" (mouseenter)="showPanel=true" (mouseleave)="showPanel=false">
   <div *ngSwitchCase="'TextInput'">
     <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
-    <input type="text" class="form-control" id="{{uniqueId}}" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">{{formData.helpText}}</div>
+    <input type="text" class="form-control" id="{{uniqueId}}">
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
+  <div *ngSwitchCase="'Textarea'">
+    <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
+    <textarea class="form-control textarea-input" id="{{uniqueId}}" rows="{{formData.rows}}"></textarea>
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
+  <div *ngSwitchCase="'Selectbox'">
+    <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
+    <select class="form-select" aria-label="Default select example" id="{{uniqueId}}">
+      <option *ngFor="let option of formData.options"
+              [value]="option">
+        {{option}}
+      </option>
+    </select>
+    <div class="form-text">{{formData.helpText}}</div>
   </div>
   <app-animation-hider [show]="showPanel">
     <div>
@@ -41,5 +56,6 @@
   <ng-template matMenuContent let-position="position">
     <button mat-menu-item (click)="addNewInput({position, type: 'TextInput'})">Textové pole</button>
     <button mat-menu-item (click)="addNewInput({position, type: 'Selectbox'})">Výběr</button>
+    <button mat-menu-item (click)="addNewInput({position, type: 'Textarea'})">Textové pole velké</button>
   </ng-template>
 </mat-menu>
