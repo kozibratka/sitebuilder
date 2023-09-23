@@ -21,3 +21,26 @@
 .input-container {
   position: relative;
 }
+
+.line:before {
+  content: '';
+  position: absolute;
+  top: 53%;
+  left: 0;
+  border-top: 1px solid rgba(255,255,255,.25);
+  background: black;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.line {
+  position: relative;
+}
+
+.links {
+  position: relative;
+}
+
+.new-row-input-button {
+  background: white;
+}

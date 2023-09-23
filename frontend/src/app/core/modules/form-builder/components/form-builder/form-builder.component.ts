@@ -12,6 +12,10 @@ export class FormBuilderComponent {
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {
+    if (x === -1) {
+      this.formData.push([new TextInput()]);
+      return;
+    }
     const position = data.position === 'right' ? y + 1 : y;
     this.formData[x].splice(position, 0, new TextInput());
   }

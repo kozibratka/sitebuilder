@@ -10,6 +10,7 @@ import {NewInputDescriptionInterface} from '../../interfaces/new-input-descripti
 })
 export class FormInputComponent {
   @Input() formData: BaseInput;
+  @Input() isNewRowInput = false;
 
   @Output() newInput: EventEmitter<NewInputDescriptionInterface> = new EventEmitter();
   @Output() removeInput: EventEmitter<boolean> = new EventEmitter();

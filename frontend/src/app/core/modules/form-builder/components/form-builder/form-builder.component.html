@@ -4,4 +4,7 @@
       <app-form-input [formData]="columnData" (newInput)="addInput($event, x, y)" (removeInput)="deleteInput(x, y)"></app-form-input>
     </div>
   </div>
+  <div class="form-row row">
+    <app-form-input [isNewRowInput]="true" (newInput)="addInput($event, -1, -1)"></app-form-input>
+  </div>
 </div>

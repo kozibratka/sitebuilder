@@ -1,4 +1,12 @@
-<div class="input-container" [ngSwitch]="formData.constructor.name" (mouseenter)="showPanel=true" (mouseleave)="showPanel=false">
+<div class="text-center line" *ngIf="isNewRowInput">
+  <div class="links">
+    <button mat-icon-button class="new-row-input-button" [matMenuTriggerFor]="appMenu" [matMenuTriggerData]="{position: ''}">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!isNewRowInput" class="input-container" [ngSwitch]="formData.constructor.name" (mouseenter)="showPanel=true" (mouseleave)="showPanel=false">
   <div *ngSwitchCase="'TextInput'">
     <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
     <input type="text" class="form-control" id="{{uniqueId}}" aria-describedby="emailHelp">
