@@ -12,6 +12,7 @@ import {Textarea} from '../../class/textarea';
 })
 export class FormBuilderComponent {
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
+  @Input() isAdmin = true;
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {
     let typeInput: BaseInput = null;

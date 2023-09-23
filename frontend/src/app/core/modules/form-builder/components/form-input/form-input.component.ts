@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {BaseInput} from '../../class/base-input';
 import {StringService} from '../../../../services/string.service';
 import {NewInputDescriptionInterface} from '../../interfaces/new-input-description-interface';
 
@@ -11,6 +10,7 @@ import {NewInputDescriptionInterface} from '../../interfaces/new-input-descripti
 export class FormInputComponent {
   @Input() formData: any;
   @Input() isNewRowInput = false;
+  @Input() isAdmin = true;
 
   @Output() newInput: EventEmitter<NewInputDescriptionInterface> = new EventEmitter();
   @Output() removeInput: EventEmitter<boolean> = new EventEmitter();
