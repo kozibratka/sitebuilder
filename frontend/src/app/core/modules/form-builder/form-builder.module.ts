@@ -6,13 +6,21 @@ import {CoreModule} from '../../core.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import { TextInputAdminComponent } from './components/admin-input/text-input-admin/text-input-admin.component';
+import { TextareaAdminComponent } from './components/admin-input/textarea-admin/textarea-admin.component';
+import { SelectboxAdminComponent } from './components/admin-input/selectbox-admin/selectbox-admin.component';
+import { BaseAdminComponent } from './components/admin-input/base-admin/base-admin.component';
 
 
 
 @NgModule({
   declarations: [
     FormBuilderComponent,
-    FormInputComponent
+    FormInputComponent,
+    TextInputAdminComponent,
+    TextareaAdminComponent,
+    SelectboxAdminComponent,
+    BaseAdminComponent,
   ],
   exports: [
     FormBuilderComponent

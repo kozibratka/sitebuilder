@@ -30,7 +30,7 @@
   <app-animation-hider *ngIf="isAdmin" [show]="showPanel">
     <div>
       <div class="input-panel input-panel-top">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="settings()">
           <mat-icon>settings</mat-icon>
         </button>
         <button mat-icon-button class="text-danger" (click)="deleteInput()">

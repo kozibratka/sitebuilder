@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {StringService} from '../../../../services/string.service';
 import {NewInputDescriptionInterface} from '../../interfaces/new-input-description-interface';
+import {BaseInput} from '../../class/base-input';
+import {MatDialog} from '@angular/material/dialog';
+import {MoveableModalComponent} from '../../../../components/moveable-modal/moveable-modal.component';
 
 @Component({
   selector: 'app-form-input',
@@ -17,11 +20,26 @@ export class FormInputComponent {
   uniqueId = StringService.randomString();
   showPanel = false;
 
+
+  constructor(
+    public dialog: MatDialog
+  ) {
+  }
+
   addNewInput(data: NewInputDescriptionInterface) {
     this.newInput.emit(data);
   }
 
   deleteInput() {
     this.removeInput.emit(true);
+  }
+
+  settings() {
+    const adminComponent = this.formData.adminComponent;
+    const dialogRef = this.dialog.open(adminComponent, {
+      data: this.formData,
+      width: '50%',
+      position: {top: '110px'}
+    });
   }
 }
