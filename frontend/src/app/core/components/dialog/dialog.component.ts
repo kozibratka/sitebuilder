@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent {
-
+  @Input() saveButtonShow = true;
 }

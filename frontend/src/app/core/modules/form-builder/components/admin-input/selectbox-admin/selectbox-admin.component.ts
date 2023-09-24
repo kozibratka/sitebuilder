@@ -1,12 +1,26 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
 import {Selectbox} from '../../../class/selectbox';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-selectbox-admin',
   templateUrl: './selectbox-admin.component.html',
   styleUrls: ['./selectbox-admin.component.css']
 })
-export class SelectboxAdminComponent extends BaseAdminComponent<Selectbox>{
-
+export class SelectboxAdminComponent extends BaseAdminComponent<Selectbox> implements OnInit{
+  form: FormGroup;
+  ngOnInit(): void {
+     this.form = this.fb.group({
+      helpText: [this.settings.helpText],
+      label: [this.settings.label],
+       options: this.fb.array(this.settings.options.map((option: string) => this.fb.control(option)))
+    });
+     this.form.statusChanges.subscribe(status => {
+      if (status === 'VALID') {
+        const formValue = this.form.value;
+        Object.assign(this.settings, formValue);
+      }
+    });
+  }
 }
