@@ -1,9 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {StringService} from '../../../../services/string.service';
 import {NewInputDescriptionInterface} from '../../interfaces/new-input-description-interface';
-import {BaseInput} from '../../class/base-input';
 import {MatDialog} from '@angular/material/dialog';
-import {MoveableModalComponent} from '../../../../components/moveable-modal/moveable-modal.component';
 
 @Component({
   selector: 'app-form-input',

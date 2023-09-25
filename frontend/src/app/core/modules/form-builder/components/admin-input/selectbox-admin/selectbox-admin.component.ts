@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
 import {Selectbox} from '../../../class/selectbox';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-selectbox-admin',
@@ -16,11 +16,21 @@ export class SelectboxAdminComponent extends BaseAdminComponent<Selectbox> imple
       label: [this.settings.label],
        options: this.fb.array(this.settings.options.map((option: string) => this.fb.control(option)))
     });
-     this.form.statusChanges.subscribe(status => {
-      if (status === 'VALID') {
-        const formValue = this.form.value;
-        Object.assign(this.settings, formValue);
-      }
-    });
+  }
+  onSubmit() {
+    if (this.form.valid) {
+      const formValue = this.form.value;
+      Object.assign(this.settings, formValue);
+    }
+  }
+  removeOption(index: number) {
+    this.settings.options.splice(index, 1);
+  }
+  addOption() {
+    (this.form.get('options') as FormArray).push(this.fb.control(''));
+  }
+
+  get options() {
+    return this.form.get('options') as FormArray;
   }
 }

@@ -1,13 +1,32 @@
-<app-dialog [saveButtonShow]="false">
+<app-dialog>
   <ng-container title>Selectbox - nastavení</ng-container>
   <ng-container content>
-    <form [formGroup]="form">
+    <form [formGroup]="form" >
       <label class="form-label" for="label">Popisek: </label>
-      <input class="form-control" id="label" type="text" formControlName="label">
+      <input class="form-control mb-3" id="label" type="text" formControlName="label">
 
       <label class="form-label" for="help-text">Miniaturní nápověda: </label>
-      <input class="form-control" id="help-text" type="text" formControlName="helpText">
+      <input class="form-control mb-3" id="help-text" type="text" formControlName="helpText">
 
+      <div formArrayName="options">
+        <label class="form-label">Možnosti: </label>
+        <div class="row align-items-center"  *ngFor="let option of options.controls; let i=index">
+          <div class="col-auto">
+            <input class="form-control" type="text" value="{{option}}" [formControlName]="i">
+          </div>
+          <div class="col-auto">
+            <button mat-icon-button class="remove-button" (click)="removeOption(i)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button mat-icon-button class="remove-button" (click)="addOption()">
+        <mat-icon>add_circle</mat-icon>
+      </button>
     </form>
+  </ng-container>
+  <ng-container save-button>
+    <button class="btn btn-primary" (click)="onSubmit()">Uložit</button>
   </ng-container>
 </app-dialog>
