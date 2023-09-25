@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
 import {Selectbox} from '../../../class/selectbox';
-import {FormArray, FormGroup} from '@angular/forms';
+import {FormArray, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-selectbox-admin',
@@ -12,6 +12,7 @@ export class SelectboxAdminComponent extends BaseAdminComponent<Selectbox> imple
   form: FormGroup;
   ngOnInit(): void {
      this.form = this.fb.group({
+       name: [this.settings.name, [Validators.required]],
       helpText: [this.settings.helpText],
       label: [this.settings.label],
        options: this.fb.array(this.settings.options.map((option: string) => this.fb.control(option)))

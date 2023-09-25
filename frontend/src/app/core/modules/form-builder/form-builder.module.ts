@@ -11,6 +11,7 @@ import { TextareaAdminComponent } from './components/admin-input/textarea-admin/
 import { SelectboxAdminComponent } from './components/admin-input/selectbox-admin/selectbox-admin.component';
 import { BaseAdminComponent } from './components/admin-input/base-admin/base-admin.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -32,7 +33,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ]
 })
 export class FormBuilderModule { }
