@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MoveableModalComponent} from '../moveable-modal.component';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -11,8 +11,8 @@ export class MoveableModalService {
   ) {
   }
 
-  show(contentComponent: new() => any, params: any): void {
-    const dialogRef = this.dialog.open(MoveableModalComponent, {
+  show(contentComponent: new() => any, params: any) {
+    return this.dialog.open(MoveableModalComponent, {
       data: {
         contentComponent,
         params

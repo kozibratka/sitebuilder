@@ -20,6 +20,7 @@ import {MenuModule} from './modules/menu/menu.module';
 import {TextModule} from './modules/text/text.module';
 import {ImageModule} from './modules/image/image.module';
 import {VideoModule} from './modules/video/video.module';
+import {FormModule} from './modules/form/form.module';
 
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import {VideoModule} from './modules/video/video.module';
         TextModule,
         ImageModule,
         VideoModule,
+        FormModule
     ],
   declarations: [
   ]

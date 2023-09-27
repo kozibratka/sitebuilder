@@ -4,7 +4,6 @@ import {ImageV1ConfigInterface} from '../../interfaces/image-v1-config-interface
 import {AdminFormService} from '../../../../../forms/admin-form.service';
 import {FileManagerService} from '../../../../../../core/modules/file-manager/services/file-manager.service';
 import {FileManagerModalService} from '../../../../../../core/modules/file-manager/services/file-manager-modal.service';
-import {MenuV1ConfigInterface} from '../../../../menu/menu-v1/interfaces/menu-v1-config-interface';
 
 @Component({
   selector: 'app-image-v1-admin',

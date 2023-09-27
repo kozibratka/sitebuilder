@@ -5,4 +5,5 @@ export class PluginIdentifier {
 
   static IMAGE_V1 = 'image_v1';
   static VIDEO_V1 = 'video_v1';
+  static FORM_V1 = 'form_v1';
 }

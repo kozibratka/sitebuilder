@@ -20,6 +20,7 @@ export class ImageV1Component extends AbstractPlugin<ImageV1ConfigInterface> imp
   }
 
   refreshView(): void {
+    console.log('ffffff');
   }
 
   getDisabledStateWhenDraggingItem(): void {
