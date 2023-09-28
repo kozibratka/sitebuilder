@@ -1,5 +1,5 @@
 import {BaseInput} from './base-input';
-import {TextInputAdminComponent} from '../components/admin-input/text-input-admin/text-input-admin.component';
+import {TextInputAdminComponent} from '../components/form-admin/admin-input/text-input-admin/text-input-admin.component';
 
 export class TextInput extends BaseInput{
   value: string;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {StringService} from '../../../../services/string.service';
-import {NewInputDescriptionInterface} from '../../interfaces/new-input-description-interface';
 import {MatDialog} from '@angular/material/dialog';
+import {NewInputDescriptionInterface} from '../../../interfaces/new-input-description-interface';
+import {StringService} from '../../../../../services/string.service';
 
 @Component({
   selector: 'app-form-input',

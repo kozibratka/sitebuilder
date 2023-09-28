@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
-import {TextInput} from '../../../class/text-input';
+import {TextInput} from '../../../../class/text-input';
 
 @Component({
   selector: 'app-text-input-admin',

@@ -1,0 +1,22 @@
+<div class="input-container" [ngSwitch]="formData.constructor.name">
+  <div *ngSwitchCase="'TextInput'">
+    <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
+    <input type="text" class="form-control" id="{{uniqueId}}">
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
+  <div *ngSwitchCase="'Textarea'">
+    <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
+    <textarea class="form-control textarea-input" id="{{uniqueId}}" rows="{{formData.rows}}"></textarea>
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
+  <div *ngSwitchCase="'Selectbox'">
+    <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
+    <select class="form-select" aria-label="Default select example" id="{{uniqueId}}">
+      <option *ngFor="let option of formData.options"
+              [value]="option">
+        {{option}}
+      </option>
+    </select>
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
+</div>

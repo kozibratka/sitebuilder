@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
-import {Textarea} from '../../../class/textarea';
+import {Textarea} from '../../../../class/textarea';
 
 @Component({
   selector: 'app-textarea-admin',

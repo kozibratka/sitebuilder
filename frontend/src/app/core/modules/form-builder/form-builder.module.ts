@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilderComponent } from './components/form-builder/form-builder.component';
-import { FormInputComponent } from './components/form-input/form-input.component';
 import {CoreModule} from '../../core.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
-import { TextInputAdminComponent } from './components/admin-input/text-input-admin/text-input-admin.component';
-import { TextareaAdminComponent } from './components/admin-input/textarea-admin/textarea-admin.component';
-import { SelectboxAdminComponent } from './components/admin-input/selectbox-admin/selectbox-admin.component';
-import { BaseAdminComponent } from './components/admin-input/base-admin/base-admin.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import {FormBuilderComponent} from './components/form-admin/form-builder/form-builder.component';
+import {FormInputComponent} from './components/form-admin/form-input/form-input.component';
+import {TextInputAdminComponent} from './components/form-admin/admin-input/text-input-admin/text-input-admin.component';
+import {TextareaAdminComponent} from './components/form-admin/admin-input/textarea-admin/textarea-admin.component';
+import {SelectboxAdminComponent} from './components/form-admin/admin-input/selectbox-admin/selectbox-admin.component';
+import {BaseAdminComponent} from './components/form-admin/admin-input/base-admin/base-admin.component';
+import {FormInputPublicComponent} from './components/form-public/form-input/form-input-public.component';
 
 
 
@@ -19,13 +20,15 @@ import {MatDialogModule} from '@angular/material/dialog';
   declarations: [
     FormBuilderComponent,
     FormInputComponent,
+    FormInputPublicComponent,
     TextInputAdminComponent,
     TextareaAdminComponent,
     SelectboxAdminComponent,
     BaseAdminComponent,
   ],
   exports: [
-    FormBuilderComponent
+    FormBuilderComponent,
+    FormInputPublicComponent
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,6 @@
 import {BaseInput} from './base-input';
-import {SelectboxAdminComponent} from '../components/admin-input/selectbox-admin/selectbox-admin.component';
 import {StringService} from '../../../services/string.service';
+import {SelectboxAdminComponent} from '../components/form-admin/admin-input/selectbox-admin/selectbox-admin.component';
 
 export class Selectbox extends BaseInput{
   options: string[];

@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {BaseInput} from '../../class/base-input';
-import {TextInput} from '../../class/text-input';
-import {NewInputDescriptionInterface} from '../../interfaces/new-input-description-interface';
-import {Selectbox} from '../../class/selectbox';
-import {Textarea} from '../../class/textarea';
+import {BaseInput} from '../../../class/base-input';
+import {TextInput} from '../../../class/text-input';
+import {NewInputDescriptionInterface} from '../../../interfaces/new-input-description-interface';
+import {Selectbox} from '../../../class/selectbox';
+import {Textarea} from '../../../class/textarea';
 
 @Component({
   selector: 'app-form-builder',

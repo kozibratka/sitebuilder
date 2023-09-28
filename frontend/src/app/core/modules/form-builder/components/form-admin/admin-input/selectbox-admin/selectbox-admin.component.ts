@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
-import {Selectbox} from '../../../class/selectbox';
 import {FormArray, FormGroup, Validators} from '@angular/forms';
+import {Selectbox} from '../../../../class/selectbox';
 
 @Component({
   selector: 'app-selectbox-admin',
@@ -25,7 +25,7 @@ export class SelectboxAdminComponent extends BaseAdminComponent<Selectbox> imple
     }
   }
   removeOption(index: number) {
-    this.settings.options.splice(index, 1);
+    (this.form.get('options') as FormArray).removeAt(index);
   }
   addOption() {
     (this.form.get('options') as FormArray).push(this.fb.control(''));

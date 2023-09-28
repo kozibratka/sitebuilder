@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {BaseInput} from '../../../class/base-input';
 import {FormBuilder} from '@angular/forms';
+import {BaseInput} from '../../../../class/base-input';
 
 @Component({
   selector: 'app-base-admin',
