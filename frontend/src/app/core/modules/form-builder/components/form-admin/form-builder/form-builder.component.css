@@ -1,0 +1,4 @@
+.input-container-col:hover {
+  outline-color: #007BFF;
+  outline: dotted 1px;
+}
