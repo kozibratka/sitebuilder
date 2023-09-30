@@ -27,6 +27,14 @@
     </select>
     <div class="form-text">{{formData.helpText}}</div>
   </div>
+  <div *ngSwitchCase="'Checkbox'">
+    <div class="form-check" *ngFor="let option of formData.options">
+      <input class="form-check-input" type="checkbox" id="{{option}}" name="{{option}}" value="{{option}}">
+      <label class="form-check-label" for="{{option}}">{{option}}</label>
+    </div>
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
+
   <app-animation-hider *ngIf="isAdmin" [show]="showPanel">
     <div>
       <div class="input-panel input-panel-top">
@@ -57,5 +65,6 @@
     <button mat-menu-item (click)="addNewInput({position, type: 'TextInput'})">Textové pole</button>
     <button mat-menu-item (click)="addNewInput({position, type: 'Selectbox'})">Výběr</button>
     <button mat-menu-item (click)="addNewInput({position, type: 'Textarea'})">Textové pole velké</button>
+    <button mat-menu-item (click)="addNewInput({position, type: 'Checkbox'})">Možnosti zaškrtávací</button>
   </ng-template>
 </mat-menu>

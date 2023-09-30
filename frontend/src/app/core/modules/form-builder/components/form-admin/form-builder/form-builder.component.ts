@@ -4,6 +4,7 @@ import {TextInput} from '../../../class/text-input';
 import {NewInputDescriptionInterface} from '../../../interfaces/new-input-description-interface';
 import {Selectbox} from '../../../class/selectbox';
 import {Textarea} from '../../../class/textarea';
+import {Checkbox} from '../../../class/checkbox';
 
 @Component({
   selector: 'app-form-builder',
@@ -25,6 +26,9 @@ export class FormBuilderComponent {
         break;
       case 'Textarea':
         typeInput = new Textarea();
+        break;
+      case 'Checkbox':
+        typeInput = new Checkbox();
         break;
     }
 

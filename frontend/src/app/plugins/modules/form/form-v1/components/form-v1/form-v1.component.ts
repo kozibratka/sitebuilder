@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {AbstractPlugin} from '../../../../../abstract-class/abstract-plugin';
 import {FormV1ConfigInterface} from '../../interfaces/form-v1-config-interface';
 import {PluginIdentifier} from '../../../../../constants/plugin-identifier';
@@ -6,6 +6,7 @@ import {TextInput} from '../../../../../../core/modules/form-builder/class/text-
 import {FormBuilder} from '@angular/forms';
 import * as _ from 'underscore';
 import {BaseInput} from '../../../../../../core/modules/form-builder/class/base-input';
+import {FormPublicComponent} from '../../../../../../core/modules/form-builder/components/form-public/form-public/form-public.component';
 
 @Component({
   selector: 'app-form-v1',
@@ -14,8 +15,9 @@ import {BaseInput} from '../../../../../../core/modules/form-builder/class/base-
 })
 export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> implements OnInit{
 
-  form;
+  @ViewChild(FormPublicComponent, {static: true}) formBuilderPublic: FormPublicComponent;
 
+  form;
   constructor(
     private fb: FormBuilder,
   ) {
@@ -23,7 +25,6 @@ export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> imple
   }
 
   ngOnInit(): void {
-    this.refreshView();
   }
 
   initEmptySettings(): FormV1ConfigInterface {
@@ -37,11 +38,7 @@ export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> imple
   }
 
   refreshView(): void {
-    const flatFormData = _.flatten(this.settings.form);
-    const controls = flatFormData.map((data: BaseInput) => ({[data.name]: data.validators}));
-    this.form = this.fb.group(
-      {...controls}
-    );
+    this.formBuilderPublic.refresh();
   }
 
 }

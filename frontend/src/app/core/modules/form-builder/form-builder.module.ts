@@ -13,6 +13,7 @@ import {TextareaAdminComponent} from './components/form-admin/admin-input/textar
 import {SelectboxAdminComponent} from './components/form-admin/admin-input/selectbox-admin/selectbox-admin.component';
 import {BaseAdminComponent} from './components/form-admin/admin-input/base-admin/base-admin.component';
 import {FormInputPublicComponent} from './components/form-public/form-input/form-input-public.component';
+import {CheckboxAdminComponent} from './components/form-admin/admin-input/checkbox-admin/checkbox-admin.component';
 
 
 
@@ -25,6 +26,7 @@ import {FormInputPublicComponent} from './components/form-public/form-input/form
     TextareaAdminComponent,
     SelectboxAdminComponent,
     BaseAdminComponent,
+    CheckboxAdminComponent,
   ],
   exports: [
     FormBuilderComponent,
