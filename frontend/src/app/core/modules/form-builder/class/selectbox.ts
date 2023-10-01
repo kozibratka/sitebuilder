@@ -1,15 +1,15 @@
 import {BaseInput} from './base-input';
 import {StringService} from '../../../services/string.service';
 import {SelectboxAdminComponent} from '../components/form-admin/admin-input/selectbox-admin/selectbox-admin.component';
-import {FormBuilder, FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
+import {BaseAdminComponent} from '../components/form-admin/admin-input/base-admin/base-admin.component';
 
 export class Selectbox extends BaseInput{
   options: string[];
-  validators: [] = [];
+  required = false;
 
 
   constructor(
-    private fb: FormBuilder
   ) {
     super();
     this.options = ['možnost 1', 'možnost 2', 'možnost 3'];
@@ -17,10 +17,11 @@ export class Selectbox extends BaseInput{
     this.helpText = 'Nápověda';
     this.name = 'select ' + StringService.randomString();
   }
-
-  adminComponent = SelectboxAdminComponent;
+  getAdminComponent(): typeof BaseAdminComponent<any> {
+    return SelectboxAdminComponent;
+  }
 
   createForm(){
-    return {[this.name]: new FormControl('', this.validators)};
+    return {[this.name]: new FormControl('', [this.required ? Validators.required : null])};
   }
 }

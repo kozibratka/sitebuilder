@@ -1,23 +1,27 @@
 import {BaseInput} from './base-input';
-import {TextInputAdminComponent} from '../components/form-admin/admin-input/text-input-admin/text-input-admin.component';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
+import {BaseAdminComponent} from '../components/form-admin/admin-input/base-admin/base-admin.component';
+import {TextareaAdminComponent} from '../components/form-admin/admin-input/textarea-admin/textarea-admin.component';
+import {StringService} from '../../../services/string.service';
 
 export class Textarea extends BaseInput{
   value: string;
   rows = 3;
 
-  validators: [] = [];
+  required: boolean;
 
 
   constructor() {
     super();
     this.label = 'Název';
     this.helpText = 'Nápověda';
+    this.name = 'textarea ' + StringService.randomString();
+  }
+  getAdminComponent(): typeof BaseAdminComponent<any> {
+    return TextareaAdminComponent;
   }
 
-  adminComponent = TextInputAdminComponent;
-
   createForm(){
-    return {[this.name]: new FormControl('', this.validators)};
+    return {[this.name]: new FormControl('', [this.required ? Validators.required : null])};
   }
 }

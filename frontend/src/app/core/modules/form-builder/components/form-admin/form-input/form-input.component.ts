@@ -33,7 +33,7 @@ export class FormInputComponent {
   }
 
   settings() {
-    const adminComponent = this.formData.adminComponent;
+    const adminComponent = this.formData.getAdminComponent();
     const dialogRef = this.dialog.open(adminComponent, {
       data: this.formData,
       width: '35%',

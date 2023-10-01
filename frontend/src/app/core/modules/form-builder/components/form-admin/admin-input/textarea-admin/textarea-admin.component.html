@@ -1,5 +1,24 @@
-<app-dialog>
-  <ng-container title>Smazání položky menu</ng-container>
-  <ng-container content>Opravdu si přejete smazat položku menu?</ng-container>
-  <ng-container save-button>Odstranit</ng-container>
+<app-dialog [saveButtonShow]="false">
+  <ng-container title>Textarea - nastavení</ng-container>
+  <ng-container content>
+    <form [formGroup]="form" >
+      <label class="form-label" for="name">Název: </label>
+      <input class="form-control" id="name" type="text" formControlName="name">
+      <div *ngIf="form.get('name').hasError('required')" class="invalid-feedback">
+        Toto pole je povinné
+      </div>
+      <div class="form-text mb-3">Slouží pro odeslaná data</div>
+      <label class="form-label" for="label">Popisek: </label>
+      <input class="form-control mb-3" id="label" type="text" formControlName="label">
+      <label class="form-label" for="help-text">Miniaturní nápověda: </label>
+      <input class="form-control mb-3" id="help-text" type="text" formControlName="helpText">
+      <div class="form-check">
+        <input class="form-check-input" id="help-text1" type="checkbox" formControlName="required">
+        <label class="form-check-label" for="help-text1">Povinné vyplnit: </label>
+      </div>
+    </form>
+  </ng-container>
+  <ng-container custom-button>
+    <button [mat-dialog-close] = "form.valid" [disabled]="!form.valid" (click)="onSubmit()" class="btn btn-primary">Uložit</button>
+  </ng-container>
 </app-dialog>

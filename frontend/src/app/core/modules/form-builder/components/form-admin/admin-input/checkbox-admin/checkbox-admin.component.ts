@@ -15,7 +15,12 @@ export class CheckboxAdminComponent extends BaseAdminComponent<Checkbox> impleme
        name: [this.settings.name, [Validators.required]],
       helpText: [this.settings.helpText],
       label: [this.settings.label],
-       options: this.fb.array(this.settings.options.map((option: string) => this.fb.control(option)))
+       options: this.fb.array(this.settings.options.map((option) => this.fb.group(
+         {
+           option: option.option,
+           required: option.required,
+         }
+       )))
     });
   }
   onSubmit() {
@@ -28,10 +33,10 @@ export class CheckboxAdminComponent extends BaseAdminComponent<Checkbox> impleme
     (this.form.get('options') as FormArray).removeAt(index);
   }
   addOption() {
-    (this.form.get('options') as FormArray).push(this.fb.control(''));
+    this.options.push(this.fb.group({option: '', required: false}));
   }
 
   get options() {
-    return this.form.get('options') as FormArray;
+    return this.form.get('options') as FormArray<FormGroup>;
   }
 }

@@ -18,9 +18,13 @@
 
       <div formArrayName="options">
         <label class="form-label">Možnosti: </label>
-        <div class="row align-items-center"  *ngFor="let option of options.controls; let i=index">
+        <div class="row align-items-center"  *ngFor="let option of options.controls; let i=index" formGroupName="{{i}}">
           <div class="col-auto">
-            <input class="form-control" type="text" value="{{option}}" [formControlName]="i">
+            <input class="form-control" type="text" formControlName="option">
+          </div>
+          <div class="form-check col-auto">
+            <input class="form-check-input" id="help-text{{i}}" type="checkbox" formControlName="required">
+            <label class="form-check-label" for="help-text{{i}}">Povinné vyplnit: </label>
           </div>
           <div class="col-auto">
             <button mat-icon-button class="remove-button" (click)="removeOption(i)">

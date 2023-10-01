@@ -19,4 +19,11 @@
     </select>
     <div class="form-text">{{formData.helpText}}</div>
   </div>
+  <div *ngSwitchCase="'Checkbox'">
+    <div class="form-check" *ngFor="let option of formData.options">
+      <input class="form-check-input" type="checkbox" id="{{option}}" name="{{option}}" value="{{option}}">
+      <label class="form-check-label" for="{{option}}">{{option}}</label>
+    </div>
+    <div class="form-text">{{formData.helpText}}</div>
+  </div>
 </div>
