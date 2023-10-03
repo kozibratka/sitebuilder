@@ -1,19 +1,33 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BaseInput} from '../../../class/base-input';
 import {TextInput} from '../../../class/text-input';
 import {NewInputDescriptionInterface} from '../../../interfaces/new-input-description-interface';
 import {Selectbox} from '../../../class/selectbox';
 import {Textarea} from '../../../class/textarea';
 import {Checkbox} from '../../../class/checkbox';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormPublicComponent} from '../../form-public/form-public/form-public.component';
 
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
   styleUrls: ['./form-builder.component.css']
 })
-export class FormBuilderComponent {
+export class FormBuilderComponent implements OnInit{
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
   @Input() isAdmin = true;
+
+  @Output() refresh = new EventEmitter<boolean>();
+  form: FormGroup;
+
+  constructor(
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.form = FormPublicComponent.initForm(this.formData, this.fb);
+  }
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {
     let typeInput: BaseInput = null;
@@ -35,10 +49,12 @@ export class FormBuilderComponent {
 
     if (x === -1) {
       this.formData.push([typeInput]);
+      this.refresh.emit(true);
       return;
     }
     const position = data.position === 'right' ? y + 1 : y;
     this.formData[x].splice(position, 0, typeInput);
+    this.refresh.emit(true);
   }
 
   deleteInput(x: number, y: number) {
@@ -46,5 +62,6 @@ export class FormBuilderComponent {
     if (!this.formData[x].length) {
       this.formData.splice(x, 1);
     }
+    this.refresh.emit(true);
   }
 }

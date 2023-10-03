@@ -22,6 +22,10 @@ export class Selectbox extends BaseInput{
   }
 
   createForm(){
-    return {[this.name]: new FormControl('', [this.required ? Validators.required : null])};
+    const validations = [];
+    if (this.required) {
+      validations.push(Validators.required);
+    }
+    return {[this.name]: validations};
   }
 }

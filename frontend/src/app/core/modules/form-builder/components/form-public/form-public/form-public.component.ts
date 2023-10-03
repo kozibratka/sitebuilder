@@ -19,23 +19,26 @@ export class FormPublicComponent implements OnInit{
   ) {
   }
 
-  ngOnInit(): void {
-    this.refresh();
-  }
-
-  refresh(): void {
-    const flatFormData = _.flatten(this.formData);
-    const formControls = [];
+  static initForm(formData: Array<Array<BaseInput>>, fb: FormBuilder) {
+    const flatFormData = _.flatten(formData);
+    let formControls = {};
     flatFormData.forEach((data: BaseInput) => {
       const form = data.createForm();
       if (Array.isArray(form)) {
-        formControls.push(...form);
+        formControls = Object.assign(formControls, ...form);
       } else {
-        formControls.push(form);
+        formControls = Object.assign(formControls, form);
       }
     });
-    this.form = this.fb.group(
-      {...formControls}
+    return fb.group(
+      formControls
     );
+  }
+
+  ngOnInit(): void {
+    this.refresh();
+  }
+  refresh() {
+    this.form = FormPublicComponent.initForm(this.formData, this.fb);
   }
 }

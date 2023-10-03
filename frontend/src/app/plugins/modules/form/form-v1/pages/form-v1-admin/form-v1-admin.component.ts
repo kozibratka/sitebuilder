@@ -10,4 +10,7 @@ import {FormV1ConfigInterface} from '../../interfaces/form-v1-config-interface';
 export class FormV1AdminComponent extends AbstractAdminSetting<FormV1ConfigInterface>{
   createAdminForm(settings: FormV1ConfigInterface): void {
   }
+  refreshView() {
+    this.contextObject.refreshView();
+  }
 }

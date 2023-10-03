@@ -21,7 +21,11 @@ export class Textarea extends BaseInput{
     return TextareaAdminComponent;
   }
 
-  createForm(){
-    return {[this.name]: new FormControl('', [this.required ? Validators.required : null])};
+  createForm() {
+    const validations = [];
+    if (this.required) {
+      validations.push(Validators.required);
+    }
+    return {[this.name]: validations};
   }
 }

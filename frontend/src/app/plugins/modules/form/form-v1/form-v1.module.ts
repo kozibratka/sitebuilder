@@ -6,6 +6,7 @@ import { FormV1Component } from './components/form-v1/form-v1.component';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {FormV1ResolverService} from './services/form-v1-resolver.service';
 import {FormPublicComponent} from '../../../../core/modules/form-builder/components/form-public/form-public/form-public.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -17,7 +18,8 @@ import {FormPublicComponent} from '../../../../core/modules/form-builder/compone
     ],
     imports: [
         CommonModule,
-        FormBuilderModule
+        FormBuilderModule,
+        ReactiveFormsModule
     ],
   providers: [
     {provide: AbstractPluginResolver, useClass: FormV1ResolverService, multi: true},

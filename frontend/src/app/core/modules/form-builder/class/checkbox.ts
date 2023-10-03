@@ -20,8 +20,14 @@ export class Checkbox extends BaseInput {
     return CheckboxAdminComponent;
   }
 
-  createForm(){
-    return this.options.map(value => ({[value.option]: new FormControl('', [value.required ? Validators.required : null])}));
+  createForm() {
+    return this.options.map(value => {
+        const validations = [];
+        if (value.required) {
+          validations.push(Validators.required);
+        }
+        return {[value.option]: validations};
+      }
+    );
   }
-
 }

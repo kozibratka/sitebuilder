@@ -6,5 +6,5 @@ export abstract class BaseInput {
   helpText: string;
   name: string;
   abstract getAdminComponent(): typeof BaseAdminComponent<any>;
-  abstract createForm(): {[key: string]: FormControl} | {[key: string]: FormControl}[];
+  abstract createForm(): {[key: string]: any[]} | {[key: string]: any[]}[];
 }

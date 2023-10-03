@@ -1,7 +1,37 @@
 <div class="container">
-  <div class="form-row row" *ngFor="let rowData of formData;index as x">
-    <div class="col" *ngFor="let columnData of rowData;index as y">
-      <app-form-input-public [formData]="columnData"></app-form-input-public>
+  <form [formGroup]="form">
+    <div class="form-row row" *ngFor="let rowData of formData;index as x">
+      <div class="col" *ngFor="let columnData of rowData;index as y">
+        <div class="input-container" [ngSwitch]="columnData.constructor.name">
+          <div *ngSwitchCase="'TextInput'">
+            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>
+            <input type="text" class="form-control" id="{{x}}{{y}}" [formControlName]="columnData.name">
+            <div class="form-text">{{columnData.helpText}}</div>
+          </div>
+          <div *ngSwitchCase="'Textarea'">
+            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>
+            <textarea class="form-control textarea-input" id="{{x}}{{y}}" rows="{{$any(columnData).rows}}" [formControlName]="columnData.name"></textarea>
+            <div class="form-text">{{columnData.helpText}}</div>
+          </div>
+          <div *ngSwitchCase="'Selectbox'">
+            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>
+            <select class="form-select" aria-label="Default select example" id="{{x}}{{y}}" [formControlName]="columnData.name">
+              <option *ngFor="let option of $any(columnData).options"
+                      [value]="option">
+                {{option}}
+              </option>
+            </select>
+            <div class="form-text">{{columnData.helpText}}</div>
+          </div>
+          <div *ngSwitchCase="'Checkbox'">
+            <div class="form-check" *ngFor="let option of $any(columnData).options">
+              <input class="form-check-input" type="checkbox" id="{{option.option}}" name="{{option.option}}" [formControlName]="option.option">
+              <label class="form-check-label" for="{{option.option}}">{{option.option}}</label>
+            </div>
+            <div class="form-text">{{columnData.helpText}}</div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

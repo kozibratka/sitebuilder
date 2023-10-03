@@ -12,7 +12,6 @@ import {TextInputAdminComponent} from './components/form-admin/admin-input/text-
 import {TextareaAdminComponent} from './components/form-admin/admin-input/textarea-admin/textarea-admin.component';
 import {SelectboxAdminComponent} from './components/form-admin/admin-input/selectbox-admin/selectbox-admin.component';
 import {BaseAdminComponent} from './components/form-admin/admin-input/base-admin/base-admin.component';
-import {FormInputPublicComponent} from './components/form-public/form-input/form-input-public.component';
 import {CheckboxAdminComponent} from './components/form-admin/admin-input/checkbox-admin/checkbox-admin.component';
 
 
@@ -21,7 +20,6 @@ import {CheckboxAdminComponent} from './components/form-admin/admin-input/checkb
   declarations: [
     FormBuilderComponent,
     FormInputComponent,
-    FormInputPublicComponent,
     TextInputAdminComponent,
     TextareaAdminComponent,
     SelectboxAdminComponent,
@@ -30,7 +28,6 @@ import {CheckboxAdminComponent} from './components/form-admin/admin-input/checkb
   ],
   exports: [
     FormBuilderComponent,
-    FormInputPublicComponent
   ],
   imports: [
     CommonModule,
