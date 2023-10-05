@@ -48,3 +48,25 @@
 .textarea-input {
   resize: none;
 }
+
+.position-right {
+  text-align: right;
+}
+
+.position-center {
+  text-align: center;
+}
+
+
+.checkbox {
+  display: inline-block;
+}
+
+.position-right .form-check {
+  padding-left: 0 !important;
+}
+
+.position-right .form-check-input {
+  float: right !important;
+  margin-left: 0.5em !important;
+}

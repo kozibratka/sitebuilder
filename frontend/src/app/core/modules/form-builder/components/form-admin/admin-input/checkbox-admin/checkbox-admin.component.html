@@ -16,6 +16,13 @@
       <label class="form-label" for="help-text">Miniaturní nápověda: </label>
       <input class="form-control mb-3" id="help-text" type="text" formControlName="helpText">
 
+      <label for="position" class="form-label">Pozice</label>
+      <select class="form-select" id="position" formControlName="position">
+        <option value="left">Vlevo</option>
+        <option value="right">Vpravo</option>
+      </select>
+
+
       <div formArrayName="options">
         <label class="form-label">Možnosti: </label>
         <div class="row align-items-center"  *ngFor="let option of options.controls; let i=index" formGroupName="{{i}}">

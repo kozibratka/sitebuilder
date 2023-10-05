@@ -14,6 +14,7 @@ export class CheckboxAdminComponent extends BaseAdminComponent<Checkbox> impleme
      this.form = this.fb.group({
        name: [this.settings.name, [Validators.required]],
       helpText: [this.settings.helpText],
+       position: this.settings.position,
       label: [this.settings.label],
        options: this.fb.array(this.settings.options.map((option) => this.fb.group(
          {

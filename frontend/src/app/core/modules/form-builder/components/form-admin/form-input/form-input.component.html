@@ -7,7 +7,7 @@
 </div>
 
 <div *ngIf="!isNewRowInput" class="input-container" (mouseenter)="showPanel=true" (mouseleave)="showPanel=false">
-  <div class="input-container" [ngSwitch]="formData.constructor.name">
+  <div class="input-container position-{{formData.position}}" [ngSwitch]="formData.constructor.name">
     <div *ngSwitchCase="'TextInput'">
       <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
       <input type="text" class="form-control" id="{{uniqueId}}">
@@ -28,10 +28,10 @@
       </select>
       <div class="form-text">{{formData.helpText}}</div>
     </div>
-    <div *ngSwitchCase="'Checkbox'">
+    <div class="checkbox" *ngSwitchCase="'Checkbox'">
       <div class="form-check" *ngFor="let option of formData.options">
-        <input class="form-check-input" type="checkbox" id="{{option.option}}" name="{{option.option}}">
         <label class="form-check-label" for="{{option.option}}">{{option.option}}</label>
+        <input class="form-check-input" type="checkbox" id="{{option.option}}" name="{{option.option}}">
       </div>
       <div class="form-text">{{formData.helpText}}</div>
     </div>

@@ -1,11 +1,12 @@
 import {BaseInput} from './base-input';
 import {StringService} from '../../../services/string.service';
 import {CheckboxAdminComponent} from '../components/form-admin/admin-input/checkbox-admin/checkbox-admin.component';
-import {FormControl, Validators} from '@angular/forms';
+import {Validators} from '@angular/forms';
 import {BaseAdminComponent} from '../components/form-admin/admin-input/base-admin/base-admin.component';
 
 export class Checkbox extends BaseInput {
   options: {option: string, required: boolean}[];
+  position: 'left' | 'right';
 
 
   constructor() {
@@ -14,6 +15,7 @@ export class Checkbox extends BaseInput {
     this.label = 'Název';
     this.helpText = 'Nápověda';
     this.name = 'checkbox ' + StringService.randomString();
+    this.position = 'left';
   }
 
   getAdminComponent(): typeof BaseAdminComponent<any> {
