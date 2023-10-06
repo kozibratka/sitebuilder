@@ -72,6 +72,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'image_v1' }
 
+    App\Service\Plugin\Form\FormV1\FormV1Service:
+        tags:
+            - { name: 'plugin_service', key: 'form_v1' }
+
     App\Service\Plugin\PluginServiceService:
         arguments: [!tagged { tag: 'plugin_service', index_by: 'key' }]
 
