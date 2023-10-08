@@ -5,36 +5,24 @@ use App\Entity\SiteBuilder\Page;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class MenuV1Item
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="MenuV1", inversedBy="items")
-     */
+    #[ORM\ManyToOne(targetEntity: 'MenuV1', inversedBy: 'items')]
     private MenuV1 $menu;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Page")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page')]
     private ?Page $page = null;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private string $name = '';
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private int $level = 0;
 
     public function getMenu(): MenuV1

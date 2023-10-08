@@ -6,24 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class MenuV1 extends BasePlugin
 {
-    /**
-     * @ORM\OneToMany(targetEntity="MenuV1Item", mappedBy="menu", cascade={"persist"}, orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: 'MenuV1Item', mappedBy: 'menu', cascade: ['persist'], orphanRemoval: true)]
     protected Collection $items;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $logoName = null;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $logoImage = null;
 
     public function __construct()

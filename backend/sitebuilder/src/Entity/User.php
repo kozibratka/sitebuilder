@@ -13,45 +13,43 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="user")
  * @UniqueEntity("email")
  */
+#[ORM\Table(name: 'user')]
+#[ORM\Entity]
 class User implements UserInterface
 {
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
      * @Serializer\Exclude()
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(min="3")
      */
+    #[ORM\Column(type: 'string')]
     private string $fullName = '';
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Email
      */
+    #[ORM\Column(type: 'string')]
     private string $email = '';
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(min="6")
      * @Serializer\Exclude()
      */
+    #[ORM\Column(type: 'string')]
     private string $password = '';
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Web", mappedBy="user", cascade={"persist"})
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Web', mappedBy: 'user', cascade: ['persist'])]
     private Collection $webs;
 
     public function __construct()

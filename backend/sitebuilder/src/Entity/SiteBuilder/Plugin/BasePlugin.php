@@ -18,11 +18,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     errorPath: 'name',
     message: 'This value is already used.',
 )]
+
+#[ORM\Entity]
+#[ORM\Table(name:'base_plugin')]
+#[ORM\InheritanceType('JOINED')]
+#[ORM\DiscriminatorColumn(name:'pluginType', type:'string')]
 /**
- * @ORM\Entity
- * @ORM\Table(name="base_plugin")
- * @ORM\InheritanceType("JOINED")
- * @ORM\DiscriminatorColumn(name="pluginType", type="string")
  * @Serializer\Discriminator(
  *     field = "pluginType",
  *     disabled = false,
@@ -36,37 +37,33 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 abstract class BasePlugin
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $name = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\PaletteGridItem", mappedBy="plugin")
      * @Serializer\Exclude()
      */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PaletteGridItem', mappedBy: 'plugin')]
     private Collection $paletteGridItems;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(onDelete="CASCADE", nullable=false)
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE', nullable: false)]
     private ?User $user = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Web", inversedBy="plugins")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Web', inversedBy: 'plugins')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Web $web = null;
 
     public ?string $identifier = null;

@@ -11,43 +11,37 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="page_block")
- */
+#[ORM\Table(name: 'page_block')]
+#[ORM\Entity]
 class PageBlock
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="integer", options={"default" : 1})
      * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'integer', options: ['default' => 1])]
     private $height = 1;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Page", inversedBy="pageBlocks")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page', inversedBy: 'pageBlocks')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Page $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="PaletteGridItem", mappedBy="pageBlock", cascade={"persist"}, orphanRemoval=true)
      * @Assert\Valid()
      */
+    #[ORM\OneToMany(targetEntity: 'PaletteGridItem', mappedBy: 'pageBlock', cascade: ['persist'], orphanRemoval: true)]
     private Collection $paletteGridItems;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
 
     private string $uniqueId = '';

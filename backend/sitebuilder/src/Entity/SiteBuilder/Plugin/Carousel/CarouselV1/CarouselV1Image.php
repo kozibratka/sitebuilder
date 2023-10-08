@@ -4,36 +4,24 @@ namespace App\Entity\SiteBuilder\Plugin\Carousel\CarouselV1;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class CarouselV1Image
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private string $path = '';
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private string $h1 = '';
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    #[ORM\Column(type: 'string')]
     private string $h2 = '';
 
-    /**
-     * @ORM\ManyToOne(targetEntity="CarouselV1", inversedBy="images")
-     */
+    #[ORM\ManyToOne(targetEntity: 'CarouselV1', inversedBy: 'images')]
     private $carousel;
 
     public function getId()

@@ -5,15 +5,11 @@ namespace App\Entity\SiteBuilder\Plugin\Image\ImageV1;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="image_v1")
- */
+#[ORM\Table(name: 'image_v1')]
+#[ORM\Entity]
 class ImageV1 extends BasePlugin
 {
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private string $imagePath;
 
     public function setIdentifier()

@@ -9,55 +9,41 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="gridstack_item")
- */
+#[ORM\Table(name: 'gridstack_item')]
+#[ORM\Entity]
 class PaletteGridItem
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\PageBlock", inversedBy="paletteGridItems")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\PageBlock', inversedBy: 'paletteGridItems')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private PageBlock $pageBlock;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private int $w;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private int $h;
 
     /**
-     * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'integer')]
     private ?int $x;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private int $y;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", inversedBy="paletteGridItems", cascade={"persist"})
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', inversedBy: 'paletteGridItems', cascade: ['persist'])]
     private ?BasePlugin $plugin = null;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $diffGridAndContentBottomHeightPx = null;
 
     private string $uniqueId = '';

@@ -6,16 +6,14 @@ use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="text_v1")
- */
+#[ORM\Table(name: 'text_v1')]
+#[ORM\Entity]
 class TextV1 extends BasePlugin
 {
     /**
-     * @ORM\Column(type="text")
      * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'text')]
     private ?string $text;
 
     public function __construct()

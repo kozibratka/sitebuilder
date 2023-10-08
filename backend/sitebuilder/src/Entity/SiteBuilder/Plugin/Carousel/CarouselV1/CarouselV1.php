@@ -7,25 +7,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="carousel_v1")
- */
+#[ORM\Table(name: 'carousel_v1')]
+#[ORM\Entity]
 class CarouselV1 extends BasePlugin
 {
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type: 'integer')]
     private ?int $intervalRotate;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private ?bool $autostart = true;
 
-    /**
-     * @ORM\OneToMany(targetEntity="CarouselV1Image", cascade={"persist"}, orphanRemoval=true, mappedBy="carousel")
-     */
+    #[ORM\OneToMany(targetEntity: 'CarouselV1Image', cascade: ['persist'], orphanRemoval: true, mappedBy: 'carousel')]
     private $images;
 
     public function __construct()

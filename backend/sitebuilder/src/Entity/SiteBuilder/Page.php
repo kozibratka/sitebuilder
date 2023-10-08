@@ -11,10 +11,6 @@ use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\PageRepository")
- * @ORM\Table(name="page")
- */
 #[UniqueEntity(
     fields: ['name', 'web', 'parentForPublic'],
     errorPath: 'name',
@@ -23,57 +19,53 @@ use Symfony\Component\Validator\Constraints as Assert;
     fields: ['url', 'web', 'parentForPublic'],
     errorPath: 'url',
 )]
+#[ORM\Table(name: 'page')]
+#[ORM\Entity(repositoryClass: 'App\Repository\PageRepository')]
 class Page
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
     private string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\PageBlock", mappedBy="page", cascade={"persist"}, orphanRemoval=true)
      * @Assert\Valid()
      */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', mappedBy: 'page', cascade: ['persist'], orphanRemoval: true)]
     private Collection $pageBlocks;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SiteBuilder\Web", inversedBy="pages")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Web', inversedBy: 'pages')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Web $web;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
     private string $url;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $description = '';
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\SiteBuilder\Page")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
+    #[ORM\OneToOne(targetEntity: 'App\Entity\SiteBuilder\Page')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Page $parentForPublic = null;
 
     private array $globalPlugins = [];

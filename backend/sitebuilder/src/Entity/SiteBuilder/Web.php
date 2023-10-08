@@ -14,44 +14,39 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Security\Validator as AppValidator;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\WebRepository")
- * @ORM\Table(name="web",
- *     uniqueConstraints={@ORM\UniqueConstraint(name="web_unique",columns={"user_id", "name"})}
- *     )
  * @AppValidator\UniqueEntityWithUser(fields={"name", "user"})
  */
+#[ORM\Table(name: 'web')]
+#[ORM\UniqueConstraint(name: 'web_unique', columns: ['user_id', 'name'])]
+#[ORM\Entity(repositoryClass: 'App\Repository\WebRepository')]
 class Web
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string")
      * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
     private string $name = '';
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="webs")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\User', inversedBy: 'webs')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Page", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
      * @Assert\Valid()
      */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Page', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
     private Collection $pages;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SiteBuilder\Plugin\BasePlugin", mappedBy="web", cascade={"remove"}, orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
     private Collection $plugins;
 
     public function __construct()
