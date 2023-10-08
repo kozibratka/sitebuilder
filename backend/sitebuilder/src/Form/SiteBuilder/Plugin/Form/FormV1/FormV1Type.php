@@ -4,7 +4,7 @@ namespace App\Form\SiteBuilder\Plugin\Form\FormV1;
 
 use App\Entity\SiteBuilder\Plugin\Form\FormV1\FormV1;
 use App\Form\SiteBuilder\Plugin\BasePluginType;
-use App\Form\Type\JsonType;
+use App\Form\Type\UnstructuredType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +14,7 @@ class FormV1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email')
-            ->add('form', JsonType::class)
+            ->add('form', UnstructuredType::class)
         ;
     }
 

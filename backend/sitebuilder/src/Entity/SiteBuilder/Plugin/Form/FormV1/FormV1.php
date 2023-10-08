@@ -1,23 +1,19 @@
 <?php
 
 namespace App\Entity\SiteBuilder\Plugin\Form\FormV1;
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'form_v1')]
-class FormV1
+class FormV1 extends BasePlugin
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer')]
-    private $id;
-
     #[ORM\Column(type: 'json')]
     private $form;
     #[ORM\OneToMany(targetEntity: FormV1Data::class, mappedBy: 'form')]
     private $formData;
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', nullable: true)]
     private $email;
 
     public function getForm()
@@ -50,13 +46,8 @@ class FormV1
         $this->email = $email;
     }
 
-    public function getId()
+    public function setIdentifier()
     {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
+        $this->identifier = 'form_v1';
     }
 }

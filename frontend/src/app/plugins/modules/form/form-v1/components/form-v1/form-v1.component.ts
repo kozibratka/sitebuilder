@@ -49,20 +49,21 @@ export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> imple
 
   inputsToInstance() {
     const newInstances = this.settings.form.map(value => {
-      value.map(value1 => {
+      return value.map(value1 => {
         let instance: BaseInput = null;
-        if (value1.type === Checkbox.constructor.name) {
+        if (value1.type === 'Checkbox') {
           instance = new Checkbox();
-        } else if (value1.type === Selectbox.constructor.name) {
+        } else if (value1.type === 'Selectbox') {
           instance = new Selectbox();
-        } else if (value1.type === TextInput.constructor.name) {
+        } else if (value1.type === 'TextInput') {
           instance = new TextInput();
-        }else if (value1.type === Textarea.constructor.name) {
+        }else if (value1.type === 'Textarea') {
           instance = new Textarea();
         }
         if (instance) {
           Object.assign(instance, value1);
         }
+        return instance;
       });
     });
     Object.assign(this.settings.form, newInstances);
