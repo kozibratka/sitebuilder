@@ -1,0 +1,23 @@
+<app-dialog [saveButtonShow]="false">
+  <ng-container title>Textarea - nastavení</ng-container>
+  <ng-container content>
+    <form [formGroup]="form" >
+<!--      <label class="form-label" for="name">Název: </label>-->
+<!--      <input class="form-control" id="name" type="text" formControlName="name">-->
+<!--      <div *ngIf="form.get('name').hasError('required')" class="invalid-feedback">-->
+<!--        Toto pole je povinné-->
+<!--      </div>-->
+<!--      <div class="form-text mb-3">Slouží pro odeslaná data</div>-->
+      <label class="form-label" for="label">Popisek: </label>
+      <input class="form-control mb-3" id="label" type="text" formControlName="label">
+      <label for="position" class="form-label">Pozice</label>
+      <select class="form-select" id="position" formControlName="position">
+        <option value="left">Vlevo</option>
+        <option value="right">Vpravo</option>
+      </select>
+    </form>
+  </ng-container>
+  <ng-container custom-button>
+    <button [mat-dialog-close] = "form.valid" [disabled]="!form.valid" (click)="onSubmit()" class="btn btn-primary">Uložit</button>
+  </ng-container>
+</app-dialog>

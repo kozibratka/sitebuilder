@@ -7,6 +7,7 @@ import {Textarea} from '../../../class/textarea';
 import {Checkbox} from '../../../class/checkbox';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {FormPublicComponent} from '../../form-public/form-public/form-public.component';
+import {Button} from '../../../class/button';
 
 @Component({
   selector: 'app-form-builder',
@@ -43,6 +44,9 @@ export class FormBuilderComponent implements OnInit{
         break;
       case 'Checkbox':
         typeInput = new Checkbox();
+        break;
+      case 'Button':
+        typeInput = new Button();
         break;
     }
 

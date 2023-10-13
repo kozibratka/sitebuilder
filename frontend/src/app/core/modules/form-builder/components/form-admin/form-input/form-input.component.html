@@ -13,6 +13,9 @@
       <input type="text" class="form-control" id="{{uniqueId}}">
       <div class="form-text">{{formData.helpText}}</div>
     </div>
+    <div *ngSwitchCase="'Button'">
+      <button type="submit" class="btn btn-primary">{{formData.label}}</button>
+    </div>
     <div *ngSwitchCase="'Textarea'">
       <label for="{{uniqueId}}" class="form-label">{{formData.label}}</label>
       <textarea class="form-control textarea-input" id="{{uniqueId}}" rows="{{formData.rows}}"></textarea>
@@ -68,5 +71,6 @@
     <button mat-menu-item (click)="addNewInput({position, type: 'Selectbox'})">Výběr</button>
     <button mat-menu-item (click)="addNewInput({position, type: 'Textarea'})">Textové pole velké</button>
     <button mat-menu-item (click)="addNewInput({position, type: 'Checkbox'})">Možnosti zaškrtávací</button>
+    <button mat-menu-item (click)="addNewInput({position, type: 'Button'})">Tlačítko pro odeslání formuláře</button>
   </ng-template>
 </mat-menu>
