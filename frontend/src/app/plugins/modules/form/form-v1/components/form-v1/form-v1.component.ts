@@ -46,6 +46,7 @@ export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> imple
 
   refreshView(): void {
     this.formBuilderPublic.refresh();
+    console.log('refresh');
   }
 
   inputsToInstance() {

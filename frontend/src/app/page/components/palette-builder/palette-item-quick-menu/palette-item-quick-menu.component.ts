@@ -87,7 +87,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
       title: pluginResolver.name,
       plugin,
     }).afterClosed().subscribe(value => {
-      // plugin.refreshView();
+      plugin.refreshView();
     });
   }
 }
