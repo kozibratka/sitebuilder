@@ -10,6 +10,7 @@ import {FormPublicComponent} from '../../../../../../core/modules/form-builder/c
 import {Checkbox} from '../../../../../../core/modules/form-builder/class/checkbox';
 import {Selectbox} from '../../../../../../core/modules/form-builder/class/selectbox';
 import {Textarea} from '../../../../../../core/modules/form-builder/class/textarea';
+import {Button} from '../../../../../../core/modules/form-builder/class/button';
 
 @Component({
   selector: 'app-form-v1',
@@ -59,6 +60,8 @@ export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> imple
           instance = new TextInput();
         }else if (value1.type === 'Textarea') {
           instance = new Textarea();
+        }else if (value1.type === 'Button') {
+          instance = new Button();
         }
         if (instance) {
           Object.assign(instance, value1);
