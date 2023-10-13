@@ -72,4 +72,8 @@ export class FormV1Component extends AbstractPlugin<FormV1ConfigInterface> imple
     Object.assign(this.settings.form, newInstances);
   }
 
+  formSubmitted(data: any) {
+    console.log(data);
+  }
+
 }

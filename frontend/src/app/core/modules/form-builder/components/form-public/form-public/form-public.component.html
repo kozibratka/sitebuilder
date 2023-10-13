@@ -9,7 +9,7 @@
             <div class="form-text">{{columnData.helpText}}</div>
           </div>
           <div *ngSwitchCase="'Button'">
-            <button type="submit" class="btn btn-primary">{{columnData.label}}</button>
+            <button type="submit" class="btn btn-primary" (click)="submitForm()">{{columnData.label}}</button>
           </div>
           <div *ngSwitchCase="'Textarea'">
             <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BaseInput} from '../../../class/base-input';
 import {TextInput} from '../../../class/text-input';
 import * as _ from 'underscore';
@@ -12,6 +12,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class FormPublicComponent implements OnInit{
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
   form: FormGroup;
+
+  @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
 
 
   constructor(
@@ -40,5 +42,8 @@ export class FormPublicComponent implements OnInit{
   }
   refresh() {
     this.form = FormPublicComponent.initForm(this.formData, this.fb);
+  }
+  submitForm() {
+    this.formSubmitted.emit(this.form.value);
   }
 }
