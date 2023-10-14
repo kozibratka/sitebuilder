@@ -28,11 +28,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     field = "pluginType",
  *     disabled = false,
  *     map = {
- *          "CarouselV1" = "App\Entity\SiteBuilder\Plugin\Carousel\CarouselV1\CarouselV1",
- *          "TextV1" = "App\Entity\SiteBuilder\Plugin\Text\TextV1\TextV1",
- *          "MenuV1" = "App\Entity\SiteBuilder\Plugin\Menu\MenuV1\MenuV1",
- *          "ImageV1" = "App\Entity\SiteBuilder\Plugin\Image\ImageV1\ImageV1",
- *          "FormV1" = "App\Entity\SiteBuilder\Plugin\Form\FormV1\FormV1"
+ *          "Carousel" = "App\Entity\SiteBuilder\Plugin\Carousel\PluginCarousel",
+ *          "Text" = "App\Entity\SiteBuilder\Plugin\Text\PluginText",
+ *          "Menu" = "App\Entity\SiteBuilder\Plugin\Menu\PluginMenu",
+ *          "Image" = "App\Entity\SiteBuilder\Plugin\Image\PluginImage",
+ *          "Form" = "App\Entity\SiteBuilder\Plugin\Form\PluginForm"
  *
  *     })
  */
