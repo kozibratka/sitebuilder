@@ -1,14 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormV1Module} from './form-v1/form-v1.module';
+import {FormResolverService} from './services/form-resolver.service';
+import {ReactiveFormsModule} from '@angular/forms';
+import {FormPublicComponent} from '../../../core/modules/form-builder/components/form-public/form-public/form-public.component';
+import {FormBuilderModule} from '../../../core/modules/form-builder/form-builder.module';
+import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
+import {FormComponent} from './components/form/form.component';
+import {FormAdminComponent} from './pages/form-admin/form-admin.component';
 
 
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    FormV1Module
-  ]
+    declarations: [
+        FormAdminComponent,
+        FormComponent,
+        FormPublicComponent
+    ],
+    imports: [
+        CommonModule,
+        FormBuilderModule,
+        ReactiveFormsModule
+    ],
+  providers: [
+    {provide: AbstractPluginResolver, useClass: FormResolverService, multi: true},
+  ],
 })
 export class FormModule { }
