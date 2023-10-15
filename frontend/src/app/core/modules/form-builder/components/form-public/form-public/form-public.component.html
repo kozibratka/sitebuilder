@@ -4,7 +4,11 @@
       <div class="col" *ngFor="let columnData of rowData;index as y">
         <div class="input-container position-{{$any(columnData).position}}" [ngSwitch]="columnData.constructor.name">
           <div *ngSwitchCase="'TextInput'">
-            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>
+            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}
+              <span class="text-danger" *ngIf="$any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
+                (Toto pole je povinné)
+              </span>
+            </label>
             <input type="text" class="form-control" id="{{x}}{{y}}" [formControlName]="columnData.name">
             <div class="form-text">{{columnData.helpText}}</div>
           </div>

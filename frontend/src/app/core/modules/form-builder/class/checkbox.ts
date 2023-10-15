@@ -28,7 +28,7 @@ export class Checkbox extends BaseInput {
         if (value.required) {
           validations.push(Validators.required);
         }
-        return {[value.option]: validations};
+        return {[value.option]: ['', ...validations]};
       }
     );
   }

@@ -33,9 +33,14 @@ export class FormPublicComponent implements OnInit{
         formControls = Object.assign(formControls, form);
       }
     });
-    return fb.group(
-      formControls
+    let frm = fb.group(
+      formControls,
+      {updateOn: 'submit'}
     );
+    frm.statusChanges.subscribe(value => {
+      console.log('dddggggg');
+    });
+    return frm;
   }
 
   ngOnInit(): void {
@@ -45,6 +50,11 @@ export class FormPublicComponent implements OnInit{
     this.form = FormPublicComponent.initForm(this.formData, this.fb);
   }
   submitForm() {
-    this.formSubmitted.emit(this.form.value);
+    if (this.form.valid) {
+      this.formSubmitted.emit(this.form.value);
+    }
+  }
+  getFormField(name: string) {
+    return this.form.get(name);
   }
 }

@@ -6,7 +6,7 @@ import {StringService} from '../../../services/string.service';
 
 export class TextInput extends BaseInput{
   value: string;
-  required = false;
+  required = true;
 
 
   constructor() {
@@ -24,6 +24,6 @@ export class TextInput extends BaseInput{
     if (this.required) {
       validations.push(Validators.required);
     }
-    return {[this.name]: validations};
+    return {[this.name]: ['', ...validations]};
   }
 }
