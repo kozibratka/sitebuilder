@@ -12,7 +12,7 @@ class FormData
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'simple_array')]
+    #[ORM\Column(type: 'json')]
     private $data;
 
     #[ORM\ManyToOne(targetEntity: PluginForm::class, inversedBy: 'formData')]

@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class FormPublicComponent implements OnInit{
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
   form: FormGroup;
+  @Input()isSend = false;
 
   @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
 

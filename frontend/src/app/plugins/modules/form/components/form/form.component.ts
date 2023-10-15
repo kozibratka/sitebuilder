@@ -10,6 +10,8 @@ import {Selectbox} from '../../../../../core/modules/form-builder/class/selectbo
 import {Textarea} from '../../../../../core/modules/form-builder/class/textarea';
 import {Button} from '../../../../../core/modules/form-builder/class/button';
 import {BaseInput} from '../../../../../core/modules/form-builder/class/base-input';
+import {SymfonyApiClientService} from '../../../../../core/services/api/symfony-api/symfony-api-client.service';
+import {NotifierService} from '../../../../../core/services/notifier.service';
 
 @Component({
   selector: 'app-form-v1',
@@ -21,8 +23,11 @@ export class FormComponent extends AbstractPlugin<FormConfigInterface> implement
   @ViewChild(FormPublicComponent, {static: true}) formBuilderPublic: FormPublicComponent;
 
   form;
+  isSend = false;
   constructor(
     private fb: FormBuilder,
+    private symfonyApiClientService: SymfonyApiClientService,
+    private notifierService: NotifierService,
   ) {
     super();
   }
@@ -72,7 +77,13 @@ export class FormComponent extends AbstractPlugin<FormConfigInterface> implement
   }
 
   formSubmitted(data: any) {
-    console.log(data);
+    if (!this.settings.hashId) {
+      return;
+    }
+    this.symfonyApiClientService.post('plugin_form_save_data', {formData: data}, {hash: this.settings.hashId}).subscribe(value => {
+      this.notifierService.notify('Formulář byl úspěšně odeslán');
+      this.isSend = true;
+    });
   }
 
 }

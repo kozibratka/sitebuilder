@@ -2,6 +2,7 @@
 
 namespace App\Entity\SiteBuilder\Plugin\Form;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -9,12 +10,19 @@ class PluginForm extends BasePlugin
 {
     #[ORM\Column(type: 'json')]
     private $form;
-    #[ORM\OneToMany(targetEntity: FormData::class, mappedBy: 'form')]
+    #[ORM\OneToMany(targetEntity: FormData::class, mappedBy: 'form', orphanRemoval: true, cascade: ['persist'])]
     private $formData;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private $email;
 
+    private $hashId;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->formData = new ArrayCollection();
+    }
     public function getForm()
     {
         return $this->form;
@@ -48,5 +56,29 @@ class PluginForm extends BasePlugin
     public function setIdentifier()
     {
         $this->identifier = 'form_v1';
+    }
+
+    public function getHashId()
+    {
+        return $this->hashId;
+    }
+
+    public function setHashId($hashId)
+    {
+        $this->hashId = $hashId;
+    }
+
+    public function addFormData(FormData $formData): self
+    {
+        $this->formData->add($formData);
+        $formData->setForm($this);
+        return $this;
+    }
+
+    public function removeFormData(FormData $formData): self
+    {
+        $this->formData->removeElement($formData);
+        $formData->setForm(null);
+        return $this;
     }
 }

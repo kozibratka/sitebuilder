@@ -17,4 +17,5 @@ return [
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Snc\RedisBundle\SncRedisBundle::class => ['all' => true],
+    Nzo\UrlEncryptorBundle\NzoUrlEncryptorBundle::class => ['all' => true],
 ];
