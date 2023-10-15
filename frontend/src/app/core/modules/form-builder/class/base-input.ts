@@ -7,5 +7,5 @@ export abstract class BaseInput {
   name: string;
   type: string = this.constructor.name; // for json decode
   abstract getAdminComponent(): typeof BaseAdminComponent<any>;
-  abstract createForm(): {[key: string]: any[]} | {[key: string]: any[]}[];
+  abstract createForm(): any;
 }

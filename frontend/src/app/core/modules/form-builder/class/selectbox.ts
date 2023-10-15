@@ -26,6 +26,6 @@ export class Selectbox extends BaseInput{
     if (this.required) {
       validations.push(Validators.required);
     }
-    return {[this.name]: ['', ...validations]};
+    return {[this.name]: ['', validations]};
   }
 }

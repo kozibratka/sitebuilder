@@ -30,7 +30,7 @@ a:not([href]){
   z-index: 1!important;
 }
 
-.form-control.ng-invalid {
+.form-control.ng-invalid.ng-touched {
   border-color: #dc3545;
 }
 

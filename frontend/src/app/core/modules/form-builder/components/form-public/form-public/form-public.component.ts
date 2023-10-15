@@ -13,6 +13,7 @@ export class FormPublicComponent implements OnInit{
   @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
   form: FormGroup;
   @Input()isSend = false;
+  trySubmit = false;
 
   @Output() formSubmitted: EventEmitter<any> = new EventEmitter();
 
@@ -35,10 +36,10 @@ export class FormPublicComponent implements OnInit{
     });
     let frm = fb.group(
       formControls,
-      {updateOn: 'submit'}
+      // {updateOn: 'submit'}
     );
     frm.statusChanges.subscribe(value => {
-      console.log('dddggggg');
+      console.log(value);
     });
     return frm;
   }
@@ -50,6 +51,8 @@ export class FormPublicComponent implements OnInit{
     this.form = FormPublicComponent.initForm(this.formData, this.fb);
   }
   submitForm() {
+    this.trySubmit = true;
+    this.form.markAllAsTouched();
     if (this.form.valid) {
       this.formSubmitted.emit(this.form.value);
     }

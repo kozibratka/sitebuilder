@@ -5,7 +5,7 @@
         <div class="input-container position-{{$any(columnData).position}}" [ngSwitch]="columnData.constructor.name">
           <div *ngSwitchCase="'TextInput'">
             <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}
-              <span class="text-danger" *ngIf="$any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
+              <span class="text-danger" *ngIf="getFormField($any(columnData).name).touched && $any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
                 (Toto pole je povinné)
               </span>
             </label>
