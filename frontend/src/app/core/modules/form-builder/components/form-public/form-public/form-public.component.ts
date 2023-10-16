@@ -34,14 +34,9 @@ export class FormPublicComponent implements OnInit{
         formControls = Object.assign(formControls, form);
       }
     });
-    let frm = fb.group(
+    return fb.group(
       formControls,
-      // {updateOn: 'submit'}
     );
-    frm.statusChanges.subscribe(value => {
-      console.log(value);
-    });
-    return frm;
   }
 
   ngOnInit(): void {
