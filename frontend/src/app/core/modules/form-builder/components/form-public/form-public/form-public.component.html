@@ -5,9 +5,9 @@
         <div class="input-container position-{{$any(columnData).position}}" [ngSwitch]="columnData.constructor.name">
           <div *ngSwitchCase="'TextInput'">
             <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}
-              <span class="text-danger" *ngIf="getFormField($any(columnData).name).touched && $any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
+              <small class="text-danger" *ngIf="getFormField($any(columnData).name).touched && $any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
                 (Toto pole je povinné)
-              </span>
+              </small>
             </label>
             <input type="text" class="form-control" id="{{x}}{{y}}" [formControlName]="columnData.name">
             <div class="form-text">{{columnData.helpText}}</div>
@@ -16,12 +16,22 @@
             <button [disabled]="isSend" type="submit" class="btn btn-primary" (click)="submitForm()">{{columnData.label}}</button>
           </div>
           <div *ngSwitchCase="'Textarea'">
-            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>
+            <label for="{{x}}{{y}}" class="form-label">
+              {{columnData.label}}
+              <small class="text-danger" *ngIf="getFormField($any(columnData).name).touched && $any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
+                (Toto pole je povinné)
+              </small>
+            </label>
             <textarea class="form-control textarea-input" id="{{x}}{{y}}" rows="{{$any(columnData).rows}}" [formControlName]="columnData.name"></textarea>
             <div class="form-text">{{columnData.helpText}}</div>
           </div>
           <div *ngSwitchCase="'Selectbox'">
-            <label for="{{x}}{{y}}" class="form-label">{{columnData.label}}</label>
+            <label for="{{x}}{{y}}" class="form-label">
+              {{columnData.label}}
+              <small class="text-danger" *ngIf="getFormField($any(columnData).name).touched && $any(columnData).required && getFormField($any(columnData).name).errors?.['required']">
+                (Toto pole je povinné)
+              </small>
+            </label>
             <select class="form-select" aria-label="Default select example" id="{{x}}{{y}}" [formControlName]="columnData.name">
               <option *ngFor="let option of $any(columnData).options"
                       [value]="option">
@@ -34,6 +44,9 @@
             <div class="form-check" *ngFor="let option of $any(columnData).options">
               <label class="form-check-label" for="{{option.option}}">{{option.option}}</label>
               <input class="form-check-input" type="checkbox" id="{{option.option}}" name="{{option.option}}" [formControlName]="option.option">
+              <small class="text-danger" *ngIf="getFormField($any(option).option).touched && $any(option).required && getFormField($any(option).option).errors?.['required']">
+                (Toto pole je povinné)
+              </small>
             </div>
             <div class="form-text">{{columnData.helpText}}</div>
           </div>
