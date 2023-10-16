@@ -3,6 +3,7 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
 import {FormAdminComponent} from '../pages/form-admin/form-admin.component';
 import {FormComponent} from '../components/form/form.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
+import {FormDataAdminComponent} from '../pages/form-data-admin/form-data-admin.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,11 @@ export class FormResolverService extends AbstractPluginResolver {
     {
       label: 'Formulář',
       component: FormAdminComponent,
+      path: ''
+    },
+    {
+      label: 'Data formuláře',
+      component: FormDataAdminComponent,
       path: ''
     },
   ];

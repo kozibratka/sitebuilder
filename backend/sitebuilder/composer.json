@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "friendsofsymfony/jsrouting-bundle": "^2.7",
+        "gedmo/doctrine-extensions": "^3.13",
         "jms/serializer-bundle": "^3.7.0",
         "lexik/jwt-authentication-bundle": "^2.8",
         "nelmio/cors-bundle": "^2.1",

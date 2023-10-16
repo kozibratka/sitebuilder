@@ -4,13 +4,18 @@ namespace App\Entity\SiteBuilder\Plugin\Form;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity]
 class PluginForm extends BasePlugin
 {
     #[ORM\Column(type: 'json')]
     private $form;
-    #[ORM\OneToMany(targetEntity: FormData::class, mappedBy: 'form', orphanRemoval: true, cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: FormData::class, mappedBy: 'form', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[ORM\OrderBy(["id" => "DESC"])]
+    /**
+     * @Serializer\Exclude()
+     */
     private $formData;
 
     #[ORM\Column(type: 'string', nullable: true)]

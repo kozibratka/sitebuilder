@@ -7,6 +7,7 @@ import {FormBuilderModule} from '../../../core/modules/form-builder/form-builder
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {FormComponent} from './components/form/form.component';
 import {FormAdminComponent} from './pages/form-admin/form-admin.component';
+import { FormDataAdminComponent } from './pages/form-data-admin/form-data-admin.component';
 
 
 
@@ -14,7 +15,8 @@ import {FormAdminComponent} from './pages/form-admin/form-admin.component';
     declarations: [
         FormAdminComponent,
         FormComponent,
-        FormPublicComponent
+        FormPublicComponent,
+        FormDataAdminComponent
     ],
     imports: [
         CommonModule,
