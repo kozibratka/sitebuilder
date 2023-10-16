@@ -72,6 +72,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'image_v1' }
 
+    App\Service\Plugin\Video\VideoService:
+        tags:
+            - { name: 'plugin_service', key: 'video_v1' }
+
     App\Service\Plugin\Form\FormService:
         tags:
             - { name: 'plugin_service', key: 'form_v1' }

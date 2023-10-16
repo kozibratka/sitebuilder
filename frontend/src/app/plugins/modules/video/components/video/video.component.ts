@@ -38,10 +38,27 @@ export class VideoComponent extends AbstractPlugin<VideoConfigInterface> impleme
   }
 
   getVideoUrl() {
-    if (this.settings.videoPath !== this.lastVideoPath) {
-      this.lastVideoPath = this.settings.videoPath;
-      this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.settings.videoPath);
+    const videoUrl = this.validateYouTubeUrl(this.settings.videoPath);
+    if (videoUrl && videoUrl !== this.lastVideoPath) {
+      this.lastVideoPath = videoUrl;
+      this.sanitizedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
     }
     return this.sanitizedUrl;
+  }
+
+  validateYouTubeUrl(url: string)
+  {
+    if (url !== undefined || url !== '') {
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+      if (match && match[2].length === 11) {
+        // Do anything for being valid
+        // if need to change the url to embed url then use below line
+        return 'https://www.youtube.com/embed/' + match[2] + '?autoplay=0';
+      }
+      else {
+        return false;
+      }
+    }
   }
 }
