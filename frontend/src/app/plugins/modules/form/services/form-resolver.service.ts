@@ -52,6 +52,6 @@ export class FormResolverService extends AbstractPluginResolver {
   }
 
   get name(): string {
-    return 'Formulář v1';
+    return 'Formulář';
   }
 }

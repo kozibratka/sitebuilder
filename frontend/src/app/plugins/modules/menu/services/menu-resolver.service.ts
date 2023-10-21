@@ -52,6 +52,6 @@ export class MenuResolverService extends AbstractPluginResolver {
   }
 
   get name(): string {
-    return 'Menu v1';
+    return 'Menu';
   }
 }

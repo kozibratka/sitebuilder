@@ -46,6 +46,6 @@ export class ImageResolverService extends AbstractPluginResolver {
   }
 
   get name(): string {
-    return 'Obrázek v1';
+    return 'Obrázek';
   }
 }

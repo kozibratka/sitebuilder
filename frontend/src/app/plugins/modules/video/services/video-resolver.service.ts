@@ -46,6 +46,6 @@ export class VideoResolverService extends AbstractPluginResolver {
   }
 
   get name(): string {
-    return 'Video v1';
+    return 'Video';
   }
 }
