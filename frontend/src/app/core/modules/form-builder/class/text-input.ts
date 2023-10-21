@@ -6,7 +6,7 @@ import {StringService} from '../../../services/string.service';
 
 export class TextInput extends BaseInput{
   value: string;
-  required = true;
+  required = false;
 
 
   constructor() {

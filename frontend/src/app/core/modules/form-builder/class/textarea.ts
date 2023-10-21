@@ -8,7 +8,7 @@ export class Textarea extends BaseInput{
   value: string;
   rows = 3;
 
-  required: boolean;
+  required = false;
 
 
   constructor() {

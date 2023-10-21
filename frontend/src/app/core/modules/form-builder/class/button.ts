@@ -8,7 +8,7 @@ export class Button extends BaseInput {
     super();
     this.label = 'Odeslat';
     this.helpText = '';
-    this.position = 'left';
+    this.position = 'right';
     // this.name = 'Tlačítko ' + StringService.randomString();
   }
 

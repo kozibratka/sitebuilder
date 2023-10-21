@@ -17,9 +17,11 @@ export class FormDataAdminComponent extends AbstractAdminSetting<FormConfigInter
   }
 
   createAdminForm(settings: FormConfigInterface): void {
+    if (!this.settings.hashId) {
+      return;
+    }
     this.symfonyApiClientService.get('plugin_form_get_data', {hash: settings.hashId}).subscribe(value => {
       this.formData = value.body;
-      console.log(this.formData);
     });
   }
 

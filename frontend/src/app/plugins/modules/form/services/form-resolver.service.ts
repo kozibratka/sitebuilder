@@ -36,7 +36,7 @@ export class FormResolverService extends AbstractPluginResolver {
   }
 
   gridHeight(): number {
-    return 13;
+    return 15;
   }
 
   gridWidth(): number {
