@@ -29,6 +29,11 @@ security:
             stateless: true
             anonymous: true
 
+        public_plugin_endpoint:
+            pattern: ^/plugin/(plugin-form/save-data)
+            stateless: true
+            anonymous: true
+
         api:
             pattern:   ^/
             stateless: true
@@ -48,4 +53,5 @@ security:
          - { path: ^/user/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-preview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/plugin/plugin-form/save-data, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/, roles: ROLE_USER }
