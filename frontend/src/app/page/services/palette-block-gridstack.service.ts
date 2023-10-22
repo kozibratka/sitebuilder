@@ -66,11 +66,11 @@ export class PaletteBlockGridstackService {
 
   startGridStackPalettePublic(pageBlock: PageBlockInterface, paletteElement: ElementRef) {
     const gridstackBlock = GridStack.init({
-      column: 12,
+      column: 80,
       staticGrid: true,
       disableOneColumnMode: true,
       margin: 0,
-      cellHeight: '20px',
+      //cellHeight: '20px',
       float: true,
       styleInHead: true,
       draggable: {scroll: false},
