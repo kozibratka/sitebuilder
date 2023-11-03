@@ -7,7 +7,6 @@ import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin
 import {MoveableModalComponent} from '../../../core/components/moveable-modal/moveable-modal.component';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
-import {ArrayHelper} from '../../../core/helpers/array-helper';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {SystemInfoService} from '../../../core/services/system-info.service';
 import {Title} from '@angular/platform-browser';
@@ -36,6 +35,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   globalPlugins: BasePlugConfigInterface[] = [];
   globalPluginsSelect = [];
   @HostBinding('style.minHeight')minHeight = '0px';
+  menuLocked = false;
 
   constructor(
     private route: ActivatedRoute,

@@ -1,10 +1,19 @@
 /// <reference types="jqueryui" />
-import {AfterViewInit, ApplicationRef, Component, Inject, NgZone, OnInit, Renderer2} from '@angular/core';
+import {
+  AfterViewInit,
+  ApplicationRef,
+  Component,
+  EventEmitter,
+  Inject,
+  NgZone,
+  OnInit,
+  Output,
+  Renderer2
+} from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {GridStack} from 'gridstack/dist/gridstack';
 import {Subject} from 'rxjs';
-import {PaletteItemComponent} from '../palette-builder/page-block/palette-item-component/palette-item.component';
 import {QuickMenuService} from '../../services/quick-menu.service';
 
 @Component({
@@ -16,6 +25,8 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   baseBlocks: { image: string, id: number }[];
   showMoveIcon = false;
+  private _locked = false;
+  @Output() private locketEmitter = new EventEmitter<boolean>();
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
@@ -68,4 +79,12 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     return pageBlock; // this is what happens if sortablejsCloneFunction is not provided. Add your stuff here
   }
 
+  get locked(): boolean {
+    return this._locked;
+  }
+
+  set locked(value: boolean) {
+    this._locked = value;
+    this.locketEmitter.emit(this._locked)
+  }
 }

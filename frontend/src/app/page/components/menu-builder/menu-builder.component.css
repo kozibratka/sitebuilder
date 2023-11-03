@@ -36,6 +36,14 @@ i.icon-move{
   font-size: 17px;
 }
 
+.lock {
+  position: absolute;
+  right: -38px;
+  top: 116px;
+  background-color: #fff;
+  padding: 7px;
+}
+
 /*.menu-image:hover + i.icon-move{*/
 /*  display: block;*/
 /*}*/
