@@ -26,3 +26,11 @@
 :host ::ng-deep .cdk-overlay-pane {
   z-index: 2000 !important;
 }
+
+.hide-menu {
+  display: none;
+}
+
+::ng-deep body:not(.sidebar-collapse):has(.hide-menu) {
+  margin-left: -250px!important;
+}

@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, NavigationEnd, Router} from '@angular/router';
 import {MatSelect} from '@angular/material/select';
 import {LoginClientService} from '../../../core/services/api/login-api/login-client/login-client.service';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
@@ -8,6 +8,7 @@ import {WebInterface} from '../../../web/interfaces/web-interface';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Event} from '../../../core/services/api/symfony-api/tools/constants/event';
 import {Title} from '@angular/platform-browser';
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-administration',
@@ -21,6 +22,7 @@ export class LayoutComponent implements OnInit {
   symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND, stopSendLogin: Event.POST_SEND};
   websSelect: WebInterface[] = [];
   private _selectedWeb: number;
+  isVisibleMenu = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +38,7 @@ export class LayoutComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.initSelectWeb(data.webList);
     });
+    this.registerCheckVisibilityMenu();
   }
 
   logout(): void {
@@ -67,5 +70,16 @@ export class LayoutComponent implements OnInit {
     }
     this._selectedWeb = value;
     this.router.navigate(['/admin', value]);
+  }
+
+  registerCheckVisibilityMenu() {
+    let checkMenuDisplay = (url: string) => {
+      this.isVisibleMenu = !url.includes('page-builder');
+    };
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => this.router.url)
+    ).subscribe(checkMenuDisplay);
+    checkMenuDisplay(this.router.url);
   }
 }
