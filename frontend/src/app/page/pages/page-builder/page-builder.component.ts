@@ -10,11 +10,13 @@ import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/sy
 import {NotifierService} from '../../../core/services/notifier.service';
 import {SystemInfoService} from '../../../core/services/system-info.service';
 import {Title} from '@angular/platform-browser';
-import {Subject, Subscription} from 'rxjs';
+import {Subject, Subscription, timer} from 'rxjs';
 import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
 import {PaletteBlockService} from '../../services/palette-block.service';
+import {animate, state, style, transition, trigger} from "@angular/animations";
+import {timeout} from "rxjs/operators";
 
 @Component({
   selector: 'app-page-builder',
@@ -24,6 +26,18 @@ import {PaletteBlockService} from '../../services/palette-block.service';
     MenuPluginResolverService,
     {provide: 'PageBuilderEvent', useFactory: () => new Subject<boolean>()},
     {provide: 'GridItemDragged', useFactory: () => new Subject<boolean>()}
+  ],
+  animations: [
+    trigger('visibleMenu', [
+      state('show', style({left: '235px'})),
+      state('hide', style({left: '-8px'})),
+      transition('show => hide', [
+        animate('0.15s')
+      ]),
+      transition('hide => show', [
+        animate('0.15s')
+      ]),
+    ])
   ]
 })
 export class PageBuilderComponent implements OnInit, AfterViewChecked {
@@ -36,6 +50,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   globalPluginsSelect = [];
   @HostBinding('style.minHeight')minHeight = '0px';
   menuLocked = false;
+  mouseOnMenu = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,6 +81,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
     this.registerResizedBlockListenerOnDragged();
+    this.closeMenuOnLoad();
     // this.fileManagerModalService.open();
   }
 
@@ -112,5 +128,29 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
 
   refreshGlobalPluginSelect(identifier: string) {
     this.globalPluginsSelect = this.globalPlugins.filter(value => value.identifier === identifier);
+  }
+
+  onMouseEnter() {
+    this.mouseOnMenu = true;
+  }
+
+  onMouseLeave() {
+    this.mouseOnMenu = false;
+  }
+
+  getMenuState() {
+    if (!this.menuLocked) {
+      if (this.mouseOnMenu) {
+        return 'show';
+      }
+      return 'hide';
+    }
+    return null;
+  }
+
+  closeMenuOnLoad() {
+    timer(500).subscribe(value => {
+      this.mouseOnMenu = false;
+    });
   }
 }

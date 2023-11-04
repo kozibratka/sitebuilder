@@ -36,3 +36,9 @@
 :host {
   display: block;
 }
+
+.menu-unlocked {
+  position: absolute;
+  width: 279px;
+  z-index: 1;
+}

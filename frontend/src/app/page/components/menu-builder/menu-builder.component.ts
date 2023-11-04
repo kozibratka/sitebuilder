@@ -47,17 +47,14 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
       GridStack.setupDragIn('.grid-stack-item-menu', { handle: '.icon-move', appendTo: 'body', helper: this.myClone.bind(this) });
-      // $('.menu-element .menu-element-item').draggable({
-      //   revert: 'invalid',
-      //   handle: '.icon-move',
-      //   scroll: false,
-      //   appendTo: 'body',
-      //   helper: 'clone'
-      // });
     });
   }
 
   ngOnInit(): void {
+
+  }
+
+  onMousOver() {
 
   }
 

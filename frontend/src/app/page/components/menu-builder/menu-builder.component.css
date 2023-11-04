@@ -42,6 +42,7 @@ i.icon-move{
   top: 116px;
   background-color: #fff;
   padding: 7px;
+  cursor: pointer;
 }
 
 /*.menu-image:hover + i.icon-move{*/

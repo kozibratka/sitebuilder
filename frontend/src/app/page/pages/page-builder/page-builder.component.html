@@ -9,10 +9,10 @@
   </div>
 </div>
 <div class="row" [class.grid-item-dragged]="gridDragged$ | async">
-  <div class="col-md-2">
+  <div [class]="menuLocked ? 'col-md-2' : 'menu-unlocked'" [@visibleMenu]="getMenuState()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <app-menu-builder (locketEmitter)="menuLocked = $event"></app-menu-builder>
   </div>
-  <div class="col-md-10">
+  <div [class]="menuLocked ? 'col-md-10' : 'col-md-12'" >
     <app-palette-builder [pageDetail]="pageDetail"></app-palette-builder>
   </div>
 <!--  {{namePlugin}}-->
