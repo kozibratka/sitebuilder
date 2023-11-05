@@ -6,6 +6,7 @@ namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Page;
+use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\Web;
 use App\Form\SiteBuilder\PageType;
@@ -55,6 +56,7 @@ class PageController extends BaseApiController
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */
             $page = $form->getData();
+            $page->addPageBlock(new PageBlock());
             $web->addPage($page);
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);

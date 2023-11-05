@@ -1,4 +1,4 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, ElementRef, HostBinding, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, HostBinding, Inject, OnInit, ViewChild} from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {ActivatedRoute} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
@@ -11,12 +11,9 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {SystemInfoService} from '../../../core/services/system-info.service';
 import {Title} from '@angular/platform-browser';
 import {Subject, Subscription, timer} from 'rxjs';
-import {FileManagerModalService} from '../../../core/modules/file-manager/services/file-manager-modal.service';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
-import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
 import {PaletteBlockService} from '../../services/palette-block.service';
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {timeout} from "rxjs/operators";
 
 @Component({
   selector: 'app-page-builder',
@@ -49,7 +46,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   globalPlugins: BasePlugConfigInterface[] = [];
   globalPluginsSelect = [];
   @HostBinding('style.minHeight')minHeight = '0px';
-  menuLocked = false;
+  private _menuLocked = false;
   mouseOnMenu = true;
 
   constructor(
@@ -58,10 +55,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
     private webDetailResolverService: WebDetailResolverService,
-    private pluginResolverService: PluginResolverService,
     private domainInfoService: SystemInfoService,
-    private fileManagerModalService: FileManagerModalService,
-    private changeDetectorRef: ChangeDetectorRef,
     public title: Title,
     public elementRef: ElementRef<HTMLElement>,
 
@@ -139,7 +133,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   getMenuState() {
-    if (!this.menuLocked) {
+    if (!this._menuLocked) {
       if (this.mouseOnMenu) {
         return 'show';
       }
@@ -152,5 +146,15 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     timer(500).subscribe(value => {
       this.mouseOnMenu = false;
     });
+  }
+
+  get menuLocked(): boolean {
+    return this._menuLocked;
+  }
+
+  set menuLocked(value: boolean) {
+    this._menuLocked = value;
+    (window as any).dispatchEvent(new Event('resize'));
+
   }
 }

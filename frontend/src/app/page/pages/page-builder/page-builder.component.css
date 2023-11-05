@@ -42,3 +42,11 @@
   width: 279px;
   z-index: 1;
 }
+
+::ng-deep .builder.col-md-12 .palette {
+  font-size: 1vw !important;
+}
+
+::ng-deep .builder.col-md-10 .palette {
+  font-size: 0.833333333vw;
+}

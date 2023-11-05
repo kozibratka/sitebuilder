@@ -43,13 +43,6 @@ i.icon-move{
   background-color: #fff;
   padding: 7px;
   cursor: pointer;
+  z-index: 1;
 }
-
-/*.menu-image:hover + i.icon-move{*/
-/*  display: block;*/
-/*}*/
-
-/*i.icon-move:hover{*/
-/*  display: block;*/
-/*}*/
 
