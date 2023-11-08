@@ -1,1 +1,5 @@
-<img class="image" [src]="settings.imagePath">
+<img
+  class="image" [src]="settings.imagePath"
+  [style.border-radius.%]="settings.circle"
+  [style.filter]="'blur('+settings.blur+'px) grayscale('+settings.grayscale+'%) sepia('+settings.sepia+'%)'"
+>

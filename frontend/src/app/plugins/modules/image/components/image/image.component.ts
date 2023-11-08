@@ -13,6 +13,10 @@ export class ImageComponent extends AbstractPlugin<ImageConfigInterface> impleme
     return {
       identifier: PluginIdentifier.IMAGE_V1,
       imagePath: 'https://picsum.photos/seed/picsum/400/200',
+      circle: 0,
+      blur: 0,
+      grayscale: 0,
+      sepia: 0,
     };
   }
 

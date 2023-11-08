@@ -1,0 +1,42 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex flex-md-row flex-wrap">
+      <div class="p-2">
+        <div>Zaoblení:</div>
+        <mat-slider
+          [max]="100"
+          [min]="0"
+          [step]="1">
+          <input matSliderThumb [(ngModel)]="settings.circle" #slider>
+        </mat-slider>
+      </div>
+      <div class="p-2">
+        <div>Rozostření:</div>
+        <mat-slider
+          [max]="30"
+          [min]="0"
+          [step]="1">
+          <input matSliderThumb [(ngModel)]="settings.blur" #slider>
+        </mat-slider>
+      </div>
+      <div class="p-2">
+        <div>Černobílé:</div>
+        <mat-slider
+          [max]="100"
+          [min]="0"
+          [step]="1">
+          <input matSliderThumb [(ngModel)]="settings.grayscale" #slider>
+        </mat-slider>
+      </div>
+      <div class="p-2">
+        <div>Sépiové zbravení:</div>
+        <mat-slider
+          [max]="100"
+          [min]="0"
+          [step]="1">
+          <input matSliderThumb [(ngModel)]="settings.sepia" #slider>
+        </mat-slider>
+      </div>
+    </div>
+  </div>
+</div>

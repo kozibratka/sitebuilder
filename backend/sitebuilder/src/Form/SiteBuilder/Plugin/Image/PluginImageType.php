@@ -15,6 +15,10 @@ class PluginImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('imagePath')
+        ->add('circle')
+        ->add('blur')
+        ->add('grayscale')
+        ->add('sepia')
         ;
     }
 
