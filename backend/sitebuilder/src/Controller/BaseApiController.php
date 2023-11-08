@@ -19,9 +19,12 @@ class BaseApiController extends AbstractController
         $this->requestStack = $requestStack;
     }
 
-    public function jsonResponseSimple($data = [], $statusCode = 200, $isInvalidForm = false, string|array $group = 'Default') {
+    public function jsonResponseSimple($data = [], $statusCode = 200, $isInvalidForm = false, string|array $group = null) {
         $onlyValidForm = $this->requestStack->getCurrentRequest()->headers->get('validform');
         $context = SerializationContext::create();
+        if ($group) {
+            $context->setGroups($group);
+        }
 //        $context->enableMaxDepthChecks();
 //        $context->setGroups($group);
         $serialized = $this->serializer->serialize((!$onlyValidForm || $isInvalidForm) ? $data : [], 'json', $context);

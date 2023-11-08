@@ -15,6 +15,7 @@ import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {GridStack} from 'gridstack/dist/gridstack';
 import {Subject} from 'rxjs';
 import {QuickMenuService} from '../../services/quick-menu.service';
+import {UserService} from "../../../authorization/services/user.service";
 
 @Component({
   selector: 'app-menu-builder',
@@ -25,7 +26,6 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   baseBlocks: { image: string, id: number }[];
   showMoveIcon = false;
-  private _locked = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
 
   constructor(
@@ -34,7 +34,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
     private renderer: Renderer2,
     private window: Window,
-
+    private userService: UserService,
     private applicationRef: ApplicationRef,
     private quickMenuService: QuickMenuService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
@@ -77,11 +77,11 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   get locked(): boolean {
-    return this._locked;
+    return this.userService.settings.lockBuilderMenu;
   }
 
   set locked(value: boolean) {
-    this._locked = value;
-    this.locketEmitter.emit(this._locked)
+    this.userService.settings.lockBuilderMenu = value;
+    this.locketEmitter.emit(value)
   }
 }

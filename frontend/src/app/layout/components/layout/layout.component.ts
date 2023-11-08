@@ -9,6 +9,7 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {Event} from '../../../core/services/api/symfony-api/tools/constants/event';
 import {Title} from '@angular/platform-browser';
 import {filter, map} from "rxjs/operators";
+import {UserService} from "../../../authorization/services/user.service";
 
 @Component({
   selector: 'app-administration',
@@ -30,7 +31,8 @@ export class LayoutComponent implements OnInit {
     private notifierService: NotifierService,
     private router: Router,
     private webDetailResolverService: WebDetailResolverService,
-    public title: Title
+    public title: Title,
+    public userService: UserService,
   ) {
   }
 

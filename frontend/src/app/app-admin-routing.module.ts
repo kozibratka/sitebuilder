@@ -5,6 +5,7 @@ import {WebDetailResolverService} from './web/services/web-detail-resolver.servi
 import {WebListResolverGuard} from './web/services/web-list-resolver.service';
 import {RouteRoleGuardService} from './core/guards/route-role-guard.service';
 import {LayoutComponent} from './layout/components/layout/layout.component';
+import {UserResolver} from "./authorization/resolvers/user.resolver";
 
 
 const routes: Routes = [
@@ -12,7 +13,7 @@ const routes: Routes = [
     path: 'admin/:webId',
     component: LayoutComponent,
     canActivate: [RouteRoleGuardService, WebListResolverGuard],
-    resolve: {webList: WebListResolverGuard, webDetail: WebDetailResolverService},
+    resolve: {webList: WebListResolverGuard, webDetail: WebDetailResolverService, user: UserResolver},
     children: [
       {
         path: 'web',

@@ -14,6 +14,7 @@ import {Subject, Subscription, timer} from 'rxjs';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 import {PaletteBlockService} from '../../services/palette-block.service';
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {UserService} from "../../../authorization/services/user.service";
 
 @Component({
   selector: 'app-page-builder',
@@ -46,7 +47,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   globalPlugins: BasePlugConfigInterface[] = [];
   globalPluginsSelect = [];
   @HostBinding('style.minHeight')minHeight = '0px';
-  private _menuLocked = false;
   mouseOnMenu = true;
 
   constructor(
@@ -58,6 +58,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     private domainInfoService: SystemInfoService,
     public title: Title,
     public elementRef: ElementRef<HTMLElement>,
+    private userService: UserService,
 
     private paletteBlockService: PaletteBlockService,
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
@@ -133,7 +134,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   getMenuState() {
-    if (!this._menuLocked) {
+    if (!this.userService.settings.lockBuilderMenu) {
       if (this.mouseOnMenu) {
         return 'show';
       }
@@ -143,17 +144,20 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   }
 
   closeMenuOnLoad() {
-    timer(500).subscribe(value => {
-      this.mouseOnMenu = false;
-    });
+    if (!this.userService.settings.lockBuilderMenu) {
+      timer(500).subscribe(value => {
+        this.mouseOnMenu = false;
+      });
+    }
   }
 
   get menuLocked(): boolean {
-    return this._menuLocked;
+    return this.userService.settings.lockBuilderMenu;
   }
 
   set menuLocked(value: boolean) {
-    this._menuLocked = value;
+    this.userService.settings.lockBuilderMenu = value;
+    this.userService.update();
     (window as any).dispatchEvent(new Event('resize'));
 
   }

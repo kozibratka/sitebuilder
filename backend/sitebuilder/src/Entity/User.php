@@ -30,6 +30,7 @@ class User implements UserInterface
     /**
      * @Assert\NotBlank
      * @Assert\Length(min="3")
+     * @Serializer\Groups({"default", "user"})
      */
     #[ORM\Column(type: 'string')]
     private string $fullName = '';
@@ -37,6 +38,7 @@ class User implements UserInterface
     /**
      * @Assert\NotBlank
      * @Assert\Email
+     * @Serializer\Groups({"default", "user"})
      */
     #[ORM\Column(type: 'string')]
     private string $email = '';
@@ -51,6 +53,12 @@ class User implements UserInterface
 
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Web', mappedBy: 'user', cascade: ['persist'])]
     private Collection $webs;
+
+    /**
+     * @Serializer\Groups({"default", "user"})
+     */
+    #[ORM\Column(type: 'boolean')]
+    private bool $lockBuilderMenu = false;
 
     public function __construct()
     {
@@ -139,5 +147,15 @@ class User implements UserInterface
     public function getUserIdentifier(): string
     {
         return $this->getEmail();
+    }
+
+    public function isLockBuilderMenu(): bool
+    {
+        return $this->lockBuilderMenu;
+    }
+
+    public function setLockBuilderMenu(bool $showBuilderMenu): void
+    {
+        $this->lockBuilderMenu = $showBuilderMenu;
     }
 }

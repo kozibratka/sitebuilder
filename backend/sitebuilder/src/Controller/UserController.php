@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\SiteBuilder\Web;
 use App\Entity\User;
 use App\Form\UserRegistrationType;
+use App\Form\UserType;
 use App\Service\UserStorageService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,6 +33,29 @@ class UserController extends BaseApiController
 
             return $this->jsonResponseSimple($user, 201);
         }
+        return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/read", name="read", methods={"GET"})
+     */
+    public function read() {
+        $user = $this->getUser();
+        return $this->jsonResponseSimple($user, 201, group: 'user');
+    }
+
+    /**
+     * @Route("/update", name="update", methods={"POST"})
+     */
+    public function update(Request $request) {
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form->submit($request->request->all());
+        if($form->isValid()) {
+            $this->flush();
+            return $this->jsonResponseSimple([], 201);
+        }
+
         return $this->invalidFormResponse($form);
     }
 }
