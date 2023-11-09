@@ -5,18 +5,22 @@
 
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
+import { Alignment } from '@ckeditor/ckeditor5-alignment';
 import { Autoformat } from '@ckeditor/ckeditor5-autoformat';
 import { Bold, Italic } from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
+import { CKBox } from '@ckeditor/ckeditor5-ckbox';
+import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
+import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import {
 	Image,
 	ImageCaption,
 	ImageStyle,
 	ImageToolbar,
-	ImageUpload
+	ImageUpload,
+	PictureEditing
 } from '@ckeditor/ckeditor5-image';
 import { Indent } from '@ckeditor/ckeditor5-indent';
 import { Link } from '@ckeditor/ckeditor5-link';
@@ -32,10 +36,14 @@ import { TextTransformation } from '@ckeditor/ckeditor5-typing';
 
 class Editor extends ClassicEditor {
 	public static override builtinPlugins = [
+		Alignment,
 		Autoformat,
 		BlockQuote,
 		Bold,
+		CKBox,
+		CloudServices,
 		Essentials,
+		FontBackgroundColor,
 		FontColor,
 		FontFamily,
 		FontSize,
@@ -52,6 +60,7 @@ class Editor extends ClassicEditor {
 		MediaEmbed,
 		Paragraph,
 		PasteFromOffice,
+		PictureEditing,
 		Table,
 		TableToolbar,
 		TextTransformation
@@ -62,24 +71,22 @@ class Editor extends ClassicEditor {
 			items: [
 				'heading',
 				'|',
+				'fontFamily',
+				'fontSize',
+				'fontColor',
+				'fontBackgroundColor',
+				'alignment',
 				'bold',
 				'italic',
 				'link',
 				'bulletedList',
 				'numberedList',
 				'|',
-				'outdent',
-				'indent',
-				'|',
 				'imageUpload',
 				'blockQuote',
 				'insertTable',
-				'mediaEmbed',
 				'undo',
-				'redo',
-				'fontColor',
-				'fontFamily',
-				'fontSize'
+				'redo'
 			]
 		},
 		language: 'cs',
