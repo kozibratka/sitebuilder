@@ -25,7 +25,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -59,7 +60,7 @@
               "src/assets/admin_lte/plugins/sparklines/sparkline.js",
               "src/assets/admin_lte/dist/js/adminlte.min.js",
               "src/assets/admin_lte/dist/js/demo.js",
-              "node_modules/lodash/lodash.min.js"
+              "node_modules/lodash/lodash.min.js",
             ]
           },
           "configurations": {

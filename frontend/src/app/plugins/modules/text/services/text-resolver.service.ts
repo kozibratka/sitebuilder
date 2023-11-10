@@ -3,6 +3,7 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
 import {TextComponent} from '../components/text/text.component';
 import {TextTextAdminComponent} from '../pages/text-admin/text-text-admin.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
+import {TinymceAdminComponent} from "../pages/tinymce-admin/tinymce-admin.component";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,11 @@ export class TextResolverService extends AbstractPluginResolver{
     {
       label: 'Text',
       component: TextTextAdminComponent,
+      path: ''
+    },
+    {
+      label: 'Text - tinymce',
+      component: TinymceAdminComponent,
       path: ''
     }
   ];

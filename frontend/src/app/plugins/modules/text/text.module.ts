@@ -7,22 +7,25 @@ import {CoreModule} from '../../../core/core.module';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {TextTextAdminComponent} from './pages/text-admin/text-text-admin.component';
 import {TextComponent} from './components/text/text.component';
-
-
+import { TinymceAdminComponent } from './pages/tinymce-admin/tinymce-admin.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
     TextComponent,
-    TextTextAdminComponent
+    TextTextAdminComponent,
+    TinymceAdminComponent
   ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
         CKEditorModule,
-        CoreModule
+        CoreModule,
+        EditorModule
     ],
   providers: [
     {provide: AbstractPluginResolver, useClass: TextResolverService, multi: true},
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ],
 })
 export class TextModule { }
