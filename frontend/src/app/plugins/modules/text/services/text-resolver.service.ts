@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AbstractPluginResolver} from '../../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {TextComponent} from '../components/text/text.component';
-import {TextTextAdminComponent} from '../pages/text-admin/text-text-admin.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
 import {TinymceAdminComponent} from "../pages/tinymce-admin/tinymce-admin.component";
 
@@ -19,11 +18,6 @@ export class TextResolverService extends AbstractPluginResolver{
   adminComponentsClass = [
     {
       label: 'Text',
-      component: TextTextAdminComponent,
-      path: ''
-    },
-    {
-      label: 'Text - tinymce',
       component: TinymceAdminComponent,
       path: ''
     }

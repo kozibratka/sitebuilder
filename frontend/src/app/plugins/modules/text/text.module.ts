@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
-import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {TextResolverService} from './services/text-resolver.service';
 import {CoreModule} from '../../../core/core.module';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
-import {TextTextAdminComponent} from './pages/text-admin/text-text-admin.component';
 import {TextComponent} from './components/text/text.component';
 import { TinymceAdminComponent } from './pages/tinymce-admin/tinymce-admin.component';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
@@ -13,13 +11,11 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 @NgModule({
   declarations: [
     TextComponent,
-    TextTextAdminComponent,
     TinymceAdminComponent
   ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        CKEditorModule,
         CoreModule,
         EditorModule
     ],

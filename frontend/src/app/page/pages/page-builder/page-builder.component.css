@@ -50,3 +50,7 @@
 ::ng-deep .builder.col-md-10 .palette {
   font-size: 0.833333333vw;
 }
+
+::ng-deep .cdk-overlay-container:has(.file-manager-dialog) {
+  z-index: 2003 !important;
+}

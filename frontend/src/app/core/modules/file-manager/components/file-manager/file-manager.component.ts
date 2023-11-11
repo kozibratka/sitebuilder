@@ -65,7 +65,6 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private webDetailResolverService: WebDetailResolverService,
     private matTreeService: MatTreeService<DirectoryTreeInterface, FlatDirectoryTreeInterface>,
     public viewContainerRef: ViewContainerRef,
     private contextMenuService: ContextMenuService,

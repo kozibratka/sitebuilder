@@ -4,7 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {CoreModule} from '../core/core.module';
-import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MixedCdkDragDropModule} from 'angular-mixed-cdk-drag-drop';
 import {NgbCarousel, NgbSlide} from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +28,6 @@ import {FormModule} from './modules/form/form.module';
         ReactiveFormsModule,
         MatButtonModule,
         RouterModule,
-        CKEditorModule,
         FormsModule,
         DragDropModule,
         MixedCdkDragDropModule,

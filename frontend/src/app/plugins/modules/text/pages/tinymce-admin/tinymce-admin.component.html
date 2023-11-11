@@ -1,15 +1,7 @@
-<label>Text</label>
-<editor
-  [init]="{
-     base_url: '/tinymce',
-     suffix: '.min',
-     menubar: false,
-     plugins: [
-       'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview', 'anchor', 'searchreplace',
-       'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media', 'table',
-       'help', 'wordcount',
-     ],
-     toolbar1: 'undo redo fontfamily blocks bold italic forecolor backcolor image',
-      toolbar2: 'alignleft aligncenter alignright alignjustify bullist numlist outdent indent removeformat | help'
-   }"
-></editor>
+<form [formGroup]="adminForm">
+  <label>Text</label>
+  <editor
+    [init]="tinyMceOptions"
+    formControlName='text'
+  ></editor>
+</form>
