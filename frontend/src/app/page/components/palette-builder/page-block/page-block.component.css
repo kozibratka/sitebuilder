@@ -49,3 +49,38 @@
     display: none;
   }
 }
+
+.block-content-rows {
+  min-height: 200px;
+}
+
+.block-row {
+  border: 1px solid black;
+}
+
+::ng-deep .palette .block-content-rows > .sortable-ghost
+{
+  width: 100%;
+  height: 100px;
+  margin-bottom: 1px;
+  border: 1px solid black;
+  background-color: #f2f2f2;
+}
+
+::ng-deep .palette .block-content-rows > .sortable-ghost *
+{
+  display: none !important;
+}
+
+::ng-deep .palette .block-content-rows > .block-row
+{
+  width: 100%;
+  margin-bottom: 1px;
+  border: 1px solid black !important;
+}
+
+::ng-deep .palette .block-content-rows > .block-row:empty
+{
+  height: 100px!important;
+}
+

@@ -43,6 +43,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   draggingItemBottom = false;
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
+  rows = [];
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -62,9 +63,9 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.initGridStack();
-    this.registerOnDraggedItem();
-    this.registerIsResizedOnDrag();
+    // this.initGridStack();
+    // this.registerOnDraggedItem();
+    // this.registerIsResizedOnDrag();
   }
 
   ngAfterViewInit(): void {

@@ -2,7 +2,12 @@
   <div class="block-menu">
     <i class="fas fa-arrows-alt handle"></i>
   </div>
-  <div #palette_content class="block-content grid-stack" [class.dragging-item-bottom]="draggingItemBottom">
-    <app-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems; trackBy: trackByGridItem"></app-grid-item>
+<!--  <div #palette_content class="block-content grid-stack" [class.dragging-item-bottom]="draggingItemBottom">-->
+<!--    <app-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems; trackBy: trackByGridItem"></app-grid-item>-->
+<!--  </div>-->
+  <div class="block-content-rows" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}}">
+    <div class="block-row" *ngFor="let row of rows">
+
+    </div>
   </div>
 </div>

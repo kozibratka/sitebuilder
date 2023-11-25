@@ -27,6 +27,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   baseBlocks: { image: string, id: number }[];
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
+  rows = [1];
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,

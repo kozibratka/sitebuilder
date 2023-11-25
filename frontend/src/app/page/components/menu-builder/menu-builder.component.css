@@ -46,3 +46,11 @@ i.icon-move{
   z-index: 1;
 }
 
+.grid-row-menu {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+}
+
