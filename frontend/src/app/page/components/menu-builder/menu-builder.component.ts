@@ -16,6 +16,7 @@ import {GridStack} from 'gridstack/dist/gridstack';
 import {Subject} from 'rxjs';
 import {QuickMenuService} from '../../services/quick-menu.service';
 import {UserService} from "../../../authorization/services/user.service";
+import {GridRowInterface} from "../../interfaces/grid-row-interface";
 
 @Component({
   selector: 'app-menu-builder',
@@ -27,7 +28,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   baseBlocks: { image: string, id: number }[];
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
-  rows = [1];
+  rows: GridRowInterface[] = [{cells: [{width: 6, items: []}, {width: 6, items: []}]}];
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,

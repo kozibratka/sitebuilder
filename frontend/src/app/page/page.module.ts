@@ -25,6 +25,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MouseMoveScrollDirective} from '../core/directives/mouse-move-scroll-directive';
 import { RemoveGridItemDialogComponent } from './components/remove-grid-item-dialog/remove-grid-item-dialog.component';
 import {FormBuilderModule} from '../core/modules/form-builder/form-builder.module';
+import { GridRowComponent } from './components/grid-row/grid-row.component';
+import { GridCellComponent } from './components/grid-cell/grid-cell.component';
+import { GridCellItemComponent } from './components/grid-cell-item/grid-cell-item.component';
 
 
 const routes: Routes = [
@@ -67,6 +70,9 @@ const routes: Routes = [
     MenuPluginResolverDirective,
     PluginMiniAdminComponent,
     RemoveGridItemDialogComponent,
+    GridRowComponent,
+    GridCellComponent,
+    GridCellItemComponent,
   ],
   exports: [
     PaletteItemComponent

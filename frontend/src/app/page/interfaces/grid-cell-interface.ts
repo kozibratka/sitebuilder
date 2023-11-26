@@ -1,5 +1,6 @@
-import {BasePlugConfigInterface} from "../../plugins/interfaces/base-plug-config-interface";
+import {GridCellItemInterface} from "./grid-cell-item-interface";
 
 export interface GridCellInterface {
-  plugin: BasePlugConfigInterface;
+  items: GridCellItemInterface[];
+  width: number;
 }

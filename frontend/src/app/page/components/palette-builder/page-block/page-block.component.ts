@@ -28,6 +28,7 @@ import {AbstractPlugin} from '../../../../plugins/abstract-class/abstract-plugin
 import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
 import {PaletteBlockService} from '../../../services/palette-block.service';
 import {StringService} from '../../../../core/services/string.service';
+import {GridRowInterface} from "../../../interfaces/grid-row-interface";
 
 @Component({
   selector: 'app-palette-block',
@@ -43,7 +44,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   draggingItemBottom = false;
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
-  rows = [];
+  rows: GridRowInterface[] = [];
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
