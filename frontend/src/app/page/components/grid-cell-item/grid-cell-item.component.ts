@@ -29,9 +29,7 @@ export class GridCellItemComponent implements OnInit{
       } else {
         this.pluginResolver = this.getResolverFromIdentifier();
       }
-      this.initPlugin();
-    } else {
-
+      this.createPlugin();
     }
   }
 
@@ -41,7 +39,7 @@ export class GridCellItemComponent implements OnInit{
     });
   }
 
-  initPlugin() {
+  createPlugin() {
     let componentClass = this.pluginResolver.componentClass as any;
     this.plugin = this.pluginContainer.createComponent<AbstractPlugin<any>>(componentClass);
     this.plugin.instance.initializeSettings(this.gridCellItem.plugin);

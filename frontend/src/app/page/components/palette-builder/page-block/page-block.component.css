@@ -75,12 +75,8 @@
 ::ng-deep .palette .block-content-rows > .block-row
 {
   width: 100%;
-  margin-bottom: 1px;
-  border: 1px solid black !important;
 }
 
-::ng-deep .palette .block-content-rows > .block-row:empty
-{
-  height: 100px!important;
+.block-content-rows.container {
+  max-width: 100%;
 }
-

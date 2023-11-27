@@ -1,3 +1,18 @@
-.row {
+:host.row:hover {
   border: 1px solid black;
 }
+
+:host.row:not(:has(.cell-item)) {
+  min-height: 100px;
+  border: 1px solid black;
+}
+
+:host.row {
+  margin-bottom: 1rem;
+}
+
+:host.row:hover ::ng-deep app-grid-cell:not(:last-child) {
+  border-right: 1px solid red;
+}
+
+

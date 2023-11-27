@@ -8,5 +8,5 @@ import {GridRowInterface} from "../../interfaces/grid-row-interface";
 })
 export class GridRowComponent {
   @Input() row: GridRowInterface;
-
+  @Input() isDeepChild = false;
 }
