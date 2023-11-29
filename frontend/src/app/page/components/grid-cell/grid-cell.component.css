@@ -1,4 +1,4 @@
-.cell-content:hover {
+:host:not(.resized) > .cell-content:hover {
   border: 1px solid black;
 }
 

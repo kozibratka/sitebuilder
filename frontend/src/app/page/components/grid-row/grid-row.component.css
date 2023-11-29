@@ -11,8 +11,11 @@
   margin-bottom: 1rem;
 }
 
-:host.row:hover ::ng-deep app-grid-cell:not(:last-child) {
+:host.row:hover ::ng-deep .delimiter-line {
   border-right: 1px solid red;
+  width: 0.5px;
+  margin: 0 auto;
+  height: 100%;
 }
 
 app-grid-cell {

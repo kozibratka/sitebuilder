@@ -10,10 +10,10 @@
 </div>
 <div class="row" [class.grid-item-dragged]="gridDragged$ | async">
   <div [class]="menuLocked ? 'col-md-2' : 'menu-unlocked'" [@visibleMenu]="getMenuState()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-    <app-menu-builder (locketEmitter)="menuLocked = $event"></app-menu-builder>
+    <app-menu-builder (sortableJsDragging)="isSortableJsDragged = $event"  (locketEmitter)="menuLocked = $event"></app-menu-builder>
   </div>
   <div [class]="menuLocked ? 'col-md-10' : 'col-md-12'" class="builder" >
-    <app-palette-builder [pageDetail]="pageDetail"></app-palette-builder>
+    <app-palette-builder [isSortableJsDragged]="isSortableJsDragged" [pageDetail]="pageDetail"></app-palette-builder>
   </div>
 <!--  {{namePlugin}}-->
 </div>

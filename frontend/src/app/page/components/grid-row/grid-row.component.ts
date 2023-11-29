@@ -11,6 +11,7 @@ import {DOCUMENT} from "@angular/common";
 export class GridRowComponent implements OnInit, OnDestroy{
   @Input() row: GridRowInterface;
   @Input() isDeepChild = false;
+  isResized = false;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -26,6 +27,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
   }
 
   onCellResized(event: MouseEvent, cellIndex: number) {
+    this.isResized = true;
     let start = event.clientX;
     let cellWidth = this.elementRef.nativeElement.offsetWidth / 12;
     let leftCell = this.row.cells[cellIndex];
@@ -47,6 +49,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
       subscriptionMouseUp.unsubscribe();
       subscriptionMouseMove.unsubscribe();
       this.document.body.style.cursor = '';
+      this.isResized = false;
     });
   }
 

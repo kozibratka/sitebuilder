@@ -29,6 +29,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
   rows: GridRowInterface[] = [{cells: [{width: 6, items: []}, {width: 6, items: []}]}];
+  @Output() sortableJsDragging =  new EventEmitter<boolean>();
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
@@ -89,5 +90,13 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   cloneSortableJsRow(item) {
     return JSON.parse(JSON.stringify(item));
+  }
+
+  onDragStart = (event: any) => {
+    this.sortableJsDragging.emit(true);
+  }
+
+  onDragEnd = (event: any)=> {
+    this.sortableJsDragging.emit(false);
   }
 }

@@ -48,6 +48,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   globalPluginsSelect = [];
   @HostBinding('style.minHeight')minHeight = '0px';
   mouseOnMenu = true;
+  isSortableJsDragged = false;
 
   constructor(
     private route: ActivatedRoute,
