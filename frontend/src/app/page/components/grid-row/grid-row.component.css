@@ -15,4 +15,8 @@
   border-right: 1px solid red;
 }
 
+app-grid-cell {
+  position: relative;
+}
+
 

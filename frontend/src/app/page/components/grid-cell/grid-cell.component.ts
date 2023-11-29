@@ -1,16 +1,28 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Host, HostBinding, HostListener, Inject, Input, OnInit, Output} from '@angular/core';
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
+import {GridRowComponent} from "../grid-row/grid-row.component";
+import {fromEvent} from "rxjs";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-grid-cell',
   templateUrl: './grid-cell.component.html',
   styleUrls: ['./grid-cell.component.css']
 })
-export class GridCellComponent implements OnInit{
+export class GridCellComponent {
   @Input() cell: GridCellInterface;
-  @HostBinding('class') widthClass;
+  @Input() isLast = false;
+  @Output() resized$ = new EventEmitter<MouseEvent>();
 
-  ngOnInit(): void {
-    this.widthClass = `col-md-${this.cell.width}`;
+
+  constructor(
+    @Inject(DOCUMENT) private document: Document
+  ) {
+  }
+
+  onMouseDownResizeDelimiter(event: MouseEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.resized$.emit(event);
   }
 }

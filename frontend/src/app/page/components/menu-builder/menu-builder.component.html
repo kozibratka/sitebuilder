@@ -30,7 +30,7 @@
   </div>
   <div class="tab-pane fade menu-element d-flex flex-wrap active show" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
 
-     <div class="grid-row-menu" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}}" >
+     <div class="grid-row-menu" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}}" [sortablejsCloneFunction]="cloneSortableJsRow">
        <div>
          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
          <span class="text">Nový prostor pro prvky</span>

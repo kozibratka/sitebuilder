@@ -86,4 +86,8 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     this.userService.settings.lockBuilderMenu = value;
     this.locketEmitter.emit(value)
   }
+
+  cloneSortableJsRow(item) {
+    return JSON.parse(JSON.stringify(item));
+  }
 }

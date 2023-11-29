@@ -1,2 +1,5 @@
-<app-grid-cell [cell]="item" *ngFor="let item of row.cells"></app-grid-cell>
-
+<app-grid-cell [cell]="cell" [isLast]="last" *ngFor="let cell of row.cells; let last = last;index as i"
+               (resized$)="onCellResized($event, i)"
+               class="col-md-{{cell.width}}"
+>
+</app-grid-cell>

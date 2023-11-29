@@ -29,6 +29,7 @@ import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-
 import {PaletteBlockService} from '../../../services/palette-block.service';
 import {StringService} from '../../../../core/services/string.service';
 import {GridRowInterface} from "../../../interfaces/grid-row-interface";
+import {SortablejsDirective} from "ngx-sortablejs";
 
 @Component({
   selector: 'app-palette-block',
@@ -39,6 +40,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
+  @ViewChild(SortablejsDirective, {static: true}) sortablejs: SortablejsDirective;
   @Output() resized = new EventEmitter<boolean>();
   private _pageBlock: PageBlockInterface;
   draggingItemBottom = false;

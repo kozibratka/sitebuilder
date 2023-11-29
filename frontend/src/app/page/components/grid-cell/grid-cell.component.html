@@ -1,3 +1,4 @@
 <div class="cell-content">
   <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items"></app-grid-cell-item>
 </div>
+<div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);"></div>

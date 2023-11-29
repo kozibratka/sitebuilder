@@ -6,3 +6,13 @@
   width: 100%;
   height: 100%;
 }
+
+.cell-delimiter {
+  position: absolute;
+  width: 25px;
+  right: -13px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 1;
+  top: 0px;
+}
