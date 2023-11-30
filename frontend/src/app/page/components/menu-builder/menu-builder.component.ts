@@ -29,7 +29,6 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
   rows: GridRowInterface[] = [{cells: [{width: 6, items: []}, {width: 6, items: []}]}];
-  @Output() sortableJsDragging =  new EventEmitter<boolean>();
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
@@ -41,6 +40,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     private applicationRef: ApplicationRef,
     private quickMenuService: QuickMenuService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
+    @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
   ) {
     this.baseBlocks = [
       {image: 'https://via.placeholder.com/300/000000?text=2', id: 1}
@@ -93,10 +93,10 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   onDragStart = (event: any) => {
-    this.sortableJsDragging.emit(true);
+    this.sortableJsDragged$.next(true);
   }
 
   onDragEnd = (event: any)=> {
-    this.sortableJsDragging.emit(false);
+    this.sortableJsDragged$.next(false);
   }
 }

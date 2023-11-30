@@ -1,7 +1,8 @@
-import {AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {PageInterface} from '../../interfaces/page-interface';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {StringService} from '../../../core/services/string.service';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-palette-builder',
@@ -12,11 +13,11 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 
   @ViewChild('palette') private _palette: ElementRef<HTMLElement>;
   @Input() pageDetail: PageInterface;
-  @Input() isSortableJsDragged = false;
   isDraggedContent = false;
   private _isResized = false;
 
   constructor(
+    @Inject('SortableJsDragged') public sortableJsDragged$: Subject<boolean>,
   ) {
   }
 

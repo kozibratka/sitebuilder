@@ -60,6 +60,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     private paletteBlockService: PaletteBlockService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
+    @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
     @Inject(DOCUMENT) private document: Document,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
@@ -195,5 +196,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     if (index !== -1) {
       this._pageBlock.paletteGridItems.splice(index, 1);
     }
+  }
+
+  onDragStart = (event: any) => {
+    this.sortableJsDragged$.next(true);
+  }
+
+  onDragEnd = (event: any)=> {
+    this.sortableJsDragged$.next(false);
   }
 }

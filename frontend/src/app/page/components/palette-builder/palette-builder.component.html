@@ -2,7 +2,7 @@
   <div class="card-header">
     <h3 class="card-title">Editační plátno</h3>
   </div> <!-- /.card-body -->
-  <div class="card-body palette" [class.sortable-js-dragged]="isSortableJsDragged">
+  <div class="card-body palette" [class.sortable-js-dragged]="sortableJsDragged$ | async">
     <app-palette-item-quick-menu></app-palette-item-quick-menu>
 
     <ul

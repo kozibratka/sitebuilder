@@ -23,6 +23,7 @@ import {UserService} from "../../../authorization/services/user.service";
   providers: [
     MenuPluginResolverService,
     {provide: 'PageBuilderEvent', useFactory: () => new Subject<boolean>()},
+    {provide: 'SortableJsDragged', useFactory: () => new Subject<boolean>()},
     {provide: 'GridItemDragged', useFactory: () => new Subject<boolean>()}
   ],
   animations: [
