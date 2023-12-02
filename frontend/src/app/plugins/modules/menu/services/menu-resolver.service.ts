@@ -4,11 +4,12 @@ import {MenuAdminComponent} from '../pages/menu-admin/menu-admin.component';
 import {MenuLogoAdminComponent} from '../pages/menu-logo-admin/menu-logo-admin.component';
 import {MenuComponent} from '../components/menu/menu.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
+import {MenuConfigInterface} from "../interfaces/menu-config-interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class MenuResolverService extends AbstractPluginResolver {
+export class MenuResolverService extends AbstractPluginResolver<MenuConfigInterface> {
 
   adminComponentsClass = [
     {
@@ -53,5 +54,18 @@ export class MenuResolverService extends AbstractPluginResolver {
 
   get name(): string {
     return 'Menu';
+  }
+
+  getEmptySettings(): MenuConfigInterface {
+    return {
+      identifier: PluginIdentifier.MENU_V1,
+      logoImage: '',
+      logoName: 'Logo',
+      items: [
+        {name: 'one', pageUrl: '', level: 0, page: null},
+        {name: 'two', pageUrl: '', level: 1, page: null},
+        {name: 'tree', pageUrl: '', level: 0, page: null},
+      ]
+    };
   }
 }

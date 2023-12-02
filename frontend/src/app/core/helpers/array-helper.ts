@@ -11,7 +11,6 @@ export class ArrayHelper {
   static syncArrayOfObjects(fromArray: any[], toArray: any[], propertyName = 'id') {
     const array1 = _.flatten<List<{}>>(fromArray, 20);
     const array2 = _.flatten(toArray, 20);
-    console.log(array2);
     array1.forEach((value, index) => {
       if (value.hasOwnProperty(propertyName)) {
         array2[index][propertyName] = value[propertyName];

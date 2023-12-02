@@ -4,23 +4,23 @@ import {AbstractPluginResolver} from './abstract-classes/abstract-plugin-resolve
 @Injectable()
 export class MenuPluginResolverService {
 
-  private _selectedAbstractPluginResolverMessenger: AbstractPluginResolver;
+  private _selectedAbstractPluginResolverMessenger: AbstractPluginResolver<any>;
 
   constructor(
-    @Inject(AbstractPluginResolver) private _abstractMenuPluginResolver: AbstractPluginResolver[]
+    @Inject(AbstractPluginResolver) private _abstractMenuPluginResolver: AbstractPluginResolver<any>[]
   ) {
 
   }
 
-  get selectedAbstractPluginResolverMessenger(): AbstractPluginResolver {
+  get selectedAbstractPluginResolverMessenger(): AbstractPluginResolver<any> {
     return this._selectedAbstractPluginResolverMessenger;
   }
 
-  set selectedAbstractPluginResolverMessenger(value: AbstractPluginResolver) {
+  set selectedAbstractPluginResolverMessenger(value: AbstractPluginResolver<any>) {
     this._selectedAbstractPluginResolverMessenger = value;
   }
 
-  get abstractMenuPluginResolver(): AbstractPluginResolver[] {
+  get abstractMenuPluginResolver(): AbstractPluginResolver<any>[] {
     return this._abstractMenuPluginResolver;
   }
 }

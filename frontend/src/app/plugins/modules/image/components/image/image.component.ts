@@ -9,16 +9,6 @@ import {PluginIdentifier} from '../../../../constants/plugin-identifier';
   styleUrls: ['image.component.css']
 })
 export class ImageComponent extends AbstractPlugin<ImageConfigInterface> implements AfterViewChecked{
-  initEmptySettings(): ImageConfigInterface {
-    return {
-      identifier: PluginIdentifier.IMAGE_V1,
-      imagePath: 'https://picsum.photos/seed/picsum/400/200',
-      circle: 0,
-      blur: 0,
-      grayscale: 0,
-      sepia: 0,
-    };
-  }
 
   ngAfterViewChecked(): void {
   }

@@ -15,19 +15,6 @@ export class MenuComponent extends AbstractPlugin<MenuConfigInterface> implement
     this.refreshView();
   }
 
-  initEmptySettings(): MenuConfigInterface {
-    return {
-      identifier: PluginIdentifier.MENU_V1,
-      logoImage: '',
-      logoName: 'Logo',
-      items: [
-        {name: 'one', pageUrl: '', level: 0, page: null},
-        {name: 'two', pageUrl: '', level: 1, page: null},
-        {name: 'tree', pageUrl: '', level: 0, page: null},
-      ]
-    };
-  }
-
   refreshView(): void {
     this.itemsAsNestedArray = ArrayHelper.objectWithLevelToNestedArray(this.settings.items);
   }

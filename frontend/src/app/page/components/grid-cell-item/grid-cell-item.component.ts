@@ -1,8 +1,19 @@
-import {Component, ComponentRef, Inject, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  ElementRef,
+  HostListener,
+  Inject,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {AbstractPluginResolver} from "../../services/abstract-classes/abstract-plugin-resolver";
 import {MenuPluginResolverService} from "../../services/menu-plugin-resolver.service";
 import {AbstractPlugin} from "../../../plugins/abstract-class/abstract-plugin";
+import {QuickMenuService} from "../../services/quick-menu.service";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -11,14 +22,17 @@ import {AbstractPlugin} from "../../../plugins/abstract-class/abstract-plugin";
 })
 export class GridCellItemComponent implements OnInit{
   @Input() gridCellItem: GridCellItemInterface;
-  public pluginResolver: AbstractPluginResolver;
+  public pluginResolver: AbstractPluginResolver<any>;
   @ViewChild('content', {read: ViewContainerRef, static: true}) pluginContainer: ViewContainerRef;
-  private plugin: ComponentRef<AbstractPlugin<any>>;
+  plugin: ComponentRef<AbstractPlugin<any>>;
+  showMoveIcon = false;
 
 
   constructor(
-    @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractPluginResolvers: AbstractPluginResolver<any>[],
     private menuPluginResolverService: MenuPluginResolverService,
+    private quickMenuService: QuickMenuService,
+    public elementRef: ElementRef,
   ) {
   }
 
@@ -33,8 +47,19 @@ export class GridCellItemComponent implements OnInit{
     }
   }
 
+  @HostListener('mouseenter', ['$event'])
+  onMouseEnter(event: MouseEvent): void {
+    this.quickMenuService.moveMenu.next(this);
+    this.showMoveIcon = true;
+  }
+
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent): void {
+    this.showMoveIcon = false;
+  }
+
   getResolverFromIdentifier() {
-    return this.abstractPluginResolver.find(value => {
+    return this.abstractPluginResolvers.find(value => {
       return value.identifier === this.gridCellItem.plugin.identifier;
     });
   }

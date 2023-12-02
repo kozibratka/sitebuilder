@@ -17,6 +17,7 @@ import {Subject} from 'rxjs';
 import {QuickMenuService} from '../../services/quick-menu.service';
 import {UserService} from "../../../authorization/services/user.service";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
+import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 
 @Component({
   selector: 'app-menu-builder',
@@ -33,7 +34,6 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
     private zone: NgZone,
-
     private renderer: Renderer2,
     private window: Window,
     private userService: UserService,
@@ -48,9 +48,6 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.zone.runOutsideAngular(() => {
-      GridStack.setupDragIn('.grid-stack-item-menu', { handle: '.icon-move', appendTo: 'body', helper: this.myClone.bind(this) });
-    });
   }
 
   ngOnInit(): void {
@@ -90,6 +87,12 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   cloneSortableJsRow(item) {
     return JSON.parse(JSON.stringify(item));
+  }
+
+  createPluginConfig = (item): GridCellItemInterface => {
+    let resolver = this.menuPluginResolverServices.selectedAbstractPluginResolverMessenger;
+    let pluginConfig = resolver.getEmptySettings();
+    return {plugin: pluginConfig};
   }
 
   onDragStart = (event: any) => {

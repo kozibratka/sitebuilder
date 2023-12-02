@@ -7,7 +7,7 @@ import {AbstractPluginResolver} from '../../page/services/abstract-classes/abstr
 export class PluginResolverService {
 
   constructor(
-    @Inject(AbstractPluginResolver) private abstractMenuPluginResolvers: AbstractPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractMenuPluginResolvers: AbstractPluginResolver<any>[],
   ) { }
 
   getPluginResolverByIdentifier(identifier: string) {

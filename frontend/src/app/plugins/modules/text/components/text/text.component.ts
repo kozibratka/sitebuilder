@@ -16,13 +16,6 @@ export class TextComponent extends AbstractPlugin<TextConfigInterface>
   ngOnInit(): void {
   }
 
-  initEmptySettings(): TextConfigInterface {
-    return {
-      identifier: 'text_v1',
-      text: 'Text plugin'
-    };
-  }
-
   refreshView(): void {
   }
 

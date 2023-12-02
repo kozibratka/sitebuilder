@@ -1,10 +1,14 @@
 :host.row:hover {
-  border: 1px solid black;
+  outline:  dotted 0 transparent;
+  transition: outline 0.3s linear;
+  outline-width: 1px;
+  outline-color: black;
 }
 
 :host.row:not(:has(.cell-item)) {
   min-height: 100px;
-  border: 1px solid black;
+  outline-width: 1px;
+  outline-color: black;
 }
 
 :host.row {
@@ -20,6 +24,10 @@
 
 app-grid-cell {
   position: relative;
+}
+
+:host.row {
+  min-height: 20px;
 }
 
 

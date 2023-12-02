@@ -3,11 +3,12 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
 import {TextComponent} from '../components/text/text.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
 import {TinymceAdminComponent} from "../pages/tinymce-admin/tinymce-admin.component";
+import {TextConfigInterface} from "../interfaces/text-config-interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class TextResolverService extends AbstractPluginResolver{
+export class TextResolverService extends AbstractPluginResolver<TextConfigInterface>{
 
   constructor() { super(); }
 
@@ -49,5 +50,12 @@ export class TextResolverService extends AbstractPluginResolver{
 
   gridHeight(): number {
     return 5;
+  }
+
+  getEmptySettings(): TextConfigInterface {
+    return {
+      identifier: 'text_v1',
+      text: 'Text plugin'
+    };
   }
 }

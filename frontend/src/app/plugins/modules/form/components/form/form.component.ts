@@ -38,13 +38,6 @@ export class FormComponent extends AbstractPlugin<FormConfigInterface> implement
     }
   }
 
-  initEmptySettings(): FormConfigInterface {
-    return {
-      identifier: PluginIdentifier.FORM_V1,
-      form: [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()], [new Button()]],
-    };
-  }
-
   getDisabledStateWhenDraggingItem(): any {
   }
 

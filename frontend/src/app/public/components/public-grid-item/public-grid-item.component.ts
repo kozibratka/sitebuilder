@@ -29,11 +29,11 @@ export class PublicGridItemComponent implements OnInit, OnDestroy {
   @ViewChild('gridContent', {read: ElementRef, static: true}) gridContent: ElementRef;
   private component: ComponentRef<AbstractPlugin<BasePlugConfigInterface>>;
   private resizeObserver: ResizeObserver;
-  private pluginResolver: AbstractPluginResolver;
+  private pluginResolver: AbstractPluginResolver<any>;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
-    @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver<any>[],
     public elementRef: ElementRef<GridItemHTMLElement>,
     public pageBlockComponent: PublicPageBlockComponent,
     private resolver: ComponentFactoryResolver,

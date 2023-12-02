@@ -8,6 +8,7 @@ import {MoveableModalService} from '../../../../core/components/moveable-modal/s
 import {PluginMiniAdminComponent} from '../../../pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 import {PluginResolverService} from '../../../../plugins/services/plugin-resolver.service';
 import {QuickMenuService} from '../../../services/quick-menu.service';
+import {GridCellItemComponent} from "../../grid-cell-item/grid-cell-item.component";
 
 
 @Component({
@@ -22,7 +23,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   @HostBinding('style.display') display = 'none';
   @HostBinding('style.width') width;
 
-  private selectedItemForMenu: PaletteItemComponent;
+  private selectedItemForMenu: GridCellItemComponent;
   private lastMouserOveredElement = null;
   private isEnabled = true;
 
@@ -59,7 +60,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
       }
       this.display = 'block';
       paletteItemElement = this.lastMouserOveredElement =
-        paletteItemElement ? paletteItemElement as PaletteItemComponent : this.lastMouserOveredElement as PaletteItemComponent;
+        paletteItemElement ? paletteItemElement as GridCellItemComponent : this.lastMouserOveredElement as GridCellItemComponent;
       this.selectedItemForMenu = paletteItemElement;
       const itemElement = paletteItemElement.elementRef.nativeElement;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {
@@ -75,7 +76,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
 
   private openItemMenu(): void{
     this.display = 'none';
-    const plugin = this.selectedItemForMenu.componentRef.instance;
+    const plugin = this.selectedItemForMenu.plugin.instance;
     const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
       plugin.settings.identifier
     );

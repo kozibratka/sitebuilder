@@ -1,0 +1,10 @@
+:host:hover, ::ng-deep .sortable-js-dragged app-grid-cell-item{
+  outline:  dotted 0 transparent;
+  transition: outline 0.3s linear;
+  outline-width: 1px;
+  outline-color: green;
+}
+
+:host {
+  display: block;
+}

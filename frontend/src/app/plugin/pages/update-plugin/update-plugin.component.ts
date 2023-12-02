@@ -18,7 +18,7 @@ import {PluginResolverService} from '../../../plugins/services/plugin-resolver.s
   styleUrls: ['./update-plugin.component.css']
 })
 export class UpdatePluginComponent implements OnInit {
-  pluginResolver: AbstractPluginResolver;
+  pluginResolver: AbstractPluginResolver<any>;
   pluginSetting: BasePlugConfigInterface;
 
   adminConfig = null;

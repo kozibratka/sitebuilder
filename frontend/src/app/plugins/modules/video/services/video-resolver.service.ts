@@ -3,11 +3,12 @@ import {AbstractPluginResolver} from '../../../../page/services/abstract-classes
 import {VideoAdminComponent} from '../pages/video-admin/video-admin.component';
 import {VideoComponent} from '../components/video/video.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
+import {VideoConfigInterface} from "../interfaces/video-config-interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class VideoResolverService extends AbstractPluginResolver {
+export class VideoResolverService extends AbstractPluginResolver<VideoConfigInterface> {
 
   adminComponentsClass = [
     {
@@ -47,5 +48,12 @@ export class VideoResolverService extends AbstractPluginResolver {
 
   get name(): string {
     return 'Video';
+  }
+
+  getEmptySettings(): VideoConfigInterface {
+    return {
+      identifier: PluginIdentifier.VIDEO_V1,
+      videoPath: 'https://www.youtube.com/embed?v=2Gg6Seob5Mg&list=PLGmxyVGSCDKvmLInHxJ9VdiwEb82Lxd2E&ab_channel=NOCOPYRIGHTMOTIONGRAPHICS',
+    };
   }
 }

@@ -14,9 +14,6 @@ export class SystemInfoService {
   }
 
   isPreviewHostname(): boolean {
-
-    console.log(location.host);
-
     return this.getLocalhostWithPortForPreview() === location.host ||
       environment.hostname.replace('www', environment.previewSubdomain) === window.location.hostname;
   }

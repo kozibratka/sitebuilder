@@ -1,5 +1,8 @@
-:host:not(.resized) > .cell-content:hover {
-  border: 1px solid black;
+:host:not(.resized) > .cell-content:hover, ::ng-deep .sortable-js-dragged .cell-content{
+  outline:  dotted 0 transparent;
+  transition: outline 0.3s linear;
+  outline-width: 1px;
+  outline-color: #007BFF;
 }
 
 .cell-content {

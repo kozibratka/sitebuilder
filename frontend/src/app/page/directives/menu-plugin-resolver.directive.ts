@@ -7,7 +7,7 @@ import {MenuPluginResolverService} from '../services/menu-plugin-resolver.servic
 })
 export class MenuPluginResolverDirective {
 
-  @Input() abstractMenuPluginResolverMessenger: AbstractPluginResolver;
+  @Input() abstractMenuPluginResolverMessenger: AbstractPluginResolver<any>;
 
   constructor(
     private menuPluginResolverService: MenuPluginResolverService

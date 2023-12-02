@@ -41,7 +41,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   @ViewChild('gridContent', {read: ElementRef, static: true}) gridContent: ElementRef;
   private _componentRef: ComponentRef<AbstractPlugin<any>>;
   private lastPosition: ElementPositionMessenger;
-  public pluginResolver: AbstractPluginResolver;
+  public pluginResolver: AbstractPluginResolver<any>;
   private pageBuilderEventSubscription: Subscription;
   showMoveIcon = false;
 
@@ -53,7 +53,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
     private resolver: ComponentFactoryResolver,
     private webDetailResolverService: WebDetailResolverService,
     private quickMenuService: QuickMenuService,
-    @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractPluginResolver: AbstractPluginResolver<any>[],
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
 
     private dialog: MatDialog
@@ -145,7 +145,7 @@ export class PaletteItemComponent implements OnInit, AfterViewInit, AfterViewChe
   }
 
   prepareItemQuickMenu(event: MouseEvent): void {
-    this.quickMenuService.moveMenu.next(this);
+    //this.quickMenuService.moveMenu.next(this);
   }
 
   getResolverFromIdentifier() {

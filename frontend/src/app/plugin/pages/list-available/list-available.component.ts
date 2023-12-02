@@ -11,12 +11,12 @@ import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-con
 })
 export class ListAvailableComponent implements OnInit {
 
-  allPlugins: AbstractPluginResolver[] = [];
+  allPlugins: AbstractPluginResolver<any>[] = [];
   usedPlugins = new Set<string>();
   displayedColumns = ['name', 'description', 'action'];
 
   constructor(
-    @Inject(AbstractPluginResolver) public abstractMenuPluginResolver: AbstractPluginResolver[],
+    @Inject(AbstractPluginResolver) public abstractMenuPluginResolver: AbstractPluginResolver<any>[],
     private route: ActivatedRoute,
   ) { }
 

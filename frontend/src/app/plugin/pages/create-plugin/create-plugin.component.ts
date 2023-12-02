@@ -21,7 +21,7 @@ import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-con
   styleUrls: ['./create-plugin.component.css']
 })
 export class CreatePluginComponent implements OnInit {
-  pluginResolver: AbstractPluginResolver;
+  pluginResolver: AbstractPluginResolver<any>;
   @ViewChild(MiniAdminComponent, {static: true}) private miniAdminComponent: MiniAdminComponent;
   createForm: FormGroup;
 

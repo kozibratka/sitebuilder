@@ -9,7 +9,6 @@ export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
   contextObject: AbstractPlugin<T>;
   private _settings: T;
   webId: number;
-  menuResolver: AbstractPluginResolver;
   adminForm: FormGroup;
 
 

@@ -30,20 +30,40 @@
   </div>
   <div class="tab-pane fade menu-element d-flex flex-wrap active show" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
 
-     <div class="grid-row-menu" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd}" [sortablejsCloneFunction]="cloneSortableJsRow">
+     <div class="grid-row-menu"
+          [sortablejs]="rows"
+          [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
+          [sortablejsCloneFunction]="cloneSortableJsRow"
+          (mouseleave)="showMoveIcon = false"
+          (mouseenter)="showMoveIcon = true"
+     >
        <div>
          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
          <span class="text">Nový prostor pro prvky</span>
+         <app-animation-hider [show] = "showMoveIcon">
+           <i class="material-icons icon-move-grid">open_with</i>
+         </app-animation-hider>
        </div>
      </div>
 
-    <div (mouseleave)="showMoveIcon = false" (mouseenter)="showMoveIcon = true" class="menu-element-item grid-stack-item-menu" *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver" [attr.gs-w]="abstractMenuPluginResolver.gridWidth()" [attr.gs-h]="abstractMenuPluginResolver.gridHeight()">
+    <div class="menu-plugin-container d-flex flex-md-row flex-wrap"
+      sortablejs="[1]"
+      [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, handle: '.icon-move', onStart: onDragStart, onEnd: onDragEnd, sort: false}"
+      [sortablejsCloneFunction]="createPluginConfig"
+    >
+      <div
+        (mouseleave)="showMoveIcon = false"
+        (mouseenter)="showMoveIcon = true"
+        class="menu-element-item grid-stack-item-menu"
+        *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver"
+      >
         <mat-icon class="menu-image">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
         <span class="text">{{abstractMenuPluginResolver.name}}</span>
         <app-animation-hider [show] = "showMoveIcon">
           <i class="material-icons icon-move" appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver">open_with</i>
         </app-animation-hider>
       </div>
+    </div>
   </div>
 </div>
   <div class="lock" (click)="locked = !locked">

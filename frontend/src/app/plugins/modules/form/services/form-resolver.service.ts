@@ -4,11 +4,14 @@ import {FormAdminComponent} from '../pages/form-admin/form-admin.component';
 import {FormComponent} from '../components/form/form.component';
 import {PluginIdentifier} from '../../../constants/plugin-identifier';
 import {FormDataAdminComponent} from '../pages/form-data-admin/form-data-admin.component';
+import {FormConfigInterface} from "../interfaces/form-config-interface";
+import {TextInput} from "../../../../core/modules/form-builder/class/text-input";
+import {Button} from "../../../../core/modules/form-builder/class/button";
 
 @Injectable({
   providedIn: 'root'
 })
-export class FormResolverService extends AbstractPluginResolver {
+export class FormResolverService extends AbstractPluginResolver<FormConfigInterface> {
 
   adminComponentsClass = [
     {
@@ -53,5 +56,12 @@ export class FormResolverService extends AbstractPluginResolver {
 
   get name(): string {
     return 'Formulář';
+  }
+
+  getEmptySettings(): FormConfigInterface {
+    return {
+      identifier: PluginIdentifier.FORM_V1,
+      form: [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()], [new Button()]],
+    };
   }
 }

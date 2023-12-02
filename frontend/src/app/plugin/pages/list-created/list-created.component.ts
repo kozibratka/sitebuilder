@@ -17,12 +17,12 @@ import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-con
 export class ListCreatedComponent implements OnInit {
   createdPlugins: BasePlugConfigInterface[] = [];
   displayedColumns = ['name', 'action'];
-  pluginResolver: AbstractPluginResolver;
+  pluginResolver: AbstractPluginResolver<any>;
 
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    @Inject(AbstractPluginResolver) private abstractMenuPluginResolvers: AbstractPluginResolver[],
+    @Inject(AbstractPluginResolver) private abstractMenuPluginResolvers: AbstractPluginResolver<any>[],
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
