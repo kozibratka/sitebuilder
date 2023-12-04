@@ -8,3 +8,34 @@
 :host {
   display: block;
 }
+
+.frameCover{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.frameCover div.btn {
+  background-color: #262b33;
+  border-radius: 0;
+  border: 1px solid #d6d6d6;
+  font-size: 12px;
+  height: 25px;
+  margin-right: 1px;
+  outline: 1px solid #000000;
+  position: relative;
+  top: 1px;
+  width: 25px;
+  padding: 0;
+}
+
+.frameCover div.btn i {
+  color: white;
+  display: block;
+  font-size: 18px;
+  position: relative !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
