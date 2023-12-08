@@ -1,4 +1,14 @@
-import {Component, ElementRef, Inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {fromEvent} from "rxjs";
 import {DOCUMENT} from "@angular/common";
@@ -6,12 +16,13 @@ import {DOCUMENT} from "@angular/common";
 @Component({
   selector: 'app-grid-row',
   templateUrl: './grid-row.component.html',
-  styleUrls: ['./grid-row.component.css']
+  styleUrls: ['./grid-row.component.css'],
 })
 export class GridRowComponent implements OnInit, OnDestroy{
   @Input() row: GridRowInterface;
   @Input() isDeepChild = false;
   isResized = false;
+  isMouseEnter = false;
 
   constructor(
     private elementRef: ElementRef<HTMLElement>,
@@ -24,6 +35,16 @@ export class GridRowComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
+  }
+
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.isMouseEnter = true;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.isMouseEnter = false;
   }
 
   onCellResized(event: MouseEvent, cellIndex: number) {

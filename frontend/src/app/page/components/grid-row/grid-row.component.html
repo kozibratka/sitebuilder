@@ -2,5 +2,6 @@
                (resized$)="onCellResized($event, i)"
                class="col-md-{{cell.width}}"
                [class.resized]="isResized"
+               [isMouseEnterRow] = isMouseEnter
 >
 </app-grid-cell>

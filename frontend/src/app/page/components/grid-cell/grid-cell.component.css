@@ -12,10 +12,30 @@
 
 .cell-delimiter {
   position: absolute;
-  width: 25px;
-  right: -13px;
+  width: 12px;
+  right: -6px;
   height: 100%;
   cursor: col-resize;
   z-index: 1;
   top: 0px;
+}
+
+.add-cell-icon-left {
+  position: absolute;
+  left: 0px;
+  top: 42%;
+  cursor: pointer;
+  color: green;
+  border-radius: 50%;
+  background: white;
+}
+
+.add-cell-icon-right {
+  position: absolute;
+  right: 0px;
+  top: 42%;
+  cursor: pointer;
+  color: green;
+  border-radius: 50%;
+  background: white;
 }

@@ -8,3 +8,7 @@
 <div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);">
   <div class="delimiter-line"></div>
 </div>
+<app-animation-hider [show] = "isMouseEnterRow">
+<mat-icon class="add-cell-icon-left add-cell-icon" fontIcon="add"></mat-icon>
+<mat-icon class="add-cell-icon-right add-cell-icon" fontIcon="add"></mat-icon>
+</app-animation-hider>

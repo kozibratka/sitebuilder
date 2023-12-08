@@ -11,6 +11,7 @@ export class GridCellComponent implements OnInit{
   @Input() cell: GridCellInterface;
   @Input() isLast = false;
   @Output() resized$ = new EventEmitter<MouseEvent>();
+  @Input() isMouseEnterRow = false;
 
 
   constructor(
