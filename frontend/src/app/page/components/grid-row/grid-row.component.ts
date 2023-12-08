@@ -12,6 +12,7 @@ import {
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {fromEvent} from "rxjs";
 import {DOCUMENT} from "@angular/common";
+import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 
 @Component({
   selector: 'app-grid-row',
@@ -72,6 +73,23 @@ export class GridRowComponent implements OnInit, OnDestroy{
       this.document.body.style.cursor = '';
       this.isResized = false;
     });
+  }
+
+  decreaseCellWidthOnAddNewCell(startIndex: number, site : 'right' | 'left') {
+    let sliced: GridCellInterface[] = [];
+    if (site == 'right') {
+      sliced.push(...this.row.cells.slice(startIndex));
+      sliced.push(...this.row.cells.slice(0, startIndex).reverse());
+    } else {
+      sliced.push(...this.row.cells.slice(0, startIndex).reverse());
+      sliced.push(...this.row.cells.slice(startIndex));
+    }
+    for(var val of sliced) {
+      if (val.width > 1) {
+        --val.width;
+        return;
+      }
+    }
   }
 
   getWidth() {
