@@ -23,7 +23,7 @@
 .add-cell-icon-left {
   position: absolute;
   left: 0px;
-  top: 42%;
+  top: 35%;
   cursor: pointer;
   color: green;
   border-radius: 50%;
@@ -33,9 +33,29 @@
 .add-cell-icon-right {
   position: absolute;
   right: 0px;
-  top: 42%;
+  top: 35%;
   cursor: pointer;
   color: green;
+  border-radius: 50%;
+  background: white;
+}
+
+.del-cell-icon-left {
+  position: absolute;
+  left: 0px;
+  top: 54%;
+  cursor: pointer;
+  color: red;
+  border-radius: 50%;
+  background: white;
+}
+
+.del-cell-icon-right {
+  position: absolute;
+  right: 0px;
+  top: 54%;
+  cursor: pointer;
+  color: red;
   border-radius: 50%;
   background: white;
 }

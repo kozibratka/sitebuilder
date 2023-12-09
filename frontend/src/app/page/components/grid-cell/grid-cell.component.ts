@@ -12,6 +12,8 @@ export class GridCellComponent implements OnInit{
   @Input() isLast = false;
   @Output() resized$ = new EventEmitter<MouseEvent>();
   @Input() isMouseEnterRow = false;
+  @Output() addCell$ = new EventEmitter<'left' | 'right'>();
+  @Output() removeCell$ = new EventEmitter<'left' | 'right'>();
 
 
   constructor(

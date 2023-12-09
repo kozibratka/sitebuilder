@@ -75,9 +75,12 @@ export class GridRowComponent implements OnInit, OnDestroy{
     });
   }
 
-  decreaseCellWidthOnAddNewCell(startIndex: number, site : 'right' | 'left') {
+  addNewCell(startIndex: number, site : 'right' | 'left') {
+    if (this.row.cells.length == 12) {
+      return;
+    }
     let sliced: GridCellInterface[] = [];
-    if (site == 'right') {
+    if (site == 'left') {
       sliced.push(...this.row.cells.slice(startIndex));
       sliced.push(...this.row.cells.slice(0, startIndex).reverse());
     } else {
@@ -87,7 +90,29 @@ export class GridRowComponent implements OnInit, OnDestroy{
     for(var val of sliced) {
       if (val.width > 1) {
         --val.width;
-        return;
+        break;
+      }
+    }
+    if(site == 'left') {
+      this.row.cells.splice(startIndex, 0, {width: 1, items: []})
+    } else {
+      this.row.cells.splice(startIndex+1, 0, {width: 1, items: []})
+    }
+  }
+
+  removeCell(startIndex: number, site : 'right' | 'left') {
+    let startCell = this.row.cells[startIndex];
+    if(site == 'left') {
+      if (startIndex) {
+        let toRemoveCell = this.row.cells[startIndex-1];
+        this.row.cells.splice(startIndex-1, 1);
+        startCell.width += toRemoveCell.width;
+      }
+    } else {
+      if (startIndex < this.row.cells.length-1) {
+        let toRemoveCell = this.row.cells[startIndex+1];
+        this.row.cells.splice(startIndex+1, 1);
+        startCell.width += toRemoveCell.width;
       }
     }
   }

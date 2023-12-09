@@ -3,5 +3,7 @@
                class="col-md-{{cell.width}}"
                [class.resized]="isResized"
                [isMouseEnterRow] = isMouseEnter
+               (addCell$)="addNewCell(i, $event)"
+               (removeCell$)="removeCell(i, $event)"
 >
 </app-grid-cell>
