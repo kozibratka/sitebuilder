@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
-import {GridStack} from 'gridstack/dist/gridstack';
 import {Subject} from 'rxjs';
 import {QuickMenuService} from '../../services/quick-menu.service';
 import {UserService} from "../../../authorization/services/user.service";
@@ -86,7 +85,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   cloneSortableJsRow(item) {
-    return JSON.parse(JSON.stringify(item));
+    return {cells: [{width: 6, items: []}, {width: 6, items: []}]};
   }
 
   createPluginConfig = (item): GridCellItemInterface => {

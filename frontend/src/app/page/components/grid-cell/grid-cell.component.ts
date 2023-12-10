@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 import {Subject} from "rxjs";
+import {SortableEvent} from "sortablejs";
+import {GridRowInterface} from "../../interfaces/grid-row-interface";
 
 @Component({
   selector: 'app-grid-cell',
@@ -34,7 +36,17 @@ export class GridCellComponent implements OnInit{
     this.sortableJsDragged$.next(true);
   }
 
-  onDragEnd = (event: any)=> {
+  onDragEnd = (event: SortableEvent)=> {
+    let index = event.newIndex;
+
     this.sortableJsDragged$.next(false);
+  }
+
+  onAdd = (event: SortableEvent) => {
+    let newCellItem = this.cell.items[event.newIndex] as any;
+    if (newCellItem.cells) {
+      let newRow = this.cell.items[event.newIndex] as GridRowInterface;
+      this.cell.items[event.newIndex] = {row: newRow};
+    }
   }
 }

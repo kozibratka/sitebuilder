@@ -7,12 +7,13 @@
 
 :host {
   display: block;
+  position: relative;
 }
 
 .frameCover{
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 9px;
+  left: 23px;
   z-index: 1;
 }
 

@@ -31,7 +31,7 @@
   <div class="tab-pane fade menu-element d-flex flex-wrap active show" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
 
      <div class="grid-row-menu"
-          [sortablejs]="rows"
+          sortablejs="[1]"
           [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
           [sortablejsCloneFunction]="cloneSortableJsRow"
           (mouseleave)="showMoveIcon = false"

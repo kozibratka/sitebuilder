@@ -1,6 +1,7 @@
 <div class="cell-content"
      [sortablejs]="cell.items"
-     [sortablejsOptions]="{group: {name: 'cell', pull: true, put: ['menu-row', 'menu-plugin', 'cell']}, onStart: onDragStart, onEnd: onDragEnd,
+     [sortablejsOptions]="{group: {name: 'cell', pull: true, put: ['menu-row', 'menu-plugin', 'cell']},
+     onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd,
      handle: '.icon-move-cell-item'}"
 >
   <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items"></app-grid-cell-item>

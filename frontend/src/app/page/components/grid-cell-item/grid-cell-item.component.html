@@ -1,7 +1,7 @@
 <div class="cell-item">
   <ng-container #content class="grid-cell-item-content">
   </ng-container>
-  <app-grid-row [isDeepChild]="true" [row]="gridCellItem.row" *ngIf="gridCellItem.row"></app-grid-row>
+  <app-grid-row class="row"  [isDeepChild]="true" [row]="gridCellItem.row" *ngIf="gridCellItem.row"></app-grid-row>
 
   <app-animation-hider [show] = "showMoveIcon">
     <div class="frameCover">

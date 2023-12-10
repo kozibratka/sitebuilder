@@ -1,4 +1,4 @@
-:host.row:hover {
+:host.row:hover, :host.row:not(:has(.cell-item)) {
   outline:  dotted 0 transparent;
   transition: outline 0.3s linear;
   outline-width: 1px;
