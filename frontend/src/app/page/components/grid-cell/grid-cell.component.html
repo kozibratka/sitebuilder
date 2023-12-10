@@ -9,8 +9,14 @@
   <div class="delimiter-line"></div>
 </div>
 <app-animation-hider [show] = "isMouseEnterRow">
-<mat-icon class="add-cell-icon-left add-cell-icon" fontIcon="add" (click)="addCell$.emit('left')"></mat-icon>
-<mat-icon class="del-cell-icon-left del-cell-icon" fontIcon="remove" (click)="removeCell$.emit('left')"></mat-icon>
-<mat-icon class="add-cell-icon-right add-cell-icon" fontIcon="add" (click)="addCell$.emit('right')"></mat-icon>
-<mat-icon class="del-cell-icon-right del-cell-icon" fontIcon="remove" (click)="removeCell$.emit('right')"></mat-icon>
+  <div class="add-del-cell-container">
+    <div class="left-add-del-cell">
+      <mat-icon class="add-cell-icon-left add-cell-icon" fontIcon="add" (click)="addCell$.emit('left')"></mat-icon>
+      <mat-icon class="del-cell-icon-left del-cell-icon" fontIcon="remove" (click)="removeCell$.emit('left')"></mat-icon>
+    </div>
+    <div class="right-add-del-cell">
+      <mat-icon class="add-cell-icon-right add-cell-icon" fontIcon="add" (click)="addCell$.emit('right')"></mat-icon>
+      <mat-icon class="del-cell-icon-right del-cell-icon" fontIcon="remove" (click)="removeCell$.emit('right')"></mat-icon>
+    </div>
+  </div>
 </app-animation-hider>

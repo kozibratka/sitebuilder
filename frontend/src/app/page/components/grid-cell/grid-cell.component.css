@@ -21,9 +21,6 @@
 }
 
 .add-cell-icon-left {
-  position: absolute;
-  left: 0px;
-  top: 35%;
   cursor: pointer;
   color: green;
   border-radius: 50%;
@@ -31,9 +28,6 @@
 }
 
 .add-cell-icon-right {
-  position: absolute;
-  right: 0px;
-  top: 35%;
   cursor: pointer;
   color: green;
   border-radius: 50%;
@@ -41,9 +35,6 @@
 }
 
 .del-cell-icon-left {
-  position: absolute;
-  left: 0px;
-  top: 54%;
   cursor: pointer;
   color: red;
   border-radius: 50%;
@@ -51,11 +42,33 @@
 }
 
 .del-cell-icon-right {
-  position: absolute;
-  right: 0px;
-  top: 54%;
   cursor: pointer;
   color: red;
   border-radius: 50%;
   background: white;
+}
+
+.left-add-del-cell {
+  position: absolute;
+  top: 40%;
+  left: 0px;
+  width: 17px;
+}
+
+.right-add-del-cell {
+  position: absolute;
+  top: 40%;
+  right: 0px;
+  width: 17px;
+}
+
+.add-del-cell-container {
+  width: 20px;
+}
+
+.add-del-cell-container mat-icon {
+  height: 17px;
+  width: 17px;
+  border-radius: 49%;
+  font-size: 17px;
 }
