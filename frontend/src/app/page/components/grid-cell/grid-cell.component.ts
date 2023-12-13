@@ -38,7 +38,6 @@ export class GridCellComponent implements OnInit{
 
   onDragEnd = (event: SortableEvent)=> {
     let index = event.newIndex;
-
     this.sortableJsDragged$.next(false);
   }
 
@@ -48,5 +47,7 @@ export class GridCellComponent implements OnInit{
       let newRow = this.cell.items[event.newIndex] as GridRowInterface;
       this.cell.items[event.newIndex] = {row: newRow};
     }
+    console.log(this.cell.items)
+
   }
 }

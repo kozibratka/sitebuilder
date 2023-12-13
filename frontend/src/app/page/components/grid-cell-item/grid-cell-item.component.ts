@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {AbstractPluginResolver} from "../../services/abstract-classes/abstract-plugin-resolver";
-import {MenuPluginResolverService} from "../../services/menu-plugin-resolver.service";
 import {AbstractPlugin} from "../../../plugins/abstract-class/abstract-plugin";
 import {QuickMenuService} from "../../services/quick-menu.service";
 
@@ -30,7 +29,6 @@ export class GridCellItemComponent implements OnInit{
 
   constructor(
     @Inject(AbstractPluginResolver) private abstractPluginResolvers: AbstractPluginResolver<any>[],
-    private menuPluginResolverService: MenuPluginResolverService,
     private quickMenuService: QuickMenuService,
     public elementRef: ElementRef,
   ) {
@@ -38,11 +36,7 @@ export class GridCellItemComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.gridCellItem.plugin) {
-      if (!this.gridCellItem.plugin.id) {
-        this.pluginResolver = this.menuPluginResolverService.selectedAbstractPluginResolverMessenger;
-      } else {
-        this.pluginResolver = this.getResolverFromIdentifier();
-      }
+      this.pluginResolver = this.getResolverFromIdentifier();
       this.createPlugin();
     }
   }
