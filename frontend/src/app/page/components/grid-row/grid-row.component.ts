@@ -22,6 +22,7 @@ import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 export class GridRowComponent implements OnInit, OnDestroy{
   @Input() row: GridRowInterface;
   @Input() isDeepChild = false;
+  @Output() removeRow$ = new EventEmitter<boolean>();
   isResized = false;
   isMouseEnter = false;
   constructor(

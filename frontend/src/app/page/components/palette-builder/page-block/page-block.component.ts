@@ -205,4 +205,8 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   onDragEnd = (event: any)=> {
     this.sortableJsDragged$.next(false);
   }
+
+  removeRow(index:number) {
+    this.rows.splice(index, 1);
+  }
 }

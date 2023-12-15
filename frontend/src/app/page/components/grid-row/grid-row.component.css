@@ -5,7 +5,7 @@
   outline-color: black;
 }
 
-:host(:has(.move-icon-container:hover)) {
+:host:has(.move-icon-container:hover) {
   outline:  solid 0 transparent;
   transition: none;
   outline-color: red !important;
