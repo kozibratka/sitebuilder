@@ -5,6 +5,13 @@
   outline-color: black;
 }
 
+:host(:has(.move-icon-container:hover)) {
+  outline:  solid 0 transparent;
+  transition: none;
+  outline-color: red !important;
+  outline-width: 1px !important;
+}
+
 :host.row:not(:has(.cell-item)) {
   min-height: 100px;
   outline-width: 1px;
@@ -16,7 +23,7 @@
 }
 
 :host.row:hover ::ng-deep .delimiter-line {
-  border-right: 1px solid red;
+  border-right: 1px dotted black;
   width: 0.5px;
   margin: 0 auto;
   height: 100%;
@@ -28,6 +35,41 @@ app-grid-cell {
 
 :host.row {
   min-height: 20px;
+}
+
+.frameCover{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 1;
+}
+
+.frameCover div.btn {
+  background-color: #262b33;
+  border-radius: 0;
+  border: 1px solid #d6d6d6;
+  font-size: 12px;
+  height: 25px;
+  margin-right: 1px;
+  outline: 1px solid #000000;
+  position: relative;
+  top: 1px;
+  width: 25px;
+  padding: 0;
+}
+
+.frameCover div.btn i {
+  color: white;
+  display: block;
+  font-size: 18px;
+  position: relative !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.move-icon-container {
+  position: absolute;
 }
 
 

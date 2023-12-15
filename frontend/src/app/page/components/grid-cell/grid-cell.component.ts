@@ -47,7 +47,5 @@ export class GridCellComponent implements OnInit{
       let newRow = this.cell.items[event.newIndex] as GridRowInterface;
       this.cell.items[event.newIndex] = {row: newRow};
     }
-    console.log(this.cell.items)
-
   }
 }

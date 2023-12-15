@@ -1,7 +1,7 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, HostBinding,
   HostListener,
   Inject,
   Input,
@@ -24,7 +24,6 @@ export class GridRowComponent implements OnInit, OnDestroy{
   @Input() isDeepChild = false;
   isResized = false;
   isMouseEnter = false;
-
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     @Inject(DOCUMENT) private document: Document

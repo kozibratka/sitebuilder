@@ -5,7 +5,7 @@
 <!--  <div #palette_content class="block-content grid-stack" [class.dragging-item-bottom]="draggingItemBottom">-->
 <!--    <app-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems; trackBy: trackByGridItem"></app-grid-item>-->
 <!--  </div>-->
-  <div class="block-content-rows container" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, onStart: onDragStart, onEnd: onDragEnd}">
+  <div class="block-content-rows container" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <app-grid-row class="row" [row]="row" *ngFor="let row of rows"></app-grid-row>
   </div>
 </div>

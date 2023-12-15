@@ -7,3 +7,14 @@
                (removeCell$)="removeCell(i, $event)"
 >
 </app-grid-cell>
+
+<app-animation-hider [show] = "isMouseEnter" class="move-icon-container">
+  <div class="frameCover">
+    <div title="Přesunout" class="btn draganddrop move-row">
+      <i class="material-icons icon-move-cell-item">open_with</i>
+    </div>
+    <div title="Smazat" class="btn draganddrop">
+      <i class="material-icons icon-remove">delete</i>
+    </div>
+  </div>
+</app-animation-hider>
