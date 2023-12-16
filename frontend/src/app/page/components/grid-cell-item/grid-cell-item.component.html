@@ -1,15 +1,17 @@
-<div class="cell-item">
+<div class="cell-item" [class.is-row]="gridCellItem.row" [class.move-menu-hover]="isMoveMenuHover">
   <ng-container #content class="grid-cell-item-content">
   </ng-container>
   <app-grid-row class="row is-child"  [isDeepChild]="true" [row]="gridCellItem.row" *ngIf="gridCellItem.row"></app-grid-row>
 
-  <app-animation-hider [show] = "showMoveIcon">
-    <div class="frameCover">
-      <div title="Přesunout" class="btn draganddrop">
-        <i class="material-icons icon-move-cell-item">open_with</i>
-      </div>
-      <div title="Smazat" class="btn draganddrop">
-        <i class="material-icons icon-remove">delete</i>
+  <app-animation-hider [show] = "showMoveIcon" class="move-icon-cell-item-container" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
+    <div class="plugin-move-menu">
+      <div class="frameCover">
+        <div title="Přesunout" class="btn draganddrop">
+          <i class="material-icons icon-move-cell-item">open_with</i>
+        </div>
+        <div title="Smazat" class="btn draganddrop">
+          <i class="material-icons icon-remove">delete</i>
+        </div>
       </div>
     </div>
   </app-animation-hider>

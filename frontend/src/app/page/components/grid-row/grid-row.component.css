@@ -5,11 +5,11 @@
   outline-color: black;
 }
 
-:host:has(.move-icon-container:hover) {
+:host:has(.move-icon-row-container:hover) {
   outline:  solid 0 transparent;
   transition: none;
   outline-color: red !important;
-  outline-width: 1px !important;
+  outline-width: 2px !important;
 }
 
 :host.row:not(:has(.cell-item)) {
@@ -37,13 +37,6 @@ app-grid-cell {
   min-height: 20px;
 }
 
-.frameCover{
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  z-index: 1;
-}
-
 .frameCover div.btn {
   background-color: #262b33;
   border-radius: 0;
@@ -68,7 +61,17 @@ app-grid-cell {
   transform: translate(-50%, -50%);
 }
 
-.move-icon-container {
+.row-menu {
+  width: 153px;
+  position: absolute;
+  top: -27px;
+  right: 0px;
+  z-index: 1;
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.move-icon-row-container {
   position: absolute;
 }
 

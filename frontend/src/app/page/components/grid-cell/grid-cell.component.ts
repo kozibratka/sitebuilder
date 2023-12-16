@@ -12,6 +12,7 @@ import {GridRowInterface} from "../../interfaces/grid-row-interface";
 export class GridCellComponent implements OnInit{
   @Input() cell: GridCellInterface;
   @Input() isLast = false;
+  @Input() isDeepChild = false;
   @Output() resized$ = new EventEmitter<MouseEvent>();
   @Input() isMouseEnterRow = false;
   @Output() addCell$ = new EventEmitter<'left' | 'right'>();

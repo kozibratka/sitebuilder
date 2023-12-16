@@ -21,10 +21,12 @@ import {QuickMenuService} from "../../services/quick-menu.service";
 })
 export class GridCellItemComponent implements OnInit{
   @Input() gridCellItem: GridCellItemInterface;
+  @Input() isDeepChild = false;
   public pluginResolver: AbstractPluginResolver<any>;
   @ViewChild('content', {read: ViewContainerRef, static: true}) pluginContainer: ViewContainerRef;
   plugin: ComponentRef<AbstractPlugin<any>>;
   showMoveIcon = false;
+  isMoveMenuHover = false;
 
 
   constructor(

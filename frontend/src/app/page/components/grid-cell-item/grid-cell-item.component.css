@@ -10,11 +10,20 @@
   position: relative;
 }
 
-.frameCover{
+.plugin-move-menu {
+  width: 153px;
   position: absolute;
-  top: 9px;
-  left: 23px;
+  top: 11px;
+  right: 0px;
   z-index: 1;
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.cell-item.is-row > app-animation-hider .plugin-move-menu {
+  top: -27px;
+  left: 0px;
+  text-align: left;
 }
 
 .frameCover div.btn {
@@ -39,4 +48,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.move-menu-hover {
+  outline:  solid 0 transparent;
+  transition: none;
+  outline-color: red !important;
+  outline-width: 2px !important;
 }

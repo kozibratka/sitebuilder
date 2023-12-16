@@ -5,16 +5,19 @@
                [isMouseEnterRow] = isMouseEnter
                (addCell$)="addNewCell(i, $event)"
                (removeCell$)="removeCell(i, $event)"
+               [isDeepChild]="isDeepChild"
 >
 </app-grid-cell>
 
-<app-animation-hider [show] = "isMouseEnter" class="move-icon-container" *ngIf="!isDeepChild">
-  <div class="frameCover">
-    <div title="Přesunout" class="btn draganddrop move-row">
-      <i class="material-icons icon-move-cell-item">open_with</i>
-    </div>
-    <div title="Smazat" class="btn draganddrop" (click)="removeRow$.emit(true)">
-      <i class="material-icons icon-remove">delete</i>
+<app-animation-hider [show] = "isMouseEnter" class="move-icon-row-container" *ngIf="!isDeepChild">
+  <div class="row-menu">
+    <div class="frameCover">
+      <div title="Přesunout" class="btn draganddrop move-row">
+        <i class="material-icons icon-move-cell-item">open_with</i>
+      </div>
+      <div title="Smazat" class="btn draganddrop" (click)="removeRow$.emit(true)">
+        <i class="material-icons icon-remove">delete</i>
+      </div>
     </div>
   </div>
 </app-animation-hider>
