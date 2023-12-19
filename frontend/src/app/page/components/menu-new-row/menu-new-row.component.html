@@ -1,6 +1,9 @@
-<div class="d-flex flex-wrap p-2 menu-container">
-  <div class="p-2" *ngFor="let num of [1, 12]; index as i" (click)="numColumns.emit(i)">
-    <mat-icon>splitscreen_vertical_add</mat-icon>
-    <span>{{num}}</span>
+<div class="container">
+  <h6>Vyberte počet buněk:</h6>
+  <div class="d-flex flex-wrap menu-container">
+    <div class="p-2 menu-num-container" *ngFor="let num of [1,2,3,4,5,6,7,8,9,10,11,12]; index as i" (click)="numColumns.emit(num)">
+      <mat-icon>dashboard</mat-icon>
+      <span>{{num}}</span>
+    </div>
   </div>
 </div>

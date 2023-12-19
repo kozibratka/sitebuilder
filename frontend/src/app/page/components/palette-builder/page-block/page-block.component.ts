@@ -214,8 +214,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   addRow(num: number){
     let newRow: GridRowInterface = {cells: []};
     let newCells: GridCellInterface[] = [];
+    let width = Math.floor(12/num);
     for (let i = 0; i < num; i++) {
-      newCells.push({items: [], width: 2})
+      let widthForColumn = width;
+      if (12 % num && i == num-1) {
+        widthForColumn = 12 - ((i) * width);
+      }
+      newCells.push({items: [], width: widthForColumn});
     }
     newRow.cells = newCells;
     this.rows.push(newRow);
