@@ -30,6 +30,7 @@ import {PaletteBlockService} from '../../../services/palette-block.service';
 import {StringService} from '../../../../core/services/string.service';
 import {GridRowInterface} from "../../../interfaces/grid-row-interface";
 import {SortablejsDirective} from "ngx-sortablejs";
+import {GridCellInterface} from "../../../interfaces/grid-cell-interface";
 
 @Component({
   selector: 'app-palette-block',
@@ -208,5 +209,15 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   removeRow(index:number) {
     this.rows.splice(index, 1);
+  }
+
+  addRow(num: number){
+    let newRow: GridRowInterface = {cells: []};
+    let newCells: GridCellInterface[] = [];
+    for (let i = 0; i < num; i++) {
+      newCells.push({items: [], width: 2})
+    }
+    newRow.cells = newCells;
+    this.rows.push(newRow);
   }
 }

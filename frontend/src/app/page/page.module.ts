@@ -28,6 +28,8 @@ import {FormBuilderModule} from '../core/modules/form-builder/form-builder.modul
 import { GridRowComponent } from './components/grid-row/grid-row.component';
 import { GridCellComponent } from './components/grid-cell/grid-cell.component';
 import { GridCellItemComponent } from './components/grid-cell-item/grid-cell-item.component';
+import { MenuNewRowComponent } from './components/./menu-new-row/menu-new-row.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 
 const routes: Routes = [
@@ -73,21 +75,23 @@ const routes: Routes = [
     GridRowComponent,
     GridCellComponent,
     GridCellItemComponent,
+    MenuNewRowComponent,
   ],
   exports: [
     PaletteItemComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        CoreModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatTableModule,
-        MatDialogModule,
-        SortablejsModule,
-        MatIconModule,
-        FormBuilderModule,
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    CoreModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatTableModule,
+    MatDialogModule,
+    SortablejsModule,
+    MatIconModule,
+    FormBuilderModule,
+    MatMenuModule,
+  ]
 })
 export class PageModule { }

@@ -8,4 +8,15 @@
   <div class="block-content-rows container" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <app-grid-row (removeRow$)="removeRow(i)" class="row" [row]="row" *ngFor="let row of rows; index as i"></app-grid-row>
   </div>
+  <div class="text-center line">
+    <div class="links">
+      <button mat-icon-button class="new-row-input-button">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <app-menu-new-row (numColumns)="addRow($event)"></app-menu-new-row>
+</mat-menu>
