@@ -1,0 +1,6 @@
+<div class="d-flex flex-wrap p-2 menu-container">
+  <div class="p-2" *ngFor="let num of [1, 12]; index as i" (click)="numColumns.emit(i)">
+    <mat-icon>splitscreen_vertical_add</mat-icon>
+    <span>{{num}}</span>
+  </div>
+</div>
