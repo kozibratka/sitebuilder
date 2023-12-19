@@ -102,4 +102,26 @@
 
 .new-row-input-button {
   background: white;
+  z-index: 2;
+}
+
+.new-row-up {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: -16px;
+}
+
+.new-row-up > button {
+  width: 30px;
+  height: 30px;
+  padding: 5px 0;
+}
+
+.block-content-rows.container > div {
+  position: relative;
+}
+
+.add-icon-row-up {
+  font-size: 15px;
 }

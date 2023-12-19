@@ -48,6 +48,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
   rows: GridRowInterface[] = [];
+  hoverOnIndexRow: number = null;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -211,7 +212,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     this.rows.splice(index, 1);
   }
 
-  addRow(num: number){
+  addRow(num: number, index: number = null){
     let newRow: GridRowInterface = {cells: []};
     let newCells: GridCellInterface[] = [];
     let width = Math.floor(12/num);
@@ -223,6 +224,10 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
       newCells.push({items: [], width: widthForColumn});
     }
     newRow.cells = newCells;
-    this.rows.push(newRow);
+    if (index !== null) {
+      this.rows.splice(index, 0, newRow);
+    } else {
+      this.rows.push(newRow);
+    }
   }
 }
