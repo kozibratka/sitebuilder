@@ -16,12 +16,19 @@ class PageBlockType extends AbstractType
     {
         $builder
             ->add("height")
-            ->add('paletteGridItems', CollectionType::class, [
-                'entry_type' => PaletteGridItemType::class,
+//            ->add('paletteGridItems', CollectionType::class, [
+//                'entry_type' => PaletteGridItemType::class,
+//                'allow_add' => true,
+//                'allow_delete' => true,
+//                'by_reference' => false,
+//                'entry_options' => ['is_preview' => $options['is_preview']]
+//            ])
+            ->add('rows', CollectionType::class, [
+                'entry_type' => GridRowType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'entry_options' => ['is_preview' => $options['is_preview']]
+                'entry_options' => ['is_preview' => $options['is_preview']],
             ])
             ->add('uniqueId')
         ;

@@ -50,4 +50,14 @@ class GridCellItem
     {
         $this->plugin = $plugin;
     }
+
+    public function getCell(): GridCell
+    {
+        return $this->cell;
+    }
+
+    public function setCell(GridCell $cell): void
+    {
+        $this->cell = $cell;
+    }
 }
