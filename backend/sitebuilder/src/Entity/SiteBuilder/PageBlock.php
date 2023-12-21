@@ -43,12 +43,15 @@ class PageBlock
     #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
+    #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock')]
+    private Collection $rows;
 
     private string $uniqueId = '';
 
     public function __construct()
     {
         $this->paletteGridItems = new ArrayCollection();
+        $this->rows = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,10 +122,33 @@ class PageBlock
         $this->uniqueId = $uniqueId;
     }
 
+    public function getRows(): Collection
+    {
+        return $this->rows;
+    }
+
+    public function setRows(Collection $rows): void
+    {
+        $this->rows = $rows;
+    }
+
+    public function addRow(GridRow $row): self
+    {
+        $row->setPageBlock($this);
+        $this->rows->add($row);
+        return $this;
+    }
+
+    public function removeRow(GridRow $row): self
+    {
+        $this->rows->removeElement($row);
+        return $this;
+    }
+
     public function __clone(): void
     {
-        $this->paletteGridItems = new ArrayCollection($this->paletteGridItems->map(function(PaletteGridItem $paletteGridItem) {
-            $clone = clone $paletteGridItem;
+        $this->rows = new ArrayCollection($this->rows->map(function(GridRow $row) {
+            $clone = clone $row;
             $clone->setPageBlock($this);
             return $clone;
         })->toArray());
