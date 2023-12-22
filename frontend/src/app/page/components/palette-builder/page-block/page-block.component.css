@@ -115,7 +115,7 @@
 .new-row-up > button {
   width: 30px;
   height: 30px;
-  padding: 5px 0;
+  padding: 6px 0;
 }
 
 .block-content-rows.container > div {
@@ -124,4 +124,9 @@
 
 .add-icon-row-up {
   font-size: 15px;
+}
+
+.hider-new-row-button > ::ng-deep .animation-hider-container {
+  position: relative;
+  z-index: 1;
 }

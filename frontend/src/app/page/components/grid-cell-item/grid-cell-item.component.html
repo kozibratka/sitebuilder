@@ -6,6 +6,9 @@
   <app-animation-hider [show] = "showMoveIcon" class="move-icon-cell-item-container" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
     <div class="plugin-move-menu">
       <div class="frameCover">
+        <div title="Nastavení" class="btn draganddrop" (click)="openSettings()">
+          <i class="material-icons icon-settings">settings</i>
+        </div>
         <div title="Přesunout" class="btn draganddrop">
           <i class="material-icons icon-move-cell-item">open_with</i>
         </div>

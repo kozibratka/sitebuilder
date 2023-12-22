@@ -38,12 +38,12 @@ export class PaletteItemQuickMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.prepareQuickMenu();
+    //this.prepareQuickMenu();
   }
 
   @HostListener('click')
   onClick(): void {
-    this.openItemMenu();
+    //this.openItemMenu();
   }
 
   private prepareQuickMenu(): void {
@@ -65,7 +65,7 @@ export class PaletteItemQuickMenuComponent implements OnInit {
       const itemElement = paletteItemElement.elementRef.nativeElement;
       const position = ElementHelper.getPositionToParentElement(itemElement, this.paletteBuilderComponent.palette.nativeElement, {
         x: 19,
-        y: 28
+        y: 75
       });
       const itemElementWidth = itemElement.offsetWidth;
       this.width = itemElementWidth + 'px';

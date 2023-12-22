@@ -7,7 +7,7 @@
 <!--  </div>-->
   <div class="block-content-rows container" [sortablejs]="rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <div *ngFor="let row of rows; index as i">
-      <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow+1">
+      <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow+1" class="hider-new-row-button">
         <div class="new-row-up">
           <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i}">
             <mat-icon class="add-icon-row-up">add_circle</mat-icon>

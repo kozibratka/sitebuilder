@@ -12,7 +12,12 @@ import {
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {AbstractPluginResolver} from "../../services/abstract-classes/abstract-plugin-resolver";
 import {AbstractPlugin} from "../../../plugins/abstract-class/abstract-plugin";
-import {QuickMenuService} from "../../services/quick-menu.service";
+import {
+  PluginMiniAdminComponent
+} from "../../pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component";
+import {PluginResolverService} from "../../../plugins/services/plugin-resolver.service";
+import {PageBuilderComponent} from "../../pages/page-builder/page-builder.component";
+import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -31,8 +36,11 @@ export class GridCellItemComponent implements OnInit{
 
   constructor(
     @Inject(AbstractPluginResolver) private abstractPluginResolvers: AbstractPluginResolver<any>[],
-    private quickMenuService: QuickMenuService,
+    // private quickMenuService: QuickMenuService,
     public elementRef: ElementRef,
+    private pluginResolverService: PluginResolverService,
+    private pageBuilderComponent: PageBuilderComponent,
+    private moveableModalService: MoveableModalService,
   ) {
   }
 
@@ -45,7 +53,7 @@ export class GridCellItemComponent implements OnInit{
 
   @HostListener('mouseenter', ['$event'])
   onMouseEnter(event: MouseEvent): void {
-    this.quickMenuService.moveMenu.next(this);
+    // this.quickMenuService.moveMenu.next(this);
     this.showMoveIcon = true;
   }
 
@@ -64,5 +72,22 @@ export class GridCellItemComponent implements OnInit{
     let componentClass = this.pluginResolver.componentClass as any;
     this.plugin = this.pluginContainer.createComponent<AbstractPlugin<any>>(componentClass);
     this.plugin.instance.initializeSettings(this.gridCellItem.plugin);
+  }
+
+  openSettings() {
+    const plugin = this.plugin.instance;
+    const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
+      plugin.settings.identifier
+    );
+    this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
+    this.moveableModalService.show(PluginMiniAdminComponent, {
+      adminAbleInterface: pluginResolver,
+      settings: plugin.settings,
+      page: this.pageBuilderComponent.pageDetail,
+      title: pluginResolver.name,
+      plugin,
+    }).afterClosed().subscribe(value => {
+      plugin.refreshView();
+    });
   }
 }
