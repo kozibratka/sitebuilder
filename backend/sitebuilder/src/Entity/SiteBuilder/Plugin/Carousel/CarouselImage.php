@@ -22,6 +22,7 @@ class CarouselImage
     private string $h2 = '';
 
     #[ORM\ManyToOne(targetEntity: 'PluginCarousel', inversedBy: 'images')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private $carousel;
 
     public function getId()

@@ -4,7 +4,6 @@ namespace App\Form\SiteBuilder;
 
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,13 +19,17 @@ class GridCellItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->addPluginFieldSubscriber->isPreview = $options['is_preview'];
-        $builder->add('row',
-            EntityType::class,
-            [
-                'entry_type' => GridRowType::class,
-            ]
-        )->addEventSubscriber($this->addPluginFieldSubscriber)
-        ;
+        $builder->addEventSubscriber($this->addPluginFieldSubscriber);
+        $builder->add('id', null, ['required' => false, 'mapped' => false]);
+        if (!$options['is_sub_row']) {
+            $builder->add('row',
+                GridRowType::class,
+                [
+                    'is_preview' => $options['is_preview'],
+                    'is_sub_row' => true,
+                ]
+            );
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -34,6 +37,7 @@ class GridCellItemType extends AbstractType
         $resolver->setDefaults([
             'data_class' => GridCellItem::class,
             'is_preview' => false,
+            'is_sub_row' => true,
         ]);
     }
 }

@@ -43,7 +43,7 @@ class PageBlock
     #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
-    #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock')]
+    #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $rows;
 
     private string $uniqueId = '';
@@ -143,6 +143,12 @@ class PageBlock
     {
         $this->rows->removeElement($row);
         return $this;
+    }
+
+    public function getGridCellItems(): array
+    {
+        $gridCellItems = $this->rows->map(fn(GridRow $gridRow) => $gridRow->getGridCellItems())->toArray();
+        return array_merge(...$gridCellItems);
     }
 
     public function __clone(): void

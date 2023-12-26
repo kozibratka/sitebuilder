@@ -19,7 +19,7 @@ class GridRow
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private PageBlock $pageBlock;
 
-    #[ORM\OneToMany(targetEntity: GridCell::class, mappedBy: 'row')]
+    #[ORM\OneToMany(targetEntity: GridCell::class, mappedBy: 'row', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $cells;
 
     public function __construct()
@@ -47,15 +47,31 @@ class GridRow
         $this->pageBlock = $pageBlock;
     }
 
-    public function addCell($cell)
+    public function getCells(): Collection
     {
-        $this->cells->add($cell);
-        $cell->setGridRow($this);
+        return $this->cells;
     }
 
-    public function removeCell($cell)
+    public function setCells(Collection $cells): void
+    {
+        $this->cells = $cells;
+    }
+
+    public function addCell(GridCell $cell)
+    {
+        $this->cells->add($cell);
+        $cell->setRow($this);
+    }
+
+    public function removeCell(GridCell $cell)
     {
         $this->cells->removeElement($cell);
-        $cell->setGridRow(null);
+        $cell->setRow(null);
+    }
+
+    public function getGridCellItems(): array
+    {
+        $gridCellItems = $this->cells->map(fn(GridCell $gridCell) => $gridCell->getGridCellItemsWithDeep())->toArray();
+        return array_merge(...$gridCellItems);
     }
 }

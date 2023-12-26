@@ -47,7 +47,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   draggingItemBottom = false;
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
-  rows: GridRowInterface[] = [];
   hoverOnIndexRow: number = null;
 
   constructor(
@@ -209,7 +208,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   removeRow(index:number) {
-    this.rows.splice(index, 1);
+    this.pageBlock.rows.splice(index, 1);
   }
 
   addRow(num: number, index: number = null){
@@ -225,9 +224,9 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     }
     newRow.cells = newCells;
     if (index !== null) {
-      this.rows.splice(index, 0, newRow);
+      this.pageBlock.rows.splice(index, 0, newRow);
     } else {
-      this.rows.push(newRow);
+      this.pageBlock.rows.push(newRow);
     }
   }
 }

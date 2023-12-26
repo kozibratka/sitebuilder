@@ -14,11 +14,12 @@ class GridCellItem
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id = null;
     #[ORM\ManyToOne(targetEntity: GridCell::class, inversedBy: 'items')]
-    private GridCell $cell;
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?GridCell $cell;
 
-    #[ORM\OneToOne(targetEntity: GridRow::class)]
+    #[ORM\OneToOne(targetEntity: GridRow::class, cascade: ['persist', 'remove'])]
     private ?GridRow $row;
-    #[ORM\ManyToOne(targetEntity: BasePlugin::class)]
+    #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'])]
     private ?BasePlugin $plugin;
 
     public function getId(): ?int
@@ -51,12 +52,12 @@ class GridCellItem
         $this->plugin = $plugin;
     }
 
-    public function getCell(): GridCell
+    public function getCell(): ?GridCell
     {
         return $this->cell;
     }
 
-    public function setCell(GridCell $cell): void
+    public function setCell(?GridCell $cell): void
     {
         $this->cell = $cell;
     }

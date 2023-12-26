@@ -5,6 +5,7 @@ namespace App\Controller\SiteBuilder;
 
 
 use App\Controller\BaseApiController;
+use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
@@ -91,9 +92,19 @@ class PageController extends BaseApiController
     {
         $withPublic = $request->query->get('withPublic');
         $form = $this->createForm(PageType::class, $page, ['pageBuilder' => true]);
+        /** @var GridCellItem[] $oldGridItems */
+        $oldGridItems = [];
+        if ($request->isMethod('post')) {
+            $oldGridItems = $page->getGridCellItems();
+        }
         $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
+            foreach ($oldGridItems as $gridCellItem) {
+                if (!$gridCellItem->getCell()) {
+                    //$doctrine->getManager()->remove($gridCellItem);
+                }
+            }
             $this->flush();
             if ($withPublic) {
                 $currentPublicPage = $doctrine->getRepository(Page::class)->findOneBy(['parentForPublic' => $page->getId()]);
@@ -106,6 +117,7 @@ class PageController extends BaseApiController
             }
             return $this->jsonResponseSimple($page, 201);
         }
+
         return $this->invalidFormResponse($form);
     }
 

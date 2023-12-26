@@ -169,6 +169,12 @@ class Page
         $this->parentForPublic = $parentForPublic;
     }
 
+    public function getGridCellItems(): array
+    {
+        $gridCellItems = $this->pageBlocks->map(fn(PageBlock $pageBlock) => $pageBlock->getGridCellItems())->toArray();
+        return array_merge(...$gridCellItems);
+    }
+
     public function __clone(): void
     {
         $this->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) {

@@ -17,8 +17,9 @@ class GridCell
     #[ORM\Column(type: 'integer')]
     private int $width = 0;
     #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells')]
-    private GridRow $row;
-    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?GridRow $row;
+    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell', cascade: ['persist'])]
     private Collection $items;
 
     /**
@@ -66,20 +67,34 @@ class GridCell
         return $this->row;
     }
 
-    public function setRow(GridRow $row): void
+    public function setRow(?GridRow $row): void
     {
         $this->row = $row;
     }
 
-    public function addItem($item)
+    public function addItem(GridCellItem $item)
     {
         $this->items->add($item);
-        $item->setGridCell($this);
+        $item->setCell($this);
     }
 
-    public function removeItem($item)
+    public function removeItem(GridCellItem $item)
     {
         $this->items->removeElement($item);
-        $item->setGridCell(null);
+        if ($item->getCell() === $this) {
+            $item->setCell(null);
+        }
+    }
+
+    public function getGridCellItemsWithDeep(): array
+    {
+        $gridCellItems = $this->getItems()->toArray();
+        /** @var GridCellItem $gridCellItem */
+        foreach ($gridCellItems as $gridCellItem) {
+            if ($gridCellItem->getRow()) {
+                $gridCellItems = array_merge($gridCellItems, $gridCellItem->getRow()->getGridCellItems());
+            }
+        }
+        return $gridCellItems;
     }
 }

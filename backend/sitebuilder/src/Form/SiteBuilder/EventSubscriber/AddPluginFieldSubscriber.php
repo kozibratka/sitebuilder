@@ -2,6 +2,7 @@
 
 namespace App\Form\SiteBuilder\EventSubscriber;
 
+use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Exception\CustomErrorMessageException;
@@ -40,16 +41,15 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $formClass = $this->pluginServices[$identifier]->getFormClass();
         }
         if(isset($data['id']) && !$this->isPreview) {
-            $paletteGridItem = $this->entityManager->getRepository(PaletteGridItem::class)->find($data['id']);
-            if($paletteGridItem) {
-                $form->setData($paletteGridItem);
+            $gridCellItem = $this->entityManager->getRepository(GridCellItem::class)->find($data['id']);
+            if($gridCellItem) {
+                $form->setData($gridCellItem);
             }else{
                 throw new CustomErrorMessageException('Pokoušíte se upravit element, který je již smazaný');
             }
         } else {
-            /** @var PaletteGridItem $paletteGridItem */
-            $paletteGridItem = new PaletteGridItem();
-            $form->setData($paletteGridItem);
+            $gridCellItem = new GridCellItem();
+            $form->setData($gridCellItem);
         }
         if(isset($plugin['id']) && !$this->isPreview) {
             $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);

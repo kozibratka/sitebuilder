@@ -110,6 +110,7 @@
   position: absolute;
   text-align: center;
   top: -16px;
+  height: 10px;
 }
 
 .new-row-up > button {

@@ -14,6 +14,7 @@ class MenuItem
     private $id;
 
     #[ORM\ManyToOne(targetEntity: 'PluginMenu', inversedBy: 'items')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private PluginMenu $menu;
 
     #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page')]
