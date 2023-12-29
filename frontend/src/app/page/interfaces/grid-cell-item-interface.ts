@@ -5,4 +5,5 @@ export interface GridCellItemInterface {
   plugin?: BasePlugConfigInterface;
   row?: GridRowInterface;
   id?: number;
+  itemOrder: number;
 }

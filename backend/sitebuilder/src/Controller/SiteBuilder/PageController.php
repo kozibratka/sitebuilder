@@ -102,7 +102,7 @@ class PageController extends BaseApiController
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
             foreach ($oldGridItems as $gridCellItem) {
                 if (!$gridCellItem->getCell()) {
-                    //$doctrine->getManager()->remove($gridCellItem);
+                    $doctrine->getManager()->remove($gridCellItem);
                 }
             }
             $this->flush();
@@ -115,6 +115,7 @@ class PageController extends BaseApiController
                 $clonePage->setParentForPublic($page);
                 $this->persist($clonePage);
             }
+            $page->refreshGridCellItemOrder();
             return $this->jsonResponseSimple($page, 201);
         }
 

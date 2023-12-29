@@ -77,7 +77,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.updateBottomPaddingSubscription.unsubscribe();
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {

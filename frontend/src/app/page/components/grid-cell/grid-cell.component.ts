@@ -45,8 +45,11 @@ export class GridCellComponent implements OnInit{
   onAdd = (event: SortableEvent) => {
     let newCellItem = this.cell.items[event.newIndex] as any;
     if (newCellItem.cells) {
-      let newRow = this.cell.items[event.newIndex] as GridRowInterface;
-      this.cell.items[event.newIndex] = {row: newRow};
+      let newRow = this.cell.items[event.newIndex] as unknown as GridRowInterface;
+      this.cell.items[event.newIndex] = {row: newRow, itemOrder: event.newIndex};
     }
+    this.cell.items.forEach((value, index) => {
+      value.itemOrder = index;
+    });
   }
 }

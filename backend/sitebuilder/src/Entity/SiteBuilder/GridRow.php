@@ -74,4 +74,12 @@ class GridRow
         $gridCellItems = $this->cells->map(fn(GridCell $gridCell) => $gridCell->getGridCellItemsWithDeep())->toArray();
         return array_merge(...$gridCellItems);
     }
+
+    public function refreshGridCellItemOrder()
+    {
+        /** @var GridCell $cell */
+        foreach ($this->cells as $cell) {
+            $cell->refreshGridCellItemOrder();
+        }
+    }
 }

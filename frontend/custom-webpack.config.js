@@ -7,7 +7,7 @@ module.exports = {
     }
   },
   watchOptions: {
-    ignored: /node_modules/,
+    ignored: ['**/node_modules', '**/src/assets'],
   },
   resolve: {fallback: {"util": false}},
 };

@@ -18,9 +18,12 @@ class GridCellItem
     private ?GridCell $cell;
 
     #[ORM\OneToOne(targetEntity: GridRow::class, cascade: ['persist', 'remove'])]
-    private ?GridRow $row;
+    private ?GridRow $row = null;
     #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'])]
     private ?BasePlugin $plugin;
+
+    #[ORM\Column(type: 'integer')]
+    private int $itemOrder = 0;
 
     public function getId(): ?int
     {
@@ -60,5 +63,15 @@ class GridCellItem
     public function setCell(?GridCell $cell): void
     {
         $this->cell = $cell;
+    }
+
+    public function getItemOrder(): int
+    {
+        return $this->itemOrder;
+    }
+
+    public function setItemOrder(int $itemOrder): void
+    {
+        $this->itemOrder = $itemOrder;
     }
 }

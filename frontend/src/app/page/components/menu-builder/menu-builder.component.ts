@@ -91,7 +91,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   createPluginConfig = (item): GridCellItemInterface => {
     let resolver = this.menuPluginResolverServices.selectedAbstractPluginResolverMessenger;
     let pluginConfig = resolver.getEmptySettings();
-    return {plugin: pluginConfig};
+    return {plugin: pluginConfig, itemOrder: 0};
   }
 
   onDragStart = (event: any) => {

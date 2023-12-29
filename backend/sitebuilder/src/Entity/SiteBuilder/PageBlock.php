@@ -151,6 +151,14 @@ class PageBlock
         return array_merge(...$gridCellItems);
     }
 
+    public function refreshGridCellItemOrder()
+    {
+        /** @var GridRow $row */
+        foreach ($this->rows as $row) {
+            $row->refreshGridCellItemOrder();
+        }
+    }
+
     public function __clone(): void
     {
         $this->rows = new ArrayCollection($this->rows->map(function(GridRow $row) {

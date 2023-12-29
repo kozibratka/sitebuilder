@@ -20,6 +20,7 @@ class GridCell
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridRow $row;
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell', cascade: ['persist'])]
+    #[ORM\OrderBy(["itemOrder" => "ASC"])]
     private Collection $items;
 
     /**
@@ -96,5 +97,20 @@ class GridCell
             }
         }
         return $gridCellItems;
+    }
+
+    public function refreshGridCellItemOrder()
+    {
+        $iterator = $this->getItems()->getIterator();
+        $iterator->uasort(function (GridCellItem $a, GridCellItem $b) {
+            return ($a->getItemOrder() < $b->getItemOrder()) ? -1 : 1;
+        });
+        $this->items = new ArrayCollection(iterator_to_array($iterator));
+        /** @var GridCellItem $item */
+        foreach ($iterator as $item) {
+            if ($row = $item->getRow()) {
+                $row->refreshGridCellItemOrder();
+            }
+        }
     }
 }
