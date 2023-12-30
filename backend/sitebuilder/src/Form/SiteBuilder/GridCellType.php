@@ -26,6 +26,7 @@ class GridCellType extends AbstractType
             ]
         )
             ->add('width', IntegerType::class)
+            ->add('uniqueId')
         ;
     }
 

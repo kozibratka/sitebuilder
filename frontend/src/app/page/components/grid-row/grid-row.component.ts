@@ -13,6 +13,7 @@ import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {fromEvent} from "rxjs";
 import {DOCUMENT} from "@angular/common";
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
+import {StringService} from "../../../core/services/string.service";
 
 @Component({
   selector: 'app-grid-row',
@@ -119,5 +120,12 @@ export class GridRowComponent implements OnInit, OnDestroy{
 
   getWidth() {
     return this.elementRef.nativeElement.offsetWidth;
+  }
+
+  trackByCell(index, item: GridCellInterface) {
+    if (!item.uniqueId) {
+      item.uniqueId = StringService.randomString();
+    }
+    return( item.uniqueId );
   }
 }

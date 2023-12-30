@@ -23,6 +23,8 @@ class GridCell
     #[ORM\OrderBy(["itemOrder" => "ASC"])]
     private Collection $items;
 
+    private string $uniqueId = '';
+
     /**
      * @param int|null $id
      * @param int $width
@@ -85,6 +87,16 @@ class GridCell
         if ($item->getCell() === $this) {
             $item->setCell(null);
         }
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->uniqueId;
+    }
+
+    public function setUniqueId(string $uniqueId): void
+    {
+        $this->uniqueId = $uniqueId;
     }
 
     public function getGridCellItemsWithDeep(): array

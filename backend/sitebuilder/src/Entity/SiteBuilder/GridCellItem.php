@@ -25,6 +25,8 @@ class GridCellItem
     #[ORM\Column(type: 'integer')]
     private int $itemOrder = 0;
 
+    private string $uniqueId = '';
+
     public function getId(): ?int
     {
         return $this->id;
@@ -73,5 +75,15 @@ class GridCellItem
     public function setItemOrder(int $itemOrder): void
     {
         $this->itemOrder = $itemOrder;
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->uniqueId;
+    }
+
+    public function setUniqueId(string $uniqueId): void
+    {
+        $this->uniqueId = $uniqueId;
     }
 }

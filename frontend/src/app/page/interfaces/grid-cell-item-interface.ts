@@ -6,4 +6,5 @@ export interface GridCellItemInterface {
   row?: GridRowInterface;
   id?: number;
   itemOrder: number;
+  uniqueId?: string;
 }

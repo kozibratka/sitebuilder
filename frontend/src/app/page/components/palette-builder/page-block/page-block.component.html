@@ -6,7 +6,7 @@
 <!--    <app-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems; trackBy: trackByGridItem"></app-grid-item>-->
 <!--  </div>-->
   <div class="block-content-rows container" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
-    <div *ngFor="let row of pageBlock.rows; index as i">
+    <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow+1" class="hider-new-row-button">
         <div class="new-row-up">
           <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i}">

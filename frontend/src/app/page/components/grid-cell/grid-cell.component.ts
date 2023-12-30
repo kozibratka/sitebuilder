@@ -3,6 +3,8 @@ import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 import {Subject} from "rxjs";
 import {SortableEvent} from "sortablejs";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
+import {StringService} from "../../../core/services/string.service";
+import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 
 @Component({
   selector: 'app-grid-cell',
@@ -51,5 +53,12 @@ export class GridCellComponent implements OnInit{
     this.cell.items.forEach((value, index) => {
       value.itemOrder = index;
     });
+  }
+
+  trackByItem(index, item: GridCellItemInterface) {
+    if (!item.uniqueId) {
+      item.uniqueId = StringService.randomString();
+    }
+    return( item.uniqueId );
   }
 }

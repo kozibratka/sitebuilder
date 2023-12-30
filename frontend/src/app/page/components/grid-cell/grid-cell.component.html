@@ -4,7 +4,7 @@
      onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd,
      handle: '.icon-move-cell-item'}"
 >
-  <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items" [isDeepChild]="isDeepChild"></app-grid-cell-item>
+  <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items; trackBy: trackByItem" [isDeepChild]="isDeepChild"></app-grid-cell-item>
 </div>
 <div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);">
   <div class="delimiter-line"></div>

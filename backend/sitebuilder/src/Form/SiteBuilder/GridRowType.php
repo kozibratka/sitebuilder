@@ -26,7 +26,9 @@ class GridRowType extends AbstractType
                     'is_sub_row' => $options['is_sub_row']
                 ],
             ]
-        );
+        )
+            ->add('uniqueId')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

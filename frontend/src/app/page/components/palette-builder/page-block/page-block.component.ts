@@ -90,6 +90,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     return( item.uniqueId );
   }
 
+  trackByRows(index, item: GridRowInterface) {
+    if (!item.uniqueId) {
+      item.uniqueId = StringService.randomString();
+    }
+    return( item.uniqueId );
+  }
+
   private prepareResizeHorizontalPalette(event: MouseEvent): void{
     const actualHeight = this.paletteContent.nativeElement.offsetHeight;
     if (event.offsetY < actualHeight - 7) {

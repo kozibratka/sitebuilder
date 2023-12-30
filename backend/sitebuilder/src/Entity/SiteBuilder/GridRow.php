@@ -22,6 +22,8 @@ class GridRow
     #[ORM\OneToMany(targetEntity: GridCell::class, mappedBy: 'row', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $cells;
 
+    private string $uniqueId = '';
+
     public function __construct()
     {
         $this->cells = new ArrayCollection();
@@ -67,6 +69,16 @@ class GridRow
     {
         $this->cells->removeElement($cell);
         $cell->setRow(null);
+    }
+
+    public function getUniqueId(): string
+    {
+        return $this->uniqueId;
+    }
+
+    public function setUniqueId(string $uniqueId): void
+    {
+        $this->uniqueId = $uniqueId;
     }
 
     public function getGridCellItems(): array

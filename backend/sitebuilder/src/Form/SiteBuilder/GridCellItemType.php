@@ -23,6 +23,7 @@ class GridCellItemType extends AbstractType
         $builder->addEventSubscriber($this->addPluginFieldSubscriber);
         $builder->add('id', null, ['required' => false, 'mapped' => false])
             ->add('itemOrder',IntegerType::class)
+            ->add('uniqueId')
         ;
         if (!$options['is_sub_row']) {
             $builder->add('row',
