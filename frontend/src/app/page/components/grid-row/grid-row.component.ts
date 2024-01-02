@@ -101,20 +101,36 @@ export class GridRowComponent implements OnInit, OnDestroy{
     }
   }
 
-  removeCell(startIndex: number, site : 'right' | 'left') {
+  removeCell(startIndex: number, cellInfo: {site: string, isRightPanel: boolean}) {
+    if (this.row.cells.length < 2) {
+      return;
+    }
     let startCell = this.row.cells[startIndex];
-    if(site == 'left') {
+    if (cellInfo.isRightPanel) {
+      if (cellInfo.site === 'left') {
+        let toRemoveCell = this.row.cells[startIndex];
+        this.row.cells.splice(startIndex, 1);
+        if (this.row.cells[startIndex-1]) {
+          this.row.cells[startIndex-1].width += toRemoveCell.width;
+        }
+      }
+    }
+    else if(cellInfo.site == 'left') {
       if (startIndex) {
         let toRemoveCell = this.row.cells[startIndex-1];
         this.row.cells.splice(startIndex-1, 1);
         startCell.width += toRemoveCell.width;
       }
     } else {
-      if (startIndex < this.row.cells.length-1) {
-        let toRemoveCell = this.row.cells[startIndex+1];
-        this.row.cells.splice(startIndex+1, 1);
-        startCell.width += toRemoveCell.width;
-      }
+        let toRemoveCell = this.row.cells[startIndex];
+        this.row.cells.splice(startIndex, 1);
+        let toResizeIndex = startIndex-1;
+        if (toResizeIndex < 0) {
+          toResizeIndex = 0;
+        }
+        if (this.row.cells[toResizeIndex]) {
+          this.row.cells[toResizeIndex].width += toRemoveCell.width;
+        }
     }
   }
 

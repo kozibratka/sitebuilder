@@ -18,9 +18,9 @@
   outline-color: black;
 }
 
-:host.row {
-  margin-bottom: 1rem;
-}
+/*:host.row {*/
+/*  margin-bottom: 1rem;*/
+/*}*/
 
 :host.row:hover ::ng-deep .delimiter-line {
   border-right: 1px dotted black;

@@ -51,14 +51,15 @@
 .left-add-del-cell {
   position: absolute;
   top: 40%;
-  left: 0px;
+  left: -9px;
   width: 17px;
+  z-index: 3;
 }
 
 .right-add-del-cell {
   position: absolute;
   top: 40%;
-  right: 0px;
+  right: -9px;
   width: 17px;
 }
 

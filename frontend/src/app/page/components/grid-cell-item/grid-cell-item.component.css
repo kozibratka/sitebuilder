@@ -55,4 +55,6 @@
   transition: none;
   outline-color: red !important;
   outline-width: 2px !important;
+  position: relative;
+  z-index: 1;
 }
