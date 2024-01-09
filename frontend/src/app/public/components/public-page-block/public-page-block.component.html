@@ -1,5 +1,5 @@
 <div class="block">
   <div #palette_content class="block-content grid-stack">
-    <app-public-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems"></app-public-grid-item>
+    <app-grid-row-public class="row" [row]="row" *ngFor="let row of pageBlock.rows; index as i"></app-grid-row-public>
   </div>
 </div>

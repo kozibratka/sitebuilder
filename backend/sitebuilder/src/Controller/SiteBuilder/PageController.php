@@ -72,7 +72,7 @@ class PageController extends BaseApiController
     {
         $this->denyAccessUnlessGranted('page_builder_voter', $web);
         $form = $this->createForm(PageType::class, null, ['is_preview' => true]);
-        $form->submit($request->request->all());
+        $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */
             $page = $form->getData();
