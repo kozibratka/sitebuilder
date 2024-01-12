@@ -14,11 +14,12 @@ import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 export class GridCellComponent implements OnInit{
   @Input() cell: GridCellInterface;
   @Input() isLast = false;
+  @Input() isFirst = false;
   @Input() isDeepChild = false;
   @Output() resized$ = new EventEmitter<MouseEvent>();
   @Input() isMouseEnterRow = false;
   @Output() addCell$ = new EventEmitter<'left' | 'right'>();
-  @Output() removeCell$ = new EventEmitter<{site: 'left' | 'right', isRightPanel: boolean}>();
+  @Output() removeCell$ = new EventEmitter<{site: 'left' | 'right', isRightPanel: boolean, isDeepChild: boolean}>();
 
 
   constructor(

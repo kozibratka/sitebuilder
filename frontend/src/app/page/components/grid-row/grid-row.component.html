@@ -1,8 +1,11 @@
-<app-grid-cell [cell]="cell" [isLast]="last" *ngFor="let cell of row.cells; let last = last;index as i; trackBy: trackByCell"
+<app-grid-cell [cell]="cell"
+               [isLast]="last"
+               [isFirst]="first"
+               *ngFor="let cell of row.cells; let last = last;let first = first;index as i; trackBy: trackByCell"
                (resized$)="onCellResized($event, i)"
                class="col-md-{{cell.width}}"
                [class.resized]="isResized"
-               [isMouseEnterRow] = isMouseEnter
+               [isMouseEnterRow]=isMouseEnter
                (addCell$)="addNewCell(i, $event)"
                (removeCell$)="removeCell(i, $event)"
                [isDeepChild]="isDeepChild"

@@ -13,10 +13,9 @@
 .plugin-move-menu {
   width: 153px;
   position: absolute;
-  top: 11px;
-  right: 0px;
+  top: 0px;
+  left: 0px;
   z-index: 1;
-  text-align: right;
   padding-bottom: 10px;
 }
 

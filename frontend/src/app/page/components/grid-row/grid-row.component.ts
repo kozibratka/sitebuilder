@@ -39,14 +39,30 @@ export class GridRowComponent implements OnInit, OnDestroy{
   ngOnDestroy(): void {
   }
 
-  @HostListener('mouseenter')
+  @HostListener('mouseenter', ["$event"])
   onMouseEnter() {
     this.isMouseEnter = true;
+    event.stopPropagation();
   }
 
-  @HostListener('mouseleave')
+  @HostListener('mouseleave', ["$event"])
   onMouseLeave() {
     this.isMouseEnter = false;
+    event.stopPropagation();
+  }
+
+  @HostListener('dragover', ["$event"])
+  onDragOver() {
+    event.stopPropagation();
+  }
+
+  @HostListener('dragstart', ["$event"])
+  onDragStart() {
+    event.stopPropagation();
+  }
+  @HostListener('dragenter', ["$event"])
+  onDragEnter() {
+    event.stopPropagation();
   }
 
   onCellResized(event: MouseEvent, cellIndex: number) {
@@ -101,8 +117,8 @@ export class GridRowComponent implements OnInit, OnDestroy{
     }
   }
 
-  removeCell(startIndex: number, cellInfo: {site: string, isRightPanel: boolean}) {
-    if (this.row.cells.length < 2) {
+  removeCell(startIndex: number, cellInfo: {site: string, isRightPanel: boolean, isDeepChild: boolean}) {
+    if (this.row.cells.length < 2 || (cellInfo.isDeepChild && this.row.cells.length == 2)) {
       return;
     }
     let startCell = this.row.cells[startIndex];

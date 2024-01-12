@@ -9,27 +9,27 @@
 <div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);">
   <div class="delimiter-line"></div>
 </div>
-<app-animation-hider [show] = "isMouseEnterRow">
+<app-animation-hider [show] = "isMouseEnterRow" *ngIf="!isDeepChild || !isFirst">
   <div class="add-del-cell-container">
     <div class="left-add-del-cell">
       <mat-icon class="add-cell-icon-left add-cell-icon" fontIcon="add" (click)="addCell$.emit('left')"></mat-icon>
-      <mat-icon [matMenuTriggerFor]="menu" class="del-cell-icon-left del-cell-icon" fontIcon="remove" [matMenuTriggerData]="{rightPanel: false}"></mat-icon>
+      <mat-icon [matMenuTriggerFor]="menu" class="del-cell-icon-left del-cell-icon" fontIcon="remove" [matMenuTriggerData]="{rightPanel: false, isDeepChild}"></mat-icon>
     </div>
-    <div class="right-add-del-cell" *ngIf="isLast">
+    <div class="right-add-del-cell" *ngIf="isLast && !isDeepChild">
       <mat-icon class="add-cell-icon-right add-cell-icon" fontIcon="add" (click)="addCell$.emit('right')"></mat-icon>
-      <mat-icon [matMenuTriggerFor]="menu" class="del-cell-icon-right del-cell-icon" fontIcon="remove" [matMenuTriggerData]="{rightPanel: true}"></mat-icon>
+      <mat-icon [matMenuTriggerFor]="menu" class="del-cell-icon-right del-cell-icon" fontIcon="remove" [matMenuTriggerData]="{rightPanel: true, isDeepChild}"></mat-icon>
     </div>
   </div>
 </app-animation-hider>
 
 
 <mat-menu #menu="matMenu">
-  <ng-template matMenuContent let-rightPanel="rightPanel">
+  <ng-template matMenuContent let-rightPanel="rightPanel" let-isDeepChild="isDeepChild">
     <div class="container">
       <h6>Jakou buňku smazat?</h6>
       <div class="d-flex flex-wrap menu-container">
-        <button type="button" class="btn btn-light" (click)="removeCell$.emit({site: 'left', isRightPanel: rightPanel})">Vlevo</button>
-        <button type="button" class="btn btn-light" (click)="removeCell$.emit({site: 'right', isRightPanel: rightPanel})">Vpravo</button>
+        <button type="button" class="btn btn-light" (click)="removeCell$.emit({site: 'left', isRightPanel: rightPanel, isDeepChild})">Vlevo</button>
+        <button type="button" class="btn btn-light" (click)="removeCell$.emit({site: 'right', isRightPanel: rightPanel, isDeepChild})">Vpravo</button>
       </div>
     </div>
   </ng-template>
