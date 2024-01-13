@@ -1,11 +1,11 @@
 import {
   Component,
   ComponentRef,
-  ElementRef,
+  ElementRef, EventEmitter,
   HostListener,
   Inject,
   Input,
-  OnInit,
+  OnInit, Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -32,6 +32,7 @@ export class GridCellItemComponent implements OnInit{
   plugin: ComponentRef<AbstractPlugin<any>>;
   showMoveIcon = false;
   isMoveMenuHover = false;
+  @Output() deleteItem = new EventEmitter<boolean>();
 
 
   constructor(
@@ -72,6 +73,10 @@ export class GridCellItemComponent implements OnInit{
     let componentClass = this.pluginResolver.componentClass as any;
     this.plugin = this.pluginContainer.createComponent<AbstractPlugin<any>>(componentClass);
     this.plugin.instance.initializeSettings(this.gridCellItem.plugin);
+  }
+
+  delete() {
+    this.deleteItem.emit(true);
   }
 
   openSettings() {

@@ -62,4 +62,8 @@ export class GridCellComponent implements OnInit{
     }
     return( item.uniqueId );
   }
+
+  deleteItem(index: number) {
+    this.cell.items.splice(index, 1);
+  }
 }

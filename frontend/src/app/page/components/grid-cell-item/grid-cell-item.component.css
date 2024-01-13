@@ -20,9 +20,10 @@
 }
 
 .cell-item.is-row > app-animation-hider .plugin-move-menu {
-  top: -27px;
-  left: 0px;
-  text-align: left;
+  top: -2px;
+  right: 0px;
+  left: initial;
+  text-align: right;
 }
 
 .frameCover div.btn {
