@@ -220,13 +220,31 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   addRow(num: number, index: number = null){
     let newRow: GridRowInterface = {cells: []};
     let newCells: GridCellInterface[] = [];
-    let width = Math.floor(12/num);
-    for (let i = 0; i < num; i++) {
-      let widthForColumn = width;
-      if (12 % num && i == num-1) {
-        widthForColumn = 12 - ((i) * width);
+    if (num === 5) {
+      newCells = [{items: [], width: 2}, {items: [], width: 2}, {items: [], width: 4}, {items: [], width: 2}, {items: [], width: 2}];
+    } else if(num === 7) {
+      newCells = [{items: [], width: 1}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 1}];
+    }
+    else if(num === 8) {
+      newCells = [{items: [], width: 1}, {items: [], width: 1}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 1}, {items: [], width: 1}];
+    }
+    else if(num === 9) {
+      newCells = [{items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}];
+    }
+    else if(num === 10) {
+      newCells = [{items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 2}, {items: [], width: 2}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}];
+    }
+    else if(num === 11) {
+      newCells = [{items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 2}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}, {items: [], width: 1}];
+    }else {
+      let width = Math.floor(12/num);
+      for (let i = 0; i < num; i++) {
+        let widthForColumn = width;
+        if (12 % num && i == num-1) {
+          widthForColumn = 12 - ((i) * width);
+        }
+        newCells.push({items: [], width: widthForColumn});
       }
-      newCells.push({items: [], width: widthForColumn});
     }
     newRow.cells = newCells;
     if (index !== null) {
