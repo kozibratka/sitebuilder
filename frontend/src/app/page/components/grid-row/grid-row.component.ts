@@ -79,7 +79,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
       let diffInCell = Math.round(actualDiff / cellWidth);
       let leftCellWidthTmp = leftCellWidth + diffInCell;
       let rightCellWidthTmp = rightCellWidth - diffInCell;
-      if (leftCellWidthTmp && rightCellWidthTmp) {
+      if (leftCellWidthTmp > 0 && rightCellWidthTmp > 0) {
         leftCell.width = leftCellWidthTmp;
         rightCell.width = rightCellWidthTmp;
       }
