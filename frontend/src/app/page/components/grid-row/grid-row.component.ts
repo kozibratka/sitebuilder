@@ -42,28 +42,34 @@ export class GridRowComponent implements OnInit, OnDestroy{
   @HostListener('mouseenter', ["$event"])
   onMouseEnter() {
     this.isMouseEnter = true;
-    event.stopPropagation();
+    if (this.isDeepChild) {
+      event.stopPropagation();
+    }
   }
 
   @HostListener('mouseleave', ["$event"])
   onMouseLeave() {
     this.isMouseEnter = false;
-    event.stopPropagation();
-  }
+    if (this.isDeepChild) {
+      event.stopPropagation();
+    }  }
 
   @HostListener('dragover', ["$event"])
   onDragOver() {
-    event.stopPropagation();
-  }
+    if (this.isDeepChild) {
+      event.stopPropagation();
+    }  }
 
   @HostListener('dragstart', ["$event"])
   onDragStart() {
-    event.stopPropagation();
-  }
+    if (this.isDeepChild) {
+      event.stopPropagation();
+    }  }
   @HostListener('dragenter', ["$event"])
   onDragEnter() {
-    event.stopPropagation();
-  }
+    if (this.isDeepChild) {
+      event.stopPropagation();
+    }  }
 
   onCellResized(event: MouseEvent, cellIndex: number) {
     this.isResized = true;
