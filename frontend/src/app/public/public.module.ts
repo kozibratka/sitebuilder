@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AppAdminModule} from '../app-admin.module';
 import { PublicComponent } from './pages/public/public.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AppPublicComponent} from './app-public.component';
@@ -14,6 +13,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
 import { GridCellItemPublicComponent } from './components/grid-cell-item-public/grid-cell-item-public.component';
 import { GridRowPublicComponent } from './components/grid-row-public/grid-row-public.component';
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PluginsModule} from "../plugins/plugins.module";
 
 const routes: Routes = [
   {
@@ -33,13 +35,15 @@ const routes: Routes = [
     GridRowPublicComponent
   ],
     imports: [
-        CommonModule,
-        AppAdminModule,
-        RouterModule.forRoot(routes),
-        PageModule,
-        CoreModule,
-        MatIconModule,
-        MatMenuModule,
+      BrowserModule,
+      BrowserAnimationsModule,
+      CommonModule,
+      RouterModule.forRoot(routes),
+      PageModule,
+      CoreModule,
+      MatIconModule,
+      MatMenuModule,
+      PluginsModule,
     ],
   bootstrap: [AppPublicComponent]
 })

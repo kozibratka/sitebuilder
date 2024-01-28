@@ -33,7 +33,7 @@ export class FormComponent extends AbstractPlugin<FormConfigInterface> implement
   }
 
   ngOnInit(): void {
-    if (this.settings.id) {
+    if (Array.isArray(this.settings.form)) {
       this.inputsToInstance();
     }
   }
