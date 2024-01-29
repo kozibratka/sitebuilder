@@ -26,6 +26,10 @@
   text-align: right;
 }
 
+.cell-item:not(.is-row ) {
+  padding-bottom: 15px;
+}
+
 .frameCover div.btn {
   background-color: #262b33;
   border-radius: 0;
