@@ -54,3 +54,7 @@
 ::ng-deep .cdk-overlay-container:has(.file-manager-dialog) {
   z-index: 2003 !important;
 }
+
+.left-menu {
+  z-index: 1;
+}

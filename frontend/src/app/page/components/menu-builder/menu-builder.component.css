@@ -42,12 +42,12 @@ i.icon-move, i.icon-move-grid{
 
 .lock {
   position: absolute;
-  right: -38px;
-  top: 116px;
+  right: 0px;
+  top: 59px;
   background-color: #fff;
-  padding: 7px;
+  padding: 0px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 1
 }
 
 .grid-row-menu {
@@ -63,3 +63,7 @@ i.icon-move, i.icon-move-grid{
   width: 100%;
 }
 
+:host {
+  position: fixed;
+  width: 16%;
+}

@@ -29,7 +29,7 @@ import {UserService} from "../../../authorization/services/user.service";
   animations: [
     trigger('visibleMenu', [
       state('show', style({left: '235px'})),
-      state('hide', style({left: '-8px'})),
+      state('hide', style({left: '-40px'})),
       transition('show => hide', [
         animate('0.15s')
       ]),

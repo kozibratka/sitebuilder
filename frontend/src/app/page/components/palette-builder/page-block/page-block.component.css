@@ -106,11 +106,12 @@
 }
 
 .new-row-up {
-  width: 100%;
+  width: 50%;
   position: absolute;
-  text-align: center;
+  text-align: left;
   top: -16px;
   height: 10px;
+  right: 15px;
 }
 
 .new-row-up > button {
