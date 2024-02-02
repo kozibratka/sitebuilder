@@ -75,4 +75,10 @@ app-grid-cell {
   position: absolute;
 }
 
+.menu-row {
+  width: auto !important;
+  padding: 3px !important;
+  color: white;
+}
+
 

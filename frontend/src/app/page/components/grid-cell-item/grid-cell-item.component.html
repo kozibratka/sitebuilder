@@ -6,6 +6,9 @@
   <app-animation-hider [show] = "showMoveIcon" class="move-icon-cell-item-container" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
     <div class="plugin-move-menu">
       <div class="frameCover">
+        <div title="Nastavení prvku" class="btn draganddrop menu-cell-item">
+          <strong>Prvek</strong>
+        </div>
         <div title="Nastavení" class="btn draganddrop" (click)="openSettings()" *ngIf="!gridCellItem.row">
           <i class="material-icons icon-settings">settings</i>
         </div>

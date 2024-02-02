@@ -62,3 +62,9 @@
   position: relative;
   z-index: 1;
 }
+
+.menu-cell-item {
+  width: auto !important;
+  padding: 3px !important;
+  color: white;
+}
