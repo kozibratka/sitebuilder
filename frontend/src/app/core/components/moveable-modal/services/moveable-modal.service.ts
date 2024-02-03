@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MoveableModalComponent} from '../moveable-modal.component';
 import {MatDialog} from '@angular/material/dialog';
+import {InitAbleInterface} from "../interfaces/init-able-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class MoveableModalService {
   ) {
   }
 
-  show<T>(contentComponent: new() => any, params: T) {
+  show<T>(contentComponent: new() => InitAbleInterface, params: T) {
     return this.dialog.open(MoveableModalComponent, {
       data: {
         contentComponent,
