@@ -57,4 +57,8 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
     }
     return( item.uniqueId );
   }
+
+  deleteBlock(i: number) {
+    this.pageDetail.pageBlocks.splice(i, 1);
+  }
 }

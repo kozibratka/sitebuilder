@@ -48,6 +48,9 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
   hoverOnIndexRow: number = null;
+  showMoveIcon: boolean;
+  isMoveMenuHover = false;
+  @Output() deleteBlock = new EventEmitter<boolean>();
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -81,6 +84,16 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
     // this.prepareResizeHorizontalPalette(event);
+  }
+
+  @HostListener('mouseenter', ['$event'])
+  onMouseEnter(event: MouseEvent): void {
+    this.showMoveIcon = true;
+  }
+
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent): void {
+    this.showMoveIcon = false;
   }
 
   trackByGridItem(index, item: PaletteItemConfig ) {

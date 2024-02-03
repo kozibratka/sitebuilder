@@ -11,6 +11,8 @@ import {AbstractPluginResolver} from '../../../page/services/abstract-classes/ab
 import {NotifierService} from '../../../core/services/notifier.service';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
 import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
+import {AdminAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/admin-able-interface";
+import {SettingAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
 
 @Component({
   selector: 'app-update-plugin',
@@ -21,7 +23,7 @@ export class UpdatePluginComponent implements OnInit {
   pluginResolver: AbstractPluginResolver<any>;
   pluginSetting: BasePlugConfigInterface;
 
-  adminConfig = null;
+  adminConfig: AdminAbleInterface & SettingAbleInterface = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +39,7 @@ export class UpdatePluginComponent implements OnInit {
     this.route.data.subscribe((data) => {
       this.pluginSetting = data.plugin;
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(data.plugin.identifier);
-      this.adminConfig = {adminAbleInterface: this.pluginResolver, settings: this.pluginSetting};
+      this.adminConfig = {contextObject: data.plugin, settings: this.pluginSetting, adminComponentsClass: this.pluginResolver.adminComponentsClass};
     });
   }
 

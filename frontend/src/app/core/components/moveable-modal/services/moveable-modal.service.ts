@@ -11,7 +11,7 @@ export class MoveableModalService {
   ) {
   }
 
-  show(contentComponent: new() => any, params: any) {
+  show<T>(contentComponent: new() => any, params: T) {
     return this.dialog.open(MoveableModalComponent, {
       data: {
         contentComponent,

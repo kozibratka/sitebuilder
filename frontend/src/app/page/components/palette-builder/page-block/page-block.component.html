@@ -1,10 +1,4 @@
-<div class="block">
-  <div class="block-menu">
-    <i class="fas fa-arrows-alt handle"></i>
-  </div>
-<!--  <div #palette_content class="block-content grid-stack" [class.dragging-item-bottom]="draggingItemBottom">-->
-<!--    <app-grid-item class="grid-stack-item" [gridItemConfig]="gridNode" *ngFor="let gridNode of pageBlock.paletteGridItems; trackBy: trackByGridItem"></app-grid-item>-->
-<!--  </div>-->
+<div class="block" [class.move-menu-hover]="isMoveMenuHover">
   <div class="block-content-rows container" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow+1" class="hider-new-row-button">
@@ -25,6 +19,25 @@
     </div>
   </div>
 </div>
+
+<app-animation-hider [show]="showMoveIcon" class="" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
+  <div class="block-move-menu">
+    <div class="frameCover">
+      <div title="Nastavení Bloku" class="btn draganddrop block-menu-label">
+        <strong>Blok</strong>
+      </div>
+      <div title="Nastavení bloku" class="btn draganddrop">
+        <i class="material-icons icon-settings">settings</i>
+      </div>
+      <div title="Přesunout" class="btn draganddrop icon-move-block">
+        <i class="material-icons icon-move-block">open_with</i>
+      </div>
+      <div title="Smazat blok" class="btn draganddrop" (click)="deleteBlock.emit(true)">
+        <i class="material-icons icon-remove">delete</i>
+      </div>
+    </div>
+  </div>
+</app-animation-hider>
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-index="index">

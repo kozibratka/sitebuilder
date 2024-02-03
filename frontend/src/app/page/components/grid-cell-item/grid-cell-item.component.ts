@@ -18,6 +18,8 @@ import {
 import {PluginResolverService} from "../../../plugins/services/plugin-resolver.service";
 import {PageBuilderComponent} from "../../pages/page-builder/page-builder.component";
 import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
+import {AdminAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/admin-able-interface";
+import {SettingAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -85,12 +87,10 @@ export class GridCellItemComponent implements OnInit{
       plugin.settings.identifier
     );
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
-    this.moveableModalService.show(PluginMiniAdminComponent, {
-      adminAbleInterface: pluginResolver,
+    this.moveableModalService.show<AdminAbleInterface & SettingAbleInterface>(PluginMiniAdminComponent, {
+      adminComponentsClass: pluginResolver.adminComponentsClass,
       settings: plugin.settings,
-      page: this.pageBuilderComponent.pageDetail,
-      title: pluginResolver.name,
-      plugin,
+      contextObject: plugin
     }).afterClosed().subscribe(value => {
       plugin.refreshView();
     });

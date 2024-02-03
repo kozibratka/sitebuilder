@@ -3,7 +3,7 @@
     <h3 class="card-title">Úprava pluginu <b>{{pluginResolver.name}}<ng-container *ngIf="pluginSetting">: {{pluginSetting.name}}</ng-container></b></h3>
   </div> <!-- /.card-body -->
   <div class="card-body">
-    <app-mini-admin [configAdmin]="adminConfig"></app-mini-admin>
+    <app-mini-admin [setInitParams]="adminConfig"></app-mini-admin>
     <div class="container-fluid mt-3">
       <div class="d-flex justify-content-end">
         <a [routerLink]="['../../list-created', pluginResolver.identifier]" mat-button>Zpět na vytvořených pluginů</a>
