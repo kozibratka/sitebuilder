@@ -24,6 +24,8 @@ export class MoveableModalComponent implements OnInit {
 
   ngOnInit(): void {
     const component = this.content.createComponent<InitAbleInterface>(this.data.contentComponent).instance;
-    component.setInitParams(this.data.params);
+    if (this.data.params) {
+      component.setInitParams(this.data.params);
+    }
   }
 }
