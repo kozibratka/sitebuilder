@@ -17,8 +17,8 @@ import {
 } from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {GridItemHTMLElement} from 'gridstack/dist/gridstack';
-import {PaletteBuilderComponent} from '../palette-builder.component';
-import {PaletteItemComponent} from './palette-item-component/palette-item.component';
+import {PaletteBuilderComponent} from '../../palette-builder/palette-builder.component';
+import {PaletteItemComponent} from '../../palette-builder/page-block/palette-item-component/palette-item.component';
 import {Subject, Subscription} from 'rxjs';
 import {PageBlockInterface} from '../../../interfaces/page-block-interface';
 import {PaletteItemConfig} from '../../../interfaces/palette-item-config';

@@ -23,7 +23,7 @@ import {ElementPositionMessenger} from '../../../../../core/messengers/element-p
 import {ElementHelper} from '../../../../../core/helpers/element-helper';
 import {PaletteItemConfig} from '../../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../../services/palette-block-gridstack.service';
-import {PageBlockComponent} from '../page-block.component';
+import {PageBlockComponent} from '../../../page-block/page-block/page-block.component';
 import {AbstractPlugin} from '../../../../../plugins/abstract-class/abstract-plugin';
 import {QuickMenuService} from '../../../../services/quick-menu.service';
 import {MatDialog} from '@angular/material/dialog';

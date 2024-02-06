@@ -3,67 +3,64 @@
     <div class="card-header">
       <h3 class="card-title">Stavební prvky</h3>
     </div> <!-- /.card-body -->
-<ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile"
-       role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Prvky</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home"
-       role="tab" aria-controls="custom-content-below-home" aria-selected="true">Bloky</a>
-  </li>
-</ul>
-  </div>
-
-<div class="tab-content" id="custom-content-below-tabContent">
-  <div class="tab-pane fade" id="custom-content-below-home" role="tabpanel"
-       aria-labelledby="custom-content-below-home-tab">
-    <ul
-      class="menu-block"
-      [sortablejs]="baseBlocks"
-      [sortablejsCloneFunction]="clonePageBlock"
-      [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false} }">
-      <li *ngFor="let item of baseBlocks">
-        <img alt="" src="{{item.image}}">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Prvky</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Bloky</button>
       </li>
     </ul>
-  </div>
-  <div class="tab-pane fade menu-element d-flex flex-wrap active show" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-    <div class="menu-plugin-container d-flex flex-md-row flex-wrap"
-      sortablejs="[1]"
-      [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, handle: '.icon-move', onStart: onDragStart, onEnd: onDragEnd, sort: false}"
-      [sortablejsCloneFunction]="createPluginConfig"
-    >
-      <div class="menu-element-item grid-stack-item-menu"
-           sortablejs="[1]"
-           [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
-           [sortablejsCloneFunction]="cloneSortableJsRow"
-           (mouseleave)="showMoveIcon = false"
-           (mouseenter)="showMoveIcon = true"
-      >
-        <div>
-          <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
-          <span class="text">Stavební buňky</span>
-          <app-animation-hider [show] = "showMoveIcon">
-            <i class="material-icons icon-move-grid">open_with</i>
-          </app-animation-hider>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="menu-plugin-container d-flex flex-md-row flex-wrap"
+             sortablejs="[1]"
+             [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, handle: '.icon-move', onStart: onDragStart, onEnd: onDragEnd, sort: false}"
+             [sortablejsCloneFunction]="createPluginConfig"
+        >
+          <div class="menu-element-item grid-stack-item-menu"
+               sortablejs="[1]"
+               [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
+               [sortablejsCloneFunction]="cloneSortableJsRow"
+               (mouseleave)="showMoveIcon = false"
+               (mouseenter)="showMoveIcon = true"
+          >
+            <div>
+              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
+              <span class="text">Stavební buňky</span>
+              <app-animation-hider [show] = "showMoveIcon">
+                <i class="material-icons icon-move-grid">open_with</i>
+              </app-animation-hider>
+            </div>
+          </div>
+          <div
+            (mouseleave)="showMoveIcon = false"
+            (mouseenter)="showMoveIcon = true"
+            class="menu-element-item grid-stack-item-menu"
+            *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver"
+          >
+            <mat-icon class="menu-image">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
+            <span class="text">{{abstractMenuPluginResolver.name}}</span>
+            <app-animation-hider [show] = "showMoveIcon">
+              <i class="material-icons icon-move" appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver">open_with</i>
+            </app-animation-hider>
+          </div>
         </div>
       </div>
-      <div
-        (mouseleave)="showMoveIcon = false"
-        (mouseenter)="showMoveIcon = true"
-        class="menu-element-item grid-stack-item-menu"
-        *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver"
-      >
-        <mat-icon class="menu-image">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
-        <span class="text">{{abstractMenuPluginResolver.name}}</span>
-        <app-animation-hider [show] = "showMoveIcon">
-          <i class="material-icons icon-move" appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver">open_with</i>
-        </app-animation-hider>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <ul
+          class="menu-block"
+          [sortablejs]="baseBlocks"
+          [sortablejsCloneFunction]="clonePageBlock"
+          [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false} }">
+          <li *ngFor="let item of baseBlocks">
+            <img alt="" src="{{item.image}}">
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-</div>
+
   <div class="lock" (click)="locked = !locked">
     <mat-icon>{{locked ? 'lock' : 'lock_open'}}</mat-icon>
   </div>
