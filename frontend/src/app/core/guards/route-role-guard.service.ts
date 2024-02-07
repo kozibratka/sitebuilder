@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {LoginClientService} from '../services/api/login-api/login-client/login-client.service';
+import {LoginClientService} from '../../authorization/services/login-client.service';
 import {NotifierService} from '../services/notifier.service';
 import {SymfonyApiClientService} from '../services/api/symfony-api/symfony-api-client.service';
 import {catchError, map, tap} from 'rxjs/operators';

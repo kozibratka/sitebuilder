@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, NavigationEnd, Router} from '@angular/router';
 import {MatSelect} from '@angular/material/select';
-import {LoginClientService} from '../../../core/services/api/login-api/login-client/login-client.service';
+import {LoginClientService} from '../../../authorization/services/login-client.service';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {HiderElementDirective} from '../../../core/directives/hider-element.directive';
 import {WebInterface} from '../../../web/interfaces/web-interface';

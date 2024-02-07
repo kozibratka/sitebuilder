@@ -4,7 +4,7 @@ import {AbstractControl, FormGroup} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {WebListResolverGuard} from '../../../web/services/web-list-resolver.service';
-import {LoginClientService} from '../../../core/services/api/login-api/login-client/login-client.service';
+import {LoginClientService} from '../../services/login-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 
 @Component({

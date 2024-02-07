@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegisterFormService} from '../../services/register-form.service';
 import {FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LoginClientService} from '../../../core/services/api/login-api/login-client/login-client.service';
+import {LoginClientService} from '../../services/login-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 

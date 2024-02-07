@@ -18,4 +18,12 @@ class RoleController extends BaseApiController
 
         return $this->jsonResponseSimple($result);
     }
+    /**
+     * @Route("/list", name="list", methods={"GET"})
+     */
+    public function listRoles() {
+        $result = $this->getUser()->getRoles();
+
+        return $this->jsonResponseSimple($result);
+    }
 }

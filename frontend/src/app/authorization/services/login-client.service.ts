@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import jwt_decode from 'jwt-decode';
-import {SymfonyApiClientService} from '../../symfony-api/symfony-api-client.service';
-import {tap} from 'rxjs/operators';
-import {TokenInterface} from '../../interfaces/token-interface';
-import {Observable} from 'rxjs';
+import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
+import {map, switchMap, tap} from 'rxjs/operators';
+import {TokenInterface} from '../../core/services/api/interfaces/token-interface';
+import {Observable, of} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
-import {CoreModule} from '../../../../core.module';
+import {CoreModule} from '../../core/core.module';
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: CoreModule
@@ -14,11 +15,18 @@ export class LoginClientService {
 
   constructor(
     private symfonyApiClient: SymfonyApiClientService,
+    private userService: UserService,
   ) {
   }
 
   tryLogin(username: string, password: string): Observable<HttpResponse<TokenInterface>> {
-    return this.symfonyApiClient.refreshToken(username, password);
+    return this.symfonyApiClient.refreshToken(username, password).pipe(switchMap(value => {
+      return this.symfonyApiClient.get<string[]>('role_list')
+        .pipe(
+          tap(x => {this.userService.roles = x.body;}),
+          map(value1 => value)
+        );
+    }));
   }
 
   isLoggedIn(): boolean | null {

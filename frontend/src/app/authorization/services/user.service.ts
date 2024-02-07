@@ -7,6 +7,7 @@ import {SymfonyApiClientService} from "../../core/services/api/symfony-api/symfo
 })
 export class UserService {
   settings: UserInterface;
+  roles: string[] = []
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -14,5 +15,9 @@ export class UserService {
 
   update() {
     this.symfonyApiClientService.post('user_update', this.settings).subscribe();
+  }
+
+  hasRole(role: string): boolean {
+    return this.roles.includes(role);
   }
 }
