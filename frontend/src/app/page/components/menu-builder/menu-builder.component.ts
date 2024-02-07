@@ -42,7 +42,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
   ) {
     this.baseBlocks = [
-      {image: 'https://via.placeholder.com/300/000000?text=2', id: 1}
+      {image: 'https://placehold.co/600x200', id: 1}
     ];
   }
 

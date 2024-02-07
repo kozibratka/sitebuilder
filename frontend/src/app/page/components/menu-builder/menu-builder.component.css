@@ -1,5 +1,6 @@
 .menu-block{
   list-style-type: none;
+  position: relative;
 }
 
 .menu-block  img{
@@ -20,6 +21,17 @@
 
 .menu-element-item img{
   width: 30%;
+}
+
+.menu-element-block:not(.ui-draggable-dragging){
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+}
+
+.menu-element-block img{
+  width: 100%;
 }
 
 .grid-stack-item-menu {
@@ -66,4 +78,14 @@ i.icon-move, i.icon-move-grid{
 :host {
   position: fixed;
   width: 16%;
+}
+
+i.icon-move-block{
+  position: absolute;
+  top: 15px;
+  color: black;
+  /*display: none;*/
+  left: 11px;
+  cursor: move;
+  font-size: 17px;
 }
