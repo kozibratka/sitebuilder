@@ -60,6 +60,9 @@ class User implements UserInterface
     #[ORM\Column(type: 'boolean')]
     private bool $lockBuilderMenu = false;
 
+    #[ORM\Column(type: 'json')]
+    private array $roles = ['ROLE_USER'];
+
     public function __construct()
     {
         $this->webs = new ArrayCollection();
@@ -87,7 +90,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        return $this->roles;
     }
 
     public function getPassword(): string

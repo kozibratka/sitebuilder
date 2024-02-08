@@ -39,7 +39,9 @@ class Web
     #[ORM\ManyToOne(targetEntity: 'App\Entity\User', inversedBy: 'webs')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
-
+    #[ORM\OneToMany(targetEntity: PageBlock::class, mappedBy: 'web')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private Collection $pageBlocks;
     /**
      * @Assert\Valid()
      */
@@ -49,10 +51,19 @@ class Web
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
     private Collection $plugins;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isTemplate = false;
+    /**
+     * @Serializer\Exclude()
+     */
+    #[ORM\ManyToOne(targetEntity: Web::class)]
+    private ?Web $parent;
+
     public function __construct()
     {
         $this->pages = new ArrayCollection();
         $this->plugins = new ArrayCollection();
+        $this->pageBlocks = new ArrayCollection();
     }
 
     public function getId(): int
@@ -134,5 +145,42 @@ class Web
     public function setPreviewPath(?string $previewPath)
     {
         $this->previewPath = $previewPath;
+    }
+
+    public function getPageBlocks(): Collection
+    {
+        return $this->pageBlocks;
+    }
+
+    public function setPageBlocks(Collection $pageBlocks): void
+    {
+        $this->pageBlocks = $pageBlocks;
+    }
+
+    public function isTemplate(): bool
+    {
+        return $this->isTemplate;
+    }
+
+    public function setIsTemplate(bool $isTemplate): void
+    {
+        $this->isTemplate = $isTemplate;
+    }
+
+    public function getParent(): ?Web
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Web $parent): void
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getParentWebBlocks(): ?Collection {
+        return $this->getParent()?->getPageBlocks();
     }
 }

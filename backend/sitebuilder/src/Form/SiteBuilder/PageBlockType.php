@@ -5,6 +5,8 @@ namespace App\Form\SiteBuilder;
 
 
 use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\PageBlockTemplateCategory;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,6 +31,9 @@ class PageBlockType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'entry_options' => ['is_preview' => $options['is_preview']],
+            ])
+            ->add('category', EntityType::class, [
+                'class' => PageBlockTemplateCategory::class
             ])
             ->add('uniqueId')
         ;

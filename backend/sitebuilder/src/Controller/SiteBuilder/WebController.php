@@ -3,8 +3,9 @@
 namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
+use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Web;
-use App\Form\SiteBuilder\PagePreviewType;
+use App\Form\SiteBuilder\PageBlockType;
 use App\Form\SiteBuilder\WebType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,13 +37,13 @@ class WebController extends BaseApiController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/create/{id}", name="create")
      */
-    public function create(Request $request)
+    public function create(Request $request, Web $web)
     {
-        $form = $this->createForm(WebType::class);
+        $form = $this->createForm(WebType::class, null, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);
         $form->submit($request->request->all());
-        if($form->isValid()) {
+        if($form->isValid() && !$web->getParent()) {
             $web = $form->getData();
             $this->persist($web);
             return $this->jsonResponseSimple($web, 201);
@@ -55,11 +56,11 @@ class WebController extends BaseApiController
      */
     public function update(Request $request, Web $web)
     {
-        $form = $this->createForm(WebType::class, $web);
+        $this->denyAccessUnlessGranted('page_builder_with_children_voter',$web);
+        $form = $this->createForm(WebType::class, $web, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);
         $form->submit($request->request->all());
         if($form->isValid()) {
             $web = $form->getData();
-            $this->denyAccessUnlessGranted('page_builder_with_children_voter',$web);
             $this->flush();
             return $this->jsonResponseSimple($web, 201);
         }
@@ -74,5 +75,22 @@ class WebController extends BaseApiController
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
         $this->removeEntity($web);
         return new JsonResponse();
+    }
+
+    /**
+     * @Route("/create-block-template/{id}", name="create_block_template")
+     */
+    public function createBlockTemplate(Request $request, Web $web) {
+        $this->denyAccessUnlessGranted('page_builder_voter',$web);
+        $form = $this->createForm(PageBlockType::class, null, ['is_preview' => true]); //is_preview - ignore plugin id sync
+        $form->submit($request->request->all());
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var PageBlock $pageBlock */
+            $pageBlock = $form->getData();
+            $pageBlock->setWeb($web);
+            $this->persist($pageBlock);
+            return $this->jsonResponseSimple($web->getParentWebBlocks(), 201);
+        }
+        return $this->invalidFormResponse($form);
     }
 }

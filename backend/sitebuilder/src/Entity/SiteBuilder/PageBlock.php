@@ -28,7 +28,15 @@ class PageBlock
 
     #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page', inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private Page $page;
+    private ?Page $page;
+
+    #[Assert\Expression(
+        "this.getPage() or value",
+        message: 'Web and Page is empty',
+    )]
+    #[ORM\ManyToOne(targetEntity: Web::class, inversedBy: 'pageBlocks')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    private ?Web $web;
 
     /**
      * @Assert\Valid()
@@ -45,6 +53,8 @@ class PageBlock
     private ?User $user = null;
     #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $rows;
+    #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
+    private ?PageBlockTemplateCategory $category;
 
     private string $uniqueId = '';
 
@@ -64,12 +74,12 @@ class PageBlock
         $this->id = $id;
     }
 
-    public function getPage(): Page
+    public function getPage(): ?Page
     {
         return $this->page;
     }
 
-    public function setPage(Page $page)
+    public function setPage(?Page $page)
     {
         $this->page = $page;
     }
@@ -143,6 +153,26 @@ class PageBlock
     {
         $this->rows->removeElement($row);
         return $this;
+    }
+
+    public function getWeb(): ?Web
+    {
+        return $this->web;
+    }
+
+    public function setWeb(?Web $web): void
+    {
+        $this->web = $web;
+    }
+
+    public function getCategory(): PageBlockTemplateCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(PageBlockTemplateCategory $category): void
+    {
+        $this->category = $category;
     }
 
     public function getGridCellItems(): array

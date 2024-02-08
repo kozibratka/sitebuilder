@@ -20,7 +20,7 @@ class PaletteGridItemType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addPluginFieldSubscriber->isPreview = $options['is_preview'];
+        $this->addPluginFieldSubscriber->syncById = $options['is_preview'];
         $builder
             ->add('id', null, ['required' => false])
             ->add('w')
