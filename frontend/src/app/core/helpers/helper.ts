@@ -7,4 +7,9 @@ export class Helper {
       return obj[propertyName];
     };
   }
+
+  static objectResetAssign(target:any,source: any) {
+    target.length = 0;
+    Object.assign(target, source);
+  }
 }

@@ -15,7 +15,7 @@ export abstract class AbstractApiFormService {
   ) {
   }
 
-  abstract createForm(data: {querySegment?: {}, formFields?: {}, path?: string}): FormGroup;
+  abstract createForm(data: {querySegment?: {}, formFields?: {}, path?: string, options?: any}): FormGroup;
 
   createValidator(data: {querySegment?: {}, formFields?: {}, path?: string}): (AbstractControl) => Observable<ValidationErrors | null> {
     return (abstractControl: AbstractControl) => {

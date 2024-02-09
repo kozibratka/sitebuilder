@@ -5,6 +5,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
+import {Helper} from "../../core/helpers/helper";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
 
   selectedId = 0;
   webDetail: WebInterface = {plugins: [], id: 0, name: '', pages: []}; // persist reference
+  resolver$:Observable<WebInterface>;
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -26,17 +28,17 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
     if (!this.selectedId) {
       return null;
     }
-    return this.symfonyApiClientService.get<WebInterface>('web_read', {id: this.selectedId}).pipe(catchError(err => {
+    this.resolver$ = this.symfonyApiClientService.get<WebInterface>('web_read', {id: this.selectedId}).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
-      this.webDetail.name = httpResponse.body.name;
-      this.webDetail.id = httpResponse.body.id;
+      Helper.objectResetAssign(this.webDetail, httpResponse.body);
       this.webDetail.plugins.length = 0;
       this.webDetail.plugins.push(...this.webDetail.plugins);
-      this.webDetail.pages = httpResponse.body.pages;
       return this.webDetail;
     }));
+
+    return this.resolver$;
   }
 
   refresh() {

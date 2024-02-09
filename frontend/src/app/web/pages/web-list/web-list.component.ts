@@ -37,9 +37,7 @@ export class WebListComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Moje weby');
-    this.route.root.firstChild.data.subscribe(data => {
-      this.dataToTable = data.webList;
-    });
+    this.dataToTable = this.webListGuard.webList;
     this.displayedColumns = ['name', 'action'];
   }
 

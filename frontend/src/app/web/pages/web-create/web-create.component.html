@@ -1,11 +1,18 @@
 <div class="card card-primary card-outline">
   <div class="card-header">
-    <h3 class="card-title">Vytvořit web</h3>
+    <h3 class="card-title">{{title.getTitle()}}</h3>
   </div> <!-- /.card-body -->
   <div class="card-body">
     <form [formGroup]="createWebForm">
       <app-global-form-error></app-global-form-error>
-      <input appFormError type="text" class="form-control" placeholder="Název webu" formControlName="name">
+      <label for="webName" class="form-label">Název webu</label>
+      <input id="webName" appFormError type="text" class="form-control" placeholder="Název webu" formControlName="name">
+      <ng-container *ngIf="createWebForm.contains('isTemplate')">
+        <div class="form-check">
+          <input class="form-check-input" id="help-text1" type="checkbox" formControlName="isTemplate">
+          <label class="form-check-label" for="help-text1">Web bude sloužit jako šablona</label>
+        </div>
+      </ng-container>
       <div class="container-fluid mt-3">
         <div class="d-flex justify-content-end">
           <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button>Zpět na seznam webů</a>

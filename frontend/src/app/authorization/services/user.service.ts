@@ -7,7 +7,6 @@ import {SymfonyApiClientService} from "../../core/services/api/symfony-api/symfo
 })
 export class UserService {
   settings: UserInterface;
-  roles: string[] = []
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -19,5 +18,20 @@ export class UserService {
 
   hasRole(role: string): boolean {
     return this.roles.includes(role);
+  }
+
+
+  get roles(): string[] {
+    let item = localStorage.getItem('roles');
+    if (!item) {
+      return [];
+    }
+    return JSON.parse(localStorage.getItem('roles'));
+  }
+
+  set roles(value: string[]) {
+    if (value && value.length) {
+      localStorage.setItem('roles', JSON.stringify(value));
+    }
   }
 }

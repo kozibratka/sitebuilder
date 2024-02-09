@@ -5,6 +5,7 @@ import {WebInterface} from '../interfaces/web-interface';
 import {catchError, map} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
+import {Helper} from "../../core/helpers/helper";
 
 @Injectable({
   providedIn: 'root'
@@ -24,12 +25,20 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const webId = parseInt(route.paramMap.get('webId'), null);
+    return this.refreshWebList(webId);
+  }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    return this.webList;
+  }
+
+  refreshWebList(webId: number) {
     return this.symfonyApiClientService.get<WebInterface[]>('web_list').pipe(
       map(value => {
-        this.webList = value.body;
-        if (route.firstChild && route.firstChild.url.length && route.firstChild.url[0].path === 'web') {
-          return true;
-        }
+        Helper.objectResetAssign(this.webList, value.body);
+        // if (route.firstChild && route.firstChild.url.length && route.firstChild.url[0].path === 'web') {
+        //   return true;
+        // }
         if (!webId) {
           if (!this.webList.length) {
             return this.router.parseUrl('/admin/0/web/list');
@@ -50,9 +59,5 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
         return throwError(error);
       }),
     );
-  }
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.webList;
   }
 }

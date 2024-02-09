@@ -8,6 +8,9 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Title} from '@angular/platform-browser';
+import {UserService} from "../../../authorization/services/user.service";
+import {WebDetailResolverService} from "../../services/web-detail-resolver.service";
+import {forkJoin} from "rxjs";
 
 @Component({
   selector: 'app-web-create',
@@ -26,21 +29,25 @@ export class WebCreateComponent implements OnInit {
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
     public webListGuard: WebListResolverGuard,
-    public title: Title
+    public title: Title,
+    public userService: UserService,
+    private webDetail: WebDetailResolverService,
+    private webDetailResolverService: WebDetailResolverService,
   ) {
   }
 
   ngOnInit(): void {
-    this.title.setTitle('Vytvoření webu');
     if (this.route.snapshot.url[0].path === 'create') {
+      this.title.setTitle('Vytvoření webu');
       this.createWeb();
     } else {
+      this.title.setTitle('Úprava webu');
       this.updateWeb();
     }
   }
 
   createWeb(): void {
-    this.createWebForm = this.webFormService.createForm({path: 'web_create'});
+    this.createWebForm = this.webFormService.createForm({path: 'web_create', options: {allowTemplate: this.userService.hasRole('ROLE_ADMIN')}});
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.symfonyApiClientService.post('web_create', this.createWebForm.value).subscribe({
@@ -55,15 +62,18 @@ export class WebCreateComponent implements OnInit {
   }
 
   updateWeb(): void {
-    const webDetail: WebInterface = this.route.snapshot.data.webDetail;
-    this.createWebForm = this.webFormService.createForm({path: 'web_create', querySegment: {id: webDetail.id}});
+    const webDetail = this.webDetail.webDetail;
+    this.createWebForm = this.webFormService.createForm({path: 'web_update', querySegment: {id: webDetail.id}, options: {allowTemplate: this.userService.hasRole('ROLE_ADMIN')}});
+    console.log(webDetail)
     this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.symfonyApiClientService.post('web_update', this.createWebForm.value, {id: webDetail.id}).subscribe({
-          next: () => {
-            this.notifierService.notify('Web byl úspěšně upraven');
-            this.router.navigate(['list'], { relativeTo: this.route.parent });
+          next: (value) => {
+            forkJoin(this.webListGuard.refreshWebList(webDetail.id), this.webDetailResolverService.resolver$).subscribe(value1 => {
+              this.notifierService.notify('Web byl úspěšně upraven');
+              this.router.navigate(['list'], { relativeTo: this.route.parent });
+            });
           },
           error: err => this.httpResponseToasterService.showError(err)
         });

@@ -10,6 +10,7 @@ import {Event} from '../../../core/services/api/symfony-api/tools/constants/even
 import {Title} from '@angular/platform-browser';
 import {filter, map} from "rxjs/operators";
 import {UserService} from "../../../authorization/services/user.service";
+import {WebListResolverGuard} from "../../../web/services/web-list-resolver.service";
 
 @Component({
   selector: 'app-administration',
@@ -33,13 +34,12 @@ export class LayoutComponent implements OnInit {
     private webDetailResolverService: WebDetailResolverService,
     public title: Title,
     public userService: UserService,
+    public webListResolverGuard: WebListResolverGuard,
   ) {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.initSelectWeb(data.webList);
-    });
+    this.initSelectWeb(this.webListResolverGuard.webList);
     this.registerCheckVisibilityMenu();
   }
 
