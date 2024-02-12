@@ -58,3 +58,8 @@
 .left-menu {
   z-index: 1;
 }
+
+.link-back-list-pages {
+  position: absolute;
+  left: 12px;
+}
