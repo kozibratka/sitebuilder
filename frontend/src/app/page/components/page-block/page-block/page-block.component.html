@@ -35,6 +35,10 @@
       <div title="Smazat blok" class="btn draganddrop" (click)="deleteBlock.emit(true)">
         <i class="material-icons icon-remove">delete</i>
       </div>
+      <div *ngIf="userService.hasRole('ROLE_ADMIN')" title="Přidat jako šablonu" class="btn draganddrop" (click)="saveAsTemplate()">
+        <i class="material-icons icon-remove">add</i>
+      </div>
+
     </div>
   </div>
 </app-animation-hider>

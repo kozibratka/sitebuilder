@@ -31,6 +31,11 @@ import {StringService} from '../../../../core/services/string.service';
 import {GridRowInterface} from "../../../interfaces/grid-row-interface";
 import {SortablejsDirective} from "ngx-sortablejs";
 import {GridCellInterface} from "../../../interfaces/grid-cell-interface";
+import {UserService} from "../../../../authorization/services/user.service";
+import {SymfonyApiClientService} from "../../../../core/services/api/symfony-api/symfony-api-client.service";
+import {NotifierService} from "../../../../core/services/notifier.service";
+import {HttpResponseToasterService} from "../../../../core/services/http-response-toaster.service";
+import {WebDetailResolverService} from "../../../../web/services/web-detail-resolver.service";
 
 @Component({
   selector: 'app-palette-block',
@@ -62,6 +67,11 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     private quickMenuService: QuickMenuService,
     private elementRef: ElementRef,
     private paletteBlockService: PaletteBlockService,
+    public userService: UserService,
+    private symfonyApiClientService: SymfonyApiClientService,
+    private notifierService: NotifierService,
+    private httpResponseToasterService: HttpResponseToasterService,
+    private webDetailResolverService: WebDetailResolverService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
@@ -228,6 +238,15 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   removeRow(index:number) {
     this.pageBlock.rows.splice(index, 1);
+  }
+
+  saveAsTemplate() {
+    this.symfonyApiClientService.post('web_create_block_template', this.pageBlock, {id: this.webDetailResolverService.webDetail.id}).subscribe({
+      next: () => {
+        this.notifierService.notify('Blok byl úspěšně přidán do šablon');
+      },
+      error: err => this.httpResponseToasterService.showError(err)
+    });
   }
 
   addRow(num: number, index: number = null){

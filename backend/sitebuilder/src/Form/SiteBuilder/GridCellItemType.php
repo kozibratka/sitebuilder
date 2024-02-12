@@ -31,6 +31,7 @@ class GridCellItemType extends AbstractType
                 [
                     'is_preview' => $options['is_preview'],
                     'is_sub_row' => true,
+                    'empty_data' => null,
                 ]
             );
         }

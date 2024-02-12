@@ -6,6 +6,7 @@ namespace App\Form\SiteBuilder;
 
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockTemplateCategory;
+use App\Entity\SiteBuilder\Web;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -37,6 +38,9 @@ class PageBlockType extends AbstractType
             ])
             ->add('uniqueId')
         ;
+        if ($options['web']) {
+            $builder->add('web', EntityType::class, ['class' => Web::class]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -45,6 +49,7 @@ class PageBlockType extends AbstractType
             'data_class' => PageBlock::class,
             'allow_extra_fields' => true,
             'is_preview' => false,
+            'web' => null,
         ]);
     }
 }

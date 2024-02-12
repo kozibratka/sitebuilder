@@ -7,9 +7,12 @@ use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Web;
 use App\Form\SiteBuilder\PageBlockType;
 use App\Form\SiteBuilder\WebType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 /**
  * @Route("web", name="web_")
@@ -79,17 +82,17 @@ class WebController extends BaseApiController
 
     /**
      * @Route("/create-block-template/{id}", name="create_block_template")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function createBlockTemplate(Request $request, Web $web) {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
-        $form = $this->createForm(PageBlockType::class, null, ['is_preview' => true]); //is_preview - ignore plugin id sync
-        $form->submit($request->request->all());
+        $form = $this->createForm(PageBlockType::class, null, ['is_preview' => true, 'web' => $web->getId()]); //is_preview - ignore plugin id sync
+        $form->submit(array_merge($request->request->all(), ['web' => $web->getId()]));
         if($form->isSubmitted() && $form->isValid()) {
             /** @var PageBlock $pageBlock */
             $pageBlock = $form->getData();
-            $pageBlock->setWeb($web);
             $this->persist($pageBlock);
-            return $this->jsonResponseSimple($web->getParentWebBlocks(), 201);
+            return $this->jsonResponseSimple($web->getPageBlocks(), 201);
         }
         return $this->invalidFormResponse($form);
     }

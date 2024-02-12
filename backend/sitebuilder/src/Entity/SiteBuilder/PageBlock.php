@@ -28,7 +28,7 @@ class PageBlock
 
     #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page', inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?Page $page;
+    private ?Page $page = null;
 
     #[Assert\Expression(
         "this.getPage() or value",
