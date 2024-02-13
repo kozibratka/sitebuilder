@@ -36,6 +36,8 @@ import {SymfonyApiClientService} from "../../../../core/services/api/symfony-api
 import {NotifierService} from "../../../../core/services/notifier.service";
 import {HttpResponseToasterService} from "../../../../core/services/http-response-toaster.service";
 import {WebDetailResolverService} from "../../../../web/services/web-detail-resolver.service";
+import {MatDialog} from "@angular/material/dialog";
+import {TemplateBlockDialogComponent} from "../template-block-dialog/template-block-dialog.component";
 
 @Component({
   selector: 'app-palette-block',
@@ -72,6 +74,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
     private webDetailResolverService: WebDetailResolverService,
+    private dialog: MatDialog,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
@@ -240,13 +243,20 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     this.pageBlock.rows.splice(index, 1);
   }
 
-  saveAsTemplate() {
-    this.symfonyApiClientService.post('web_create_block_template', this.pageBlock, {id: this.webDetailResolverService.webDetail.id}).subscribe({
-      next: () => {
-        this.notifierService.notify('Blok byl úspěšně přidán do šablon');
-      },
-      error: err => this.httpResponseToasterService.showError(err)
-    });
+  saveAsTemplateDialog() {
+    this.dialog.open(TemplateBlockDialogComponent).afterClosed().subscribe(value => {
+      if (!value) {
+        return;
+      }
+      console.log(value)
+      let block = {...this.pageBlock, category: value};
+      this.symfonyApiClientService.post('page_block_template_create', block, {id: this.webDetailResolverService.webDetail.id}).subscribe({
+        next: () => {
+          this.notifierService.notify('Blok byl úspěšně přidán do šablon');
+        },
+        error: err => this.httpResponseToasterService.showError(err)
+      });
+    })
   }
 
   addRow(num: number, index: number = null){

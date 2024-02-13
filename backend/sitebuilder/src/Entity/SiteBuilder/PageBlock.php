@@ -36,6 +36,9 @@ class PageBlock
     )]
     #[ORM\ManyToOne(targetEntity: Web::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    /**
+     * @Serializer\Exclude()
+     */
     private ?Web $web;
 
     /**
@@ -54,6 +57,10 @@ class PageBlock
     #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $rows;
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
+    #[Assert\Expression(
+        "this.getPage() or value",
+        message: 'Category is required',
+    )]
     private ?PageBlockTemplateCategory $category;
 
     private string $uniqueId = '';

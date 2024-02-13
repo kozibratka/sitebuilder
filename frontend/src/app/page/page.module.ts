@@ -8,7 +8,7 @@ import {PageBuilderComponent} from './pages/page-builder/page-builder.component'
 import {PageBuilderResolverService} from './services/page-builder-resolver.service';
 import {PageBlockComponent} from './components/page-block/page-block/page-block.component';
 import {RemovePageDialogComponent} from './components/remove-page-dialog/remove-page-dialog.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MenuBuilderComponent} from './components/menu-builder/menu-builder.component';
 import {PaletteBuilderComponent} from './components/palette-builder/palette-builder.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -30,6 +30,7 @@ import { GridCellComponent } from './components/grid-cell/grid-cell.component';
 import { GridCellItemComponent } from './components/grid-cell-item/grid-cell-item.component';
 import { MenuNewRowComponent } from './components/./menu-new-row/menu-new-row.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { TemplateBlockDialogComponent } from './components/page-block/template-block-dialog/template-block-dialog.component';
 
 
 const routes: Routes = [
@@ -76,6 +77,7 @@ const routes: Routes = [
     GridCellComponent,
     GridCellItemComponent,
     MenuNewRowComponent,
+    TemplateBlockDialogComponent,
   ],
   exports: [
     PaletteItemComponent
@@ -92,6 +94,7 @@ const routes: Routes = [
     MatIconModule,
     FormBuilderModule,
     MatMenuModule,
+    FormsModule,
   ]
 })
 export class PageModule { }

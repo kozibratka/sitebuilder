@@ -6,7 +6,7 @@
 </div>
 <mat-dialog-actions class="float-end">
   <button mat-button [mat-dialog-close] = "false">Zrušit</button>
-  <button *ngIf="saveButtonShow" mat-button [mat-dialog-close] = "true">
+  <button *ngIf="saveButtonShow" mat-button [mat-dialog-close] = "saveData">
     <span #ref><ng-content select="[save-button]"></ng-content></span>
     <ng-container *ngIf="!ref.hasChildNodes()">
       Uložit

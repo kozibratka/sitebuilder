@@ -39,7 +39,9 @@ class PageBlockType extends AbstractType
             ->add('uniqueId')
         ;
         if ($options['web']) {
-            $builder->add('web', EntityType::class, ['class' => Web::class]);
+            $builder->add('web', EntityType::class, ['class' => Web::class])
+                ->add('category', EntityType::class, ['class' => PageBlockTemplateCategory::class])
+            ;
         }
     }
 
