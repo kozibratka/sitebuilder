@@ -24,12 +24,12 @@ class UserStorageService
     }
 
     public function createStorageForNewUser(User $user) {
-        $newUserRootPath = $this->getUserRootStorage($user);
+        $newUserRootPath = $this->getUserServerRootStorage($user);
         $this->filesystem->mkdir($newUserRootPath);
     }
 
     public function getUserDirectoryTree(UserInterface $user) {
-        $userRoot = $this->getUserRootStorage($user);
+        $userRoot = $this->getUserServerRootStorage($user);
         $directories = $this->finder->directories()->in($userRoot);
         return $this->createDirectoryTree($directories);
     }
@@ -77,8 +77,8 @@ class UserStorageService
     }
 
     private function getValidUserServerPath(string $path, UserInterface $user) {
-        $rootPath = $resultPath = $this->getUserRootStorage($user);
-        $fullDesiredPath = $this->getUserRootStorage($user).'/'.trim($path, '/');
+        $rootPath = $resultPath = $this->getUserServerRootStorage($user);
+        $fullDesiredPath = $this->getUserServerRootStorage($user).'/'.trim($path, '/');
         if(str_starts_with(realpath($fullDesiredPath), realpath($rootPath))) {
             $resultPath = $fullDesiredPath;
         }
@@ -87,7 +87,7 @@ class UserStorageService
     }
 
     private function getValidUserPath(string $path, UserInterface $user) {
-        $rootPath = $this->getUserRootStorage($user);
+        $rootPath = $this->getUserServerRootStorage($user);
         $pos = strpos($path, $rootPath);
         return trim(substr_replace($path, '', $pos, strlen($rootPath)), '/');
     }
@@ -142,8 +142,13 @@ class UserStorageService
         return $protocol.$server.$port;
     }
 
-    private function getUserRootStorage(UserInterface $user) {
+    public function getUserServerRootStorage(UserInterface $user) {
+        $rootPath =  $this->getRootServerStorage($user);
+        return $rootPath.'/user_data';
+    }
+
+    public function getRootServerStorage(UserInterface $user) {
         $rootPath =  $_ENV['FILE_STORAGE_PATH'] ?? null ?: ($this->parameterBag->get('kernel.project_dir').'/public/storage/');
-        return $rootPath.$_ENV['USER_STORAGE_PATH_VAR'].$user->getId();
+        return $rootPath.'user/'.$user->getId();
     }
 }
