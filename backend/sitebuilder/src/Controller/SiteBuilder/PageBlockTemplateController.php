@@ -5,7 +5,7 @@ namespace App\Controller\SiteBuilder;
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockTemplateCategory;
-use App\Form\SiteBuilder\PageBlockTemplateType;
+use App\Form\SiteBuilder\PageBlockType;
 use App\Helper\Helper;
 use App\Service\WebStorageService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,9 +23,8 @@ class PageBlockTemplateController extends BaseApiController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function create(Request $request, WebStorageService $webStorageService) {
-        $form = $this->createForm(PageBlockTemplateType::class);
-        $data = ['block' => json_decode($request->request->all()['block'], true)];
-        $form->submit($data);
+        $form = $this->createForm(PageBlockType::class, null, ['is_preview' => true, 'web' => true]);
+        $form->submit(json_decode($request->request->all()['block'], true));
         if($form->isSubmitted() && $form->isValid()) {
             /** @var PageBlock $pageBlock */
             $pageBlock = $form->get('block')->getData();
