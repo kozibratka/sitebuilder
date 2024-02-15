@@ -248,9 +248,17 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
       if (!value) {
         return;
       }
-      console.log(value)
-      let block = {...this.pageBlock, category: value};
-      this.symfonyApiClientService.post('page_block_template_create', block, {id: this.webDetailResolverService.webDetail.id}).subscribe({
+      let block = {...this.pageBlock, category: value, web: this.webDetailResolverService.webDetail.id};
+      let file = 'Ahoj jak se máš?';
+      const formData = new FormData();
+      var blob = new Blob([file], {
+        type: "text/plain;charset=utf-8"
+      });
+      formData.append("image", blob);
+      formData.append("block", JSON.stringify(block));
+
+      let data = {block}
+      this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
         next: () => {
           this.notifierService.notify('Blok byl úspěšně přidán do šablon');
         },

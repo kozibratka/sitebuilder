@@ -23,4 +23,8 @@ class Helper
     public static function validFileName($name) {
         return strpbrk($name, "\\/?%*:|\"<>") === FALSE;
     }
+
+    public static function randomString($length = 10) {
+        return bin2hex(random_bytes($length));
+    }
 }

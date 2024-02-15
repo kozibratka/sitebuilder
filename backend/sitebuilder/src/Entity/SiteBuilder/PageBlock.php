@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppAssert;
 
 #[ORM\Table(name: 'page_block')]
 #[ORM\Entity]
@@ -34,6 +35,7 @@ class PageBlock
         "this.getPage() or value",
         message: 'Web and Page is empty',
     )]
+    #[AppAssert\PageBuilderUser]
     #[ORM\ManyToOne(targetEntity: Web::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     /**
@@ -62,6 +64,9 @@ class PageBlock
         message: 'Category is required',
     )]
     private ?PageBlockTemplateCategory $category;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private string $imagePath;
 
     private string $uniqueId = '';
 
@@ -194,6 +199,16 @@ class PageBlock
         foreach ($this->rows as $row) {
             $row->refreshGridCellItemOrder();
         }
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(?string $imagePath): void
+    {
+        $this->imagePath = $imagePath;
     }
 
     public function __clone(): void

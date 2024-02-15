@@ -8,4 +8,5 @@ export interface PageBlockInterface {
   rows: GridRowInterface[];
   uniqueId: string;
   category?: number;
+  web?: number;
 }
