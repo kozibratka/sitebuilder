@@ -9,4 +9,5 @@ export interface PageBlockInterface {
   uniqueId: string;
   category?: number;
   web?: number;
+  imagePath: string;
 }

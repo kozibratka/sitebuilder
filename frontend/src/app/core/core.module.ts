@@ -26,6 +26,7 @@ import { AnimationHiderComponent } from './components/hidder/animation-hider/ani
 import {HidderComponent} from './components/hidder/plain-hider/hidder.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { RemoveItemComponent } from './components/remove-item/remove-item.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     AnimationHiderComponent,
     DialogComponent,
     SafeHtmlPipe,
+    RemoveItemComponent,
   ],
   imports: [
     CommonModule,

@@ -249,7 +249,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
       if (!value) {
         return;
       }
-      console.log(value)
       let block = {...this.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
       if (value.image) {
         this.uploadBlockTemplate(value.image, block);

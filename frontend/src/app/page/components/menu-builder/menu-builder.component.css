@@ -80,7 +80,7 @@ i.icon-move, i.icon-move-grid{
   width: 16%;
 }
 
-i.icon-move-block{
+i.icon-move-block, i.icon-delete{
   position: absolute;
   top: 15px;
   color: black;
@@ -89,3 +89,10 @@ i.icon-move-block{
   cursor: move;
   font-size: 17px;
 }
+
+i.icon-delete {
+  left: 40px;
+  cursor: pointer;
+}
+
+

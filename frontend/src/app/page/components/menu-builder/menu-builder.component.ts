@@ -4,7 +4,8 @@ import {
   ApplicationRef,
   Component,
   EventEmitter,
-  Inject, Input,
+  Inject,
+  Input,
   NgZone,
   OnInit,
   Output,
@@ -18,6 +19,11 @@ import {UserService} from "../../../authorization/services/user.service";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {PageInterface} from "../../interfaces/page-interface";
+import {MatDialog} from "@angular/material/dialog";
+import {SymfonyApiClientService} from "../../../core/services/api/symfony-api/symfony-api-client.service";
+import {NotifierService} from "../../../core/services/notifier.service";
+import {HttpResponseToasterService} from "../../../core/services/http-response-toaster.service";
+import {RemoveItemComponent} from "../../../core/components/remove-item/remove-item.component";
 
 @Component({
   selector: 'app-menu-builder',
@@ -26,7 +32,7 @@ import {PageInterface} from "../../interfaces/page-interface";
 })
 export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
-  baseBlocks: { image: string, id: number }[];
+  baseBlocks: PageBlockInterface[];
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
   @Input() pageDetail: PageInterface;
@@ -40,19 +46,20 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     private userService: UserService,
     private applicationRef: ApplicationRef,
     private quickMenuService: QuickMenuService,
+    private dialog: MatDialog,
+    private symfonyApiClientService: SymfonyApiClientService,
+    private notifierService: NotifierService,
+    private httpResponseToasterService: HttpResponseToasterService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
   ) {
-    this.baseBlocks = [
-      {image: 'https://placehold.co/600x200', id: 1}
-    ];
   }
 
   ngAfterViewInit(): void {
   }
 
   ngOnInit(): void {
-
+    this.baseBlocks = this.pageDetail.webBlocks;
   }
 
   onMousOver() {
@@ -72,9 +79,8 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     return el;
   }
 
-  clonePageBlock = (item) => {
-    const pageBlock: PageBlockInterface = {height: 20, paletteGridItems: [], uniqueId: '', rows: []};
-    return pageBlock; // this is what happens if sortablejsCloneFunction is not provided. Add your stuff here
+  clonePageBlock = (item: PageBlockInterface) => {
+    return JSON.parse(JSON.stringify(item)); // this is what happens if sortablejsCloneFunction is not provided. Add your stuff here
   }
 
   get locked(): boolean {
@@ -102,5 +108,19 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   onDragEnd = (event: any)=> {
     this.sortableJsDragged$.next(false);
+  }
+
+  deleteTemplateBlock(block:  PageBlockInterface) {
+    this.dialog.open(RemoveItemComponent, {data: { name: 'šablona bloku' }}).afterClosed().subscribe(value => {
+      if (!value) {
+        return;
+      }
+      this.symfonyApiClientService.post('page_block_template_delete', {}, {id: block.id}).subscribe({
+        next: () => {
+          this.notifierService.notify('Šablona Bloku byla úspěšně smazána');
+        },
+        error: err => this.httpResponseToasterService.showError(err)
+      });
+    })
   }
 }

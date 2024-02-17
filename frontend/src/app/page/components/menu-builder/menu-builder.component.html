@@ -57,9 +57,10 @@
           (mouseenter)="showMoveIcon = true"
         >
           <div *ngFor="let item of baseBlocks" class="menu-element-block grid-stack-item-menu">
-            <img alt="" src="{{item.image}}">
+            <img alt="" src="{{item.imagePath}}">
             <app-animation-hider [show] = "showMoveIcon">
               <i class="material-icons icon-move-block">open_with</i>
+              <i class="material-icons icon-delete" (click)="deleteTemplateBlock(item)">delete</i>
             </app-animation-hider>
           </div>
         </div>
