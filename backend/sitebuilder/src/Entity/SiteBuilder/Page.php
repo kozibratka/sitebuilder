@@ -183,6 +183,13 @@ class Page
         }
     }
 
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getWebBlocks(): array {
+        return $this->getWeb()->getAllWebBlocks();
+    }
+
     public function __clone(): void
     {
         $this->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) {

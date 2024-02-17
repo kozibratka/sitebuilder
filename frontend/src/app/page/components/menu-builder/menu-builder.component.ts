@@ -4,7 +4,7 @@ import {
   ApplicationRef,
   Component,
   EventEmitter,
-  Inject,
+  Inject, Input,
   NgZone,
   OnInit,
   Output,
@@ -17,6 +17,7 @@ import {QuickMenuService} from '../../services/quick-menu.service';
 import {UserService} from "../../../authorization/services/user.service";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
+import {PageInterface} from "../../interfaces/page-interface";
 
 @Component({
   selector: 'app-menu-builder',
@@ -28,6 +29,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   baseBlocks: { image: string, id: number }[];
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
+  @Input() pageDetail: PageInterface;
   rows: GridRowInterface[] = [{cells: [{width: 6, items: []}, {width: 6, items: []}]}];
 
   constructor(

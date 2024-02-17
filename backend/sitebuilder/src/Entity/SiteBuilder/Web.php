@@ -176,11 +176,7 @@ class Web
     {
         $this->parent = $parent;
     }
-
-    /**
-     * @Serializer\VirtualProperty()
-     */
-    public function getParentWebBlocks(): ?Collection {
-        return $this->getParent()?->getPageBlocks();
+    public function getAllWebBlocks(): array {
+        return [...$this->getParent()?->getPageBlocks()->toArray() ?? [], ...$this->getPageBlocks()->toArray() ?? []];
     }
 }

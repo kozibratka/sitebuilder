@@ -8,3 +8,4 @@ phpstan.neon
 ###< phpstan/phpstan ###
 
 .idea/
+/public/
