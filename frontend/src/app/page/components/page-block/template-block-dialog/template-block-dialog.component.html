@@ -1,9 +1,13 @@
-<app-dialog [saveData]="selectedCategory">
+<app-dialog [saveData]="sendData">
   <ng-container title>Uložení bloku jako šablony</ng-container>
   <ng-container content>
     <label for="category-select" class="form-label">Vyberte kategorii: </label>
-    <select [(ngModel)]="selectedCategory" id="category-select" class="form-select">
+    <select [(ngModel)]="sendData.selectedCategory" id="category-select" class="form-select">
       <option *ngFor="let cat of category" [value]="cat.id">{{cat.name}}</option>
     </select>
+    <br>
+    <label for="image" class="form-label">Vyberte obrázek: </label>
+    <input id="image" class="form-control" type="file" accept="image/*"
+           (change)="onImageChange($event)">
   </ng-container>
 </app-dialog>

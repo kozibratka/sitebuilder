@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\SiteBuilder\Web;
+use App\Helper\ImageHelper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,9 +19,13 @@ class WebStorageService
         $this->finder = new Finder();
     }
 
-    public function uploadBlockImage(Web $web, UploadedFile $file, $name) {
+    public function uploadBlockImage(Web $web, UploadedFile $file, $name, $isBAse64 = false) {
         $realPath = $this->getUserWebServerRootStorage($web);
-        $file->move($realPath, $name);
+        if ($isBAse64) {
+            ImageHelper::base64_to_jpeg_file($file->getContent(), $realPath.'/'.$name);
+        } else {
+            $file->move($realPath, $name);
+        }
         return $this->getPublicPathFile($web, $name);
     }
 

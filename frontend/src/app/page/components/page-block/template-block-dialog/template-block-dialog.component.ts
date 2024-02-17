@@ -10,7 +10,7 @@ import {PageBlockComponent} from "../page-block/page-block.component";
 })
 export class TemplateBlockDialogComponent implements OnInit{
   category: {name: string, id: number}[] = [];
-  selectedCategory = 0;
+  sendData = {selectedCategory: 0, image: null};
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {block: PageBlockComponent},
     private symfonyApiClientService: SymfonyApiClientService
@@ -20,7 +20,11 @@ export class TemplateBlockDialogComponent implements OnInit{
   ngOnInit(): void {
     this.symfonyApiClientService.get<any[]>('page_block_template_category_list').subscribe(value => {
       this.category = value.body;
-      this.selectedCategory = this.category[0].id;
+      this.sendData.selectedCategory = this.category[0].id;
     });
+  }
+
+  onImageChange(event: any) {
+    this.sendData.image = event.target.files[0];
   }
 }

@@ -27,10 +27,15 @@ class PageBlockTemplateController extends BaseApiController
         $form->submit(json_decode($request->request->all()['block'], true));
         if($form->isSubmitted() && $form->isValid()) {
             /** @var PageBlock $pageBlock */
-            $pageBlock = $form->get('block')->getData();
+            $pageBlock = $form->getData();
             $web = $pageBlock->getWeb();
             $image = $request->files->get('image');
-            $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString());
+            if ($image) {
+                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString());
+            } else {
+                $image = $request->files->get('imageBase64');
+                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString(), true);
+            }
             $pageBlock->setImagePath($path);
             $this->persist($pageBlock);
             return $this->jsonResponseSimple($web->getPageBlocks(), 201);

@@ -38,6 +38,7 @@ import {HttpResponseToasterService} from "../../../../core/services/http-respons
 import {WebDetailResolverService} from "../../../../web/services/web-detail-resolver.service";
 import {MatDialog} from "@angular/material/dialog";
 import {TemplateBlockDialogComponent} from "../template-block-dialog/template-block-dialog.component";
+import {ImageService} from "../../../../core/services/image.service";
 
 @Component({
   selector: 'app-palette-block',
@@ -248,23 +249,35 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
       if (!value) {
         return;
       }
-      let block = {...this.pageBlock, category: value, web: this.webDetailResolverService.webDetail.id};
-      let file = 'Ahoj jak se máš?';
-      const formData = new FormData();
-      var blob = new Blob([file], {
-        type: "text/plain;charset=utf-8"
-      });
-      formData.append("image", blob);
-      formData.append("block", JSON.stringify(block));
-
-      let data = {block}
-      this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
-        next: () => {
-          this.notifierService.notify('Blok byl úspěšně přidán do šablon');
-        },
-        error: err => this.httpResponseToasterService.showError(err)
-      });
+      console.log(value)
+      let block = {...this.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
+      if (value.image) {
+        this.uploadBlockTemplate(value.image, block);
+      } else {
+        ImageService.screenshot(this.elementRef).subscribe(image => {
+          this.uploadBlockTemplate(image, block, true);
+        });
+      }
     })
+  }
+
+  uploadBlockTemplate(image: string | File, block, isBase64 = false) {
+    const formData = new FormData();
+    var blob = new Blob([image], {
+      type: "image/png",
+    });
+    if (isBase64) {
+      formData.append("imageBase64", blob);
+    } else {
+      formData.append("image", blob);
+    }
+    formData.append("block", JSON.stringify(block));
+    this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
+      next: () => {
+        this.notifierService.notify('Blok byl úspěšně přidán do šablon');
+      },
+      error: err => this.httpResponseToasterService.showError(err)
+    });
   }
 
   addRow(num: number, index: number = null){
