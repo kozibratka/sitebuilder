@@ -7,7 +7,7 @@ export interface PageBlockInterface {
   paletteGridItems: PaletteItemConfig[];
   rows: GridRowInterface[];
   uniqueId: string;
-  category?: number;
+  category?: {id: number, name: string};
   web?: number;
   imagePath: string;
 }

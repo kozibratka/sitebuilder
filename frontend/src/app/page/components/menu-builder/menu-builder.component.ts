@@ -24,6 +24,7 @@ import {SymfonyApiClientService} from "../../../core/services/api/symfony-api/sy
 import {NotifierService} from "../../../core/services/notifier.service";
 import {HttpResponseToasterService} from "../../../core/services/http-response-toaster.service";
 import {RemoveItemComponent} from "../../../core/components/remove-item/remove-item.component";
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-menu-builder',
@@ -32,7 +33,10 @@ import {RemoveItemComponent} from "../../../core/components/remove-item/remove-i
 })
 export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
-  baseBlocks: PageBlockInterface[];
+  templateBlocksPerCategory = new Map<string, PageBlockInterface[]>();
+  templateBlockCategory:string[] = [];
+  selectedTemplateBlockCategory = '';
+  selectedBlockTemplates: PageBlockInterface[] = [];
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
   @Input() pageDetail: PageInterface;
@@ -59,7 +63,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.baseBlocks = this.pageDetail.webBlocks;
+    this.initTemplateBlocks(this.pageDetail.webBlocks);
   }
 
   onMousOver() {
@@ -122,5 +126,30 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
         error: err => this.httpResponseToasterService.showError(err)
       });
     })
+  }
+
+  initTemplateBlocks(blocks: PageBlockInterface[]) {
+    let categorySet = new Set<string>();
+    blocks.forEach(value => {
+      let category = value.category;
+      if (!this.templateBlocksPerCategory.has(category.name)) {
+        this.templateBlocksPerCategory.set(category.name, []);
+      }
+      this.templateBlocksPerCategory.get(category.name).push(value);
+      categorySet.add(category.name);
+    });
+    this.templateBlockCategory = Array.from(categorySet).sort();
+    this.changeSelectedTemplateBlocks(this.selectedTemplateBlockCategory);
+  }
+
+  changeSelectedTemplateBlocks(name) {
+    this.selectedTemplateBlockCategory = name;
+    if (!this.selectedTemplateBlockCategory.length) {
+      this.selectedBlockTemplates = _.flatten([...this.templateBlocksPerCategory.values()]);
+      this.selectedBlockTemplates.sort((a, b) => {
+       return a.category.name.localeCompare(b.category.name);
+      });
+    }
+    this.selectedBlockTemplates = this.templateBlocksPerCategory.get(this.selectedTemplateBlockCategory);
   }
 }
