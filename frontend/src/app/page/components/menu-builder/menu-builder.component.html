@@ -50,19 +50,24 @@
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div
           class="menu-block"
-          [sortablejs]="selectedBlockTemplates"
+          [sortablejs]="pageBlockTemplateService.selectedBlockTemplates"
           [sortablejsCloneFunction]="clonePageBlock"
           [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false}, handle: '.icon-move-block' }"
           (mouseleave)="showMoveIcon = false"
           (mouseenter)="showMoveIcon = true"
         >
-          <div *ngFor="let item of selectedBlockTemplates" class="menu-element-block grid-stack-item-menu">
-            <img alt="" src="{{item.imagePath}}">
-            <app-animation-hider [show] = "showMoveIcon">
-              <i class="material-icons icon-move-block">open_with</i>
-              <i class="material-icons icon-delete" (click)="deleteTemplateBlock(item)">delete</i>
-            </app-animation-hider>
-          </div>
+          <ng-container *ngFor="let category of pageBlockTemplateService.templateBlockCategory">
+            <div *ngIf="category == '' || category == pageBlockTemplateService.selectedTemplateBlockCategory">
+              <h4>{{category}}</h4>
+              <div *ngFor="let item of pageBlockTemplateService.selectedBlockTemplates" class="menu-element-block grid-stack-item-menu">
+                <img alt="" src="{{item.imagePath}}">
+                <app-animation-hider [show] = "showMoveIcon">
+                  <i class="material-icons icon-move-block">open_with</i>
+                  <i class="material-icons icon-delete" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
+                </app-animation-hider>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>

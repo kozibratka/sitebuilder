@@ -32,13 +32,7 @@ import {GridRowInterface} from "../../../interfaces/grid-row-interface";
 import {SortablejsDirective} from "ngx-sortablejs";
 import {GridCellInterface} from "../../../interfaces/grid-cell-interface";
 import {UserService} from "../../../../authorization/services/user.service";
-import {SymfonyApiClientService} from "../../../../core/services/api/symfony-api/symfony-api-client.service";
-import {NotifierService} from "../../../../core/services/notifier.service";
-import {HttpResponseToasterService} from "../../../../core/services/http-response-toaster.service";
-import {WebDetailResolverService} from "../../../../web/services/web-detail-resolver.service";
-import {MatDialog} from "@angular/material/dialog";
-import {TemplateBlockDialogComponent} from "../template-block-dialog/template-block-dialog.component";
-import {ImageService} from "../../../../core/services/image.service";
+import {PageBlockTemplateService} from "../../../services/page-block-template.service";
 
 @Component({
   selector: 'app-palette-block',
@@ -46,6 +40,7 @@ import {ImageService} from "../../../../core/services/image.service";
   styleUrls: ['./page-block.component.css'],
 })
 export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
+  static BLOCK__TEMPLATE_UPDATED = 'BLOCK__TEMPLATE_UPDATED';
 
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
@@ -68,14 +63,10 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     private ngZone: NgZone,
     private window: Window,
     private quickMenuService: QuickMenuService,
-    private elementRef: ElementRef,
+    public elementRef: ElementRef,
     private paletteBlockService: PaletteBlockService,
     public userService: UserService,
-    private symfonyApiClientService: SymfonyApiClientService,
-    private notifierService: NotifierService,
-    private httpResponseToasterService: HttpResponseToasterService,
-    private webDetailResolverService: WebDetailResolverService,
-    private dialog: MatDialog,
+    public pageBlockTemplateService: PageBlockTemplateService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
@@ -242,41 +233,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   removeRow(index:number) {
     this.pageBlock.rows.splice(index, 1);
-  }
-
-  saveAsTemplateDialog() {
-    this.dialog.open(TemplateBlockDialogComponent).afterClosed().subscribe(value => {
-      if (!value) {
-        return;
-      }
-      let block = {...this.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
-      if (value.image) {
-        this.uploadBlockTemplate(value.image, block);
-      } else {
-        ImageService.screenshot(this.elementRef).subscribe(image => {
-          this.uploadBlockTemplate(image, block, true);
-        });
-      }
-    })
-  }
-
-  uploadBlockTemplate(image: string | File, block, isBase64 = false) {
-    const formData = new FormData();
-    var blob = new Blob([image], {
-      type: "image/png",
-    });
-    if (isBase64) {
-      formData.append("imageBase64", blob);
-    } else {
-      formData.append("image", blob);
-    }
-    formData.append("block", JSON.stringify(block));
-    this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
-      next: () => {
-        this.notifierService.notify('Blok byl úspěšně přidán do šablon');
-      },
-      error: err => this.httpResponseToasterService.showError(err)
-    });
   }
 
   addRow(num: number, index: number = null){
