@@ -19,10 +19,6 @@ import {UserService} from "../../../authorization/services/user.service";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {PageInterface} from "../../interfaces/page-interface";
-import {MatDialog} from "@angular/material/dialog";
-import {SymfonyApiClientService} from "../../../core/services/api/symfony-api/symfony-api-client.service";
-import {NotifierService} from "../../../core/services/notifier.service";
-import {HttpResponseToasterService} from "../../../core/services/http-response-toaster.service";
 import {PageBlockTemplateService} from "../../services/page-block-template.service";
 
 @Component({
