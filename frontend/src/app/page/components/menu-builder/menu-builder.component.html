@@ -48,6 +48,10 @@
         </div>
       </div>
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="d-flex flex-wrap container">
+          <button type="button" (click)="pageBlockTemplateService.selectedCategory = ''" [class]="pageBlockTemplateService.selectedCategory == '' ? 'btn-secondary' : 'btn-outline-secondary'" class="btn p-1 m-1">Všechny</button>
+          <button *ngFor="let category of pageBlockTemplateService.templateBlockCategory" (click)="pageBlockTemplateService.selectedCategory = category" [class]="pageBlockTemplateService.selectedCategory == category ? 'btn-secondary' : 'btn-outline-secondary'" type="button" class="btn p-1 m-1">{{category}}</button>
+        </div>
         <div
           class="menu-block"
           [sortablejs]="pageBlockTemplateService.selectedBlockTemplates"
@@ -56,18 +60,13 @@
           (mouseleave)="showMoveIcon = false"
           (mouseenter)="showMoveIcon = true"
         >
-          <ng-container *ngFor="let category of pageBlockTemplateService.templateBlockCategory">
-            <div *ngIf="category == '' || category == pageBlockTemplateService.selectedTemplateBlockCategory">
-              <h4>{{category}}</h4>
-              <div *ngFor="let item of pageBlockTemplateService.selectedBlockTemplates" class="menu-element-block grid-stack-item-menu">
-                <img alt="" src="{{item.imagePath}}">
-                <app-animation-hider [show] = "showMoveIcon">
-                  <i class="material-icons icon-move-block">open_with</i>
-                  <i class="material-icons icon-delete" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
-                </app-animation-hider>
-              </div>
-            </div>
-          </ng-container>
+          <div *ngFor="let item of pageBlockTemplateService.selectedBlockTemplates" class="menu-element-block grid-stack-item-menu">
+            <img alt="" src="{{item.imagePath}}">
+            <app-animation-hider [show] = "showMoveIcon">
+              <i class="material-icons icon-move-block">open_with</i>
+              <i class="material-icons icon-delete" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
+            </app-animation-hider>
+          </div>
         </div>
       </div>
     </div>

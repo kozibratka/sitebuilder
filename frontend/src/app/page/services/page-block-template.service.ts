@@ -21,7 +21,7 @@ export class PageBlockTemplateService {
   pageBlock: PageBlockInterface;
   templateBlocksPerCategory = new Map<string, PageBlockInterface[]>();
   templateBlockCategory:string[] = [];
-  selectedTemplateBlockCategory = '';
+  private _selectedCategory = '';
   selectedBlockTemplates: PageBlockInterface[] = [];
   private webBlocks: PageBlockInterface[];
 
@@ -33,12 +33,22 @@ export class PageBlockTemplateService {
     private dialog: MatDialog,
   ) { }
 
+
+  get selectedCategory(): string {
+    return this._selectedCategory;
+  }
+
+  set selectedCategory(value: string) {
+    this._selectedCategory = value;
+    this.changeSelectedTemplateBlocks(value);
+  }
+
   saveAsTemplateDialog(blockComponent: PageBlockComponent) {
     this.dialog.open(TemplateBlockDialogComponent).afterClosed().subscribe(value => {
       if (!value) {
         return;
       }
-      let block = {...this.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
+      let block = {...this.pageBlock, category: value._selectedCategory, web: this.webDetailResolverService.webDetail.id};
       if (value.image) {
         this.uploadBlockTemplate(value.image, block);
       } else {
@@ -99,18 +109,18 @@ export class PageBlockTemplateService {
       categorySet.add(category.name);
     });
     this.templateBlockCategory = Array.from(categorySet).sort();
-    this.changeSelectedTemplateBlocks(this.selectedTemplateBlockCategory);
+    this.changeSelectedTemplateBlocks(this._selectedCategory);
   }
 
   changeSelectedTemplateBlocks(name) {
-    this.selectedTemplateBlockCategory = name;
-    if (!this.selectedTemplateBlockCategory.length) {
+    this._selectedCategory = name;
+    if (!this._selectedCategory.length) {
       this.selectedBlockTemplates = _.flatten([...this.templateBlocksPerCategory.values()]);
       this.selectedBlockTemplates.sort((a, b) => {
         return a.category.name.localeCompare(b.category.name);
       });
     } else {
-      this.selectedBlockTemplates = this.templateBlocksPerCategory.get(this.selectedTemplateBlockCategory);
+      this.selectedBlockTemplates = this.templateBlocksPerCategory.get(this._selectedCategory);
     }
   }
 }
