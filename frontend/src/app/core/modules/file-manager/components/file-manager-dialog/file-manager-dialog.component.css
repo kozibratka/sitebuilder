@@ -1,0 +1,9 @@
+.file-manager-dialog {
+  width: 100%;
+}
+
+.close-icon {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}

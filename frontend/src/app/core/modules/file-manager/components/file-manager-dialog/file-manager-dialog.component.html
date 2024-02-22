@@ -1,7 +1,7 @@
-<h2 mat-dialog-title>Souborový manager <i class="material-icons float-end" mat-dialog-close>close</i></h2>
-<div class="row file-manager-dialog">
-  <div class="col-md-12"><app-file-manager></app-file-manager></div>
-  <div class="col-md-12 text-end">
+<h2 mat-dialog-title>Souborový manager <i class="material-icons float-end close-icon" mat-dialog-close>close</i></h2>
+<div class="file-manager-dialog p-2">
+  <app-file-manager></app-file-manager>
+  <div class="text-end">
     <button mat-raised-button mat-dialog-close><i class="material-icons">close</i>Zrušit</button>
     <button class="ml-2" (click)="onSelected()" mat-raised-button color="primary" mat-dialog-close><i class="material-icons">done</i>Vybrat</button>
   </div>
