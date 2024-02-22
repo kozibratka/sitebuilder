@@ -1,6 +1,6 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" class="wrapper align-items-stretch">
   <div cdkDragHandle class="move-line d-flex justify-content-between align-items-center">
-    <span class="header-title">{{data.params.title ?? ''}}</span>
+    <span class="header-title">{{title ?? ''}}</span>
     <mat-icon [mat-dialog-close]="false" class="close-icon">close</mat-icon>
   </div>
   <ng-container #modalContent></ng-container>

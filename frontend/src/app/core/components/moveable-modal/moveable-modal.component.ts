@@ -17,9 +17,9 @@ export class MoveableModalComponent implements OnInit {
   title = '';
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {contentComponent: new() => InitAbleInterface, params: any}
+    @Inject(MAT_DIALOG_DATA) public data: {contentComponent: new() => InitAbleInterface, params: any, title: string}
   ) {
-
+    this.title = data.title;
   }
 
   ngOnInit(): void {

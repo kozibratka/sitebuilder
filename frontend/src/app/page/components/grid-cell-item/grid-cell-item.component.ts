@@ -90,8 +90,8 @@ export class GridCellItemComponent implements OnInit{
     this.moveableModalService.show<AdminAbleInterface & SettingAbleInterface>(PluginMiniAdminComponent, {
       adminComponentsClass: pluginResolver.adminComponentsClass,
       settings: plugin.settings,
-      contextObject: plugin
-    }).afterClosed().subscribe(value => {
+      contextObject: plugin,
+    }, pluginResolver.name).afterClosed().subscribe(value => {
       plugin.refreshView();
     });
   }
