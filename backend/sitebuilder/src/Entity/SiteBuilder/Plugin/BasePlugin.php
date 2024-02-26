@@ -142,4 +142,11 @@ abstract class BasePlugin
     {
         $this->name = $name;
     }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getWebId(): ?int {
+        return $this->getWeb()?->getId();
+    }
 }

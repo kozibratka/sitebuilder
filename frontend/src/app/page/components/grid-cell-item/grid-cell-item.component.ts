@@ -20,6 +20,8 @@ import {PageBuilderComponent} from "../../pages/page-builder/page-builder.compon
 import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
 import {AdminAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/admin-able-interface";
 import {SettingAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
+import {MenuAdminComponent} from "../../../plugins/modules/menu/pages/menu-admin/menu-admin.component";
+import {PluginSelectComponent} from "../../../plugins/components/plugin-select/plugin-select.component";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -87,11 +89,14 @@ export class GridCellItemComponent implements OnInit{
       plugin.settings.identifier
     );
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
-    this.moveableModalService.show<AdminAbleInterface & SettingAbleInterface>(PluginMiniAdminComponent, {
-      adminComponentsClass: pluginResolver.adminComponentsClass,
+    let adminPages = [{label: 'Vybrat prvek', component: PluginSelectComponent, path: ''},...pluginResolver.adminComponentsClass];
+    this.moveableModalService.show<AdminAbleInterface & SettingAbleInterface>(PluginMiniAdminComponent,
+      {
+      adminComponentsClass: adminPages,
       settings: plugin.settings,
       contextObject: plugin,
-    }, pluginResolver.name).afterClosed().subscribe(value => {
+      },
+      pluginResolver.name).afterClosed().subscribe(value => {
       plugin.refreshView();
     });
   }

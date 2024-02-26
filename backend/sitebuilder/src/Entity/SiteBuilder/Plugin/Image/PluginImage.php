@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class PluginImage extends BasePlugin
 {
     #[ORM\Column(type: 'text')]
-    private string $imagePath;
+    private string $imagePath = 'https://picsum.photos/seed/picsum/400/200';
 
     #[ORM\Column(type: 'integer')]
     private int $circle = 0;

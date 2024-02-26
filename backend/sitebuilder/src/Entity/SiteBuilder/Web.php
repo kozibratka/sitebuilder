@@ -48,6 +48,9 @@ class Web
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Page', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
     private Collection $pages;
 
+    /**
+     * @Serializer\Exclude()
+     */
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
     private Collection $plugins;
 

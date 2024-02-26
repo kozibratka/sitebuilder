@@ -11,6 +11,7 @@ import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfo
 })
 export class PageBuilderResolverService implements Resolve<PageInterface> {
 
+  page: PageInterface;
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService
@@ -26,7 +27,8 @@ export class PageBuilderResolverService implements Resolve<PageInterface> {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
-      return httpResponse.body;
+      this.page = httpResponse.body;
+      return this.page;
     }));
   }
 }

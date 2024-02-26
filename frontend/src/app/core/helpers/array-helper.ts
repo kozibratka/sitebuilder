@@ -8,13 +8,6 @@ export class ArrayHelper {
     arrayToReinit.push(...newValues);
   }
 
-  static reinitObject(target: {}, source: {}) {
-    for (const key in target) {
-      delete target[key];
-    }
-    Object.assign(target, source);
-  }
-
   static syncArrayOfObjects(fromArray: any[], toArray: any[], propertyName = 'id') {
     const array1 = _.flatten<List<{}>>(fromArray, 20);
     const array2 = _.flatten(toArray, 20);

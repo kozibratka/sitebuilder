@@ -20,6 +20,7 @@ import {TextModule} from './modules/text/text.module';
 import {ImageModule} from './modules/image/image.module';
 import {VideoModule} from './modules/video/video.module';
 import {FormModule} from './modules/form/form.module';
+import { PluginSelectComponent } from './components/plugin-select/plugin-select.component';
 
 @NgModule({
     imports: [
@@ -48,6 +49,8 @@ import {FormModule} from './modules/form/form.module';
         FormModule
     ],
   declarations: [
+  
+    PluginSelectComponent
   ]
 })
 export class PluginsModule { }
