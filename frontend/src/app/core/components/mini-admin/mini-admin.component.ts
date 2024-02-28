@@ -1,13 +1,14 @@
 import {Component, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {AdminAbleInterface} from './tools/interfaces/admin-able-interface';
 import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
+import {InitAbleInterface} from "../moveable-modal/interfaces/init-able-interface";
 
 @Component({
   selector: 'app-mini-admin',
   templateUrl: './mini-admin.component.html',
   styleUrls: ['./mini-admin.component.css']
 })
-export class MiniAdminComponent implements OnInit {
+export class MiniAdminComponent implements OnInit, InitAbleInterface {
 
   @ViewChild('content1', {read: ViewContainerRef, static: true}) content1: ViewContainerRef;
   adminAble: AdminAbleInterface & SettingAbleInterface;
@@ -16,12 +17,16 @@ export class MiniAdminComponent implements OnInit {
   settings: any;
   admin: SettingAbleInterface;
   label = '';
+  allowedAdminComponent = null;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   showContent(component: new() => SettingAbleInterface, label: string) {
+    if (this.allowedAdminComponent && this.allowedAdminComponent != component) {
+      return;
+    }
     this.selectedComponent = component;
     this.content1.clear();
     this.admin = this.content1.createComponent<SettingAbleInterface>(component).instance;
@@ -30,7 +35,7 @@ export class MiniAdminComponent implements OnInit {
     this.label = label;
   }
 
-  @Input() set setInitParams(value: AdminAbleInterface & SettingAbleInterface) {
+  @Input() setInitParams(value: AdminAbleInterface & SettingAbleInterface) {
     this.adminAble = value;
     this.settings = value.settings;
     this.showContent(value.adminComponentsClass[0].component, value.adminComponentsClass[0].label);

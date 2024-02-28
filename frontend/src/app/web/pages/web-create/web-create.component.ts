@@ -64,7 +64,6 @@ export class WebCreateComponent implements OnInit {
   updateWeb(): void {
     const webDetail = this.webDetail.webDetail;
     this.createWebForm = this.webFormService.createForm({path: 'web_update', querySegment: {id: webDetail.id}, options: {allowTemplate: this.userService.hasRole('ROLE_ADMIN')}});
-    console.log(webDetail)
     this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {

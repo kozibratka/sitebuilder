@@ -74,21 +74,21 @@ export class PaletteItemQuickMenuComponent implements OnInit {
     });
   }
 
-  private openItemMenu(): void{
-    this.display = 'none';
-    const plugin = this.selectedItemForMenu.plugin.instance;
-    const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
-      plugin.settings.identifier
-    );
-    this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
-    this.moveableModalService.show(PluginMiniAdminComponent, {
-      adminAbleInterface: pluginResolver,
-      settings: plugin.settings,
-      page: this.pageBuilderComponent.pageDetail,
-      title: pluginResolver.name,
-      plugin,
-    }).afterClosed().subscribe(value => {
-      plugin.refreshView();
-    });
-  }
+  // private openItemMenu(): void{
+  //   this.display = 'none';
+  //   const plugin = this.selectedItemForMenu.plugin.instance;
+  //   const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
+  //     plugin.settings.identifier
+  //   );
+  //   this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
+  //   this.moveableModalService.show(PluginMiniAdminComponent, {
+  //     adminAbleInterface: pluginResolver,
+  //     settings: plugin.settings,
+  //     page: this.pageBuilderComponent.pageDetail,
+  //     title: pluginResolver.name,
+  //     plugin,
+  //   }).afterClosed().subscribe(value => {
+  //     plugin.refreshView();
+  //   });
+  // }
 }

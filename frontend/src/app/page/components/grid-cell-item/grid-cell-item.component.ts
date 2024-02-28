@@ -21,7 +21,9 @@ import {MoveableModalService} from "../../../core/components/moveable-modal/serv
 import {AdminAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/admin-able-interface";
 import {SettingAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
 import {MenuAdminComponent} from "../../../plugins/modules/menu/pages/menu-admin/menu-admin.component";
-import {PluginSelectComponent} from "../../../plugins/components/plugin-select/plugin-select.component";
+import {AdminPluginSelectComponent} from "../../../plugins/components/plugin-select/admin-plugin-select.component";
+import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
+import {InitAbleInterface} from "../../../core/components/moveable-modal/interfaces/init-able-interface";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -89,15 +91,22 @@ export class GridCellItemComponent implements OnInit{
       plugin.settings.identifier
     );
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
-    let adminPages = [{label: 'Vybrat prvek', component: PluginSelectComponent, path: ''},...pluginResolver.adminComponentsClass];
-    this.moveableModalService.show<AdminAbleInterface & SettingAbleInterface>(PluginMiniAdminComponent,
+    let adminPages = [{label: 'Vybrat prvek', component: AdminPluginSelectComponent, path: ''},...pluginResolver.adminComponentsClass];
+    let dialogInfo = this.moveableModalService.show<any>(MiniAdminComponent,
       {
       adminComponentsClass: adminPages,
       settings: plugin.settings,
       contextObject: plugin,
       },
-      pluginResolver.name).afterClosed().subscribe(value => {
-      plugin.refreshView();
-    });
+      pluginResolver.name);
+      dialogInfo.afterClosed().subscribe(value => {
+        plugin.refreshView();
+      });
+      if (plugin.settings.webId) {
+        let instanceReady = dialogInfo.componentInstance.instanceReady$.subscribe((value: MiniAdminComponent) => {
+          value.allowedAdminComponent = AdminPluginSelectComponent;
+          instanceReady.unsubscribe();
+        });
+      }
   }
 }

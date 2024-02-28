@@ -6,13 +6,14 @@ import {PluginResolverService} from "../../services/plugin-resolver.service";
 import {PageBuilderResolverService} from "../../../page/services/page-builder-resolver.service";
 import {ObjectHelper} from "../../../core/helpers/object-helper";
 import {pairwise, startWith} from "rxjs/operators";
+import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
 
 @Component({
   selector: 'app-plugin-select',
-  templateUrl: './plugin-select.component.html',
-  styleUrls: ['./plugin-select.component.css']
+  templateUrl: './admin-plugin-select.component.html',
+  styleUrls: ['./admin-plugin-select.component.css']
 })
-export class PluginSelectComponent extends AbstractAdminSetting<BasePlugConfigInterface> implements OnInit {
+export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugConfigInterface> implements OnInit {
   selectOptions: {name: string, id: number}[] = [];
   selectedId: number|'';
   form: FormGroup;
@@ -20,7 +21,8 @@ export class PluginSelectComponent extends AbstractAdminSetting<BasePlugConfigIn
   constructor(
     private pluginResolverService: PluginResolverService,
     private fb: FormBuilder,
-    private pageBuilderResolverService: PageBuilderResolverService
+    private pageBuilderResolverService: PageBuilderResolverService,
+    private miniAdminComponent: MiniAdminComponent,
   ) {
     super();
   }
@@ -46,8 +48,10 @@ export class PluginSelectComponent extends AbstractAdminSetting<BasePlugConfigIn
       let pluginConfig: any = {};
       if (next != '0') {
         pluginConfig = this.pageBuilderResolverService.page.globalPlugins.find(value1 => value1.id == next);
+        this.miniAdminComponent.allowedAdminComponent = AdminPluginSelectComponent;
       } else {
         pluginConfig = this.lastPlugin ? this.lastPlugin : this.pluginResolverService.getPluginResolverByIdentifier(this.contextObject.settings.identifier).getEmptySettings();
+        this.miniAdminComponent.allowedAdminComponent = null;
       }
       ObjectHelper.reinitObject(this.settings, pluginConfig);
     });

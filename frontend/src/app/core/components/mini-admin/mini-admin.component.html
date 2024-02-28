@@ -2,7 +2,7 @@
   <div class="row">
       <nav class="col-md-4" id="sidebar">
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
-          <li [class]="{active: selectedComponent === setting.component}" *ngFor="let setting of adminAble.adminComponentsClass;">
+          <li [class]="{active: selectedComponent === setting.component, invisible: allowedAdminComponent && setting.component != allowedAdminComponent}" *ngFor="let setting of adminAble.adminComponentsClass;">
             <a href="#" (click)="showContent(setting.component, setting.label);$event.preventDefault()">
               <span class="fa fa-chevron-right me-3"></span>{{setting.label}}</a>
           </li>
