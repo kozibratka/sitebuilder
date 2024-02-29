@@ -3,7 +3,6 @@
 namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\SiteBuilder\GridCellItem;
-use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,7 +10,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Security\Core\Security;
 use Traversable;
 
 class AddPluginFieldSubscriber implements EventSubscriberInterface
@@ -19,7 +17,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
     private $pluginServices;
     public $syncById = false;
 
-    public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager, private Security $security)
+    public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager)
     {
         $this->pluginServices = iterator_to_array($pluginServices);
     }
