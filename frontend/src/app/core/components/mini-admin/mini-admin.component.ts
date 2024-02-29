@@ -30,8 +30,8 @@ export class MiniAdminComponent implements OnInit, InitAbleInterface {
     this.selectedComponent = component;
     this.content1.clear();
     this.admin = this.content1.createComponent<SettingAbleInterface>(component).instance;
-    this.admin.settings = this.settings;
     this.admin.contextObject = this.adminAble.contextObject;
+    this.admin.settings = this.settings;
     this.label = label;
   }
 

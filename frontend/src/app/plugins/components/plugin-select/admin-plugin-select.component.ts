@@ -15,9 +15,8 @@ import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin
 })
 export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugConfigInterface> implements OnInit {
   selectOptions: {name: string, id: number}[] = [];
-  selectedId: number|'';
+  selectedId: string;
   form: FormGroup;
-  lastPlugin: BasePlugConfigInterface = {} as any;
   constructor(
     private pluginResolverService: PluginResolverService,
     private fb: FormBuilder,
@@ -34,23 +33,23 @@ export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugCon
     this.selectOptions = this.pageBuilderResolverService.page.globalPlugins.filter(value => {
       return value.identifier == this.settings.identifier;
     }).map(value => {return {id: value.id, name: value.name}});
-    this.selectedId = this.settings.webId ? this.settings.id : 0;
+    this.selectedId = this.settings.webId ? this.settings.id.toString() : '0';
     this.form = this.fb.group({
       plugin: [this.selectedId],
     });
     if (!this.settings.webId) {
-      this.lastPlugin = ObjectHelper.copy(this.settings);
+      this.contextObject.lastAdminSettings = ObjectHelper.copy(this.settings);
     }
     this.form.get('plugin').valueChanges.pipe(startWith(this.selectedId), pairwise()).subscribe(([prev, next]: [any, any]) => {
       if (prev == '0') {
-        this.lastPlugin = ObjectHelper.copy(this.settings);
+        this.contextObject.lastAdminSettings = ObjectHelper.copy(this.settings);
       }
       let pluginConfig: any = {};
       if (next != '0') {
         pluginConfig = this.pageBuilderResolverService.page.globalPlugins.find(value1 => value1.id == next);
         this.miniAdminComponent.allowedAdminComponent = AdminPluginSelectComponent;
       } else {
-        pluginConfig = this.lastPlugin ? this.lastPlugin : this.pluginResolverService.getPluginResolverByIdentifier(this.contextObject.settings.identifier).getEmptySettings();
+        pluginConfig = this.contextObject.lastAdminSettings ? this.contextObject.lastAdminSettings : this.pluginResolverService.getPluginResolverByIdentifier(this.contextObject.settings.identifier).getEmptySettings();
         this.miniAdminComponent.allowedAdminComponent = null;
       }
       ObjectHelper.reinitObject(this.settings, pluginConfig);
