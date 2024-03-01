@@ -48,12 +48,6 @@ abstract class BasePlugin
     private ?string $name = null;
 
     /**
-     * @Serializer\Exclude()
-     */
-    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PaletteGridItem', mappedBy: 'plugin')]
-    private Collection $paletteGridItems;
-
-    /**
      * @Gedmo\Blameable(on="create")
      * @Serializer\Exclude()
      */
@@ -90,22 +84,6 @@ abstract class BasePlugin
     public function getPaletteGridItems(): Collection
     {
         return $this->paletteGridItems;
-    }
-
-    public function setPaletteGridItems(Collection $paletteGridItems)
-    {
-        $this->paletteGridItems = $paletteGridItems;
-    }
-
-    public function addPaletteGridItem(PaletteGridItem $paletteGridItem)
-    {
-        if(!$this->paletteGridItems->contains($paletteGridItem)) {
-            $this->paletteGridItems->add($paletteGridItem);
-        }
-    }
-
-    public function removePaletteGridItem(PaletteGridItem $paletteGridItem) {
-        $this->paletteGridItems->removeElement($paletteGridItem);
     }
 
     public function getIdentifier(): ?string

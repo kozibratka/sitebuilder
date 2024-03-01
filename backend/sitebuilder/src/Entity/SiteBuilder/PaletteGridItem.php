@@ -115,9 +115,6 @@ class PaletteGridItem
     public function setPlugin(?BasePlugin $plugin)
     {
         $this->plugin = $plugin;
-        if($plugin) {
-            $this->plugin->addPaletteGridItem($this);
-        }
     }
 
     public function getDiffGridAndContentBottomHeightPx(): ?int

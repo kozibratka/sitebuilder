@@ -59,5 +59,8 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             }
         }
         $form->add('plugin', $formClass);
+        if (!isset($plugin['id'])) {
+            $form->get('plugin')->setData(null);
+        }
     }
 }

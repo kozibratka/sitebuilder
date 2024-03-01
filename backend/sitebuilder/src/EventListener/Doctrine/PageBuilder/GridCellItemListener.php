@@ -25,7 +25,6 @@ class GridCellItemListener
             $oldPlugin = $event->getOldValue('plugin');
             if ($gridCellItem->getPlugin()->getWeb() && !$oldPlugin->getWeb()) {
                 $this->entityManager->remove($oldPlugin);
-                $this->entityManager->flush();
             }
         }
     }

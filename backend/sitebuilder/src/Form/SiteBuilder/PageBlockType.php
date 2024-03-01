@@ -33,9 +33,6 @@ class PageBlockType extends AbstractType
                 'by_reference' => false,
                 'entry_options' => ['is_preview' => $options['is_preview']],
             ])
-            ->add('category', EntityType::class, [
-                'class' => PageBlockTemplateCategory::class
-            ])
             ->add('uniqueId')
         ;
         if ($options['web']) {
