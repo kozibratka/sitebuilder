@@ -26,7 +26,7 @@ class WebController extends BaseApiController
     {
         $user = $this->getUser();
         $pages = $this->getDoctrine()->getRepository(Web::class)->findBy(['user' => $user]);
-        return $this->jsonResponseSimple($pages);
+        return $this->jsonResponseSimple($pages, group: 'base_list');
     }
 
     /**
@@ -95,5 +95,13 @@ class WebController extends BaseApiController
             return $this->jsonResponseSimple($web->getPageBlocks(), 201);
         }
         return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/template-list", name="template_list")
+     */
+    public function templateList() {
+        $pages = $this->getDoctrine()->getRepository(Web::class)->findBy(['isTemplate' => true]);
+        return $this->jsonResponseSimple($pages, group: 'base_list');
     }
 }

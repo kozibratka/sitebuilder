@@ -21,6 +21,9 @@ use App\Security\Validator as AppValidator;
 #[ORM\Entity(repositoryClass: 'App\Repository\WebRepository')]
 class Web
 {
+    /**
+     * @Serializer\Groups({"default", "base_list"})
+     */
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
@@ -28,6 +31,7 @@ class Web
 
     /**
      * @Assert\NotBlank()
+     * @Serializer\Groups({"default", "base_list"})
      */
     #[ORM\Column(type: 'string')]
     private string $name = '';
@@ -61,6 +65,12 @@ class Web
      */
     #[ORM\ManyToOne(targetEntity: Web::class)]
     private ?Web $parent;
+
+    /**
+     * @Serializer\Groups({"default", "base_list"})
+     */
+    #[ORM\Column(type: 'string', nullable: true)]
+    private string $imagePath;
 
     public function __construct()
     {
@@ -179,6 +189,17 @@ class Web
     {
         $this->parent = $parent;
     }
+
+    public function getImagePath(): string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(string $imagePath): void
+    {
+        $this->imagePath = $imagePath;
+    }
+
     public function getAllWebBlocks(): array {
         return [...$this->getParent()?->getPageBlocks()->toArray() ?? [], ...$this->getPageBlocks()->toArray() ?? []];
     }

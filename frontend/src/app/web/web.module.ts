@@ -9,6 +9,9 @@ import {CoreModule} from '../core/core.module';
 import {RemoveWebDialogComponent} from './components/remove-web-dialog/remove-web-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { SelectTemplateComponent } from './pages/web-create/select-template/select-template.component';
+import { CreateNameComponent } from './pages/web-create/create-name/create-name.component';
+import {GenericResolver} from "../core/services/resolver/generic.resolver";
 
 
 const routes: Routes = [
@@ -17,8 +20,14 @@ const routes: Routes = [
     component: WebListComponent,
   },
   {
-    path: 'create',
-    component: WebCreateComponent
+    path: 'select-template',
+    component: SelectTemplateComponent,
+    resolve: {templates: GenericResolver},
+    data: {resolverConfig: {data: {route: 'web_template_list'}}},
+  },
+  {
+    path: 'create-name/:idTemplate',
+    component: CreateNameComponent
   },
   {
     path: 'update/:webId',
@@ -29,7 +38,9 @@ const routes: Routes = [
   declarations: [
     WebListComponent,
     WebCreateComponent,
-    RemoveWebDialogComponent
+    RemoveWebDialogComponent,
+    SelectTemplateComponent,
+    CreateNameComponent
   ],
   imports: [
     CommonModule,

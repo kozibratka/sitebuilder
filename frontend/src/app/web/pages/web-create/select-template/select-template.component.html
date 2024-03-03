@@ -1,0 +1,13 @@
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Vyberte šablonu</h3>
+  </div>
+  <div class="card-body">
+    <div class="d-flex wrapper justify-content-center">
+      <div *ngFor="let template of templates" class="template-container d-flex justify-content-center">
+        <img *ngIf="template.imagePath" src="{{template.imagePath}}">
+        <button type="button" class="btn btn-secondary align-self-end">Vytvořit web</button>
+      </div>
+    </div>
+  </div>
+</div>
