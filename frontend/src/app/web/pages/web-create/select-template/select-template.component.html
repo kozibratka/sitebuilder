@@ -5,8 +5,10 @@
   <div class="card-body">
     <div class="d-flex wrapper justify-content-center">
       <div *ngFor="let template of templates" class="template-container d-flex justify-content-center">
-        <img *ngIf="template.imagePath" src="{{template.imagePath}}">
-        <button type="button" class="btn btn-secondary align-self-end">Vytvořit web</button>
+        <img *ngIf="template.imagePath" src="{{template.imagePath}}" class="template-image">
+        <a class="align-self-end create-button mb-1" [routerLink]="['../create-name', template.id]">
+          <button type="button" class="btn btn-secondary">Vybrat šablonu</button>
+        </a>
       </div>
     </div>
   </div>

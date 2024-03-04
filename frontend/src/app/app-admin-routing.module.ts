@@ -12,29 +12,38 @@ const routes: Routes = [
   {
     path: 'admin/:webId',
     component: LayoutComponent,
-    canActivate: [RouteRoleGuardService, WebListResolverGuard],
-    resolve: {webList: WebListResolverGuard, webDetail: WebDetailResolverService, user: UserResolver},
+    canActivate: [WebListResolverGuard],
+    resolve: {webList: WebListResolverGuard},
+    runGuardsAndResolvers: 'always',
     children: [
       {
-        path: 'web',
-        loadChildren: () => import('./web/web.module').then(m => m.WebModule)
-      },
-      {
-        path: 'page',
-        loadChildren: () => import('./page/page.module').then(m => m.PageModule)
-      },
-      {
-        path: 'file',
-        loadChildren: () => import('./file/file.module').then(m => m.FileModule)
-
-      },
-      {
-        path: 'plugin',
-        loadChildren: () => import('./plugin/plugin.module').then(m => m.PluginModule)
-      },
-      {
         path: '',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        canActivate: [RouteRoleGuardService],
+        resolve: {webDetail: WebDetailResolverService, user: UserResolver},
+        children: [
+          {
+            path: 'web',
+            loadChildren: () => import('./web/web.module').then(m => m.WebModule)
+          },
+          {
+            path: 'page',
+            loadChildren: () => import('./page/page.module').then(m => m.PageModule)
+          },
+          {
+            path: 'file',
+            loadChildren: () => import('./file/file.module').then(m => m.FileModule)
+
+          },
+          {
+            path: 'plugin',
+            loadChildren: () => import('./plugin/plugin.module').then(m => m.PluginModule)
+          },
+          {
+            path: '',
+            loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+          }
+        ]
+
       }
     ]
   },

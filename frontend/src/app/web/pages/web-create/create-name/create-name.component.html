@@ -1,1 +1,20 @@
-<p>create-name works!</p>
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Název nového webu</h3>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="d-flex justify-content-center">
+        <div class="d-flex flex-column wrapper">
+          <div>
+            <label for="name" class="form-label">Název webu (slouží jako název webu v seznamu všech webů):</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-secondary mt-2">Vytvořit web!</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,13 @@
 .template-container {
-  height: 300px;
-  width: 200px;
+  height: 400px;
+  width: 300px;
   border: 1px solid black;
+}
+
+.template-image {
+  width: 300px;
+}
+
+.create-button {
+  position: absolute;
 }
