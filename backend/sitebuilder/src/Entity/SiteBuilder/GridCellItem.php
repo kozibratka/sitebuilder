@@ -3,6 +3,7 @@
 namespace App\Entity\SiteBuilder;
 
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -19,7 +20,7 @@ class GridCellItem
 
     #[ORM\OneToOne(targetEntity: GridRow::class, cascade: ['persist', 'remove'])]
     private ?GridRow $row = null;
-    #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'], inversedBy: 'items')]
     private ?BasePlugin $plugin;
 
     #[ORM\Column(type: 'integer')]
@@ -85,5 +86,17 @@ class GridCellItem
     public function setUniqueId(string $uniqueId): void
     {
         $this->uniqueId = $uniqueId;
+    }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        if ($this->plugin) {
+            $this->plugin = clone $this->plugin;
+            $this->plugin->addGridCellItem($this);
+        }
+        if ($this->row) {
+            $this->row = clone $this->row;
+        }
     }
 }

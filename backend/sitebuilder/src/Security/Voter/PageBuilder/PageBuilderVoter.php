@@ -4,6 +4,9 @@
 namespace App\Security\Voter\PageBuilder;
 
 
+use App\Entity\SiteBuilder\GridCell;
+use App\Entity\SiteBuilder\GridCellItem;
+use App\Entity\SiteBuilder\GridRow;
 use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
@@ -35,16 +38,22 @@ class PageBuilderVoter extends Voter
                 $user = $subject->getUser();
                 break;
             case $subject instanceof Page:
-                $user = $subject->getUser();
+                $user = $subject->getWeb()->getUser();
                 break;
             case $subject instanceof PageBlock:
-                $user = $subject->getUser();
+                $user = $subject->getPage()->getWeb()->getUser();
                 break;
-            case $subject instanceof PaletteGridItem:
-                $user = $subject->getPageBlock()->getUser();
+            case $subject instanceof GridRow:
+                $user = $subject->getPageBlock()->getPage()->getWeb()->getUser();
+                break;
+            case $subject instanceof GridCell:
+                $user = $subject->getRow()->getPageBlock()->getPage()->getWeb()->getUser();
+                break;
+            case $subject instanceof GridCellItem:
+                $user = $subject->getCell()->getRow()->getPageBlock()->getPage()->getWeb()->getUser();
                 break;
             case $subject instanceof BasePlugin:
-                $user = $subject->getUser();
+                $user = $subject->getWeb()?->getUser() ?? $subject->getItems()->get(0)?->getCell()->getRow()->getPageBlock()->getPage()->getWeb()->getUser();
                 break;
         }
         if($userLogged === $user || !$user) {

@@ -43,7 +43,7 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
       this.clearMessage();
       if (status === 'INVALID') {
         this.createErrorMessage();
-        if (this.inputFormErrorGrouperDirective.hasError) {
+        if (this.inputFormErrorGrouperDirective?.hasError) {
           this.inputFormErrorGrouperDirective.hasError = true;
         }
       }

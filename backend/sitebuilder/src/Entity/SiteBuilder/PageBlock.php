@@ -48,14 +48,6 @@ class PageBlock
      */
     #[ORM\OneToMany(targetEntity: 'PaletteGridItem', mappedBy: 'pageBlock', cascade: ['persist'], orphanRemoval: true)]
     private Collection $paletteGridItems;
-
-    /**
-     * @Gedmo\Blameable(on="create")
-     * @Serializer\Exclude()
-     */
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?User $user = null;
     #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $rows;
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
@@ -112,16 +104,6 @@ class PageBlock
     {
         $this->paletteGridItems->removeElement($paletteGridItem);
         return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user)
-    {
-        $this->user = $user;
     }
 
     public function getHeight()
@@ -213,6 +195,7 @@ class PageBlock
 
     public function __clone(): void
     {
+        $this->id = null;
         $this->rows = new ArrayCollection($this->rows->map(function(GridRow $row) {
             $clone = clone $row;
             $clone->setPageBlock($this);

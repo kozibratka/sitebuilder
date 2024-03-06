@@ -35,14 +35,6 @@ class Page
     private string $name;
 
     /**
-     * @Gedmo\Blameable(on="create")
-     * @Serializer\Exclude()
-     */
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?User $user = null;
-
-    /**
      * @Assert\Valid()
      */
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', mappedBy: 'page', cascade: ['persist'], orphanRemoval: true)]
@@ -93,16 +85,6 @@ class Page
     public function setName(string $name)
     {
         $this->name = $name;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user)
-    {
-        $this->user = $user;
     }
 
     public function getPageBlocks(): Collection
@@ -192,6 +174,7 @@ class Page
 
     public function __clone(): void
     {
+        $this->id = null;
         $this->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) {
             $clone = clone $pageBlock;
             $clone->setPage($this);

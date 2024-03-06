@@ -94,4 +94,14 @@ class GridRow
             $cell->refreshGridCellItemOrder();
         }
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->cells = new ArrayCollection($this->cells->map(function(GridCell $cell) {
+            $clone = clone $cell;
+            $clone->setRow($this);
+            return $clone;
+        })->toArray());
+    }
 }

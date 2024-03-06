@@ -4,6 +4,7 @@
 namespace App\Entity\SiteBuilder;
 
 
+use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -79,12 +80,12 @@ class Web
         $this->pageBlocks = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId(?int $id)
     {
         $this->id = $id;
     }
@@ -202,5 +203,37 @@ class Web
 
     public function getAllWebBlocks(): array {
         return [...$this->getParent()?->getPageBlocks()->toArray() ?? [], ...$this->getPageBlocks()->toArray() ?? []];
+    }
+
+    public function __clone() {
+        $this->setId(null);
+        $this->pageBlocks = new ArrayCollection();
+        $oldGlobalPlugins = $this->plugins;
+        $globalPluginsPerId = [];
+        foreach ($oldGlobalPlugins as $plugin) {
+            $globalPluginsPerId[$plugin->getId()] = $plugin;
+        }
+        $this->plugins = new ArrayCollection($this->plugins->map(function(BasePlugin $plugin) {
+            $clone = clone $plugin;
+            $clone->setId(null);
+            $clone->setWeb($this);
+            return $clone;
+        })->toArray());
+        $newPages = new ArrayCollection();
+        /** @var Page $page */
+        foreach ($this->pages as $page) {
+            $newPage = clone $page;
+            $newPage->setWeb($this);
+            $cellItems = $page->getGridCellItems();
+            /** @var GridCellItem $item */
+            foreach ($cellItems as $item) {
+                $plugin = $item->getPlugin();
+                if ($plugin && $plugin->getId() && $globalPluginsPerId[$plugin->getId()]) {
+                    $item->setPlugin($globalPluginsPerId[$plugin->getId()]);
+                }
+            }
+            $newPages->add($newPage);
+        }
+
     }
 }

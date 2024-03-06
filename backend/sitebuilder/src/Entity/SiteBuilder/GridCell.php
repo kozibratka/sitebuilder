@@ -125,4 +125,14 @@ class GridCell
             }
         }
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->items = new ArrayCollection($this->items->map(function(GridCellItem $item) {
+            $clone = clone $item;
+            $clone->setCell($this);
+            return $clone;
+        })->toArray());
+    }
 }

@@ -44,12 +44,16 @@ class WebController extends BaseApiController
      */
     public function create(Request $request, Web $web)
     {
-        $form = $this->createForm(WebType::class, null, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);
+        $validationWeb = new Web();
+        $validationWeb->setUser($this->getUser());
+        $form = $this->createForm(WebType::class, $validationWeb, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);
         $form->submit($request->request->all());
         if($form->isValid() && !$web->getParent()) {
-            $web = $form->getData();
-            $this->persist($web);
-            return $this->jsonResponseSimple($web, 201);
+            $clone = clone $web;
+            $clone->setParent($web);
+            $clone->setName($form->get('name')->getData());
+            $this->persist($clone);
+            return $this->jsonResponseSimple($clone, 201);
         }
         return $this->invalidFormResponse($form);
     }

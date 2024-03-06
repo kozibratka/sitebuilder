@@ -3,13 +3,11 @@
 
 namespace App\Entity\SiteBuilder\Plugin;
 
-use App\Entity\SiteBuilder\PaletteGridItem;
+use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\Web;
-use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -48,25 +46,21 @@ abstract class BasePlugin
     private ?string $name = null;
 
     /**
-     * @Gedmo\Blameable(on="create")
-     * @Serializer\Exclude()
-     */
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\User')]
-    #[ORM\JoinColumn(onDelete: 'CASCADE', nullable: false)]
-    private ?User $user = null;
-
-    /**
      * @Serializer\Exclude()
      */
     #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Web', inversedBy: 'plugins')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Web $web = null;
+    /** @var ArrayCollection  */
+    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin')]
+    private $gridCellItems;
 
     public ?string $identifier = null;
 
     public function __construct()
     {
         $this->paletteGridItems = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     abstract public function setIdentifier();
@@ -91,16 +85,6 @@ abstract class BasePlugin
         return $this->identifier;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-    }
-
     public function getWeb(): ?Web
     {
         return $this->web;
@@ -121,10 +105,46 @@ abstract class BasePlugin
         $this->name = $name;
     }
 
+    public function getGridCellItems(): Collection
+    {
+        return $this->gridCellItems;
+    }
+
+    public function setGridCellItems(Collection $items): void
+    {
+        $this->gridCellItems = $items;
+    }
+
+    /**
+     * @param mixed $item
+     */
+    public function addGridCellItem(GridCellItem $item)
+    {
+        $this->gridCellItems->add($item);
+        $item->setPlugin($this);
+    }
+
+    /**
+     * @param mixed $item
+     */
+    public function removeGridCellItem($item)
+    {
+        $this->items->removeElement($item);
+        $item->setBasePlugin(null);
+    }
+
     /**
      * @Serializer\VirtualProperty()
      */
     public function getWebId(): ?int {
         return $this->getWeb()?->getId();
+    }
+
+    public function __clone(): void
+    {
+        $this->items = new ArrayCollection();
+        if (!$this->web) {
+            $this->id = null;
+        }
     }
 }

@@ -32,9 +32,9 @@ export class CreateNameComponent implements OnInit{
     this.form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.symfonyApiClientService.post('web_create', this.form.value, {id: templateId}).subscribe({
-          next: () => {
+          next: (response) => {
             this.notifierService.notify('Web byl úspěšně vytvořen');
-            this.router.navigate(['list'], { relativeTo: this.route.parent });
+            this.router.navigate(['page/page-builder', response.body.pages[0].id], { relativeTo: this.route.parent.parent });
           },
           error: err => this.httpResponseToasterService.showError(err)
         });
