@@ -6,6 +6,7 @@ import {SymfonyApiClientService} from "../../../../core/services/api/symfony-api
 import {NotifierService} from "../../../../core/services/notifier.service";
 import {HttpResponseToasterService} from "../../../../core/services/http-response-toaster.service";
 import {WebListResolverGuard} from "../../../services/web-list-resolver.service";
+import {ApiFormService} from "../../../../core/services/form/api-form.service";
 
 @Component({
   selector: 'app-create-name',
@@ -18,27 +19,22 @@ export class CreateNameComponent implements OnInit{
   constructor(
     private webFormService: WebFormService,
     private route: ActivatedRoute,
-    private symfonyApiClientService: SymfonyApiClientService,
     private notifierService: NotifierService,
-    private httpResponseToasterService: HttpResponseToasterService,
     private router: Router,
-    public webListGuard: WebListResolverGuard,
+    public apiFormService: ApiFormService
   ) {
   }
 
   ngOnInit(): void {
     let templateId = this.route.snapshot.paramMap.get('idTemplate');
-    this.form = this.webFormService.createForm({path: 'web_create', querySegment: {id: templateId}});
+    this.form = this.webFormService.createForm();
     this.form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('web_create', this.form.value, {id: templateId}).subscribe({
-          next: (response) => {
-            this.notifierService.notify('Web byl úspěšně vytvořen');
-            this.router.navigate(['page/page-builder', response.body.pages[0].id], { relativeTo: this.route.parent.parent });
-          },
-          error: err => this.httpResponseToasterService.showError(err)
+        this.apiFormService.send('web_create', this.form, {id: templateId}).subscribe(response => {
+          this.notifierService.notify('Web byl úspěšně vytvořen');
+          this.router.navigate(['page/page-builder', response.body.pages[0].id], { relativeTo: this.route.parent.parent });
         });
       }
-    })
+    });
   }
 }
