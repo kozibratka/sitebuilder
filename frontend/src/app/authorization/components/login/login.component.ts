@@ -1,9 +1,8 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginFormService} from '../../services/login-form.service';
 import {AbstractControl, FormGroup} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {WebListResolverGuard} from '../../../web/services/web-list-resolver.service';
 import {LoginClientService} from '../../services/login-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 
@@ -22,7 +21,6 @@ export class LoginComponent implements OnInit {
     private loginClientService: LoginClientService,
     private httpResponseToasterService: HttpResponseToasterService,
     private router: Router,
-    private webListResolver: WebListResolverGuard
   ) {
     this.loginForm = this.loginFormService.createForm();
   }

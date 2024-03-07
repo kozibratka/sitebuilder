@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import {FormGroup, Validators} from '@angular/forms';
-import {AbstractApiFormService} from '../../core/services/form/abstract-class/abstract-api-form-service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginFormService extends AbstractApiFormService {
+export class LoginFormService {
+
+
+  constructor(private formBuilder: FormBuilder) {
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       email: ['', Validators.required],

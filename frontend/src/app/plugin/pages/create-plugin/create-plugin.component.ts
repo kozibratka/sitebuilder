@@ -8,12 +8,12 @@ import {FormGroup} from '@angular/forms';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {PluginFormService} from '../../services/plugin-form.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
-import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
 import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
+import {ApiFormService} from "../../../core/services/form/api-form.service";
 
 @Component({
   selector: 'app-create-plugin',
@@ -30,10 +30,10 @@ export class CreatePluginComponent implements OnInit {
     private pluginResolverService: PluginResolverService,
     private webDetailResolverService: WebDetailResolverService,
     private pluginFormService: PluginFormService,
-    private symfonyApiClientService: SymfonyApiClientService,
     private router: Router,
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
+    private apiFormService: ApiFormService,
   ) { }
 
   ngOnInit(): void {
@@ -48,10 +48,10 @@ export class CreatePluginComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const identifier = params.get('identifier');
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(identifier);
-      this.createForm = this.pluginFormService.createForm({path: 'plugin_create', querySegment: {id: this.webDetailResolverService.selectedId, identifier}});
+      this.createForm = this.pluginFormService.createForm();
       this.createForm.statusChanges.subscribe(status => {
         if (status === 'VALID') {
-          this.symfonyApiClientService.post<BasePlugConfigInterface>('plugin_create', this.createForm.value, {id: this.webDetailResolverService.selectedId, identifier}).subscribe({
+          this.apiFormService.send('plugin_create', this.createForm, {id: this.webDetailResolverService.selectedId, identifier}).subscribe({
             next: (response) => {
               this.notifierService.notify('Plugin byl úspěšně vytvořen');
               this.router.navigate(['update', response.body.id], { relativeTo: this.route.parent });
@@ -66,12 +66,12 @@ export class CreatePluginComponent implements OnInit {
   updatePlugin() {
     const plugin: BasePlugConfigInterface = this.route.snapshot.data.plugin;
     this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(plugin.identifier);
-    this.createForm = this.pluginFormService.createForm({path: 'plugin_update', querySegment: {id: plugin.id}});
+    this.createForm = this.pluginFormService.createForm();
     this.createForm.patchValue(plugin);
     this.createForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('plugin_update', this.createForm.value, {id: plugin.id}).subscribe({
-          next: () => {
+        this.apiFormService.send('plugin_update', this.createForm, {id: plugin.id}).subscribe({
+          next: (response) => {
             this.notifierService.notify('Plugin byl úspěšně upraven');
             this.router.navigate(['list-created', this.pluginResolver.identifier], { relativeTo: this.route.parent });
           },

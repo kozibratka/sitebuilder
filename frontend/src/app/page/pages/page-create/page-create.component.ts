@@ -8,6 +8,7 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {Title} from '@angular/platform-browser';
+import {ApiFormService} from "../../../core/services/form/api-form.service";
 
 @Component({
   selector: 'app-page-create',
@@ -29,7 +30,8 @@ export class PageCreateComponent implements OnInit {
     private notifierService: NotifierService,
     private httpResponseToasterService: HttpResponseToasterService,
     private webDetailResolverService: WebDetailResolverService,
-    public title: Title
+    public title: Title,
+    private apiFormService: ApiFormService,
   ) {
   }
 
@@ -43,38 +45,39 @@ export class PageCreateComponent implements OnInit {
   }
 
   createPage(): void {
-    this.createPageForm = this.pageFormService.createForm({
-      path: 'page_create',
-      querySegment: {id: this.webDetailResolverService.selectedId}
-    });
+    this.createPageForm = this.pageFormService.createForm();
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('page_create', this.createPageForm.value, {id: this.webDetailResolverService.selectedId}).subscribe({
-          next: () => {
-            this.notifierService.notify('Stránka byla úspěšně vytvořena');
-            this.router.navigate(['list'], {relativeTo: this.route.parent});
-          },
-          error: err => this.httpResponseToasterService.showError(err)
-        });
+        this.apiFormService.send('page_create', this.createPageForm, {id: this.webDetailResolverService.selectedId}).subscribe(
+          {
+            next: () => {
+              this.notifierService.notify('Stránka byla úspěšně vytvořena');
+              this.router.navigate(['list'], {relativeTo: this.route.parent});
+            },
+            error: err => this.httpResponseToasterService.showError(err)
+          }
+        );
       }
     });
   }
 
   updatePage(): void {
     const pageDetail: WebInterface = this.route.snapshot.data.pageDetail;
-    this.createPageForm = this.pageFormService.createForm({path: 'page_update_page', querySegment: {id: pageDetail.id}});
+    this.createPageForm = this.pageFormService.createForm();
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.symfonyApiClientService.post('update_page', this.createPageForm.value, {id: pageDetail.id}).subscribe({
-          next: () => {
-            this.notifierService.notify('Stránka byla úspěšně upravena');
-            this.router.navigate(['list'], { relativeTo: this.route.parent });
-          },
-          error: err => this.httpResponseToasterService.showError(err)
-        });
+        this.apiFormService.send('page_update_page', this.createPageForm, {id: pageDetail.id}).subscribe(
+          {
+            next: () => {
+              this.notifierService.notify('Stránka byla úspěšně upravena');
+              this.router.navigate(['list'], {relativeTo: this.route.parent});
+            },
+            error: err => this.httpResponseToasterService.showError(err)
+          }
+        );
       }
-    });
+    })
   }
 
   refreshUrlInput(event: Event) {
