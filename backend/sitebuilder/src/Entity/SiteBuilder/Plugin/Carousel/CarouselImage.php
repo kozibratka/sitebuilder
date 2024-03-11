@@ -74,4 +74,9 @@ class CarouselImage
     {
         $this->carousel = $carousel;
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+    }
 }

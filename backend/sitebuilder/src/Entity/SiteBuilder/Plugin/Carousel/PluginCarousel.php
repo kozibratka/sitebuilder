@@ -80,4 +80,14 @@ class PluginCarousel extends BasePlugin
     {
         $this->images->removeElement($image);
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->images = new ArrayCollection($this->images->map(function(CarouselImage $item) {
+            $clone = clone $item;
+            $clone->setCarousel($this);
+            return $clone;
+        })->toArray());
+    }
 }

@@ -29,7 +29,6 @@ export class WebListComponent implements OnInit {
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
     private router: Router,
-    private webDetailResolverService: WebDetailResolverService,
     public webListGuard: WebListResolverGuard,
     private layoutComponent: LayoutComponent,
     public title: Title
@@ -53,7 +52,9 @@ export class WebListComponent implements OnInit {
     ).subscribe({
       next: () => {
         this.notifierService.notify('Web byl úspěšně smazán');
-        this.router.navigate(['./'], { relativeTo: this.route });
+        this.webListGuard.refreshWebList().subscribe(value => {
+          this.dataToTable = {...this.webListGuard.webList};
+        });
         },
       error: err => this.httpResponseToasterService.showError(err)
     });

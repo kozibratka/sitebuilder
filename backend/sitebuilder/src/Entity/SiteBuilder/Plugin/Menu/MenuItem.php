@@ -73,4 +73,9 @@ class MenuItem
     {
         return $this->getPage()?->getUrl();
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+    }
 }

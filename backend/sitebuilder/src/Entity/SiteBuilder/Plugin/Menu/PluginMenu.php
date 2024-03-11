@@ -70,4 +70,14 @@ class PluginMenu extends BasePlugin
     {
         $this->logoImage = $logoImage;
     }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->items = new ArrayCollection($this->items->map(function(MenuItem $item) {
+            $clone = clone $item;
+            $clone->setMenu($this);
+            return $clone;
+        })->toArray());
+    }
 }

@@ -16,7 +16,7 @@ class GridCell
     private ?int $id = null;
     #[ORM\Column(type: 'integer')]
     private int $width = 0;
-    #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells')]
+    #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells', cascade: ['persist'])]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridRow $row;
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell', cascade: ['persist'])]

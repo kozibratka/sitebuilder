@@ -14,13 +14,13 @@ class GridCellItem
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id = null;
-    #[ORM\ManyToOne(targetEntity: GridCell::class, inversedBy: 'items')]
+    #[ORM\ManyToOne(targetEntity: GridCell::class, inversedBy: 'items', cascade: ['persist'])]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridCell $cell;
 
     #[ORM\OneToOne(targetEntity: GridRow::class, cascade: ['persist', 'remove'])]
     private ?GridRow $row = null;
-    #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'], inversedBy: 'items')]
+    #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'], inversedBy: 'gridCellItems')]
     private ?BasePlugin $plugin;
 
     #[ORM\Column(type: 'integer')]
@@ -91,7 +91,7 @@ class GridCellItem
     public function __clone(): void
     {
         $this->id = null;
-        if ($this->plugin) {
+        if ($this->plugin && !$this->plugin->getWeb()) {
             $this->plugin = clone $this->plugin;
             $this->plugin->addGridCellItem($this);
         }

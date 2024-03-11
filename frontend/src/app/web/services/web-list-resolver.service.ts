@@ -32,10 +32,11 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
     return this.webList;
   }
 
-  refreshWebList(webId: number) {
+  refreshWebList(webId: number = 0) {
     return this.symfonyApiClientService.get<WebInterface[]>('web_list').pipe(
       map(value => {
         Helper.objectResetAssign(this.webList, value.body);
+        console.log(this.webList);
         // if (route.firstChild && route.firstChild.url.length && route.firstChild.url[0].path === 'web') {
         //   return true;
         // }

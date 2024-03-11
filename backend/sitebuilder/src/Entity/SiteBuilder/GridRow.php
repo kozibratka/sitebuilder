@@ -15,7 +15,7 @@ class GridRow
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: PageBlock::class, inversedBy: 'rows')]
+    #[ORM\ManyToOne(targetEntity: PageBlock::class, inversedBy: 'rows', cascade: ['persist'])]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private PageBlock $pageBlock;
 

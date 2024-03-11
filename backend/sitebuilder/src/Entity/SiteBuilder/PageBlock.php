@@ -27,7 +27,7 @@ class PageBlock
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
     private $height = 1;
 
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page', inversedBy: 'pageBlocks')]
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page', inversedBy: 'pageBlocks', cascade: ['persist'])]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Page $page = null;
 

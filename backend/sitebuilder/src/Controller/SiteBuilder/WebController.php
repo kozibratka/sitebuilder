@@ -51,6 +51,7 @@ class WebController extends BaseApiController
         if($form->isValid() && !$web->getParent()) {
             $clone = clone $web;
             $clone->setParent($web);
+            $clone->setIsTemplate(false);
             $clone->setName($form->get('name')->getData());
             $this->persist($clone);
             return $this->jsonResponseSimple($clone, 201);

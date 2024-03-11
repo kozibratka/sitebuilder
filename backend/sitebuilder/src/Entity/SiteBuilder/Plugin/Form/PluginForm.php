@@ -86,4 +86,9 @@ class PluginForm extends BasePlugin
         $formData->setForm(null);
         return $this;
     }
+
+    public function __clone(): void
+    {
+        $this->formData = new ArrayCollection();
+    }
 }

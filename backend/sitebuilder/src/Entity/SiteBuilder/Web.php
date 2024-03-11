@@ -56,7 +56,7 @@ class Web
     /**
      * @Serializer\Exclude()
      */
-    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', mappedBy: 'web', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $plugins;
 
     #[ORM\Column(type: 'boolean')]
@@ -228,8 +228,8 @@ class Web
             /** @var GridCellItem $item */
             foreach ($cellItems as $item) {
                 $plugin = $item->getPlugin();
-                if ($plugin && $plugin->getId() && $globalPluginsPerId[$plugin->getId()]) {
-                    $item->setPlugin($globalPluginsPerId[$plugin->getId()]);
+                if ($plugin && $plugin->getId() && isset($globalPluginsPerId[$plugin->getId()])) {
+                    $globalPluginsPerId[$plugin->getId()]->addGridCellItem($item);
                 }
             }
             $newPages->add($newPage);

@@ -52,7 +52,7 @@ abstract class BasePlugin
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Web $web = null;
     /** @var ArrayCollection  */
-    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin')]
+    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin', cascade: ['persist'])]
     private $gridCellItems;
 
     public ?string $identifier = null;
