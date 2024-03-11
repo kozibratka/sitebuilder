@@ -65,6 +65,11 @@ a {
   text-decoration: none;
 }
 
+a.disabled {
+  color: grey !important;
+  pointer-events: none;
+}
+
 .plugin-form-border {
   padding: 17px;
   border: 1px solid #dee2e6!important;

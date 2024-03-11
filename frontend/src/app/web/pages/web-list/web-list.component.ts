@@ -31,7 +31,8 @@ export class WebListComponent implements OnInit {
     private router: Router,
     public webListGuard: WebListResolverGuard,
     private layoutComponent: LayoutComponent,
-    public title: Title
+    public title: Title,
+    public webDetailResolverService: WebDetailResolverService,
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class WebListComponent implements OnInit {
       next: () => {
         this.notifierService.notify('Web byl úspěšně smazán');
         this.webListGuard.refreshWebList().subscribe(value => {
-          this.dataToTable = {...this.webListGuard.webList};
+          this.dataToTable = [...this.webListGuard.webList];
         });
         },
       error: err => this.httpResponseToasterService.showError(err)

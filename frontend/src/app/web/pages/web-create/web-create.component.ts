@@ -42,6 +42,7 @@ export class WebCreateComponent implements OnInit {
   updateWeb(): void {
     const webDetail = this.webDetail.webDetail;
     this.createWebForm = this.webFormService.createForm(this.userService.hasRole('ROLE_ADMIN'));
+    this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.apiFormService.send('web_update', this.createWebForm, {id: webDetail.id}).subscribe(response => {

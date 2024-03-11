@@ -25,7 +25,7 @@ class WebController extends BaseApiController
     public function list()
     {
         $user = $this->getUser();
-        $pages = $this->getDoctrine()->getRepository(Web::class)->findBy(['user' => $user]);
+        $pages = $this->getDoctrine()->getRepository(Web::class)->findBy(['user' => $user], ['id' => 'desc']);
         return $this->jsonResponseSimple($pages, group: 'base_list');
     }
 

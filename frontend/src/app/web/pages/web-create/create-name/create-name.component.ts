@@ -32,7 +32,7 @@ export class CreateNameComponent implements OnInit{
       if (status === 'VALID') {
         this.apiFormService.send('web_create', this.form, {id: templateId}).subscribe(response => {
           this.notifierService.notify('Web byl úspěšně vytvořen');
-          this.router.navigate(['page/page-builder', response.body.pages[0].id], { relativeTo: this.route.parent.parent });
+          this.router.navigate(['web/list'], { relativeTo: this.route.parent.parent });
         });
       }
     });

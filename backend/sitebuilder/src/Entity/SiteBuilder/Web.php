@@ -58,7 +58,9 @@ class Web
      */
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Plugin\BasePlugin', mappedBy: 'web', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $plugins;
-
+    /**
+     * @Serializer\Groups({"default", "base_list"})
+     */
     #[ORM\Column(type: 'boolean')]
     private bool $isTemplate = false;
     /**
