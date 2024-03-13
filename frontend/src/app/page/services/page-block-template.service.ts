@@ -13,6 +13,7 @@ import {PageBlockInterface} from "../interfaces/page-block-interface";
 import {PageBlockComponent} from "../components/page-block/page-block/page-block.component";
 import {RemoveItemComponent} from "../../core/components/remove-item/remove-item.component";
 import * as _ from 'lodash';
+import {StringService} from "../../core/services/string.service";
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class PageBlockTemplateService {
   templateBlocksPerCategory = new Map<string, PageBlockInterface[]>();
   templateBlockCategory:string[] = [];
   private _selectedCategory = '';
-  selectedBlockTemplates: PageBlockInterface[] = [];
+  blockTemplates: PageBlockInterface[] = [];
   private webBlocks: PageBlockInterface[];
 
   constructor(
@@ -115,12 +116,14 @@ export class PageBlockTemplateService {
   changeSelectedTemplateBlocks(name) {
     this._selectedCategory = name;
     if (!this._selectedCategory.length) {
-      this.selectedBlockTemplates = _.flatten([...this.templateBlocksPerCategory.values()]);
-      this.selectedBlockTemplates.sort((a, b) => {
+      this.blockTemplates = _.flatten([...this.templateBlocksPerCategory.values()]);
+      this.blockTemplates.sort((a, b) => {
         return a.category.name.localeCompare(b.category.name);
       });
     } else {
-      this.selectedBlockTemplates = this.templateBlocksPerCategory.get(this._selectedCategory);
+      this.blockTemplates = this.templateBlocksPerCategory.get(this._selectedCategory);
     }
+    let emptyBlock: PageBlockInterface = {rows: [], uniqueId: StringService.randomString()};
+    this.blockTemplates.push(emptyBlock);
   }
 }

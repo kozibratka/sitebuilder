@@ -5,6 +5,7 @@ namespace App\Controller\SiteBuilder;
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\Web;
+use App\Exception\CustomErrorMessageException;
 use App\Form\SiteBuilder\PageBlockType;
 use App\Form\SiteBuilder\WebType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -53,6 +54,7 @@ class WebController extends BaseApiController
             $clone->setParent($web);
             $clone->setIsTemplate(false);
             $clone->setName($form->get('name')->getData());
+            //dd($clone);
             $this->persist($clone);
             return $this->jsonResponseSimple($clone, 201);
         }
@@ -81,6 +83,9 @@ class WebController extends BaseApiController
     public function remove(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
+        if (!$web->getParent()) {
+            throw new CustomErrorMessageException('Nelze smazat web šablony');
+        }
         $this->removeEntity($web);
         return new JsonResponse();
     }

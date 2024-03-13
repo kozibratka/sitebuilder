@@ -2,6 +2,9 @@
 
 namespace App\Security\Voter\PageBuilder;
 
+use App\Entity\SiteBuilder\GridCell;
+use App\Entity\SiteBuilder\GridCellItem;
+use App\Entity\SiteBuilder\GridRow;
 use App\Entity\SiteBuilder\PaletteGridItem;
 use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
@@ -59,9 +62,30 @@ class PageBuilderWithChildrenVoter extends Voter
                     }
                 }
                 break;
-            case $subject instanceof PaletteGridItem:
-                $user = $subject->getPageBlock()->getUser();
+            case $subject instanceof GridCellItem:
+                $user = $subject->getUser();
                 $result = $this->voteOnAttribute($attribute, $subject->getPlugin(), $token);
+                if(!$result) {
+                    return false;
+                }
+                break;
+            case $subject instanceof GridRow:
+                $user = $subject->getUser();
+                foreach ($subject->getCells() as $cell) {
+                    $result = $this->voteOnAttribute($attribute, $cell, $token);
+                    if(!$result) {
+                        return false;
+                    }
+                }
+                break;
+            case $subject instanceof GridCell:
+                $user = $subject->getUser();
+                foreach ($subject->getItems() as $item) {
+                    $result = $this->voteOnAttribute($attribute, $item, $token);
+                    if(!$result) {
+                        return false;
+                    }
+                }
                 if(!$result) {
                     return false;
                 }

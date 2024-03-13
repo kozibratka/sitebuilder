@@ -33,6 +33,9 @@ export class HttpResponseToasterService {
           case 400:
             completedMessage = error.error ? error.error : 'Server nemůže zpracovat požadavek';
             break;
+          case 422:
+            completedMessage = error.error;
+            break;
           default:
             completedMessage = 'Neočekávaná chyba serveru. Kód chyby: ' + error.status;
             break;

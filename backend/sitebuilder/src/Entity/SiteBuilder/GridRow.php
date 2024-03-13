@@ -15,7 +15,7 @@ class GridRow
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: PageBlock::class, inversedBy: 'rows', cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: PageBlock::class, inversedBy: 'rows')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private PageBlock $pageBlock;
 
@@ -93,6 +93,10 @@ class GridRow
         foreach ($this->cells as $cell) {
             $cell->refreshGridCellItemOrder();
         }
+    }
+
+    public function getUser() {
+        return $this->getPageBlock()?->getUser();
     }
 
     public function __clone(): void

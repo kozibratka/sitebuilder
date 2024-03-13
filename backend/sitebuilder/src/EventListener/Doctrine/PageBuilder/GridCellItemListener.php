@@ -16,6 +16,8 @@ class GridCellItemListener
         $plugin = $gridCellItem->getPlugin();
         if($plugin && !$plugin->getWeb()) {
             $this->entityManager->remove($plugin);
+        } elseif ($plugin) {
+            $plugin->removeGridCellItem($gridCellItem);
         }
     }
 

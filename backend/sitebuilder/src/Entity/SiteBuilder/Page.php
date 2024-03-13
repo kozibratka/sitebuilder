@@ -165,6 +165,10 @@ class Page
         }
     }
 
+    public function getUser() {
+        return $this->web?->getUser();
+    }
+
     /**
      * @Serializer\VirtualProperty()
      */

@@ -3,11 +3,9 @@ import {GridRowInterface} from "./grid-row-interface";
 
 export interface PageBlockInterface {
   id?: number;
-  height: number;
-  paletteGridItems: PaletteItemConfig[];
   rows: GridRowInterface[];
   uniqueId: string;
   category?: {id: number, name: string};
   web?: number;
-  imagePath: string;
+  imagePath?: string;
 }

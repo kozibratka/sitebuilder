@@ -14,7 +14,7 @@ class GridCellItem
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $id = null;
-    #[ORM\ManyToOne(targetEntity: GridCell::class, inversedBy: 'items', cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: GridCell::class, inversedBy: 'items')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridCell $cell;
 
@@ -86,6 +86,10 @@ class GridCellItem
     public function setUniqueId(string $uniqueId): void
     {
         $this->uniqueId = $uniqueId;
+    }
+
+    public function getUser() {
+        return $this->getCell()?->getUser();
     }
 
     public function __clone(): void

@@ -140,29 +140,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   }
 
-  private initGridStack(): void {
-    this.paletteBlockGridstackService.init(this.paletteContent, this._pageBlock.paletteGridItems, this._pageBlock, this.changeDetectorRef);
-    const gridstackBlock = this.paletteBlockGridstackService.gridstackBlocks.get(this.paletteContent.nativeElement);
-    gridstackBlock.on('dragstop', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuService.moveMenu.next(true);
-      this.quickMenuService.moveMenu.next(null);
-      this.gridItemDragged.next(false);
-    });
-    gridstackBlock.on('dragstart', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuService.moveMenu.next(false);
-      this.gridItemDragged.next(true);
-    });
-    gridstackBlock.on('resizestop', (event: Event, el: GridItemHTMLElement) => {
-      this.quickMenuService.moveMenu.next(null);
-      this.gridItemDragged.next(false);
-      this.applicationRef.tick();
-
-    });
-    gridstackBlock.on('resizestart', (event: Event, el: GridItemHTMLElement) => {
-      this.gridItemDragged.next(true);
-      this.applicationRef.tick();
-    });
-  }
 
   private registerOnDraggedItem() {
     this.updateBottomPaddingSubscription = this.gridItemDragged.subscribe(value => {
@@ -214,13 +191,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input()
   set pageBlock(value: PageBlockInterface) {
     this._pageBlock = value;
-    this.paletteBlockGridstackService.gridStackNodes = this._pageBlock.paletteGridItems;
+    //this.paletteBlockGridstackService.gridStackNodes = this._pageBlock.paletteGridItems;
   }
   removeGridItem(paletteItemComponent: PaletteItemComponent) {
-    const index = this._pageBlock.paletteGridItems.indexOf(paletteItemComponent.gridItemConfig);
-    if (index !== -1) {
-      this._pageBlock.paletteGridItems.splice(index, 1);
-    }
+    // const index = this._pageBlock.paletteGridItems.indexOf(paletteItemComponent.gridItemConfig);
+    // if (index !== -1) {
+    //   this._pageBlock.paletteGridItems.splice(index, 1);
+    // }
   }
 
   onDragStart = (event: any) => {

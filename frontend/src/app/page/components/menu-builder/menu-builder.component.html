@@ -54,18 +54,27 @@
         </div>
         <div
           class="menu-block"
-          [sortablejs]="pageBlockTemplateService.selectedBlockTemplates"
+          [sortablejs]="pageBlockTemplateService.blockTemplates"
           [sortablejsCloneFunction]="clonePageBlock"
           [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false}, handle: '.icon-move-block' }"
           (mouseleave)="showMoveIcon = false"
           (mouseenter)="showMoveIcon = true"
         >
-          <div *ngFor="let item of pageBlockTemplateService.selectedBlockTemplates" class="menu-element-block grid-stack-item-menu">
-            <img alt="" src="{{item.imagePath}}">
-            <app-animation-hider [show] = "showMoveIcon">
-              <i class="material-icons icon-move-block">open_with</i>
-              <i class="material-icons icon-delete" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
-            </app-animation-hider>
+          <div *ngFor="let item of pageBlockTemplateService.blockTemplates; let last = last" class="menu-element-block grid-stack-item-menu">
+            <ng-container *ngIf="!last">
+              <img alt="" src="{{item.imagePath}}">
+              <app-animation-hider [show] = "showMoveIcon">
+                <i class="material-icons icon-move-block">open_with</i>
+                <i class="material-icons icon-delete" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
+              </app-animation-hider>
+            </ng-container>
+            <ng-container *ngIf="last">
+              <div class="empty-block-template">
+                <app-animation-hider [show] = "showMoveIcon">
+                  <i class="material-icons icon-move-block">open_with</i>
+                </app-animation-hider>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>

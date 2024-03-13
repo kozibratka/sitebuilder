@@ -52,7 +52,7 @@ abstract class BasePlugin
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Web $web = null;
     /** @var ArrayCollection  */
-    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin', cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin')]
     private $gridCellItems;
 
     public ?string $identifier = null;
@@ -60,7 +60,7 @@ abstract class BasePlugin
     public function __construct()
     {
         $this->paletteGridItems = new ArrayCollection();
-        $this->items = new ArrayCollection();
+        $this->gridCellItems = new ArrayCollection();
     }
 
     abstract public function setIdentifier();
@@ -127,10 +127,14 @@ abstract class BasePlugin
     /**
      * @param mixed $item
      */
-    public function removeGridCellItem($item)
+    public function removeGridCellItem(GridCellItem $item)
     {
-        $this->items->removeElement($item);
-        $item->setBasePlugin(null);
+        $this->gridCellItems->removeElement($item);
+        $item->setPlugin(null);
+    }
+
+    public function getUser() {
+        return $this->getWeb()?->getUser() ?? $this->getGridCellItems()[0]->getUser();
     }
 
     /**
@@ -142,7 +146,7 @@ abstract class BasePlugin
 
     public function __clone(): void
     {
-        $this->items = new ArrayCollection();
+        $this->gridCellItems = new ArrayCollection();
         if (!$this->web) {
             $this->id = null;
         }

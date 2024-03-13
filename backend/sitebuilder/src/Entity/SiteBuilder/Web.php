@@ -50,7 +50,7 @@ class Web
     /**
      * @Assert\Valid()
      */
-    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Page', mappedBy: 'web', cascade: ['remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Page', mappedBy: 'web', cascade: ['remove', 'persist'], orphanRemoval: true)]
     private Collection $pages;
 
     /**
@@ -210,13 +210,10 @@ class Web
     public function __clone() {
         $this->setId(null);
         $this->pageBlocks = new ArrayCollection();
-        $oldGlobalPlugins = $this->plugins;
         $globalPluginsPerId = [];
-        foreach ($oldGlobalPlugins as $plugin) {
-            $globalPluginsPerId[$plugin->getId()] = $plugin;
-        }
-        $this->plugins = new ArrayCollection($this->plugins->map(function(BasePlugin $plugin) {
+        $this->plugins = new ArrayCollection($this->plugins->map(function(BasePlugin $plugin) use(&$globalPluginsPerId) {
             $clone = clone $plugin;
+            $globalPluginsPerId[$plugin->getId()] = $clone;
             $clone->setId(null);
             $clone->setWeb($this);
             return $clone;
@@ -224,9 +221,12 @@ class Web
         $newPages = new ArrayCollection();
         /** @var Page $page */
         foreach ($this->pages as $page) {
+            if($page->getParentForPublic()) {
+                continue;
+            }
             $newPage = clone $page;
             $newPage->setWeb($this);
-            $cellItems = $page->getGridCellItems();
+            $cellItems = $newPage->getGridCellItems();
             /** @var GridCellItem $item */
             foreach ($cellItems as $item) {
                 $plugin = $item->getPlugin();
@@ -236,6 +236,7 @@ class Web
             }
             $newPages->add($newPage);
         }
+        $this->setPages($newPages);
 
     }
 }

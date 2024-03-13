@@ -16,7 +16,7 @@ class GridCell
     private ?int $id = null;
     #[ORM\Column(type: 'integer')]
     private int $width = 0;
-    #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells', cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridRow $row;
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell', cascade: ['persist'])]
@@ -124,6 +124,10 @@ class GridCell
                 $row->refreshGridCellItemOrder();
             }
         }
+    }
+
+    public function getUser() {
+        return $this->getRow()?->getUser();
     }
 
     public function __clone(): void

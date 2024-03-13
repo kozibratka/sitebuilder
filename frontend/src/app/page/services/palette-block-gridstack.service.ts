@@ -121,7 +121,7 @@ export class PaletteBlockGridstackService {
     }
     // this.gridstackBlocks.get(block).opts.minRow = toMove;
     // this.gridstackBlocks.get(block).engine.maxRow = toMove;
-    pageBlock.height = toMove;
+    //pageBlock.height = toMove;
     (this.gridstackBlocks.get(block) as any)._updateStyles();
     this.toResizeRows = toMove;
   }
