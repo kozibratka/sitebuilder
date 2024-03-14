@@ -35,7 +35,7 @@ export class MiniAdminComponent implements OnInit, InitAbleInterface {
     this.label = label;
   }
 
-  @Input() setInitParams(value: AdminAbleInterface & SettingAbleInterface) {
+  @Input() set setInitParams(value: AdminAbleInterface & SettingAbleInterface) {
     this.adminAble = value;
     this.settings = value.settings;
     this.showContent(value.adminComponentsClass[0].component, value.adminComponentsClass[0].label);

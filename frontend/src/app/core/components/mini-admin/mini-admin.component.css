@@ -42,9 +42,10 @@
   -o-transition: all 0.3s;
   transition: all 0.3s;
   padding: 0 !important;
-  background-color: white;
+  background-color: #f4f6f9;
   border-top: 1px solid rgba(0,0,0,.125);
-  margin-bottom: 43px;
+  min-height: 332px;
+  /*margin-bottom: 43px;*/
 }
 
 #content h5 {
@@ -75,3 +76,9 @@
 }
 
 .close:hover {background: #bbb;}
+
+.container-fluid > .row {
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}

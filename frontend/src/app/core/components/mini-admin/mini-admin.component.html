@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-      <nav class="col-md-4" id="sidebar">
+      <nav class="col-4" id="sidebar">
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component, invisible: allowedAdminComponent && setting.component != allowedAdminComponent}" *ngFor="let setting of adminAble.adminComponentsClass;">
             <a href="#" (click)="showContent(setting.component, setting.label);$event.preventDefault()">
@@ -9,7 +9,7 @@
         </ul>
       </nav>
 
-      <div id="content" class="col-md-8">
+      <div id="content" class="col">
         <h5>{{label}}</h5>
         <div class="content-block">
           <ng-container #content1></ng-container>

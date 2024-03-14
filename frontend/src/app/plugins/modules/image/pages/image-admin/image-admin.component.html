@@ -1,17 +1,22 @@
-<form [formGroup]="adminForm">
-  <div class="d-flex flex-md-row flex-wrap">
-    <div class="form-check">
-      <label class="form-check-label" for="image">
-        Obrázek
-      </label>
-      <div>
-        <button (click)="onClickAddImageButton()" mat-raised-button color="primary" class="my-2" id="image"><i class="material-icons">photo</i>Vybrat obrázek
-        </button>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="adminForm">
+      <div class="d-flex flex-md-row flex-wrap">
+        <div class="form-check">
+          <label class="form-check-label" for="image">
+            Obrázek
+          </label>
+          <div>
+            <button (click)="onClickAddImageButton()" mat-raised-button color="primary" class="my-2" id="image"><i
+              class="material-icons">photo</i>Vybrat obrázek
+            </button>
+          </div>
+          <div *ngIf="settings.imagePath">
+            <br>
+            <img height="65" src="{{settings.imagePath}}"><br>
+          </div>
+        </div>
       </div>
-      <div *ngIf="settings.imagePath">
-        <br>
-        <img height="65" src="{{settings.imagePath}}"><br>
-      </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>

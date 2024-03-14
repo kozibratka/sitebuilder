@@ -1,3 +1,3 @@
 export interface InitAbleInterface {
-  setInitParams(params: any);
+  set setInitParams(params: any);
 }

@@ -1,11 +1,13 @@
-<div class="d-flex justify-content-center">
-  <div [formGroup]="form">
-    <p>V následující seznamu můžete vybrat předdefinovaný prvek:</p>
-    <select class="form-select" formControlName="plugin">
-      <option value=0>Vlastní</option>
-      <option *ngFor="let option of selectOptions" value="{{option.id}}">{{option.name}}</option>
-    </select>
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <div [formGroup]="form">
+        <p>V následující seznamu můžete vybrat předdefinovaný prvek:</p>
+        <select class="form-select" formControlName="plugin">
+          <option value=0>Vlastní</option>
+          <option *ngFor="let option of selectOptions" value="{{option.id}}">{{option.name}}</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>
-
-
