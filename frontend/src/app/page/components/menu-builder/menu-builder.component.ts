@@ -30,6 +30,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   showMoveIcon = false;
   @Output() private locketEmitter = new EventEmitter<boolean>();
+  @Output() private dragMenuBlock$ = new EventEmitter<boolean>();
   @Input() pageDetail: PageInterface;
   rows: GridRowInterface[] = [{cells: [{width: 6, items: []}, {width: 6, items: []}]}];
 
@@ -99,5 +100,13 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   onDragEnd = (event: any)=> {
     this.sortableJsDragged$.next(false);
+  }
+
+  onDragStartBlock = (event: any) => {
+    this.dragMenuBlock$.next(true);
+  }
+
+  onDragEndBlock = (event: any)=> {
+    this.dragMenuBlock$.next(false);
   }
 }

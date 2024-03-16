@@ -13,6 +13,7 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 
   @ViewChild('palette') private _palette: ElementRef<HTMLElement>;
   @Input() pageDetail: PageInterface;
+  @Input() menuBlocDragged: boolean;
   isDraggedContent = false;
   private _isResized = false;
 

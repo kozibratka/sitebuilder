@@ -56,7 +56,7 @@
           class="menu-block"
           [sortablejs]="pageBlockTemplateService.blockTemplates"
           [sortablejsCloneFunction]="clonePageBlock"
-          [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'shared',pull: 'clone',put: false}, handle: '.icon-move-block' }"
+          [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'block',pull: 'clone',put: false}, handle: '.icon-move-block', onStart: onDragStartBlock, onEnd: onDragEndBlock }"
           (mouseleave)="showMoveIcon = false"
           (mouseenter)="showMoveIcon = true"
         >

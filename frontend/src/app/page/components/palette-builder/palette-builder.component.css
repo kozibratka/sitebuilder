@@ -21,12 +21,19 @@
 ::ng-deep.palette .palette-block > .sortable-ghost
 {
   width: 100%;
-  height: 20px;
+  height: 50px;
   margin-bottom: 1px;
   background-color: black;
 }
 
-::ng-deep.palette .palette-block > .sortable-ghost > img
+::ng-deep.palette .palette-block > .sortable-ghost  *
 {
+  display: none;
+}
+
+::ng-deep.menu-block-dragged app-animation-hider {
+  display: none;
+}
+::ng-deep.menu-block-dragged .line,  ::ng-deep.block-dragged .line{
   display: none;
 }

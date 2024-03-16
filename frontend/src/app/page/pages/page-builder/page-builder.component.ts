@@ -50,6 +50,7 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
   @HostBinding('style.minHeight')minHeight = '0px';
   mouseOnMenu = true;
   isSortableJsDragged = false;
+  menuBlockDragged = false;
 
   constructor(
     private route: ActivatedRoute,

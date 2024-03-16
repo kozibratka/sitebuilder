@@ -1,4 +1,4 @@
-<div class="card card-primary card-outline">
+<div class="card card-primary card-outline" [class.menu-block-dragged] = "menuBlocDragged" [class.block-dragged] = "isDraggedContent" >
   <div class="card-header">
     <h3 class="card-title">Editační plátno</h3>
   </div>
@@ -9,7 +9,7 @@
       [class.resized]="isResized"
       #palette
       [sortablejs]="pageDetail.pageBlocks"
-      [sortablejsOptions]="{ group: 'shared', handle: '.icon-move-block' }">
+      [sortablejsOptions]="{ group: 'block', handle: '.icon-move-block',animation: 0 }">
       <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of pageDetail.pageBlocks; trackBy: trackByBlock;index as i;">
         <app-palette-block (deleteBlock)="deleteBlock(i)" [pageBlock]="item" (resized)="isResized=$event"></app-palette-block>
       </li>

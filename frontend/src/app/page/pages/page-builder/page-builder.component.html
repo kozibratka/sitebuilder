@@ -11,10 +11,10 @@
 </div>
 <div class="row" [class.grid-item-dragged]="gridDragged$ | async">
   <div class="left-menu" [class]="menuLocked ? 'col-md-2' : 'menu-unlocked'" [@visibleMenu]="getMenuState()" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
-    <app-menu-builder [pageDetail]="pageDetail" (locketEmitter)="menuLocked = $event"></app-menu-builder>
+    <app-menu-builder (dragMenuBlock$)="menuBlockDragged=$event" [pageDetail]="pageDetail" (locketEmitter)="menuLocked = $event"></app-menu-builder>
   </div>
   <div [class]="menuLocked ? 'col-md-10' : 'col-md-12'" class="builder" >
-    <app-palette-builder [pageDetail]="pageDetail"></app-palette-builder>
+    <app-palette-builder [pageDetail]="pageDetail" [menuBlocDragged]="menuBlockDragged"></app-palette-builder>
   </div>
 <!--  {{namePlugin}}-->
 </div>
