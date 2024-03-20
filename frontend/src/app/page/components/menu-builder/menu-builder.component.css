@@ -95,7 +95,7 @@ i.icon-delete {
   cursor: pointer;
 }
 
-::ng-deep .menu-element-block:not(.sortable-ghost) .empty-block-template {
+::ng-deep .menu-element-block .empty-block-template {
   border: 1px solid black;
   height: 122px;
   width: 100%;
