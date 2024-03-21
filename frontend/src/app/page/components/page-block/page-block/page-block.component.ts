@@ -84,6 +84,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   ngAfterViewInit(): void {
   }
 
+
   ngOnDestroy() {
   }
 

@@ -1,12 +1,12 @@
 <div class="block" [class.move-menu-hover]="isMoveMenuHover" (mouseleave)="hoverOnIndexRow=null">
-  <div class="block-content-rows container" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'block', put: ['menu-row']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
-    <div class="text-center line">
-      <div class="new-row-center" *ngIf="!pageBlock.rows.length">
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: 0}">
-          <mat-icon class="add-icon-row-up">add_circle</mat-icon>
-        </button>
-      </div>
+  <div class="text-center line">
+    <div class="new-row-center" *ngIf="!pageBlock.rows.length">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: 0}">
+        <mat-icon class="add-icon-row-up">add_circle</mat-icon>
+      </button>
     </div>
+  </div>
+  <div class="block-content-rows container" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'rows', put: ['rows']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
         <div class="new-row-up">
