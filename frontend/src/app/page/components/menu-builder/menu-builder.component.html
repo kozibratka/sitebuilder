@@ -61,14 +61,14 @@
           (mouseenter)="showMoveIcon = true"
         >
           <div *ngFor="let item of pageBlockTemplateService.blockTemplates; let last = last" class="menu-element-block grid-stack-item-menu">
-            <ng-container *ngIf="!last">
+            <ng-container *ngIf="item.imagePath">
               <img alt="" src="{{item.imagePath}}">
               <app-animation-hider [show] = "showMoveIcon">
                 <i class="material-icons icon-move-block">open_with</i>
                 <i class="material-icons icon-delete" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
               </app-animation-hider>
             </ng-container>
-            <ng-container *ngIf="last">
+            <ng-container *ngIf="last && !pageBlockTemplateService.selectedCategory">
               <div class="empty-block-template">
                 <app-animation-hider [show] = "showMoveIcon">
                   <i class="material-icons icon-move-block">open_with</i>

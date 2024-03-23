@@ -3,11 +3,9 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Security\Validator as AppAssert;
@@ -60,7 +58,7 @@ class PageBlock
     #[ORM\Column(type: 'string', nullable: true)]
     private string $imagePath;
 
-    private string $uniqueId = '';
+    private ?string $uniqueId = '';
 
     public function __construct()
     {
@@ -116,12 +114,12 @@ class PageBlock
         $this->height = $height;
     }
 
-    public function getUniqueId(): string
+    public function getUniqueId(): ?string
     {
         return $this->uniqueId;
     }
 
-    public function setUniqueId(string $uniqueId)
+    public function setUniqueId(?string $uniqueId)
     {
         $this->uniqueId = $uniqueId;
     }

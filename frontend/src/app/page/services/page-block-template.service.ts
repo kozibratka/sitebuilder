@@ -49,7 +49,7 @@ export class PageBlockTemplateService {
       if (!value) {
         return;
       }
-      let block = {...this.pageBlock, category: value._selectedCategory, web: this.webDetailResolverService.webDetail.id};
+      let block = {...blockComponent.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
       if (value.image) {
         this.uploadBlockTemplate(value.image, block);
       } else {
@@ -120,10 +120,10 @@ export class PageBlockTemplateService {
       this.blockTemplates.sort((a, b) => {
         return a.category.name.localeCompare(b.category.name);
       });
+      let emptyBlock: PageBlockInterface = {rows: [], uniqueId: StringService.randomString()};
+      this.blockTemplates.push(emptyBlock);
     } else {
       this.blockTemplates = this.templateBlocksPerCategory.get(this._selectedCategory);
     }
-    let emptyBlock: PageBlockInterface = {rows: [], uniqueId: StringService.randomString()};
-    this.blockTemplates.push(emptyBlock);
   }
 }

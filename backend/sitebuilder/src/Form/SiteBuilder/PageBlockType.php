@@ -18,7 +18,6 @@ class PageBlockType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("height")
 //            ->add('paletteGridItems', CollectionType::class, [
 //                'entry_type' => PaletteGridItemType::class,
 //                'allow_add' => true,
