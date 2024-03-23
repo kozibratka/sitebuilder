@@ -101,6 +101,15 @@
   right: 15px;
 }
 
+.new-row-center {
+  width: 50%;
+  position: absolute;
+  text-align: left;
+  height: 10px;
+  right: 15px;
+  top: 17px;
+}
+
 .new-row-bottom {
   width: 50%;
   position: absolute;
