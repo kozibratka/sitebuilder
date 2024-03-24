@@ -44,4 +44,8 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
   refresh() {
     this.resolve().subscribe();
   }
+
+  isTemplateWeb() {
+    return !!!this.webDetail.parent;
+  }
 }

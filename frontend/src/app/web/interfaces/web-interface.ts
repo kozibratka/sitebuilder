@@ -5,4 +5,5 @@ export interface WebInterface {
   name: string;
   plugins: BasePlugConfigInterface[];
   pages: {id: number, name: string}[];
+  parent?: number;
 }

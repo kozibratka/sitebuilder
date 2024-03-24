@@ -203,6 +203,13 @@ class Web
         $this->imagePath = $imagePath;
     }
 
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function parent() {
+        return $this->parent?->getId();
+    }
+
     public function getAllWebBlocks(): array {
         return [...$this->getParent()?->getPageBlocks()->toArray() ?? [], ...$this->getPageBlocks()->toArray() ?? []];
     }
