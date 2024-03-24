@@ -31,6 +31,7 @@ import { GridCellItemComponent } from './components/grid-cell-item/grid-cell-ite
 import { MenuNewRowComponent } from './components/./menu-new-row/menu-new-row.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { TemplateBlockDialogComponent } from './components/page-block/template-block-dialog/template-block-dialog.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 const routes: Routes = [
@@ -95,6 +96,7 @@ const routes: Routes = [
     FormBuilderModule,
     MatMenuModule,
     FormsModule,
+    MatTooltipModule,
   ]
 })
 export class PageModule { }

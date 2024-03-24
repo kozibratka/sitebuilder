@@ -195,6 +195,13 @@ class PageBlock
         return $this->getWeb()?->getUser() ?? $this->getPage()->getUser();
     }
 
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getWebId() {
+        return $this->web?->getId();
+    }
+
     public function __clone(): void
     {
         $this->id = null;

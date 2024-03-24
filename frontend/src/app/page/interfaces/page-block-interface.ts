@@ -1,4 +1,3 @@
-import {PaletteItemConfig} from './palette-item-config';
 import {GridRowInterface} from "./grid-row-interface";
 
 export interface PageBlockInterface {
@@ -6,6 +5,6 @@ export interface PageBlockInterface {
   rows: GridRowInterface[];
   uniqueId: string;
   category?: {id: number, name: string};
-  web?: number;
+  webId?: number;
   imagePath?: string;
 }

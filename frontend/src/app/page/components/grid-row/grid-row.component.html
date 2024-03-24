@@ -15,13 +15,13 @@
 <app-animation-hider [show] = "isMouseEnter" class="move-icon-row-container" *ngIf="!isDeepChild">
   <div class="row-menu">
     <div class="frameCover">
-      <div title="Nastavení buňek" class="btn draganddrop menu-row">
+      <div matTooltip="Nastavení buňek" class="btn draganddrop menu-row">
         <strong>Buňky</strong>
       </div>
-      <div title="Přesunout" class="btn draganddrop move-row">
+      <div matTooltip="Přesunout" class="btn draganddrop move-row">
         <i class="material-icons icon-move-cell-item">open_with</i>
       </div>
-      <div title="Smazat" class="btn draganddrop" (click)="removeRow$.emit(true)">
+      <div matTooltip="Smazat" class="btn draganddrop" (click)="removeRow$.emit(true)">
         <i class="material-icons icon-remove">delete</i>
       </div>
     </div>

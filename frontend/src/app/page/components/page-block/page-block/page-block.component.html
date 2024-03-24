@@ -32,20 +32,23 @@
 <app-animation-hider [show]="showMoveIcon" class="" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
   <div class="block-move-menu">
     <div class="frameCover">
-      <div title="Nastavení Bloku" class="btn draganddrop block-menu-label">
+      <div matTooltip="Nastavení Bloku" class="btn draganddrop block-menu-label">
         <strong>Blok</strong>
       </div>
-      <div title="Nastavení bloku" class="btn draganddrop">
+      <div matTooltip="Nastavení bloku" class="btn draganddrop">
         <i class="material-icons icon-settings">settings</i>
       </div>
-      <div title="Přesunout" class="btn draganddrop icon-move-block">
+      <div matTooltip="Přesunout" class="btn draganddrop icon-move-block">
         <i class="material-icons icon-move-block">open_with</i>
       </div>
-      <div title="Smazat blok" class="btn draganddrop" (click)="deleteBlock.emit(true)">
+      <div matTooltip="Smazat blok" class="btn draganddrop" (click)="deleteBlock.emit(true)">
         <i class="material-icons icon-remove">delete</i>
       </div>
-      <div *ngIf="userService.hasRole('ROLE_ADMIN')" title="Přidat jako šablonu" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this)">
+      <div *ngIf="userService.hasRole('ROLE_ADMIN')" matTooltip="Přidat jako šablonu" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this)">
         <i class="material-icons icon-remove">add</i>
+      </div>
+      <div *ngIf="userService.hasRole('ROLE_ADMIN') && pageBlock.webId" matTooltip="Aktualizovat šablonu" class="btn draganddrop" (click)="pageBlockTemplateService.update(this)">
+        <i class="material-icons icon-update">update</i>
       </div>
 
     </div>

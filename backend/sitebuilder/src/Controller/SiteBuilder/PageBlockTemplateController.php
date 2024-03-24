@@ -44,6 +44,31 @@ class PageBlockTemplateController extends BaseApiController
     }
 
     /**
+     * @Route("/create/{id}", name="update")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function update(PageBlock $pageBlock, Request $request, WebStorageService $webStorageService) {
+        $form = $this->createForm(PageBlockType::class, $pageBlock, ['is_preview' => true, 'web' => true]);
+        $form->submit(json_decode($request->request->all()['block'], true));
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var PageBlock $pageBlock */
+            $pageBlock = $form->getData();
+            $web = $pageBlock->getWeb();
+            $image = $request->files->get('image');
+            if ($image) {
+                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString());
+            } else {
+                $image = $request->files->get('imageBase64');
+                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString(), true);
+            }
+            $pageBlock->setImagePath($path);
+            $this->flush();
+            return $this->jsonResponseSimple($web->getPageBlocks(), 201);
+        }
+        return $this->invalidFormResponse($form);
+    }
+
+    /**
      * @Route("/category-list", name="category_list")
      * @Security("is_granted('ROLE_ADMIN')")
      */

@@ -6,16 +6,16 @@
   <app-animation-hider [show] = "showMoveIcon" class="move-icon-cell-item-container" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
     <div class="plugin-move-menu">
       <div class="frameCover">
-        <div title="Nastavení prvku" class="btn draganddrop menu-cell-item">
+        <div matTooltip="Nastavení prvku" class="btn draganddrop menu-cell-item">
           <strong>Prvek</strong>
         </div>
-        <div title="Nastavení" class="btn draganddrop" (click)="openSettings()" *ngIf="!gridCellItem.row">
+        <div matTooltip="Nastavení" class="btn draganddrop" (click)="openSettings()" *ngIf="!gridCellItem.row">
           <i class="material-icons icon-settings">settings</i>
         </div>
-        <div title="Přesunout" class="btn draganddrop icon-move-cell">
+        <div matTooltip="Přesunout" class="btn draganddrop icon-move-cell">
           <i class="material-icons icon-move-cell-item">open_with</i>
         </div>
-        <div title="Smazat" class="btn draganddrop" (click)="delete()">
+        <div matTooltip="Smazat" class="btn draganddrop" (click)="delete()">
           <i class="material-icons icon-remove">delete</i>
         </div>
       </div>
