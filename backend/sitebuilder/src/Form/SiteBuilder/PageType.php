@@ -23,7 +23,7 @@ class PageType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'by_reference' => false,
-                    'entry_options' => ['is_preview' => $options['is_preview']],
+                    'entry_options' => ['sync_by_id' => $options['sync_by_id']],
                 ]
             );
         if (!$options['pageBuilder']) {
@@ -42,7 +42,7 @@ class PageType extends AbstractType
             [
                 'data_class' => Page::class,
                 'allow_extra_fields' => true,
-                'is_preview' => false,
+                'sync_by_id' => true,
                 'pageBuilder' => false,
             ]
         );

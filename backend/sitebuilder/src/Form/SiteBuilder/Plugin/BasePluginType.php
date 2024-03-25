@@ -10,7 +10,7 @@ class BasePluginType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('id')
+        $builder->add('id', null, ['mapped' => false])
             ->add('identifier')
             ->add('name')
         ;

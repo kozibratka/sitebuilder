@@ -51,21 +51,25 @@ export class PageBlockTemplateService {
       }
       let block = {...blockComponent.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
       let formData = null;
+      let sendFnc = () => {
+        this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
+          next: (value) => {
+            ArrayHelper.reinitArray(this.webBlocks, value.body);
+            this.refreshMenu(value.body);
+            this.notifierService.notify('Blok byl úspěšně přidán do šablon');
+          },
+          error: err => this.httpResponseToasterService.showError(err)
+        });
+      };
       if (value.image) {
         formData = this.prepareFormData(value.image, block);
+        sendFnc();
       } else {
         ImageService.screenshot(blockComponent.elementRef).subscribe(image => {
           formData = this.prepareFormData(image, block, true);
+          sendFnc();
         });
       }
-      this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
-        next: (value) => {
-          ArrayHelper.reinitArray(this.webBlocks, value.body);
-          this.refreshMenu(value.body);
-          this.notifierService.notify('Blok byl úspěšně přidán do šablon');
-        },
-        error: err => this.httpResponseToasterService.showError(err)
-      });
     })
   }
 
@@ -78,21 +82,25 @@ export class PageBlockTemplateService {
       }
       let block = {...blockComponent.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
       let formData = null;
+      let sendFnc = () => {
+        this.symfonyApiClientService.post('page_block_template_update', formData, {id: block.id}).subscribe({
+          next: (value) => {
+            ArrayHelper.reinitArray(this.webBlocks, value.body);
+            this.refreshMenu(value.body);
+            this.notifierService.notify('Blok byl úspěšně přidán do šablon');
+          },
+          error: err => this.httpResponseToasterService.showError(err)
+        });
+      };
       if (value.image) {
         formData = this.prepareFormData(value.image, block);
+        sendFnc();
       } else {
         ImageService.screenshot(blockComponent.elementRef).subscribe(image => {
           formData = this.prepareFormData(image, block, true);
+          sendFnc();
         });
       }
-      this.symfonyApiClientService.post('page_block_template_update', formData, {id: block.id}).subscribe({
-        next: (value) => {
-          ArrayHelper.reinitArray(this.webBlocks, value.body);
-          this.refreshMenu(value.body);
-          this.notifierService.notify('Blok byl úspěšně přidán do šablon');
-        },
-        error: err => this.httpResponseToasterService.showError(err)
-      });
     })
   }
 
@@ -107,7 +115,7 @@ export class PageBlockTemplateService {
       formData.append("image", blob);
     }
     formData.append("block", JSON.stringify(block));
-    return formData
+    return formData;
   }
 
   deleteTemplateBlock(block:  PageBlockInterface) {

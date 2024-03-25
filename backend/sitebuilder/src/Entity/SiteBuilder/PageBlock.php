@@ -60,6 +60,8 @@ class PageBlock
 
     private ?string $uniqueId = '';
 
+    private ?bool $isFromTemplateBlock = false;
+
     public function __construct()
     {
         $this->paletteGridItems = new ArrayCollection();
@@ -193,6 +195,16 @@ class PageBlock
 
     public function getUser() {
         return $this->getWeb()?->getUser() ?? $this->getPage()->getUser();
+    }
+
+    public function isFromTemplateBlock(): bool
+    {
+        return $this->isFromTemplateBlock;
+    }
+
+    public function setIsFromTemplateBlock(bool $isFromTemplateBlock): void
+    {
+        $this->isFromTemplateBlock = $isFromTemplateBlock;
     }
 
     /**

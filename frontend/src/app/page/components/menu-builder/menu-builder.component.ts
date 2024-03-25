@@ -74,7 +74,8 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   clonePageBlock = (item: PageBlockInterface) => {
-    return JSON.parse(JSON.stringify(item)); // this is what happens if sortablejsCloneFunction is not provided. Add your stuff here
+    let cloneItem = {...item, isFromTemplateBlock: true}
+    return JSON.parse(JSON.stringify(cloneItem));
   }
 
   get locked(): boolean {

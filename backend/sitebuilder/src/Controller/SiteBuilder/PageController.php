@@ -71,7 +71,7 @@ class PageController extends BaseApiController
     public function createPreview(Request $request, Web $web, \Predis\Client $client)
     {
         $this->denyAccessUnlessGranted('page_builder_voter', $web);
-        $form = $this->createForm(PageType::class, null, ['is_preview' => true]);
+        $form = $this->createForm(PageType::class, null, ['sync_by_id' => false]);
         $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */

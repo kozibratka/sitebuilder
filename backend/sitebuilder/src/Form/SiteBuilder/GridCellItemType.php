@@ -19,7 +19,7 @@ class GridCellItemType extends AbstractType
     }
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $this->addPluginFieldSubscriber->syncById = $options['is_preview'];
+        $this->addPluginFieldSubscriber->syncById = $options['sync_by_id'];
         $builder->addEventSubscriber($this->addPluginFieldSubscriber);
         $builder->add('id', null, ['required' => false, 'mapped' => false])
             ->add('itemOrder',IntegerType::class)
@@ -29,7 +29,7 @@ class GridCellItemType extends AbstractType
             $builder->add('row',
                 GridRowType::class,
                 [
-                    'is_preview' => $options['is_preview'],
+                    'sync_by_id' => $options['sync_by_id'],
                     'is_sub_row' => true,
                     'empty_data' => null,
                 ]
@@ -41,7 +41,7 @@ class GridCellItemType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => GridCellItem::class,
-            'is_preview' => false,
+            'sync_by_id' => true,
             'is_sub_row' => true,
         ]);
     }

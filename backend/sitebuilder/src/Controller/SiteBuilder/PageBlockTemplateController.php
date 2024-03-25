@@ -23,7 +23,7 @@ class PageBlockTemplateController extends BaseApiController
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function create(Request $request, WebStorageService $webStorageService) {
-        $form = $this->createForm(PageBlockType::class, null, ['is_preview' => true, 'web' => true]);
+        $form = $this->createForm(PageBlockType::class, null, ['sync_by_id' => false, 'web' => true]);
         $form->submit(json_decode($request->request->all()['block'], true));
         if($form->isSubmitted() && $form->isValid()) {
             /** @var PageBlock $pageBlock */
@@ -44,11 +44,11 @@ class PageBlockTemplateController extends BaseApiController
     }
 
     /**
-     * @Route("/create/{id}", name="update")
+     * @Route("/update/{id}", name="update")
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function update(PageBlock $pageBlock, Request $request, WebStorageService $webStorageService) {
-        $form = $this->createForm(PageBlockType::class, $pageBlock, ['is_preview' => true, 'web' => true]);
+        $form = $this->createForm(PageBlockType::class, $pageBlock, ['sync_by_id' => true, 'web' => true]);
         $form->submit(json_decode($request->request->all()['block'], true));
         if($form->isSubmitted() && $form->isValid()) {
             /** @var PageBlock $pageBlock */

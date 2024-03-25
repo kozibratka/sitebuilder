@@ -15,7 +15,7 @@ use Traversable;
 class AddPluginFieldSubscriber implements EventSubscriberInterface
 {
     private $pluginServices;
-    public $syncById = false;
+    public $syncById = true;
 
     public function __construct(Traversable $pluginServices, private EntityManagerInterface $entityManager)
     {
@@ -38,7 +38,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $identifier = $plugin['identifier'];
             $formClass = $this->pluginServices[$identifier]->getFormClass();
         }
-        if(isset($data['id']) && !$this->syncById) {
+        if(isset($data['id']) && $this->syncById) {
             $gridCellItem = $this->entityManager->getRepository(GridCellItem::class)->find($data['id']);
             if($gridCellItem) {
                 $form->setData($gridCellItem);
@@ -49,7 +49,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $gridCellItem = new GridCellItem();
             $form->setData($gridCellItem);
         }
-        if(isset($plugin['id']) && !$this->syncById) {
+        if(isset($plugin['id']) && $this->syncById) {
             $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
             if($pluginDb->getWeb()) {
                 $data['plugin'] = $plugin['id'];

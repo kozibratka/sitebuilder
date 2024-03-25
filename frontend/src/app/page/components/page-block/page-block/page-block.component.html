@@ -1,6 +1,6 @@
 <div class="block" [class.move-menu-hover]="isMoveMenuHover" (mouseleave)="hoverOnIndexRow=null">
-  <div class="text-center line">
-    <div class="new-row-center" *ngIf="!pageBlock.rows.length">
+  <div class="text-center" *ngIf="!pageBlock.rows.length">
+    <div class="new-row-center">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: 0}">
         <mat-icon class="add-icon-row-up">add_circle</mat-icon>
       </button>
@@ -17,7 +17,7 @@
       </app-animation-hider>
       <app-grid-row (removeRow$)="removeRow(i)" class="row" [row]="row" (mouseenter)="hoverOnIndexRow=i"></app-grid-row>
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
-        <div class="text-center line">
+        <div class="text-center">
           <div class="links new-row-bottom">
             <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button">
               <mat-icon class="add-icon-row-up">add_circle</mat-icon>

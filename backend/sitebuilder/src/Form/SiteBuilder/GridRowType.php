@@ -22,7 +22,7 @@ class GridRowType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'entry_options' => [
-                    'is_preview' => $options['is_preview'],
+                    'sync_by_id' => $options['sync_by_id'],
                     'is_sub_row' => $options['is_sub_row']
                 ],
             ]
@@ -35,7 +35,7 @@ class GridRowType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => GridRow::class,
-            'is_preview' => false,
+            'sync_by_id' => true,
             'is_sub_row' => false,
         ]);
     }

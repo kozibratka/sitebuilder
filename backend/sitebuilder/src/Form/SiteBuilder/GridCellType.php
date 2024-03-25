@@ -22,7 +22,7 @@ class GridCellType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'entry_options' => ['is_preview' => $options['is_preview'], 'is_sub_row' => $options['is_sub_row']],
+                'entry_options' => ['sync_by_id' => $options['sync_by_id'], 'is_sub_row' => $options['is_sub_row']],
             ]
         )
             ->add('width', IntegerType::class)
@@ -34,7 +34,7 @@ class GridCellType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => GridCell::class,
-            'is_preview' => false,
+            'sync_by_id' => true,
             'is_sub_row' => false,
         ]);
     }
