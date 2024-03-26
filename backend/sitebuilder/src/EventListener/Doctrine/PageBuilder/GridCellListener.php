@@ -3,6 +3,7 @@
 namespace App\EventListener\Doctrine\PageBuilder;
 
 use App\Entity\SiteBuilder\GridCell;
+use App\Entity\SiteBuilder\GridCellItem;
 use Doctrine\ORM\EntityManagerInterface;
 
 class GridCellListener
@@ -13,8 +14,11 @@ class GridCellListener
     }
 
     public function preRemove(GridCell $gridCell){
+        /** @var GridCellItem $gridCellItem */
         foreach($gridCell->getItems() as $gridCellItem) {
-            $this->entityManager->remove($gridCellItem);
+            if (!$gridCellItem->isReasigned()) {
+                $this->entityManager->remove($gridCellItem);
+            }
         }
     }
 }

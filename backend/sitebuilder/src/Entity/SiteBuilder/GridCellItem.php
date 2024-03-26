@@ -3,8 +3,8 @@
 namespace App\Entity\SiteBuilder;
 
 use App\Entity\SiteBuilder\Plugin\BasePlugin;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'grid_cell_item')]
@@ -27,6 +27,10 @@ class GridCellItem
     private int $itemOrder = 0;
 
     private string $uniqueId = '';
+    /**
+     * @Serializer\Exclude()
+     */
+    private $reasigned = false;
 
     public function getId(): ?int
     {
@@ -86,6 +90,16 @@ class GridCellItem
     public function setUniqueId(string $uniqueId): void
     {
         $this->uniqueId = $uniqueId;
+    }
+
+    public function isReasigned(): bool
+    {
+        return $this->reasigned;
+    }
+
+    public function setReasigned(bool $reasigned): void
+    {
+        $this->reasigned = $reasigned;
     }
 
     public function getUser() {

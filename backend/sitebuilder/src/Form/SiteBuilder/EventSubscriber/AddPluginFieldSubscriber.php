@@ -42,6 +42,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $gridCellItem = $this->entityManager->getRepository(GridCellItem::class)->find($data['id']);
             if($gridCellItem) {
                 $form->setData($gridCellItem);
+                $gridCellItem->setReasigned(true);
             }else{
                 throw new CustomErrorMessageException('Pokoušíte se upravit element, který je již smazaný');
             }
