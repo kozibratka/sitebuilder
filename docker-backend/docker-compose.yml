@@ -7,9 +7,6 @@ services:
   backend-nginx:
     image: nginx
 
-  php-fpm:
-    build: images/php-fpm
-
   php-fpm-8.0:
     build: images/php-fpm-8.0
 
