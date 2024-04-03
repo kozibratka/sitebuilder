@@ -31,7 +31,7 @@ class WebStorageService
 
     public function getPublicPathFile(Web $web, $name) {
         $path = $this->getUserWebServerRootStorage($web).'/'.$name;
-        return str_replace($_SERVER['DOCUMENT_ROOT'], '', $path);
+        return str_replace($_SERVER['DOCUMENT_ROOT'].'/', '', $path);
     }
 
     private function getUserWebServerRootStorage(Web $web) {

@@ -148,7 +148,7 @@ class UserStorageService
     }
 
     public function getRootServerStorage(UserInterface $user) {
-        $rootPath =  $_ENV['FILE_STORAGE_PATH'] ?? null ?: ($this->parameterBag->get('kernel.project_dir').'/public/storage/');
+        $rootPath =  $this->parameterBag->get('kernel.project_dir').'/public/storage/';
         return $rootPath.'user/'.$user->getId();
     }
 }

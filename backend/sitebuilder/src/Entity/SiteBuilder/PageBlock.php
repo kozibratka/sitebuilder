@@ -3,16 +3,18 @@
 
 namespace App\Entity\SiteBuilder;
 
+use App\Interface\EntityFileProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Security\Validator as AppAssert;
 
 #[ORM\Table(name: 'page_block')]
 #[ORM\Entity]
-class PageBlock
+class PageBlock implements EntityFileProviderInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
@@ -205,6 +207,25 @@ class PageBlock
     public function setIsFromTemplateBlock(bool $isFromTemplateBlock): void
     {
         $this->isFromTemplateBlock = $isFromTemplateBlock;
+    }
+
+    public function getDestinationFilePath(): ?string
+    {
+        return null;
+    }
+
+    public function setFilePath(string $path)
+    {
+    }
+
+    public function getFilePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function getFile(): ?UploadedFile
+    {
+        return null;
     }
 
     /**

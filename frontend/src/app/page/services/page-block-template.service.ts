@@ -34,7 +34,10 @@ export class PageBlockTemplateService {
     private dialog: MatDialog,
   ) { }
 
-
+  initMenu(webBlocks: PageBlockInterface[]) {
+    this.webBlocks = webBlocks;
+    this.refreshMenu();
+  }
   get selectedCategory(): string {
     return this._selectedCategory;
   }
@@ -55,7 +58,7 @@ export class PageBlockTemplateService {
         this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
           next: (value) => {
             ArrayHelper.reinitArray(this.webBlocks, value.body);
-            this.refreshMenu(value.body);
+            this.refreshMenu();
             this.notifierService.notify('Blok byl úspěšně přidán do šablon');
           },
           error: err => this.httpResponseToasterService.showError(err)
@@ -85,7 +88,6 @@ export class PageBlockTemplateService {
       let sendFnc = () => {
         this.symfonyApiClientService.post('page_block_template_update', formData, {id: block.id}).subscribe({
           next: (value) => {
-            ArrayHelper.reinitArray(this.webBlocks, value.body);
             this.refreshMenu(value.body);
             this.notifierService.notify('Blok byl úspěšně přidán do šablon');
           },
@@ -123,9 +125,8 @@ export class PageBlockTemplateService {
       if (!value) {
         return;
       }
-      this.symfonyApiClientService.post('page_block_template_delete', {}, {id: block.id}).subscribe({
+      this.symfonyApiClientService.get<any>('page_block_template_delete', {id: block.id}).subscribe({
         next: (resp) => {
-          ArrayHelper.reinitArray(this.webBlocks, value.body);
           this.refreshMenu(resp.body);
           this.notifierService.notify('Šablona Bloku byla úspěšně smazána');
         },
@@ -134,8 +135,10 @@ export class PageBlockTemplateService {
     })
   }
 
-  refreshMenu(webBlocks: PageBlockInterface[]) {
-    this.webBlocks = webBlocks;
+  refreshMenu(data?: PageBlockInterface[]) {
+    if (data) {
+      ArrayHelper.reinitArray(this.webBlocks, data);
+    }
     this.templateBlocksPerCategory.clear();
     let categorySet = new Set<string>();
     this.webBlocks.forEach(value => {

@@ -5,6 +5,7 @@ namespace App\Controller\SiteBuilder;
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockTemplateCategory;
+use App\Exception\CustomErrorMessageException;
 use App\Form\SiteBuilder\PageBlockType;
 use App\Helper\Helper;
 use App\Service\WebStorageService;
@@ -66,6 +67,19 @@ class PageBlockTemplateController extends BaseApiController
             return $this->jsonResponseSimple($web->getPageBlocks(), 201);
         }
         return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function delete(PageBlock $pageBlock, EntityManagerInterface $entityManager) {
+        $web = $pageBlock->getWeb();
+        if (!$web) {
+            throw new CustomErrorMessageException('Není šablona');
+        }
+        $this->removeEntity($pageBlock);
+        return $this->jsonResponseSimple($web->getPageBlocks(), 200);
     }
 
     /**

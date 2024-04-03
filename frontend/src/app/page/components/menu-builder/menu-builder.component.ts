@@ -53,7 +53,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.pageBlockTemplateService.refreshMenu(this.pageDetail.webBlocks);
+    this.pageBlockTemplateService.initMenu(this.pageDetail.webBlocks);
   }
 
   onMousOver() {
