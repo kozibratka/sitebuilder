@@ -8,7 +8,7 @@ use App\Entity\SiteBuilder\PageBlockTemplateCategory;
 use App\Exception\CustomErrorMessageException;
 use App\Form\SiteBuilder\PageBlockType;
 use App\Helper\Helper;
-use App\Service\WebStorageService;
+use App\Service\Storage\WebStorageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;

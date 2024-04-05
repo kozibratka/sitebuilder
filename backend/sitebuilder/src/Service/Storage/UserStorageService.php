@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Storage;
 
 use App\Entity\User;
 use App\Helper\Helper;

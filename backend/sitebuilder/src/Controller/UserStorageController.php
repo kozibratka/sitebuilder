@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-use App\Service\UserStorageService;
+use App\Service\Storage\UserStorageService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

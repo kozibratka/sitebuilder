@@ -7,7 +7,7 @@ use App\Entity\SiteBuilder\Web;
 use App\Entity\User;
 use App\Form\UserRegistrationType;
 use App\Form\UserType;
-use App\Service\UserStorageService;
+use App\Service\Storage\UserStorageService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
