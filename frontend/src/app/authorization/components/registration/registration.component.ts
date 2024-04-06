@@ -14,6 +14,7 @@ import {ApiFormService} from "../../../core/services/form/api-form.service";
 })
 export class RegistrationComponent implements OnInit {
   registrationForm: FormGroup;
+  activationSend = false;
 
   constructor(
     private loginClientService: LoginClientService,
@@ -26,6 +27,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
         this.apiFormService.send('user_registration', this.registrationForm).subscribe(httpResponse => {
+          // this.activationSend = true;
           this.loginClientService.tryLogin(this.registrationForm.get('email').value,
             this.registrationForm.get('password').get('first').value).subscribe({
             next: () => this.router.navigate(['/admin', httpResponse.body.webs[0].id]),

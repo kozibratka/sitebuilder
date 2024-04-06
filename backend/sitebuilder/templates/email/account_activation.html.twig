@@ -1,0 +1,7 @@
+{% extends "email/base_email.html.twig" %}
+{% block title %}
+    Aktivace nového účtu
+{% endblock %}
+{% block content_text %}
+    Aktivaci nového účtu provedete kliknutím na následující odkaz <a href="{{ url('user_activation', {hash: hash}) }}">zde</a>
+{% endblock %}

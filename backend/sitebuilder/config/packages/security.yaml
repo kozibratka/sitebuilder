@@ -54,6 +54,7 @@ security:
     access_control:
          - { path: ^/security/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/user/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/user/activation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-preview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/plugin/plugin-form/save-data, roles: IS_AUTHENTICATED_ANONYMOUSLY }

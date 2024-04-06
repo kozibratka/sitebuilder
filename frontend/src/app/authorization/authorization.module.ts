@@ -19,7 +19,7 @@ const routes: Routes = [
         component: RegistrationComponent
       },
       {
-        path: 'login',
+        path: 'login/:activated',
         component: LoginComponent
       }
     ]

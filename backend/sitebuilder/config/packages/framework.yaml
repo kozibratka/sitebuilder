@@ -15,3 +15,10 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+    rate_limiter:
+        registration_api:
+            # use 'sliding_window' if you prefer that policy
+            policy: 'fixed_window'
+            limit: 100
+            interval: '60 minutes'

@@ -1,4 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <p class="alert alert-success" *ngIf="activated">Účet byl aktivován, nyní se můžete přihlásit.</p>
   <div class="form-group">
     <div  class="input-group mb-3">
       <input type="email" class="form-control" placeholder="Email" formControlName="email">

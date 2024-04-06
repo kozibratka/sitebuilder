@@ -17,6 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Table(name: 'user')]
 #[ORM\Entity]
+#[UniqueEntity(
+    fields: ['email'],
+)]
 class User implements UserInterface
 {
     /**
@@ -61,7 +64,10 @@ class User implements UserInterface
     private bool $lockBuilderMenu = false;
 
     #[ORM\Column(type: 'json')]
-    private array $roles = ['ROLE_USER'];
+    private array $roles = [];
+
+    #[ORM\Column(type: 'string')]
+    private string $hash = '';
 
     public function __construct()
     {
@@ -91,6 +97,12 @@ class User implements UserInterface
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    public function addRole($role) {
+        if (!in_array($role, $this->roles)) {
+            $this->roles[] = $role;
+        }
     }
 
     public function getPassword(): string
@@ -160,5 +172,15 @@ class User implements UserInterface
     public function setLockBuilderMenu(bool $showBuilderMenu): void
     {
         $this->lockBuilderMenu = $showBuilderMenu;
+    }
+
+    public function getHash(): string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(string $hash): void
+    {
+        $this->hash = $hash;
     }
 }

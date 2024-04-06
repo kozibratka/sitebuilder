@@ -1,4 +1,7 @@
-<form [formGroup]="registrationForm">
+<p *ngIf="activationSend">
+  Registrace proběhla úspěšně, na email vám byl zaslán odkaz pro aktivaci vašeho nového účtu.
+</p>
+<form *ngIf="!activationSend" [formGroup]="registrationForm">
   <div appFormError class="form-group">
     <div #errorFormContainer class="input-group">
       <input type="text" class="form-control" placeholder="Celé jméno" formControlName="fullName">

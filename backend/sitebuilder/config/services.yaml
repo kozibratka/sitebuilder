@@ -4,6 +4,10 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.domain: '%env(APP_DOMAIN)%'
+    app.port: '%env(PUBLIC_SERVER_PORT)%'
+    app.email_no_reply: 'noreply@%app.domain%'
+    app.date_time_format: 'd.m.Y H:i:s'
 
 services:
     # default configuration for services in *this* file
