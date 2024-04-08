@@ -6,7 +6,7 @@ namespace App\Form\SiteBuilder;
 
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockTemplateCategory;
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PreSubmitEvent;

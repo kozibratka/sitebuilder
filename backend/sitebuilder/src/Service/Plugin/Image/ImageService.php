@@ -4,8 +4,8 @@
 namespace App\Service\Plugin\Image;
 
 
-use App\Entity\SiteBuilder\Plugin\Image\PluginImage;
-use App\Form\SiteBuilder\Plugin\Image\PluginImageType;
+use App\Entity\Plugin\Image\PluginImage;
+use App\Form\Plugin\Image\PluginImageType;
 use App\Service\Plugin\PluginInterface;
 
 class ImageService implements PluginInterface

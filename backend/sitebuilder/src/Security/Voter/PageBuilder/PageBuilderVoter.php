@@ -4,14 +4,13 @@
 namespace App\Security\Voter\PageBuilder;
 
 
+use App\Entity\Page;
+use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCell;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\GridRow;
-use App\Entity\SiteBuilder\PaletteGridItem;
-use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;

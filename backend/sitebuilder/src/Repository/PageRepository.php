@@ -4,7 +4,7 @@
 namespace App\Repository;
 
 
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 

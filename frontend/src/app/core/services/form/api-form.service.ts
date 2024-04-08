@@ -34,7 +34,11 @@ export class ApiFormService {
     const iterate = (errors, form: AbstractControl) => {
       Object.keys(errors).forEach(key => {
         if (Array.isArray(errors[key])){
-          form.get(key).setErrors(errors[key], {emitEvent: true});
+          if (typeof errors[key][0] === 'string') {
+            form.get(key).setErrors(errors[key], {emitEvent: true});
+          } else {
+            iterate(errors[key], form.get(key));
+          }
         }
         else if (typeof errors[key] === 'string') {
           baseErrors.push(errors[key]);

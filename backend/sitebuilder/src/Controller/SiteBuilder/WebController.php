@@ -3,9 +3,9 @@
 namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
-use App\Form\SiteBuilder\WebType;
+use App\Form\Web\WebType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

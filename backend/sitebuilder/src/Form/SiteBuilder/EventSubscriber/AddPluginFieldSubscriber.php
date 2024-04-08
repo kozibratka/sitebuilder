@@ -2,8 +2,8 @@
 
 namespace App\Form\SiteBuilder\EventSubscriber;
 
+use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

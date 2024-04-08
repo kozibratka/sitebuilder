@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -54,7 +54,7 @@ class User implements UserInterface
     #[ORM\Column(type: 'string')]
     private string $password = '';
 
-    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\Web', mappedBy: 'user', cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Web::class, mappedBy: 'user', cascade: ['persist'])]
     private Collection $webs;
 
     /**

@@ -13,6 +13,13 @@
           <label class="form-check-label" for="help-text1">Web bude sloužit jako šablona</label>
         </div>
       </ng-container>
+      <label class="form-label">Doména:</label>
+      <div formArrayName="domains">
+        <div *ngFor="let domain of domains.controls; let i=index" [formGroupName]="i">
+          <input appFormError placeholder="Např: domena.cz" type="text" formControlName="name" class="form-control">
+        </div>
+      </div>
+
       <div class="container-fluid mt-3">
         <div class="d-flex justify-content-end">
           <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button>Zpět na seznam webů</a>

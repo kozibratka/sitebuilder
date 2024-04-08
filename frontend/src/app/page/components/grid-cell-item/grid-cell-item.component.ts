@@ -12,18 +12,11 @@ import {
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {AbstractPluginResolver} from "../../services/abstract-classes/abstract-plugin-resolver";
 import {AbstractPlugin} from "../../../plugins/abstract-class/abstract-plugin";
-import {
-  PluginMiniAdminComponent
-} from "../../pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component";
 import {PluginResolverService} from "../../../plugins/services/plugin-resolver.service";
 import {PageBuilderComponent} from "../../pages/page-builder/page-builder.component";
 import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
-import {AdminAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/admin-able-interface";
-import {SettingAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
-import {MenuAdminComponent} from "../../../plugins/modules/menu/pages/menu-admin/menu-admin.component";
 import {AdminPluginSelectComponent} from "../../../plugins/components/plugin-select/admin-plugin-select.component";
 import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
-import {InitAbleInterface} from "../../../core/components/moveable-modal/interfaces/init-able-interface";
 
 @Component({
   selector: 'app-grid-cell-item',

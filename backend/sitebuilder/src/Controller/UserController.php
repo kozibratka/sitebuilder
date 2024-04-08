@@ -4,18 +4,16 @@
 namespace App\Controller;
 
 use App\Constant\Role;
-use App\Entity\SiteBuilder\Web;
 use App\Entity\User;
+use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\UserRegistrationType;
 use App\Form\UserType;
 use App\Helper\Helper;
 use App\Service\Storage\UserStorageService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;

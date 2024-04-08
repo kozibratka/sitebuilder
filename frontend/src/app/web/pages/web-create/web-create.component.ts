@@ -1,16 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormArray, FormGroup} from '@angular/forms';
 import {WebFormService} from '../../services/web-form.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WebInterface} from '../../interfaces/web-interface';
-import {WebListResolverGuard} from '../../services/web-list-resolver.service';
-import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
-import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Title} from '@angular/platform-browser';
 import {UserService} from "../../../authorization/services/user.service";
 import {WebDetailResolverService} from "../../services/web-detail-resolver.service";
-import {forkJoin} from "rxjs";
 import {ApiFormService} from "../../../core/services/form/api-form.service";
 
 @Component({
@@ -29,7 +24,6 @@ export class WebCreateComponent implements OnInit {
     private notifierService: NotifierService,
     public title: Title,
     public userService: UserService,
-    private webDetail: WebDetailResolverService,
     public apiFormService: ApiFormService
   ) {
   }
@@ -40,7 +34,7 @@ export class WebCreateComponent implements OnInit {
   }
 
   updateWeb(): void {
-    const webDetail = this.webDetail.webDetail;
+    const webDetail = this.route.snapshot.data.web;
     this.createWebForm = this.webFormService.createForm(this.userService.hasRole('ROLE_ADMIN'));
     this.createWebForm.patchValue(webDetail);
     this.createWebForm.statusChanges.subscribe(status => {
@@ -51,5 +45,9 @@ export class WebCreateComponent implements OnInit {
         });
       }
     });
+  }
+
+  get domains() {
+    return this.createWebForm.get('domains') as FormArray;
   }
 }

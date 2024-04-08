@@ -5,7 +5,7 @@ namespace App\Controller\Plugin;
 
 use App\Controller\BaseApiController;
 use App\Entity\SiteBuilder\Plugin\ArticlePlugin;
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**

@@ -4,7 +4,7 @@
 namespace App\EventListener\Doctrine\PageBuilder\Plugin;
 
 
-use App\Entity\SiteBuilder\Plugin\Form\PluginForm;
+use App\Entity\Plugin\Form\PluginForm;
 use Nzo\UrlEncryptorBundle\Encryptor\Encryptor;
 
 class FormListener

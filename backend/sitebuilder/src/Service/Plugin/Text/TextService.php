@@ -2,8 +2,8 @@
 
 namespace App\Service\Plugin\Text;
 
-use App\Entity\SiteBuilder\Plugin\Text\PluginText;
-use App\Form\SiteBuilder\Plugin\Text\PluginTextType;
+use App\Entity\Plugin\Text\PluginText;
+use App\Form\Plugin\Text\PluginTextType;
 use App\Service\Plugin\PluginInterface;
 
 class TextService implements PluginInterface

@@ -4,7 +4,7 @@
 namespace App\EventListener\Doctrine\PageBuilder;
 
 
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
+use App\Entity\Plugin\BasePlugin;
 
 class PluginResolveIdentifierListener
 {

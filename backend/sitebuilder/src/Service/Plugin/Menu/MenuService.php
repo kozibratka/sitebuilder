@@ -2,8 +2,8 @@
 
 namespace App\Service\Plugin\Menu;
 
-use App\Entity\SiteBuilder\Plugin\Menu\PluginMenu;
-use App\Form\SiteBuilder\Plugin\Menu\PluginMenuType;
+use App\Entity\Plugin\Menu\PluginMenu;
+use App\Form\Plugin\Menu\PluginMenuType;
 use App\Service\Plugin\PluginInterface;
 
 class MenuService implements PluginInterface

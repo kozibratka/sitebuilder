@@ -5,12 +5,12 @@ namespace App\Controller\SiteBuilder;
 
 
 use App\Controller\BaseApiController;
+use App\Entity\Page;
+use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
-use App\Entity\SiteBuilder\Page;
 use App\Entity\SiteBuilder\PageBlock;
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
-use App\Entity\SiteBuilder\Web;
-use App\Form\SiteBuilder\PageType;
+use App\Entity\Web\Web;
+use App\Form\PageType;
 use Doctrine\Persistence\ManagerRegistry;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;

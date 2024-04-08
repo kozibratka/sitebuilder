@@ -3,8 +3,8 @@
 namespace App\Controller\SiteBuilder;
 
 use App\Controller\BaseApiController;
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Plugin\BasePlugin;
+use App\Entity\Web\Web;
 use App\Service\Plugin\PluginServiceService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;

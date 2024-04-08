@@ -4,8 +4,8 @@
 namespace App\Service\Plugin\Video;
 
 
-use App\Entity\SiteBuilder\Plugin\Video\PluginVideo;
-use App\Form\SiteBuilder\Plugin\Video\PluginVideoType;
+use App\Entity\Plugin\Video\PluginVideo;
+use App\Form\Plugin\Video\PluginVideoType;
 use App\Service\Plugin\PluginInterface;
 
 class VideoService implements PluginInterface

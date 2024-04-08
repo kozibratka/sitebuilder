@@ -2,7 +2,7 @@
 
 namespace App\Service\Storage;
 
-use App\Entity\SiteBuilder\Web;
+use App\Entity\Web\Web;
 use App\Helper\ImageHelper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;

@@ -4,8 +4,8 @@
 namespace App\Controller\Plugin;
 
 use App\Controller\BaseApiController;
-use App\Entity\SiteBuilder\Plugin\Form\FormData;
-use App\Entity\SiteBuilder\Plugin\Form\PluginForm;
+use App\Entity\Plugin\Form\FormData;
+use App\Entity\Plugin\Form\PluginForm;
 use Doctrine\ORM\EntityManagerInterface;
 use Nzo\UrlEncryptorBundle\Encryptor\Encryptor;
 use Symfony\Component\HttpFoundation\JsonResponse;

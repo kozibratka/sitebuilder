@@ -4,8 +4,8 @@
 namespace App\Service\Plugin\Form;
 
 
-use App\Entity\SiteBuilder\Plugin\Form\PluginForm;
-use App\Form\SiteBuilder\Plugin\Form\PluginFormType;
+use App\Entity\Plugin\Form\PluginForm;
+use App\Form\Plugin\Form\PluginFormType;
 use App\Service\Plugin\PluginInterface;
 
 class FormService implements PluginInterface

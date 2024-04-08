@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { SelectTemplateComponent } from './pages/web-create/select-template/select-template.component';
 import { CreateNameComponent } from './pages/web-create/create-name/create-name.component';
 import {GenericResolver} from "../core/services/resolver/generic.resolver";
+import {WebDetailResolverService} from "./services/web-detail-resolver.service";
 
 
 const routes: Routes = [
@@ -32,6 +33,8 @@ const routes: Routes = [
   {
     path: 'update/:webId',
     component: WebCreateComponent,
+    resolve: {web: GenericResolver},
+    data: {resolverConfig: {data: {route: 'web_read'}, queryDataMap: {webId: 'id'}}},
   }
 ];
 @NgModule({

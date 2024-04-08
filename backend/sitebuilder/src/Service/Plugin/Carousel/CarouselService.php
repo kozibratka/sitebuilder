@@ -4,8 +4,8 @@
 namespace App\Service\Plugin\Carousel;
 
 
-use App\Entity\SiteBuilder\Plugin\Carousel\PluginCarousel;
-use App\Form\SiteBuilder\Plugin\Carousel\PluginCarouselType;
+use App\Entity\Plugin\Carousel\PluginCarousel;
+use App\Form\Plugin\Carousel\PluginCarouselType;
 use App\Service\Plugin\PluginInterface;
 
 class CarouselService implements PluginInterface

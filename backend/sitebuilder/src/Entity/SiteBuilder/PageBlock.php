@@ -3,14 +3,16 @@
 
 namespace App\Entity\SiteBuilder;
 
+use App\Entity\Page;
+use App\Entity\Web\Web;
 use App\Interface\EntityFileProviderInterface;
+use App\Security\Validator as AppAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Security\Validator as AppAssert;
 
 #[ORM\Table(name: 'page_block')]
 #[ORM\Entity]
@@ -27,7 +29,7 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
     private $height = 1;
 
-    #[ORM\ManyToOne(targetEntity: 'App\Entity\SiteBuilder\Page', inversedBy: 'pageBlocks')]
+    #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Page $page = null;
 

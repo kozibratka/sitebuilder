@@ -2,7 +2,7 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Entity\SiteBuilder\Plugin\BasePlugin;
+use App\Entity\Plugin\BasePlugin;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
