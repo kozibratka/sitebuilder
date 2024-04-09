@@ -29,12 +29,11 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
     if (!this.loginClient.isLoggedIn()) {
       return this.router.parseUrl('/authorization/login');
     }
-    const webId = parseInt(route.paramMap.get('webId'), null);
-    return this.refreshWebList(webId);
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.webList;
+    const webId = parseInt(route.paramMap.get('webId'), null);
+    return this.refreshWebList(webId);
   }
 
   refreshWebList(webId: number = 0) {

@@ -13,7 +13,6 @@ const routes: Routes = [
     path: 'admin/:webId',
     component: LayoutComponent,
     canActivate: [WebListResolverGuard],
-    resolve: {webList: WebListResolverGuard},
     runGuardsAndResolvers: 'always',
     children: [
       {

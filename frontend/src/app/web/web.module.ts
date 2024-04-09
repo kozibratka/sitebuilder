@@ -15,12 +15,14 @@ import {GenericResolver} from "../core/services/resolver/generic.resolver";
 import {WebDetailResolverService} from "./services/web-detail-resolver.service";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {WebListResolverGuard} from "./services/web-list-resolver.service";
 
 
 const routes: Routes = [
   {
     path: 'list',
     component: WebListComponent,
+    resolve: {webList: WebListResolverGuard},
   },
   {
     path: 'select-template',
