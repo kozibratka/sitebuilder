@@ -6,6 +6,7 @@ import {catchError, map} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
 import {Helper} from "../../core/helpers/helper";
+import {LoginClientService} from "../../authorization/services/login-client.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,15 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
     private router: Router,
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService,
+    private loginClient: LoginClientService,
   ) {
 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (!this.loginClient.isLoggedIn()) {
+      return this.router.parseUrl('/authorization/login');
+    }
     const webId = parseInt(route.paramMap.get('webId'), null);
     return this.refreshWebList(webId);
   }

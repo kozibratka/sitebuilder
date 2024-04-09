@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   private internal = 0;
-  activated = false;
+  activated = 0;
 
   constructor(
     private loginFormService: LoginFormService,
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activated = !!this.route.snapshot.paramMap.get('activated');
+    this.activated = parseInt(this.route.snapshot.paramMap.get('activated'));
     if (this.loginClientService.isLoggedIn()) {
       this.router.navigate(['admin', 0]);
     }

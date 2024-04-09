@@ -37,6 +37,7 @@ export class LoginClientService {
     if (new Date(decoded.exp * 1000) < new Date()) {
       return false;
     }
+    return true;
   }
 
   logout(): void {

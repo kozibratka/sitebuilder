@@ -49,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/authorization/login',
+    redirectTo: '/admin/0',
     pathMatch: 'full'
   },
   {
