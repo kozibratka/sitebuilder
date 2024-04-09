@@ -11,7 +11,7 @@
       <!-- Position Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Název webu</th>
-        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        <td mat-cell *matCellDef="let element">{{element.name}} <mat-icon [matTooltip]="'Na tomto webu se aktuálně nacházíte'"  fontIcon="star" *ngIf="element.id==webDetailResolverService.webDetail.id">*</mat-icon></td>
       </ng-container>
 
       <ng-container matColumnDef="action">

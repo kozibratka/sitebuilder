@@ -31,7 +31,7 @@ export class LayoutComponent implements OnInit {
     private loginClientService: LoginClientService,
     private notifierService: NotifierService,
     private router: Router,
-    private webDetailResolverService: WebDetailResolverService,
+    public webDetailResolverService: WebDetailResolverService,
     public title: Title,
     public userService: UserService,
     public webListResolverGuard: WebListResolverGuard,

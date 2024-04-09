@@ -34,3 +34,7 @@
 ::ng-deep body:not(.sidebar-collapse):has(.hide-menu) {
   margin-left: -250px!important;
 }
+
+.navbar-head {
+  width: 100%;
+}

@@ -13,6 +13,8 @@ import { SelectTemplateComponent } from './pages/web-create/select-template/sele
 import { CreateNameComponent } from './pages/web-create/create-name/create-name.component';
 import {GenericResolver} from "../core/services/resolver/generic.resolver";
 import {WebDetailResolverService} from "./services/web-detail-resolver.service";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 const routes: Routes = [
@@ -53,6 +55,8 @@ const routes: Routes = [
     MatTableModule,
     MatDialogModule,
     MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
   ]
 })
 export class WebModule { }
