@@ -29,6 +29,15 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
     if (!this.loginClient.isLoggedIn()) {
       return this.router.parseUrl('/authorization/login');
     }
+    if (state.url === '/admin/0/web/select-template') {
+      return true;
+    }
+    const webId = parseInt(route.paramMap.get('webId'), null);
+    if (!webId) {
+      return this.refreshWebList();
+    }
+
+    return true;
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
@@ -45,7 +54,7 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
         // }
         if (!webId) {
           if (!this.webList.length) {
-            return this.router.parseUrl('/admin/0/web/list');
+            return this.router.parseUrl('/admin/0/web/select-template');
           } else {
             return this.router.createUrlTree(['/admin', this.webList[0].id]);
           }

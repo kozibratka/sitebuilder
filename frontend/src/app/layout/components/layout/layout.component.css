@@ -28,7 +28,7 @@
 }
 
 .hide-menu {
-  display: none;
+  visibility: hidden;
 }
 
 ::ng-deep body:not(.sidebar-collapse):has(.hide-menu) {
