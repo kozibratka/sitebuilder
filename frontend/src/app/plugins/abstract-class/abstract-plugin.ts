@@ -7,8 +7,6 @@ export abstract class AbstractPlugin<T extends BasePlugConfigInterface>{
 
   abstract refreshView(): void;
 
-  abstract getDisabledStateWhenDraggingItem(): any;
-
   initializeSettings(settings: T): void {
     this.settings = settings;
   }

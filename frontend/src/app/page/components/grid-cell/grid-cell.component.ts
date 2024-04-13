@@ -23,7 +23,7 @@ export class GridCellComponent implements OnInit{
 
 
   constructor(
-    @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
+    @Inject('AnyDraggedResized') private sortableJsDragged$: Subject<boolean>,
   ) {
   }
 

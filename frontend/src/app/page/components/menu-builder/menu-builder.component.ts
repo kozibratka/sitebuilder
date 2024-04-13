@@ -45,7 +45,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     public pageBlockTemplateService: PageBlockTemplateService,
     public webDetailResolverService: WebDetailResolverService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
-    @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
+    @Inject('AnyDraggedResized') private sortableJsDragged$: Subject<boolean>,
   ) {
   }
 

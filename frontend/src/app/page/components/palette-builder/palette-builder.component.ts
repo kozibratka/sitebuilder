@@ -18,7 +18,7 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
   private _isResized = false;
 
   constructor(
-    @Inject('SortableJsDragged') public sortableJsDragged$: Subject<boolean>,
+    @Inject('AnyDraggedResized') public sortableJsDragged$: Subject<boolean>,
   ) {
   }
 

@@ -8,7 +8,7 @@ import {
   Inject,
   Input,
   NgZone, OnDestroy,
-  OnInit,
+  OnInit, Optional,
   Output,
   QueryList,
   Renderer2,
@@ -40,14 +40,11 @@ import {PageBlockTemplateService} from "../../../services/page-block-template.se
   styleUrls: ['./page-block.component.css'],
 })
 export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
-  static BLOCK__TEMPLATE_UPDATED = 'BLOCK__TEMPLATE_UPDATED';
-
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @ViewChild(SortablejsDirective, {static: true}) sortablejs: SortablejsDirective;
   @Output() resized = new EventEmitter<boolean>();
   private _pageBlock: PageBlockInterface;
-  draggingItemBottom = false;
   updateBottomPaddingSubscription: Subscription;
   private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
   hoverOnIndexRow: number = null;
@@ -57,19 +54,16 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
-    private changeDetectorRef: ChangeDetectorRef,
-    private applicationRef: ApplicationRef,
     private renderer: Renderer2,
     private ngZone: NgZone,
     private window: Window,
-    private quickMenuService: QuickMenuService,
     public elementRef: ElementRef,
     private paletteBlockService: PaletteBlockService,
     public userService: UserService,
     public pageBlockTemplateService: PageBlockTemplateService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
-    @Inject('SortableJsDragged') private sortableJsDragged$: Subject<boolean>,
+    @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
     @Inject(DOCUMENT) private document: Document,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
@@ -77,7 +71,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
 
   ngOnInit(): void {
     // this.initGridStack();
-    // this.registerOnDraggedItem();
     // this.registerIsResizedOnDrag();
   }
 
@@ -140,39 +133,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     });
 
   }
-
-
-  private registerOnDraggedItem() {
-    this.updateBottomPaddingSubscription = this.gridItemDragged.subscribe(value => {
-      if (value) {
-        this.draggingItemBottom = true;
-        this.enableDisablePlugins(true);
-      } else {
-        this.enableDisablePlugins(false);
-        this.draggingItemBottom = false;
-      }
-    });
-  }
-
-  private enableDisablePlugins(disable = true) {
-    if (disable) {
-      this.itemStatesBeforeDragging.clear();
-      this.paletteItemComponents.forEach(item => {
-        const plugin = item.componentRef.instance;
-        this.itemStatesBeforeDragging.set(plugin, {...plugin.settings});
-        const offState = item.componentRef.instance.getDisabledStateWhenDraggingItem();
-        Object.assign(plugin.settings, offState);
-
-      });
-    } else {
-      this.itemStatesBeforeDragging.forEach((settings, plugin) => {
-        Object.assign(plugin.settings, settings);
-      });
-    }
-
-    this.draggingItemBottom = true;
-    this.changeDetectorRef.detectChanges();
-  }
   private registerIsResizedOnDrag() {
     let sizeObserver;
     this.gridItemDragged.subscribe(value => {
@@ -202,11 +162,11 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   onDragStart = (event: any) => {
-    this.sortableJsDragged$.next(true);
+    this.anyDraggedResized$.next(true);
   }
 
   onDragEnd = (event: any)=> {
-    this.sortableJsDragged$.next(false);
+    this.anyDraggedResized$.next(false);
   }
 
   removeRow(index:number) {

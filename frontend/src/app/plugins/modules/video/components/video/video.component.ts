@@ -1,23 +1,29 @@
-import {AfterViewChecked, Component} from '@angular/core';
+import {AfterViewChecked, Component, Inject, OnInit, Optional} from '@angular/core';
 import {VideoConfigInterface} from '../../interfaces/video-config-interface';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {AbstractPlugin} from '../../../../abstract-class/abstract-plugin';
-import {PluginIdentifier} from '../../../../constants/plugin-identifier';
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-video-v1',
   templateUrl: 'video.component.html',
   styleUrls: ['video.component.css']
 })
-export class VideoComponent extends AbstractPlugin<VideoConfigInterface> implements AfterViewChecked{
+export class VideoComponent extends AbstractPlugin<VideoConfigInterface> implements AfterViewChecked, OnInit{
 
   sanitizedUrl: SafeResourceUrl;
   private lastVideoPath: string;
+  disable = false;
 
   constructor(
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
   ) {
     super();
+  }
+
+  ngOnInit() {
+    this.getDisabledStateWhenDraggingItem()
   }
 
   ngAfterViewChecked(): void {
@@ -27,7 +33,11 @@ export class VideoComponent extends AbstractPlugin<VideoConfigInterface> impleme
   }
 
   getDisabledStateWhenDraggingItem(): any {
-    return {videoPath: ''};
+    if (this.anyDraggedResized$) {
+      this.anyDraggedResized$.subscribe(value => {
+        this.disable = value;
+      })
+    }
   }
 
   getVideoUrl() {

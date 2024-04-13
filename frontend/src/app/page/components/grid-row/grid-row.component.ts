@@ -6,11 +6,11 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit,
+  OnInit, Optional,
   Output
 } from '@angular/core';
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
-import {fromEvent} from "rxjs";
+import {fromEvent, Subject} from "rxjs";
 import {DOCUMENT} from "@angular/common";
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 import {StringService} from "../../../core/services/string.service";
@@ -28,7 +28,8 @@ export class GridRowComponent implements OnInit, OnDestroy{
   isMouseEnter = false;
   constructor(
     private elementRef: ElementRef<HTMLElement>,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
   ) {
   }
 
@@ -73,6 +74,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
 
   onCellResized(event: MouseEvent, cellIndex: number) {
     this.isResized = true;
+    this.anyDraggedResized$.next(true);
     let start = event.clientX;
     let cellWidth = this.elementRef.nativeElement.offsetWidth / 12;
     let leftCell = this.row.cells[cellIndex];
@@ -95,6 +97,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
       subscriptionMouseMove.unsubscribe();
       this.document.body.style.cursor = '';
       this.isResized = false;
+      this.anyDraggedResized$.next(false);
     });
   }
 
