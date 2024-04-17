@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     errorPath: 'url',
 )]
 #[ORM\Table(name: 'page')]
+#[ORM\Index(columns: ['url'], name: 'url')]
 #[ORM\Entity(repositoryClass: 'App\Repository\PageRepository')]
 class Page
 {

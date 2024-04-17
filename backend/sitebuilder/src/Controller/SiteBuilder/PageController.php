@@ -158,12 +158,23 @@ class PageController extends BaseApiController
     }
 
     /**
-     * @Route("/get-public/{domain}", name="get_public")
+     * @Route("/get-public", name="get_public")
      */
-    public function getPagePublic(Request $request, string $domain)
+    public function getPagePublic(Request $request)
     {
-        $url = $request->request->get('url');
-        $page = $this->getDoctrine()->getRepository(Page::class)->findOneBy(['url' => $url]);
+        $path = $request->query->get('url');
+        $hostname = $request->query->get('hostname');
+        $page = $this->getDoctrine()->getRepository(Page::class)->getForHostnamePath($hostname, $path);
+        if (!$page) {
+            if (str_starts_with($hostname, 'www.')) {
+                $hostnameTmp = substr($hostname, 4);
+                $page = $this->getDoctrine()->getRepository(Page::class)->getForHostnamePath($hostnameTmp, $path);
+            }
+            if (!$page && !str_starts_with($hostname, 'www.')) {
+                $hostnameTmp = 'www.'.$hostname;
+                $page = $this->getDoctrine()->getRepository(Page::class)->getForHostnamePath($hostnameTmp, $path);
+            }
+        }
 
         return $this->jsonResponseSimple($page ?? [], 201);
     }

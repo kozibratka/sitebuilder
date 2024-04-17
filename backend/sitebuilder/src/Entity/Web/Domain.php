@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'domain')]
+#[ORM\Index(columns: ['name'], name: 'name')]
 #[UniqueEntity(
     fields: ['name']
 )]
