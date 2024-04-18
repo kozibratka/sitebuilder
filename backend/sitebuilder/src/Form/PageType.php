@@ -32,6 +32,7 @@ class PageType extends AbstractType
                 ->add('name',null, ['empty_data' => ''])
                 ->add('url', null, ['empty_data' => ''])
                 ->add('description')
+                ->add('homePage')
             ;
         }
 

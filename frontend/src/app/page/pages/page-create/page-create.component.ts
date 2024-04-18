@@ -62,7 +62,7 @@ export class PageCreateComponent implements OnInit {
   }
 
   updatePage(): void {
-    const pageDetail: WebInterface = this.route.snapshot.data.pageDetail;
+    const pageDetail = this.route.snapshot.data.pageDetail;
     this.createPageForm = this.pageFormService.createForm();
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {

@@ -9,6 +9,12 @@
       <input appFormError (keyup)="refreshUrlInput($event)" type="text" class="form-control" placeholder="Název stránky" formControlName="name" id="name">
       <label class="mt-3" for="url">Url stráky:</label>
       <input appFormError type="text" class="form-control" placeholder="Url stránky" formControlName="url" id="url">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" formControlName="homePage" id="homepage">
+        <label class="form-check-label" for="homepage">
+          Přistávací stránka
+        </label>
+      </div>
       <label class="mt-3" for="description">Popis stráky:</label>
       <textarea appFormError type="text" class="form-control" placeholder="Popis stránky" formControlName="description" id="description"></textarea>
       <div class="container-fluid mt-3">

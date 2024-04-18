@@ -7,5 +7,6 @@ export interface PageInterface {
   pageBlocks: PageBlockInterface[];
   globalPlugins?: BasePlugConfigInterface[];
   url: string;
+  homePage: boolean;
   webBlocks: PageBlockInterface[];
 }

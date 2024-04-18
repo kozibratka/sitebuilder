@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\Web\Web;
+use App\EventListener\Doctrine\PageListener;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -52,7 +53,7 @@ class Page
      * @Assert\NotBlank()
      */
     #[ORM\Column(type: 'string')]
-    private string $url;
+    private string $url = '';
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $description = '';
@@ -60,6 +61,9 @@ class Page
     #[ORM\OneToOne(targetEntity: Page::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Page $parentForPublic = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $homePage = false;
 
     private array $globalPlugins = [];
 
@@ -150,6 +154,16 @@ class Page
     public function setParentForPublic(?Page $parentForPublic)
     {
         $this->parentForPublic = $parentForPublic;
+    }
+
+    public function isHomePage(): bool
+    {
+        return $this->homePage;
+    }
+
+    public function setHomePage(bool $homePage): void
+    {
+        $this->homePage = $homePage;
     }
 
     public function getGridCellItems(): array

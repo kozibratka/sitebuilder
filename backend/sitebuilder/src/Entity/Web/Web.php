@@ -124,6 +124,9 @@ class Web
         $this->user = $user;
     }
 
+    /**
+     * @return Collection<Page>
+     */
     public function getPages(): Collection
     {
         return $this->pages;

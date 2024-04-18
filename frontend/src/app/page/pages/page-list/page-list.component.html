@@ -8,7 +8,7 @@
       <!-- Position Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Název stránky</th>
-        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        <td mat-cell *matCellDef="let element">{{element.name}} <mat-icon [matTooltip]="'Přistávací stránka'"  fontIcon="star" *ngIf="element.homePage">*</mat-icon></td>
       </ng-container>
 
       <ng-container matColumnDef="action">

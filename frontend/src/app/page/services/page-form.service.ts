@@ -11,7 +11,8 @@ export class PageFormService{
     return this.formBuilder.group({
       name: [''],
       url: [''],
-      description: ['']
+      description: [''],
+      homePage: [false]
     }, {updateOn: 'submit'});
   }
 
