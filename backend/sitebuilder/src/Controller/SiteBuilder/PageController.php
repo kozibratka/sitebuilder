@@ -11,6 +11,7 @@ use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\Web\Web;
 use App\Form\PageType;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Predis\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -160,19 +161,20 @@ class PageController extends BaseApiController
     /**
      * @Route("/get-public", name="get_public")
      */
-    public function getPagePublic(Request $request)
+    public function getPagePublic(Request $request, EntityManagerInterface $entityManager)
     {
         $path = $request->query->get('url');
         $hostname = $request->query->get('hostname');
-        $page = $this->getDoctrine()->getRepository(Page::class)->getForHostnamePath($hostname, $path);
+        $pageRepository = $entityManager->getRepository(Page::class);
+        $page = $pageRepository->getForHostnamePath($hostname, $path);
         if (!$page) {
             if (str_starts_with($hostname, 'www.')) {
                 $hostnameTmp = substr($hostname, 4);
-                $page = $this->getDoctrine()->getRepository(Page::class)->getForHostnamePath($hostnameTmp, $path);
+                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path);
             }
             if (!$page && !str_starts_with($hostname, 'www.')) {
                 $hostnameTmp = 'www.'.$hostname;
-                $page = $this->getDoctrine()->getRepository(Page::class)->getForHostnamePath($hostnameTmp, $path);
+                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path);
             }
         }
 

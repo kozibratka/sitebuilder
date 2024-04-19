@@ -28,12 +28,17 @@ class PageRepository extends EntityRepository
             ->join('p.web', 'w')
             ->join('w.domains', 'd')
             ->andWhere('p.parentForPublic IS NULL')
-            ->andWhere('p.url = :path')
             ->andWhere('d.name = :domain')
-            ->setParameter('path', $path)
             ->setParameter('domain', $hostname)
         ;
-
+        if (!$path) {
+            $qb->andWhere('p.homePage = 1')
+            ;
+        } else {
+            $qb->andWhere('p.url = :path')
+                ->setParameter('path', $path)
+            ;
+        }
         return $qb->getQuery()->getOneOrNullResult();
     }
 }
