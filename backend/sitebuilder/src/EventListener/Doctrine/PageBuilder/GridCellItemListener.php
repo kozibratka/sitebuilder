@@ -14,6 +14,9 @@ class GridCellItemListener
 
     public function preRemove(GridCellItem $gridCellItem){
         $plugin = $gridCellItem->getPlugin();
+        if ($gridCellItem->getId() == 533) {
+            dd('fffffffffff');
+        }
         if($plugin && !$plugin->getWeb()) {
             $this->entityManager->remove($plugin);
         } elseif ($plugin) {

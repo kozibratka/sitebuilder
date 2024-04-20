@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PublicPageRepository::class)]
 class PublicPage extends AbstractPage
 {
-    #[ORM\OneToOne(targetEntity: Page::class)]
+    #[ORM\OneToOne(targetEntity: Page::class, inversedBy: 'publicPage')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Page $parentForPublic = null;
 

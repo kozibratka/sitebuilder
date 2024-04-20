@@ -10,6 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PageRepository::class)]
 class Page extends AbstractPage
 {
+    #[ORM\OneToOne(targetEntity: PublicPage::class, mappedBy: 'parentForPublic', cascade: ['remove'])]
+    private $publicPage;
+
+    public function getPublicPage()
+    {
+        return $this->publicPage;
+    }
+
+    public function setPublicPage($publicPage): void
+    {
+        $this->publicPage = $publicPage;
+    }
     public function createPublicPage() {
         $page = new PublicPage();
         $page->setHomePage($this->isHomePage());
@@ -24,9 +36,6 @@ class Page extends AbstractPage
             $clone->setPage($page);
             return $clone;
         })->toArray());
-
-
-
         return $page;
     }
 }
