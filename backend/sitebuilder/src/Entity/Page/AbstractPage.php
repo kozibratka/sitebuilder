@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Page;
 
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\Web\Web;
-use App\EventListener\Doctrine\PageListener;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,17 +12,21 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(
-    fields: ['name', 'web', 'parentForPublic'],
+    fields: ['name', 'web'],
     errorPath: 'name',
 )]
 #[UniqueEntity(
-    fields: ['url', 'web', 'parentForPublic'],
+    fields: ['url', 'web'],
     errorPath: 'url',
 )]
 #[ORM\Table(name: 'page')]
 #[ORM\Index(columns: ['url'], name: 'url')]
-#[ORM\Entity(repositoryClass: 'App\Repository\PageRepository')]
-class Page
+#[ORM\Entity()]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap(['public' => PublicPage::class, 'private' => Page::class])]
+
+abstract class AbstractPage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
@@ -40,7 +43,7 @@ class Page
      * @Assert\Valid()
      */
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', mappedBy: 'page', cascade: ['persist'], orphanRemoval: true)]
-    private Collection $pageBlocks;
+    protected Collection $pageBlocks;
 
     /**
      * @Serializer\Exclude()
@@ -57,10 +60,6 @@ class Page
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $description = '';
-
-    #[ORM\OneToOne(targetEntity: Page::class)]
-    #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?Page $parentForPublic = null;
 
     #[ORM\Column(type: 'boolean')]
     private bool $homePage = false;
@@ -136,7 +135,7 @@ class Page
         $this->url = $url;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -144,16 +143,6 @@ class Page
     public function setDescription(?string $description)
     {
         $this->description = $description;
-    }
-
-    public function getParentForPublic(): ?Page
-    {
-        return $this->parentForPublic;
-    }
-
-    public function setParentForPublic(?Page $parentForPublic)
-    {
-        $this->parentForPublic = $parentForPublic;
     }
 
     public function isHomePage(): bool

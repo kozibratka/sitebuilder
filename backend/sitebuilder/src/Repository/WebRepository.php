@@ -14,7 +14,6 @@ class WebRepository extends EntityRepository
             ->leftJoin('w.pages', 'p')
             ->leftJoin('w.domains', 'domains')
             ->andWhere('w = :web')
-            ->andWhere('p.parentForPublic IS NULL')
             ->setParameter('web', $web)
             ;
 

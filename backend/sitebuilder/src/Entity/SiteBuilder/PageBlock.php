@@ -3,7 +3,7 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Entity\Page;
+use App\Entity\Page\AbstractPage;
 use App\Entity\Web\Web;
 use App\Interface\EntityFileProviderInterface;
 use App\Security\Validator as AppAssert;
@@ -29,9 +29,9 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'integer', options: ['default' => 1])]
     private $height = 1;
 
-    #[ORM\ManyToOne(targetEntity: Page::class, inversedBy: 'pageBlocks')]
+    #[ORM\ManyToOne(targetEntity: AbstractPage::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?Page $page = null;
+    private ?AbstractPage $page = null;
 
     #[Assert\Expression(
         "this.getPage() or value",
@@ -82,12 +82,12 @@ class PageBlock implements EntityFileProviderInterface
         $this->id = $id;
     }
 
-    public function getPage(): ?Page
+    public function getPage(): ?AbstractPage
     {
         return $this->page;
     }
 
-    public function setPage(?Page $page)
+    public function setPage(?AbstractPage $page)
     {
         $this->page = $page;
     }

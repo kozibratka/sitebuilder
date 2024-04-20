@@ -2,7 +2,7 @@
 
 namespace App\Security\Voter\PageBuilder;
 
-use App\Entity\Page;
+use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCell;
 use App\Entity\SiteBuilder\GridCellItem;
@@ -43,7 +43,7 @@ class PageBuilderWithChildrenVoter extends Voter
                     }
                 }
                 break;
-            case $subject instanceof Page:
+            case $subject instanceof AbstractPage:
                 $user = $subject->getUser();
                 foreach ($subject->getPageBlocks() as $pageBlock) {
                     $result = $this->voteOnAttribute($attribute, $pageBlock, $token);

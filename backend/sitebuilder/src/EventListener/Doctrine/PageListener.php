@@ -2,13 +2,13 @@
 
 namespace App\EventListener\Doctrine;
 
-use App\Entity\Page;
+use App\Entity\Page\AbstractPage;
 use App\Exception\CustomErrorMessageException;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
 class PageListener extends BaseListener
 {
-    public function prePersist(Page $page){
+    public function prePersist(AbstractPage $page){
         if ($page->isHomePage()) {
             $this->deselectHomePage($page);
         } elseif ($page->getWeb()->getPages()->count() === 1) {
@@ -16,7 +16,7 @@ class PageListener extends BaseListener
         }
     }
 
-    public function preRemove(Page $page){
+    public function preRemove(AbstractPage $page){
         if ($page->isHomePage()) {
             throw new CustomErrorMessageException('Nelze smazat přistávací stránku');
         }
@@ -26,7 +26,7 @@ class PageListener extends BaseListener
         $em = $eventArgs->getObjectManager();
         $uow = $em->getUnitOfWork();
         foreach ($uow->getScheduledEntityUpdates() as $entity) {
-            if ($entity instanceof Page) {
+            if ($entity instanceof AbstractPage) {
                 if ($entity->isHomePage() && $this->isPropertyChanged($eventArgs, $entity, 'homePage')) {
                     if($deselectedPages = $this->deselectHomePage($entity)) {
                         $this->recomputeSingleEntityChangeSet($eventArgs, $deselectedPages);
@@ -37,7 +37,7 @@ class PageListener extends BaseListener
         }
     }
 
-    private function deselectHomePage(Page $exceptPage) {
+    private function deselectHomePage(AbstractPage $exceptPage) {
         $web = $exceptPage->getWeb();
         $pages = [];
         foreach ($web->getPages() as $page) {

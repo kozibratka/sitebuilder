@@ -5,12 +5,14 @@ namespace App\Controller\SiteBuilder;
 
 
 use App\Controller\BaseApiController;
-use App\Entity\Page;
+use App\Entity\Page\Page;
+use App\Entity\Page\PublicPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\Web\Web;
 use App\Form\PageType;
+use App\Repository\PageRepository\PublicPageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Predis\Client;
@@ -108,13 +110,12 @@ class PageController extends BaseApiController
             }
             $this->flush();
             if ($withPublic) {
-                $currentPublicPage = $doctrine->getRepository(Page::class)->findOneBy(['parentForPublic' => $page->getId()]);
+                $currentPublicPage = $doctrine->getRepository(PublicPage::class)->findOneBy(['parentForPublic' => $page->getId()]);
                 if ($currentPublicPage) {
                     $doctrine->getManager()->remove($currentPublicPage);
                 }
-                $clonePage = clone $page;
-                $clonePage->setParentForPublic($page);
-                $this->persist($clonePage);
+                $publicPage = $page->createPublicPage();
+                $this->persist($publicPage);
             }
             $page->refreshGridCellItemOrder();
             return $this->jsonResponseSimple($page, 201);
@@ -165,16 +166,16 @@ class PageController extends BaseApiController
     {
         $path = $request->query->get('url');
         $hostname = $request->query->get('hostname');
-        $pageRepository = $entityManager->getRepository(Page::class);
-        $page = $pageRepository->getForHostnamePath($hostname, $path, true);
+        $pageRepository = $entityManager->getRepository(PublicPage::class);
+        $page = $pageRepository->getForHostnamePath($hostname, $path);
         if (!$page) {
             if (str_starts_with($hostname, 'www.')) {
                 $hostnameTmp = substr($hostname, 4);
-                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path, true);
+                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path);
             }
             if (!$page && !str_starts_with($hostname, 'www.')) {
                 $hostnameTmp = 'www.'.$hostname;
-                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path, true);
+                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path);
             }
         }
 

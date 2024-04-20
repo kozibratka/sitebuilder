@@ -4,7 +4,7 @@
 namespace App\Security\Voter\PageBuilder;
 
 
-use App\Entity\Page;
+use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCell;
 use App\Entity\SiteBuilder\GridCellItem;
@@ -36,7 +36,7 @@ class PageBuilderVoter extends Voter
             case $subject instanceof Web:
                 $user = $subject->getUser();
                 break;
-            case $subject instanceof Page:
+            case $subject instanceof AbstractPage:
                 $user = $subject->getWeb()->getUser();
                 break;
             case $subject instanceof PageBlock:

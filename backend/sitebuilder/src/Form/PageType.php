@@ -4,7 +4,8 @@
 namespace App\Form;
 
 
-use App\Entity\Page;
+use App\Entity\Page\AbstractPage;
+use App\Entity\Page\Page;
 use App\Form\SiteBuilder\PageBlockType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
