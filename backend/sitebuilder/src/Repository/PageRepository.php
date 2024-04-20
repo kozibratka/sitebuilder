@@ -22,12 +22,12 @@ class PageRepository extends EntityRepository
         return $qb->getQuery()->getResult(Query::HYDRATE_ARRAY);
     }
 
-    public function getForHostnamePath($hostname, $path) {
+    public function getForHostnamePath($hostname, $path, $publicPage = false) {
         $qb = $this->createQueryBuilder('p');
         $qb
             ->join('p.web', 'w')
             ->join('w.domains', 'd')
-            ->andWhere('p.parentForPublic IS NULL')
+            ->andWhere(!$publicPage ? 'p.parentForPublic IS NULL' : 'p.parentForPublic IS NOT NULL')
             ->andWhere('d.name = :domain')
             ->setParameter('domain', $hostname)
         ;

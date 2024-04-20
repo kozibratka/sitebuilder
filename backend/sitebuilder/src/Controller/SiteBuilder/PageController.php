@@ -166,15 +166,15 @@ class PageController extends BaseApiController
         $path = $request->query->get('url');
         $hostname = $request->query->get('hostname');
         $pageRepository = $entityManager->getRepository(Page::class);
-        $page = $pageRepository->getForHostnamePath($hostname, $path);
+        $page = $pageRepository->getForHostnamePath($hostname, $path, true);
         if (!$page) {
             if (str_starts_with($hostname, 'www.')) {
                 $hostnameTmp = substr($hostname, 4);
-                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path);
+                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path, true);
             }
             if (!$page && !str_starts_with($hostname, 'www.')) {
                 $hostnameTmp = 'www.'.$hostname;
-                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path);
+                $page = $pageRepository->getForHostnamePath($hostnameTmp, $path, true);
             }
         }
 
