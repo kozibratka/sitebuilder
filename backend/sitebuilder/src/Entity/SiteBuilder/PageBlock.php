@@ -60,7 +60,7 @@ class PageBlock implements EntityFileProviderInterface
     private ?PageBlockTemplateCategory $category;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    private string $imagePath;
+    private ?string $imagePath = null;
 
     private ?string $uniqueId = '';
 
