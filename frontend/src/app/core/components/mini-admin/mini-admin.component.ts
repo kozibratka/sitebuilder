@@ -8,7 +8,7 @@ import {InitAbleInterface} from "../moveable-modal/interfaces/init-able-interfac
   templateUrl: './mini-admin.component.html',
   styleUrls: ['./mini-admin.component.css']
 })
-export class MiniAdminComponent implements OnInit, InitAbleInterface {
+export class MiniAdminComponent implements OnInit, InitAbleInterface<AdminAbleInterface & SettingAbleInterface> {
 
   @ViewChild('content1', {read: ViewContainerRef, static: true}) content1: ViewContainerRef;
   adminAble: AdminAbleInterface & SettingAbleInterface;

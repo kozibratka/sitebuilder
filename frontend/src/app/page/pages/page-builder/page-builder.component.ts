@@ -4,7 +4,6 @@ import {ActivatedRoute} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
-import {MoveableModalComponent} from '../../../core/components/moveable-modal/moveable-modal.component';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
@@ -43,7 +42,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
 
   @ViewChild(MiniAdminComponent, {static: true}) miniAdmin: MiniAdminComponent;
   // @ViewChild(MouseMoveScrollDirective, {static: true}) mouseMoveScrollDirective: MouseMoveScrollDirective;
-  @ViewChild(MoveableModalComponent, {static: true}) moveableModalComponent: MoveableModalComponent;
   pageDetail: PageInterface;
   globalPlugins: BasePlugConfigInterface[] = [];
   globalPluginsSelect = [];
