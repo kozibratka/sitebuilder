@@ -5,8 +5,10 @@ namespace App\Form\SiteBuilder;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GridCellItemType extends AbstractType
@@ -31,7 +33,6 @@ class GridCellItemType extends AbstractType
                 [
                     'sync_by_id' => $options['sync_by_id'],
                     'is_sub_row' => true,
-                    'empty_data' => null,
                 ]
             );
         }
@@ -42,7 +43,7 @@ class GridCellItemType extends AbstractType
         $resolver->setDefaults([
             'data_class' => GridCellItem::class,
             'sync_by_id' => true,
-            'is_sub_row' => true,
+            'is_sub_row' => false,
         ]);
     }
 }

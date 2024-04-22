@@ -5,6 +5,7 @@ namespace App\Form\SiteBuilder\EventSubscriber;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Exception\CustomErrorMessageException;
+use App\Form\SiteBuilder\GridRowType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -34,10 +35,6 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
         $plugin = $data['plugin'] ?? null;
-        if($plugin && $plugin['identifier']) {
-            $identifier = $plugin['identifier'];
-            $formClass = $this->pluginServices[$identifier]->getFormClass();
-        }
         if(isset($data['id']) && $this->syncById) {
             $gridCellItem = $this->entityManager->getRepository(GridCellItem::class)->find($data['id']);
             if($gridCellItem) {
@@ -50,18 +47,24 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             $gridCellItem = new GridCellItem();
             $form->setData($gridCellItem);
         }
-        if(isset($plugin['id']) && $this->syncById) {
-            $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
-            if($pluginDb->getWeb()) {
-                $data['plugin'] = $plugin['id'];
-                $event->setData($data);
-                $form->add('plugin', EntityType::class, ['class' => get_class($pluginDb), 'choices' => [$pluginDb]]);
-                return;
+        if ($plugin) {
+            if($plugin && $plugin['identifier']) {
+                $identifier = $plugin['identifier'];
+                $formClass = $this->pluginServices[$identifier]->getFormClass();
             }
-        }
-        $form->add('plugin', $formClass);
-        if (!isset($plugin['id'])) {
-            $form->get('plugin')->setData(null);
+            if(isset($plugin['id']) && $this->syncById) {
+                $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
+                if($pluginDb->getWeb()) {
+                    $data['plugin'] = $plugin['id'];
+                    $event->setData($data);
+                    $form->add('plugin', EntityType::class, ['class' => get_class($pluginDb), 'choices' => [$pluginDb]]);
+                    return;
+                }
+            }
+            $form->add('plugin', $formClass);
+            if (!isset($plugin['id'])) {
+                $form->get('plugin')->setData(null);
+            }
         }
     }
 }
