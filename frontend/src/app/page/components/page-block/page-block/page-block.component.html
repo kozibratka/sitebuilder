@@ -19,7 +19,7 @@
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
         <div class="text-center">
           <div class="links new-row-bottom">
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button">
+            <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i+1}">
               <mat-icon class="add-icon-row-up">add_circle</mat-icon>
             </button>
           </div>
