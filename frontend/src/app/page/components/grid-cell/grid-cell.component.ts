@@ -49,6 +49,7 @@ export class GridCellComponent implements OnInit{
     let newCellItem = this.cell.items[event.newIndex] as any;
     if (newCellItem.cells) {
       let newRow = this.cell.items[event.newIndex] as unknown as GridRowInterface;
+      newRow.uniqueId = StringService.randomString();
       this.cell.items[event.newIndex] = {row: newRow, itemOrder: event.newIndex};
     }
     this.cell.items.forEach((value, index) => {
@@ -59,6 +60,9 @@ export class GridCellComponent implements OnInit{
   trackByItem(index, item: GridCellItemInterface) {
     if (!item.uniqueId) {
       item.uniqueId = StringService.randomString();
+    }
+    if (item.row && !item.row.uniqueId) {
+      item.row.uniqueId = StringService.randomString();
     }
     return( item.uniqueId );
   }
