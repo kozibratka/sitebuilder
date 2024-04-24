@@ -20,7 +20,6 @@ import {CoreModule} from '../core/core.module';
 import {PaletteItemQuickMenuComponent} from './components/palette-builder/palette-item-quick-menu/palette-item-quick-menu.component';
 import {MenuPluginResolverDirective} from './directives/menu-plugin-resolver.directive';
 import {PaletteItemComponent} from './components/palette-builder/page-block/palette-item-component/palette-item.component';
-import { PluginMiniAdminComponent } from './pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MouseMoveScrollDirective} from '../core/directives/mouse-move-scroll-directive';
 import { RemoveGridItemDialogComponent } from './components/remove-grid-item-dialog/remove-grid-item-dialog.component';
@@ -32,6 +31,7 @@ import { MenuNewRowComponent } from './components/./menu-new-row/menu-new-row.co
 import {MatMenuModule} from "@angular/material/menu";
 import { TemplateBlockDialogComponent } from './components/page-block/template-block-dialog/template-block-dialog.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { BlockAdminComponent } from './components/page-block/block-admin/block-admin.component';
 
 
 const routes: Routes = [
@@ -72,13 +72,13 @@ const routes: Routes = [
     PaletteItemQuickMenuComponent,
     MouseMoveScrollDirective,
     MenuPluginResolverDirective,
-    PluginMiniAdminComponent,
     RemoveGridItemDialogComponent,
     GridRowComponent,
     GridCellComponent,
     GridCellItemComponent,
     MenuNewRowComponent,
     TemplateBlockDialogComponent,
+    BlockAdminComponent,
   ],
   exports: [
     PaletteItemComponent

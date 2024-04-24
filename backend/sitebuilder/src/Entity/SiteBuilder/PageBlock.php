@@ -62,6 +62,12 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $imagePath = null;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $backgroundImage = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $backgroundColor = null;
+
     private ?string $uniqueId = '';
 
     private ?bool $isFromTemplateBlock = false;
@@ -228,6 +234,26 @@ class PageBlock implements EntityFileProviderInterface
     public function getFile(): ?UploadedFile
     {
         return null;
+    }
+
+    public function getBackgroundImage(): ?string
+    {
+        return $this->backgroundImage;
+    }
+
+    public function setBackgroundImage(?string $backgroundImage): void
+    {
+        $this->backgroundImage = $backgroundImage;
+    }
+
+    public function getBackgroundColor(): ?string
+    {
+        return $this->backgroundColor;
+    }
+
+    public function setBackgroundColor(?string $backgroundColor): void
+    {
+        $this->backgroundColor = $backgroundColor;
     }
 
     /**

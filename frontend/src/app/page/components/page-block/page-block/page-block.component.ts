@@ -16,14 +16,12 @@ import {
   ViewChildren
 } from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {GridItemHTMLElement} from 'gridstack/dist/gridstack';
 import {PaletteBuilderComponent} from '../../palette-builder/palette-builder.component';
 import {PaletteItemComponent} from '../../palette-builder/page-block/palette-item-component/palette-item.component';
 import {Subject, Subscription} from 'rxjs';
 import {PageBlockInterface} from '../../../interfaces/page-block-interface';
 import {PaletteItemConfig} from '../../../interfaces/palette-item-config';
 import {PaletteBlockGridstackService} from '../../../services/palette-block-gridstack.service';
-import {QuickMenuService} from '../../../services/quick-menu.service';
 import {AbstractPlugin} from '../../../../plugins/abstract-class/abstract-plugin';
 import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
 import {PaletteBlockService} from '../../../services/palette-block.service';
@@ -33,6 +31,12 @@ import {SortablejsDirective} from "ngx-sortablejs";
 import {GridCellInterface} from "../../../interfaces/grid-cell-interface";
 import {UserService} from "../../../../authorization/services/user.service";
 import {PageBlockTemplateService} from "../../../services/page-block-template.service";
+import {MoveableModalService} from "../../../../core/components/moveable-modal/services/moveable-modal.service";
+import {BlockAdminComponent} from "../block-admin/block-admin.component";
+import {MiniAdminComponent} from "../../../../core/components/mini-admin/mini-admin.component";
+import {
+  AdminSettingAbleInterface
+} from "../../../../core/components/mini-admin/tools/interfaces/admin-setting-able-interface";
 
 @Component({
   selector: 'app-palette-block',
@@ -61,6 +65,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     private paletteBlockService: PaletteBlockService,
     public userService: UserService,
     public pageBlockTemplateService: PageBlockTemplateService,
+    private moveableModalService: MoveableModalService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
@@ -208,5 +213,15 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     } else {
       this.pageBlock.rows.push(newRow);
     }
+  }
+
+  openSettings() {
+    let settings: AdminSettingAbleInterface = {
+      settings: this.pageBlock,
+      contextObject: this,
+      adminComponentsClass: [{component: BlockAdminComponent, label: 'Pozadí'}]
+    };
+
+    this.moveableModalService.show(MiniAdminComponent, settings, 'Nastavení bloku');
   }
 }

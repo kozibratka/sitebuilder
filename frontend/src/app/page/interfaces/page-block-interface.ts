@@ -7,4 +7,6 @@ export interface PageBlockInterface {
   category?: {id: number, name: string};
   webId?: number;
   imagePath?: string;
+  backgroundImage?: string;
+  backgroundColor?: string;
 }

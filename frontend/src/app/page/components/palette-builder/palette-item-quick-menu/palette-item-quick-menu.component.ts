@@ -1,11 +1,8 @@
 import {Component, HostBinding, HostListener, Inject, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
 import {PaletteBuilderComponent} from '../palette-builder.component';
-import {PaletteItemComponent} from '../page-block/palette-item-component/palette-item.component';
 import {PageBuilderComponent} from '../../../pages/page-builder/page-builder.component';
 import {ElementHelper} from '../../../../core/helpers/element-helper';
 import {MoveableModalService} from '../../../../core/components/moveable-modal/services/moveable-modal.service';
-import {PluginMiniAdminComponent} from '../../../pages/page-builder/components/plugin-mini-admin/plugin-mini-admin.component';
 import {PluginResolverService} from '../../../../plugins/services/plugin-resolver.service';
 import {QuickMenuService} from '../../../services/quick-menu.service';
 import {GridCellItemComponent} from "../../grid-cell-item/grid-cell-item.component";
