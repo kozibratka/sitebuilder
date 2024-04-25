@@ -114,7 +114,11 @@ a.disabled {
   }
 }
 
-.delimiter>div:not(:last-child)::after {
-  border-left: 1px solid black;
+
+
+.delimiter>div {/* harmless if there is no hr in last position   */
+  border-right: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  margin-bottom: 20px;
 }
 
