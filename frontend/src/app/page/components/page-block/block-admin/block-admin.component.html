@@ -1,8 +1,17 @@
 <div class="card">
   <div class="card-body">
-      <div class="d-flex flex-md-row flex-wrap">
-        <div class="form-check">
-          Obsah
+      <div class="d-flex flex-md-row flex-wrap justify-content-center delimiter">
+        <div class="px-5">
+          <label for="color" class="form-check-label">Barva:</label>
+          <input (input)="updateColor($event)" type="color" class="form-control form-control-color" id="color" value="{{settings.backgroundColor}}" title="Vyberte barvu">
+        </div>
+        <div class="px-5">
+          <label for="image" class="form-check-label">Obrázek:</label>
+          <div>
+            <button mat-raised-button color="primary" class="form-control" id="image"><i
+              class="material-icons">photo</i>Vybrat obrázek
+            </button>
+          </div>
         </div>
       </div>
   </div>

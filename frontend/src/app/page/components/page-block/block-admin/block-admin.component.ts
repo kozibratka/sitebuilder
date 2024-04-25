@@ -12,4 +12,7 @@ export class BlockAdminComponent implements SettingAbleInterface{
   contextObject: PageBlockComponent;
   settings: PageBlockInterface;
 
+  updateColor($event) {
+    this.settings.backgroundColor = $event.target.value;
+  }
 }

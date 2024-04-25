@@ -114,3 +114,7 @@ a.disabled {
   }
 }
 
+.delimiter>div:not(:last-child)::after {
+  border-left: 1px solid black;
+}
+

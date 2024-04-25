@@ -23,6 +23,7 @@ class PageBlockType extends AbstractType
         $builder
             ->add('uniqueId')
             ->add('isFromTemplateBlock', CheckboxType::class)
+            ->add('backgroundColor')
         ;
         if ($options['web']) {
             $builder->add('web', EntityType::class, ['class' => Web::class])
