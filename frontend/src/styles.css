@@ -114,11 +114,18 @@ a.disabled {
   }
 }
 
+.border-outer {
+  padding-right: .25rem !important;
+  padding-left: .25rem !important;
+  margin-bottom: .5rem !important;
+  margin-right: .25rem !important;
+  margin-left: .25rem !important;
+}
 
-
-.delimiter>div {/* harmless if there is no hr in last position   */
-  border-right: 1px solid lightgray;
-  border-left: 1px solid lightgray;
-  margin-bottom: 20px;
+.border-inner {
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+  padding-top: .25rem !important;
+  padding-bottom: .25rem !important;
 }
 

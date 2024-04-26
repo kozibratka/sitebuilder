@@ -1,12 +1,16 @@
 <div class="card">
   <div class="card-body">
-      <div class="d-flex flex-md-row flex-wrap delimiter">
-        <div class="px-5">
-          <label for="color" class="form-check-label">Barva:</label>
-          <input (input)="updateColor($event)" type="color" class="form-control form-control-color" id="color" value="{{settings.backgroundColor}}" title="Vyberte barvu">
+      <div class="d-flex flex-md-row flex-wrap">
+        <div class="border-outer">
+          <div class="border border-inner">
+            <label for="color" class="form-check-label">Barva:</label>
+            <input (input)="updateColor($event)" type="color" class="form-control form-control-color" id="color" value="{{settings.backgroundColor}}" title="Vyberte barvu">
+          </div>
         </div>
-        <div class="px-5">
-          <app-image-input [miniature]="true" [path]="settings.backgroundImage" (imagePath)="updateImage($event)"></app-image-input>
+        <div class="border-outer">
+          <div class="border border-inner">
+            <app-image-input [miniature]="true" [path]="settings.backgroundImage" (imagePath)="updateImage($event)"></app-image-input>
+          </div>
         </div>
       </div>
   </div>
