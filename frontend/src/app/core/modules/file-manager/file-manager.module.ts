@@ -17,13 +17,16 @@ import {DragToSelectModule} from 'ngx-drag-to-select';
 import {ContextMenuModule} from '../context-menu/context-menu.module';
 import {CoreModule} from '../../core.module';
 import { FileManagerDialogComponent } from './components/file-manager-dialog/file-manager-dialog.component';
+import { ImageInputComponent } from './components/image-input/image-input.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
 @NgModule({
-  declarations: [FileManagerComponent, LargeItemComponent, FileManagerDialogComponent],
+  declarations: [FileManagerComponent, LargeItemComponent, FileManagerDialogComponent, ImageInputComponent],
   exports: [
-    FileManagerComponent
+    FileManagerComponent,
+    ImageInputComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,8 @@ import { FileManagerDialogComponent } from './components/file-manager-dialog/fil
     ContextMenuModule,
     MatSnackBarModule,
     DragToSelectModule.forRoot(),
-    CoreModule
+    CoreModule,
+    MatTooltipModule
   ]
 })
 export class FileManagerModule { }

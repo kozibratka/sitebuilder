@@ -46,8 +46,7 @@ class UserStorageService
             $fileData['name'] = $file->getFilename();
             $fileData['mimeType'] = mime_content_type($file->getRealPath());
             $fileData['size'] = Helper::getSize($file->getSize());
-            $fileData['publicPath'] = $this->getPublicPathFile($file);
-            $fileData['path'] = $this->getValidUserPath($file->getRealPath(), $user);
+            $fileData['publicPath'] = $this->getPublicPathFile($file, $user);
             $fileData['modified'] = (new \DateTime())->setTimestamp(filemtime($file->getRealPath()))->format(\DateTimeInterface::ATOM);
             $files[] = $fileData;
         }
@@ -77,19 +76,13 @@ class UserStorageService
     }
 
     private function getValidUserServerPath(string $path, UserInterface $user) {
-        $rootPath = $resultPath = $this->getUserServerRootStorage($user);
-        $fullDesiredPath = $this->getUserServerRootStorage($user).'/'.trim($path, '/');
-        if(str_starts_with(realpath($fullDesiredPath), realpath($rootPath))) {
+        $userDataRootPath = $resultPath = $this->getUserServerRootStorage($user);
+        $fullDesiredPath = $userDataRootPath.'/'.trim($path, '/');
+        if(str_starts_with(realpath($fullDesiredPath), realpath($userDataRootPath))) {
             $resultPath = $fullDesiredPath;
         }
 
         return '/'.trim($resultPath, '/');
-    }
-
-    private function getValidUserPath(string $path, UserInterface $user) {
-        $rootPath = $this->getUserServerRootStorage($user);
-        $pos = strpos($path, $rootPath);
-        return trim(substr_replace($path, '', $pos, strlen($rootPath)), '/');
     }
 
     private function createDirectoryTree(Finder $finder) {
@@ -126,20 +119,11 @@ class UserStorageService
         return $tree;
     }
 
-    public function getPublicPathFile(SplFileInfo $fileInfo) {
-        return $this->getMyUrl().str_replace($_SERVER['DOCUMENT_ROOT'], '', $fileInfo->getPathname());
-    }
-
-    public function getMyUrl()
-    {
-        $protocol = (!empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on' || $_SERVER['HTTPS'] == '1')) ? 'https://' : 'http://';
-        $server = $_SERVER['SERVER_NAME'];
-        $port = isset($_ENV['PUBLIC_SERVER_PORT']) ? ':'.$_SERVER['PUBLIC_SERVER_PORT'] : '';
-        if(!$port) {
-            $port = $_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '';
-        }
-
-        return $protocol.$server.$port;
+    public function getPublicPathFile(SplFileInfo $fileInfo, UserInterface $user) {
+        $fullPathFile = $fileInfo->getRealPath();
+        $basePublic = $this->getBasePublicStoragePath();
+        $path = str_replace($basePublic, '', $fullPathFile);
+        return $path;
     }
 
     public function getUserServerRootStorage(UserInterface $user) {
@@ -148,7 +132,11 @@ class UserStorageService
     }
 
     public function getRootServerStorage(UserInterface $user) {
-        $rootPath =  $this->parameterBag->get('kernel.project_dir').'/public/storage/';
+        $rootPath =  $this->getBasePublicStoragePath().'/storage/';
         return $rootPath.'user/'.$user->getId();
+    }
+
+    public function getBasePublicStoragePath() {
+        return $this->parameterBag->get('kernel.project_dir').'/public/';
     }
 }

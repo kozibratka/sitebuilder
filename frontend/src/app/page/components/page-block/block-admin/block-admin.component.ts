@@ -15,4 +15,8 @@ export class BlockAdminComponent implements SettingAbleInterface{
   updateColor($event) {
     this.settings.backgroundColor = $event.target.value;
   }
+
+  updateImage(path: string) {
+    this.settings.backgroundImage = path;
+  }
 }

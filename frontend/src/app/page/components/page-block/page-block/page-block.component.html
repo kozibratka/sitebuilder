@@ -1,4 +1,4 @@
-<div class="block" [style.background-color]="pageBlock.backgroundColor" [class.move-menu-hover]="isMoveMenuHover" (mouseleave)="hoverOnIndexRow=null">
+<div class="block" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor" [class.move-menu-hover]="isMoveMenuHover" (mouseleave)="hoverOnIndexRow=null">
   <div class="text-center" *ngIf="!pageBlock.rows.length">
     <div class="new-row-center">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: 0}">

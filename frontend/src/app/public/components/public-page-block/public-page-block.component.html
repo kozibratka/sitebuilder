@@ -1,4 +1,4 @@
-<div class="block" [style.background-color]="pageBlock.backgroundColor">
+<div class="block" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor">
   <div #palette_content class="block-content">
     <app-grid-row-public class="row" [row]="row" *ngFor="let row of pageBlock.rows; index as i"></app-grid-row-public>
   </div>

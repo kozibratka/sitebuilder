@@ -32,6 +32,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { TemplateBlockDialogComponent } from './components/page-block/template-block-dialog/template-block-dialog.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { BlockAdminComponent } from './components/page-block/block-admin/block-admin.component';
+import {FileManagerModule} from "../core/modules/file-manager/file-manager.module";
 
 
 const routes: Routes = [
@@ -83,20 +84,21 @@ const routes: Routes = [
   exports: [
     PaletteItemComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    CoreModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatTableModule,
-    MatDialogModule,
-    SortablejsModule,
-    MatIconModule,
-    FormBuilderModule,
-    MatMenuModule,
-    FormsModule,
-    MatTooltipModule,
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        CoreModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatTableModule,
+        MatDialogModule,
+        SortablejsModule,
+        MatIconModule,
+        FormBuilderModule,
+        MatMenuModule,
+        FormsModule,
+        MatTooltipModule,
+        FileManagerModule,
+    ]
 })
 export class PageModule { }

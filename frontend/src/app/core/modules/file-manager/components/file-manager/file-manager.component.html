@@ -40,7 +40,7 @@
       </div>
       <dts-select-container [(selectedItems)]="selectedItems" (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.stopPropagation(); $event.preventDefault();">
         <div class="row">
-          <app-large-item [dtsSelectItem]="fileItem" #fileItem class="col-xl-1 col-sm-2" *ngFor="let file of currentPathContent|async" [file]="file"
+          <app-large-item [dtsSelectItem]="fileItem" #fileItem class="col-xl-2 col-sm-2" *ngFor="let file of currentPathContent|async" [file]="file"
                           (lastSelected)="lastSelectedFile=$event"
                           (changeDirectory)="changeCurrentPath($event, false)"
                           (contextMenuEmmitter)="openContextMenuItem($event, areaContextMenuItem, fileItem)">

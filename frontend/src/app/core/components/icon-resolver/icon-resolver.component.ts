@@ -23,7 +23,7 @@ export class IconResolverComponent implements OnInit {
   }
 
   isImage() {
-    return this.fileExtension === 'jpeg' || this.fileExtension === 'png';
+    return this.fileExtension === 'jpg' || this.fileExtension === 'jpeg' || this.fileExtension === 'png';
   }
 
 }
