@@ -1,0 +1,13 @@
+.mini-image {
+  max-height: 95px;
+}
+
+.image-wrap {
+  overflow: hidden;
+  height: 95px;
+}
+
+.item {
+  border: 2px solid #ddd;
+  height: 155px;
+}

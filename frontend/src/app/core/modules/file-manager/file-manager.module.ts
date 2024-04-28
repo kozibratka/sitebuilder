@@ -19,11 +19,12 @@ import {CoreModule} from '../../core.module';
 import { FileManagerDialogComponent } from './components/file-manager-dialog/file-manager-dialog.component';
 import { ImageInputComponent } from './components/image-input/image-input.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { PixabayComponent } from './components/pixabay/pixabay.component';
 
 
 
 @NgModule({
-  declarations: [FileManagerComponent, LargeItemComponent, FileManagerDialogComponent, ImageInputComponent],
+  declarations: [FileManagerComponent, LargeItemComponent, FileManagerDialogComponent, ImageInputComponent, PixabayComponent],
   exports: [
     FileManagerComponent,
     ImageInputComponent
