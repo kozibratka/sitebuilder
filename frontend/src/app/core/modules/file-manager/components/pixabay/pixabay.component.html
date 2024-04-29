@@ -19,7 +19,7 @@
         <div class="image-wrap mb-1">
           <img class="mini-image" src="{{item.previewURL}}">
         </div>
-        <button mat-raised-button color="primary" class="my-1" id="image">
+        <button mat-raised-button color="primary" class="my-1" id="image" [mat-dialog-close]="item">
           <mat-icon>download</mat-icon>
           Použít
         </button>

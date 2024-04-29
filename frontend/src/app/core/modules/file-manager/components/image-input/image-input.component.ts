@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FileManagerModalService} from "../../services/file-manager-modal.service";
 import {MatDialog} from "@angular/material/dialog";
 import {PixabayComponent} from "../pixabay/pixabay.component";
+import {FileManagerService} from "../../services/file-manager.service";
 
 @Component({
   selector: 'app-image-input',
@@ -17,6 +18,7 @@ export class ImageInputComponent {
   constructor(
     private fileManagerModalService: FileManagerModalService,
     private dialog: MatDialog,
+    private fileManagerService: FileManagerService,
   ) {
   }
 
@@ -37,8 +39,15 @@ export class ImageInputComponent {
 
   openPixabay() {
     let dialog = this.dialog.open(PixabayComponent, {maxWidth: '36vw', minWidth: '36vw'});
-    dialog.afterClosed().subscribe(value => {
-
+    dialog.beforeClosed().subscribe(imageDetail => {
+      if (!imageDetail) {
+        return;
+      }
+      let imageUrl = imageDetail.largeImageURL;
+      this.fileManagerService.downloadFile(imageUrl, 'pixabay', imageDetail.id+'.jpg').subscribe(value => {
+        this.imagePath.emit(value);
+        }
+      );
     });
   }
 }

@@ -46,7 +46,7 @@ class UserStorageService
             $fileData['name'] = $file->getFilename();
             $fileData['mimeType'] = mime_content_type($file->getRealPath());
             $fileData['size'] = Helper::getSize($file->getSize());
-            $fileData['publicPath'] = $this->getPublicPathFile($file, $user);
+            $fileData['publicPath'] = $this->getPublicPathFile($file);
             $fileData['modified'] = (new \DateTime())->setTimestamp(filemtime($file->getRealPath()))->format(\DateTimeInterface::ATOM);
             $files[] = $fileData;
         }
@@ -72,16 +72,19 @@ class UserStorageService
 
     public function uploadFile(UploadedFile $file, string $path, UserInterface $user) {
         $realPath = $this->getValidUserServerPath($path, $user);
-        $file->move($realPath, $file->getClientOriginalName());
+        if (!$this->filesystem->exists($realPath)) {
+            $this->filesystem->mkdir($realPath);
+        }
+        $newFile = $file->move($realPath, $file->getClientOriginalName());
+        return $this->getPublicPathFile($newFile->getFileInfo());
     }
 
     private function getValidUserServerPath(string $path, UserInterface $user) {
         $userDataRootPath = $resultPath = $this->getUserServerRootStorage($user);
         $fullDesiredPath = $userDataRootPath.'/'.trim($path, '/');
-        if(str_starts_with(realpath($fullDesiredPath), realpath($userDataRootPath))) {
+        if(str_starts_with($fullDesiredPath, $userDataRootPath)) {
             $resultPath = $fullDesiredPath;
         }
-
         return '/'.trim($resultPath, '/');
     }
 
@@ -119,7 +122,7 @@ class UserStorageService
         return $tree;
     }
 
-    public function getPublicPathFile(SplFileInfo $fileInfo, UserInterface $user) {
+    public function getPublicPathFile(SplFileInfo|\SplFileInfo $fileInfo) {
         $fullPathFile = $fileInfo->getRealPath();
         $basePublic = $this->getBasePublicStoragePath();
         $path = str_replace($basePublic, '', $fullPathFile);

@@ -61,11 +61,12 @@ class UserStorageController extends BaseApiController
         $path = $request->request->get('path');
         /** @var UploadedFile[] $files */
         $files = $request->files;
+        $resultPath = [];
         foreach($files as $file) {
-            $storageService->uploadFile($file, $path, $this->getUser());
+            $resultPath[] = $storageService->uploadFile($file, $path, $this->getUser());
         }
 
-        return $this->jsonResponseSimple();
+        return $this->jsonResponseSimple($resultPath);
     }
 
     /**
