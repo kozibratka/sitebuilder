@@ -31,8 +31,9 @@ import { MenuNewRowComponent } from './components/./menu-new-row/menu-new-row.co
 import {MatMenuModule} from "@angular/material/menu";
 import { TemplateBlockDialogComponent } from './components/page-block/template-block-dialog/template-block-dialog.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { BlockAdminComponent } from './components/page-block/block-admin/block-admin.component';
+import { BlockAppearanceComponent } from './components/page-block/admin/block-appearance/block-appearance.component';
 import {FileManagerModule} from "../core/modules/file-manager/file-manager.module";
+import { BlockDimensionComponent } from './components/page-block/admin/block-dimension/block-dimension.component';
 
 
 const routes: Routes = [
@@ -79,7 +80,8 @@ const routes: Routes = [
     GridCellItemComponent,
     MenuNewRowComponent,
     TemplateBlockDialogComponent,
-    BlockAdminComponent,
+    BlockAppearanceComponent,
+    BlockDimensionComponent,
   ],
   exports: [
     PaletteItemComponent

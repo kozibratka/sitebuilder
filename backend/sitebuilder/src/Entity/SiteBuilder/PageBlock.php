@@ -26,8 +26,8 @@ class PageBlock implements EntityFileProviderInterface
     /**
      * @Assert\NotBlank()
      */
-    #[ORM\Column(type: 'integer', options: ['default' => 1])]
-    private $height = 1;
+    #[ORM\Column(type: 'integer')]
+    private ?int $height = null;
 
     #[ORM\ManyToOne(targetEntity: AbstractPage::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]

@@ -32,11 +32,12 @@ import {GridCellInterface} from "../../../interfaces/grid-cell-interface";
 import {UserService} from "../../../../authorization/services/user.service";
 import {PageBlockTemplateService} from "../../../services/page-block-template.service";
 import {MoveableModalService} from "../../../../core/components/moveable-modal/services/moveable-modal.service";
-import {BlockAdminComponent} from "../block-admin/block-admin.component";
+import {BlockAppearanceComponent} from "../admin/block-appearance/block-appearance.component";
 import {MiniAdminComponent} from "../../../../core/components/mini-admin/mini-admin.component";
 import {
   AdminSettingAbleInterface
 } from "../../../../core/components/mini-admin/tools/interfaces/admin-setting-able-interface";
+import {BlockDimensionComponent} from "../admin/block-dimension/block-dimension.component";
 
 @Component({
   selector: 'app-palette-block',
@@ -219,7 +220,10 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     let settings: AdminSettingAbleInterface = {
       settings: this.pageBlock,
       contextObject: this,
-      adminComponentsClass: [{component: BlockAdminComponent, label: 'Pozadí'}]
+      adminComponentsClass: [
+        {component: BlockAppearanceComponent, label: 'Pozadí'},
+        {component: BlockDimensionComponent, label: 'Rozměry'}
+      ]
     };
 
     this.moveableModalService.show(MiniAdminComponent, settings, 'Nastavení bloku');
