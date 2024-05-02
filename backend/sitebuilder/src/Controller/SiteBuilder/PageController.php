@@ -100,7 +100,7 @@ class PageController extends BaseApiController
         if ($request->isMethod('post')) {
             $oldGridItems = $page->getGridCellItems();
         }
-        $form->submit($request->request->all(), false);
+        $form->submit($request->request->all(), true);
         if($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
             foreach ($oldGridItems as $gridCellItem) {

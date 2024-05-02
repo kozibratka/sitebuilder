@@ -33,6 +33,7 @@ class GridCellItemType extends AbstractType
                 [
                     'sync_by_id' => $options['sync_by_id'],
                     'is_sub_row' => true,
+                    'empty_data' => null,
                 ]
             );
         }

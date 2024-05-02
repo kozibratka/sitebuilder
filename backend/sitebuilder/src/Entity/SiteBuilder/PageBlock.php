@@ -22,11 +22,7 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
-
-    /**
-     * @Assert\NotBlank()
-     */
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $height = null;
 
     #[ORM\ManyToOne(targetEntity: AbstractPage::class, inversedBy: 'pageBlocks')]
