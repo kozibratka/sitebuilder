@@ -83,12 +83,13 @@ export class GridCellItemComponent implements OnInit{
     const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
       plugin.settings.identifier
     );
+    plugin.settings = this.gridCellItem.plugin;
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
     let adminPages = [{label: 'Vybrat prvek', component: AdminPluginSelectComponent, path: ''},...pluginResolver.adminComponentsClass];
     let dialogInfo = this.moveableModalService.show<any>(MiniAdminComponent,
       {
       adminComponentsClass: adminPages,
-      settings: plugin.settings,
+      settings: this.gridCellItem.plugin,
       contextObject: plugin,
       },
       pluginResolver.name);
