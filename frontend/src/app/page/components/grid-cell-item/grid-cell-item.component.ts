@@ -4,8 +4,8 @@ import {
   ElementRef, EventEmitter,
   HostListener,
   Inject,
-  Input,
-  OnInit, Output,
+  Input, OnChanges,
+  OnInit, Output, SimpleChanges,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -23,7 +23,7 @@ import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin
   templateUrl: './grid-cell-item.component.html',
   styleUrls: ['./grid-cell-item.component.css']
 })
-export class GridCellItemComponent implements OnInit{
+export class GridCellItemComponent implements OnInit, OnChanges{
   @Input() gridCellItem: GridCellItemInterface;
   @Input() isDeepChild = false;
   public pluginResolver: AbstractPluginResolver<any>;
@@ -48,6 +48,13 @@ export class GridCellItemComponent implements OnInit{
     if (this.gridCellItem.plugin) {
       this.pluginResolver = this.getResolverFromIdentifier();
       this.createPlugin();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    let change = changes['gridCellItem'];
+    if (change.previousValue) {
+      this.plugin.instance.settings = this.gridCellItem.plugin;
     }
   }
 
