@@ -6,13 +6,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {VideoComponent} from './components/video/video.component';
 import {VideoAdminComponent} from './pages/video-admin/video-admin.component';
+import { VideoDimensionAdminComponent } from './pages/video-dimension-admin/video-dimension-admin.component';
 
 
 
 @NgModule({
   declarations: [
     VideoComponent,
-    VideoAdminComponent
+    VideoAdminComponent,
+    VideoDimensionAdminComponent
   ],
     imports: [
         CommonModule,

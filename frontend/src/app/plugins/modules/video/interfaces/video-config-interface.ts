@@ -2,4 +2,5 @@ import {BasePlugConfigInterface} from '../../../interfaces/base-plug-config-inte
 
 export interface VideoConfigInterface extends BasePlugConfigInterface {
   videoPath: string;
+  height?: number;
 }

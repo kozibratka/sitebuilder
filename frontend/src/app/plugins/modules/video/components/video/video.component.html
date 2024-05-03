@@ -1,4 +1,4 @@
-<div class="video-container">
+<div class="video-container" [style.height.px]="settings.height">
   <iframe *ngIf="settings.videoPath;else other_content" class="frame" scrolling="no"
           [style]="disable ? 'overflow: hidden !important;pointer-events: none !important;' : ''"
           [src]="getVideoUrl()">

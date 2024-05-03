@@ -14,7 +14,9 @@ class PluginVideoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('videoPath')
+        $builder
+            ->add('videoPath')
+            ->add('height')
         ;
     }
 
