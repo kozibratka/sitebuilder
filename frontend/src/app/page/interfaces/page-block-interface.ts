@@ -9,5 +9,6 @@ export interface PageBlockInterface {
   imagePath?: string;
   backgroundImage?: string;
   backgroundColor?: string;
+  backgroundVideo?: string;
   height?: number;
 }

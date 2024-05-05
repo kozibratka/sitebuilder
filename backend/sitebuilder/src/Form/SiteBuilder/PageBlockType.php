@@ -26,6 +26,7 @@ class PageBlockType extends AbstractType
             ->add('isFromTemplateBlock', CheckboxType::class)
             ->add('backgroundColor')
             ->add('backgroundImage')
+            ->add('backgroundVideo')
             ->add('height', NumberType::class)
         ;
         if ($options['web']) {

@@ -64,6 +64,9 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $backgroundColor = null;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $backgroundVideo = null;
+
     private ?string $uniqueId = '';
 
     private ?bool $isFromTemplateBlock = false;
@@ -250,6 +253,16 @@ class PageBlock implements EntityFileProviderInterface
     public function setBackgroundColor(?string $backgroundColor): void
     {
         $this->backgroundColor = $backgroundColor;
+    }
+
+    public function getBackgroundVideo(): ?string
+    {
+        return $this->backgroundVideo;
+    }
+
+    public function setBackgroundVideo(?string $backgroundVideo): void
+    {
+        $this->backgroundVideo = $backgroundVideo;
     }
 
     /**

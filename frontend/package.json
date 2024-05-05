@@ -54,6 +54,7 @@
     "tinymce": "^6.7.2",
     "tslib": "^2.0.0",
     "underscore": "^1.13.1",
+    "youtube-background": "^1.1.7",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

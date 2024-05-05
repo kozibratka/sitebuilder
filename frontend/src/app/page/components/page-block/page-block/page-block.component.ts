@@ -38,6 +38,7 @@ import {
   AdminSettingAbleInterface
 } from "../../../../core/components/mini-admin/tools/interfaces/admin-setting-able-interface";
 import {BlockDimensionComponent} from "../admin/block-dimension/block-dimension.component";
+import {UrlService} from "../../../../core/services/url.service";
 
 @Component({
   selector: 'app-palette-block',
@@ -46,6 +47,7 @@ import {BlockDimensionComponent} from "../admin/block-dimension/block-dimension.
 })
 export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
+  @ViewChild('video') video: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
   @ViewChild(SortablejsDirective, {static: true}) sortablejs: SortablejsDirective;
   @Output() resized = new EventEmitter<boolean>();
@@ -67,6 +69,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     public userService: UserService,
     public pageBlockTemplateService: PageBlockTemplateService,
     private moveableModalService: MoveableModalService,
+    public videoService: UrlService,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
@@ -81,6 +84,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   }
 
   ngAfterViewInit(): void {
+    this.initVideo();
   }
 
 
@@ -227,5 +231,11 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     };
 
     this.moveableModalService.show(MiniAdminComponent, settings, 'Nastavení bloku');
+  }
+
+  initVideo() {
+    if (this.pageBlock.backgroundVideo) {
+      (jQuery(this.video.nativeElement.firstElementChild) as any).youtube_background();
+    }
   }
 }

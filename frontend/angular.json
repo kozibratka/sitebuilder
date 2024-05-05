@@ -61,6 +61,7 @@
               "src/assets/admin_lte/dist/js/adminlte.min.js",
               "src/assets/admin_lte/dist/js/demo.js",
               "node_modules/lodash/lodash.min.js",
+              "node_modules/youtube-background/jquery.youtube-background.min.js"
             ]
           },
           "configurations": {
