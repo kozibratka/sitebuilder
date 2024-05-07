@@ -1,9 +1,9 @@
 <div class="block" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor" [class.move-menu-hover]="isMoveMenuHover" (mouseleave)="hoverOnIndexRow=null">
-  <div #video class="video-container" *ngIf="pageBlock.backgroundVideo">
+  <div #video class="video-container" *ngIf="videoUrl">
     <!--    <iframe width="800" height="315"-->
     <!--            src="https://www.youtube.com/embed/tgbNymZ7vqY?autoplay=1&mute=1">-->
     <!--    </iframe>-->
-    <div [attr.data-vbg]="videoService.getYoutubeVideoUrl(pageBlock.backgroundVideo)"></div>
+    <div [attr.data-vbg]="videoUrl"></div>
   </div>
   <div class="block-content-rows container" [style.height.px]="!pageBlock.rows.length ? (pageBlock.height ?? 65) : null" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'rows', put: ['rows']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">

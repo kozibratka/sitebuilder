@@ -4,22 +4,16 @@ import {Injectable, SecurityContext} from "@angular/core";
   providedIn: 'root'
 })
 export class UrlService {
-
-  videos = [];
   constructor(
     private sanitizer: DomSanitizer,
   ) {
   }
 
   getYoutubeVideoUrl(videoPath: string) {
-    if (this.videos[videoPath]) {
-      return this.videos[videoPath];
-    }
     const videoUrl = this.validateYouTubeUrl(videoPath);
     let result: any = '';
     if (videoUrl) {
       result = this.sanitizer.sanitize(SecurityContext.RESOURCE_URL, this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl));
-      this.videos[videoPath] = result;
     }
     return result;
   }

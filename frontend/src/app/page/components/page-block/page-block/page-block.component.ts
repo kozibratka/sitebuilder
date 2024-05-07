@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit, ApplicationRef,
   ChangeDetectorRef,
   Component,
@@ -45,7 +46,7 @@ import {UrlService} from "../../../../core/services/url.service";
   templateUrl: './page-block.component.html',
   styleUrls: ['./page-block.component.css'],
 })
-export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
+export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked{
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChild('video') video: ElementRef<HTMLElement>;
   @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
@@ -58,6 +59,9 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   showMoveIcon: boolean;
   isMoveMenuHover = false;
   @Output() deleteBlock = new EventEmitter<boolean>();
+  readyStartVideo = false;
+  public videoUrl = '';
+  private videoFactory = null;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -81,14 +85,20 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
   ngOnInit(): void {
     // this.initGridStack();
     // this.registerIsResizedOnDrag();
+    this.initVideo();
+
   }
 
   ngAfterViewInit(): void {
-    this.initVideo();
+  }
+
+  ngAfterViewChecked(): void {
+    this.startVideo();
   }
 
 
   ngOnDestroy() {
+    this.destroyVideo();
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
@@ -233,9 +243,32 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy{
     this.moveableModalService.show(MiniAdminComponent, settings, 'Nastavení bloku');
   }
 
-  initVideo() {
+  initVideo(url: string = '') {
+    if (url) {
+      this.pageBlock.backgroundVideo = url;
+    }
     if (this.pageBlock.backgroundVideo) {
-      (jQuery(this.video.nativeElement.firstElementChild) as any).youtube_background();
+      this.readyStartVideo = true;
+      this.videoUrl = this.videoService.getYoutubeVideoUrl(this.pageBlock.backgroundVideo);
+    }
+  }
+
+  startVideo() {
+    if (this.readyStartVideo) {
+      this.readyStartVideo = false;
+      if (!this.videoFactory) {
+        this.videoFactory = (jQuery(this.video.nativeElement.firstElementChild) as any).youtube_background();
+      } else {
+        (window as any).VIDEO_BACKGROUNDS.add(this.video.nativeElement.firstElementChild);
+      }
+    }
+  }
+
+  destroyVideo() {
+    if (this.pageBlock.backgroundVideo) {
+      (window as any).VIDEO_BACKGROUNDS.destroy(this.video.nativeElement.firstElementChild);
+      this.pageBlock.backgroundVideo = '';
+      this.videoUrl = '';
     }
   }
 }

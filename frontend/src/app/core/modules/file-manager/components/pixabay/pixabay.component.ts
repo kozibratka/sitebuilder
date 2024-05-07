@@ -12,7 +12,6 @@ export class PixabayComponent implements OnInit, OnDestroy{
   data = [];
   term$ = new Subject<string>();
   private _search = '';
-  private termSubscription: Subscription;
 
 
   constructor(
@@ -20,7 +19,7 @@ export class PixabayComponent implements OnInit, OnDestroy{
   ) {
   }
   ngOnInit(): void {
-    this.termSubscription = this.term$.pipe(
+    this.term$.pipe(
       debounceTime(1000)
     ).subscribe(value1 => {
       this.load()
@@ -50,7 +49,7 @@ export class PixabayComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.termSubscription.unsubscribe();
+    this.term$.complete();
   }
 
 }
