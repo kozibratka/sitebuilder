@@ -61,7 +61,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   @Output() deleteBlock = new EventEmitter<boolean>();
   readyStartVideo = false;
   public videoUrl = '';
-  private videoFactory = null;
 
   constructor(
     private paletteBlockGridstackService: PaletteBlockGridstackService,
@@ -256,8 +255,8 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   startVideo() {
     if (this.readyStartVideo) {
       this.readyStartVideo = false;
-      if (!this.videoFactory) {
-        this.videoFactory = (jQuery(this.video.nativeElement.firstElementChild) as any).youtube_background();
+      if (!(window as any).hasOwnProperty('VIDEO_BACKGROUNDS')) {
+        (jQuery(this.video.nativeElement.firstElementChild) as any).youtube_background();
       } else {
         (window as any).VIDEO_BACKGROUNDS.add(this.video.nativeElement.firstElementChild);
       }
