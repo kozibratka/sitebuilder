@@ -19,7 +19,8 @@ export class MoveableModalService {
         params,
         title: title,
       },
-      width: '50%',
+      width: '888px',
+      maxHeight: '500px',
       position: {top: '110px'}
     });
   }
