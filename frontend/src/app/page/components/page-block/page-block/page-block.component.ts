@@ -84,10 +84,11 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   ngOnInit(): void {
     // this.initGridStack();
     // this.registerIsResizedOnDrag();
+    this.initVideoUrl();
   }
 
   ngAfterViewInit(): void {
-    this.initVideo();
+    this.startVideo();
   }
 
   ngAfterViewChecked(): void {
@@ -240,17 +241,22 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     this.moveableModalService.show(MiniAdminComponent, settings, 'Nastavení bloku');
   }
 
-  initVideo(url: string = '') {
-    if (url) {
-      this.pageBlock.backgroundVideo = url;
-    }
+  initVideoUrl() {
     if (this.pageBlock.backgroundVideo) {
       this.videoUrl = this.videoService.getYoutubeVideoUrl(this.pageBlock.backgroundVideo);
+    }
+  }
+
+  changeVideo(url: string = '') {
+    if (url) {
+      this.pageBlock.backgroundVideo = url;
+      this.initVideoUrl();
+    }
+    if (this.videoUrl) {
       if (!this.video) {
         this.changeDetectorRef.detectChanges();
       }
       this.startVideo();
-
     }
   }
 

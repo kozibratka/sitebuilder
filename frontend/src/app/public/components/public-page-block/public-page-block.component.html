@@ -1,4 +1,7 @@
 <div class="block" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor">
+  <div #video class="video-container" *ngIf="videoUrl" [style.filter]="'grayscale('+pageBlock.grayScale+'%)'" [style.opacity]="pageBlock.opacity/10">
+    <div [attr.data-vbg]="videoUrl"></div>
+  </div>
   <div #palette_content class="block-content" [style.height.px]="!pageBlock.rows.length ? (pageBlock.height ?? 65) : null">
     <app-grid-row-public class="row" [row]="row" *ngFor="let row of pageBlock.rows; index as i"></app-grid-row-public>
   </div>

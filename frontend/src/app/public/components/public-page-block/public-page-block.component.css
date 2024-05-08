@@ -7,3 +7,10 @@
   background-repeat: no-repeat;
   background-size: 100%;
 }
+
+.video-container {
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  width: 100%;
+}

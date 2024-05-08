@@ -54,7 +54,7 @@ export class BlockAppearanceComponent implements SettingAbleInterface, OnInit, O
       if (value.length) {
         if (this.urlService.validateYouTubeUrl(value)) {
           this.contextObject.destroyVideo();
-          this.contextObject.initVideo(value);
+          this.contextObject.changeVideo(value);
         }
       } else {
         this.contextObject.destroyVideo();
