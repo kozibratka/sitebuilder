@@ -11,4 +11,6 @@ export interface PageBlockInterface {
   backgroundColor?: string;
   backgroundVideo?: string;
   height?: number;
+  grayScale?: number;
+  opacity?: number;
 }

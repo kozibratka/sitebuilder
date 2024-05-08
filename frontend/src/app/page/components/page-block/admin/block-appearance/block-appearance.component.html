@@ -1,24 +1,38 @@
 <div class="card">
   <div class="card-body">
     <div class="row">
-        <div class="col-md-2">
-          <div class="border border-inner">
+        <div class="col-md-6">
+          <div class="border border-inner text-center">
             <label for="color" class="form-check-label">Barva:</label>
-            <input (input)="updateColor($event)" type="color" class="form-control form-control-color" id="color" value="{{settings.backgroundColor}}" title="Vyberte barvu">
+            <input (input)="updateColor($event)" type="color" class="form-control form-control-color mx-auto" id="color" value="{{settings.backgroundColor}}" title="Vyberte barvu">
           </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="border border-inner">
             <app-image-input [miniature]="true" [path]="settings.backgroundImage" (imagePath)="updateImage($event)"></app-image-input>
           </div>
         </div>
-        <div class="col-md-5">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
           <div class="border border-inner">
             <label for="video" class="form-label">Url videa</label>
             <input type="text" class="form-control" id="video" [(ngModel)]="video">
             <div id="emailHelp" class="form-text">Zadejte odkaz na youtube video</div>
           </div>
         </div>
+        <div class="col-md-3">
+            <div class="border border-inner">
+              <label for="gray" class="form-label">Stupeň šedi videa</label>
+              <input type="range" min="0" max="100" class="form-range" id="gray" [(ngModel)]="settings.grayScale">
+            </div>
+          </div>
+        <div class="col-md-3">
+            <div class="border border-inner">
+              <label for="opacity" class="form-label">Průhlednost videa</label>
+              <input type="range" min="0" max="10" class="form-range" id="opacity" [(ngModel)]="settings.opacity">
+            </div>
+          </div>
       </div>
   </div>
 </div>

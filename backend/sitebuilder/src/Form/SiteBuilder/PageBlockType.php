@@ -28,6 +28,8 @@ class PageBlockType extends AbstractType
             ->add('backgroundImage')
             ->add('backgroundVideo')
             ->add('height', NumberType::class)
+            ->add('grayScale', NumberType::class)
+            ->add('opacity', NumberType::class)
         ;
         if ($options['web']) {
             $builder->add('web', EntityType::class, ['class' => Web::class])

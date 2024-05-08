@@ -59,7 +59,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   showMoveIcon: boolean;
   isMoveMenuHover = false;
   @Output() deleteBlock = new EventEmitter<boolean>();
-  readyStartVideo = false;
   public videoUrl = '';
 
   constructor(
@@ -73,6 +72,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     public pageBlockTemplateService: PageBlockTemplateService,
     private moveableModalService: MoveableModalService,
     public videoService: UrlService,
+    private changeDetectorRef: ChangeDetectorRef,
 
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
@@ -84,15 +84,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   ngOnInit(): void {
     // this.initGridStack();
     // this.registerIsResizedOnDrag();
-    this.initVideo();
-
   }
 
   ngAfterViewInit(): void {
+    this.initVideo();
   }
 
   ngAfterViewChecked(): void {
-    this.startVideo();
   }
 
 
@@ -247,14 +245,17 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
       this.pageBlock.backgroundVideo = url;
     }
     if (this.pageBlock.backgroundVideo) {
-      this.readyStartVideo = true;
       this.videoUrl = this.videoService.getYoutubeVideoUrl(this.pageBlock.backgroundVideo);
+      if (!this.video) {
+        this.changeDetectorRef.detectChanges();
+      }
+      this.startVideo();
+
     }
   }
 
   startVideo() {
-    if (this.readyStartVideo) {
-      this.readyStartVideo = false;
+    if (this.videoUrl) {
       if (!(window as any).hasOwnProperty('VIDEO_BACKGROUNDS')) {
         (jQuery(this.video.nativeElement.firstElementChild) as any).youtube_background();
       } else {

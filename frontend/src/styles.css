@@ -114,18 +114,3 @@ a.disabled {
   }
 }
 
-.border-outer {
-  padding-right: .25rem !important;
-  padding-left: .25rem !important;
-  margin-bottom: .5rem !important;
-  margin-right: .25rem !important;
-  margin-left: .25rem !important;
-}
-
-.border-inner {
-  padding-right: 1rem !important;
-  padding-left: 1rem !important;
-  padding-top: .25rem !important;
-  padding-bottom: .25rem !important;
-}
-
