@@ -1,8 +1,15 @@
 :host:not(.resized) > .cell-content:hover, ::ng-deep .sortable-js-dragged .cell-content{
-  outline:  dotted 0 transparent;
-  transition: outline 0.3s linear;
-  outline-width: 1px;
+  outline:  dotted 1px transparent;
+  transition: outline 0.3s linear,box-shadow 0.3s linear;
   outline-color: #007BFF;
+  box-shadow: 0 0 0 1px white;
+
+
+  /*!* inner indicator *!*/
+  /*outline: 2px #F9F9F9 solid;*/
+  /*outline-offset: 0;*/
+  /*!* outer indicator *!*/
+  /*box-shadow: 0 0 0 4px #193146;*/
 }
 
 .cell-content {

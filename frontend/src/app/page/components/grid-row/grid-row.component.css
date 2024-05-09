@@ -10,6 +10,7 @@
   transition: none;
   outline-color: red !important;
   outline-width: 2px !important;
+  box-shadow: 0 0 0 4px #3498db;
 }
 
 :host.row:not(:has(.cell-item)) {
