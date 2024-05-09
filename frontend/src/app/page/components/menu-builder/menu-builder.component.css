@@ -19,6 +19,13 @@
   font-size: 15px;
 }
 
+.menu-element-cells:not(.ui-draggable-dragging){
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+}
+
 .menu-element-item img{
   width: 30%;
 }
@@ -101,3 +108,7 @@ i.icon-delete {
   width: 100%;
 }
 
+/*mat-icon {*/
+/*  color: white;*/
+/*  mix-blend-mode: difference;*/
+/*}*/

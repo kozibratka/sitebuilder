@@ -34,6 +34,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   @Output() private dragMenuBlock$ = new EventEmitter<boolean>();
   @Input() pageDetail: PageInterface;
   rows: GridRowInterface[] = [{cells: [{width: 6, items: []}, {width: 6, items: []}]}];
+  mouseOnNewRow = false;
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
@@ -91,7 +92,10 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     return {cells: [{width: 6, items: []}, {width: 6, items: []}]};
   }
 
-  createPluginConfig = (item): GridCellItemInterface => {
+  createPluginConfig = (item): GridCellItemInterface | GridRowInterface => {
+    if (this.mouseOnNewRow) {
+      return this.cloneSortableJsRow(item);
+    }
     let resolver = this.menuPluginResolverServices.selectedAbstractPluginResolverMessenger;
     let pluginConfig = resolver.getEmptySettings();
     return {plugin: pluginConfig, itemOrder: 0};

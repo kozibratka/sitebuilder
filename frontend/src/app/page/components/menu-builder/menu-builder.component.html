@@ -25,8 +25,8 @@
                (mouseleave)="showMoveIcon = false"
                (mouseenter)="showMoveIcon = true"
           >
-            <div>
-              <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
+            <div class="menu-element-cells">
+              <mat-icon class="material-icons-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
               <span class="text">Stavební buňky</span>
               <app-animation-hider [show] = "showMoveIcon">
                 <i class="material-icons icon-move-grid">open_with</i>
@@ -39,7 +39,7 @@
             class="menu-element-item grid-stack-item-menu"
             *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver"
           >
-            <mat-icon class="menu-image">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
+            <mat-icon class="menu-image material-icons-outlined">{{abstractMenuPluginResolver.getMenuImage()}}</mat-icon><br>
             <span class="text">{{abstractMenuPluginResolver.name}}</span>
             <app-animation-hider [show] = "showMoveIcon">
               <i class="material-icons icon-move" appMenuPluginResolverDirective [abstractMenuPluginResolverMessenger] = "abstractMenuPluginResolver">open_with</i>

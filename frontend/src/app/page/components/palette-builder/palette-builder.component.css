@@ -37,3 +37,10 @@
 ::ng-deep.menu-block-dragged .line,  ::ng-deep.block-dragged .line{
   display: none;
 }
+
+::ng-deep.menu-element-item.sortable-ghost, ::ng-deep.menu-element-cells.sortable-ghost
+{
+  color: white !important;
+  margin: 0 auto;
+  mix-blend-mode: difference;
+}

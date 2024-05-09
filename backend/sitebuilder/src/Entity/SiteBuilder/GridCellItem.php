@@ -21,7 +21,7 @@ class GridCellItem
     #[ORM\OneToOne(targetEntity: GridRow::class, cascade: ['persist', 'remove'])]
     private ?GridRow $row = null;
     #[ORM\ManyToOne(targetEntity: BasePlugin::class, cascade: ['persist'], inversedBy: 'gridCellItems')]
-    private ?BasePlugin $plugin;
+    private ?BasePlugin $plugin = null;
 
     #[ORM\Column(type: 'integer')]
     private int $itemOrder = 0;
