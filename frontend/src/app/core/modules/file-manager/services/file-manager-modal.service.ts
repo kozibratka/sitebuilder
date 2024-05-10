@@ -18,7 +18,7 @@ export class FileManagerModalService {
 
   open(fileType: 'image' = null): Observable<FileManagerEvent> {
     const config = new MatDialogConfig();
-    config.minWidth = '55vw';
+    config.width = '55vw';
     config.minHeight = '27vw';
     config.position = {top: '100px'};
     const dialogRef = this.dialog.open(FileManagerDialogComponent, config);

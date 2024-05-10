@@ -46,6 +46,7 @@ class UserStorageService
             $fileData['name'] = $file->getFilename();
             $fileData['mimeType'] = mime_content_type($file->getRealPath());
             $fileData['size'] = Helper::getSize($file->getSize());
+            $fileData['path'] = $this->getPathRelativeToUserData($file->getRealPath(), $user);
             $fileData['publicPath'] = $this->getPublicPathFile($file);
             $fileData['modified'] = (new \DateTime())->setTimestamp(filemtime($file->getRealPath()))->format(\DateTimeInterface::ATOM);
             $files[] = $fileData;
@@ -127,6 +128,12 @@ class UserStorageService
         $basePublic = $this->getBasePublicStoragePath();
         $path = str_replace($basePublic, '', $fullPathFile);
         return $path;
+    }
+
+    private function getPathRelativeToUserData(string $path, UserInterface $user) {
+        $rootPath = $this->getUserServerRootStorage($user);
+        $pos = strpos($path, $rootPath);
+        return trim(substr_replace($path, '', $pos, strlen($rootPath)), '/');
     }
 
     public function getUserServerRootStorage(UserInterface $user) {

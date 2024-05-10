@@ -116,6 +116,11 @@ h5 {
   border-bottom: 1px solid #e0e0e0;
 }
 
+.large-item {
+  width: 132px;
+  padding: 0 14px;
+}
+
 
 
 

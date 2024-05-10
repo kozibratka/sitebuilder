@@ -5,7 +5,7 @@
     <button mat-stroked-button (click)="fileUploadButton.click()"><fa-icon class="folder" [icon]="icons.faUpload"></fa-icon> Nahrát soubor</button>
   </div>
   <div class="row manager-body">
-    <div class="col-2">
+    <div class="col-md-3">
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
         <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="10" (click)="changeDirectoryFromTree(node)" [class.selected-tree-node]="selectedTreeNode === node">
@@ -24,7 +24,7 @@
         </mat-tree-node>
       </mat-tree>
     </div>
-    <div class="col-10 file-area">
+    <div class="col-md-9 file-area">
       <div class="row mini-panel">
         <div class="col-8">
           <app-directory-mini-navigation [currentPath]="currentPath" (pathEmitter)="changeCurrentPath($event)"></app-directory-mini-navigation>
@@ -39,8 +39,8 @@
         </div>
       </div>
       <dts-select-container [(selectedItems)]="selectedItems" (contextmenu)="openContextMenu2($event, areaContextMenu2); $event.stopPropagation(); $event.preventDefault();">
-        <div class="row">
-          <app-large-item [dtsSelectItem]="fileItem" #fileItem class="col-xl-2 col-sm-2" *ngFor="let file of currentPathContent|async" [file]="file"
+        <div class="d-flex flex-wrap">
+          <app-large-item [dtsSelectItem]="fileItem" #fileItem class="large-item" *ngFor="let file of currentPathContent|async" [file]="file"
                           (lastSelected)="lastSelectedFile=$event"
                           (changeDirectory)="changeCurrentPath($event, false)"
                           (contextMenuEmmitter)="openContextMenuItem($event, areaContextMenuItem, fileItem)">
