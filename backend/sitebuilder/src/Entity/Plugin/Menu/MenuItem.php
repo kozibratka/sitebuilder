@@ -4,6 +4,7 @@ namespace App\Entity\Plugin\Menu;
 use App\Entity\Page\AbstractPage;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity]
 class MenuItem
@@ -72,6 +73,14 @@ class MenuItem
     public function getPageUrl(): ?string
     {
         return $this->getPage()?->getUrl();
+    }
+
+    /**
+     * @Serializer\VirtualProperty()
+     */
+    public function getPageId(): ?string
+    {
+        return $this->getPage()?->getId();
     }
 
     public function __clone(): void

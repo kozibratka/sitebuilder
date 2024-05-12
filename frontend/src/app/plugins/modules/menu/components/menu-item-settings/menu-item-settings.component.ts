@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MenuItemInterface} from '../../interfaces/menu-item-interface';
 import {WebDetailResolverService} from '../../../../../web/services/web-detail-resolver.service';
+import {PageListResolverService} from "../../../../../page/services/page-list-resolver.service";
 
 @Component({
   selector: 'app-menu-item-settings',
@@ -15,15 +16,19 @@ export class MenuItemSettingsComponent {
   constructor(
     private webDetail: WebDetailResolverService,
     private fb: FormBuilder,
+    pageListResolverService: PageListResolverService,
     @Inject(MAT_DIALOG_DATA) private data: MenuItemInterface,
   ) {
-    this.pages = this.webDetail.webDetail.pages;
+    pageListResolverService.getPageList().subscribe(value => {
+      this.pages = value;
+    });
     this.settings = this.fb.group({
       name: ['', [Validators.required]],
-      idPage: [null, [Validators.required]],
+      pageId: [null, [Validators.required]],
     });
     if (data) {
-      data.page = null;
+      console.log(data)
+      //data.page = null;
       this.settings.patchValue(data);
     }
   }

@@ -19,6 +19,10 @@ export class PageListResolverService implements Resolve<PageInterface[]> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface[]> {
+    return this.getPageList();
+  }
+
+  getPageList() {
     const webId = this.webDetailResolverService.selectedId;
     return this.symfonyApiClientService.get<PageInterface[]>('page_list', {id: webId}).pipe(catchError(err => {
       this.httpResponseToasterService.showError(err);

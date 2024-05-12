@@ -15,7 +15,7 @@ class MenuItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('page', EntityType::class, ['class' => AbstractPage::class])
+            ->add('pageId', EntityType::class, ['class' => AbstractPage::class, 'property_path' => 'page'])
             ->add('name', TextType::class)
             ->add('level', NumberType::class)
         ;

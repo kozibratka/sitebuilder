@@ -1,6 +1,6 @@
 export interface MenuItemInterface {
   name: string;
-  page: number;
+  pageId: number;
   level: number;
   pageUrl: string;
 }

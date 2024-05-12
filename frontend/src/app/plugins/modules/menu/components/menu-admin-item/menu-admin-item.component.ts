@@ -1,10 +1,11 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SortableOptions} from 'sortablejs';
 import {MatDialog} from '@angular/material/dialog';
 import {MenuItemInterface} from '../../interfaces/menu-item-interface';
 import {MenuAdminComponent} from '../../pages/menu-admin/menu-admin.component';
 import {MenuRemoveItemDialogComponent} from '../menu-remove-item-dialog/menu-remove-item-dialog.component';
 import {MenuItemSettingsComponent} from '../menu-item-settings/menu-item-settings.component';
+import EventReceiver from "../../../../../../assets/admin_lte/plugins/filterizr/EventReceiver";
 
 @Component({
   selector: 'app-menu-admin-item',
@@ -14,6 +15,7 @@ import {MenuItemSettingsComponent} from '../menu-item-settings/menu-item-setting
 export class MenuAdminItemComponent {
   @Input() items: any[];
   @Input() options: SortableOptions;
+  @Output() updated = new EventEmitter<boolean>();
 
 
   constructor(
@@ -37,6 +39,7 @@ export class MenuAdminItemComponent {
         const formSettings = dialogRef.componentInstance.settings;
         if (formSettings.valid) {
           Object.assign(item, formSettings.value);
+          this.updated.emit(true);
         }
       }
     });

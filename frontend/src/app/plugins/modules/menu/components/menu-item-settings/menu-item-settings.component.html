@@ -9,12 +9,12 @@
       </div>
     </div>
     <div class="">
-      <label for="page">Stránka {{!settings.get('idPage').value}}</label>
-      <select class="form-control" required id="page" formControlName="idPage">
+      <label for="page">Stránka {{!settings.get('pageId').value}}</label>
+      <select class="form-control" required id="page" formControlName="pageId">
         <option [ngValue]="null" disabled>Vyberte stránku...</option>
-        <option *ngFor="let item of pages" [ngValue]="item.id">{{item.name}}</option>
+        <option *ngFor="let item of pages" [ngValue]="item.id.toString()">{{item.name}}</option>
       </select>
-      <div *ngIf="settings.get('idPage').hasError('required')" class="invalid-feedback">
+      <div *ngIf="settings.get('pageId').hasError('required')" class="invalid-feedback">
         Toto pole je povinné
       </div>
     </div>
