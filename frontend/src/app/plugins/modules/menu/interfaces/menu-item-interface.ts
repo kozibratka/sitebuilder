@@ -1,6 +1,6 @@
 export interface MenuItemInterface {
   name: string;
-  pageId: number;
   level: number;
-  pageUrl: string;
+  pageId: number
+  pageDetail: {pageUrl: string, isHomepage: boolean};
 }

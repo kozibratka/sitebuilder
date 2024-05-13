@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuConfigInterface} from '../../interfaces/menu-config-interface';
 import {AbstractPlugin} from '../../../../abstract-class/abstract-plugin';
-import {PluginIdentifier} from '../../../../constants/plugin-identifier';
 import {ArrayHelper} from '../../../../../core/helpers/array-helper';
 
 @Component({

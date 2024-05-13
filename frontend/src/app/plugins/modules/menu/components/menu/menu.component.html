@@ -10,7 +10,7 @@
     <div class=" collapse navbar-collapse" id="navbarNavDropdown">
       <ul [class]="['navbar-nav', 'ms-auto']">
         <li [class.dropdown]="item.children" class="nav-item" *ngFor="let item of itemsAsNestedArray; let i = index">
-          <a [id]="'dropdown'+i" [attr.data-bs-toggle]="item.children.length ? 'dropdown' : ''" [class.dropdown-toggle]="item.children.length" class="nav-link mx-2" aria-current="page" href="/{{item.pageUrl}}">{{item.name}}</a>
+          <a [id]="'dropdown'+i" [attr.data-bs-toggle]="item.children.length ? 'dropdown' : ''" [class.dropdown-toggle]="item.children.length" class="nav-link mx-2" aria-current="page" href="/{{item.pageDetail.isHomepage ? '' : item.pageDetail.pageUrl}}">{{item.name}}</a>
           <ng-container *ngTemplateOutlet="dropdown; context: {items: item.children, index: i}"></ng-container>
         </li>
       </ul>

@@ -5,13 +5,16 @@ namespace App\Controller\SiteBuilder;
 
 
 use App\Controller\BaseApiController;
+use App\Entity\Page\AbstractPage;
 use App\Entity\Page\Page;
 use App\Entity\Page\PublicPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\Web\Web;
+use App\Exception\CustomErrorMessageException;
 use App\Form\PageType;
+use App\Form\PublicPageType;
 use App\Repository\PageRepository\PublicPageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -62,6 +65,9 @@ class PageController extends BaseApiController
             $page = $form->getData();
             $page->addPageBlock(new PageBlock());
             $web->addPage($page);
+            if ($web->getPages()->count() == 1) {
+                $page->setHomePage(true);
+            }
             $this->persist($page);
             return $this->jsonResponseSimple($page, 201);
         }
@@ -133,7 +139,14 @@ class PageController extends BaseApiController
         $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
-            $this->persist($page);
+            if ($publicPage = $page->getPublicPage()) {
+                $formPublicPage = $this->createForm(PublicPageType::class, $publicPage, ['pageBuilder' => false]);
+                $formPublicPage->submit($request->request->all(), false);
+            }
+            if ($page->isHomePage()) {
+                $this->deselectHomePage($page);
+            }
+            $this->flush();
             return $this->jsonResponseSimple($page, 201);
         }
         return $this->invalidFormResponse($form);
@@ -144,6 +157,9 @@ class PageController extends BaseApiController
      */
     public function remove(Page $page)
     {
+        if ($page->isHomePage()) {
+            throw new CustomErrorMessageException('Nelze smazat přistávací stránku');
+        }
         $this->denyAccessUnlessGranted('page_builder_voter',$page);
         $this->removeEntity($page);
         return new JsonResponse();
@@ -180,5 +196,17 @@ class PageController extends BaseApiController
         }
 
         return $this->jsonResponseSimple($page ?? [], 201);
+    }
+
+    private function deselectHomePage(Page $exceptPage) {
+        $web = $exceptPage->getWeb();
+        foreach ($web->getPages() as $page) {
+            if ($page === $exceptPage || $page === $exceptPage->getPublicPage()) {
+                continue;
+            }
+            if ($page->isHomePage()) {
+                $page->setHomePage(false);
+            }
+        }
     }
 }

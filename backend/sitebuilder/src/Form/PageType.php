@@ -16,18 +16,6 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add(
-                'pageBlocks',
-                CollectionType::class,
-                [
-                    'entry_type' => PageBlockType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'by_reference' => false,
-                    'entry_options' => ['sync_by_id' => $options['sync_by_id']],
-                ]
-            );
         if (!$options['pageBuilder']) {
             $builder
                 ->add('name',null, ['empty_data' => ''])
@@ -35,6 +23,19 @@ class PageType extends AbstractType
                 ->add('description')
                 ->add('homePage')
             ;
+        } else {
+            $builder
+                ->add(
+                    'pageBlocks',
+                    CollectionType::class,
+                    [
+                        'entry_type' => PageBlockType::class,
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'by_reference' => false,
+                        'entry_options' => ['sync_by_id' => $options['sync_by_id']],
+                    ]
+                );
         }
 
     }

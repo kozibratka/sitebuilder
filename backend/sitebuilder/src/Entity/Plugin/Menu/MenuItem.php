@@ -19,6 +19,9 @@ class MenuItem
     private PluginMenu $menu;
 
     #[ORM\ManyToOne(targetEntity: AbstractPage::class)]
+    /**
+     * @Serializer\Exclude()
+     */
     private ?AbstractPage $page = null;
 
     #[ORM\Column(type: 'string')]
@@ -70,9 +73,12 @@ class MenuItem
     /**
      * @Serializer\VirtualProperty()
      */
-    public function getPageUrl(): ?string
+    public function getPageDetail()
     {
-        return $this->getPage()?->getUrl();
+        return [
+            'pageUrl' => $this->getPage()?->getUrl(),
+            'isHomepage' => $this->getPage()?->isHomePage(),
+        ];
     }
 
     /**
