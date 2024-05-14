@@ -2,11 +2,13 @@
 
 namespace App\Entity\Plugin\Form;
 use App\Entity\Plugin\BasePlugin;
+use App\Helper\Helper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity]
+#[ORM\Index(columns: ['hash_id'], name: 'hash_id')]
 class PluginForm extends BasePlugin
 {
     #[ORM\Column(type: 'json')]
@@ -21,12 +23,14 @@ class PluginForm extends BasePlugin
     #[ORM\Column(type: 'string', nullable: true)]
     private $email;
 
-    private $hashId;
+    #[ORM\Column(type: 'string')]
+    private string $hashId = '';
 
     public function __construct()
     {
         parent::__construct();
         $this->formData = new ArrayCollection();
+        $this->hashId = Helper::randomString();
     }
     public function getForm()
     {

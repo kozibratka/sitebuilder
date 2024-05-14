@@ -54,7 +54,7 @@ export class GridCellItemComponent implements OnInit, OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     let change = changes['gridCellItem'];
     if (change.previousValue) {
-      this.plugin.instance.settings = this.gridCellItem.plugin;
+      this.plugin.instance.initializeSettings(this.gridCellItem.plugin);
     }
   }
 
@@ -90,7 +90,7 @@ export class GridCellItemComponent implements OnInit, OnChanges{
     const pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(
       plugin.settings.identifier
     );
-    plugin.settings = this.gridCellItem.plugin;
+    plugin.initializeSettings(this.gridCellItem.plugin);
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
     let adminPages = [{label: 'Vybrat prvek', component: AdminPluginSelectComponent, path: ''},...pluginResolver.adminComponentsClass];
     let dialogInfo = this.moveableModalService.show<any>(MiniAdminComponent,

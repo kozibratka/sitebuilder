@@ -15,7 +15,6 @@ class PluginFormType extends AbstractType
     {
         $builder->add('email')
             ->add('form', UnstructuredType::class)
-            ->add('hashId')
         ;
     }
 

@@ -20,20 +20,18 @@ class PluginFormController extends BaseApiController
     /**
      * @Route("/save-data/{hash}", name="save_data")
      */
-    public function saveData(Encryptor $encryptor, EntityManagerInterface $entityManager, Request $request, ?string $hash = null) {
+    public function saveData(EntityManagerInterface $entityManager, Request $request, ?string $hash = null) {
         if (!$hash) {
             return new JsonResponse();
         }
-        if ($id = $encryptor->decrypt($hash)) {
-            $pluginForm = $entityManager->getRepository(PluginForm::class)->find($id);
-            if (!$pluginForm) {
-                return new JsonResponse();
-            }
-            $newFormData = new FormData();
-            $newFormData->setData($request->get('formData'));
-            $pluginForm->addFormData($newFormData);
-            $entityManager->flush();
+        $pluginForm = $entityManager->getRepository(PluginForm::class)->findOneBy(['hashId' => $hash]);
+        if (!$pluginForm) {
+            return new JsonResponse();
         }
+        $newFormData = new FormData();
+        $newFormData->setData($request->get('formData'));
+        $pluginForm->addFormData($newFormData);
+        $entityManager->flush();
         return new JsonResponse();
     }
 
