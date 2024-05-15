@@ -47,7 +47,6 @@ export class FormComponent extends AbstractPlugin<FormConfigInterface> implement
 
   inputsToInstance() {
     this.formInputs = this.formService.inputArrayToInstanceInput(this.settings.form);
-    console.log('refreshed form')
   }
 
   formSubmitted(data: any) {

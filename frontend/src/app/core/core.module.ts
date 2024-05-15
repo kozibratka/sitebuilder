@@ -27,6 +27,7 @@ import {HidderComponent} from './components/hidder/plain-hider/hidder.component'
 import { DialogComponent } from './components/dialog/dialog.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { RemoveItemComponent } from './components/remove-item/remove-item.component';
+import { LinkDeactivateDirective } from './directives/link-deactivate.directive';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { RemoveItemComponent } from './components/remove-item/remove-item.compon
     DialogComponent,
     SafeHtmlPipe,
     RemoveItemComponent,
+    LinkDeactivateDirective,
   ],
   imports: [
     CommonModule,
@@ -58,22 +60,23 @@ import { RemoveItemComponent } from './components/remove-item/remove-item.compon
     MatDialogModule,
     MatButtonModule,
   ],
-    exports: [
-        ModalForRouteComponent,
-        InputFormErrorDirective,
-        HiderElementDirective,
-        InputFormErrorGrouperDirective,
-        GlobalFormErrorComponent,
-        MoveAbleSettingsComponent,
-        HidderComponent,
-        DirectoryMiniNavigationComponent,
-        IconResolverComponent,
-        MiniAdminComponent,
-        MoveableModalComponent,
-        AnimationHiderComponent,
-        DialogComponent,
-        SafeHtmlPipe,
-    ],
+  exports: [
+    ModalForRouteComponent,
+    InputFormErrorDirective,
+    HiderElementDirective,
+    InputFormErrorGrouperDirective,
+    GlobalFormErrorComponent,
+    MoveAbleSettingsComponent,
+    HidderComponent,
+    DirectoryMiniNavigationComponent,
+    IconResolverComponent,
+    MiniAdminComponent,
+    MoveableModalComponent,
+    AnimationHiderComponent,
+    DialogComponent,
+    SafeHtmlPipe,
+    LinkDeactivateDirective,
+  ],
   providers: [
     EventEmitterService,
     JqueryVersionService,

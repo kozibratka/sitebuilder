@@ -3,6 +3,7 @@ import {PageInterface} from '../../interfaces/page-interface';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {StringService} from '../../../core/services/string.service';
 import {Subject} from "rxjs";
+import {LinkDeactivateService} from "../../../core/services/link-deactivate.service";
 
 @Component({
   selector: 'app-palette-builder',
@@ -19,10 +20,12 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 
   constructor(
     @Inject('AnyDraggedResized') public sortableJsDragged$: Subject<boolean>,
+    private linkDeactivateService: LinkDeactivateService,
   ) {
   }
 
   ngOnInit(): void {
+    this.linkDeactivateService.deactivate = true;
   }
 
   ngAfterViewChecked(): void {
