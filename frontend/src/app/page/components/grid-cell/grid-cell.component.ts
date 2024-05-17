@@ -5,6 +5,7 @@ import {SortableEvent} from "sortablejs";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {StringService} from "../../../core/services/string.service";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
+import {BasePlugConfigInterface} from "../../../plugins/interfaces/base-plug-config-interface";
 
 @Component({
   selector: 'app-grid-cell',
@@ -69,5 +70,19 @@ export class GridCellComponent implements OnInit{
 
   deleteItem(index: number) {
     this.cell.items.splice(index, 1);
+  }
+
+  getHorizontalPadding(plugin: BasePlugConfigInterface) {
+    if (!plugin || typeof(plugin.horizontalPadding) === 'undefined' || plugin.horizontalPadding === null) {
+      return {
+        "marginLeft": '15px',
+        "marginRight": '15px',
+      }
+    } else {
+      return {
+        "marginLeft": plugin.horizontalPadding+'px',
+        "marginRight": plugin.horizontalPadding+'px',
+      }
+    }
   }
 }

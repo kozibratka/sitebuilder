@@ -82,4 +82,9 @@ app-grid-cell {
   color: white;
 }
 
+.no-vertical-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 

@@ -3,7 +3,7 @@
                [isFirst]="first"
                *ngFor="let cell of row.cells; let last = last;let first = first;index as i; trackBy: trackByCell"
                (resized$)="onCellResized($event, i)"
-               class="col-md-{{cell.width}}"
+               class="col-md-{{cell.width}} no-vertical-padding"
                [class.resized]="isResized"
                [isMouseEnterRow]=isMouseEnter
                (addCell$)="addNewCell(i, $event)"

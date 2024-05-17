@@ -21,35 +21,39 @@ import {ImageModule} from './modules/image/image.module';
 import {VideoModule} from './modules/video/video.module';
 import {FormModule} from './modules/form/form.module';
 import { AdminPluginSelectComponent } from './components/plugin-select/admin-plugin-select.component';
+import { PluginDimensionAdminComponent } from './components/plugin-dimension-admin/plugin-dimension-admin.component';
+import {FileManagerModule} from "../core/modules/file-manager/file-manager.module";
 
 @NgModule({
-    imports: [
-        CommonModule,
-        CoreModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        RouterModule,
-        FormsModule,
-        DragDropModule,
-        MixedCdkDragDropModule,
-        NgbCarousel,
-        NgbSlide,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatInputModule,
-        SortablejsModule.forRoot({animation: 150}),
-        MatIconModule,
-        MatDialogModule,
-        MatSelectModule,
-        CarouselModule,
-        MenuModule,
-        TextModule,
-        ImageModule,
-        VideoModule,
-        FormModule
-    ],
+  imports: [
+    CommonModule,
+    CoreModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    RouterModule,
+    FormsModule,
+    DragDropModule,
+    MixedCdkDragDropModule,
+    NgbCarousel,
+    NgbSlide,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    SortablejsModule.forRoot({animation: 150}),
+    MatIconModule,
+    MatDialogModule,
+    MatSelectModule,
+    CarouselModule,
+    MenuModule,
+    TextModule,
+    ImageModule,
+    VideoModule,
+    FormModule,
+    FileManagerModule
+  ],
   declarations: [
-    AdminPluginSelectComponent
+    AdminPluginSelectComponent,
+    PluginDimensionAdminComponent
   ]
 })
 export class PluginsModule { }

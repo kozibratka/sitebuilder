@@ -17,6 +17,9 @@ import {PageBuilderComponent} from "../../pages/page-builder/page-builder.compon
 import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
 import {AdminPluginSelectComponent} from "../../../plugins/components/plugin-select/admin-plugin-select.component";
 import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
+import {
+  PluginDimensionAdminComponent
+} from "../../../plugins/components/plugin-dimension-admin/plugin-dimension-admin.component";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -92,7 +95,12 @@ export class GridCellItemComponent implements OnInit, OnChanges{
     );
     plugin.initializeSettings(this.gridCellItem.plugin);
     this.pageBuilderComponent.refreshGlobalPluginSelect(pluginResolver.identifier);
-    let adminPages = [{label: 'Vybrat prvek', component: AdminPluginSelectComponent, path: ''},...pluginResolver.adminComponentsClass];
+    let adminPages =
+      [
+        {label: 'Vybrat prvek', component: AdminPluginSelectComponent, path: ''},
+        ...pluginResolver.adminComponentsClass,
+        {label: 'Rozměry', component: PluginDimensionAdminComponent, path: ''}
+      ];
     let dialogInfo = this.moveableModalService.show<any>(MiniAdminComponent,
       {
       adminComponentsClass: adminPages,
