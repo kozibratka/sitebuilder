@@ -3,6 +3,7 @@
 namespace App\Form\Plugin;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,6 +14,7 @@ class BasePluginType extends AbstractType
         $builder->add('id', null, ['mapped' => false])
             ->add('identifier')
             ->add('name')
+            ->add('horizontalMargin', NumberType::class)
         ;
     }
 

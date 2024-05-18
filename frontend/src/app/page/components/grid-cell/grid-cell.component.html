@@ -7,7 +7,7 @@
   <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items; trackBy: trackByItem; index as i"
                       [isDeepChild]="isDeepChild"
                       (deleteItem)="deleteItem(i)"
-                      [style]="getHorizontalPadding(item.plugin)"
+                      [style]="gridCellService.getHorizontalMargin(item.plugin)"
   ></app-grid-cell-item>
 </div>
 <div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);">

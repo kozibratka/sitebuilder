@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {GridCellInterface} from "../../../page/interfaces/grid-cell-interface";
+import {GridCellService} from "../../../page/services/grid-cell.service";
 
 @Component({
   selector: 'app-grid-cell-public',
@@ -9,4 +10,9 @@ import {GridCellInterface} from "../../../page/interfaces/grid-cell-interface";
 export class GridCellPublicComponent {
   @Input() cell: GridCellInterface;
 
+
+  constructor(
+    public gridCellService: GridCellService
+  ) {
+  }
 }

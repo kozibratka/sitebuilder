@@ -1,4 +1,7 @@
 <div class="cell-content">
-  <app-grid-cell-item-public [gridCellItem]="item" *ngFor="let item of cell.items"></app-grid-cell-item-public>
+  <app-grid-cell-item-public
+    [gridCellItem]="item" *ngFor="let item of cell.items"
+    [style]="gridCellService.getHorizontalMargin(item.plugin)"
+  ></app-grid-cell-item-public>
 </div>
 

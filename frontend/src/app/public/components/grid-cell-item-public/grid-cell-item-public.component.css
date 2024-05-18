@@ -1,3 +1,8 @@
 .cell-item:not(.is-row ) {
   padding-bottom: 15px;
 }
+
+:host {
+  display: block;
+  position: relative;
+}

@@ -55,6 +55,9 @@ abstract class BasePlugin
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin')]
     private $gridCellItems;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $horizontalMargin = null;
+
     public ?string $identifier = null;
 
     public function __construct()
@@ -115,18 +118,12 @@ abstract class BasePlugin
         $this->gridCellItems = $items;
     }
 
-    /**
-     * @param mixed $item
-     */
     public function addGridCellItem(GridCellItem $item)
     {
         $this->gridCellItems->add($item);
         $item->setPlugin($this);
     }
 
-    /**
-     * @param mixed $item
-     */
     public function removeGridCellItem(GridCellItem $item)
     {
         $this->gridCellItems->removeElement($item);
@@ -135,6 +132,16 @@ abstract class BasePlugin
 
     public function getUser() {
         return $this->getWeb()?->getUser() ?? $this->getGridCellItems()[0]->getUser();
+    }
+
+    public function getHorizontalMargin(): ?int
+    {
+        return $this->horizontalMargin;
+    }
+
+    public function setHorizontalMargin(?int $horizontalMargin): void
+    {
+        $this->horizontalMargin = $horizontalMargin;
     }
 
     /**

@@ -2,7 +2,7 @@
   <div #video class="video-container" *ngIf="videoUrl" [style.filter]="'grayscale('+pageBlock.grayScale+'%)'" [style.opacity]="pageBlock.opacity/10">
     <div [attr.data-vbg]="videoUrl"></div>
   </div>
-  <div #palette_content class="block-content" [style.height.px]="!pageBlock.rows.length ? (pageBlock.height ?? 65) : null">
+  <div #palette_content class="block-content-rows container" [style.height.px]="!pageBlock.rows.length ? (pageBlock.height ?? 65) : null">
     <app-grid-row-public class="row" [row]="row" *ngFor="let row of pageBlock.rows; index as i"></app-grid-row-public>
   </div>
 </div>

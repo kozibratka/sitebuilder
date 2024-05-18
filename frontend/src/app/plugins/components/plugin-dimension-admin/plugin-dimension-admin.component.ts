@@ -20,7 +20,7 @@ export class PluginDimensionAdminComponent extends AbstractAdminSetting<BasePlug
   createAdminForm(settings: BasePlugConfigInterface): void {
     this.adminForm = this.adminFormService.createForm(
       {
-        horizontalPadding: [''],
+        horizontalMargin: [''],
       },
       settings
     );
