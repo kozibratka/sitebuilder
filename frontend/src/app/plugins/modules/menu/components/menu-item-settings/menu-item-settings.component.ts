@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MenuItemInterface} from '../../interfaces/menu-item-interface';
 import {WebDetailResolverService} from '../../../../../web/services/web-detail-resolver.service';
 import {PageListResolverService} from "../../../../../page/services/page-list-resolver.service";
+import {PageInterface} from "../../../../../page/interfaces/page-interface";
 
 @Component({
   selector: 'app-menu-item-settings',
@@ -12,7 +13,8 @@ import {PageListResolverService} from "../../../../../page/services/page-list-re
 })
 export class MenuItemSettingsComponent {
   settings: FormGroup;
-  pages: {id: number, name: string}[];
+  pages: PageInterface[];
+  formData: MenuItemInterface;
   constructor(
     private webDetail: WebDetailResolverService,
     private fb: FormBuilder,
@@ -27,9 +29,15 @@ export class MenuItemSettingsComponent {
       pageId: [null, [Validators.required]],
     });
     if (data) {
-      console.log(data)
-      //data.page = null;
       this.settings.patchValue(data);
     }
+
+    this.settings.statusChanges.subscribe(status => {
+      if (status == 'VALID') {
+        this.formData = this.settings.value;
+        const page = this.pages.find(page => page.id == this.formData.pageId);
+        this.formData.pageDetail = {pageUrl: page.url, isHomepage: page.homePage};
+      }
+    });
   }
 }

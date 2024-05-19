@@ -45,7 +45,7 @@ class MenuItem
         return $this->page;
     }
 
-    public function setPage(AbstractPage $page)
+    public function setPage(?AbstractPage $page)
     {
         $this->page = $page;
     }

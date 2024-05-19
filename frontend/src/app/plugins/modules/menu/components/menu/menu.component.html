@@ -20,7 +20,7 @@
 <ng-template #dropdown let-items='items' let-index='index'>
   <ul *ngIf="items" class="dropdown-menu" [attr.aria-labelledby]="'dropdown'+index">
     <li *ngFor="let item of items">
-      <a class="dropdown-item" href="{{item.pageUrl}}">{{item.name}}</a>
+      <a appLinkDeactivate class="dropdown-item" href="/{{item.pageDetail.isHomepage ? '' : item.pageDetail.pageUrl}}">{{item.name}}</a>
     </li>
   </ul>
 </ng-template>

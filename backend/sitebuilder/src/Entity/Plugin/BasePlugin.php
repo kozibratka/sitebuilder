@@ -53,6 +53,9 @@ abstract class BasePlugin
     private ?Web $web = null;
     /** @var ArrayCollection  */
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'plugin')]
+    /**
+     * @Serializer\Exclude()
+     */
     private $gridCellItems;
 
     #[ORM\Column(type: 'integer', nullable: true)]

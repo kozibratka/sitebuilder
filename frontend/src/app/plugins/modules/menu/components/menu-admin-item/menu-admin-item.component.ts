@@ -36,9 +36,9 @@ export class MenuAdminItemComponent {
     const dialogRef = this.dialog.open(MenuItemSettingsComponent, {data: item});
     dialogRef.afterClosed().subscribe(value => {
       if (value) {
-        const formSettings = dialogRef.componentInstance.settings;
-        if (formSettings.valid) {
-          Object.assign(item, formSettings.value);
+        const formData = dialogRef.componentInstance.formData;
+        if (formData) {
+          Object.assign(item, formData);
           this.updated.emit(true);
         }
       }
