@@ -1,6 +1,6 @@
 <div class="card card-primary card-outline">
   <div class="card-header">
-    <h3 class="card-title">Seznam mojich pluginů typu <b>{{pluginResolver.name}}</b></h3>
+    <h3 class="card-title">Seznam vlastních pluginů typu <b>{{pluginResolver.name}}</b></h3>
   </div> <!-- /.card-body -->
   <div class="card-body">
     <table mat-table [dataSource]="createdPlugins" class="w-100">
@@ -25,6 +25,7 @@
     </table>
     <div class="container-fluid mt-3">
       <div class="d-flex justify-content-end">
+        <a class="link-back-list-pages" [routerLink]="['../../list-available']" mat-button><<< Zpět na seznam pluginů</a>
         <button [routerLink]="['../../create', pluginResolver.identifier]" mat-raised-button color="primary"><i class="material-icons">add</i>Přidat plugin
         </button>
       </div>

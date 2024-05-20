@@ -22,7 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ListCreatedComponent,
     CreatePluginComponent,
     UpdatePluginComponent,
-    RemoveDialogComponent
+    RemoveDialogComponent,
   ],
   imports: [
     CommonModule,

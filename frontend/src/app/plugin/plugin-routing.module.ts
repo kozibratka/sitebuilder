@@ -9,7 +9,6 @@ import {CreatePluginComponent} from './pages/create-plugin/create-plugin.compone
 import {UpdatePluginComponent} from './pages/update-plugin/update-plugin.component';
 
 const routes: Routes = [
-  {path: '', component: PluginComponent},
   {path: 'list-available', component: ListAvailableComponent, resolve: {globalPlugins: GlobalPluginsResolver}},
   {
     path: 'list-created/:identifier',
