@@ -14,6 +14,7 @@ import {MenuComponent} from './components/menu/menu.component';
 import {MenuItemSettingsComponent} from './components/menu-item-settings/menu-item-settings.component';
 import {MenuRemoveItemDialogComponent} from './components/menu-remove-item-dialog/menu-remove-item-dialog.component';
 import {MenuLogoAdminComponent} from './pages/menu-logo-admin/menu-logo-admin.component';
+import {FileManagerModule} from "../../../core/modules/file-manager/file-manager.module";
 
 
 
@@ -33,7 +34,8 @@ import {MenuLogoAdminComponent} from './pages/menu-logo-admin/menu-logo-admin.co
         MatDialogModule,
         ReactiveFormsModule,
         MatButtonModule,
-        CoreModule
+        CoreModule,
+        FileManagerModule
     ],
   providers: [
     {provide: AbstractPluginResolver, useClass: MenuResolverService, multi: true},

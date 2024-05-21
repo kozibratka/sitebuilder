@@ -29,11 +29,7 @@ export class MenuLogoAdminComponent extends AbstractAdminSetting<MenuConfigInter
     );
   }
 
-  onClickAddImageButton() {
-    this.fileManagerModalService.open('image').subscribe(value => {
-      if (value.eventName === 'selected') {
-        this.settings.logoImage = value.files[0]?.publicPath;
-      }
-    });
+  updateImage(path: string) {
+    this.settings.logoImage = path;
   }
 }
