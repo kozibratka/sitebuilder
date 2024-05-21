@@ -1,6 +1,9 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row sidebar-dark-primary">
       <nav class="col-4" id="sidebar">
+        <div class="brand-link">
+          <span  class="brand-text font-weight-light">Menu</span>
+        </div>
         <ul *ngIf="adminAble" class="list-unstyled components mb-5">
           <li [class]="{active: selectedComponent === setting.component, invisible: allowedAdminComponent && setting.component != allowedAdminComponent}" *ngFor="let setting of adminAble.adminComponentsClass;">
             <a href="#" (click)="showContent(setting.component, setting.label);$event.preventDefault()">
