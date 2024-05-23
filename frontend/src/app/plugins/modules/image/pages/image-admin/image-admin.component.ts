@@ -24,12 +24,7 @@ export class ImageAdminComponent extends AbstractAdminSetting<ImageConfigInterfa
       settings
     );
   }
-
-  onClickAddImageButton() {
-    this.fileManagerModalService.open('image').subscribe(value => {
-      if (value.eventName === 'selected') {
-        this.settings.imagePath = value.files[0]?.publicPath;
-      }
-    });
+  updateImage(path: string) {
+    this.settings.imagePath = path;
   }
 }

@@ -8,6 +8,7 @@ import {ImageComponent} from './components/image/image.component';
 import {ImageAdminComponent} from './pages/image-admin/image-admin.component';
 import { StyleAdminComponent } from './pages/style-admin/style-admin.component';
 import {MatSliderModule} from "@angular/material/slider";
+import {FileManagerModule} from "../../../core/modules/file-manager/file-manager.module";
 
 
 
@@ -17,13 +18,14 @@ import {MatSliderModule} from "@angular/material/slider";
     ImageAdminComponent,
     StyleAdminComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatSliderModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatSliderModule,
+        FormsModule,
+        FileManagerModule
+    ],
   providers: [
     {provide: AbstractPluginResolver, useClass: ImageResolverService, multi: true},
   ],

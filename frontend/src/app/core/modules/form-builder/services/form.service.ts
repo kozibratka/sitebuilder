@@ -13,7 +13,7 @@ export class FormService {
 
   constructor() { }
 
-  inputArrayToInstanceInput(inputs: BaseInput[][]) {
+  createInputsFromArray(inputs: BaseInput[][]) {
     return inputs.map(value => {
       return value.map(value1 => {
         let instance: BaseInput = null;
@@ -30,6 +30,7 @@ export class FormService {
         }
         if (instance) {
           Object.assign(instance, value1);
+          instance.settings = value1;
         }
         return instance;
       });

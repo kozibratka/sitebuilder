@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {NewInputDescriptionInterface} from '../../../interfaces/new-input-description-interface';
 import {StringService} from '../../../../../services/string.service';
+import {BaseInput} from "../../../class/base-input";
 
 @Component({
   selector: 'app-form-input',
@@ -9,7 +10,7 @@ import {StringService} from '../../../../../services/string.service';
   styleUrls: ['./form-input.component.css'],
 })
 export class FormInputComponent {
-  @Input() formData: any;
+  @Input() formData: BaseInput;
   @Input() isNewRowInput = false;
   @Input() isAdmin = true;
 
@@ -38,6 +39,13 @@ export class FormInputComponent {
       data: this.formData,
       width: '35%',
       position: {top: '110px'}
+    });
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        let settings = {...this.formData};
+        delete settings.settings;
+        Object.assign(this.formData.settings, settings);
+      }
     });
   }
 }

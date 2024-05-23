@@ -8,6 +8,7 @@ import {Checkbox} from '../../../class/checkbox';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {FormPublicComponent} from '../../form-public/form-public/form-public.component';
 import {Button} from '../../../class/button';
+import {FormService} from "../../../services/form.service";
 
 @Component({
   selector: 'app-form-builder',
@@ -15,19 +16,21 @@ import {Button} from '../../../class/button';
   styleUrls: ['./form-builder.component.css']
 })
 export class FormBuilderComponent implements OnInit{
-  @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
+  @Input() formRawData: any[][] = [];
+  formInputs: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
   @Input() isAdmin = true;
 
   @Output() refresh = new EventEmitter<boolean>();
   form: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private formService: FormService,
   ) {
   }
 
   ngOnInit(): void {
-    this.form = FormPublicComponent.initForm(this.formData, this.fb);
+      this.formInputs = this.formService.createInputsFromArray(this.formRawData);
   }
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {
@@ -52,19 +55,23 @@ export class FormBuilderComponent implements OnInit{
 
 
     if (x === -1) {
-      this.formData.push([typeInput]);
+      this.formInputs.push([typeInput]);
+      this.formRawData.push([{...typeInput}]);
       this.refresh.emit(true);
       return;
     }
     const position = data.position === 'right' ? y + 1 : y;
-    this.formData[x].splice(position, 0, typeInput);
+    this.formInputs[x].splice(position, 0, typeInput);
+    this.formRawData[x].splice(position, 0, {...typeInput});
     this.refresh.emit(true);
   }
 
   deleteInput(x: number, y: number) {
-    this.formData[x].splice(y, 1);
-    if (!this.formData[x].length) {
-      this.formData.splice(x, 1);
+    this.formInputs[x].splice(y, 1);
+    this.formRawData[x].splice(y, 1);
+    if (!this.formInputs[x].length) {
+      this.formInputs.splice(x, 1);
+      this.formRawData.splice(x, 1);
     }
     this.refresh.emit(true);
   }

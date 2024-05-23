@@ -1,11 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormConfigInterface} from '../../interfaces/form-config-interface';
-import {FormBuilder} from '@angular/forms';
 import {FormPublicComponent} from '../../../../../core/modules/form-builder/components/form-public/form-public/form-public.component';
 import {AbstractPlugin} from '../../../../abstract-class/abstract-plugin';
 import {SymfonyApiClientService} from '../../../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../../../core/services/notifier.service';
-import {FormService} from "../../../../../core/modules/form-builder/services/form.service";
 
 @Component({
   selector: 'app-form-v1',
@@ -19,34 +17,22 @@ export class FormComponent extends AbstractPlugin<FormConfigInterface> implement
   formInputs;
   isSend = false;
   constructor(
-    private fb: FormBuilder,
     private symfonyApiClientService: SymfonyApiClientService,
     private notifierService: NotifierService,
-    private formService: FormService,
   ) {
     super();
   }
 
   ngOnInit(): void {
-
+      this.formInputs = this.settings.form;
   }
 
   initializeSettings(settings: FormConfigInterface) {
     super.initializeSettings(settings);
-    if (Array.isArray(this.settings.form)) {
-      this.inputsToInstance();
-    }
-  }
-
-  getDisabledStateWhenDraggingItem(): any {
   }
 
   refreshView(): void {
     this.formBuilderPublic.refresh();
-  }
-
-  inputsToInstance() {
-    this.formInputs = this.formService.inputArrayToInstanceInput(this.settings.form);
   }
 
   formSubmitted(data: any) {

@@ -3,6 +3,7 @@ import {BaseInput} from '../../../class/base-input';
 import {TextInput} from '../../../class/text-input';
 import * as _ from 'underscore';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormService} from "../../../services/form.service";
 
 @Component({
   selector: 'app-form-public',
@@ -10,7 +11,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./form-public.component.css']
 })
 export class FormPublicComponent implements OnInit{
-  @Input() formData: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
+  @Input() formRawData: any[][] = [];
+  formInputs: Array<Array<BaseInput>> = [[new TextInput(), new TextInput()], [new TextInput(), new TextInput()]];
   form: FormGroup;
   @Input()isSend = false;
   trySubmit = false;
@@ -19,11 +21,12 @@ export class FormPublicComponent implements OnInit{
 
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private formService: FormService,
   ) {
   }
 
-  static initForm(formData: Array<Array<BaseInput>>, fb: FormBuilder) {
+  initForm(formData: Array<Array<BaseInput>>) {
     const flatFormData = _.flatten(formData);
     let formControls = {};
     flatFormData.forEach((data: BaseInput) => {
@@ -34,7 +37,7 @@ export class FormPublicComponent implements OnInit{
         formControls = Object.assign(formControls, form);
       }
     });
-    return fb.group(
+    return this.fb.group(
       formControls,
     );
   }
@@ -43,7 +46,8 @@ export class FormPublicComponent implements OnInit{
     this.refresh();
   }
   refresh() {
-    this.form = FormPublicComponent.initForm(this.formData, this.fb);
+    this.formInputs = this.formService.createInputsFromArray(this.formRawData);
+    this.form = this.initForm(this.formInputs);
   }
   submitForm() {
     this.trySubmit = true;

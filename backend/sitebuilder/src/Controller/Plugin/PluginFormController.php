@@ -38,18 +38,15 @@ class PluginFormController extends BaseApiController
     /**
      * @Route("/get-data/{hash}", name="get_data")
      */
-    public function getData(Encryptor $encryptor, EntityManagerInterface $entityManager, Request $request, ?string $hash = null) {
+    public function getData($hash, EntityManagerInterface $entityManager) {
         if (!$hash) {
             return new JsonResponse();
         }
-        if ($id = $encryptor->decrypt($hash)) {
-            $pluginForm = $entityManager->getRepository(PluginForm::class)->find($id);
-            if (!$pluginForm) {
-                return new JsonResponse();
-            }
-            $data = $pluginForm->getFormData();
-            return $this->jsonResponseSimple($data);
+        $pluginForm = $entityManager->getRepository(PluginForm::class)->findOneBy(['hashId' => $hash]);
+        if (!$pluginForm) {
+            return new JsonResponse();
         }
-        return new JsonResponse();
+        $data = $pluginForm->getFormData();
+        return $this->jsonResponseSimple($data);
     }
 }

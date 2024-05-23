@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="form">
-    <div class="form-row row" *ngFor="let rowData of formData;index as x">
+    <div class="form-row row" *ngFor="let rowData of formInputs;index as x">
       <div class="col" *ngFor="let columnData of rowData;index as y">
         <div class="input-container position-{{$any(columnData).position}}" [ngSwitch]="columnData.constructor.name">
           <div *ngSwitchCase="'TextInput'">

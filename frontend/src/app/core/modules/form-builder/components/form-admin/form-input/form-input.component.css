@@ -18,6 +18,12 @@
   right: 47%;
 }
 
+.input-panel-top button {
+  width: 24px;
+  height: 24px;
+  padding: 0px;
+}
+
 .input-container {
   position: relative;
 }
