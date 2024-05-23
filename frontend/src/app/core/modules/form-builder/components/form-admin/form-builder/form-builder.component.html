@@ -1,7 +1,7 @@
 <div class="container">
     <div class="form-row row" *ngFor="let rowData of formInputs;index as x">
         <div class="col input-container-col" *ngFor="let columnData of rowData;index as y">
-          <app-form-input [formData]="columnData" (newInput)="addInput($event, x, y)" (removeInput)="deleteInput(x, y)"></app-form-input>
+          <app-form-input [formData]="columnData" (newInput)="addInput($event, x, y)" (removeInput)="deleteInput(x, y)" (updated)="refreshRawData()"></app-form-input>
         </div>
     </div>
   <div class="form-row row">

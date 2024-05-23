@@ -46,7 +46,7 @@ export class FormPublicComponent implements OnInit{
     this.refresh();
   }
   refresh() {
-    this.formInputs = this.formService.createInputsFromArray(this.formRawData);
+    this.formInputs = this.formService.createInputsFromRaw(this.formRawData);
     this.form = this.initForm(this.formInputs);
   }
   submitForm() {

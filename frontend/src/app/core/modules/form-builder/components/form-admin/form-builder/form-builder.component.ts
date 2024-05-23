@@ -30,7 +30,13 @@ export class FormBuilderComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.formInputs = this.formService.createInputsFromArray(this.formRawData);
+      this.formInputs = this.formService.createInputsFromRaw(this.formRawData);
+  }
+
+  refreshRawData() {
+    let rawData = this.formService.createRawFromInputs(this.formInputs);
+    this.formRawData.length = 0;
+    this.formRawData.push(...rawData);
   }
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {
@@ -56,23 +62,22 @@ export class FormBuilderComponent implements OnInit{
 
     if (x === -1) {
       this.formInputs.push([typeInput]);
-      this.formRawData.push([{...typeInput}]);
+      this.refreshRawData();
       this.refresh.emit(true);
       return;
     }
     const position = data.position === 'right' ? y + 1 : y;
     this.formInputs[x].splice(position, 0, typeInput);
-    this.formRawData[x].splice(position, 0, {...typeInput});
+    this.refreshRawData();
     this.refresh.emit(true);
   }
 
   deleteInput(x: number, y: number) {
     this.formInputs[x].splice(y, 1);
-    this.formRawData[x].splice(y, 1);
     if (!this.formInputs[x].length) {
       this.formInputs.splice(x, 1);
-      this.formRawData.splice(x, 1);
     }
+    this.refreshRawData();
     this.refresh.emit(true);
   }
 }

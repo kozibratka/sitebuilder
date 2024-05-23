@@ -13,7 +13,7 @@ export class FormService {
 
   constructor() { }
 
-  createInputsFromArray(inputs: BaseInput[][]) {
+  createInputsFromRaw(inputs: BaseInput[][]) {
     return inputs.map(value => {
       return value.map(value1 => {
         let instance: BaseInput = null;
@@ -33,6 +33,14 @@ export class FormService {
           instance.settings = value1;
         }
         return instance;
+      });
+    });
+  }
+
+  createRawFromInputs(inputs: BaseInput[][]) {
+    return inputs.map(value => {
+      return value.map(value1 => {
+        return {...value1};
       });
     });
   }

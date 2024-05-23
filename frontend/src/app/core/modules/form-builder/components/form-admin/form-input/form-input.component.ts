@@ -16,6 +16,7 @@ export class FormInputComponent {
 
   @Output() newInput: EventEmitter<NewInputDescriptionInterface> = new EventEmitter();
   @Output() removeInput: EventEmitter<boolean> = new EventEmitter();
+  @Output() updated: EventEmitter<boolean> = new EventEmitter();
   uniqueId = StringService.randomString();
   showPanel = false;
 
@@ -42,9 +43,7 @@ export class FormInputComponent {
     });
     dialogRef.afterClosed().subscribe(value => {
       if (value) {
-        let settings = {...this.formData};
-        delete settings.settings;
-        Object.assign(this.formData.settings, settings);
+        this.updated.emit(true);
       }
     });
   }
