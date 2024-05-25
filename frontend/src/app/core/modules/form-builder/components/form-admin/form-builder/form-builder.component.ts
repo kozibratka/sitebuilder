@@ -9,6 +9,8 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {FormPublicComponent} from '../../form-public/form-public/form-public.component';
 import {Button} from '../../../class/button';
 import {FormService} from "../../../services/form.service";
+import {ObjectHelper} from "../../../../../helpers/object-helper";
+import {ArrayHelper} from "../../../../../helpers/array-helper";
 
 @Component({
   selector: 'app-form-builder',
@@ -34,9 +36,8 @@ export class FormBuilderComponent implements OnInit{
   }
 
   refreshRawData() {
-    let rawData = this.formService.createRawFromInputs(this.formInputs);
-    this.formRawData.length = 0;
-    this.formRawData.push(...rawData);
+    let rawData = ObjectHelper.copyToRaw(this.formInputs);
+    ArrayHelper.reinitArray(this.formRawData, rawData);
   }
 
   addInput(data: NewInputDescriptionInterface, x: number, y: number) {

@@ -38,11 +38,11 @@ export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugCon
       plugin: [this.selectedId],
     });
     if (!this.settings.webId) {
-      this.contextObject.lastAdminSettings = ObjectHelper.copy(this.settings);
+      this.contextObject.lastAdminSettings = ObjectHelper.copyToRaw(this.settings);
     }
     this.form.get('plugin').valueChanges.pipe(startWith(this.selectedId), pairwise()).subscribe(([prev, next]: [any, any]) => {
       if (prev == '0') {
-        this.contextObject.lastAdminSettings = ObjectHelper.copy(this.settings);
+        this.contextObject.lastAdminSettings = ObjectHelper.copyToRaw(this.settings);
       }
       let pluginConfig: any = {};
       if (next != '0') {

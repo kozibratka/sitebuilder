@@ -6,7 +6,11 @@ export class ObjectHelper {
     Object.assign(target, source);
   }
 
-  static copy(source: any) {
+  static copyToRaw(source: any) {
     return JSON.parse(JSON.stringify(source))
+  }
+
+  static toArray() {
+
   }
 }

@@ -5,6 +5,7 @@ import {Selectbox} from "../class/selectbox";
 import {TextInput} from "../class/text-input";
 import {Textarea} from "../class/textarea";
 import {Button} from "../class/button";
+import {ObjectHelper} from "../../../helpers/object-helper";
 
 @Injectable({
   providedIn: 'root'
@@ -33,14 +34,6 @@ export class FormService {
           instance.settings = value1;
         }
         return instance;
-      });
-    });
-  }
-
-  createRawFromInputs(inputs: BaseInput[][]) {
-    return inputs.map(value => {
-      return value.map(value1 => {
-        return {...value1};
       });
     });
   }
