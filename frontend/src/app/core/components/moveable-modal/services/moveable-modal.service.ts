@@ -20,7 +20,7 @@ export class MoveableModalService {
         title: title,
       },
       width: '888px',
-      maxHeight: '500px',
+      maxHeight: '600px',
       position: {top: '110px'}
     });
   }

@@ -98,3 +98,12 @@
   padding-bottom: 1.25rem !important;
   margin-bottom: 19px;
 }
+
+::ng-deep.mat-mdc-dialog-surface:has(app-mini-admin) {
+  overflow-y: hidden;
+}
+
+::ng-deep.mat-mdc-dialog-surface .content-block {
+  overflow-y: auto;
+  max-height: 500px;
+}
