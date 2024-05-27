@@ -8,6 +8,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {CoreModule} from '../core/core.module';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {GravatarModule} from 'ngx-gravatar';
+import {MatIconModule} from "@angular/material/icon";
 
 
 const routes: Routes = [
@@ -21,15 +22,16 @@ const routes: Routes = [
     LayoutComponent,
     MenuComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    MatFormFieldModule,
-    MatSelectModule,
-    CoreModule,
-    MatProgressBarModule,
-    GravatarModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        MatFormFieldModule,
+        MatSelectModule,
+        CoreModule,
+        MatProgressBarModule,
+        GravatarModule,
+        MatIconModule
+    ],
   exports: [
     LayoutComponent
   ]
