@@ -20,7 +20,7 @@
         >
           <div class="menu-element-item grid-stack-item-menu"
                sortablejs="[1]"
-               [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
+               [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
                [sortablejsCloneFunction]="cloneSortableJsRow"
                (mouseleave)="showMoveIcon = false"
                (mouseenter)="showMoveIcon = true"

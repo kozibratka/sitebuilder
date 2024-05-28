@@ -1,6 +1,6 @@
 <div class="cell-content"
      [sortablejs]="cell.items"
-     [sortablejsOptions]="{group: {name: 'cell', pull: true, put: ['menu-row', 'menu-plugin', 'cell']},
+     [sortablejsOptions]="{group: {name: 'cell', pull: true, put: [(!isDeepChild ? 'menu-row' : null), 'menu-plugin', 'cell']},
      onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd,
      handle: '.icon-move-cell'}"
 >
