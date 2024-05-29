@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 import {Subject} from "rxjs";
-import {SortableEvent} from "sortablejs";
+import {MoveEvent, SortableEvent} from "sortablejs";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {StringService} from "../../../core/services/string.service";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
@@ -57,6 +57,15 @@ export class GridCellComponent implements OnInit{
     this.cell.items.forEach((value, index) => {
       value.itemOrder = index;
     });
+  }
+
+  onMove = (event: MoveEvent) => {
+    if (
+      event.dragged.querySelector('.is-row') &&
+      (event.related.tagName !== 'APP-GRID-CELL-ITEM' || event.related.classList.contains('is-deep-child'))
+    ) {
+      return false;
+    }
   }
 
   trackByItem(index, item: GridCellItemInterface) {

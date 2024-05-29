@@ -9,13 +9,13 @@
         <div matTooltip="Nastavení prvku" class="btn draganddrop menu-cell-item">
           <strong>Prvek</strong>
         </div>
-        <div matTooltip="Nastavení" class="btn draganddrop" (click)="openSettings()" *ngIf="!gridCellItem.row">
+        <div class="btn draganddrop" (click)="openSettings()" *ngIf="!gridCellItem.row">
           <i class="material-icons icon-settings">settings</i>
         </div>
-        <div matTooltip="Přesunout" class="btn draganddrop icon-move-cell">
+        <div class="btn draganddrop icon-move-cell">
           <i class="material-icons icon-move-cell-item">open_with</i>
         </div>
-        <div matTooltip="Smazat" class="btn draganddrop" (click)="delete()">
+        <div class="btn draganddrop" (click)="delete()">
           <i class="material-icons icon-remove">delete</i>
         </div>
       </div>

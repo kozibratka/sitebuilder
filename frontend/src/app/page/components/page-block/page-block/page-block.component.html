@@ -38,13 +38,13 @@
       <div matTooltip="Nastavení Bloku" class="btn draganddrop block-menu-label">
         <strong>Blok</strong>
       </div>
-      <div matTooltip="Nastavení bloku" class="btn draganddrop" (click)="openSettings()">
+      <div class="btn draganddrop" (click)="openSettings()">
         <i class="material-icons icon-settings">settings</i>
       </div>
-      <div matTooltip="Přesunout" class="btn draganddrop icon-move-block">
+      <div class="btn draganddrop icon-move-block">
         <i class="material-icons icon-move-block">open_with</i>
       </div>
-      <div matTooltip="Smazat blok" class="btn draganddrop" (click)="deleteBlock.emit(true)">
+      <div class="btn draganddrop" (click)="deleteBlock.emit(true)">
         <i class="material-icons icon-remove">delete</i>
       </div>
       <div *ngIf="userService.hasRole('ROLE_ADMIN')" matTooltip="Přidat jako šablonu" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this)">

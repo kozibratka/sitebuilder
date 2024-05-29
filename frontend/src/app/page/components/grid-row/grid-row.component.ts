@@ -41,7 +41,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
   }
 
   @HostListener('mouseenter', ["$event"])
-  onMouseEnter() {
+  onMouseEnter(event) {
     this.isMouseEnter = true;
     if (this.isDeepChild) {
       event.stopPropagation();
@@ -49,25 +49,25 @@ export class GridRowComponent implements OnInit, OnDestroy{
   }
 
   @HostListener('mouseleave', ["$event"])
-  onMouseLeave() {
+  onMouseLeave(event) {
     this.isMouseEnter = false;
     if (this.isDeepChild) {
       event.stopPropagation();
     }  }
 
   @HostListener('dragover', ["$event"])
-  onDragOver() {
+  onDragOver(event) {
     if (this.isDeepChild) {
       event.stopPropagation();
     }  }
 
   @HostListener('dragstart', ["$event"])
-  onDragStart() {
+  onDragStart(event) {
     if (this.isDeepChild) {
       event.stopPropagation();
     }  }
   @HostListener('dragenter', ["$event"])
-  onDragEnter() {
+  onDragEnter(event) {
     if (this.isDeepChild) {
       event.stopPropagation();
     }  }

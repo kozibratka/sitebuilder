@@ -1,13 +1,14 @@
 <div class="cell-content"
      [sortablejs]="cell.items"
      [sortablejsOptions]="{group: {name: 'cell', pull: true, put: [(!isDeepChild ? 'menu-row' : null), 'menu-plugin', 'cell']},
-     onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd,
+     onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd, onMove: onMove,
      handle: '.icon-move-cell'}"
 >
   <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items; trackBy: trackByItem; index as i"
                       [isDeepChild]="isDeepChild"
                       (deleteItem)="deleteItem(i)"
                       [style]="gridCellService.getHorizontalMargin(item.plugin)"
+                      [class.is-deep-child]="isDeepChild"
   ></app-grid-cell-item>
 </div>
 <div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);">
