@@ -6,6 +6,7 @@ import {WebListResolverGuard} from './web/services/web-list-resolver.service';
 import {RouteRoleGuardService} from './core/guards/route-role-guard.service';
 import {LayoutComponent} from './layout/components/layout/layout.component';
 import {UserResolver} from "./authorization/resolvers/user.resolver";
+import {TestComponent} from "./test/test.component";
 
 
 const routes: Routes = [
@@ -50,6 +51,11 @@ const routes: Routes = [
     path: '',
     redirectTo: '/admin/0',
     pathMatch: 'full'
+  },
+  {
+    path: 'test',
+    pathMatch: 'full',
+    component: TestComponent,
   },
   {
     path: 'authorization',

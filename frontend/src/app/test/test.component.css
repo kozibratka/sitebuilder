@@ -1,0 +1,9 @@
+.srt2 {
+  padding: 0px;
+  position: relative;
+}
+.handle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}

@@ -1,6 +1,6 @@
 <div class="cell-content"
      [sortablejs]="cell.items"
-     [sortablejsOptions]="{group: {name: 'cell', pull: true, put: [(!isDeepChild ? 'menu-row' : null), 'menu-plugin', 'cell']},
+     [sortablejsOptions]="{swapThreshold: 0.5,animation: 300,group: {name: 'cell', pull: true, put: [(!isDeepChild ? 'menu-row' : null), 'menu-plugin', 'cell']},
      onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd, onMove: onMove,
      handle: '.icon-move-cell'}"
 >
@@ -10,6 +10,9 @@
                       [style]="gridCellService.getHorizontalMargin(item.plugin)"
                       [class.is-deep-child]="isDeepChild"
   ></app-grid-cell-item>
+<!--  <div *ngIf="!cell.items.length" class="fake-content">-->
+<!--  </div>-->
+
 </div>
 <div *ngIf="!isLast" class="cell-delimiter" (mousedown)="onMouseDownResizeDelimiter($event);">
   <div class="delimiter-line"></div>

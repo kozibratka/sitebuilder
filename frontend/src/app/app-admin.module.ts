@@ -16,7 +16,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {TestComponent} from './administration/admin/test/test.component';
 import { TestDirectiveDirective } from './administration/admin/test/test-directive.directive';
 import {AppAdminRoutingModule} from './app-admin-routing.module';
 import {AppAdminComponent} from './app-admin.component';
@@ -24,6 +23,7 @@ import {CoreModule} from './core/core.module';
 import {PluginsModule} from './plugins/plugins.module';
 import {FileManagerModule} from './core/modules/file-manager/file-manager.module';
 import {LayoutModule} from './layout/layout.module';
+import {TestComponent} from "./test/test.component";
 
 @NgModule({
   declarations: [
