@@ -56,7 +56,7 @@ export class GridCellItemComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     let change = changes['gridCellItem'];
-    if (change.previousValue) {
+    if (change.previousValue && this.plugin) {
       this.plugin.instance.initializeSettings(this.gridCellItem.plugin);
     }
   }

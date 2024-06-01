@@ -27,16 +27,26 @@ class GridCellItemType extends AbstractType
             ->add('itemOrder',IntegerType::class)
             ->add('uniqueId')
         ;
-        if (!$options['is_sub_row']) {
-            $builder->add('row',
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (PreSubmitEvent $event) use($options): void {
+        $data = $event->getData();
+        $form = $event->getForm();
+        if ($data['row'] ?? null) {
+            $form->add('row',
                 GridRowType::class,
                 [
                     'sync_by_id' => $options['sync_by_id'],
                     'is_sub_row' => true,
-                    'empty_data' => null,
                 ]
-            );
+            )
+            ;
         }
+        });
+//        $builder->addEventListener(FormEvents::POST_SUBMIT, function (PostSubmitEvent $event): void {
+//            $data = $event->getData();
+//            $form = $event->getForm();
+//            dd($form->get('row')->getData());
+//            dd($data);
+//        });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
