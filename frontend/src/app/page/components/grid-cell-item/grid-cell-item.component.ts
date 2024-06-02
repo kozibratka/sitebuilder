@@ -29,6 +29,7 @@ import {
 export class GridCellItemComponent implements OnInit, OnChanges{
   @Input() gridCellItem: GridCellItemInterface;
   @Input() isDeepChild = false;
+  @Input() isLast = false;
   public pluginResolver: AbstractPluginResolver<any>;
   @ViewChild('content', {read: ViewContainerRef, static: true}) pluginContainer: ViewContainerRef;
   plugin: ComponentRef<AbstractPlugin<any>>;

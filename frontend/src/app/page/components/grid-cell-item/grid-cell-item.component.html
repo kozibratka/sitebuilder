@@ -4,10 +4,10 @@
   <app-grid-row class="row is-child"  [isDeepChild]="true" [row]="gridCellItem.row" *ngIf="gridCellItem.row"></app-grid-row>
 
   <app-animation-hider [show] = "showMoveIcon" class="move-icon-cell-item-container" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
-    <div class="plugin-move-menu">
+    <div class="plugin-move-menu" [class.is-last]="isLast">
       <div class="frameCover">
-        <div matTooltip="Nastavení prvku" class="btn draganddrop menu-cell-item">
-          <strong>Prvek</strong>
+        <div class="btn draganddrop menu-cell-item">
+          <strong>{{gridCellItem.row ? 'Vnořená řádka' : 'Prvek'}}</strong>
         </div>
         <div class="btn draganddrop" (click)="openSettings()" *ngIf="!gridCellItem.row">
           <i class="material-icons icon-settings">settings</i>

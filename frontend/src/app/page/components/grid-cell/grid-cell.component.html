@@ -6,6 +6,7 @@
 >
   <app-grid-cell-item [gridCellItem]="item" *ngFor="let item of cell.items; trackBy: trackByItem; index as i"
                       [isDeepChild]="isDeepChild"
+                      [isLast] = "isLast"
                       (deleteItem)="deleteItem(i)"
                       [style]="gridCellService.getHorizontalMargin(item.plugin)"
                       [class.is-deep-child]="isDeepChild"

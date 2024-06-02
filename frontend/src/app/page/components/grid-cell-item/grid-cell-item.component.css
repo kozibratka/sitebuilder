@@ -11,7 +11,6 @@
 }
 
 .plugin-move-menu {
-  width: 153px;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -68,4 +67,8 @@
   width: auto !important;
   padding: 3px !important;
   color: white;
+}
+
+::ng-deep.is-child .plugin-move-menu.is-last {
+  top: 24px;
 }
