@@ -40,6 +40,7 @@ import {
 } from "../../../../core/components/mini-admin/tools/interfaces/admin-setting-able-interface";
 import {BlockDimensionComponent} from "../admin/block-dimension/block-dimension.component";
 import {UrlService} from "../../../../core/services/url.service";
+import {DragStatusService} from "../../../services/drag-status.service";
 
 @Component({
   selector: 'app-palette-block',
@@ -73,17 +74,14 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     private moveableModalService: MoveableModalService,
     public videoService: UrlService,
     private changeDetectorRef: ChangeDetectorRef,
-
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
-    @Inject('AnyDraggedResized') @Optional() private anyDraggedResized$: Subject<boolean>,
+    private dragStatusService: DragStatusService,
     @Inject(DOCUMENT) private document: Document,
     private paletteBuilderComponent: PaletteBuilderComponent
   ) {
   }
 
   ngOnInit(): void {
-    // this.initGridStack();
-    // this.registerIsResizedOnDrag();
     this.initVideoUrl();
   }
 
@@ -151,19 +149,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     });
 
   }
-  private registerIsResizedOnDrag() {
-    let sizeObserver;
-    this.gridItemDragged.subscribe(value => {
-      if (value) {
-        sizeObserver = new ResizeObserver((entries) => {
-          this.paletteBlockService.isResized$.next(true);
-        });
-        sizeObserver.observe(this.paletteContent.nativeElement);
-      } else {
-        sizeObserver.unobserve(this.paletteContent.nativeElement);
-      }
-    });
-  }
+
   get pageBlock(): PageBlockInterface {
     return this._pageBlock;
   }
@@ -180,11 +166,11 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   }
 
   onDragStart = (event: any) => {
-    this.anyDraggedResized$.next(true);
+    this.dragStatusService.isDragRow = true;
   }
 
   onDragEnd = (event: any)=> {
-    this.anyDraggedResized$.next(false);
+    this.dragStatusService.isDragRow = false;
   }
 
   removeRow(index:number) {

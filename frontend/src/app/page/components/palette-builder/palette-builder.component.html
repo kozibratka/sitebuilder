@@ -1,16 +1,21 @@
-<div class="card card-primary card-outline" [class.menu-block-dragged] = "menuBlocDragged" [class.block-dragged] = "isDraggedContent" >
+<div class="card card-primary card-outline"
+     [class.menu-block-dragged] = "menuBlocDragged"
+     [class.block-dragged] = "dragStatusService.isDragBlock"
+     [class.plugin-dragged] = "dragStatusService.isDragPlugin"
+     [class.menu-plugin-dragged] = "dragStatusService.isDragMenuPlugin"
+>
   <div class="card-header">
     <h3 class="card-title">Editační plátno</h3>
   </div>
-  <div class="card-body palette" [class.sortable-js-dragged]="sortableJsDragged$ | async">
+  <div class="card-body palette" [class.sortable-js-dragged]="dragStatusService.isDraggedResizedPlugin()">
     <ul
       class="palette-block list-group listing-area clearfix"
-      [class.dragged]="isDraggedContent"
+      [class.dragged]="dragStatusService.isDragBlock"
       [class.resized]="isResized"
       #palette
       [sortablejs]="pageDetail.pageBlocks"
       [sortablejsOptions]="{ group: 'block', handle: '.icon-move-block',animation: 0 }">
-      <li (dragstart)="blockDragStart()" (dragend)="blockDragStop()" class="list-group-item palette-item" *ngFor="let item of pageDetail.pageBlocks; trackBy: trackByBlock;index as i;">
+      <li (dragstart)="dragStatusService.isDragBlock = true" (dragend)="dragStatusService.isDragBlock = false" class="list-group-item palette-item" *ngFor="let item of pageDetail.pageBlocks; trackBy: trackByBlock;index as i;">
         <app-palette-block (deleteBlock)="deleteBlock(i)" [pageBlock]="item" (resized)="isResized=$event"></app-palette-block>
       </li>
     </ul>

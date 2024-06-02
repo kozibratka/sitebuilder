@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
-import {Subject} from "rxjs";
 import {MoveEvent, SortableEvent} from "sortablejs";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {StringService} from "../../../core/services/string.service";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {GridCellService} from "../../services/grid-cell.service";
+import {DragStatusService} from "../../services/drag-status.service";
 
 @Component({
   selector: 'app-grid-cell',
@@ -24,8 +24,8 @@ export class GridCellComponent implements OnInit{
 
 
   constructor(
-    @Inject('AnyDraggedResized') private sortableJsDragged$: Subject<boolean>,
     public gridCellService: GridCellService,
+    private dragStatusService: DragStatusService,
   ) {
   }
 
@@ -39,12 +39,12 @@ export class GridCellComponent implements OnInit{
   }
 
   onDragStart = (event: any) => {
-    this.sortableJsDragged$.next(true);
+    this.dragStatusService.isDragPlugin = true;
   }
 
   onDragEnd = (event: SortableEvent)=> {
     let index = event.newIndex;
-    this.sortableJsDragged$.next(false);
+    this.dragStatusService.isDragPlugin = false;
   }
 
   onAdd = (event: SortableEvent) => {

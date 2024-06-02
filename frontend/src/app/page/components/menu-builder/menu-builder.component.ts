@@ -21,6 +21,7 @@ import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {PageInterface} from "../../interfaces/page-interface";
 import {PageBlockTemplateService} from "../../services/page-block-template.service";
 import {WebDetailResolverService} from "../../../web/services/web-detail-resolver.service";
+import {DragStatusService} from "../../services/drag-status.service";
 
 @Component({
   selector: 'app-menu-builder',
@@ -46,7 +47,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     public pageBlockTemplateService: PageBlockTemplateService,
     public webDetailResolverService: WebDetailResolverService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
-    @Inject('AnyDraggedResized') private sortableJsDragged$: Subject<boolean>,
+    private dragStatusService: DragStatusService
   ) {
   }
 
@@ -102,11 +103,11 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   onDragStart = (event: any) => {
-    this.sortableJsDragged$.next(true);
+    this.dragStatusService.isDragMenuPlugin = true;
   }
 
   onDragEnd = (event: any)=> {
-    this.sortableJsDragged$.next(false);
+    this.dragStatusService.isDragMenuPlugin = false;
   }
 
   onDragStartBlock = (event: any) => {

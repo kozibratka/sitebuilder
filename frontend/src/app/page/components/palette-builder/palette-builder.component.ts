@@ -4,6 +4,7 @@ import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {StringService} from '../../../core/services/string.service';
 import {Subject} from "rxjs";
 import {LinkDeactivateService} from "../../../core/services/link-deactivate.service";
+import {DragStatusService} from "../../services/drag-status.service";
 
 @Component({
   selector: 'app-palette-builder',
@@ -15,11 +16,10 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
   @ViewChild('palette') private _palette: ElementRef<HTMLElement>;
   @Input() pageDetail: PageInterface;
   @Input() menuBlocDragged: boolean;
-  isDraggedContent = false;
   private _isResized = false;
 
   constructor(
-    @Inject('AnyDraggedResized') public sortableJsDragged$: Subject<boolean>,
+    public dragStatusService: DragStatusService,
     private linkDeactivateService: LinkDeactivateService,
   ) {
   }
@@ -29,14 +29,6 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
   }
 
   ngAfterViewChecked(): void {
-  }
-
-  blockDragStart(): void {
-    this.isDraggedContent = true;
-  }
-
-  blockDragStop(): void {
-    this.isDraggedContent = false;
   }
 
   get palette(): ElementRef<HTMLElement> {

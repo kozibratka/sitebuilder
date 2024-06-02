@@ -87,4 +87,8 @@ app-grid-cell {
   padding-right: 0 !important;
 }
 
+::ng-deep .plugin-dragged app-grid-cell-item:has(.is-row),  ::ng-deep .menu-plugin-dragged app-grid-cell-item:has(.is-row){
+  padding: 10px 0;
+}
+
 
