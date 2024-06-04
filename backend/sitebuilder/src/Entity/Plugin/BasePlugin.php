@@ -61,6 +61,13 @@ abstract class BasePlugin
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $horizontalMargin = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $paddingBottom = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $paddingTop = null;
+
+
     public ?string $identifier = null;
 
     public function __construct()
@@ -145,6 +152,26 @@ abstract class BasePlugin
     public function setHorizontalMargin(?int $horizontalMargin): void
     {
         $this->horizontalMargin = $horizontalMargin;
+    }
+
+    public function getPaddingBottom(): ?int
+    {
+        return $this->paddingBottom;
+    }
+
+    public function setPaddingBottom(?int $paddingBottom): void
+    {
+        $this->paddingBottom = $paddingBottom;
+    }
+
+    public function getPaddingTop(): ?int
+    {
+        return $this->paddingTop;
+    }
+
+    public function setPaddingTop(?int $paddingTop): void
+    {
+        $this->paddingTop = $paddingTop;
     }
 
     /**

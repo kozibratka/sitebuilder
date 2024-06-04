@@ -4,4 +4,6 @@ export interface BasePlugConfigInterface {
   name?: string;
   webId?: number;
   horizontalMargin?: string;
+  paddingBottom?: number;
+  paddingTop?: number;
 }

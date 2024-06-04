@@ -1,4 +1,4 @@
-<div class="cell-item" [class.is-row]="gridCellItem.row" [class.move-menu-hover]="isMoveMenuHover">
+<div class="cell-item" [class.is-row]="gridCellItem.row" [class.move-menu-hover]="isMoveMenuHover" [style]="getVerticalPadding()">
   <ng-container #content class="grid-cell-item-content">
   </ng-container>
   <app-grid-row class="row is-child"  [isDeepChild]="true" [row]="gridCellItem.row" *ngIf="gridCellItem.row"></app-grid-row>

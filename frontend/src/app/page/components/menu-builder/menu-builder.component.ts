@@ -98,7 +98,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
       return this.cloneSortableJsRow(item);
     }
     let resolver = this.menuPluginResolverServices.selectedAbstractPluginResolverMessenger;
-    let pluginConfig = resolver.getEmptySettings();
+    let pluginConfig = resolver.getNewPluginSettings();
     return {plugin: pluginConfig, itemOrder: 0};
   }
 

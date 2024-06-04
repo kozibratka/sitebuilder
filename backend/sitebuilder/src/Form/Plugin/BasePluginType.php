@@ -15,6 +15,8 @@ class BasePluginType extends AbstractType
             ->add('identifier')
             ->add('name')
             ->add('horizontalMargin', NumberType::class)
+            ->add('paddingBottom', NumberType::class)
+            ->add('paddingTop', NumberType::class)
         ;
     }
 

@@ -2,7 +2,7 @@
   <div #video class="video-container" *ngIf="videoUrl" [style.filter]="'grayscale('+pageBlock.grayScale+'%)'" [style.opacity]="pageBlock.opacity/10">
     <div [attr.data-vbg]="videoUrl"></div>
   </div>
-  <div class="block-content-rows container" [style.height.px]="!pageBlock.rows.length ? (pageBlock.height ?? 65) : null" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'rows', put: ['rows']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
+  <div class="block-content-rows container" [style.height.px]="!pageBlock.rows.length ? pageBlock.height : null" [sortablejs]="pageBlock.rows" [sortablejsOptions]="{group: {name: 'rows', put: ['rows']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
         <div class="new-row-up">

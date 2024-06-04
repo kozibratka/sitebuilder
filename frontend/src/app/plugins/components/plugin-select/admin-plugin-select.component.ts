@@ -49,7 +49,7 @@ export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugCon
         pluginConfig = this.pageBuilderResolverService.page.globalPlugins.find(value1 => value1.id == next);
         this.miniAdminComponent.allowedAdminComponent = AdminPluginSelectComponent;
       } else {
-        pluginConfig = this.contextObject.lastAdminSettings ? this.contextObject.lastAdminSettings : this.pluginResolverService.getPluginResolverByIdentifier(this.contextObject.settings.identifier).getEmptySettings();
+        pluginConfig = this.contextObject.lastAdminSettings ? this.contextObject.lastAdminSettings : this.pluginResolverService.getPluginResolverByIdentifier(this.contextObject.settings.identifier).getNewPluginSettings();
         this.miniAdminComponent.allowedAdminComponent = null;
       }
       ObjectHelper.reinitObject(this.settings, pluginConfig);

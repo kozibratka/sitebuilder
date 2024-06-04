@@ -1,11 +1,15 @@
 import {
   Component,
   ComponentRef,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   HostListener,
   Inject,
-  Input, OnChanges,
-  OnInit, Output, SimpleChanges,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
@@ -118,5 +122,15 @@ export class GridCellItemComponent implements OnInit, OnChanges{
           instanceReady.unsubscribe();
         });
       }
+  }
+
+  getVerticalPadding() {
+    if (this.gridCellItem.row) {
+      return 0;
+    }
+    return {
+      paddingBottom: (this.gridCellItem.plugin?.paddingBottom ?? 15)+'px',
+      paddingTop: (this.gridCellItem.plugin?.paddingTop ?? 0)+'px'
+    };
   }
 }

@@ -39,8 +39,8 @@
   }
 }
 
-.block-content-rows {
-  min-height: 65px;
+.block-content-rows:not(:has(.row)) {
+  height: 65px;
 }
 
 .block-row {
