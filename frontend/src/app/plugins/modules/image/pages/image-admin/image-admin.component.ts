@@ -3,6 +3,7 @@ import {ImageConfigInterface} from '../../interfaces/image-config-interface';
 import {AbstractAdminSetting} from '../../../../abstract-class/abstract-admin-setting';
 import {AdminFormService} from '../../../../forms/admin-form.service';
 import {FileManagerModalService} from '../../../../../core/modules/file-manager/services/file-manager-modal.service';
+import {FormService} from "../../../../../core/services/form.service";
 
 @Component({
   selector: 'app-image-v1-admin',
@@ -11,7 +12,7 @@ import {FileManagerModalService} from '../../../../../core/modules/file-manager/
 })
 export class ImageAdminComponent extends AbstractAdminSetting<ImageConfigInterface> {
   constructor(
-    protected adminFormService: AdminFormService,
+    protected adminFormService: FormService,
     private fileManagerModalService: FileManagerModalService,
   ) {
     super();

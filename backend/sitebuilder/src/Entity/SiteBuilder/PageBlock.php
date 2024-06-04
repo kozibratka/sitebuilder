@@ -73,6 +73,9 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'smallint', nullable: true)]
     private ?int $opacity = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $paddingTop = null;
+
     private ?string $uniqueId = '';
 
     private ?bool $isFromTemplateBlock = false;
@@ -289,6 +292,16 @@ class PageBlock implements EntityFileProviderInterface
     public function setOpacity(?int $opacity): void
     {
         $this->opacity = $opacity;
+    }
+
+    public function getPaddingTop(): ?int
+    {
+        return $this->paddingTop;
+    }
+
+    public function setPaddingTop(?int $paddingTop): void
+    {
+        $this->paddingTop = $paddingTop;
     }
 
     /**

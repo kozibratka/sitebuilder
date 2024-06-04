@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AbstractAdminSetting} from "../../abstract-class/abstract-admin-setting";
 import {BasePlugConfigInterface} from "../../interfaces/base-plug-config-interface";
-import {AdminFormService} from "../../forms/admin-form.service";
+import {FormService} from "../../../core/services/form.service";
 
 @Component({
   selector: 'app-plugin-dimension-admin',
@@ -12,7 +12,7 @@ export class PluginDimensionAdminComponent extends AbstractAdminSetting<BasePlug
 
 
   constructor(
-    protected adminFormService: AdminFormService,
+    protected adminFormService: FormService,
   ) {
     super();
   }

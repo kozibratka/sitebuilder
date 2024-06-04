@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {MenuConfigInterface} from '../../interfaces/menu-config-interface';
 import {AbstractAdminSetting} from '../../../../abstract-class/abstract-admin-setting';
-import {AdminFormService} from '../../../../forms/admin-form.service';
 import {FileManagerService} from '../../../../../core/modules/file-manager/services/file-manager.service';
 import {FileManagerModalService} from '../../../../../core/modules/file-manager/services/file-manager-modal.service';
+import {FormService} from "../../../../../core/services/form.service";
 
 @Component({
   selector: 'app-menu-v1-logo-admin',
@@ -12,7 +12,7 @@ import {FileManagerModalService} from '../../../../../core/modules/file-manager/
 })
 export class MenuLogoAdminComponent extends AbstractAdminSetting<MenuConfigInterface> {
   constructor(
-    protected adminFormService: AdminFormService,
+    protected adminFormService: FormService,
     private fileManagerService: FileManagerService,
     private fileManagerModalService: FileManagerModalService,
   ) {

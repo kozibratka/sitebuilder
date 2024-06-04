@@ -30,6 +30,7 @@ class PageBlockType extends AbstractType
             ->add('height', NumberType::class)
             ->add('grayScale', NumberType::class)
             ->add('opacity', NumberType::class)
+            ->add('paddingTop', NumberType::class)
         ;
         if ($options['web']) {
             $builder->add('web', EntityType::class, ['class' => Web::class])

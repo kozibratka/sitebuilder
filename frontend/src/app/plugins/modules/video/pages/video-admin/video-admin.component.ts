@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {VideoConfigInterface} from '../../interfaces/video-config-interface';
 import {AbstractAdminSetting} from '../../../../abstract-class/abstract-admin-setting';
-import {AdminFormService} from '../../../../forms/admin-form.service';
+import {FormService} from "../../../../../core/services/form.service";
 
 @Component({
   selector: 'app-image-v1-admin',
@@ -10,7 +10,7 @@ import {AdminFormService} from '../../../../forms/admin-form.service';
 })
 export class VideoAdminComponent extends AbstractAdminSetting<VideoConfigInterface> {
   constructor(
-    protected adminFormService: AdminFormService,
+    protected adminFormService: FormService,
   ) {
     super();
   }

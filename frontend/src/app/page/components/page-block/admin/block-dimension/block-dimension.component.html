@@ -1,12 +1,20 @@
 <div class="card">
   <div class="card-body">
-    <div class="d-flex flex-md-row flex-wrap">
-      <div class="border-outer">
-        <div class="border border-inner">
-            <label for="height" class="form-label">Výška prázdného bloku (px)</label>
-            <input type="number" class="form-control" id="height" [(ngModel)]="settings.height">
+    <form [formGroup]="adminForm">
+      <div class="col-md-4">
+        <div class="border-outer">
+          <div class="border border-inner">
+              <label for="height" class="form-label">Výška prázdného bloku (px)</label>
+              <input type="number" class="form-control" id="height" formControlName="height">
+          </div>
         </div>
       </div>
-    </div>
+      <div class="col-md-4">
+        <div class="border border-inner">
+          <label for="padding-top" class="form-label">Odsazení horní (px):</label>
+          <input type="number" class="form-control" id="padding-top" formControlName="paddingTop">
+        </div>
+      </div>
+    </form>
   </div>
 </div>

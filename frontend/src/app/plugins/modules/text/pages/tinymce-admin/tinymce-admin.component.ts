@@ -2,8 +2,8 @@ import {ApplicationRef, Component, NgZone, OnInit} from '@angular/core';
 import {AbstractAdminSetting} from "../../../../abstract-class/abstract-admin-setting";
 import {TextConfigInterface} from "../../interfaces/text-config-interface";
 import {FormBuilder} from "@angular/forms";
-import {AdminFormService} from "../../../../forms/admin-form.service";
 import {FileManagerModalService} from "../../../../../core/modules/file-manager/services/file-manager-modal.service";
+import {FormService} from "../../../../../core/services/form.service";
 
 @Component({
   selector: 'app-tinymce-admin',
@@ -16,7 +16,7 @@ export class TinymceAdminComponent extends AbstractAdminSetting<TextConfigInterf
 
   constructor(
     protected fb: FormBuilder,
-    protected adminFormService: AdminFormService,
+    protected adminFormService: FormService,
     private fileManagerModalService: FileManagerModalService,
     private applicationRef: ApplicationRef,
     private ngZone: NgZone,

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {CarouselConfigInterface} from '../../interfaces/carousel-config-interface';
 import {FormBuilder} from '@angular/forms';
 import {AbstractAdminSetting} from '../../../../abstract-class/abstract-admin-setting';
-import {AdminFormService} from '../../../../forms/admin-form.service';
+import {FormService} from "../../../../../core/services/form.service";
 
 @Component({
   selector: 'app-carousel-bootstrap-effect-admin',
@@ -13,7 +13,7 @@ export class CarouselEffectAdminComponent extends AbstractAdminSetting<CarouselC
 
   constructor(
     protected fb: FormBuilder,
-    protected adminFormService: AdminFormService
+    protected adminFormService: FormService
   ) {
     super();
   }

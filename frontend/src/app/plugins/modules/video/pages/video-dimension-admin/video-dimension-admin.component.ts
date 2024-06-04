@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AbstractAdminSetting} from "../../../../abstract-class/abstract-admin-setting";
 import {VideoConfigInterface} from "../../interfaces/video-config-interface";
 import {AdminFormService} from "../../../../forms/admin-form.service";
+import {FormService} from "../../../../../core/services/form.service";
 
 @Component({
   selector: 'app-video-dimension-admin',
@@ -10,7 +11,7 @@ import {AdminFormService} from "../../../../forms/admin-form.service";
 })
 export class VideoDimensionAdminComponent extends AbstractAdminSetting<VideoConfigInterface> {
   constructor(
-    protected adminFormService: AdminFormService,
+    protected adminFormService: FormService,
   ) {
     super();
   }
