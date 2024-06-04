@@ -23,8 +23,4 @@ export abstract class AbstractPluginResolver<T extends BasePlugConfigInterface> 
   abstract gridHeight(): number;
 
   abstract getEmptySettings(): T;
-
-  getNewPluginSettings(): T {
-    return {...this.getEmptySettings(), paddingBottom: 15, paddingTop: 0, horizontalMargin: 15}
-  }
 }
