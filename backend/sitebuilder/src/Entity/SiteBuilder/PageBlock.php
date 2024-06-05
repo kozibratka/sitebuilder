@@ -76,6 +76,9 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $paddingTop = null;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $paddingBottom = null;
+
     private ?string $uniqueId = '';
 
     private ?bool $isFromTemplateBlock = false;
@@ -302,6 +305,16 @@ class PageBlock implements EntityFileProviderInterface
     public function setPaddingTop(?int $paddingTop): void
     {
         $this->paddingTop = $paddingTop;
+    }
+
+    public function getPaddingBottom(): ?int
+    {
+        return $this->paddingBottom;
+    }
+
+    public function setPaddingBottom(?int $paddingBottom): void
+    {
+        $this->paddingBottom = $paddingBottom;
     }
 
     /**

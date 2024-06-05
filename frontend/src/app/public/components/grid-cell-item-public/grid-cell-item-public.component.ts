@@ -37,4 +37,14 @@ export class GridCellItemPublicComponent implements OnInit{
     this.plugin = this.pluginContainer.createComponent<AbstractPlugin<any>>(componentClass);
     this.plugin.instance.initializeSettings(this.gridCellItem.plugin);
   }
+
+  getVerticalPadding() {
+    if (this.gridCellItem.row) {
+      return 0;
+    }
+    return {
+      paddingBottom: (this.gridCellItem.plugin?.paddingBottom ?? 15)+'px',
+      paddingTop: (this.gridCellItem.plugin?.paddingTop ?? 0)+'px'
+    };
+  }
 }

@@ -11,15 +11,16 @@ export class FormService {
 
   createForm(formFields: {}, settings: any): FormGroup {
     const form = this.formBuilder.group(formFields);
+    if (settings) {
+      form.patchValue(settings);
+    }
     form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
+        console.log('ssss')
         const formValue = form.value as any;
         Object.assign(settings, formValue);
       }
     });
-    if (settings) {
-      form.patchValue(settings);
-    }
     return form;
   }
 }

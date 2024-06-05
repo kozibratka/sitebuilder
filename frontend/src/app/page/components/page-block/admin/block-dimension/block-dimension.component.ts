@@ -25,6 +25,7 @@ export class BlockDimensionComponent implements SettingAbleInterface, OnInit{
       {
         height: [''],
         paddingTop: [0],
+        paddingBottom: [0],
       },
       this.settings
     );

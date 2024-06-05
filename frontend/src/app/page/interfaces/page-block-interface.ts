@@ -13,4 +13,6 @@ export interface PageBlockInterface {
   height?: number;
   grayScale?: number;
   opacity?: number;
+  paddingTop?: number;
+  paddingBottom?: number;
 }

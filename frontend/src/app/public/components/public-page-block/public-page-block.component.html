@@ -1,4 +1,4 @@
-<div class="block" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor">
+<div class="block" [style]="getStyles()" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor">
   <div #video class="video-container" *ngIf="videoUrl" [style.filter]="'grayscale('+pageBlock.grayScale+'%)'" [style.opacity]="pageBlock.opacity/10">
     <div [attr.data-vbg]="videoUrl"></div>
   </div>

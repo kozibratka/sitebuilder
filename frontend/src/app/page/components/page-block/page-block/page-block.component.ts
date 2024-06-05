@@ -263,4 +263,15 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
       this.videoUrl = '';
     }
   }
+
+  getStyles() {
+    let style = {};
+    if (this._pageBlock.paddingTop) {
+      style['paddingTop'] = this._pageBlock.paddingTop+'px';
+    }
+    if (this._pageBlock.paddingBottom) {
+      style['paddingBottom'] = this._pageBlock.paddingBottom+'px';
+    }
+    return style;
+  }
 }

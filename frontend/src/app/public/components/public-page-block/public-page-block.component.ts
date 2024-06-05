@@ -42,4 +42,15 @@ export class PublicPageBlockComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getStyles() {
+    let style = {};
+    if (this.pageBlock.paddingTop) {
+      style['paddingTop'] = this.pageBlock.paddingTop+'px';
+    }
+    if (this.pageBlock.paddingBottom) {
+      style['paddingBottom'] = this.pageBlock.paddingBottom+'px';
+    }
+    return style;
+  }
+
 }
