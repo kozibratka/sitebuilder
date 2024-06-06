@@ -61,10 +61,6 @@ body {
   height: 100%;
 }
 
-a {
-  text-decoration: none;
-}
-
 a.disabled {
   color: grey !important;
   pointer-events: none;

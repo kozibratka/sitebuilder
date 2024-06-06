@@ -16,7 +16,6 @@ export class FormService {
     }
     form.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        console.log('ssss')
         const formValue = form.value as any;
         Object.assign(settings, formValue);
       }

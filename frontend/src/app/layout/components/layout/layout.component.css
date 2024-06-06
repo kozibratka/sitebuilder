@@ -42,3 +42,11 @@
 .user-menu {
   padding: 7px;
 }
+
+::ng-deep a {
+  text-decoration: none;
+}
+
+::ng-deep app-palette-builder a {
+  text-decoration: underline;
+}
