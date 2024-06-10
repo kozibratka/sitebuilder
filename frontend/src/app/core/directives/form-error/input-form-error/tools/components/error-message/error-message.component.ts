@@ -17,6 +17,20 @@ export class ErrorMessageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getMessage(index: string, errors) {
+    let message = '';
+    switch (index) {
+      case 'required':
+        message = 'Toto pole je povinné';
+        break;
+      default:
+        message = errors[index];
+        break;
+    }
+
+    return message;
+  }
+
   get errors(): ValidationErrors {
     return this._errors;
   }

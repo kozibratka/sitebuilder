@@ -3,6 +3,7 @@ import {AbstractAdminSetting} from "../../../../abstract-class/abstract-admin-se
 import {FormService} from "../../../../../core/services/form.service";
 import {FileManagerModalService} from "../../../../../core/modules/file-manager/services/file-manager-modal.service";
 import {ButtonConfigInterface} from "../../interfaces/button-config-interface";
+import {Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-buttom-admin',
@@ -22,7 +23,7 @@ export class ButtonAdminComponent extends AbstractAdminSetting<ButtonConfigInter
     this.adminForm = this.adminFormService.createForm(
       {
         position: [null],
-        label: [null],
+        label: [null, Validators.required],
         type: [null],
       },
       settings

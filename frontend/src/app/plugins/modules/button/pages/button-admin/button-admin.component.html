@@ -5,7 +5,7 @@
         <div class="col-md-4">
           <div class="border border-inner">
             <label for="type" class="form-label">Typ tlačítka:</label>
-            <select class="form-control" required id="type" formControlName="type">
+            <select class="form-select" required id="type" formControlName="type">
               <option *ngFor="let item of types" [ngValue]="item">{{item}}</option>
             </select>
           </div>
@@ -13,7 +13,7 @@
         <div class="col-md-4">
           <div class="border border-inner">
             <label for="position" class="form-label">Pozice:</label>
-            <select class="form-control" required id="position" formControlName="position">
+            <select class="form-select" required id="position" formControlName="position">
               <option *ngFor="let item of positions" [ngValue]="item.id">{{item.name}}</option>
             </select>
           </div>
@@ -21,7 +21,7 @@
         <div class="col-md-4">
           <div class="border border-inner">
             <label for="label" class="form-label">Text:</label>
-            <input type="number" class="form-control" id="label" formControlName="label">
+            <input appFormError type="text" class="form-control" id="label" formControlName="label">
           </div>
         </div>
       </div>

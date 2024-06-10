@@ -9,5 +9,5 @@ module.exports = {
   watchOptions: {
     ignored: ['**/node_modules', '**/src/assets'],
   },
-  resolve: {fallback: {"util": false}},
+  resolve: {fallback: {"util": false, "path": false, "child_process": false, "fs": false}},
 };

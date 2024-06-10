@@ -6,7 +6,9 @@ use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\Button\PluginButton;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +21,9 @@ class ButtonType extends AbstractType
             ->add('fileUrl')
             ->add('linkType', IntegerType::class)
             ->add('pageId', EntityType::class, ['class' => AbstractPage::class, 'property_path' => 'page'])
+            ->add('type', TextType::class)
+            ->add('label', TextType::class)
+            ->add('position', ChoiceType::class,['choices' => ['left' => 1, 'right' => 2, 'center' => 3]])
         ;
     }
 

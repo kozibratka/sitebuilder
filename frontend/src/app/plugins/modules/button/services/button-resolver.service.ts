@@ -59,6 +59,7 @@ export class ButtonResolverService extends AbstractPluginResolver<ButtonConfigIn
       pageId: null,
       linkType: null,
       position: 'center',
+      type: 'btn-primary',
     };
   }
 }
