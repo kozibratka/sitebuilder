@@ -60,7 +60,7 @@ export class VideoResolverService extends AbstractPluginResolver<VideoConfigInte
     return {
       identifier: PluginIdentifier.VIDEO_V1,
       videoPath: 'https://www.youtube.com/embed?v=2Gg6Seob5Mg&list=PLGmxyVGSCDKvmLInHxJ9VdiwEb82Lxd2E&ab_channel=NOCOPYRIGHTMOTIONGRAPHICS',
-      height: 250
+      height: 250,
     };
   }
 }

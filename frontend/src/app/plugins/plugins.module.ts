@@ -23,6 +23,7 @@ import {FormModule} from './modules/form/form.module';
 import { AdminPluginSelectComponent } from './components/plugin-select/admin-plugin-select.component';
 import { PluginDimensionAdminComponent } from './components/plugin-dimension-admin/plugin-dimension-admin.component';
 import {FileManagerModule} from "../core/modules/file-manager/file-manager.module";
+import {ButtonModule} from "./modules/button/button.module";
 
 @NgModule({
   imports: [
@@ -48,12 +49,13 @@ import {FileManagerModule} from "../core/modules/file-manager/file-manager.modul
     TextModule,
     ImageModule,
     VideoModule,
+    ButtonModule,
     FormModule,
     FileManagerModule
   ],
   declarations: [
     AdminPluginSelectComponent,
-    PluginDimensionAdminComponent
+    PluginDimensionAdminComponent,
   ]
 })
 export class PluginsModule { }

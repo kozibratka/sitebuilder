@@ -21,7 +21,7 @@ export class ImageResolverService extends AbstractPluginResolver<ImageConfigInte
       label: 'Vzhled',
       component: StyleAdminComponent,
       path: ''
-    },
+    }
   ];
 
   get componentClass(): new(...args: any[]) => {} {

@@ -86,6 +86,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'image_v1' }
 
+    App\Service\Plugin\Button\ButtonService:
+        tags:
+            - { name: 'plugin_service', key: 'button_v1' }
+
     App\Service\Plugin\Video\VideoService:
         tags:
             - { name: 'plugin_service', key: 'video_v1' }
