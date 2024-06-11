@@ -4,6 +4,7 @@ import {PluginIdentifier} from '../../../constants/plugin-identifier';
 import {ButtonConfigInterface} from "../interfaces/button-config-interface";
 import {ButtonAdminComponent} from "../pages/button-admin/button-admin.component";
 import {ButtonComponent} from "../components/button/button.component";
+import {ButtonLinkAdminComponent} from "../pages/button-link-admin/button-link-admin.component";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,11 @@ export class ButtonResolverService extends AbstractPluginResolver<ButtonConfigIn
     {
       label: 'Tlačítko',
       component: ButtonAdminComponent,
+      path: ''
+    },
+    {
+      label: 'Odkaz',
+      component: ButtonLinkAdminComponent,
       path: ''
     },
   ];

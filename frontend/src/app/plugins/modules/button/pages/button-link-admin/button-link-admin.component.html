@@ -1,1 +1,29 @@
-<p>button-link-admin works!</p>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="adminForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="border border-inner">
+            <label for="type" class="form-label">Typ odkazu:</label>
+            <select class="form-select" required id="type" formControlName="linkType">
+              <option *ngFor="let item of linkType" [ngValue]="item.id">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div [ngSwitch]="settings.linkType">
+            <div *ngSwitchCase="1">
+              <div class="border border-inner">
+                <label for="page" class="form-label">Vyberte stránku:</label>
+                <select class="form-control" required id="page" formControlName="pageId">
+                  <option [ngValue]="null" disabled>Vyberte stránku...</option>
+                  <option *ngFor="let item of pageList$ | async" [ngValue]="item.id.toString()">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
