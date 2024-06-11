@@ -33,8 +33,8 @@ class PluginButton extends BasePlugin
     #[ORM\Column(type: 'string')]
     private string $type = '';
 
-    #[ORM\Column(type: 'smallint')]
-    private int $position = 1;
+    #[ORM\Column(type: 'string')]
+    private string $position = '';
 
     public function getLinkType(): ?int
     {
@@ -101,12 +101,12 @@ class PluginButton extends BasePlugin
         $this->type = $type;
     }
 
-    public function getPosition(): int
+    public function getPosition(): string
     {
         return $this->position;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(string $position): void
     {
         $this->position = $position;
     }

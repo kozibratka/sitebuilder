@@ -40,7 +40,7 @@ export class GridCellItemPublicComponent implements OnInit{
 
   getVerticalPadding() {
     if (this.gridCellItem.row) {
-      return 0;
+      return {};
     }
     return {
       paddingBottom: (this.gridCellItem.plugin?.paddingBottom ?? 15)+'px',
