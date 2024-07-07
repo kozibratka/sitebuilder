@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BasePlugConfigInterface} from "../../plugins/interfaces/base-plug-config-interface";
+import {BasePlugConfigInterface} from "../../plugins/shared/interfaces/base-plug-config-interface";
 
 @Injectable({
   providedIn: 'root'

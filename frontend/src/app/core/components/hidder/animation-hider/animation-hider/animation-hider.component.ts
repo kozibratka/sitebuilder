@@ -3,6 +3,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-animation-hider',
+  standalone: true,
   templateUrl: './animation-hider.component.html',
   styleUrls: ['./animation-hider.component.css'],
   animations: [

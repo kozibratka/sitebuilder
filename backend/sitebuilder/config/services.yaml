@@ -74,6 +74,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'text_v1' }
 
+    App\Service\Plugin\Icon\IconService:
+        tags:
+            - { name: 'plugin_service', key: 'icon_v1' }
+
     App\Service\Plugin\Carousel\CarouselService:
         tags:
             - { name: 'plugin_service', key: 'carousel_v1' }

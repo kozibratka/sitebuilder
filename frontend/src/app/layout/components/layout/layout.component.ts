@@ -1,6 +1,12 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, ActivationEnd, NavigationEnd, Router} from '@angular/router';
-import {MatSelect} from '@angular/material/select';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  ActivationEnd,
+  NavigationEnd,
+  Router,
+  RouterLink, RouterOutlet
+} from '@angular/router';
 import {LoginClientService} from '../../../authorization/services/login-client.service';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {HiderElementDirective} from '../../../core/directives/hider-element.directive';
@@ -11,10 +17,26 @@ import {Title} from '@angular/platform-browser';
 import {filter, map} from "rxjs/operators";
 import {UserService} from "../../../authorization/services/user.service";
 import {WebListResolverGuard} from "../../../web/services/web-list-resolver.service";
+import {MatSelect} from "@angular/material/select";
+import {MatProgressBar} from "@angular/material/progress-bar";
+import {HidderComponent} from "../../../core/components/hidder/plain-hider/hidder.component";
+import {MenuComponent} from "../menu/menu.component";
+import {MatIcon} from "@angular/material/icon";
+import {GravatarModule} from "ngx-gravatar";
 
 @Component({
   selector: 'app-administration',
+  standalone: true,
   templateUrl: './layout.component.html',
+  imports: [
+    MatProgressBar,
+    RouterLink,
+    HidderComponent,
+    RouterOutlet,
+    MenuComponent,
+    MatIcon,
+    GravatarModule,
+  ],
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent implements OnInit {
@@ -80,7 +102,7 @@ export class LayoutComponent implements OnInit {
     };
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => this.router.url)
+      map((event) => this.router.url)
     ).subscribe(checkMenuDisplay);
     checkMenuDisplay(this.router.url);
   }

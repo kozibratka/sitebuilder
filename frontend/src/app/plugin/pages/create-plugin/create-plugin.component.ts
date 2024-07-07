@@ -3,21 +3,33 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {PluginFormService} from '../../services/plugin-form.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
 import {NotifierService} from '../../../core/services/notifier.service';
-import {PluginResolverService} from '../../../plugins/services/plugin-resolver.service';
-import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
+import {PluginResolverService} from '../../../plugins/shared/services/plugin-resolver.service';
+import {BasePlugConfigInterface} from '../../../plugins/shared/interfaces/base-plug-config-interface';
 import {ApiFormService} from "../../../core/services/form/api-form.service";
+import {InputFormErrorDirective} from "../../../core/directives/form-error/input-form-error/input-form-error.directive";
+import {GlobalFormErrorComponent} from "../../../core/components/global-form-error/global-form-error.component";
+import {MatAnchor, MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-create-plugin',
+  standalone: true,
   templateUrl: './create-plugin.component.html',
+  imports: [
+    ReactiveFormsModule,
+    InputFormErrorDirective,
+    GlobalFormErrorComponent,
+    RouterLink,
+    MatButton,
+    MatAnchor
+  ],
   styleUrls: ['./create-plugin.component.css']
 })
 export class CreatePluginComponent implements OnInit {
@@ -64,7 +76,7 @@ export class CreatePluginComponent implements OnInit {
   }
 
   updatePlugin() {
-    const plugin: BasePlugConfigInterface = this.route.snapshot.data.plugin;
+    const plugin: BasePlugConfigInterface = this.route.snapshot.data['plugin'];
     this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(plugin.identifier);
     this.createForm = this.pluginFormService.createForm();
     this.createForm.patchValue(plugin);

@@ -1,11 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
 import {Textarea} from '../../../../class/textarea';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {DialogComponent} from "../../../../../../components/dialog/dialog.component";
+import {MatDialogClose} from "@angular/material/dialog";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-textarea-admin',
+  standalone: true,
   templateUrl: './textarea-admin.component.html',
+  imports: [
+    CommonModule,
+    DialogComponent,
+    ReactiveFormsModule,
+    MatDialogClose
+  ],
   styleUrls: ['./textarea-admin.component.css']
 })
 export class TextareaAdminComponent extends BaseAdminComponent<Textarea> implements OnInit{

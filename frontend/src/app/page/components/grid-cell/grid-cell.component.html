@@ -1,6 +1,6 @@
 <div class="cell-content"
-     [sortablejs]="cell.items"
-     [sortablejsOptions]="{swapThreshold: 0.5,animation: 300,group: {name: 'cell', pull: true, put: [(!isDeepChild ? 'menu-row' : null), 'menu-plugin', 'cell']},
+     [nxtSortablejs]="cell.items"
+     [config]="{swapThreshold: 0.5,animation: 300,group: {name: 'cell', pull: true, put: [(!isDeepChild ? 'menu-row' : null), 'menu-plugin', 'cell']},
      onStart: onDragStart, onEnd: onDragEnd, onAdd: onAdd, onMove: onMove,
      handle: '.icon-move-cell'}"
 >
@@ -34,7 +34,7 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-rightPanel="rightPanel" let-isDeepChild="isDeepChild">
-    <div class="container">
+    <div class="container" (mouseenter)="gridRowComponent.isMouseEnter = true" (mouseleave)="gridRowComponent.isMouseEnter = false">
       <h6>Jakou buňku smazat?</h6>
       <div class="d-flex flex-wrap menu-container">
         <button type="button" class="btn btn-light" (click)="removeCell$.emit({site: 'left', isRightPanel: rightPanel, isDeepChild})">Vlevo</button>

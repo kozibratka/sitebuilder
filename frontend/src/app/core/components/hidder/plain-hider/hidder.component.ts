@@ -1,9 +1,14 @@
 import {ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {EventEmitterService} from '../../../services/event-emitter-service';
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-hidder',
+  standalone: true,
   templateUrl: './hidder.component.html',
+  imports: [
+    NgIf
+  ],
   styleUrls: ['./hidder.component.css']
 })
 export class HidderComponent implements OnInit, OnDestroy {

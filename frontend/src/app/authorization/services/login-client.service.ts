@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {TokenInterface} from '../../core/services/api/interfaces/token-interface';
 import {Observable, of} from 'rxjs';
 import {HttpResponse} from '@angular/common/http';
-import {CoreModule} from '../../core/core.module';
 import {UserService} from "./user.service";
 
 @Injectable({
-  providedIn: CoreModule
+  providedIn: 'root'
 })
 export class LoginClientService {
 
@@ -46,7 +45,7 @@ export class LoginClientService {
 
   decodeAccessToken(token: string): {exp: number} {
     try {
-      return jwt_decode(token) as any;
+      return jwtDecode(token) as any;
     } catch (Error) {
       return null;
     }

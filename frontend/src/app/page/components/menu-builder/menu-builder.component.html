@@ -14,14 +14,14 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="menu-plugin-container d-flex flex-md-row flex-wrap"
-             sortablejs="[1]"
-             [sortablejsOptions]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, handle: '.icon-move', onStart: onDragStart, onEnd: onDragEnd, sort: false}"
-             [sortablejsCloneFunction]="createPluginConfig"
+             [nxtSortablejs]="[1]"
+             [config]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, handle: '.icon-move', onStart: onDragStart, onEnd: onDragEnd, sort: false}"
+             [cloneFunction]="createPluginConfig"
         >
           <div class="menu-element-item grid-stack-item-menu"
-               sortablejs="[1]"
-               [sortablejsOptions]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
-               [sortablejsCloneFunction]="cloneSortableJsRow"
+               [nxtSortablejs]="[1]"
+               [config]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
+               [cloneFunction]="cloneSortableJsRow"
                (mouseleave)="showMoveIcon = false"
                (mouseenter)="showMoveIcon = true"
           >
@@ -54,9 +54,9 @@
         </div>
         <div
           class="menu-block"
-          [sortablejs]="pageBlockTemplateService.blockTemplates"
-          [sortablejsCloneFunction]="clonePageBlock"
-          [sortablejsOptions]="{ animation: 150, sort: false, group: {name: 'block',pull: 'clone',put: false}, handle: '.icon-move-block', onStart: onDragStartBlock, onEnd: onDragEndBlock }"
+          [nxtSortablejs]="pageBlockTemplateService.blockTemplates"
+          [cloneFunction]="clonePageBlock"
+          [config]="{ animation: 150, sort: false, group: {name: 'block',pull: 'clone',put: false}, handle: '.icon-move-block', onStart: onDragStartBlock, onEnd: onDragEndBlock }"
           (mouseleave)="showMoveIcon = false"
           (mouseenter)="showMoveIcon = true"
         >

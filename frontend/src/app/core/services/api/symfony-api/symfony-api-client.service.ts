@@ -1,16 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Observable, Subject, throwError} from 'rxjs';
+import {Observable, of, Subject, throwError} from 'rxjs';
 import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../../external-library/router';
 import {TokenInterface} from '../interfaces/token-interface';
 import {EventEmitterService} from '../../event-emitter-service';
 import {Event} from './tools/constants/event';
-import {CoreModule} from '../../../core.module';
 import {environment} from '../../../../../environments/environment';
 
 @Injectable({
-  providedIn: CoreModule
+  providedIn: 'root'
 })
 export class SymfonyApiClientService {
 
@@ -25,21 +24,25 @@ export class SymfonyApiClientService {
   }
 
   private downloadRoutes(): Observable<object> {
-    this.status = 'inProgress';
-    return this.httpClient.get(environment.backendUrl + environment.backendRoutesPath,
-      {
-        responseType: 'json', headers: {fetchRoutes: 'true'}
-      }).pipe(
-      catchError(this.handleErrorRoute.bind(this)),
-      tap(response => {
-        this.status = 'done';
-        this.urlFetchNotification$.next(response);
-      }));
+    return of(1).pipe(
+      tap(value => this.status = 'inProgress'),
+      switchMap(() => {
+        return this.httpClient.get(environment.backendUrl + environment.backendRoutesPath,
+          {
+            responseType: 'json', headers: {fetchRoutes: 'true'}
+          }).pipe(
+          catchError(this.handleErrorRoute.bind(this)),
+          tap(response => {
+            this.status = 'done';
+            this.urlFetchNotification$.next(response);
+          }));
+        }
+      )
+    );
   }
 
   get<T = {}>(routeName: string, querySegmentParam?: {}, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
-    this.emitPreSend('get');
-    const routesFromBackend$ = this.tryGetRoutes();
+    const routesFromBackend$ = this.tryGetRoutes('get');
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
@@ -60,8 +63,7 @@ export class SymfonyApiClientService {
   }
 
   post<T = any>(routeName: string, data, querySegmentParam?: {}, headersOptions: { [header: string]: string } = {}, requestOptions = {}): Observable<HttpResponse<T>> {
-    this.emitPreSend('post');
-    const routesFromBackend$ = this.tryGetRoutes();
+    const routesFromBackend$ = this.tryGetRoutes('post');
     return routesFromBackend$.pipe(
       switchMap(routes => {
         Routing.setRoutingData(routes);
@@ -91,7 +93,7 @@ export class SymfonyApiClientService {
 
   private prepareHeader(headersOptions: { [header: string]: string } = {}): { [header: string]: string } {
     if (this.token) {
-      headersOptions.Authorization = 'Bearer ' + this.token;
+      headersOptions['Authorization'] = 'Bearer ' + this.token;
     }
     return headersOptions;
   }
@@ -105,22 +107,20 @@ export class SymfonyApiClientService {
     localStorage.setItem('token', value);
   }
 
-  private tryGetRoutes(): Observable<object> {
+  private tryGetRoutes(type): Observable<object> {
     let routesFromBackend$: Observable<object>;
-    switch (this.status) {
-      case 'done':
-      case 'none':
-        routesFromBackend$ = this.downloadRoutes();
-        break;
-      default:
-        routesFromBackend$ = new Observable<object>(subscriber => {
-          const unsubscribe = this.urlFetchNotification$.subscribe(downloadedRoutes => {
-            unsubscribe.unsubscribe();
-            subscriber.next(downloadedRoutes);
-          });
+    routesFromBackend$ = new Observable<object>(subscriber => {
+      this.emitPreSend(type);
+      if (this.status === 'done' || this.status === 'none') {
+        this.downloadRoutes().subscribe(value => subscriber.next(value));
+      } else {
+        const unsubscribe = this.urlFetchNotification$.subscribe(downloadedRoutes => {
+          unsubscribe.unsubscribe();
+          subscriber.next(downloadedRoutes);
         });
-        break;
-    }
+      }
+    });
+
     return routesFromBackend$;
   }
 

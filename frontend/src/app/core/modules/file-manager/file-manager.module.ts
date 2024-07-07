@@ -14,21 +14,14 @@ import { LargeItemComponent } from './components/file-manager/large-item/large-i
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {DragToSelectModule} from 'ngx-drag-to-select';
-import {ContextMenuModule} from '../context-menu/context-menu.module';
-import {CoreModule} from '../../core.module';
 import { FileManagerDialogComponent } from './components/file-manager-dialog/file-manager-dialog.component';
-import { ImageInputComponent } from './components/image-input/image-input.component';
+import { ImageInputComponent } from '../../../plugins/shared/components/inputs/image-inputs/image-input/image-input.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { PixabayComponent } from './components/pixabay/pixabay.component';
+import { PixabayComponent } from '../../../plugins/shared/components/pixabay/pixabay.component';
 
 
 
 @NgModule({
-  declarations: [FileManagerComponent, LargeItemComponent, FileManagerDialogComponent, ImageInputComponent, PixabayComponent],
-  exports: [
-    FileManagerComponent,
-    ImageInputComponent
-  ],
   imports: [
     CommonModule,
     MatTreeModule,
@@ -41,10 +34,8 @@ import { PixabayComponent } from './components/pixabay/pixabay.component';
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    ContextMenuModule,
     MatSnackBarModule,
     DragToSelectModule.forRoot(),
-    CoreModule,
     MatTooltipModule
   ]
 })

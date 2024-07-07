@@ -21,7 +21,7 @@ export class GenericResolver implements Resolve<{}[]> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<{}[]> {
-    const config = route.data.resolverConfig;
+    const config = route.data['resolverConfig'];
     const routeName = config.data.route;
     const queryMap = (config.queryDataMap  ?? {}) as {string: string};
     const quryParam = {};

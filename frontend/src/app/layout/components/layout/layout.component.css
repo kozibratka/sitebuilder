@@ -45,6 +45,7 @@
 
 ::ng-deep a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 ::ng-deep app-palette-builder a {

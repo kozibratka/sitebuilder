@@ -1,11 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
-import {FormArray, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Checkbox} from '../../../../class/checkbox';
+import {DialogComponent} from "../../../../../../components/dialog/dialog.component";
+import {MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {MatDialogClose} from "@angular/material/dialog";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-checkbox-admin',
+  standalone: true,
   templateUrl: './checkbox-admin.component.html',
+  imports: [
+    CommonModule,
+    DialogComponent,
+    ReactiveFormsModule,
+    MatIconButton,
+    MatIcon,
+    MatDialogClose
+  ],
   styleUrls: ['./checkbox-admin.component.css']
 })
 export class CheckboxAdminComponent extends BaseAdminComponent<Checkbox> implements OnInit{

@@ -11,6 +11,7 @@ import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfo
   providedIn: 'root'
 })
 export class PageListResolverService implements Resolve<PageInterface[]> {
+  pages: PageInterface[] = [];
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -28,7 +29,12 @@ export class PageListResolverService implements Resolve<PageInterface[]> {
       this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
+      this.pages = httpResponse.body;
       return httpResponse.body;
     }));
+  }
+
+  getPageDetail(pageId) {
+    return this.pages.find(value => value.id == pageId);
   }
 }

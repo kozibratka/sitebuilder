@@ -2,14 +2,22 @@ import {AfterViewChecked, Component, ElementRef, Inject, Input, OnInit, ViewChil
 import {PageInterface} from '../../interfaces/page-interface';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {StringService} from '../../../core/services/string.service';
-import {Subject} from "rxjs";
 import {LinkDeactivateService} from "../../../core/services/link-deactivate.service";
 import {DragStatusService} from "../../services/drag-status.service";
+import { SortablejsModule } from 'nxt-sortablejs'
+import {PageBlockComponent} from "../page-block/page-block/page-block.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-palette-builder',
+  standalone: true,
   templateUrl: './palette-builder.component.html',
   styleUrls: ['./palette-builder.component.css'],
+  imports: [
+    CommonModule,
+    SortablejsModule,
+    PageBlockComponent
+  ]
 })
 export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
 

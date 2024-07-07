@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {PageFormService} from '../../services/page-form.service';
 import {WebInterface} from '../../../web/interfaces/web-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
@@ -9,10 +9,22 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {Title} from '@angular/platform-browser';
 import {ApiFormService} from "../../../core/services/form/api-form.service";
+import {GlobalFormErrorComponent} from "../../../core/components/global-form-error/global-form-error.component";
+import {InputFormErrorDirective} from "../../../core/directives/form-error/input-form-error/input-form-error.directive";
+import {MatAnchor, MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-page-create',
+  standalone: true,
   templateUrl: './page-create.component.html',
+  imports: [
+    GlobalFormErrorComponent,
+    ReactiveFormsModule,
+    InputFormErrorDirective,
+    RouterLink,
+    MatButton,
+    MatAnchor
+  ],
   styleUrls: ['./page-create.component.css']
 })
 export class PageCreateComponent implements OnInit {
@@ -62,7 +74,7 @@ export class PageCreateComponent implements OnInit {
   }
 
   updatePage(): void {
-    const pageDetail = this.route.snapshot.data.pageDetail;
+    const pageDetail = this.route.snapshot.data['pageDetail'];
     this.createPageForm = this.pageFormService.createForm();
     this.createPageForm.patchValue(pageDetail);
     this.createPageForm.statusChanges.subscribe(status => {
@@ -82,7 +94,9 @@ export class PageCreateComponent implements OnInit {
 
   refreshUrlInput(event: Event) {
     const pageName = (event.target as HTMLInputElement).value;
-    this.createPageForm.patchValue({url: pageName.replaceAll(' ', '-').toLowerCase()}, {emitEvent: false});
+    let url = pageName.replaceAll(' ', '-').toLowerCase();
+    url = url.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    this.createPageForm.patchValue({url: url}, {emitEvent: false});
   }
 
 }

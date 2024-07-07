@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {WebInterface} from '../../interfaces/web-interface';
 import {MatDialog} from '@angular/material/dialog';
 import {RemoveWebDialogComponent} from '../../components/remove-web-dialog/remove-web-dialog.component';
@@ -11,10 +11,26 @@ import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/sy
 import {NotifierService} from '../../../core/services/notifier.service';
 import {LayoutComponent} from '../../../layout/components/layout/layout.component';
 import {Title} from '@angular/platform-browser';
+import {
+  MatTableModule
+} from "@angular/material/table";
+import {MatButton} from "@angular/material/button";
+import {MatTooltip} from "@angular/material/tooltip";
+import {CommonModule} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-web-list',
+  standalone: true,
   templateUrl: './web-list.component.html',
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatButton,
+    MatTooltip,
+    MatTableModule,
+    MatIconModule
+  ],
   styleUrls: ['./web-list.component.css']
 })
 export class WebListComponent implements OnInit {

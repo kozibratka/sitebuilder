@@ -6,27 +6,37 @@ import {
   Inject,
   Input,
   OnDestroy,
-  OnInit, Optional,
+  OnInit,
   Output
 } from '@angular/core';
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {fromEvent, Subject} from "rxjs";
-import {DOCUMENT} from "@angular/common";
+import {CommonModule, DOCUMENT} from "@angular/common";
 import {GridCellInterface} from "../../interfaces/grid-cell-interface";
 import {StringService} from "../../../core/services/string.service";
 import {DragStatusService} from "../../services/drag-status.service";
+import {GridCellComponent} from "../grid-cell/grid-cell.component";
+import {
+  AnimationHiderComponent
+} from "../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
 
 @Component({
   selector: 'app-grid-row',
+  standalone: true,
   templateUrl: './grid-row.component.html',
   styleUrls: ['./grid-row.component.css'],
+  imports: [
+    CommonModule,
+    GridCellComponent,
+    AnimationHiderComponent
+  ]
 })
 export class GridRowComponent implements OnInit, OnDestroy{
   @Input() row: GridRowInterface;
   @Input() isDeepChild = false;
   @Output() removeRow$ = new EventEmitter<boolean>();
   isResized = false;
-  isMouseEnter = false;
+  @HostBinding('class.is-mouse-enter') isMouseEnter = false;
   constructor(
     private elementRef: ElementRef<HTMLElement>,
     @Inject(DOCUMENT) private document: Document,

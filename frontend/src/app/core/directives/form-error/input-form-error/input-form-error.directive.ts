@@ -9,7 +9,8 @@ import {ErrorMessageComponent} from './tools/components/error-message/error-mess
 import {InputFormErrorGrouperDirective} from '../input-form-error-grouper.directive';
 
 @Directive({
-  selector: '[appFormError]'
+  selector: '[appFormError]',
+  standalone: true,
 })
 export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
 
@@ -23,9 +24,9 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
     private resolve: ComponentFactoryResolver,
     private renderer2: Renderer2,
     private elementRef: ElementRef,
+    private selfViewContainer: ViewContainerRef,
     @Host() @Optional() private inputFormErrorGrouperDirective: InputFormErrorGrouperDirective,
     @Optional() @Self() private selfInput?: NgControl,
-    private selfViewContainer?: ViewContainerRef,
   ) {
   }
 
@@ -39,7 +40,7 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
       }
       this.selfInput = this.formInput;
     }
-    this.selfInput.statusChanges.subscribe(status => {
+    this.selfInput.statusChanges?.subscribe(status => {
       this.clearMessage();
       if (status === 'INVALID') {
         this.createErrorMessage();
@@ -58,7 +59,9 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
   createErrorMessage(): void {
     const factory = this.resolve.resolveComponentFactory(ErrorMessageComponent);
     this.errorMessageComonent = this.errorFormContainer.createComponent<ErrorMessageComponent>(factory).instance;
-    this.errorMessageComonent.errors = this.selfInput.errors;
+    if (this.selfInput?.errors) {
+      this.errorMessageComonent.errors = this.selfInput.errors;
+    }
   }
 
   registerErrorMessageClean(): void {

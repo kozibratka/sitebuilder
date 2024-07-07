@@ -3,7 +3,8 @@ import {AbstractPluginResolver} from '../services/abstract-classes/abstract-plug
 import {MenuPluginResolverService} from '../services/menu-plugin-resolver.service';
 
 @Directive({
-  selector: '[appMenuPluginResolverDirective]'
+  selector: '[appMenuPluginResolverDirective]',
+  standalone: true,
 })
 export class MenuPluginResolverDirective {
 

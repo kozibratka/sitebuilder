@@ -7,7 +7,7 @@
           <span class="fas fa-envelope"></span>
         </div>
     </div>
-    <div class="small text-danger" *ngIf="email.invalid && (email.touched) && email.errors.required">
+    <div class="small text-danger" *ngIf="email && email.invalid && (email.touched) && email.errors?.['required']">
       Toto pole je povinné
     </div>
   </div>
@@ -18,7 +18,7 @@
           <span class="fas fa-lock"></span>
         </div>
     </div>
-    <div class="small text-danger" *ngIf="password.invalid && (password.touched) && password.errors.required">
+    <div class="small text-danger" *ngIf="password && password.invalid && (password.touched) && password.errors?.['required']">
       Toto pole je povinné
     </div>
   </div>

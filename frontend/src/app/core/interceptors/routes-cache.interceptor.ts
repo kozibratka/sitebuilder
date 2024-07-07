@@ -2,11 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {CoreModule} from '../core.module';
 
 @Injectable(
   {
-    providedIn: CoreModule
+    providedIn: 'root',
   }
 )
 export class RoutesCacheInterceptor implements HttpInterceptor {

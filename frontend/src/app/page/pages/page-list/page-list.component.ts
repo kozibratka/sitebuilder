@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageInterface} from '../../interfaces/page-interface';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {filter, switchMap} from 'rxjs/operators';
 import {RemovePageDialogComponent} from '../../components/remove-page-dialog/remove-page-dialog.component';
@@ -8,10 +8,24 @@ import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/sy
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Title} from '@angular/platform-browser';
+import {MatTableModule} from "@angular/material/table";
+import {MatIcon} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatButton} from "@angular/material/button";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-page-list',
+  standalone: true,
   templateUrl: './page-list.component.html',
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatIcon,
+    MatTooltipModule,
+    MatButton,
+    RouterLink,
+  ],
   styleUrls: ['./page-list.component.css']
 })
 export class PageListComponent implements OnInit {
@@ -32,7 +46,7 @@ export class PageListComponent implements OnInit {
   ngOnInit(): void {
     this.title.setTitle('Moje stránky');
     this.route.data.subscribe(data => {
-      this.dataToTable = data.pageList;
+      this.dataToTable = data['pageList'];
     });
     this.displayedColumns = ['name', 'action'];
   }

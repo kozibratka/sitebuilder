@@ -2,6 +2,7 @@ import {Directive, HostListener} from '@angular/core';
 import {LinkDeactivateService} from "../services/link-deactivate.service";
 
 @Directive({
+  standalone: true,
   selector: '[appLinkDeactivate]'
 })
 export class LinkDeactivateDirective {

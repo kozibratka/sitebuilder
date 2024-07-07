@@ -1,20 +1,16 @@
 /// <reference types="jqueryui" />
 import {
   AfterViewInit,
-  ApplicationRef,
   Component,
   EventEmitter,
   Inject,
   Input,
-  NgZone,
   OnInit,
   Output,
-  Renderer2
 } from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {Subject} from 'rxjs';
-import {QuickMenuService} from '../../services/quick-menu.service';
 import {UserService} from "../../../authorization/services/user.service";
 import {GridRowInterface} from "../../interfaces/grid-row-interface";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
@@ -22,10 +18,25 @@ import {PageInterface} from "../../interfaces/page-interface";
 import {PageBlockTemplateService} from "../../services/page-block-template.service";
 import {WebDetailResolverService} from "../../../web/services/web-detail-resolver.service";
 import {DragStatusService} from "../../services/drag-status.service";
+import {SortablejsModule} from "nxt-sortablejs";
+import {MatIcon} from "@angular/material/icon";
+import {
+  AnimationHiderComponent
+} from "../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
+import {MenuPluginResolverDirective} from "../../directives/menu-plugin-resolver.directive";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-menu-builder',
+  standalone: true,
   templateUrl: './menu-builder.component.html',
+  imports: [
+    CommonModule,
+    SortablejsModule,
+    MatIcon,
+    AnimationHiderComponent,
+    MenuPluginResolverDirective
+  ],
   styleUrls: ['./menu-builder.component.css']
 })
 export class MenuBuilderComponent implements OnInit, AfterViewInit {
@@ -39,11 +50,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   constructor(
     public menuPluginResolverServices: MenuPluginResolverService,
-    private renderer: Renderer2,
-    private window: Window,
     private userService: UserService,
-    private applicationRef: ApplicationRef,
-    private quickMenuService: QuickMenuService,
     public pageBlockTemplateService: PageBlockTemplateService,
     public webDetailResolverService: WebDetailResolverService,
     @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
@@ -62,19 +69,6 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
 
   }
 
-  myClone(event) {
-    this.quickMenuService.moveMenu.next(false);
-    this.gridItemDragged.next(true);
-    const el = (event.target as Node).parentNode.cloneNode(true);
-    const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
-      this.quickMenuService.moveMenu.next(true);
-      mouseUpListener();
-      this.gridItemDragged.next(false);
-      this.applicationRef.tick();
-    });
-    return el;
-  }
-
   clonePageBlock = (item: PageBlockInterface) => {
     let cloneItem = {...item, isFromTemplateBlock: true}
     return JSON.parse(JSON.stringify(cloneItem));
@@ -89,17 +83,19 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
     this.locketEmitter.emit(value)
   }
 
-  cloneSortableJsRow(item) {
+  cloneSortableJsRow(item: any) {
     return {cells: [{width: 6, items: []}, {width: 6, items: []}]};
   }
 
-  createPluginConfig = (item): GridCellItemInterface | GridRowInterface => {
+  createPluginConfig = (item: any): GridCellItemInterface | GridRowInterface => {
     if (this.mouseOnNewRow) {
       return this.cloneSortableJsRow(item);
     }
     let resolver = this.menuPluginResolverServices.selectedAbstractPluginResolverMessenger;
     let pluginConfig = resolver.getEmptySettings();
-    return {plugin: pluginConfig, itemOrder: 0};
+    let res = {plugin: pluginConfig, itemOrder: 0};
+
+    return res;
   }
 
   onDragStart = (event: any) => {

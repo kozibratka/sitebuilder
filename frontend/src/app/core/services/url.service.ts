@@ -30,5 +30,7 @@ export class UrlService {
         return false;
       }
     }
+
+    return false;
   }
 }

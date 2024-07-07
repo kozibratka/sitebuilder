@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    {{title}}
+    <button mat-dialog-close type="button" class="btn-close float-end" aria-label="Close"></button>
+  </div>
+  <div class="card-body">
+    <div class="search mb-4">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="search"></mat-icon>
+          </span>
+        </div>
+        <input type="text" class="form-control" placeholder="Vyhledat..." [(ngModel)]="search">
+      </div>
+    </div>
+    <div class="images d-flex flex-wrap">
+      <div *ngFor="let item of images" class="w-25 text-center item">
+        <div class="image-wrap mb-1">
+          <img class="mini-image" src="{{item.previewURL}}">
+        </div>
+        <button mat-raised-button color="primary" class="my-1" [mat-dialog-close]="item">
+          <mat-icon>download</mat-icon>
+          Použít
+        </button>
+      </div>
+      <div *ngFor="let item of icons" class="w-25 text-center item">
+        <div class="image-wrap mb-1">
+          <fa-icon [icon]="item"></fa-icon>
+        </div>
+        <button mat-raised-button color="primary" class="my-1" [mat-dialog-close]="item">
+          <mat-icon>download</mat-icon>
+          Použít
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

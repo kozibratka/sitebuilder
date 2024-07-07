@@ -1,34 +1,22 @@
 import {
   AfterViewChecked,
-  AfterViewInit, ApplicationRef,
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
-  Inject,
   Input,
-  NgZone, OnDestroy,
-  OnInit, Optional,
+  OnDestroy,
+  OnInit,
   Output,
-  QueryList,
-  Renderer2,
-  ViewChild,
-  ViewChildren
+  ViewChild
 } from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {PaletteBuilderComponent} from '../../palette-builder/palette-builder.component';
-import {PaletteItemComponent} from '../../palette-builder/page-block/palette-item-component/palette-item.component';
-import {Subject, Subscription} from 'rxjs';
+import {CommonModule} from '@angular/common';
 import {PageBlockInterface} from '../../../interfaces/page-block-interface';
-import {PaletteItemConfig} from '../../../interfaces/palette-item-config';
-import {PaletteBlockGridstackService} from '../../../services/palette-block-gridstack.service';
-import {AbstractPlugin} from '../../../../plugins/abstract-class/abstract-plugin';
-import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
-import {PaletteBlockService} from '../../../services/palette-block.service';
 import {StringService} from '../../../../core/services/string.service';
 import {GridRowInterface} from "../../../interfaces/grid-row-interface";
-import {SortablejsDirective} from "ngx-sortablejs";
+import {SortablejsModule} from "nxt-sortablejs";
 import {GridCellInterface} from "../../../interfaces/grid-cell-interface";
 import {UserService} from "../../../../authorization/services/user.service";
 import {PageBlockTemplateService} from "../../../services/page-block-template.service";
@@ -41,21 +29,40 @@ import {
 import {BlockDimensionComponent} from "../admin/block-dimension/block-dimension.component";
 import {UrlService} from "../../../../core/services/url.service";
 import {DragStatusService} from "../../../services/drag-status.service";
+import {
+  AnimationHiderComponent
+} from "../../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
+import {MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {GridRowComponent} from "../../grid-row/grid-row.component";
+import {MatMenu, MatMenuContent, MatMenuTrigger} from "@angular/material/menu";
+import {MenuNewRowComponent} from "../../menu-new-row/menu-new-row.component";
+import {MatTooltip} from "@angular/material/tooltip";
 
 @Component({
   selector: 'app-palette-block',
+  standalone: true,
   templateUrl: './page-block.component.html',
   styleUrls: ['./page-block.component.css'],
+  imports: [
+    CommonModule,
+    AnimationHiderComponent,
+    MatIconButton,
+    MatIcon,
+    GridRowComponent,
+    MatMenuTrigger,
+    MatMenu,
+    MenuNewRowComponent,
+    SortablejsModule,
+    MatTooltip,
+    MatMenuContent
+  ]
 })
 export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked{
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChild('video') video: ElementRef<HTMLElement>;
-  @ViewChildren(PaletteItemComponent) paletteItemComponents: QueryList<PaletteItemComponent>;
-  @ViewChild(SortablejsDirective, {static: true}) sortablejs: SortablejsDirective;
   @Output() resized = new EventEmitter<boolean>();
   private _pageBlock: PageBlockInterface;
-  updateBottomPaddingSubscription: Subscription;
-  private itemStatesBeforeDragging = new Map<AbstractPlugin<any>, BasePlugConfigInterface>();
   hoverOnIndexRow: number = null;
   showMoveIcon: boolean;
   isMoveMenuHover = false;
@@ -63,21 +70,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   public videoUrl = '';
 
   constructor(
-    private paletteBlockGridstackService: PaletteBlockGridstackService,
-    private renderer: Renderer2,
-    private ngZone: NgZone,
-    private window: Window,
     public elementRef: ElementRef,
-    private paletteBlockService: PaletteBlockService,
     public userService: UserService,
     public pageBlockTemplateService: PageBlockTemplateService,
     private moveableModalService: MoveableModalService,
     public videoService: UrlService,
     private changeDetectorRef: ChangeDetectorRef,
-    @Inject('GridItemDragged') private gridItemDragged: Subject<boolean>,
     private dragStatusService: DragStatusService,
-    @Inject(DOCUMENT) private document: Document,
-    private paletteBuilderComponent: PaletteBuilderComponent
   ) {
   }
 
@@ -111,45 +110,12 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     this.showMoveIcon = false;
   }
 
-  trackByGridItem(index, item: PaletteItemConfig ) {
-    if (!item.uniqueId) {
-      item.uniqueId = StringService.randomString();
-    }
-    return( item.uniqueId );
-  }
-
   trackByRows(index, item: GridRowInterface) {
     if (!item.uniqueId) {
       item.uniqueId = StringService.randomString();
     }
     return( item.uniqueId );
   }
-
-  private prepareResizeHorizontalPalette(event: MouseEvent): void{
-    const actualHeight = this.paletteContent.nativeElement.offsetHeight;
-    if (event.offsetY < actualHeight - 7) {
-      return;
-    }
-    this.resized.emit(true);
-    this.paletteBlockGridstackService.
-    prepareResizeHorizontalPalette(this.paletteItemComponents.toArray(), event, this.paletteContent.nativeElement);
-    let resizeMouseMovePaletteListener: () => void;
-    this.ngZone.runOutsideAngular(() => {
-      resizeMouseMovePaletteListener = this.renderer.listen(
-        this.document,
-        'mousemove',
-        (mouseEvent) => this.paletteBlockGridstackService.
-        resizeHorizontalPalette(mouseEvent, this.paletteContent.nativeElement, this._pageBlock)
-      );
-    });
-    const mouseUpListener = this.renderer.listen(this.window, 'mouseup', () => {
-      this.resized.emit(false);
-      resizeMouseMovePaletteListener();
-      mouseUpListener();
-    });
-
-  }
-
   get pageBlock(): PageBlockInterface {
     return this._pageBlock;
   }
@@ -157,12 +123,6 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   set pageBlock(value: PageBlockInterface) {
     this._pageBlock = value;
     //this.paletteBlockGridstackService.gridStackNodes = this._pageBlock.paletteGridItems;
-  }
-  removeGridItem(paletteItemComponent: PaletteItemComponent) {
-    // const index = this._pageBlock.paletteGridItems.indexOf(paletteItemComponent.gridItemConfig);
-    // if (index !== -1) {
-    //   this._pageBlock.paletteGridItems.splice(index, 1);
-    // }
   }
 
   onDragStart = (event: any) => {

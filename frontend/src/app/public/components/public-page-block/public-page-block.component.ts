@@ -1,10 +1,17 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {PageBlockInterface} from '../../../page/interfaces/page-block-interface';
 import {UrlService} from "../../../core/services/url.service";
+import {GridRowPublicComponent} from "../grid-row-public/grid-row-public.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-public-page-block',
+  standalone: true,
   templateUrl: './public-page-block.component.html',
+  imports: [
+    CommonModule,
+    GridRowPublicComponent
+  ],
   styleUrls: ['./public-page-block.component.css']
 })
 export class PublicPageBlockComponent implements OnInit, AfterViewInit {

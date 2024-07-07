@@ -2,7 +2,8 @@ import {ChangeDetectorRef, Directive, HostBinding, Input, OnDestroy, OnInit} fro
 import {EventEmitterService} from '../services/event-emitter-service';
 
 @Directive({
-  selector: '[appHiderElement]'
+  selector: '[appHiderElement]',
+  standalone: true,
 })
 export class HiderElementDirective implements OnInit, OnDestroy{
 

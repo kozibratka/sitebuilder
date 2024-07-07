@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="card-body">
+<div class="plugin-form-border">
+  <app-menu-admin-item (updated)="refreshSettings()" [items]="items" [options]="options" [nxtSortablejs]="items" [config]=options></app-menu-admin-item>
+</div>
+<div class="text-end">
+  <button (click)="addMenuItem()" mat-raised-button color="primary" class="my-2"><i class="material-icons">add</i>Přidat položku menu
+  </button>
+</div>
+  </div>
+</div>

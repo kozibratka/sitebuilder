@@ -5,6 +5,7 @@ import {BaseInput} from '../../../../class/base-input';
 
 @Component({
   selector: 'app-base-admin',
+  standalone: true,
   templateUrl: './base-admin.component.html',
   styleUrls: ['./base-admin.component.css']
 })

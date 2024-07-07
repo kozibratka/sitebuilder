@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Subject, Subscription} from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class EventEmitterService<T = unknown> {
 
   private subjectComunicators: Map<string, Subject<T>> = new Map<string, Subject<T>>();

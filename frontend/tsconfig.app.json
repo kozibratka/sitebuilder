@@ -3,17 +3,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "@angular/localize"
+    ]
   },
   "files": [
     "src/admin-main.ts",
-    "src/public-main.ts",
-    "src/polyfills.ts"
+    "src/public-main.ts"
   ],
   "include": [
     "src/**/*.d.ts"
-  ],
-  "exclude": [
-    "src/assets/admin_lte/*"
   ]
 }

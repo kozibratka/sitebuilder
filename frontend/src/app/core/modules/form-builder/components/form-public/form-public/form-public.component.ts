@@ -2,12 +2,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BaseInput} from '../../../class/base-input';
 import {TextInput} from '../../../class/text-input';
 import * as _ from 'underscore';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {FormService} from "../../../services/form.service";
+import {CommonModule, NgSwitch} from "@angular/common";
 
 @Component({
   selector: 'app-form-public',
+  standalone: true,
   templateUrl: './form-public.component.html',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgSwitch
+  ],
   styleUrls: ['./form-public.component.css']
 })
 export class FormPublicComponent implements OnInit{

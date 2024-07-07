@@ -1,10 +1,15 @@
 import {Component, HostListener, Input, OnInit, Output,  EventEmitter} from '@angular/core';
 import {FileInfoInterface} from '../../../interfaces/file-info-interface';
+import {IconResolverComponent} from "../../../../../components/icon-resolver/icon-resolver.component";
 
 @Component({
   selector: 'app-large-item',
+  standalone: true,
   templateUrl: './large-item.component.html',
   styleUrls: ['./large-item.component.css'],
+  imports: [
+    IconResolverComponent
+  ],
   exportAs: 'largeItemComponent'
 })
 export class LargeItemComponent implements OnInit {

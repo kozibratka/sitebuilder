@@ -1,0 +1,23 @@
+<div [nxtSortablejs]="arrayA" [config]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, sort: false}" class="cont"
+>
+  <p>comp-a works!</p>
+  <p>comp-a works!</p>
+  <p>comp-a works!</p>
+
+</div>
+
+
+<div
+  class="cont"
+  [nxtSortablejs]="arrayB"
+  [config]="{swapThreshold: 0.5,animation: 300,group: {name: 'cell', pull: true, put: ['menu-plugin', 'cell']},
+     handle: '.icon-move-cell'}"
+>
+  <p *ngFor="let i of arrayB">comp-a works!</p>
+</div>
+
+
+
+
+
+<app-comp-b></app-comp-b>

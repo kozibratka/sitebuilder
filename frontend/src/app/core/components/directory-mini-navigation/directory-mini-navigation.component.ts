@@ -1,9 +1,14 @@
 import {Component, Input, OnChanges, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-directory-mini-navigation',
+  standalone: true,
   templateUrl: './directory-mini-navigation.component.html',
-  styleUrls: ['./directory-mini-navigation.component.css']
+  styleUrls: ['./directory-mini-navigation.component.css'],
+  imports: [
+    CommonModule
+  ]
 })
 export class DirectoryMiniNavigationComponent implements OnInit, OnChanges {
 
@@ -17,7 +22,7 @@ export class DirectoryMiniNavigationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    const pathArray = (changes.currentPath.currentValue as unknown as string).split('/');
+    const pathArray = (changes['currentPath'].currentValue as unknown as string).split('/');
     this.navigation = [];
     if (pathArray[0]) {
       pathArray.unshift('');

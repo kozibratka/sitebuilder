@@ -5,6 +5,7 @@ import {ContextMenuItemDirective} from './context-menu-item.directive';
 
 @Directive({
   selector: '[appContextMenuRoot]',
+  standalone: true,
   exportAs: 'contextMenuRootDirective'
 })
 export class ContextMenuRootDirective implements OnInit{

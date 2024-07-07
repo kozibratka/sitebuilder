@@ -1,40 +1,67 @@
 import {
   AfterViewChecked,
   AfterViewInit,
-  Component, ElementRef,
-  HostListener, OnDestroy,
-  OnInit, QueryList,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
   TemplateRef,
   ViewChild,
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {MatTreeFlatDataSource} from '@angular/material/tree';
+import {MatTreeFlatDataSource, MatTreeModule} from '@angular/material/tree';
 import {DirectoryTreeInterface} from '../../interfaces/directory-tree-interface';
 import {FlatDirectoryTreeInterface} from '../../interfaces/flat-directory-tree-interface';
-import {fromEvent, merge, Observable, Subject, Subscription, timer} from 'rxjs';
-import {debounce, filter, finalize, map, take, tap} from 'rxjs/operators';
+import {fromEvent, merge, Observable, Subscription, timer} from 'rxjs';
+import {debounce, finalize, map, tap} from 'rxjs/operators';
 import {FileInfoInterface} from '../../interfaces/file-info-interface';
-import { faCoffee, faFolder, faUpload } from '@fortawesome/free-solid-svg-icons';
-import {MatDialog} from '@angular/material/dialog';
+import {faCoffee, faFolder, faUpload} from '@fortawesome/free-solid-svg-icons';
+import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogTitle} from '@angular/material/dialog';
 import {LargeItemComponent} from './large-item/large-item.component';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {HttpEventType} from '@angular/common/http';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 import * as _ from 'lodash';
-import {SelectContainerComponent} from 'ngx-drag-to-select';
-import {WebDetailResolverService} from '../../../../../web/services/web-detail-resolver.service';
+import {DragToSelectModule, SelectContainerComponent} from 'ngx-drag-to-select';
 import {HttpResponseToasterService} from '../../../../services/http-response-toaster.service';
 import {ContextMenuRootDirective} from '../../../context-menu/directives/context-menu-root.directive';
 import {SymfonyApiClientService} from '../../../../services/api/symfony-api/symfony-api-client.service';
 import {MatTreeService} from '../../../../services/mat-tree.service';
 import {ContextMenuService} from '../../../context-menu/services/context-menu.service';
 import {NotifierService} from '../../../../services/notifier.service';
-import {FileManagerEvent} from '../../interfaces/file-manager-event';
+import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {
+  DirectoryMiniNavigationComponent
+} from "../../../../components/directory-mini-navigation/directory-mini-navigation.component";
+import {ContextMenuItemDirective} from "../../../context-menu/directives/context-menu-item.directive";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {CommonModule} from "@angular/common";
+import {ArrayHelper} from "../../../../helpers/array-helper";
 
 @Component({
   selector: 'app-file-manager',
+  standalone: true,
   templateUrl: './file-manager.component.html',
+  imports: [
+    CommonModule,
+    MatTreeModule,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+    DirectoryMiniNavigationComponent,
+    ContextMenuRootDirective,
+    ContextMenuItemDirective,
+    DragToSelectModule,
+    LargeItemComponent,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    FaIconComponent
+  ],
   styleUrls: ['./file-manager.component.css']
 })
 export class FileManagerComponent implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
@@ -60,7 +87,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   uploadProgress = 0;
   uploadSub: Subscription;
   uploadMessage = '';
-  private _orderBy: 'name' | 'size' | 'modified' = 'name';
+  private _orderBy: ('type' | 'name' | 'size' | 'modified')[] = ['type', 'name'];
   private _orderByOrder: 'asc' | 'desc' = 'asc';
 
   constructor(
@@ -111,6 +138,8 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       .subscribe(response => {
         this.dataSource = new MatTreeFlatDataSource(this.treeControl,
           this.matTreeService.getTreeFlattener(transformerToFlat));
+        let data = response.body;
+        ArrayHelper.sortTree(data as any);
         this.dataSource.data = response.body;
         this.treeControl.expand(this.flatTreeNode.get(''));
       });
@@ -128,7 +157,7 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       .pipe(
         map(response => {
           let resp = response.body;
-          resp = _.orderBy(resp, [this._orderBy], [this._orderByOrder]);
+          resp = _.orderBy(resp, this._orderBy, [this._orderByOrder]);
 
           return resp;
         })
@@ -261,11 +290,11 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
   }
 
 
-  get orderBy(): 'name' | 'size' | 'modified' {
+  get orderBy(): any {
     return this._orderBy;
   }
 
-  set orderBy(value: 'name' | 'size' | 'modified') {
+  set orderBy(value: any) {
     this._orderBy = value;
     this.reloadContent();
   }

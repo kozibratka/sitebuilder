@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MoveAbleSettingsComponent} from '../move-able-settings.component';
 import {SettingAbleInterface} from '../interfaces/setting-able-interface';
-import {BasePlugConfigInterface} from '../../../../plugins/interfaces/base-plug-config-interface';
+import {BasePlugConfigInterface} from '../../../../plugins/shared/interfaces/base-plug-config-interface';
 
 @Injectable({
   providedIn: 'root'

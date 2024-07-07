@@ -3,11 +3,15 @@ import {SettingAbleInterface} from "../../../../../core/components/mini-admin/to
 import {PageBlockComponent} from "../../page-block/page-block.component";
 import {PageBlockInterface} from "../../../../interfaces/page-block-interface";
 import {FormService} from "../../../../../core/services/form.service";
-import {FormGroup} from "@angular/forms";
+import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-block-dimension',
+  standalone: true,
   templateUrl: './block-dimension.component.html',
+  imports: [
+    ReactiveFormsModule
+  ],
   styleUrls: ['./block-dimension.component.css']
 })
 export class BlockDimensionComponent implements SettingAbleInterface, OnInit{

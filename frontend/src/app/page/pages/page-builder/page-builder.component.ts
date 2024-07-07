@@ -1,6 +1,14 @@
-import {AfterViewChecked, Component, ElementRef, HostBinding, Inject, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  HostBinding,
+  Inject,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
@@ -10,19 +18,32 @@ import {NotifierService} from '../../../core/services/notifier.service';
 import {SystemInfoService} from '../../../core/services/system-info.service';
 import {Title} from '@angular/platform-browser';
 import {Subject, Subscription, timer} from 'rxjs';
-import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
-import {PaletteBlockService} from '../../services/palette-block.service';
+import {BasePlugConfigInterface} from '../../../plugins/shared/interfaces/base-plug-config-interface';
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {UserService} from "../../../authorization/services/user.service";
+import {MenuBuilderComponent} from "../../components/menu-builder/menu-builder.component";
+import {PaletteBuilderComponent} from "../../components/palette-builder/palette-builder.component";
+import {MatButton} from "@angular/material/button";
+import {CommonModule} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-page-builder',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MenuBuilderComponent,
+    PaletteBuilderComponent,
+    RouterLink,
+    MatButton,
+    MatIconModule,
+  ],
   templateUrl: './page-builder.component.html',
   styleUrls: ['./page-builder.component.css'],
   providers: [
     MenuPluginResolverService,
     {provide: 'PageBuilderEvent', useFactory: () => new Subject<boolean>()},
-    {provide: 'GridItemDragged', useFactory: () => new Subject<boolean>()}
+    {provide: 'GridItemDragged', useFactory: () => new Subject<boolean>()},
   ],
   animations: [
     trigger('visibleMenu', [
@@ -59,8 +80,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
     public title: Title,
     public elementRef: ElementRef<HTMLElement>,
     private userService: UserService,
-
-    private paletteBlockService: PaletteBlockService,
     @Inject('PageBuilderEvent') private pageBuilderEvent: Subject<boolean>,
 
     @Inject('GridItemDragged') public gridDragged$: Subject<boolean>,
@@ -73,9 +92,8 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
 
   ngOnInit(): void {
     this.title.setTitle('Vytvoření stránky');
-    this.pageDetail = this.route.snapshot.data.pageDetail as PageInterface;
+    this.pageDetail = this.route.snapshot.data['pageDetail'] as PageInterface;
     this.globalPlugins = this.pageDetail.globalPlugins ?? [];
-    this.registerResizedBlockListenerOnDragged();
     this.closeMenuOnLoad();
     // this.fileManagerModalService.open();
   }
@@ -103,22 +121,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
       },
       error: err => this.httpResponseToasterService.showError(err)
     });
-  }
-  registerResizedBlockListenerOnDragged() {
-    let isDraggedSubscription: Subscription;
-    this.gridDragged$.subscribe(dragged => {
-      if (dragged) {
-        isDraggedSubscription = this.paletteBlockService.isResized$.subscribe(value => {
-          if (this.elementRef.nativeElement.offsetHeight > parseInt(this.minHeight, 10)) {
-            this.minHeight = this.elementRef.nativeElement.offsetHeight.toString() + 'px';
-          }
-        });
-      } else if (isDraggedSubscription) {
-        isDraggedSubscription.unsubscribe();
-        this.minHeight = '0px';
-      }
-    });
-
   }
 
   refreshGlobalPluginSelect(identifier: string) {

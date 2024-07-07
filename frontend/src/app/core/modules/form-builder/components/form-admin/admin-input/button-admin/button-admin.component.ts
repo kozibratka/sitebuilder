@@ -1,11 +1,21 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseAdminComponent} from '../base-admin/base-admin.component';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Button} from '../../../../class/button';
+import {DialogComponent} from "../../../../../../components/dialog/dialog.component";
+import {MatDialogClose} from "@angular/material/dialog";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-button-admin',
+  standalone: true,
   templateUrl: './button-admin.component.html',
+  imports: [
+    CommonModule,
+    DialogComponent,
+    ReactiveFormsModule,
+    MatDialogClose
+  ],
   styleUrls: ['./button-admin.component.css']
 })
 export class ButtonAdminComponent extends BaseAdminComponent<Button> implements OnInit{

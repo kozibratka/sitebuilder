@@ -6,13 +6,34 @@ import {StringService} from "../../../core/services/string.service";
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {GridCellService} from "../../services/grid-cell.service";
 import {DragStatusService} from "../../services/drag-status.service";
+import {SortablejsModule} from "nxt-sortablejs";
+import {GridCellItemComponent} from "../grid-cell-item/grid-cell-item.component";
+import {
+  AnimationHiderComponent
+} from "../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
+import {MatIcon} from "@angular/material/icon";
+import {MatMenu, MatMenuContent, MatMenuTrigger} from "@angular/material/menu";
+import {CommonModule} from "@angular/common";
+import {GridRowComponent} from "../grid-row/grid-row.component";
 
 @Component({
   selector: 'app-grid-cell',
+  standalone: true,
   templateUrl: './grid-cell.component.html',
+  imports: [
+    CommonModule,
+    SortablejsModule,
+    GridCellItemComponent,
+    AnimationHiderComponent,
+    MatIcon,
+    MatMenu,
+    MatMenuTrigger,
+    MatMenuContent
+  ],
   styleUrls: ['./grid-cell.component.css']
 })
 export class GridCellComponent implements OnInit{
+  arrayB = ['B'];
   @Input() cell: GridCellInterface;
   @Input() isLast = false;
   @Input() isFirst = false;
@@ -26,6 +47,7 @@ export class GridCellComponent implements OnInit{
   constructor(
     public gridCellService: GridCellService,
     private dragStatusService: DragStatusService,
+    public gridRowComponent:GridRowComponent,
   ) {
   }
 
@@ -66,6 +88,8 @@ export class GridCellComponent implements OnInit{
     ) {
       return false;
     }
+
+    return true;
   }
 
   trackByItem(index, item: GridCellItemInterface) {

@@ -5,10 +5,19 @@ import {PageBlockComponent} from "../../page-block/page-block.component";
 import {UrlService} from "../../../../../core/services/url.service";
 import {Subject} from "rxjs";
 import {debounceTime} from "rxjs/operators";
+import {
+  ImageInputComponent
+} from "../../../../../plugins/shared/components/inputs/image-inputs/image-input/image-input.component";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'block-appearance',
+  standalone: true,
   templateUrl: './block-appearance.component.html',
+  imports: [
+    ImageInputComponent,
+    FormsModule
+  ],
   styleUrls: ['./block-appearance.component.css']
 })
 export class BlockAppearanceComponent implements SettingAbleInterface, OnInit, OnDestroy{

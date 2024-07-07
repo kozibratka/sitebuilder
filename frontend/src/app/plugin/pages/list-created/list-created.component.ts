@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {filter, switchMap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
@@ -7,11 +7,30 @@ import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/sy
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 import {RemoveDialogComponent} from '../../components/remove-dialog/remove-dialog.component';
 import {NotifierService} from '../../../core/services/notifier.service';
-import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
+import {BasePlugConfigInterface} from '../../../plugins/shared/interfaces/base-plug-config-interface';
+import {
+  MatCell,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderRow,
+  MatRow,
+  MatTable,
+  MatTableModule
+} from "@angular/material/table";
+import {MatAnchor, MatButton} from "@angular/material/button";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-list',
+  standalone: true,
   templateUrl: './list-created.component.html',
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatAnchor,
+    MatButton,
+    RouterLink
+  ],
   styleUrls: ['./list-created.component.css']
 })
 export class ListCreatedComponent implements OnInit {
@@ -35,7 +54,7 @@ export class ListCreatedComponent implements OnInit {
       this.pluginResolver = this.abstractMenuPluginResolvers.filter(value => value.identifier === identifier)[0];
     });
     this.route.data.subscribe((data) => {
-      this.createdPlugins = data.plugins;
+      this.createdPlugins = data['plugins'];
     });
   }
 

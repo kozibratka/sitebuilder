@@ -6,6 +6,7 @@ declare const $: any;
 
 @Component({
   selector: 'app-modal-for-route',
+  standalone: true,
   templateUrl: './modal-for-route.component.html',
   styleUrls: ['./modal-for-route.component.css'],
 })
@@ -39,11 +40,11 @@ export class ModalForRouteComponent implements OnInit, AfterViewChecked {
     this.jqueryVersionService.jqueryFromAssets(this.modalContent.nativeElement).on('hidden.bs.modal', (e) => {
       this.router.navigate(['./'], {relativeTo: this.route});
     });
-    this._schedulerShowModal = null;
+    this._schedulerShowModal = false;
     this.cd.detectChanges();
   }
 
-  get schedulerShowModal(): boolean {
+  get schedulerShowModal() {
     return this._schedulerShowModal;
   }
 

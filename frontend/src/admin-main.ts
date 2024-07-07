@@ -1,15 +1,8 @@
-import {enableProdMode} from '@angular/core';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+/// <reference types="@angular/localize" />
 
-import {environment} from './environments/environment';
-import {AppAdminModule} from './app/app-admin.module';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppAdminComponent } from './app/app-admin.component';
 
-if (environment.production) {
-  enableProdMode();
-}
-
-platformBrowserDynamic().bootstrapModule(AppAdminModule).then((moduleRef) => {
-
-  }
-)
-  .catch(err => console.error(err));
+bootstrapApplication(AppAdminComponent, appConfig)
+  .catch((err) => console.error(err));

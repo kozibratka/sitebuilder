@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {MatTreeFlattener} from '@angular/material/tree';
 import {FlatTreeControl} from '@angular/cdk/tree';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class MatTreeService<T extends {children: T[]}, K extends {level: number, expandable: boolean}> {
 
   constructor() {

@@ -1,0 +1,11 @@
+<div [style.text-align]="settings.position">
+  <fa-icon *ngIf="!settings.linkType" [icon]="['fas', settings.icon]" [size]="settings.size"></fa-icon>
+  <a *ngIf="settings.linkType"
+     appLinkDeactivate
+     [attr.target]="settings.targetBlank ? 'blank' : ''"
+     href="/{{settings.fileUrl ?? settings.externalUrl ?? settings.pageUrl }}">
+    <fa-icon [icon]="['fas', settings.icon]" [size]="settings.size"></fa-icon>
+  </a>
+
+</div>
+

@@ -1,13 +1,34 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import * as _ from 'lodash';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
-import {BasePlugConfigInterface} from '../../../plugins/interfaces/base-plug-config-interface';
+import {BasePlugConfigInterface} from '../../../plugins/shared/interfaces/base-plug-config-interface';
+import {CommonModule} from "@angular/common";
+import {
+  MatCell,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow, MatRowDef,
+  MatTable, MatTableModule
+} from "@angular/material/table";
+import {MatAnchor, MatButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-list',
+  standalone: true,
   templateUrl: './list-available.component.html',
-  styleUrls: ['./list-available.component.css']
+  styleUrls: ['./list-available.component.css'],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatAnchor,
+    MatButton,
+    RouterLink,
+    MatIcon,
+  ],
 })
 export class ListAvailableComponent implements OnInit {
 
@@ -22,7 +43,7 @@ export class ListAvailableComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      const globalPlugins = data.globalPlugins as BasePlugConfigInterface[];
+      const globalPlugins = data['globalPlugins'] as BasePlugConfigInterface[];
       this.abstractMenuPluginResolver.forEach(param => {
         this.allPlugins.push(param);
         if (_.find(globalPlugins, {identifier: param.identifier})) {

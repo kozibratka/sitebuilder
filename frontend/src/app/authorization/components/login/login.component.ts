@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginFormService} from '../../services/login-form.service';
-import {AbstractControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginClientService} from '../../services/login-client.service';
@@ -9,7 +9,11 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [
+    ReactiveFormsModule
+  ]
 })
 export class LoginComponent implements OnInit {
 
@@ -28,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activated = parseInt(this.route.snapshot.paramMap.get('activated'));
+    this.activated = parseInt(this.route.snapshot.paramMap.get('activated') ?? '0');
     if (this.loginClientService.isLoggedIn()) {
       this.router.navigate(['admin', 0]);
     }
@@ -39,7 +43,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-    this.loginClientService.tryLogin(this.loginForm.get('email').value, this.loginForm.get('password').value).subscribe({
+    this.loginClientService.tryLogin(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value).subscribe({
       next: httpResponse => {
         this.router.navigate(['/admin', 0]);
       },
@@ -53,11 +57,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get password(): AbstractControl {
+  get password() {
     return this.loginForm.get('password');
   }
 
-  get email(): AbstractControl {
+  get email() {
     return this.loginForm.get('email');
   }
 }

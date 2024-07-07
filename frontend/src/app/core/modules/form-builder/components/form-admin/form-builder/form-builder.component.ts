@@ -11,10 +11,17 @@ import {Button} from '../../../class/button';
 import {FormService} from "../../../services/form.service";
 import {ObjectHelper} from "../../../../../helpers/object-helper";
 import {ArrayHelper} from "../../../../../helpers/array-helper";
+import {FormInputComponent} from "../form-input/form-input.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-form-builder',
+  standalone: true,
   templateUrl: './form-builder.component.html',
+  imports: [
+    CommonModule,
+    FormInputComponent
+  ],
   styleUrls: ['./form-builder.component.css']
 })
 export class FormBuilderComponent implements OnInit{

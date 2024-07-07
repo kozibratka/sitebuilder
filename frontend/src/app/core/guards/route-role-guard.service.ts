@@ -6,10 +6,9 @@ import {NotifierService} from '../services/notifier.service';
 import {SymfonyApiClientService} from '../services/api/symfony-api/symfony-api-client.service';
 import {catchError, map, tap} from 'rxjs/operators';
 import {HttpResponseToasterService} from '../services/http-response-toaster.service';
-import {CoreModule} from '../core.module';
 
 @Injectable({
-  providedIn: CoreModule
+  providedIn: 'root'
 })
 export class RouteRoleGuardService implements CanActivate {
 

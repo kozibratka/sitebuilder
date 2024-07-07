@@ -4,6 +4,7 @@ import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })

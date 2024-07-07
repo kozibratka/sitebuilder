@@ -18,6 +18,7 @@ import {Event} from '../../services/api/symfony-api/tools/constants/event';
 
 @Component({
   selector: 'app-moveable-settings',
+  standalone: true,
   templateUrl: './move-able-settings.component.html',
   styleUrls: ['./move-able-settings.component.css']
 })

@@ -3,10 +3,17 @@ import {AdminAbleInterface} from './tools/interfaces/admin-able-interface';
 import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
 import {InitAbleInterface} from "../moveable-modal/interfaces/init-able-interface";
 import {AdminSettingAbleInterface} from "./tools/interfaces/admin-setting-able-interface";
+import {MatIcon} from "@angular/material/icon";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-mini-admin',
+  standalone: true,
   templateUrl: './mini-admin.component.html',
+  imports: [
+    CommonModule,
+    MatIcon
+  ],
   styleUrls: ['./mini-admin.component.css']
 })
 export class MiniAdminComponent implements OnInit, InitAbleInterface<AdminSettingAbleInterface> {

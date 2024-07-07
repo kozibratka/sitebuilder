@@ -1,11 +1,21 @@
-import * as _ from 'underscore';
-import {List} from 'underscore';
+import * as _ from 'lodash';
 
 export class ArrayHelper {
 
   static reinitArray(arrayToReinit: any[], newValues: any[]) {
     arrayToReinit.length = 0;
     arrayToReinit.push(...newValues);
+  }
+
+  static sortTree(data: {children: any[]}[], sortProperties = ['name']) {
+    let sortFnc = (dataArray: any[]) => {
+      let sorted = _.orderBy(dataArray, sortProperties, ['asc']);
+      this.reinitArray(dataArray, sorted);
+      dataArray.filter((value: any) => value.children ?? null).forEach(value => {
+        sortFnc(value.children);
+      })
+    }
+    sortFnc(data);
   }
   static objectWithLevelToNestedArray(objects: {level: number}[]) {
     const levelMap = new Map<number, any[]>();

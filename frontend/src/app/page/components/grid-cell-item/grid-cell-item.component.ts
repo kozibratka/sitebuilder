@@ -2,7 +2,7 @@ import {
   Component,
   ComponentRef,
   ElementRef,
-  EventEmitter,
+  EventEmitter, forwardRef,
   HostListener,
   Inject,
   Input,
@@ -15,19 +15,30 @@ import {
 } from '@angular/core';
 import {GridCellItemInterface} from "../../interfaces/grid-cell-item-interface";
 import {AbstractPluginResolver} from "../../services/abstract-classes/abstract-plugin-resolver";
-import {AbstractPlugin} from "../../../plugins/abstract-class/abstract-plugin";
-import {PluginResolverService} from "../../../plugins/services/plugin-resolver.service";
+import {AbstractPlugin} from "../../../plugins/shared/abstract-class/abstract-plugin";
+import {PluginResolverService} from "../../../plugins/shared/services/plugin-resolver.service";
 import {PageBuilderComponent} from "../../pages/page-builder/page-builder.component";
 import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
-import {AdminPluginSelectComponent} from "../../../plugins/components/plugin-select/admin-plugin-select.component";
+import {AdminPluginSelectComponent} from "../../../plugins/shared/components/plugin-select/admin-plugin-select.component";
 import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
 import {
   PluginDimensionAdminComponent
-} from "../../../plugins/components/plugin-dimension-admin/plugin-dimension-admin.component";
+} from "../../../plugins/shared/components/admin-pages/plugin-dimension-admin/plugin-dimension-admin.component";
+import {GridRowComponent} from "../grid-row/grid-row.component";
+import {
+  AnimationHiderComponent
+} from "../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-grid-cell-item',
+  standalone: true,
   templateUrl: './grid-cell-item.component.html',
+  imports: [
+    CommonModule,
+    forwardRef(() => GridRowComponent),
+    AnimationHiderComponent,
+  ],
   styleUrls: ['./grid-cell-item.component.css']
 })
 export class GridCellItemComponent implements OnInit, OnChanges{
@@ -104,7 +115,7 @@ export class GridCellItemComponent implements OnInit, OnChanges{
       [
         {label: 'Vybrat prvek', component: AdminPluginSelectComponent, path: ''},
         ...pluginResolver.adminComponentsClass,
-        {label: 'Rozměry', component: PluginDimensionAdminComponent, path: ''}
+        {label: 'Odsazení', component: PluginDimensionAdminComponent, path: ''}
       ];
     let dialogInfo = this.moveableModalService.show<any>(MiniAdminComponent,
       {

@@ -3,6 +3,7 @@ import {ContextMenuRootDirective} from './context-menu-root.directive';
 import {Subscription} from 'rxjs';
 
 @Directive({
+  standalone: true,
   selector: '[appContextMenuItem]'
 })
 export class ContextMenuItemDirective implements OnInit, OnDestroy{
