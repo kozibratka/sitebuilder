@@ -55,13 +55,19 @@ export class LinkAdminComponent extends AbstractAdminSetting<BasePlugConfigInter
         if (value.linkType === 1) {
           settings.externalUrl = null;
           settings.fileUrl = null;
-          settings.pageUrl = this.pageListResolverService.getPageDetail(settings.pageId).url;
+          settings.pageUrl = settings.pageId ? this.pageListResolverService.getPageDetail(settings.pageId).url : null;
         } else if (value.linkType === 2) {
           settings.pageId = null;
           settings.fileUrl = null;
         } else if (value.linkType === 3) {
           settings.externalUrl = null;
           settings.pageId = null;
+        } else {
+          settings.externalUrl = null;
+          settings.fileUrl = null;
+          settings.pageUrl = null;
+          settings.pageId = null;
+          settings.linkType = null;
         }
       }
     });
