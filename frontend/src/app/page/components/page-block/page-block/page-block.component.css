@@ -145,44 +145,10 @@
   z-index: 1;
 }
 
-.move-menu-hover {
-  outline:  solid 0 transparent;
-  transition: none;
-  outline-color: red !important;
-  outline-width: 2px !important;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 0 0 4px #3498db;
-}
-
-.frameCover div.btn {
-  background-color: #262b33;
-  border-radius: 0;
-  border: 1px solid #d6d6d6;
-  font-size: 12px;
-  height: 25px;
-  margin-right: 1px;
-  outline: 1px solid #000000;
-  position: relative;
-  top: 1px;
-  width: 25px;
-  padding: 0;
-}
-
-.frameCover div.btn i {
-  color: white;
-  display: block;
-  font-size: 18px;
-  position: relative !important;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .block-move-menu {
   width: 164px;
   position: absolute;
-  top: -31px;
+  top: -28px;
   left: 0px;
   z-index: 1;
   padding-bottom: 10px;

@@ -38,19 +38,19 @@
       <div matTooltip="Nastavení Bloku" class="btn draganddrop block-menu-label">
         <strong>Blok</strong>
       </div>
-      <div class="btn draganddrop" (click)="openSettings()">
+      <div title="Nastavení" class="btn draganddrop" (click)="openSettings()">
         <i class="material-icons icon-settings">settings</i>
       </div>
-      <div class="btn draganddrop icon-move-block">
+      <div title="Přesunout" class="btn draganddrop icon-move-block">
         <i class="material-icons icon-move-block">open_with</i>
       </div>
-      <div class="btn draganddrop" (click)="deleteBlock.emit(true)">
+      <div title="Smazat" class="btn draganddrop" (click)="deleteBlock.emit(true)">
         <i class="material-icons icon-remove">delete</i>
       </div>
-      <div *ngIf="userService.hasRole('ROLE_ADMIN')" matTooltip="Přidat jako šablonu" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this)">
+      <div title="Přidat jako šablonu" *ngIf="userService.hasRole('ROLE_ADMIN')" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this)">
         <i class="material-icons icon-remove">add</i>
       </div>
-      <div *ngIf="userService.hasRole('ROLE_ADMIN') && pageBlock.webId" matTooltip="Aktualizovat šablonu" class="btn draganddrop" (click)="pageBlockTemplateService.update(this)">
+      <div title="Aktualizovat šablonu" *ngIf="userService.hasRole('ROLE_ADMIN') && pageBlock.webId" class="btn draganddrop" (click)="pageBlockTemplateService.update(this)">
         <i class="material-icons icon-update">update</i>
       </div>
 

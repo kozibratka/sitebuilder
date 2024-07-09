@@ -44,3 +44,49 @@
   margin: 0 auto;
   mix-blend-mode: difference;
 }
+
+::ng-deep.frameCover * {
+  font-size: 10px;
+}
+
+::ng-deep.frameCover div.btn {
+  background-color: #262b33 !important;
+  border-radius: 0;
+  border: 1px solid #d6d6d6;
+  font-size: 12px;
+  height: 23px;
+  margin-right: 1px;
+  outline: 1px solid #000000;
+  position: relative;
+  top: 1px;
+  width: 23px;
+  padding: 0;
+}
+
+::ng-deep.frameCover div.btn i {
+  color: white;
+  display: block;
+  font-size: 18px;
+  position: relative !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+::ng-deep.move-menu-hover {
+  outline:  solid 0 transparent;
+  transition: none;
+  outline-color: red !important;
+  outline-width: 2px !important;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 4px #3498db;
+}
+
+::ng-deep.frameCover .material-icons {
+  font-size: 14px !important;
+  height: 14px !important;
+  width: 14px !important;
+  vertical-align: top !important;
+}
+
