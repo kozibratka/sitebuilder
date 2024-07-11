@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import {CarouselConfigInterface} from '../../interfaces/carousel-config-interface';
 import {CdkDrag, CdkDropList, CdkDropListGroup, DropListOrientation, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MixedCdkDragDropModule, MixedCdkDragSizeHelperDirective} from 'angular-mixed-cdk-drag-drop';
-import {AbstractAdminSetting} from '../../../shared/abstract-class/abstract-admin-setting';
-import {FileManagerModalService} from '../../../../core/modules/file-manager/services/file-manager-modal.service';
-import {FileManagerService} from '../../../../core/modules/file-manager/services/file-manager.service';
-import {
-  AnimationHiderComponent
-} from "../../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
 import {MatButton} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {
+  AnimationHiderComponent
+} from "../../../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
+import {AbstractAdminSetting} from "../../../abstract-class/abstract-admin-setting";
+import {CarouselConfigInterface} from "../../../../carousel/interfaces/carousel-config-interface";
+import {FileManagerModalService} from "../../../../../core/modules/file-manager/services/file-manager-modal.service";
+import {FileManagerService} from "../../../../../core/modules/file-manager/services/file-manager.service";
+import {ImagesListInterface} from "../../../interfaces/images-list-interface";
+import {BasePlugConfigInterface} from "../../../interfaces/base-plug-config-interface";
 
 @Component({
-  selector: 'app-carousel-bootstrap-images-admin',
+  selector: 'images-list-admin',
   standalone: true,
-  templateUrl: 'carousel-images-admin.component.html',
+  templateUrl: 'images-list-admin.component.html',
   imports: [
     CommonModule,
     CdkDrag,
@@ -26,9 +28,9 @@ import {CommonModule} from "@angular/common";
     MatButton,
     FormsModule
   ],
-  styleUrls: ['carousel-images-admin.component.css']
+  styleUrls: ['images-list-admin.component.css']
 })
-export class CarouselImagesAdminComponent extends AbstractAdminSetting<CarouselConfigInterface> implements OnInit {
+export class ImagesListAdmin extends AbstractAdminSetting<BasePlugConfigInterface & ImagesListInterface> implements OnInit {
 
   showIconIndex = -2;
 

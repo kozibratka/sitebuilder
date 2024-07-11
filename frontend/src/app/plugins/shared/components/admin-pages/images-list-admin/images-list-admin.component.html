@@ -1,0 +1,28 @@
+<div class="mixed-example-list"
+     [style.flex-direction]="'horizontal'"
+     [style.height]=''
+     cdkDropListGroup mixedCdkDragDrop
+     [containerSelector]="''"
+     [orientation]="orientation"
+     (dropped)="dropped($event)">
+        <span *ngFor="let image of settings.images; index as i" cdkDropList mixedCdkDropList>
+          <div class="mixed-box"
+               (mouseover)="showIconIndex=i"
+               (mouseleave)="showIconIndex=-1"
+               [style.cursor]="handler ? '' : 'move'"
+               cdkDrag mixedCdkDragSizeHelper
+               (contentBoxSize)="onSizeChange($event)">
+                <img class="image-item" [src]="image.path">
+                  <input class="image-h1" type="text" [(ngModel)]="image.h1">
+                  <input class="image-h2" type="text" [(ngModel)]="image.h2">
+                  <app-animation-hider [show] = "showIconIndex==i">
+                    <i class="material-icons icon-remove" (click)="onClickRemoveImageButton(i)">close</i>
+                  </app-animation-hider>
+        </div>
+        </span>
+</div>
+
+<div class="text-end">
+  <button (click)="onClickAddImageButton()" mat-raised-button color="primary" class="my-2"><i class="material-icons">photo</i>Přidat obrázek
+  </button>
+</div>

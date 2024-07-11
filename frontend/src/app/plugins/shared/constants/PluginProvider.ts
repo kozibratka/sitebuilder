@@ -7,6 +7,7 @@ import {MenuResolverService} from "../../menu/services/menu-resolver.service";
 import {TextResolverService} from "../../text/services/text-resolver.service";
 import {VideoResolverService} from "../../video/services/video-resolver.service";
 import {IconResolverService} from "../../icon/services/icon-resolver.service";
+import {GalleryResolverService} from "../../gallery/services/gallery-resolver.service";
 
 export const PluginsProvider = [
   {provide: AbstractPluginResolver, useClass: ButtonResolverService, multi: true},
@@ -17,6 +18,7 @@ export const PluginsProvider = [
   {provide: AbstractPluginResolver, useClass: TextResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: VideoResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: IconResolverService, multi: true},
+  {provide: AbstractPluginResolver, useClass: GalleryResolverService, multi: true},
   // { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
 
 ];

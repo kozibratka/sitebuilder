@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
-import {CarouselImagesAdminComponent} from '../pages/carousel-images-admin/carousel-images-admin.component';
-import {CarouselEffectAdminComponent} from '../pages/carousel-effect-admin/carousel-effect-admin.component';
 import {PluginIdentifier} from '../../shared/constants/plugin-identifier';
-import {CarouselComponent} from '../components/carousel/carousel.component';
-import {CarouselConfigInterface} from "../interfaces/carousel-config-interface";
 import {ImagesListAdmin} from "../../shared/components/admin-pages/images-list-admin/images-list-admin.component";
+import {GalleryConfigInterface} from "../interfaces/gallery-config-interface";
+import {GalleryComponent} from "../components/gallery/gallery.component";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CarouselResolverService extends AbstractPluginResolver<CarouselConfigInterface>{
+export class GalleryResolverService extends AbstractPluginResolver<GalleryConfigInterface>{
 
   constructor() { super(); }
 
   get componentClass(): new(...args: any[]) => {} {
-    return CarouselComponent;
+    return GalleryComponent;
   }
 
   adminComponentsClass = [
@@ -25,27 +23,22 @@ export class CarouselResolverService extends AbstractPluginResolver<CarouselConf
       component: ImagesListAdmin,
       path: ''
     },
-    {
-      label: 'Efekty',
-      component: CarouselEffectAdminComponent,
-      path: ''
-    }
   ];
 
   getMenuImage(): string {
-    return 'view_carousel';
+    return 'photo_library';
   }
 
   get identifier(): string {
-    return PluginIdentifier.CAROUSEL_V1;
+    return PluginIdentifier.GALLERY_V1;
   }
 
   get description(): string {
-    return 'Slider obrázků s animací';
+    return 'Galerie obrázků';
   }
 
   get name(): string {
-    return 'Carousel obrázků';
+    return 'Galerie obrázků';
   }
 
   isAutoResizeHeight(): boolean {
@@ -60,11 +53,9 @@ export class CarouselResolverService extends AbstractPluginResolver<CarouselConf
     return 18;
   }
 
-  getEmptySettings(): CarouselConfigInterface {
+  getEmptySettings(): GalleryConfigInterface {
     return {
-      identifier: PluginIdentifier.CAROUSEL_V1,
-      autostart: true,
-      intervalRotate: 3000,
+      identifier: PluginIdentifier.GALLERY_V1,
       images: [
         {h1: 'Text 1', h2: 'Text 2', path: 'https://picsum.photos/id/944/900/500'},
         {h1: 'Text 3', h2: 'Text 4', path: 'https://picsum.photos/id/1011/900/500'},

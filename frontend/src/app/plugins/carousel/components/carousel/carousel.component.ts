@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractPlugin} from '../../../shared/abstract-class/abstract-plugin';
 import {CarouselConfigInterface} from '../../interfaces/carousel-config-interface';
-import {PluginIdentifier} from '../../../shared/constants/plugin-identifier';
 import {NgbCarousel, NgbSlide} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule} from "@angular/common";
 
