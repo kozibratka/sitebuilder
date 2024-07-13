@@ -102,6 +102,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
         leftCell.width = leftCellWidthTmp;
         rightCell.width = rightCellWidthTmp;
       }
+      window.dispatchEvent(new Event('resize'));
     });
     let subscriptionMouseUp = fromEvent(window, 'mouseup').subscribe(value => {
       subscriptionMouseUp.unsubscribe();
@@ -135,6 +136,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
     } else {
       this.row.cells.splice(startIndex+1, 0, {width: 1, items: []})
     }
+    window.dispatchEvent(new Event('resize'));
   }
 
   removeCell(startIndex: number, cellInfo: {site: string, isRightPanel: boolean, isDeepChild: boolean}) {
@@ -168,6 +170,7 @@ export class GridRowComponent implements OnInit, OnDestroy{
           this.row.cells[toResizeIndex].width += toRemoveCell.width;
         }
     }
+    window.dispatchEvent(new Event('resize'));
   }
 
   getWidth() {

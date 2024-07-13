@@ -16,7 +16,7 @@ import SimpleLightbox from "simplelightbox/dist/simple-lightbox.esm";
 })
 export class GalleryComponent extends AbstractPlugin<GalleryConfigInterface> implements OnInit, AfterViewInit, OnDestroy {
 
-  @ViewChild('content', {static: true}) content: ElementRef;
+  @ViewChild('content', {static: true}) content: ElementRef<HTMLElement>;
   gallery = null;
   constructor() {
     super();
@@ -36,13 +36,11 @@ export class GalleryComponent extends AbstractPlugin<GalleryConfigInterface> imp
     let images = this.settings.images.map(value => {
       return {src: value.path, srct: value.path, title: value.h1}
     });
-
     this.gallery = ($(this.content.nativeElement) as any).nanogallery2({
       items:images,
       thumbnailWidth:  'auto',
       thumbnailHeight: 100,
-
-      locationHash:    false
+      locationHash:    false,
     });
   }
 
