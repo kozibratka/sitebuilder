@@ -33,7 +33,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *          "Video" = "App\Entity\Plugin\Video\PluginVideo",
  *          "Form" = "App\Entity\Plugin\Form\PluginForm",
  *          "Button" = "App\Entity\Plugin\Button\PluginButton",
- *          "Icon" = "App\Entity\Plugin\Icon\PluginIcon"
+ *          "Icon" = "App\Entity\Plugin\Icon\PluginIcon",
+ *          "Gallery" = "App\Entity\Plugin\Gallery\PluginGallery",
  *
  *     })
  */

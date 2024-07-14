@@ -3,20 +3,20 @@
 namespace App\Form\Plugin\Carousel;
 
 use App\Entity\Plugin\Carousel\CarouselImage;
+use App\Form\Plugin\shared\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CarouselImageType extends AbstractType
+class CarouselImageType extends ImageType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('path', TextType::class)
-            ->add('h1', TextType::class)
             ->add('h2', TextType::class)
         ;
+        parent::buildForm($builder, $options);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

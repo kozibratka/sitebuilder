@@ -39,8 +39,10 @@ export class GalleryComponent extends AbstractPlugin<GalleryConfigInterface> imp
     this.gallery = ($(this.content.nativeElement) as any).nanogallery2({
       items:images,
       thumbnailWidth:  'auto',
-      thumbnailHeight: 100,
+      thumbnailHeight: this.settings.thumbnailHeight,
+      thumbnailAlignment: 'right',
       locationHash:    false,
+      thumbnailDisplayTransition: "scaleUp",
     });
   }
 

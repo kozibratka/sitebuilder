@@ -4,6 +4,7 @@ import {PluginIdentifier} from '../../shared/constants/plugin-identifier';
 import {ImagesListAdmin} from "../../shared/components/admin-pages/images-list-admin/images-list-admin.component";
 import {GalleryConfigInterface} from "../interfaces/gallery-config-interface";
 import {GalleryComponent} from "../components/gallery/gallery.component";
+import {GallerySizeAdminComponent} from "../pages/gallery-size-admin/gallery-size-admin.component";
 
 
 @Injectable({
@@ -21,6 +22,11 @@ export class GalleryResolverService extends AbstractPluginResolver<GalleryConfig
     {
       label: 'Obrázky',
       component: ImagesListAdmin,
+      path: ''
+    },
+    {
+      label: 'Rozměr miniatur',
+      component: GallerySizeAdminComponent,
       path: ''
     },
   ];
@@ -56,6 +62,7 @@ export class GalleryResolverService extends AbstractPluginResolver<GalleryConfig
   getEmptySettings(): GalleryConfigInterface {
     return {
       identifier: PluginIdentifier.GALLERY_V1,
+      thumbnailHeight: 100,
       images: [
         {h1: 'Text 1', h2: 'Text 2', path: 'https://picsum.photos/id/944/900/500'},
         {h1: 'Text 3', h2: 'Text 4', path: 'https://picsum.photos/id/1011/900/500'},

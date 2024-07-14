@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Plugin\AbstractClass;
+namespace App\Form\Plugin\shared;
 
 use App\Entity\Page\AbstractPage;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AbstractLinkType extends AbstractType
+class LinkType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

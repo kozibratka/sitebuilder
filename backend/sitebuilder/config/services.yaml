@@ -82,6 +82,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'carousel_v1' }
 
+    App\Service\Plugin\Gallery\GalleryService:
+        tags:
+            - { name: 'plugin_service', key: 'gallery_v1' }
+
     App\Service\Plugin\Menu\MenuService:
         tags:
             - { name: 'plugin_service', key: 'menu_v1' }

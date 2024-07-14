@@ -3,14 +3,14 @@
 namespace App\Form\Plugin\Button;
 
 use App\Entity\Plugin\Button\PluginButton;
-use App\Form\Plugin\AbstractClass\AbstractLinkType;
+use App\Form\Plugin\shared\LinkType;
 use App\Form\Plugin\BasePluginType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ButtonType extends AbstractLinkType
+class ButtonType extends LinkType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
