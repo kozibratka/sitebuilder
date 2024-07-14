@@ -52,7 +52,7 @@ export class GalleryComponent extends AbstractPlugin<GalleryConfigInterface> imp
       locationHash:    false,
       thumbnailDisplayTransition: "scaleUp",
       fnThumbnailInit: ($thumbnail, item, GOMidx) => {
-        if (originSize && GOMidx+1 == this.settings.images.length) {
+        if (originSize && GOMidx+1 >= this.settings.images.length) {
           let images = this.content.nativeElement.querySelectorAll('img');
           if (!images.length) {
             return;
