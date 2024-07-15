@@ -67,6 +67,7 @@ export class GridCellComponent implements OnInit{
   onDragEnd = (event: SortableEvent)=> {
     let index = event.newIndex;
     this.dragStatusService.isDragPlugin = false;
+    this.recalculateOrder();
   }
 
   onAdd = (event: SortableEvent) => {
@@ -76,9 +77,7 @@ export class GridCellComponent implements OnInit{
       newRow.uniqueId = StringService.randomString();
       this.cell.items[event.newIndex] = {row: newRow, itemOrder: event.newIndex};
     }
-    this.cell.items.forEach((value, index) => {
-      value.itemOrder = index;
-    });
+    this.recalculateOrder();
   }
 
   onMove = (event: MoveEvent) => {
@@ -104,5 +103,11 @@ export class GridCellComponent implements OnInit{
 
   deleteItem(index: number) {
     this.cell.items.splice(index, 1);
+  }
+
+  recalculateOrder() {
+    this.cell.items.forEach((value, index) => {
+      value.itemOrder = index;
+    });
   }
 }
