@@ -48,7 +48,7 @@ import {MatIconModule} from "@angular/material/icon";
   animations: [
     trigger('visibleMenu', [
       state('show', style({left: '235px'})),
-      state('hide', style({left: '-40px'})),
+      state('hide', style({left: '-2px'})),
       transition('show => hide', [
         animate('0.15s')
       ]),

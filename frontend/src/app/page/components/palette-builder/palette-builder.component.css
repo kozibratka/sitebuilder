@@ -90,3 +90,7 @@
   vertical-align: top !important;
 }
 
+::ng-deep ul ul {
+  list-style-type: disc;
+}
+

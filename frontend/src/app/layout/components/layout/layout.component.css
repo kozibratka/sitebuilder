@@ -51,3 +51,7 @@
 ::ng-deep app-palette-builder a {
   text-decoration: underline;
 }
+
+.main-header {
+  z-index: initial !important;
+}

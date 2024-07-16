@@ -83,8 +83,8 @@ i.icon-move, i.icon-move-grid{
 }
 
 :host {
-  position: fixed;
-  width: 16%;
+  position: sticky;
+  top: 16px;
 }
 
 i.icon-move-block, i.icon-delete{
