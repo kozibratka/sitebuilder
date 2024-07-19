@@ -13,14 +13,21 @@
 }
 
 .menu-element-item:not(.ui-draggable-dragging){
-  padding: 10px;
-  width: 50%;
+  padding: 4px;
+  width: 45%;
   text-align: center;
   font-size: 15px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  margin: 6px;
+}
+
+.menu-element-item:not(.ui-draggable-dragging):hover {
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
 .menu-element-cells:not(.ui-draggable-dragging){
-  padding: 10px;
+  padding: 5px;
   width: 100%;
   text-align: center;
   font-size: 15px;
@@ -35,10 +42,17 @@
   width: 100%;
   text-align: center;
   font-size: 15px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 13px;
 }
 
 .menu-element-block img{
   width: 100%;
+}
+
+.menu-element-block:hover:not(.ui-draggable-dragging) {
+  box-shadow: 0 0 6px rgba(35, 173, 278, 1);
 }
 
 .grid-stack-item-menu {
@@ -47,12 +61,12 @@
 
 i.icon-move, i.icon-move-grid{
   position: absolute;
-  top: 10px;
+  top: 2px;
   color: black;
   /*display: none;*/
-  left: 11px;
+  left: 2px;
   cursor: move;
-  font-size: 17px;
+  font-size: 17px !important;
 }
 
 .grid-row-menu {
@@ -89,22 +103,21 @@ i.icon-move, i.icon-move-grid{
 
 i.icon-move-block, i.icon-delete{
   position: absolute;
-  top: 15px;
+  top: 1px;
   color: black;
   /*display: none;*/
-  left: 11px;
+  left: 1px;
   cursor: move;
-  font-size: 17px;
+  font-size: 17px !important;
 }
 
 i.icon-delete {
-  left: 40px;
+  left: 24px;
   cursor: pointer;
 }
 
 ::ng-deep .menu-element-block .empty-block-template {
-  border: 1px solid black;
-  height: 122px;
+  height: 63px;
   width: 100%;
 }
 

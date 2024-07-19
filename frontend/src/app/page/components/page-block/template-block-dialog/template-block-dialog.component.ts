@@ -4,12 +4,14 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {PageBlockComponent} from "../page-block/page-block.component";
 import {DialogComponent} from "../../../../core/components/dialog/dialog.component";
 import {FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-template-block-dialog',
   standalone: true,
   templateUrl: './template-block-dialog.component.html',
   imports: [
+    CommonModule,
     DialogComponent,
     FormsModule
   ],

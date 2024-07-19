@@ -14,6 +14,8 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="menu-plugin-container d-flex flex-md-row flex-wrap"
+             (mouseleave)="showMoveIcon = false"
+             (mouseenter)="showMoveIcon = true"
              [nxtSortablejs]="[1]"
              [config]="{group: {name: 'menu-plugin', pull: 'clone',put: false}, handle: '.icon-move', onStart: onDragStart, onEnd: onDragEnd, sort: false}"
              [cloneFunction]="createPluginConfig"
@@ -22,20 +24,14 @@
                [nxtSortablejs]="[1]"
                [config]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
                [cloneFunction]="cloneSortableJsRow"
-               (mouseleave)="showMoveIcon = false"
-               (mouseenter)="showMoveIcon = true"
           >
-            <div class="menu-element-cells">
               <mat-icon class="material-icons-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
               <span class="text">Stavební buňky</span>
               <app-animation-hider [show] = "showMoveIcon">
                 <i class="material-icons icon-move-grid">open_with</i>
               </app-animation-hider>
-            </div>
           </div>
           <div
-            (mouseleave)="showMoveIcon = false"
-            (mouseenter)="showMoveIcon = true"
             class="menu-element-item grid-stack-item-menu"
             *ngFor="let abstractMenuPluginResolver of menuPluginResolverServices.abstractMenuPluginResolver"
           >

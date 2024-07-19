@@ -6,27 +6,21 @@
     <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
         <div class="new-row-up">
-          <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i}">
-            <mat-icon class="add-icon-row-up">add_circle</mat-icon>
-          </button>
+          <fa-icon role="button" [icon]="faCirclePlus" [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i}"></fa-icon>
         </div>
       </app-animation-hider>
       <app-grid-row (removeRow$)="removeRow(i)" class="row" [row]="row" (mouseenter)="hoverOnIndexRow=i"></app-grid-row>
       <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
         <div class="text-center">
           <div class="links new-row-bottom">
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i+1}">
-              <mat-icon class="add-icon-row-up">add_circle</mat-icon>
-            </button>
+            <fa-icon role="button" [icon]="faCirclePlus" [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i+1}"></fa-icon>
           </div>
         </div>
       </app-animation-hider>
     </div>
     <div class="text-center" *ngIf="!pageBlock.rows.length">
       <div class="new-row-center">
-        <button mat-icon-button [matMenuTriggerFor]="menu" class="new-row-input-button empty" [matMenuTriggerData]="{index: 0}">
-          <mat-icon class="add-icon-row-up">add_circle</mat-icon>
-        </button>
+        <fa-icon role="button" [icon]="faCirclePlus" size="1x" [matMenuTriggerFor]="menu" class="new-row-input-button empty" [matMenuTriggerData]="{index: 0}"></fa-icon>
       </div>
     </div>
   </div>

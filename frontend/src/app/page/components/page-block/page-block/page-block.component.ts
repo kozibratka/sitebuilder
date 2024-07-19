@@ -38,6 +38,8 @@ import {GridRowComponent} from "../../grid-row/grid-row.component";
 import {MatMenu, MatMenuContent, MatMenuTrigger} from "@angular/material/menu";
 import {MenuNewRowComponent} from "../../menu-new-row/menu-new-row.component";
 import {MatTooltip} from "@angular/material/tooltip";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 
 @Component({
   selector: 'app-palette-block',
@@ -55,7 +57,8 @@ import {MatTooltip} from "@angular/material/tooltip";
     MenuNewRowComponent,
     SortablejsModule,
     MatTooltip,
-    MatMenuContent
+    MatMenuContent,
+    FaIconComponent
   ]
 })
 export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewChecked{
@@ -68,6 +71,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   isMoveMenuHover = false;
   @Output() deleteBlock = new EventEmitter<boolean>();
   public videoUrl = '';
+  faCirclePlus = faCirclePlus;
 
   constructor(
     public elementRef: ElementRef,
