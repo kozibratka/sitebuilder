@@ -45,6 +45,10 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'authorization',
+    loadChildren: () => import('./authorization/route')
+  },
+  {
     path: '',
     redirectTo: '/admin/0',
     pathMatch: 'full'
@@ -52,11 +56,7 @@ export const routes: Routes = [
   {
     path: 'test',
     component: CompAComponent
-  },
-  // {
-  //   path: 'authorization',
-  //   loadChildren: () => import('./authorization/authorization.module').then(m => m.AuthorizationModule)
-  // }
+  }
 ];
 
 export const publicRoutes: Routes = [

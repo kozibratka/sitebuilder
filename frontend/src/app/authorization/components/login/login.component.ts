@@ -5,6 +5,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoginClientService} from '../../services/login-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
   styleUrls: ['./login.component.css'],
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule
   ]
 })

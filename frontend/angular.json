@@ -34,7 +34,7 @@
               "src/assets/admin_lte/plugins/fontawesome-free/css/all.min.css",
               "src/assets/admin_lte/dist/css/custom_adminlte.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/nanogallery2/dist/css/nanogallery2.min.css"
+              "src/assets/nanogallery2/css/nanogallery2.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
@@ -130,5 +130,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
