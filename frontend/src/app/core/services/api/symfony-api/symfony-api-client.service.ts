@@ -85,7 +85,7 @@ export class SymfonyApiClientService {
   }
 
   refreshToken(username: string, passwordText: string): Observable<HttpResponse<TokenInterface>> {
-    return this.post<TokenInterface>('token_create', {email: username, password: passwordText})
+    return this.post<TokenInterface>('login_token', {email: username, password: passwordText})
       .pipe(tap((httpResponse) => {
         this.token = httpResponse.body.token;
       }));

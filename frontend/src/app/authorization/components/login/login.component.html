@@ -1,32 +1,53 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <p class="alert alert-success" *ngIf="activated">Účet byl aktivován, nyní se můžete přihlásit.</p>
-  <div class="form-group">
-    <div  class="input-group mb-3">
-      <input type="email" class="form-control" placeholder="Email" formControlName="email">
+<p class="login-box-msg">Přihlášení do systému</p>
+<div class="social-auth-links text-center">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <p class="alert alert-success" *ngIf="activated">Účet byl aktivován, nyní se můžete přihlásit.</p>
+    <div class="form-group">
+      <div  class="input-group mb-3">
+        <input type="email" class="form-control" placeholder="Email" formControlName="email">
         <div class="input-group-text">
           <span class="fas fa-envelope"></span>
         </div>
+      </div>
+      <div class="small text-danger" *ngIf="email && email.invalid && (email.touched) && email.errors?.['required']">
+        Toto pole je povinné
+      </div>
     </div>
-    <div class="small text-danger" *ngIf="email && email.invalid && (email.touched) && email.errors?.['required']">
-      Toto pole je povinné
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <input type="password" class="form-control" placeholder="Heslo" formControlName="password">
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <input type="password" class="form-control" placeholder="Heslo" formControlName="password">
         <div class="input-group-text">
           <span class="fas fa-lock"></span>
         </div>
+      </div>
+      <div class="small text-danger" *ngIf="password && password.invalid && (password.touched) && password.errors?.['required']">
+        Toto pole je povinné
+      </div>
     </div>
-    <div class="small text-danger" *ngIf="password && password.invalid && (password.touched) && password.errors?.['required']">
-      Toto pole je povinné
+    <div class="form-group">
+      <!-- /.col -->
+      <div class="d-flex flex-row-reverse">
+        <button type="submit" class="btn btn-primary btn-block">Přihlásit</button>
+      </div>
+      <!-- /.col -->
     </div>
+  </form>
+  <p>- NEBO -</p>
+  <div class="d-grid gap-2">
+    <a href="#" class="btn btn-block btn-primary">
+      <i class="fab fa-facebook mr-2"></i>
+      Přihlásit přes Facebook
+    </a>
+    <a href="#" class="btn btn-block btn-danger">
+      <i class="fab fa-google-plus mr-2"></i>
+      Přihlásit přes Google
+    </a>
   </div>
-  <div class="form-group">
-    <!-- /.col -->
-    <div class="d-flex flex-row-reverse">
-      <button type="submit" class="btn btn-primary btn-block">Přihlásit</button>
-    </div>
-    <!-- /.col -->
-  </div>
-</form>
+  <br>
+  <a [routerLink]="['../../registration']" class="text-center">Vytvořit účet pomocí emailu</a>
+</div>
+
+
+
+
+

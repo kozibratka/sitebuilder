@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {RegisterFormService} from '../../services/register-form.service';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {LoginClientService} from '../../services/login-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {ApiFormService} from "../../../core/services/form/api-form.service";
 import {InputFormErrorDirective} from "../../../core/directives/form-error/input-form-error/input-form-error.directive";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +14,9 @@ import {InputFormErrorDirective} from "../../../core/directives/form-error/input
   templateUrl: './registration.component.html',
   imports: [
     ReactiveFormsModule,
-    InputFormErrorDirective
+    InputFormErrorDirective,
+    NgIf,
+    RouterLink
   ],
   styleUrls: ['./registration.component.css']
 })
@@ -28,14 +31,14 @@ export class RegistrationComponent implements OnInit {
     private httpResponseToasterService: HttpResponseToasterService,
     private apiFormService: ApiFormService,
   ) {
-    this.registrationForm = this.registerTypeService.createForm({path: 'user_registration'});
+    this.registrationForm = this.registerTypeService.createForm({path: 'login_registration'});
     this.registrationForm.statusChanges.subscribe(status => {
       if (status === 'VALID') {
-        this.apiFormService.send('user_registration', this.registrationForm).subscribe(httpResponse => {
+        this.apiFormService.send('login_registration', this.registrationForm).subscribe(httpResponse => {
           // this.activationSend = true;
           this.loginClientService.tryLogin(this.registrationForm.get('email')?.value,
             this.registrationForm.get('password')?.get('first')?.value).subscribe({
-            next: () => this.router.navigate(['/admin', httpResponse.body.webs[0].id]),
+            next: () => this.router.navigate(['/admin', httpResponse.body]),
             error: err => this.httpResponseToasterService.showError(err)
           });
         });

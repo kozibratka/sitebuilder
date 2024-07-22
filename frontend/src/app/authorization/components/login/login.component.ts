@@ -2,10 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {LoginFormService} from '../../services/login-form.service';
 import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {LoginClientService} from '../../services/login-client.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {CommonModule} from "@angular/common";
+import {HiderElementDirective} from "../../../core/directives/hider-element.directive";
+import {MatProgressBar} from "@angular/material/progress-bar";
+import {Event} from "../../../core/services/api/symfony-api/tools/constants/event";
 
 @Component({
   selector: 'app-login',
@@ -14,10 +17,15 @@ import {CommonModule} from "@angular/common";
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HiderElementDirective,
+    MatProgressBar,
+    RouterOutlet,
+    RouterLink
   ]
 })
 export class LoginComponent implements OnInit {
+  symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND_POST, stopSendLogin: Event.POST_SEND_POST};
 
   loginForm: FormGroup;
   private internal = 0;

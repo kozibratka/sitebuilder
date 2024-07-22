@@ -10,17 +10,17 @@ security:
                 property: 'email'
     firewalls:
         login:
-            pattern: ^/security/token
+            pattern: ^/login/token
             stateless: true
             anonymous: true
             json_login:
-                check_path: /security/token/create
+                check_path: /login/token
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 username_path: email
 
         register:
-            pattern: ^/user/registration
+            pattern: ^/login/registration
             stateless: true
             anonymous: true
 
@@ -52,9 +52,9 @@ security:
         ROLE_ADMIN: ROLE_USER
 
     access_control:
-         - { path: ^/security/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/user/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/user/activation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login/activation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-preview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/plugin/plugin-form/save-data, roles: IS_AUTHENTICATED_ANONYMOUSLY }
