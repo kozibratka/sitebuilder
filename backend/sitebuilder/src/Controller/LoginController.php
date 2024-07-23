@@ -76,9 +76,9 @@ class LoginController extends BaseApiController
         throw new CustomErrorMessageException('Activation failed');
     }
     /**
-     * @Route("/google", name="google", methods={"POST"})
+     * @Route("/social", name="social", methods={"POST"})
      */
-    public function loginGoogle(Request $request,
+    public function loginSocial(Request $request,
                                 UserService $userService,
                                 ParameterBagInterface $parameterBag,
                                 EntityManagerInterface $entityManager,
@@ -86,22 +86,28 @@ class LoginController extends BaseApiController
     )
     {
         $data = $request->request->all('user');
-        $client = new \Google_Client(['client_id' => $parameterBag->get('app.google_login_token')]);
-        if (!$client->verifyIdToken($data['idToken'])) {
-            return new  CustomErrorMessageException('Token není validní');
+        $type = $request->request->get('type');
+        $type = LoginTypeEnum::from($type);
+        if ($type == LoginTypeEnum::Google) {
+            $client = new \Google_Client(['client_id' => $parameterBag->get('app.google_login_token')]);
+            if (!$client->verifyIdToken($data['idToken'])) {
+                return new  CustomErrorMessageException('Token není validní');
+            }
+            $data = file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token='.$data['idToken']);
+            $data = json_decode($data, true);
+        } elseif ($type == LoginTypeEnum::Facebook) {
+            $data = file_get_contents('https://graph.facebook.com/me?fields=email,name&access_token='.$data['authToken']);
+            $data = json_decode($data, true);
         }
-        $data = file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token='.$data['idToken']);
-        $data = json_decode($data, true);
         $email = $data['email'];
-        $val = LoginTypeEnum::Google;
-        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email, 'loginType' => LoginTypeEnum::Google]);
+        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email, 'loginType' => $type]);
         if (!$user) {
             $user = new User();
             $user->setEmail($data['email']);
             $user->setFullName($data['name']);
             $userService->create($user);
             $user->setLoginAttr($data);
-            $user->setLoginType(LoginTypeEnum::Google);
+            $user->setLoginType($type);
             $entityManager->flush();
         }
 

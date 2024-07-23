@@ -20,7 +20,7 @@ security:
                 username_path: email
 
         register:
-            pattern: ^/login/(registration|google)
+            pattern: ^/login/(registration|social)
             stateless: true
             anonymous: true
 
@@ -55,7 +55,7 @@ security:
          - { path: ^/login/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/login/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/login/activation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/login/google, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login/social, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-preview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/plugin/plugin-form/save-data, roles: IS_AUTHENTICATED_ANONYMOUSLY }

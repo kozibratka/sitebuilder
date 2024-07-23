@@ -9,7 +9,12 @@ import {provideAnimations} from "@angular/platform-browser/animations";
 import {PluginsProvider} from "./plugins/shared/constants/PluginProvider";
 import {DragToSelectModule} from "ngx-drag-to-select";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "@abacritt/angularx-social-login";
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+  SocialLoginModule
+} from "@abacritt/angularx-social-login";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +36,10 @@ export const appConfig: ApplicationConfig = {
             provider: new GoogleLoginProvider(
               '923543574323-vpos32ti6erndrilgnofmjcq98oq1k2g.apps.googleusercontent.com'
             )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('1070524357823190')
           }
         ]
       } as SocialAuthServiceConfig,
