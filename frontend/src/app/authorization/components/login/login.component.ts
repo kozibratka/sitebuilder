@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, importProvidersFrom, OnInit} from '@angular/core';
 import {LoginFormService} from '../../services/login-form.service';
 import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -9,6 +9,13 @@ import {CommonModule} from "@angular/common";
 import {HiderElementDirective} from "../../../core/directives/hider-element.directive";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {Event} from "../../../core/services/api/symfony-api/tools/constants/event";
+import {
+  GoogleLoginProvider,
+  GoogleSigninButtonModule,
+  SocialAuthServiceConfig,
+  SocialLoginModule
+} from "@abacritt/angularx-social-login";
+import {SocialLoginService} from "../../services/social-login.service";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +28,11 @@ import {Event} from "../../../core/services/api/symfony-api/tools/constants/even
     HiderElementDirective,
     MatProgressBar,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    GoogleSigninButtonModule,
+  ],
+  providers: [
+    {provide: SocialLoginService},
   ]
 })
 export class LoginComponent implements OnInit {
@@ -36,7 +47,8 @@ export class LoginComponent implements OnInit {
     private loginClientService: LoginClientService,
     private httpResponseToasterService: HttpResponseToasterService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public socialLoginService: SocialLoginService,
   ) {
     this.loginForm = this.loginFormService.createForm();
   }

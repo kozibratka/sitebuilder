@@ -17,6 +17,9 @@ class UserPasswordEncodeListener
 
     public function prePersist(User $user)
     {
+        if (!$user->getPassword()) {
+            return;
+        }
         $encodedPassword = $this->userPasswordEncoder->encodePassword($user, $user->getPassword());
         $user->setPassword($encodedPassword);
     }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 
 use App\Entity\Web\Web;
+use App\Enum\LoginTypeEnum;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -68,6 +69,11 @@ class User implements UserInterface
 
     #[ORM\Column(type: 'string')]
     private string $hash = '';
+
+    #[ORM\Column(type: 'login_type_enum')]
+    private LoginTypeEnum $loginType = LoginTypeEnum::Form;
+    #[ORM\Column(type: 'simple_array')]
+    private array $loginAttr = [];
 
     public function __construct()
     {
@@ -182,5 +188,25 @@ class User implements UserInterface
     public function setHash(string $hash): void
     {
         $this->hash = $hash;
+    }
+
+    public function getLoginType(): LoginTypeEnum
+    {
+        return $this->loginType;
+    }
+
+    public function setLoginType(LoginTypeEnum $loginType): void
+    {
+        $this->loginType = $loginType;
+    }
+
+    public function getLoginAttr(): array
+    {
+        return $this->loginAttr;
+    }
+
+    public function setLoginAttr(array $loginAttr): void
+    {
+        $this->loginAttr = $loginAttr;
     }
 }

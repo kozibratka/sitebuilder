@@ -24,8 +24,8 @@ services:
       - ./config/nginx/backend-dev-local/nginx.conf:/etc/nginx/nginx.conf
       - ./config/nginx/backend-dev-local/sites-available:/etc/nginx/sites-available
       - ./config/nginx/backend-dev-local/conf.d:/etc/nginx/conf.d
-
-  php-fpm-8.0:
+      
+  php-fpm-8.2:
     networks:
       docker_network_sitebuilder:
         ipv4_address: 10.3.0.7

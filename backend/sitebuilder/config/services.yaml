@@ -8,6 +8,7 @@ parameters:
     app.port: '%env(PUBLIC_SERVER_PORT)%'
     app.email_no_reply: 'noreply@%app.domain%'
     app.date_time_format: 'd.m.Y H:i:s'
+    app.google_login_token: '923543574323-vpos32ti6erndrilgnofmjcq98oq1k2g.apps.googleusercontent.com'
 
 services:
     # default configuration for services in *this* file

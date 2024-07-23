@@ -8,6 +8,10 @@ doctrine:
                 password:         '%env(resolve:DATABASE_PASS)%'
                 host:             '%env(resolve:DB_HOST)%'
                 server_version:   '8.0.21'
+                mapping_types:
+                    enum: string
+        types:
+            login_type_enum: App\Enum\LoginTypeEnumType
 
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)

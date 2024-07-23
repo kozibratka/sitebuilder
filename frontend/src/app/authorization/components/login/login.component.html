@@ -34,14 +34,15 @@
   </form>
   <p>- NEBO -</p>
   <div class="d-grid gap-2">
-    <a href="#" class="btn btn-block btn-primary">
+    <div href="#" class="btn btn-block btn-primary">
       <i class="fab fa-facebook mr-2"></i>
       Přihlásit přes Facebook
-    </a>
-    <a href="#" class="btn btn-block btn-danger">
+    </div>
+    <div class="btn btn-block btn-danger" (click)="socialLoginService.loginGoogle(googleButton)">
       <i class="fab fa-google-plus mr-2"></i>
+      <asl-google-signin-button #googleButton type='icon' size='medium' class="d-none"></asl-google-signin-button>
       Přihlásit přes Google
-    </a>
+    </div>
   </div>
   <br>
   <a [routerLink]="['../../registration']" class="text-center">Vytvořit účet pomocí emailu</a>

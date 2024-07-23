@@ -7,11 +7,16 @@ namespace App\Controller;
 use App\Constant\Role;
 use App\Entity\User;
 use App\Entity\Web\Web;
+use App\Enum\LoginTypeEnum;
+use App\Enum\LoginTypeEnumType;
 use App\Exception\CustomErrorMessageException;
 use App\Form\UserRegistrationType;
 use App\Helper\Helper;
 use App\Service\Storage\UserStorageService;
+use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -32,7 +37,8 @@ class LoginController extends BaseApiController
         Request             $request,
         MailerInterface     $mailer,
         TranslatorInterface $translator,
-        RateLimiterFactory $registrationApiLimiter
+        RateLimiterFactory $registrationApiLimiter,
+        UserService $userService
     ){
         $limiter = $registrationApiLimiter->create($request->getClientIp());
         $limiter->consume(1)->ensureAccepted();
@@ -41,23 +47,8 @@ class LoginController extends BaseApiController
         if ($form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
-            $newWeb = (new Web())->setName('Můj nový web '.(new \DateTime())->format($this->getParameter('app.date_time_format')));
-            $user->addWeb($newWeb);
-            $hash = Helper::randomString(20);
-            $user->setHash($hash);
-            $user->addRole('ROLE_USER'); // default empty, activation email set role!!!
-
-            $this->persist($user);
-//            $email = (new TemplatedEmail())
-//                ->from($this->getParameter('app.email_no_reply'))
-//                ->to(new Address($user->getEmail()))
-//                ->subject($translator->trans('New Registration account'))
-//                ->htmlTemplate('email/account_activation.html.twig')
-//                ->context([
-//                    'hash' => $hash,
-//                ]);
-//            $mailer->send($email);
-            return $this->jsonResponseSimple($newWeb->getId(), 201);
+            $userService->create($user);
+            return $this->jsonResponseSimple([], 201);
         }
         return $this->invalidFormResponse($form);
     }
@@ -83,6 +74,38 @@ class LoginController extends BaseApiController
         }
 
         throw new CustomErrorMessageException('Activation failed');
+    }
+    /**
+     * @Route("/google", name="google", methods={"POST"})
+     */
+    public function loginGoogle(Request $request,
+                                UserService $userService,
+                                ParameterBagInterface $parameterBag,
+                                EntityManagerInterface $entityManager,
+                                JWTTokenManagerInterface $JWTManager
+    )
+    {
+        $data = $request->request->all('user');
+        $client = new \Google_Client(['client_id' => $parameterBag->get('app.google_login_token')]);
+        if (!$client->verifyIdToken($data['idToken'])) {
+            return new  CustomErrorMessageException('Token není validní');
+        }
+        $data = file_get_contents('https://oauth2.googleapis.com/tokeninfo?id_token='.$data['idToken']);
+        $data = json_decode($data, true);
+        $email = $data['email'];
+        $val = LoginTypeEnum::Google;
+        $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email, 'loginType' => LoginTypeEnum::Google]);
+        if (!$user) {
+            $user = new User();
+            $user->setEmail($data['email']);
+            $user->setFullName($data['name']);
+            $userService->create($user);
+            $user->setLoginAttr($data);
+            $user->setLoginType(LoginTypeEnum::Google);
+            $entityManager->flush();
+        }
+
+        return $this->jsonResponseSimple(['token' => $JWTManager->create($user)], 201);
     }
 
     /**
