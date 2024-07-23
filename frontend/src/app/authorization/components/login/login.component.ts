@@ -1,4 +1,4 @@
-import {Component, importProvidersFrom, OnInit} from '@angular/core';
+import {Component, importProvidersFrom, OnDestroy, OnInit} from '@angular/core';
 import {LoginFormService} from '../../services/login-form.service';
 import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -35,7 +35,7 @@ import {SocialLoginService} from "../../services/social-login.service";
     {provide: SocialLoginService},
   ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND_POST, stopSendLogin: Event.POST_SEND_POST};
 
   loginForm: FormGroup;
@@ -85,5 +85,9 @@ export class LoginComponent implements OnInit {
 
   get email() {
     return this.loginForm.get('email');
+  }
+
+  ngOnDestroy(): void {
+    this.socialLoginService.destroy();
   }
 }
