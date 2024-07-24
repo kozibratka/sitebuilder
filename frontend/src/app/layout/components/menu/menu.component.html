@@ -2,7 +2,7 @@
   <li class="nav-item">
     <a [routerLink]="['/admin', webDetailResolverService.selectedId]" routerLinkActive="active" (click)="title.setTitle('Úvodní stránka')"
        [routerLinkActiveOptions]="{exact: true}" class="nav-link">
-    <i class="nav-icon far fa-image"></i>
+      <fa-icon [icon]="faHouseCrack" class="nav-icon"></fa-icon>
       <p>
         Úvodní stránka
       </p>
@@ -18,7 +18,7 @@
 <!--  </li>-->
   <li class="nav-item">
     <a routerLink="page/list" routerLinkActive="active" class="nav-link">
-      <i class="nav-icon fas fa-copy"></i>
+      <fa-icon [icon]="faGlobe" class="nav-icon"></fa-icon>
       <p>
         Moje stránky
       </p>
@@ -26,7 +26,7 @@
   </li>
   <li class="nav-item">
     <a routerLink="plugin/list-available" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Seznam pluginů')">
-      <i class="nav-icon fas fa-copy"></i>
+      <fa-icon [icon]="faPuzzlePiece" class="nav-icon"></fa-icon>
       <p>
         Seznam pluginů
       </p>
@@ -34,7 +34,7 @@
   </li>
   <li class="nav-item">
     <a routerLink="file" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Soubory')">
-      <i class="nav-icon fas fa-copy"></i>
+      <fa-icon [icon]="faFiles" class="nav-icon"></fa-icon>
       <p>
         Soubory
       </p>
