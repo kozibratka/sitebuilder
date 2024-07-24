@@ -42,12 +42,12 @@ class LoginController extends BaseApiController
     ){
         $limiter = $registrationApiLimiter->create($request->getClientIp());
         $limiter->consume(1)->ensureAccepted();
-        $form = $this->createForm(UserRegistrationType::class);
+        $form = $this->createForm(UserRegistrationType::class, null, ['validation_groups' => ['Default', 'FORM']]);
         $form->submit($request->request->all());
         if ($form->isValid()) {
             /** @var User $user */
             $user = $form->getData();
-            $userService->create($user);
+            $userService->create($user); // Activation email is better - after create storage...
             return $this->jsonResponseSimple([], 201);
         }
         return $this->invalidFormResponse($form);
@@ -82,7 +82,8 @@ class LoginController extends BaseApiController
                                 UserService $userService,
                                 ParameterBagInterface $parameterBag,
                                 EntityManagerInterface $entityManager,
-                                JWTTokenManagerInterface $JWTManager
+                                JWTTokenManagerInterface $JWTManager,
+                                UserStorageService $storageService,
     )
     {
         $data = $request->request->all('user');
@@ -105,10 +106,9 @@ class LoginController extends BaseApiController
             $user = new User();
             $user->setEmail($data['email']);
             $user->setFullName($data['name']);
-            $userService->create($user);
             $user->setLoginAttr($data);
             $user->setLoginType($type);
-            $entityManager->flush();
+            $userService->create($user);
         }
 
         return $this->jsonResponseSimple(['token' => $JWTManager->create($user)], 201);

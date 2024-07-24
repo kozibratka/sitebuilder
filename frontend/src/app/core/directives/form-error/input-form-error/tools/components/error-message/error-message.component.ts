@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ValidationErrors} from '@angular/forms';
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-error-message',
   templateUrl: './error-message.component.html',
-  styleUrls: ['./error-message.component.css']
+  standalone: true,
+  styleUrls: ['./error-message.component.css'],
+  imports: [
+    CommonModule
+  ]
 })
 export class ErrorMessageComponent implements OnInit {
 

@@ -18,9 +18,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Table(name: 'user')]
 #[ORM\Entity]
-#[UniqueEntity(
-    fields: ['email'],
-)]
 class User implements UserInterface
 {
     /**
@@ -48,8 +45,8 @@ class User implements UserInterface
     private string $email = '';
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(min="6")
+     * @Assert\NotBlank(groups={"FORM"}))
+     * @Assert\Length(min="6", groups={"FORM"})
      * @Serializer\Exclude()
      */
     #[ORM\Column(type: 'string')]

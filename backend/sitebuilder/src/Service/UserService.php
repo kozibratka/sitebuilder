@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\User;
 use App\Entity\Web\Web;
 use App\Helper\Helper;
+use App\Service\Storage\UserStorageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -13,11 +14,12 @@ class UserService
     public function __construct(
         private ParameterBagInterface $parameterBag,
         private EntityManagerInterface $entityManager,
+        private UserStorageService $userStorageService,
     )
     {
     }
 
-    public function create(User $user)
+    public function create(User $user, $withStorage = true)
     {
 //        $newWeb = (new Web())->setName('Můj nový web '.(new \DateTime())->format($this->parameterBag->get('app.date_time_format')));
 //        $user->addWeb($newWeb);
@@ -35,5 +37,9 @@ class UserService
 //            $mailer->send($email);
 
         $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        if ($withStorage) {
+            $this->userStorageService->createStorageForNewUser($user);
+        }
     }
 }
