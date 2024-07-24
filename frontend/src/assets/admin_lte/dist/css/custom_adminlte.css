@@ -21851,9 +21851,9 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 /* stylelint-enable selector-class-pattern */
-label:not(.form-check-label):not(.custom-file-label) {
-  font-weight: 700;
-}
+/*label:not(.form-check-label):not(.custom-file-label) {*/
+/*  font-weight: 700;*/
+/*}*/
 
 .warning-feedback {
   font-size: 80%;

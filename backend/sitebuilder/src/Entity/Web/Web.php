@@ -70,7 +70,7 @@ class Web
      * @Serializer\Exclude()
      */
     #[ORM\ManyToOne(targetEntity: Web::class)]
-    private ?Web $parent;
+    private ?Web $parent = null;
 
     /**
      * @Serializer\Groups({"default", "base_list"})

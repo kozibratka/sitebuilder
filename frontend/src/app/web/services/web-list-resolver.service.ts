@@ -7,6 +7,7 @@ import {HttpResponseToasterService} from '../../core/services/http-response-toas
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
 import {Helper} from "../../core/helpers/helper";
 import {LoginClientService} from "../../authorization/services/login-client.service";
+import {UserService} from "../../authorization/services/user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
     private symfonyApiClientService: SymfonyApiClientService,
     private httpResponseToasterService: HttpResponseToasterService,
     private loginClient: LoginClientService,
+    private userService: UserService,
   ) {
 
   }
@@ -29,7 +31,7 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
     if (!this.loginClient.isLoggedIn()) {
       return this.router.parseUrl('/authorization/login');
     }
-    if (state.url === '/admin/0/web/select-template') {
+    if (state.url.includes('/admin/0/web/select-template') || state.url.includes('/admin/0/web/create-name/0')) {
       return true;
     }
     const webId = parseInt(route.paramMap.get('webId'), null);

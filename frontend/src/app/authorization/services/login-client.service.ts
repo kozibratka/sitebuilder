@@ -22,7 +22,6 @@ export class LoginClientService {
     return this.symfonyApiClient.refreshToken(username, password).pipe(switchMap(value => {
       return this.symfonyApiClient.get<string[]>('role_list')
         .pipe(
-          tap(x => {this.userService.roles = x.body;}),
           map(value1 => value)
         );
     }));

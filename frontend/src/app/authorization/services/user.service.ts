@@ -17,21 +17,6 @@ export class UserService {
   }
 
   hasRole(role: string): boolean {
-    return this.roles.includes(role);
-  }
-
-
-  get roles(): string[] {
-    let item = localStorage.getItem('roles');
-    if (!item) {
-      return [];
-    }
-    return JSON.parse(localStorage.getItem('roles'));
-  }
-
-  set roles(value: string[]) {
-    if (value && value.length) {
-      localStorage.setItem('roles', JSON.stringify(value));
-    }
+    return this.settings.roles.includes(role);
   }
 }

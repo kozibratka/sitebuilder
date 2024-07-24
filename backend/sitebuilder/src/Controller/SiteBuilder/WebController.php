@@ -6,6 +6,7 @@ use App\Controller\BaseApiController;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\Web\WebType;
+use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,23 +37,26 @@ class WebController extends BaseApiController
         return $this->jsonResponseSimple($web);
     }
 
-    /**
-     * @Route("/create/{id}", name="create")
-     */
-    public function create(Request $request, Web $web)
+    #[Route('/create/{id}', name: 'create', defaults: ['id' => null])]
+    public function create(Request $request, ?Web $web = null)
     {
         $validationWeb = new Web();
         $validationWeb->setUser($this->getUser());
         $form = $this->createForm(WebType::class, $validationWeb, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);
         $form->submit($request->request->all());
-        if($form->isValid() && !$web->getParent()) {
-            $clone = clone $web;
-            $clone->setParent($web);
-            $clone->setIsTemplate(false);
-            $clone->setName($form->get('name')->getData());
-            //dd($clone);
-            $this->persist($clone);
-            return $this->jsonResponseSimple($clone, 201);
+        if($form->isValid()) {
+            if ($web && !$web->getParent()) {
+                $newWeb = clone $web;
+                $newWeb->setParent($web);
+                $newWeb->setIsTemplate(false);
+                $newWeb->setName($form->get('name')->getData());
+            } else {
+                $newWeb = new Web();
+                $newWeb->setName('Můj nový web '.Carbon::now()->toDateTimeString());
+            }
+
+            $this->persist($newWeb);
+            return $this->jsonResponseSimple($newWeb, 201);
         }
         return $this->invalidFormResponse($form);
     }
@@ -79,7 +83,7 @@ class WebController extends BaseApiController
     public function remove(Web $web)
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
-        if (!$web->getParent()) {
+        if ($web->isTemplate()) {
             throw new CustomErrorMessageException('Nelze smazat web šablony');
         }
         $this->removeEntity($web);

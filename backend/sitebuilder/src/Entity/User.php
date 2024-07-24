@@ -65,6 +65,9 @@ class User implements UserInterface
     private bool $lockBuilderMenu = false;
 
     #[ORM\Column(type: 'json')]
+    /**
+     * @Serializer\Groups({"default", "user"})
+     */
     private array $roles = [];
 
     #[ORM\Column(type: 'string')]

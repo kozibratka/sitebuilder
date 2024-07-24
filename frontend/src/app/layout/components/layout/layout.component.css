@@ -56,7 +56,7 @@
   z-index: initial !important;
 }
 
-.sidebar {
-  padding-left: 11px;
+::ng-deep .form-label {
+  font-weight: 500;
 }
 
