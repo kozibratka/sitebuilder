@@ -25,11 +25,13 @@
                [config]="{group: {name: 'menu-row', pull: 'clone',put: false}, onStart: onDragStart, onEnd: onDragEnd, handle: '.icon-move-grid'}"
                [cloneFunction]="cloneSortableJsRow"
           >
+            <div class="menu-element-cells">
               <mat-icon class="material-icons-outlined" aria-hidden="false" aria-label="Example home icon" fontIcon="dashboard"></mat-icon><br>
               <span class="text">Stavební buňky</span>
               <app-animation-hider [show] = "showMoveIcon">
                 <i class="material-icons icon-move-grid">open_with</i>
               </app-animation-hider>
+            </div>
           </div>
           <div
             class="menu-element-item grid-stack-item-menu"

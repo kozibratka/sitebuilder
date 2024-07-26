@@ -63,7 +63,7 @@
   margin: 0 auto;
 }
 
-::ng-deep.menu-element-item.sortable-ghost {
+::ng-deep .palette .menu-element-item.sortable-ghost {
   margin: 0px auto !important;
   padding-top: 10px;
 }
