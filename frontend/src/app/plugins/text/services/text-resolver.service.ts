@@ -55,7 +55,7 @@ export class TextResolverService extends AbstractPluginResolver<TextConfigInterf
   getEmptySettings(): TextConfigInterface {
     return {
       identifier: 'text_v1',
-      text: 'Text plugin'
+      text: '<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Nam quis nulla. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Aliquam erat volutpat. Integer malesuada. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In enim a arcu imperdiet malesuada. Aliquam ante. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Morbi scelerisque luctus velit. Praesent id justo in neque elementum ultrices. Aliquam erat volutpat. Etiam quis quam. In sem justo, commodo ut, suscipit at, pharetra vitae, orci.</p>'
     };
   }
 }
