@@ -3,7 +3,7 @@ import {AbstractAdminSetting} from "../../../abstract-class/abstract-admin-setti
 import {BasePlugConfigInterface} from "../../../interfaces/base-plug-config-interface";
 import {FormService} from "../../../../../core/services/form.service";
 import {LinkAblePluginInterface} from "../../../interfaces/link-able-plugin-interface";
-import {PageListResolverService} from "../../../../../page/services/page-list-resolver.service";
+import {PageListResolverService} from "../../../../../page/services/resolvers/page-list-resolver.service";
 import {FileManagerModalService} from "../../../../../core/modules/file-manager/services/file-manager-modal.service";
 import {ButtonConfigInterface} from "../../../../button/interfaces/button-config-interface";
 import {CommonModule, NgSwitch} from "@angular/common";

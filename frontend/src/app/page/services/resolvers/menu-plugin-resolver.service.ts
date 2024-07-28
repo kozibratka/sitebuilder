@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {AbstractPluginResolver} from './abstract-classes/abstract-plugin-resolver';
+import {AbstractPluginResolver} from '../abstract-classes/abstract-plugin-resolver';
 
 @Injectable()
 export class MenuPluginResolverService {

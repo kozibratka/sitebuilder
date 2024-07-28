@@ -4,7 +4,7 @@ import {TextConfigInterface} from "../../interfaces/text-config-interface";
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {FileManagerModalService} from "../../../../core/modules/file-manager/services/file-manager-modal.service";
 import {FormService} from "../../../../core/services/form.service";
-import {PageListResolverService} from "../../../../page/services/page-list-resolver.service";
+import {PageListResolverService} from "../../../../page/services/resolvers/page-list-resolver.service";
 import {PageInterface} from "../../../../page/interfaces/page-interface";
 import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {CommonModule} from "@angular/common";

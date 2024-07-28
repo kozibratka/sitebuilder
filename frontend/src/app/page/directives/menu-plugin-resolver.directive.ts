@@ -1,6 +1,6 @@
 import {Directive, HostListener, Input} from '@angular/core';
 import {AbstractPluginResolver} from '../services/abstract-classes/abstract-plugin-resolver';
-import {MenuPluginResolverService} from '../services/menu-plugin-resolver.service';
+import {MenuPluginResolverService} from '../services/resolvers/menu-plugin-resolver.service';
 
 @Directive({
   selector: '[appMenuPluginResolverDirective]',

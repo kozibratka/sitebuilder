@@ -3,7 +3,7 @@ import {AbstractAdminSetting} from "../../abstract-class/abstract-admin-setting"
 import {BasePlugConfigInterface} from "../../interfaces/base-plug-config-interface";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {PluginResolverService} from "../../services/plugin-resolver.service";
-import {PageBuilderResolverService} from "../../../../page/services/page-builder-resolver.service";
+import {PageBuilderResolverService} from "../../../../page/services/resolvers/page-builder-resolver.service";
 import {ObjectHelper} from "../../../../core/helpers/object-helper";
 import {pairwise, startWith} from "rxjs/operators";
 import {MiniAdminComponent} from "../../../../core/components/mini-admin/mini-admin.component";

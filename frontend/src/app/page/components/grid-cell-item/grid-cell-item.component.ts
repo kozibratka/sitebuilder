@@ -29,6 +29,7 @@ import {
   AnimationHiderComponent
 } from "../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
 import {CommonModule} from "@angular/common";
+import {GridCellItemService} from "../../services/grid-cell-item.service";
 
 @Component({
   selector: 'app-grid-cell-item',
@@ -49,7 +50,7 @@ export class GridCellItemComponent implements OnInit, OnChanges{
   @ViewChild('content', {read: ViewContainerRef, static: true}) pluginContainer: ViewContainerRef;
   plugin: ComponentRef<AbstractPlugin<any>>;
   showMoveIcon = false;
-  isMoveMenuHover = false;
+  private _isMoveMenuHover = false;
   @Output() deleteItem = new EventEmitter<boolean>();
 
 
@@ -60,6 +61,7 @@ export class GridCellItemComponent implements OnInit, OnChanges{
     private pluginResolverService: PluginResolverService,
     private pageBuilderComponent: PageBuilderComponent,
     private moveableModalService: MoveableModalService,
+    private gridCellItemService: GridCellItemService,
   ) {
   }
 
@@ -143,5 +145,15 @@ export class GridCellItemComponent implements OnInit, OnChanges{
       paddingBottom: (this.gridCellItem.plugin?.paddingBottom ?? 15)+'px',
       paddingTop: (this.gridCellItem.plugin?.paddingTop ?? 0)+'px'
     };
+  }
+
+
+  get isMoveMenuHover(): boolean {
+    return this._isMoveMenuHover;
+  }
+
+  set isMoveMenuHover(value: boolean) {
+    this._isMoveMenuHover = value;
+    this.gridCellItemService.isMenuHover = value;
   }
 }

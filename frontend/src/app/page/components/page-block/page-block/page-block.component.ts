@@ -40,6 +40,8 @@ import {MenuNewRowComponent} from "../../menu-new-row/menu-new-row.component";
 import {MatTooltip} from "@angular/material/tooltip";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
+import {GridCellItemService} from "../../../services/grid-cell-item.service";
+import {GridRowService} from "../../../services/grid-row.service";
 
 @Component({
   selector: 'app-palette-block',
@@ -81,6 +83,8 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     public videoService: UrlService,
     private changeDetectorRef: ChangeDetectorRef,
     private dragStatusService: DragStatusService,
+    public gridCellItemService: GridCellItemService,
+    public gridRowService: GridRowService,
   ) {
   }
 

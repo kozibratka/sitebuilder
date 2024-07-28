@@ -17,7 +17,6 @@
   content: '';
   color: transparent;
   border-bottom: 8px solid transparent;
-  cursor: row-resize;
 }
 
 :host-context(.dragged) .block:hover .block-menu{
@@ -128,8 +127,8 @@
   width: 50%;
   position: absolute;
   text-align: left;
-  bottom: 0px;
-  height: 10px;
+  bottom: 9px;
+  height: 0px;
   right: 8px;
 }
 
@@ -180,4 +179,12 @@
 
 .hider-new-row-button mat-icon {
   font-size: 15px !important;
+}
+
+.new-row-hover-up {
+  box-shadow: 0 -2px 0 red;
+}
+
+.new-row-hover-bottom {
+  box-shadow: 0 2px 0 red;
 }

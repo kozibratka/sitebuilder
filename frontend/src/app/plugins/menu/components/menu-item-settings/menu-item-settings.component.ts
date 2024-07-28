@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MenuItemInterface} from '../../interfaces/menu-item-interface';
 import {WebDetailResolverService} from '../../../../web/services/web-detail-resolver.service';
-import {PageListResolverService} from "../../../../page/services/page-list-resolver.service";
+import {PageListResolverService} from "../../../../page/services/resolvers/page-list-resolver.service";
 import {PageInterface} from "../../../../page/interfaces/page-interface";
 import {DialogComponent} from "../../../../core/components/dialog/dialog.component";
 import {CommonModule} from "@angular/common";

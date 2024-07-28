@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {PageInterface} from '../interfaces/page-interface';
-import {HttpResponseToasterService} from '../../core/services/http-response-toaster.service';
-import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
+import {PageInterface} from '../../interfaces/page-interface';
+import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
+import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 
 @Injectable({
   providedIn: 'root'

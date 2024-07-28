@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AbstractAdminSetting} from "../../../shared/abstract-class/abstract-admin-setting";
 import {ButtonConfigInterface} from "../../interfaces/button-config-interface";
 import {FormService} from "../../../../core/services/form.service";
-import {PageListResolverService} from "../../../../page/services/page-list-resolver.service";
+import {PageListResolverService} from "../../../../page/services/resolvers/page-list-resolver.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule, NgSwitch} from "@angular/common";
 import {MatButton} from "@angular/material/button";

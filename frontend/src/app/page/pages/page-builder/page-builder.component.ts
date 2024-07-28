@@ -7,7 +7,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
+import {MenuPluginResolverService} from '../../services/resolvers/menu-plugin-resolver.service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';

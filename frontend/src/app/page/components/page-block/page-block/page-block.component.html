@@ -1,18 +1,31 @@
-<div class="block" [style]="getStyles()" [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''" [style.background-color]="pageBlock.backgroundColor" [class.move-menu-hover]="isMoveMenuHover" (mouseleave)="hoverOnIndexRow=null">
+<div class="block"
+     [style]="getStyles()"
+     [style.background-image]="pageBlock.backgroundImage ? 'url(' + pageBlock.backgroundImage + ')' : ''"
+     [style.background-color]="pageBlock.backgroundColor"
+     [class.move-menu-hover]="isMoveMenuHover"
+     (mouseleave)="hoverOnIndexRow=gridRowService.newRowMenuOpened ? hoverOnIndexRow : null"
+>
   <div #video class="video-container" *ngIf="videoUrl" [style.filter]="'grayscale('+pageBlock.grayScale+'%)'" [style.opacity]="pageBlock.opacity/10">
     <div [attr.data-vbg]="videoUrl"></div>
   </div>
   <div class="block-content-rows container" [style.height.px]="!pageBlock.rows.length ? pageBlock.height : null" [nxtSortablejs]="pageBlock.rows" [config]="{group: {name: 'rows', put: ['rows']}, handle: '.move-row', onStart: onDragStart, onEnd: onDragEnd}">
     <div *ngFor="let row of pageBlock.rows; index as i; trackBy: trackByRows">
-      <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
-        <div class="new-row-up">
+      <app-animation-hider [show]="(i===hoverOnIndexRow || i===hoverOnIndexRow) && !gridCellItemService.isMenuHover" class="hider-new-row-button">
+        <div class="new-row-up" (mouseenter)="gridRowService.addRowHoverIndex=i" (mouseleave)="gridRowService.addRowHoverIndex=null">
           <fa-icon role="button" [icon]="faCirclePlus" [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i}"></fa-icon>
         </div>
       </app-animation-hider>
-      <app-grid-row (removeRow$)="removeRow(i)" class="row" [row]="row" (mouseenter)="hoverOnIndexRow=i"></app-grid-row>
-      <app-animation-hider [show]="i===hoverOnIndexRow || i===hoverOnIndexRow" class="hider-new-row-button">
+      <app-grid-row
+        (removeRow$)="removeRow(i)"
+        class="row" [row]="row"
+        (mouseenter)="hoverOnIndexRow=i"
+        [class.new-row-hover-up]="gridRowService.addRowHoverIndex == i && hoverOnIndexRow==i"
+        [class.new-row-hover-bottom]="gridRowService.addRowHoverIndex == i+1 && hoverOnIndexRow==i"
+      >
+      </app-grid-row>
+      <app-animation-hider [show]="(i===hoverOnIndexRow || i===hoverOnIndexRow) && !gridCellItemService.isMenuHover" class="hider-new-row-button">
         <div class="text-center">
-          <div class="links new-row-bottom">
+          <div class="links new-row-bottom" (mouseenter)="gridRowService.addRowHoverIndex=i+1" (mouseleave)="gridRowService.addRowHoverIndex=null">
             <fa-icon role="button" [icon]="faCirclePlus" [matMenuTriggerFor]="menu" class="new-row-input-button" [matMenuTriggerData]="{index: i+1}"></fa-icon>
           </div>
         </div>
@@ -54,6 +67,6 @@
 
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-index="index">
-    <app-menu-new-row (numColumns)="addRow($event, index)"></app-menu-new-row>
+    <app-menu-new-row (numColumns)="addRow($event, index)" [rowIndex]="index"></app-menu-new-row>
   </ng-template>
 </mat-menu>

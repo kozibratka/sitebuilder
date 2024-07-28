@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {MenuPluginResolverService} from '../../services/menu-plugin-resolver.service';
+import {MenuPluginResolverService} from '../../services/resolvers/menu-plugin-resolver.service';
 import {PageBlockInterface} from '../../interfaces/page-block-interface';
 import {Subject} from 'rxjs';
 import {UserService} from "../../../authorization/services/user.service";
