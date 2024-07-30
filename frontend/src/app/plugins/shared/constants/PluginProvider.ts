@@ -11,16 +11,14 @@ import {GalleryResolverService} from "../../gallery/services/gallery-resolver.se
 import {MapResolverService} from "../../map/services/map-resolver.service";
 
 export const PluginsProvider = [
+  {provide: AbstractPluginResolver, useClass: MenuResolverService, multi: true},
+  {provide: AbstractPluginResolver, useClass: GalleryResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: ButtonResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: CarouselResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: FormResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: ImageResolverService, multi: true},
-  {provide: AbstractPluginResolver, useClass: MenuResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: TextResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: VideoResolverService, multi: true},
-  {provide: AbstractPluginResolver, useClass: IconResolverService, multi: true},
-  {provide: AbstractPluginResolver, useClass: GalleryResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: MapResolverService, multi: true},
-  // { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
-
+  {provide: AbstractPluginResolver, useClass: IconResolverService, multi: true},
 ];

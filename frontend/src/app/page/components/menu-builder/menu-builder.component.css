@@ -20,6 +20,7 @@
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
   margin: 6px;
+  height: 55px;
 }
 
 .menu-element-item:not(.ui-draggable-dragging):hover {

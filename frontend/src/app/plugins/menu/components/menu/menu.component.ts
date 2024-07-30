@@ -3,12 +3,14 @@ import {MenuConfigInterface} from '../../interfaces/menu-config-interface';
 import {AbstractPlugin} from '../../../shared/abstract-class/abstract-plugin';
 import {ArrayHelper} from '../../../../core/helpers/array-helper';
 import {CommonModule} from "@angular/common";
+import {LinkDeactivateDirective} from "../../../../core/directives/link-deactivate.directive";
 
 @Component({
   selector: 'app-menu-simple-plugin',
   standalone: true,
   imports: [
     CommonModule,
+    LinkDeactivateDirective,
   ],
   templateUrl: 'menu.component.html',
   styleUrls: ['menu.component.css']
