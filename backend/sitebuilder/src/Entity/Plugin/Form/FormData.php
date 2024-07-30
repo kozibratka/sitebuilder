@@ -58,7 +58,7 @@ class FormData
         $this->form = $form;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }

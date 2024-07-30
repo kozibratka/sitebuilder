@@ -41,7 +41,7 @@ export class SymfonyApiClientService {
     );
   }
 
-  get<T = {}>(routeName: string, querySegmentParam?: {}, headersOptions: { [header: string]: string } = {}): Observable<HttpResponse<T>> {
+  get<T = {}>(routeName: string, querySegmentParam?: {}, headersOptions: { [header: string]: string } = {}, options = {}): Observable<HttpResponse<T>> {
     const routesFromBackend$ = this.tryGetRoutes('get');
     return routesFromBackend$.pipe(
       switchMap(routes => {
@@ -54,7 +54,8 @@ export class SymfonyApiClientService {
         // }
         return this.httpClient.get<T>(environment.backendUrl + path, {
           observe: 'response',
-          headers: this.prepareHeader(headersOptions)
+          headers: this.prepareHeader(headersOptions),
+          ...options
         }).pipe(
           finalize(this.generatePostSendCallbacks('post'))
         );

@@ -6,6 +6,7 @@ namespace App\Controller\Plugin;
 use App\Controller\BaseApiController;
 use App\Entity\Plugin\Form\FormData;
 use App\Entity\Plugin\Form\PluginForm;
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Nzo\UrlEncryptorBundle\Encryptor\Encryptor;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -48,5 +49,19 @@ class PluginFormController extends BaseApiController
         }
         $data = $pluginForm->getFormData();
         return $this->jsonResponseSimple($data);
+    }
+
+    /**
+     * @Route("/get-data-csv/{hash}", name="data_csv")
+     */
+    public function getDataCsv($hash, EntityManagerInterface $entityManager) {
+        if (!$hash) {
+            return new JsonResponse();
+        }
+        $pluginForm = $entityManager->getRepository(PluginForm::class)->findOneBy(['hashId' => $hash]);
+        if (!$pluginForm) {
+            return new JsonResponse();
+        }
+        return $this->responseCsv($pluginForm->getFormData()->map(fn(FormData $formData) => ['date' => Carbon::create($formData->getCreatedAt())->toDateTimeString(),...$formData->getData()])->toArray());
     }
 }

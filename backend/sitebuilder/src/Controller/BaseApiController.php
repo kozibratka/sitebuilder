@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseApiController extends AbstractController
 {
@@ -64,6 +65,25 @@ class BaseApiController extends AbstractController
         $jsonResponse->headers->set('Content-Type', 'application/invalid-form+json');
         $jsonResponse->setStatusCode(400);
         return $jsonResponse;
+    }
+
+    public function responseCsv(array $data, $useKeysForHeaderRow = true, $fieName = 'output')
+    {
+        if ($useKeysForHeaderRow) {
+            array_unshift($data, array_keys(reset($data)));
+        }
+
+        $file = fopen('php://memory', 'r+');
+        foreach ($data as $row) {
+            fputcsv($file, $row);
+        }
+        rewind($file);
+        $csvContent = stream_get_contents($file);
+        fclose($file);
+        $response = new Response($csvContent);
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment;filename="'.$fieName.'.csv"');
+        return $response;
     }
 
     protected function getErrorsFromForm(FormInterface $form)
