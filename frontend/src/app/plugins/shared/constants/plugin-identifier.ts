@@ -9,4 +9,5 @@ export class PluginIdentifier {
   static VIDEO_V1 = 'video_v1';
   static FORM_V1 = 'form_v1';
   static ICON_V1 = 'icon_v1';
+  static MAP_V1 = 'map_v1';
 }

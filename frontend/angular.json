@@ -37,7 +37,8 @@
               "src/assets/page.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/assets/nanogallery2/css/nanogallery2.css",
-              "src/assets/fonts.css"
+              "src/assets/fonts.css",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

@@ -35,6 +35,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *          "Button" = "App\Entity\Plugin\Button\PluginButton",
  *          "Icon" = "App\Entity\Plugin\Icon\PluginIcon",
  *          "Gallery" = "App\Entity\Plugin\Gallery\PluginGallery",
+ *          "Map" = "App\Entity\Plugin\Map\PluginMap",
  *
  *     })
  */

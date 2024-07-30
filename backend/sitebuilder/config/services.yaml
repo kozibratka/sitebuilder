@@ -79,6 +79,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'icon_v1' }
 
+    App\Service\Plugin\Map\MapService:
+        tags:
+            - { name: 'plugin_service', key: 'map_v1' }
+
     App\Service\Plugin\Carousel\CarouselService:
         tags:
             - { name: 'plugin_service', key: 'carousel_v1' }
