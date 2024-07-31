@@ -64,4 +64,20 @@ class PluginFormController extends BaseApiController
         }
         return $this->responseCsv($pluginForm->getFormData()->map(fn(FormData $formData) => ['date' => Carbon::create($formData->getCreatedAt())->toDateTimeString(),...$formData->getData()])->toArray());
     }
+
+    /**
+     * @Route("/remove-data/{hash}", name="remove_data")
+     */
+    public function removeData($hash, EntityManagerInterface $entityManager) {
+        if (!$hash) {
+            return new JsonResponse();
+        }
+        $pluginForm = $entityManager->getRepository(PluginForm::class)->findOneBy(['hashId' => $hash]);
+        if (!$pluginForm) {
+            return new JsonResponse();
+        }
+        $pluginForm->getFormData()->clear();
+        $entityManager->flush();
+        return new JsonResponse();
+    }
 }

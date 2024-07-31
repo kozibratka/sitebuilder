@@ -4,6 +4,7 @@ import {FormConfigInterface} from '../../interfaces/form-config-interface';
 import {SymfonyApiClientService} from '../../../../core/services/api/symfony-api/symfony-api-client.service';
 import {CommonModule} from "@angular/common";
 import {FileService} from "../../../../core/services/file.service";
+import {NotifierService} from "../../../../core/services/notifier.service";
 
 @Component({
   selector: 'app-form-data-admin',
@@ -15,10 +16,11 @@ import {FileService} from "../../../../core/services/file.service";
   ]
 })
 export class FormDataAdminComponent extends AbstractAdminSetting<FormConfigInterface> {
-  formData;
+  formData = [];
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
-    private fileService: FileService
+    private fileService: FileService,
+    private notifierService: NotifierService
   ) {
     super();
   }
@@ -27,7 +29,7 @@ export class FormDataAdminComponent extends AbstractAdminSetting<FormConfigInter
     if (!this.settings.hashId) {
       return;
     }
-    this.symfonyApiClientService.get('plugin_form_get_data', {hash: settings.hashId}).subscribe(value => {
+    this.symfonyApiClientService.get<any[]>('plugin_form_get_data', {hash: settings.hashId}).subscribe(value => {
       this.formData = value.body;
     });
   }
@@ -40,6 +42,13 @@ export class FormDataAdminComponent extends AbstractAdminSetting<FormConfigInter
     this.symfonyApiClientService.get<Blob>('plugin_form_data_csv', {hash: this.settings.hashId}, {}, {responseType: 'blob'}).subscribe(value => {
       var blob = new Blob([value.body]);
       this.fileService.blobToFile(blob, 'output.csv');
+    });
+  }
+
+  removeData() {
+    this.symfonyApiClientService.get<Blob>('plugin_form_remove_data', {hash: this.settings.hashId}).subscribe(value => {
+      this.formData.length = 0;
+      this.notifierService.notify('Data úspěšně smazána')
     });
   }
 }
