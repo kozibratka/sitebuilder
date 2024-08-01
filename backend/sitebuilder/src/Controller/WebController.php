@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Controller\SiteBuilder;
+namespace App\Controller;
 
-use App\Controller\BaseApiController;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\Web\WebType;
@@ -17,6 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class WebController extends BaseApiController
 {
+    /**
+     * @Route("/list-info", name="list_info")
+     */
+    public function webListInfo()
+    {
+        $user = $this->getUser();
+        $pages = $this->getDoctrine()->getRepository(Web::class)->findBy(['user' => $user], ['id' => 'desc']);
+        return $this->jsonResponseSimple($pages, group: 'base_list');
+    }
+
     /**
      * @Route("/list", name="list")
      */

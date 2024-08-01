@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Mapping\Annotation\Timestampable;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -47,6 +48,11 @@ class Web
     #[ORM\ManyToOne(targetEntity: 'App\Entity\User', inversedBy: 'webs')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?User $user = null;
+
+    #[ORM\Column(type: 'datetime')]
+    #[Timestampable(on: 'create')]
+    #[Serializer\Type("DateTime<'d-m-Y H:i:s'>")]
+    private $createdAt;
     #[ORM\OneToMany(targetEntity: PageBlock::class, mappedBy: 'web')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private Collection $pageBlocks;
@@ -241,6 +247,16 @@ class Web
     public function removeDomain(Domain $domain)
     {
         $this->domains->removeElement($domain);
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     /**

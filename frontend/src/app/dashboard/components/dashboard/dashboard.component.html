@@ -3,12 +3,47 @@
     <h3 class="card-title">Rychlý přehled</h3>
   </div> <!-- /.card-body -->
   <div class="card-body">
-    <p>You can use any font library you like with AdminLTE 3.</p>
-    <strong>Recommendations</strong>
-    <div>
-      <a href="https://fontawesome.com/">Font Awesome</a><br>
-      <a href="https://useiconic.com/open/">Iconic Icons</a><br>
-      <a href="http://ionicons.com/">Ion Icons</a><br>
+    <div class="row">
+      <div class="col-md-8">
+        <p class="ps-1">Vytvořené weby:</p>
+        <div class="example-container">
+          <div class="example-table-container">
+            @if(!isLoadingResults) {
+              <table mat-table [dataSource]="data" class="example-table">
+                <ng-container matColumnDef="web">
+                  <th mat-header-cell *matHeaderCellDef>Název</th>
+                  <td mat-cell *matCellDef="let row">{{row.name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="createdAt">
+                  <th mat-header-cell *matHeaderCellDef>Vytvořeno</th>
+                  <td mat-cell *matCellDef="let row">{{row.createdAt | date}}</td>
+                </ng-container>
+                <ng-container matColumnDef="pagesCount">
+                  <th mat-header-cell *matHeaderCellDef>Počet stránek</th>
+                  <td mat-cell *matCellDef="let row">{{row.pagesCount}}</td>
+                </ng-container>
+                <ng-container matColumnDef="public">
+                  <th mat-header-cell *matHeaderCellDef>Publikováno</th>
+                  <td mat-cell *matCellDef="let row">{{row.public}}</td>
+                </ng-container>
+                <ng-container matColumnDef="domain">
+                  <th mat-header-cell *matHeaderCellDef>Doména</th>
+                  <td mat-cell *matCellDef="let row">{{row.domain}}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <p class="ps-1 text-center">Využití disku:</p>
+          <div class="text-center" style="width:200px; margin: 0 auto;">
+            <p-chart type="pie" [data]="chartData" [options]="chartOptions" />
+          </div>
+      </div>
     </div>
   </div><!-- /.card-body -->
 </div>
