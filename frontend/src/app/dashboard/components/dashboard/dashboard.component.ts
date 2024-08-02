@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTableModule} from "@angular/material/table";
 import {DatePipe} from "@angular/common";
 import {SymfonyApiClientService} from "../../../core/services/api/symfony-api/symfony-api-client.service";
 import {ChartModule} from "primeng/chart";
+import {WebDetailResolverService} from "../../../web/services/web-detail-resolver.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,8 @@ import {ChartModule} from "primeng/chart";
     MatProgressSpinnerModule,
     MatTableModule,
     DatePipe,
-    ChartModule
+    ChartModule,
+    RouterLink
   ]
 })
 export class DashboardComponent implements OnInit {
@@ -29,7 +31,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private title: Title,
     private route: ActivatedRoute,
-    private symfonyApiClientService: SymfonyApiClientService
+    private symfonyApiClientService: SymfonyApiClientService,
+    public webDetailResolverService: WebDetailResolverService,
   ) {
 
   }
@@ -44,29 +47,31 @@ export class DashboardComponent implements OnInit {
   }
 
   initDiskChart() {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    this.chartData = {
-      labels: ['Volné', 'Využito'],
-      datasets: [
-        {
-          data: [540, 325],
-          backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
-          hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
-        }
-      ]
-    };
+    this.symfonyApiClientService.get<number>('user_storage_size').subscribe(value => {
+      const documentStyle = getComputedStyle(document.documentElement);
+      const textColor = documentStyle.getPropertyValue('--text-color');
+      this.chartData = {
+        labels: ['Využité místo', 'Volné místo'],
+        datasets: [
+          {
+            data: [value.body, 5-value.body],
+            backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
+            hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
+          }
+        ]
+      };
 
-    this.chartOptions = {
-      plugins: {
-        legend: {
-          labels: {
-            usePointStyle: true,
-            color: textColor
+      this.chartOptions = {
+        plugins: {
+          legend: {
+            labels: {
+              usePointStyle: true,
+              color: textColor
+            }
           }
         }
-      }
-    };
+      };
+    });
   }
 
 }

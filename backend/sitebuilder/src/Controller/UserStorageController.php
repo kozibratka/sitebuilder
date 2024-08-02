@@ -79,4 +79,14 @@ class UserStorageController extends BaseApiController
 
         return $this->jsonResponseSimple();
     }
+
+
+    /**
+     * @Route("/size", name="size", methods={"GET"})
+     */
+    public function size(Request $request, UserStorageService $storageService) {
+        $size = $storageService->getSize($this->getUser());
+
+        return $this->jsonResponseSimple($size);
+    }
 }

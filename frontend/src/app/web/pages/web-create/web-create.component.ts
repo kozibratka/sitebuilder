@@ -5,12 +5,14 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Title} from '@angular/platform-browser';
 import {UserService} from "../../../authorization/services/user.service";
-import {WebDetailResolverService} from "../../services/web-detail-resolver.service";
 import {ApiFormService} from "../../../core/services/form/api-form.service";
 import {GlobalFormErrorComponent} from "../../../core/components/global-form-error/global-form-error.component";
 import {InputFormErrorDirective} from "../../../core/directives/form-error/input-form-error/input-form-error.directive";
 import {MatAnchor, MatButton} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {MatTooltip} from "@angular/material/tooltip";
+import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-web-create',
@@ -24,15 +26,19 @@ import {CommonModule} from "@angular/common";
     RouterLink,
     MatButton,
     MatAnchor,
+    FaIconComponent,
+    MatTooltip,
   ],
   styleUrls: ['./web-create.component.css']
 })
 export class WebCreateComponent implements OnInit {
 
   createWebForm: FormGroup;
+  protected readonly faPlus = faPlus;
+  protected readonly faMinus = faMinus;
 
   constructor(
-    private webFormService: WebFormService,
+    public webFormService: WebFormService,
     private router: Router,
     public route: ActivatedRoute,
     private notifierService: NotifierService,
@@ -44,24 +50,33 @@ export class WebCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Úprava webu');
-    this.updateWeb();
+    this.createForm();
   }
 
-  updateWeb(): void {
+  createForm(): void {
     const webDetail = this.route.snapshot.data['web'];
-    this.createWebForm = this.webFormService.createForm(this.userService.hasRole('ROLE_ADMIN'));
+    this.createWebForm = this.webFormService.createForm(this.userService.hasRole('ROLE_ADMIN'), webDetail);
     this.createWebForm.patchValue(webDetail);
-    this.createWebForm.statusChanges.subscribe(status => {
-      if (status === 'VALID') {
-        this.apiFormService.send('web_update', this.createWebForm, {id: webDetail.id}).subscribe(response => {
-          this.notifierService.notify('Web byl úspěšně upraven');
-          this.router.navigate(['list'], { relativeTo: this.route.parent });
-        });
-      }
-    });
+  }
+
+  onSubmit() {
+    const webDetail = this.route.snapshot.data['web'];
+    if (this.createWebForm.valid) {
+      this.apiFormService.send('web_update', this.createWebForm, {id: webDetail.id}).subscribe(response => {
+        this.notifierService.notify('Web byl úspěšně upraven');
+        this.router.navigate(['list'], { relativeTo: this.route.parent });
+      });
+    }
   }
 
   get domains() {
     return this.createWebForm.get('domains') as FormArray;
+  }
+
+  refreshWebInput(event: Event, index: any) {
+    let domainName = (event.target as HTMLInputElement).value;
+    domainName = domainName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    domainName = domainName.replaceAll(' ', '-').toLowerCase();
+    (this.createWebForm.get('domains') as FormArray).at(index).patchValue({name: domainName}, {emitEvent: false});
   }
 }

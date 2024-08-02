@@ -13,7 +13,7 @@ import {Helper} from "../../core/helpers/helper";
 export class WebDetailResolverService implements Resolve<WebInterface> {
 
   selectedId = 0;
-  webDetail: WebInterface = {plugins: [], id: 0, name: '', pages: []}; // persist reference
+  webDetail: WebInterface = {plugins: [], id: 0, name: '', pages: [], domains: []}; // persist reference
   resolver$:Observable<WebInterface>;
 
   constructor(

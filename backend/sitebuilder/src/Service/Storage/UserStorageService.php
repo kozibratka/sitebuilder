@@ -2,6 +2,7 @@
 
 namespace App\Service\Storage;
 
+use _PHPStan_adbc35a1c\Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use App\Entity\User;
 use App\Helper\Helper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -142,11 +143,23 @@ class UserStorageService
     }
 
     public function getRootServerStorage(UserInterface $user) {
-        $rootPath =  $this->getBasePublicStoragePath().'/storage/';
-        return $rootPath.'user/'.$user->getId();
+        $rootPath =  $this->getBasePublicStoragePath().'/storage';
+        return $rootPath.'/user/'.$user->getId();
     }
 
     public function getBasePublicStoragePath() {
-        return $this->parameterBag->get('kernel.project_dir').'/public/';
+        return $this->parameterBag->get('kernel.project_dir').'/public';
+    }
+
+    public function getSize(UserInterface $user)
+    {
+        $path = $this->getUserServerRootStorage($user);
+        $bytestotal = 0;
+        if($path!==false && $path!='' && file_exists($path)){
+            foreach(new \RecursiveIteratorIterator(new RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS)) as $object){
+                $bytestotal += $object->getSize();
+            }
+        }
+        return $bytestotal/pow(10, 9);
     }
 }

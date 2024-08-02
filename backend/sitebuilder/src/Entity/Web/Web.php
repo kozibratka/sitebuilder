@@ -85,6 +85,11 @@ class Web
     private string $imagePath;
     /** @var Collection|ArrayCollection  */
     #[ORM\OneToMany(targetEntity: Domain::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'web')]
+    #[Assert\Count(
+        min: 0,
+        max: 5,
+        maxMessage: 'You cannot specify more than {{limit}} domains',
+    )]
     /**
      * @Assert\Valid()
      */
@@ -247,6 +252,7 @@ class Web
     public function removeDomain(Domain $domain)
     {
         $this->domains->removeElement($domain);
+        dd($this->domains);
     }
 
     public function getCreatedAt()

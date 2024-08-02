@@ -21,6 +21,7 @@ class Domain
 
     #[ORM\Column(type: 'string', nullable: true)]
     #[Assert\Hostname(message: 'Invalid domain')]
+    #[Assert\NotBlank()]
     private ?string $name = '';
     #[ORM\ManyToOne(targetEntity: Web::class, inversedBy: 'domains')]
     private Web $web;
@@ -53,5 +54,10 @@ class Domain
     public function setWeb(Web $web): void
     {
         $this->web = $web;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

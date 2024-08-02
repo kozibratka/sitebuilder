@@ -14,7 +14,7 @@ import {Title} from '@angular/platform-browser';
 import {
   MatTableModule
 } from "@angular/material/table";
-import {MatButton} from "@angular/material/button";
+import {MatAnchor, MatButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
 import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
@@ -29,7 +29,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatButton,
     MatTooltip,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    MatAnchor
   ],
   styleUrls: ['./web-list.component.css']
 })

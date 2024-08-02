@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Page\AbstractPage;
+use App\Entity\Page\Page;
+use App\Entity\Page\PublicPage;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\Web\WebType;
@@ -21,9 +24,21 @@ class WebController extends BaseApiController
      */
     public function webListInfo()
     {
+        $result = [];
         $user = $this->getUser();
-        $pages = $this->getDoctrine()->getRepository(Web::class)->findBy(['user' => $user], ['id' => 'desc']);
-        return $this->jsonResponseSimple($pages, group: 'base_list');
+        $webs = $this->getDoctrine()->getRepository(Web::class)->findBy(['user' => $user], ['id' => 'desc']);
+        foreach ($webs as $web) {
+            $result[] = [
+                'name' => $web->getName(),
+                'createdAt' => Carbon::create($web->getCreatedAt())->toDateTimeString(),
+                'pagesCount' => $web->getPages()->filter(fn(AbstractPage $page) => $page instanceof Page)->count(),
+                'public' => $web->getPages()->filter(fn(AbstractPage $page) => $page instanceof PublicPage)->count(),
+                'domain' => implode(', ', $web->getDomains()->toArray()),
+            ];
+        }
+
+
+        return $this->jsonResponseSimple($result);
     }
 
     /**

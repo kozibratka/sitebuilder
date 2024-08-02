@@ -19,7 +19,7 @@
       <textarea appFormError type="text" class="form-control" formControlName="description" id="description"></textarea>
       <div class="container-fluid mt-3">
         <div class="d-flex justify-content-end">
-          <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button>Zpět na seznam stránek</a>
+          <a [routerLink]="route.snapshot.url[0].path === 'create' ? ['../list'] : ['../../list']" [replaceUrl]="true" mat-button><<< Zpět na seznam stránek</a>
           <button type="submit" mat-raised-button color="primary" class="ml-2"><i class="material-icons">add</i>Uložit
           </button>
         </div>
