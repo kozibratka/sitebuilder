@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {Observable, of, Subject, throwError} from 'rxjs';
+import {endWith, Observable, of, Subject, takeWhile, throwError} from 'rxjs';
 import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import Routing from '../../../external-library/router';
 import {TokenInterface} from '../interfaces/token-interface';
 import {EventEmitterService} from '../../event-emitter-service';
 import {Event} from './tools/constants/event';
 import {environment} from '../../../../../environments/environment';
+import {HttpResponseToasterService} from "../../http-response-toaster.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class SymfonyApiClientService {
 
   constructor(
     private httpClient: HttpClient,
-    private eventEmitterService: EventEmitterService
+    private eventEmitterService: EventEmitterService,
+    private httpResponseToasterService: HttpResponseToasterService,
   ) {
   }
 
@@ -79,9 +81,15 @@ export class SymfonyApiClientService {
           ...requestOptions,
           headers: this.prepareHeader(headersOptions)
         }).pipe(
+          endWith(null),
+          catchError((err) => {
+            this.httpResponseToasterService.showError(err);
+            return throwError(err)
+          }),
           finalize(this.generatePostSendCallbacks('post'))
         );
-      })
+      }),
+      takeWhile((x) => x != null)
     );
   }
 

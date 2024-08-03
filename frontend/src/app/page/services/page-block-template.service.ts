@@ -61,7 +61,6 @@ export class PageBlockTemplateService {
             this.refreshMenu();
             this.notifierService.notify('Blok byl úspěšně přidán do šablon');
           },
-          error: err => this.httpResponseToasterService.showError(err)
         });
       };
       if (value.image) {
@@ -91,7 +90,6 @@ export class PageBlockTemplateService {
             this.refreshMenu(value.body);
             this.notifierService.notify('Blok byl úspěšně přidán do šablon');
           },
-          error: err => this.httpResponseToasterService.showError(err)
         });
       };
       if (value.image) {
@@ -130,7 +128,6 @@ export class PageBlockTemplateService {
           this.refreshMenu(resp.body);
           this.notifierService.notify('Šablona Bloku byla úspěšně smazána');
         },
-        error: err => this.httpResponseToasterService.showError(err)
       });
     })
   }

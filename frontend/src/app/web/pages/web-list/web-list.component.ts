@@ -74,7 +74,6 @@ export class WebListComponent implements OnInit {
           this.dataToTable = [...this.webListGuard.webList];
         });
         },
-      error: err => this.httpResponseToasterService.showError(err)
     });
   }
 

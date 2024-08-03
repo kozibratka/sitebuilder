@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
+import {faFile, faFileImage, faFilePdf, faFileWord, faFolder, faHouseCrack} from "@fortawesome/free-solid-svg-icons";
+import {faFileExcel} from "@fortawesome/free-solid-svg-icons/faFileExcel";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-icon-resolver',
@@ -7,6 +10,7 @@ import {CommonModule} from "@angular/common";
   templateUrl: './icon-resolver.component.html',
   imports: [
     CommonModule,
+    FaIconComponent,
     // FileIconsModule
   ],
   styleUrls: ['./icon-resolver.component.css']
@@ -22,11 +26,12 @@ export class IconResolverComponent implements OnInit {
   cla = 'classic';
 
   iconList = [ // array of icon class list based on type
-    { type: "docx", icon: "fas fa-file-word" },
-    { type: "xlsx", icon: "fas fa-file-excel" },
-    { type: "pdf", icon: "fas fa-file-pdf" },
-    { type: "jpg", icon: "fas fa-file-image" },
-    { type: "folder", icon: "fa fa-folder" }
+    { type: "docx", icon: faFileWord },
+    { type: "xlsx", icon: faFileExcel },
+    { type: "xls", icon: faFileExcel },
+    { type: "pdf", icon: faFilePdf },
+    { type: "jpg", icon: faFileImage },
+    { type: "folder", icon: faFolder }
   ];
 
   constructor() { }
@@ -42,17 +47,18 @@ export class IconResolverComponent implements OnInit {
 
   getFileExtension(extension) { // this will give you icon class name
     let ext = extension
-    let obj = this.iconList.filter(row => {
+    let obj = this.iconList.find(row => {
       if (row.type === ext) {
         return true;
       }
       return false;
     });
-    if (obj.length > 0) {
-      return obj[0].icon;
+    if (obj) {
+      return obj.icon;
     } else {
-      return "";
+      return faFile;
     }
   }
 
+  protected readonly faHouseCrack = faHouseCrack;
 }

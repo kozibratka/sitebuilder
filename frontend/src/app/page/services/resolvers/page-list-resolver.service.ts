@@ -26,7 +26,6 @@ export class PageListResolverService implements Resolve<PageInterface[]> {
   getPageList() {
     const webId = this.webDetailResolverService.selectedId;
     return this.symfonyApiClientService.get<PageInterface[]>('page_list', {id: webId}).pipe(catchError(err => {
-      this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
       this.pages = httpResponse.body;

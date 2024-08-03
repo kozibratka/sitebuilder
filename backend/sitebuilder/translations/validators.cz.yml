@@ -3,4 +3,5 @@ This value is not a valid email address.: Tato hodnota není validní emailová 
 This value is too short. It should have {{ limit }} character or more.|This value is too short. It should have {{ limit }} characters or more.: Příliš krátké. Zadejte alespoň {{ limit }} znaků.
 This value should not be blank.: Tato hodnota nesmí být prázdná
 Invalid domain: Nesprávný tvar domény
-You cannot specify more than {{limit}} domains: Nemůžete vytvořit více než {{ limit }} domén
+You cannot specify more than {{limit}}: Nemůžete vytvořit více než {{ limit }} záznamů
+Duplicate value: Duplicitní záznam

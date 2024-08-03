@@ -2,6 +2,10 @@ app-directory-mini-navigation {
   vertical-align: sub;
 }
 
+dts-select-container {
+  height: 99%;
+}
+
 .card-box {
   padding: 20px;
   border-radius: 3px;

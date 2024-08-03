@@ -68,7 +68,6 @@ export class CreatePluginComponent implements OnInit {
               this.notifierService.notify('Plugin byl úspěšně vytvořen');
               this.router.navigate(['update', response.body.id], { relativeTo: this.route.parent });
             },
-            error: err => this.httpResponseToasterService.showError(err)
           });
         }
       });
@@ -87,7 +86,6 @@ export class CreatePluginComponent implements OnInit {
             this.notifierService.notify('Plugin byl úspěšně upraven');
             this.router.navigate(['list-created', this.pluginResolver.identifier], { relativeTo: this.route.parent });
           },
-          error: err => this.httpResponseToasterService.showError(err)
         });
       }
     });

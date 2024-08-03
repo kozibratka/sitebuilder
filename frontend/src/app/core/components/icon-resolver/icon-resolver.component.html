@@ -3,5 +3,6 @@
 </ng-container>
 
 <ng-template #iconBLock>
-  <i class="fa-3 {{getFileExtension(fileExtension)}}" style="color:#EAC452;" aria-hidden="true"></i>
+<!--  <i class="fa-3 {{getFileExtension(fileExtension)}}" aria-hidden="true"></i>-->
+  <fa-icon style="color:#EAC452;" [icon]="getFileExtension(fileExtension)" class="nav-icon"></fa-icon>
 </ng-template>

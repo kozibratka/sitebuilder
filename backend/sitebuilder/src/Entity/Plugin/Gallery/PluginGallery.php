@@ -2,10 +2,12 @@
 
 namespace App\Entity\Plugin\Gallery;
 
+use App\Constant\Limit;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\Plugin\Carousel\CarouselImage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'plugin_gallery')]
@@ -14,6 +16,10 @@ class PluginGallery extends BasePlugin
     #[ORM\Column(type: 'integer')]
     private int $thumbnailHeight = 0;
 
+    #[Assert\Count(
+        max: Limit::PLUGIN_ITEMS,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
     #[ORM\OneToMany(targetEntity: GalleryImage::class, cascade: ['persist'], orphanRemoval: true, mappedBy: 'gallery')]
     private $images;
 

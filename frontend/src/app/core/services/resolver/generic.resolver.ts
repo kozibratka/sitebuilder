@@ -32,7 +32,6 @@ export class GenericResolver implements Resolve<{}[]> {
 
     return this.symfonyApiClientService.get<{}[]>(routeName, quryParam)
       .pipe(catchError(err => {
-        this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;

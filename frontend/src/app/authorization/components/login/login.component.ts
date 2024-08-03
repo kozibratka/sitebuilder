@@ -72,8 +72,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       error: (err: HttpErrorResponse) => {
         if (err.status === 401) {
           this.httpResponseToasterService.showError('Nepodařilo se přihlásit. Ujistěte se, že jste zadali správné přihlašovací údaje.');
-        } else {
-          this.httpResponseToasterService.showError(err);
         }
       }
     });

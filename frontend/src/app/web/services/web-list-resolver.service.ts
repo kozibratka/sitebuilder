@@ -70,7 +70,6 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
         }
       }),
       catchError((error) => {
-        this.httpResponseToasterService.showError(error);
         return throwError(error);
       }),
     );

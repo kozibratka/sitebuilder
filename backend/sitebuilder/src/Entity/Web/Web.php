@@ -4,6 +4,7 @@
 namespace App\Entity\Web;
 
 
+use App\Constant\Limit;
 use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
@@ -55,16 +56,28 @@ class Web
     private $createdAt;
     #[ORM\OneToMany(targetEntity: PageBlock::class, mappedBy: 'web')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[Assert\Count(
+        max: Limit::PAGE_BLOCKS,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
     private Collection $pageBlocks;
     /**
      * @Assert\Valid()
      */
+    #[Assert\Count(
+        max: Limit::PAGES,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
     #[ORM\OneToMany(targetEntity: AbstractPage::class, mappedBy: 'web', cascade: ['remove', 'persist'], orphanRemoval: true)]
     private Collection $pages;
 
     /**
      * @Serializer\Exclude()
      */
+    #[Assert\Count(
+        max: Limit::PLUGINS,
+        maxMessage: 'You cannot specify more than {{limit}} domains',
+    )]
     #[ORM\OneToMany(targetEntity: BasePlugin::class, mappedBy: 'web', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $plugins;
     /**
@@ -86,9 +99,8 @@ class Web
     /** @var Collection|ArrayCollection  */
     #[ORM\OneToMany(targetEntity: Domain::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'web')]
     #[Assert\Count(
-        min: 0,
-        max: 5,
-        maxMessage: 'You cannot specify more than {{limit}} domains',
+        max: Limit::DOMAINS,
+        maxMessage: 'You cannot specify more than {{limit}}',
     )]
     /**
      * @Assert\Valid()
@@ -252,7 +264,6 @@ class Web
     public function removeDomain(Domain $domain)
     {
         $this->domains->removeElement($domain);
-        dd($this->domains);
     }
 
     public function getCreatedAt()

@@ -66,7 +66,6 @@ export class PageCreateComponent implements OnInit {
               this.notifierService.notify('Stránka byla úspěšně vytvořena');
               this.router.navigate(['list'], {relativeTo: this.route.parent});
             },
-            error: err => this.httpResponseToasterService.showError(err)
           }
         );
       }
@@ -85,7 +84,6 @@ export class PageCreateComponent implements OnInit {
               this.notifierService.notify('Stránka byla úspěšně upravena');
               this.router.navigate(['list'], {relativeTo: this.route.parent});
             },
-            error: err => this.httpResponseToasterService.showError(err)
           }
         );
       }

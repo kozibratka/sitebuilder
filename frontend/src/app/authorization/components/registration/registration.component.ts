@@ -39,7 +39,6 @@ export class RegistrationComponent implements OnInit {
           this.loginClientService.tryLogin(this.registrationForm.get('email')?.value,
             this.registrationForm.get('password')?.get('first')?.value).subscribe({
             next: () => this.router.navigate(['/admin', httpResponse.body]),
-            error: err => this.httpResponseToasterService.showError(err)
           });
         });
       }

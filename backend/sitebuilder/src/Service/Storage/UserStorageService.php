@@ -3,7 +3,9 @@
 namespace App\Service\Storage;
 
 use _PHPStan_adbc35a1c\Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
+use App\Constant\Limit;
 use App\Entity\User;
+use App\Exception\CustomErrorMessageException;
 use App\Helper\Helper;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -59,7 +61,12 @@ class UserStorageService
         if (!Helper::validFileName($name)) {
             throw new \Exception($this->translator->trans('Invalid directory name'));
         }
+        $deepLevel = count(explode('/', $path));
+        if ($deepLevel > Limit::DIR_MAX_DEEP) {
+            throw new CustomErrorMessageException('Překročen limit vnořených adresářů');
+        }
         $path = $this->getValidUserServerPath($path, $user);
+        $this->checkCountFiles($path);
         $filesystem = new Filesystem();
         $filesystem->mkdir($path.'/'.$name);
     }
@@ -73,10 +80,17 @@ class UserStorageService
     }
 
     public function uploadFile(UploadedFile $file, string $path, UserInterface $user) {
+        $size = $this->getSize($user);
+        $fileSize = UserStorageService::bytesToGigabyte($file->getSize());
+        $size += $fileSize;
+        if ($size > Limit::DISK) {
+            throw new CustomErrorMessageException('Některé soubory se nepodařilo nahrát kvůli překročení limitu místa na disku');
+        }
         $realPath = $this->getValidUserServerPath($path, $user);
         if (!$this->filesystem->exists($realPath)) {
             $this->filesystem->mkdir($realPath);
         }
+        $this->checkCountFiles($realPath);
         $newFile = $file->move($realPath, $file->getClientOriginalName());
         return $this->getPublicPathFile($newFile->getFileInfo());
     }
@@ -160,6 +174,18 @@ class UserStorageService
                 $bytestotal += $object->getSize();
             }
         }
-        return $bytestotal/pow(10, 9);
+        return self::bytesToGigabyte($bytestotal);
+    }
+
+    public function checkCountFiles($path)
+    {
+        $finder = new Finder();
+        if ($finder->files()->in($path)->count() > Limit::COUNT_FILES_IN_DIR) {
+            throw new CustomErrorMessageException('Překročen limit počtu souborů v adresáři');
+        }
+    }
+
+    public static function bytesToGigabyte($bytes) {
+        return $bytes/pow(10, 9);
     }
 }

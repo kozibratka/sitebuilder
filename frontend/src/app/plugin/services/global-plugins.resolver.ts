@@ -27,7 +27,6 @@ export class GlobalPluginsResolver implements Resolve<BasePlugConfigInterface[]>
     const selectedWeb = this.webDetailResolverService.selectedId;
     return this.symfonyApiClientService.get<BasePlugConfigInterface[]>('plugin_global_list', {id: selectedWeb})
       .pipe(catchError(err => {
-        this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;

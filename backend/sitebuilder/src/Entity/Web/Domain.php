@@ -2,16 +2,14 @@
 
 namespace App\Entity\Web;
 
+use App\Security\Validator\UniqueCollectionGlobal;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'domain')]
 #[ORM\Index(columns: ['name'], name: 'name')]
-#[UniqueEntity(
-    fields: ['name']
-)]
+#[UniqueCollectionGlobal(fieldName: 'name', parentName: 'web', errorPath: 'name')]
 class Domain
 {
     #[ORM\Id]

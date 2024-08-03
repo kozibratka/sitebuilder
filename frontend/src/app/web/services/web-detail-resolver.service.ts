@@ -29,7 +29,6 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
       return null;
     }
     this.resolver$ = this.symfonyApiClientService.get<WebInterface>('web_read', {id: this.selectedId}).pipe(catchError(err => {
-      this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
       Helper.objectResetAssign(this.webDetail, httpResponse.body);

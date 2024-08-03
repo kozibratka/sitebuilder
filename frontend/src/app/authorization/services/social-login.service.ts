@@ -32,9 +32,6 @@ export class SocialLoginService {
             this.symfonyApiClient.token = value.body.token;
             this.router.navigate(['/']);
           },
-          error: err => {
-            this.httpResponseToasterService.showError(err);
-          }
         }
       );
     });
@@ -54,9 +51,6 @@ export class SocialLoginService {
             this.symfonyApiClient.token = value.body.token;
             this.router.navigate(['/']);
           },
-          error: err => {
-            this.httpResponseToasterService.showError(err);
-          }
         }
       );
     });

@@ -3,6 +3,7 @@
 
 namespace App\Entity\SiteBuilder;
 
+use App\Constant\Limit;
 use App\Entity\Page\AbstractPage;
 use App\Entity\Web\Web;
 use App\Interface\EntityFileProviderInterface;
@@ -47,6 +48,10 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\OneToMany(targetEntity: 'PaletteGridItem', mappedBy: 'pageBlock', cascade: ['persist'], orphanRemoval: true)]
     private Collection $paletteGridItems;
     #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[Assert\Count(
+        max: Limit::PAGE_ROWS,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
     private Collection $rows;
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
     #[Assert\Expression(

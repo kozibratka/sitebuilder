@@ -72,7 +72,6 @@ export class ListCreatedComponent implements OnInit {
         this.notifierService.notify('Váš vytvořený plugin byl úspěšně smazán');
         this.router.navigate(['./'], { relativeTo: this.route });
       },
-      error: err => this.httpResponseToasterService.showError(err)
     });
   }
 

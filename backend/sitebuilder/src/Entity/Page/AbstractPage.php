@@ -2,6 +2,7 @@
 
 namespace App\Entity\Page;
 
+use App\Constant\Limit;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\Web\Web;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -42,6 +43,10 @@ abstract class AbstractPage
     /**
      * @Assert\Valid()
      */
+    #[Assert\Count(
+        max: Limit::PAGE_BLOCKS,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
     #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', mappedBy: 'page', cascade: ['persist'], orphanRemoval: true)]
     protected Collection $pageBlocks;
 

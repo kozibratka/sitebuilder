@@ -43,7 +43,6 @@ export class RouteRoleGuardService implements CanActivate {
         return false;
       }),
       catchError((error) => {
-        this.httpResponseToasterService.showError(error);
         return of(this.router.parseUrl('/authorization/login'));
       }),
     );

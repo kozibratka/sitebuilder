@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Constant\Limit;
 use App\Entity\Page\AbstractPage;
 use App\Entity\Page\Page;
 use App\Entity\Page\PublicPage;
+use App\Entity\User;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\Web\WebType;
@@ -64,6 +66,11 @@ class WebController extends BaseApiController
     #[Route('/create/{id}', name: 'create', defaults: ['id' => null])]
     public function create(Request $request, ?Web $web = null)
     {
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user->getWebs()->count() == Limit::WEBS) {
+            throw new CustomErrorMessageException('Překročen limit počtu webů');
+        }
         $validationWeb = new Web();
         $validationWeb->setUser($this->getUser());
         $form = $this->createForm(WebType::class, $validationWeb, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);

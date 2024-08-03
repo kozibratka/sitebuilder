@@ -59,7 +59,6 @@ export class UpdatePluginComponent implements OnInit {
       next: () => {
         this.notifierService.notify('Plugin byl úspěšně upraven');
       },
-      error: err => this.httpResponseToasterService.showError(err)
     });
   }
 

@@ -24,7 +24,6 @@ export class PageBuilderResolverService implements Resolve<PageInterface> {
       id: route.paramMap.get('pageId'),
       withGlobalPlugins
     }).pipe(catchError(err => {
-      this.httpResponseToasterService.showError(err);
       return throwError(err);
     }), map(httpResponse => {
       this.page = httpResponse.body;

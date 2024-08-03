@@ -22,8 +22,6 @@ export class ApiFormService {
       (err: HttpErrorResponse) => {
         if (err.status === 400 && err.headers.get('Content-Type') === 'application/invalid-form+json') {
           this.supplyValidationErrors(err.error, form);
-        } else {
-          this.httpResponseToasterService.showError(err)
         }
       }
     ));

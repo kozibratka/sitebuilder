@@ -65,7 +65,6 @@ export class PageListComponent implements OnInit {
         this.notifierService.notify('Stránka byla úspěšně smazána');
         this.router.navigate(['./'], { relativeTo: this.route });
       },
-      error: err => this.httpResponseToasterService.showError(err)
     });
   }
 

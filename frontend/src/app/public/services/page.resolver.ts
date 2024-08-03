@@ -32,14 +32,12 @@ export class PageResolver implements Resolve<PageInterface> {
       }
       webId = localStorage.getItem('webId');
       return this.symfonyApiClientService.get<PageInterface>('page_get_preview', {id: webId, url}).pipe(catchError(err => {
-        this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;
       }));
     } else {  // is public
       return this.symfonyApiClientService.get<PageInterface>('page_get_public', {hostname: location.hostname, url}).pipe(catchError(err => {
-        this.httpResponseToasterService.showError(err);
         return throwError(err);
       }), map(httpResponse => {
         return httpResponse.body;

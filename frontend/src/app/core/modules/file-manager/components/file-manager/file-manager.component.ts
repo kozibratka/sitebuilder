@@ -202,8 +202,6 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
             this.notifierService.notify('Adresář byl úspěšně vytvořen');
             this.reloadAreas();
           },
-          error: err => {
-             this.httpResponseToasterService.showError(err); }
         });
       }
     });
@@ -241,7 +239,11 @@ export class FileManagerComponent implements OnInit, AfterViewChecked, AfterView
       reportProgress: true,
       observe: 'events'
     } ).pipe(
-      finalize(() => {firstRun = false; this.snackDismiss(snack); this.reloadContent(); })
+      finalize(() => {
+        firstRun = false;
+        this.snackDismiss(snack);
+        this.reloadContent();
+      })
     );
     upload$.subscribe((value: any) => {
       if (firstRun) {

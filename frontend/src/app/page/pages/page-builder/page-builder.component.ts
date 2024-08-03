@@ -107,7 +107,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
         this.webDetailResolverService.refresh();
         this.notifierService.notify('Úpravy byly úspěšně uloženy');
       },
-      error: err => this.httpResponseToasterService.showError(err)
     });
   }
 
@@ -119,7 +118,6 @@ export class PageBuilderComponent implements OnInit, AfterViewChecked {
         const redirectUrl = this.domainInfoService.getPreviewHostname() + `/${this.pageDetail.url}?webId=${this.webDetailResolverService.selectedId}`;
         window.open('http://' + redirectUrl, '_blank');
       },
-      error: err => this.httpResponseToasterService.showError(err)
     });
   }
 

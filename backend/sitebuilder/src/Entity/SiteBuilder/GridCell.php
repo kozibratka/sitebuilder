@@ -2,9 +2,11 @@
 
 namespace App\Entity\SiteBuilder;
 
+use App\Constant\Limit;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'grid_cell')]
@@ -19,6 +21,10 @@ class GridCell
     #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridRow $row;
+    #[Assert\Count(
+        max: Limit::CELL_ITEMS,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell', cascade: ['persist'])]
     #[ORM\OrderBy(["itemOrder" => "ASC"])]
     private Collection $items;
