@@ -58,7 +58,12 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
           if (!this.webList.length) {
             return this.router.parseUrl('/admin/0/web/select-template');
           } else {
-            return this.router.createUrlTree(['/admin', this.webList[0].id]);
+            let webId = this.webList[0].id;
+            let lastWebSwitched = parseInt(localStorage.getItem('web'));
+            if (lastWebSwitched) {
+              webId = this.webList.find(value1 => value1.id == lastWebSwitched)?.id ?? webId;
+            }
+            return this.router.createUrlTree(['/admin', webId]);
           }
         }
         if (this.webList.length) {

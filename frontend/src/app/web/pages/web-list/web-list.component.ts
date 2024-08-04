@@ -78,6 +78,7 @@ export class WebListComponent implements OnInit {
   }
 
   switchToWeb(id: number): void {
+    localStorage.setItem('web', id.toString());
     this.layoutComponent.refreshSelectedWebSelectbox();
     this.router.navigate(['/admin', id]);
   }

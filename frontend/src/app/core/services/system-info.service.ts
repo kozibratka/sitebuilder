@@ -9,29 +9,15 @@ export class SystemInfoService {
 
   constructor() { }
 
-  isLocalhost(): boolean {
-    return window.location.hostname === 'localhost';
-  }
-
   isPreviewHostname(): boolean {
-    return this.getLocalhostWithPortForPreview() === location.host ||
-      environment.hostname.replace('www', environment.previewSubdomain) === window.location.hostname;
+    let hostName = window.location.hostname.split('.');
+    if (hostName.length >= 2) {
+      return hostName[0] == environment.previewSubdomain && hostName[1] == environment.hostname.split('.')[0];
+    }
+    return false;
   }
 
   getPreviewHostname(): string {
-    return this.isLocalhost()
-      ? this.getLocalhostWithPortForPreview() : environment.hostname.replace('www', environment.previewSubdomain);
-  }
-
-  getLocalhostWithPortForPreview(): string {
-    return 'localhost:' + environment.localhostPreviewPort;
-  }
-
-  isSitebuilderDomain(): boolean {
-    return this.isLocalhost() || environment.hostname === window.location.hostname;
-  }
-
-  isAdminRoute(): boolean {
-    return this.isSitebuilderDomain() && window.location.pathname.startsWith('admin');
+    return environment.previewSubdomain+'.'+environment.hostname;
   }
 }
