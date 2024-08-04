@@ -16,14 +16,13 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (!$options['pageBuilder']) {
-            $builder
-                ->add('name',null, ['empty_data' => ''])
-                ->add('url', null, ['empty_data' => ''])
-                ->add('description')
-                ->add('homePage')
-            ;
-        } else {
+        $builder
+            ->add('name',null, ['empty_data' => ''])
+            ->add('url', null, ['empty_data' => ''])
+            ->add('description')
+            ->add('homePage')
+        ;
+        if ($options['pageBuilder']) {
             $builder
                 ->add(
                     'pageBlocks',
