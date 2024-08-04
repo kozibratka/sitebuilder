@@ -4,7 +4,7 @@
        [routerLinkActiveOptions]="{exact: true}" class="nav-link">
       <fa-icon [icon]="faHouseCrack" class="nav-icon"></fa-icon>
       <p>
-        Úvodní stránka
+        Seznam webů
       </p>
     </a>
   </li>
@@ -18,7 +18,7 @@
 <!--  </li>-->
   <li class="nav-item">
     <a routerLink="page/list" routerLinkActive="active" class="nav-link">
-      <fa-icon [icon]="faGlobe" class="nav-icon"></fa-icon>
+      <fa-icon [icon]="faFileCode" class="nav-icon"></fa-icon>
       <p>
         Moje stránky
       </p>
@@ -37,6 +37,14 @@
       <fa-icon [icon]="faFiles" class="nav-icon"></fa-icon>
       <p>
         Soubory
+      </p>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a routerLink="web/list" routerLinkActive="active" class="nav-link" (click)="title.setTitle('Správa webů')">
+      <fa-icon [icon]="faGlobe" class="nav-icon"></fa-icon>
+      <p>
+        Správa webů
       </p>
     </a>
   </li>

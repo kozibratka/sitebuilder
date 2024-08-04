@@ -16,6 +16,7 @@ export class HttpResponseToasterService {
       if (error.error instanceof ErrorEvent) {
         completedMessage = 'Nepodařilo se kontaktovat server. Zkontrolujte stav vašeho připojení.';
       } else {
+        console.log(error.error)
         switch (error.status) {
           case 404:
             completedMessage = 'Pořadovaný cíl nebyl nalezen';
@@ -30,7 +31,7 @@ export class HttpResponseToasterService {
             completedMessage = 'Nemáte oprávnění na tento obsah nebo expiroval váš token.';
             break;
           case 400:
-            completedMessage = error.error ? error.error : 'Server nemůže zpracovat požadavek';
+            // completedMessage = error.error ? error.error : 'Server nemůže zpracovat požadavek';
             break;
           case 422:
             completedMessage = error.error;
@@ -46,6 +47,8 @@ export class HttpResponseToasterService {
     } else {
       completedMessage = error;
     }
-    this.notifierService.notify(completedMessage, 'error');
+    if (completedMessage) {
+      this.notifierService.notify(completedMessage, 'error');
+    }
   }
 }

@@ -12,7 +12,7 @@
               <table mat-table [dataSource]="data" class="example-table">
                 <ng-container matColumnDef="web">
                   <th mat-header-cell *matHeaderCellDef>Název</th>
-                  <td mat-cell *matCellDef="let row">{{row.name}}</td>
+                  <td mat-cell *matCellDef="let row"><b>{{ row.name }}</b></td>
                 </ng-container>
                 <ng-container matColumnDef="createdAt">
                   <th mat-header-cell *matHeaderCellDef>Vytvořeno</th>
@@ -30,6 +30,15 @@
                   <th mat-header-cell *matHeaderCellDef>Doména</th>
                   <td mat-cell *matCellDef="let row">{{row.domain}}</td>
                 </ng-container>
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef>Spravujete</th>
+                  <td mat-cell *matCellDef="let row" class="text-center">
+                    @if (webDetailResolverService.selectedId == row.id)
+                    {
+                      <fa-icon style="color:#EAC452;" [icon]="faCircleCheck" class="nav-icon"></fa-icon>
+                    }
+                  </td>
+                </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -37,7 +46,7 @@
             }
           </div>
         </div>
-        <div class="ps-3">
+        <div class="ps-3 mt-2">
           <div><a [routerLink]="['./web/list']">Správa webů</a></div>
         </div>
       </div>

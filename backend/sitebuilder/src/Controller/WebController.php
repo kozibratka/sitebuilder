@@ -36,6 +36,7 @@ class WebController extends BaseApiController
                 'pagesCount' => $web->getPages()->filter(fn(AbstractPage $page) => $page instanceof Page)->count(),
                 'public' => $web->getPages()->filter(fn(AbstractPage $page) => $page instanceof PublicPage)->count(),
                 'domain' => implode(', ', $web->getDomains()->toArray()),
+                'id' => $web->getId(),
             ];
         }
 
@@ -83,7 +84,7 @@ class WebController extends BaseApiController
                 $newWeb->setName($form->get('name')->getData());
             } else {
                 $newWeb = new Web();
-                $newWeb->setName('Můj nový web '.Carbon::now()->toDateTimeString());
+                $newWeb->setName($form->get('name')->getData());
             }
 
             $this->persist($newWeb);

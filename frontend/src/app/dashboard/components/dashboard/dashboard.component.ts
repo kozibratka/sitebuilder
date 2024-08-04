@@ -7,6 +7,8 @@ import {DatePipe} from "@angular/common";
 import {SymfonyApiClientService} from "../../../core/services/api/symfony-api/symfony-api-client.service";
 import {ChartModule} from "primeng/chart";
 import {WebDetailResolverService} from "../../../web/services/web-detail-resolver.service";
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {faCircleCheck} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,15 +20,17 @@ import {WebDetailResolverService} from "../../../web/services/web-detail-resolve
     MatTableModule,
     DatePipe,
     ChartModule,
-    RouterLink
+    RouterLink,
+    FaIconComponent
   ]
 })
 export class DashboardComponent implements OnInit {
   data = [];
-  displayedColumns: string[] = ['web', 'createdAt', 'pagesCount', 'public', 'domain'];
+  displayedColumns: string[] = ['web', 'createdAt', 'pagesCount', 'public', 'domain', 'id'];
   isLoadingResults = true;
   chartData: any;
   chartOptions: any;
+  protected readonly faCircleCheck = faCircleCheck;
 
   constructor(
     private title: Title,
