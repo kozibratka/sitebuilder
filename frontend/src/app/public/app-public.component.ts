@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RouterOutlet} from "@angular/router";
+import {FontAwesomeIcons} from "../core/constants/FontAwesomeIcons";
+import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'app-public',
@@ -12,7 +14,9 @@ import {RouterOutlet} from "@angular/router";
 })
 export class AppPublicComponent implements OnInit {
 
-  constructor() { }
+  constructor(library: FaIconLibrary) {
+    library.addIcons(...FontAwesomeIcons);
+  }
 
   ngOnInit(): void {
   }
