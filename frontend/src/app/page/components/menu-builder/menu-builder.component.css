@@ -38,6 +38,11 @@
   width: 30%;
 }
 
+.menu-element-block {
+  max-height: 150px;
+  overflow: overlay;
+}
+
 .menu-element-block:not(.ui-draggable-dragging){
   padding: 10px;
   width: 100%;
