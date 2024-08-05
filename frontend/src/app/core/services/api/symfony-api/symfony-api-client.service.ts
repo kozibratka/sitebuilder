@@ -59,9 +59,15 @@ export class SymfonyApiClientService {
           headers: this.prepareHeader(headersOptions),
           ...options
         }).pipe(
+          endWith(null),
+          catchError((err) => {
+            this.httpResponseToasterService.showError(err);
+            return throwError(err)
+          }),
           finalize(this.generatePostSendCallbacks('post'))
         );
-      })
+      }),
+      takeWhile((x) => x != null)
     );
   }
 

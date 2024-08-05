@@ -16,7 +16,6 @@ export class HttpResponseToasterService {
       if (error.error instanceof ErrorEvent) {
         completedMessage = 'Nepodařilo se kontaktovat server. Zkontrolujte stav vašeho připojení.';
       } else {
-        console.log(error.error)
         switch (error.status) {
           case 404:
             completedMessage = 'Pořadovaný cíl nebyl nalezen';

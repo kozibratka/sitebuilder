@@ -71,15 +71,18 @@ export class WebListComponent implements OnInit {
       next: () => {
         this.notifierService.notify('Web byl úspěšně smazán');
         this.webListGuard.refreshWebList().subscribe(value => {
+          if (webId == this.webDetailResolverService.selectedId && this.webListGuard.webList.length) {
+            this.switchToWeb(this.webListGuard.webList[0].id, ['/admin', this.webListGuard.webList[0].id, 'web', 'list']);
+          }
           this.dataToTable = [...this.webListGuard.webList];
         });
         },
     });
   }
 
-  switchToWeb(id: number): void {
+  switchToWeb(id: number, url = null): void {
     localStorage.setItem('web', id.toString());
     this.layoutComponent.refreshSelectedWebSelectbox();
-    this.router.navigate(['/admin', id]);
+    this.router.navigate(url ?? ['/admin', id]);
   }
 }

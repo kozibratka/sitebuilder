@@ -26,6 +26,7 @@ export class WebDetailResolverService implements Resolve<WebInterface> {
       this.selectedId = parseInt(route.paramMap.get('webId'), null);
     }
     if (!this.selectedId) {
+      this.webDetail = {plugins: [], id: 0, name: '', pages: [], domains: []};
       return null;
     }
     this.resolver$ = this.symfonyApiClientService.get<WebInterface>('web_read', {id: this.selectedId}).pipe(catchError(err => {

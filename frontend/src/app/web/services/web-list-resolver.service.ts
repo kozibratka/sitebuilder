@@ -3,11 +3,9 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import {Observable, of, throwError} from 'rxjs';
 import {WebInterface} from '../interfaces/web-interface';
 import {catchError, map} from 'rxjs/operators';
-import {HttpResponseToasterService} from '../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../core/services/api/symfony-api/symfony-api-client.service';
 import {Helper} from "../../core/helpers/helper";
 import {LoginClientService} from "../../authorization/services/login-client.service";
-import {UserService} from "../../authorization/services/user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +18,7 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
   constructor(
     private router: Router,
     private symfonyApiClientService: SymfonyApiClientService,
-    private httpResponseToasterService: HttpResponseToasterService,
     private loginClient: LoginClientService,
-    private userService: UserService,
   ) {
 
   }
@@ -54,9 +50,9 @@ export class WebListResolverGuard implements CanActivate, Resolve<any> {
         // if (route.firstChild && route.firstChild.url.length && route.firstChild.url[0].path === 'web') {
         //   return true;
         // }
-        if (!webId) {
+        if (!webId || !this.webList.length) {
           if (!this.webList.length) {
-            return this.router.parseUrl('/admin/0/web/select-template');
+            this.router.navigate(['/admin/0/web/select-template']);
           } else {
             let webId = this.webList[0].id;
             let lastWebSwitched = parseInt(localStorage.getItem('web'));
