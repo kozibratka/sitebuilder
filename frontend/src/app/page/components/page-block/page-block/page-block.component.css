@@ -188,3 +188,7 @@
 .new-row-hover-bottom {
   box-shadow: 0 2px 0 red;
 }
+
+i.active {
+  color: greenyellow !important;
+}

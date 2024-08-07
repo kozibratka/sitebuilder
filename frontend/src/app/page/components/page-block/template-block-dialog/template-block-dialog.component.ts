@@ -27,7 +27,7 @@ export class TemplateBlockDialogComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.symfonyApiClientService.get<any[]>('page_block_template_category_list').subscribe(value => {
+    this.symfonyApiClientService.get<any[]>('page_block_category_list').subscribe(value => {
       this.category = value.body;
       this.sendData.selectedCategory = this.sendData.selectedCategory ?? this.category[0].id;
     });

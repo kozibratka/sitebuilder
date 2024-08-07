@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("page-block-template", name="page_block_template_")
+ * @Route("page-block", name="page_block_")
  */
-class PageBlockTemplateController extends BaseApiController
+class PageBlockController extends BaseApiController
 {
     /**
      * @Route("/create", name="create")
@@ -40,6 +40,32 @@ class PageBlockTemplateController extends BaseApiController
             $pageBlock->setImagePath($path);
             $this->persist($pageBlock);
             return $this->jsonResponseSimple($web->getPageBlocks(), 201);
+        }
+        return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
+    #[Route('/share/{id}', name: 'share', defaults: ['id' => null])]
+    public function share(Request $request, WebStorageService $webStorageService, PageBlock $pageBlock = null) {
+        $form = $this->createForm(PageBlockType::class, $pageBlock, ['sync_by_id' => false, 'web' => true]);
+        $form->submit(json_decode($request->request->all()['block'], true));
+        if($form->isSubmitted() && $form->isValid()) {
+            /** @var PageBlock $pageBlock */
+            $pageBlock = $form->getData();
+            $web = $pageBlock->getWeb();
+            $image = $request->files->get('image');
+            if ($image) {
+                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString());
+            } else {
+                $image = $request->files->get('imageBase64');
+                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString(), true);
+            }
+            $pageBlock->setIsShared(true);
+            $pageBlock->setImagePath($path);
+            $this->persist($pageBlock);
+            return $this->jsonResponseSimple(['blocks' => $web->getPageBlocks(), 'block' => $pageBlock], 201);
         }
         return $this->invalidFormResponse($form);
     }

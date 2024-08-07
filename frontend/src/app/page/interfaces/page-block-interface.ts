@@ -15,4 +15,5 @@ export interface PageBlockInterface {
   opacity?: number;
   paddingTop?: number;
   paddingBottom?: number;
+  isShared?: boolean;
 }

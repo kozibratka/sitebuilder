@@ -47,7 +47,7 @@ abstract class AbstractPage
         max: Limit::PAGE_BLOCKS,
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
-    #[ORM\OneToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', mappedBy: 'page', cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\ManyToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', inversedBy: 'pages', cascade: ['persist', 'remove'])]
     protected Collection $pageBlocks;
 
     /**
@@ -70,6 +70,8 @@ abstract class AbstractPage
     private bool $homePage = false;
 
     private array $globalPlugins = [];
+
+    private array $pageBlockToDelete = [];
 
     public function __construct()
     {
@@ -102,12 +104,14 @@ abstract class AbstractPage
     }
 
     public function addPageBlock(PageBlock $pageBlock) {
-        $pageBlock->setPage($this);
         $this->pageBlocks->add($pageBlock);
+        $pageBlock->addPage($this);
     }
 
     public function removePageBlock(PageBlock $pageBlock) {
         $this->pageBlocks->removeElement($pageBlock);
+        $pageBlock->removePage($this);
+        $this->pageBlockToDelete[] = $pageBlock;
     }
 
     public function getWeb(): Web
@@ -178,6 +182,16 @@ abstract class AbstractPage
         return $this->web?->getUser();
     }
 
+    public function getPageBlockToDelete(): array
+    {
+        return $this->pageBlockToDelete;
+    }
+
+    public function setPageBlockToDelete(array $pageBlockToDelete): void
+    {
+        $this->pageBlockToDelete = $pageBlockToDelete;
+    }
+
     /**
      * @Serializer\VirtualProperty()
      */
@@ -189,8 +203,7 @@ abstract class AbstractPage
     {
         $this->id = null;
         $this->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) {
-            $clone = clone $pageBlock;
-            $clone->setPage($this);
+            $clone = $pageBlock->isShared() ? $pageBlock : clone $pageBlock;
             return $clone;
         })->toArray());
     }

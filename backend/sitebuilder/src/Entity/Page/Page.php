@@ -35,9 +35,9 @@ class Page extends AbstractPage
         $page->setUrl($this->getUrl());
         $page->setDescription($this->getDescription());
         $page->setGlobalPlugins($this->getGlobalPlugins());
-        $page->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) use($page) {
-            $clone = clone $pageBlock;
-            $clone->setPage($page);
+        $originPageBlocks = $this->getPageBlocks();
+        $page->pageBlocks = new ArrayCollection($originPageBlocks->map(function(PageBlock $pageBlock) use($page) {
+            $clone = $pageBlock->isShared() ? $pageBlock : clone $pageBlock;
             return $clone;
         })->toArray());
         return $page;

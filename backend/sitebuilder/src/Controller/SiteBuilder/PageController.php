@@ -16,6 +16,7 @@ use App\Exception\CustomErrorMessageException;
 use App\Form\PageType;
 use App\Form\PublicPageType;
 use App\Repository\PageRepository\PublicPageRepository;
+use App\Service\PageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Predis\Client;
@@ -58,6 +59,7 @@ class PageController extends BaseApiController
      */
     public function create(Request $request, Web $web, ManagerRegistry $doctrine)
     {
+        $this->denyAccessUnlessGranted('page_builder_voter', $web);
         $form = $this->createForm(PageType::class);
         $form->submit($request->request->all());
         if($form->isSubmitted() && $form->isValid()) {
@@ -97,7 +99,7 @@ class PageController extends BaseApiController
     /**
      * @Route("/update-page-builder/{id}", name="update_page_builder")
      */
-    public function update(Request $request, Page $page, ManagerRegistry $doctrine)
+    public function update(Request $request, Page $page, ManagerRegistry $doctrine, PageService $pageService)
     {
         $withPublic = $request->query->get('withPublic');
         $form = $this->createForm(PageType::class, $page, ['pageBuilder' => true]);
@@ -114,6 +116,7 @@ class PageController extends BaseApiController
                     $doctrine->getManager()->remove($gridCellItem);
                 }
             }
+            $pageService->removePageBlocks($page);
             $this->flush();
             if ($withPublic) {
                 $currentPublicPage = $doctrine->getRepository(PublicPage::class)->findOneBy(['parentForPublic' => $page->getId()]);

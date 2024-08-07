@@ -42,7 +42,7 @@
 <app-animation-hider [show]="showMoveIcon" class="" (mouseenter)="isMoveMenuHover=true" (mouseleave)="isMoveMenuHover=false">
   <div class="block-move-menu">
     <div class="frameCover">
-      <div matTooltip="Nastavení Bloku" class="btn draganddrop block-menu-label">
+      <div title="Blok" class="btn draganddrop block-menu-label">
         <strong>Blok</strong>
       </div>
       <div title="Nastavení" class="btn draganddrop" (click)="openSettings()">
@@ -57,8 +57,11 @@
       <div title="Přidat jako šablonu" *ngIf="userService.hasRole('ROLE_ADMIN')" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this)">
         <i class="material-icons icon-remove">add</i>
       </div>
-      <div title="Aktualizovat šablonu" *ngIf="userService.hasRole('ROLE_ADMIN') && pageBlock.webId" class="btn draganddrop" (click)="pageBlockTemplateService.update(this)">
+      <div title="Aktualizovat šablonu" *ngIf="userService.hasRole('ROLE_ADMIN') && pageBlock.webId && !pageBlock.isShared" class="btn draganddrop" (click)="pageBlockTemplateService.update(this)">
         <i class="material-icons icon-update">update</i>
+      </div>
+      <div title="{{pageBlock.isShared ? 'Tento blok je sdílen' : 'Vytvořit sdílený blok'}}" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this, true)">
+        <i class="material-icons icon-update" [class.active]="pageBlock.isShared">share</i>
       </div>
 
     </div>

@@ -47,7 +47,7 @@ export class PageBlockTemplateService {
     this.changeSelectedTemplateBlocks(value);
   }
 
-  saveAsTemplateDialog(blockComponent: PageBlockComponent) {
+  saveAsTemplateDialog(blockComponent: PageBlockComponent, share = false) {
     this.dialog.open(TemplateBlockDialogComponent).afterClosed().subscribe(value => {
       if (!value) {
         return;
@@ -55,11 +55,17 @@ export class PageBlockTemplateService {
       let block = {...blockComponent.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
       let formData = null;
       let sendFnc = () => {
-        this.symfonyApiClientService.post('page_block_template_create', formData).subscribe({
+        let url = share ? 'page_block_share' : 'page_block_create';
+        let queryParams = share ? {id: block.id} : {};
+        this.symfonyApiClientService.post(url, formData, queryParams).subscribe({
           next: (value) => {
-            ArrayHelper.reinitArray(this.webBlocks, value.body);
+            let blocks = share ? value.body.blocks : value.body;
+            ArrayHelper.reinitArray(this.webBlocks, blocks);
+            if (share) {
+              Object.assign(blockComponent.pageBlock, value.body.block);
+            }
             this.refreshMenu();
-            this.notifierService.notify('Blok byl úspěšně přidán do šablon');
+            this.notifierService.notify('Blok byl úspěšně přidán');
           },
         });
       };
@@ -85,7 +91,7 @@ export class PageBlockTemplateService {
       let block = {...blockComponent.pageBlock, category: value.selectedCategory, web: this.webDetailResolverService.webDetail.id};
       let formData = null;
       let sendFnc = () => {
-        this.symfonyApiClientService.post('page_block_template_update', formData, {id: block.id}).subscribe({
+        this.symfonyApiClientService.post('page_block_update', formData, {id: block.id}).subscribe({
           next: (value) => {
             this.refreshMenu(value.body);
             this.notifierService.notify('Blok byl úspěšně přidán do šablon');
@@ -123,7 +129,7 @@ export class PageBlockTemplateService {
       if (!value) {
         return;
       }
-      this.symfonyApiClientService.get<any>('page_block_template_delete', {id: block.id}).subscribe({
+      this.symfonyApiClientService.get<any>('page_block_delete', {id: block.id}).subscribe({
         next: (resp) => {
           this.refreshMenu(resp.body);
           this.notifierService.notify('Šablona Bloku byla úspěšně smazána');
