@@ -7,6 +7,7 @@ namespace App\Form\SiteBuilder;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockTemplateCategory;
 use App\Entity\Web\Web;
+use App\Form\SiteBuilder\EventSubscriber\PageBlockSubscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PreSubmitEvent;
@@ -19,8 +20,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PageBlockType extends AbstractType
 {
+
+
+    public function __construct(
+        private PageBlockSubscriber $pageBlockSubscriber
+    )
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber($this->pageBlockSubscriber);
         $builder
             ->add('uniqueId')
             ->add('isFromTemplateBlock', CheckboxType::class)

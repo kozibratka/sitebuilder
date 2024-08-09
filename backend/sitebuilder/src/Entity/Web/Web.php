@@ -9,6 +9,7 @@ use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\User;
 use App\Security\Validator as AppValidator;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -290,6 +291,15 @@ class Web
     public function __clone() {
         $this->setId(null);
         $this->pageBlocks = new ArrayCollection();
+        $globalBlocks = [];
+        $blocks = $this->pageBlocks->filter(fn(PageBlock $pageBlock) => $pageBlock->isShared());
+        /** @var PageBlock $pageBlock */
+        foreach ($blocks as $pageBlock) {
+            $clone = clone $pageBlock;
+            $globalBlocks[$pageBlock->getId()] = $clone;
+            $clone->setWeb($this);
+            $this->pageBlocks->add($clone);
+        }
         $globalPluginsPerId = [];
         $this->plugins = new ArrayCollection($this->plugins->map(function(BasePlugin $plugin) use(&$globalPluginsPerId) {
             $clone = clone $plugin;
@@ -314,6 +324,15 @@ class Web
                     $globalPluginsPerId[$plugin->getId()]->addGridCellItem($item);
                 }
             }
+            $blockAssignments = $page->getPageBlockAssignments();
+            /** @var PageBlockAssignment $blockAssignment */
+            foreach ($blockAssignments as $blockAssignment) {
+                $block = $blockAssignment->getPageBlock();
+                if ($block->isShared() && isset($globalBlocks[$block->getId()])) {
+                    $blockAssignment->setPageBlock($globalBlocks[$block->getId()]);
+                }
+            }
+
             $newPages->add($newPage);
         }
         $this->setPages($newPages);

@@ -6,6 +6,8 @@ namespace App\Form;
 
 use App\Entity\Page\AbstractPage;
 use App\Entity\Page\Page;
+use App\Entity\SiteBuilder\PageBlockAssignment;
+use App\Form\SiteBuilder\PageBlockAssignmentType;
 use App\Form\SiteBuilder\PageBlockType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,10 +27,10 @@ class PageType extends AbstractType
         if ($options['pageBuilder']) {
             $builder
                 ->add(
-                    'pageBlocks',
+                    'pageBlockAssignments',
                     CollectionType::class,
                     [
-                        'entry_type' => PageBlockType::class,
+                        'entry_type' => PageBlockAssignmentType::class,
                         'allow_add' => true,
                         'allow_delete' => true,
                         'by_reference' => false,

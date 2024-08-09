@@ -3,6 +3,7 @@ import {PageBlockInterface} from '../../../page/interfaces/page-block-interface'
 import {UrlService} from "../../../core/services/url.service";
 import {GridRowPublicComponent} from "../grid-row-public/grid-row-public.component";
 import {CommonModule} from "@angular/common";
+import {PageBlockAssignmentInterface} from "../../../page/interfaces/page-block-assignment-interface";
 
 @Component({
   selector: 'app-public-page-block',
@@ -19,6 +20,7 @@ export class PublicPageBlockComponent implements OnInit, AfterViewInit {
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef;
   @ViewChild('video') video: ElementRef<HTMLElement>;
   @Input() pageBlock: PageBlockInterface;
+  private _pageBlockAssignment: PageBlockAssignmentInterface;
   public videoUrl = '';
 
   constructor(
@@ -58,6 +60,15 @@ export class PublicPageBlockComponent implements OnInit, AfterViewInit {
       style['paddingBottom'] = this.pageBlock.paddingBottom+'px';
     }
     return style;
+  }
+
+  get pageBlockAssignment(): PageBlockAssignmentInterface {
+    return this._pageBlockAssignment;
+  }
+  @Input()
+  set pageBlockAssignment(value: PageBlockAssignmentInterface) {
+    this._pageBlockAssignment = value;
+    this.pageBlock = this._pageBlockAssignment.pageBlock;
   }
 
 }

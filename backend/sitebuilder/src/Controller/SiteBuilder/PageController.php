@@ -11,6 +11,7 @@ use App\Entity\Page\PublicPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\PageType;
@@ -65,7 +66,11 @@ class PageController extends BaseApiController
         if($form->isSubmitted() && $form->isValid()) {
             /** @var Page $page */
             $page = $form->getData();
-            $page->addPageBlock(new PageBlock());
+            $pageBlock = new PageBlock();
+            $pageBlockAssignment = new PageBlockAssignment();
+            $pageBlockAssignment->setPage($page);
+            $pageBlockAssignment->setPageBlock($pageBlock);
+            $page->addPageBlockAssignment($pageBlockAssignment);
             $web->addPage($page);
             if ($web->getPages()->count() == 1) {
                 $page->setHomePage(true);
@@ -99,7 +104,7 @@ class PageController extends BaseApiController
     /**
      * @Route("/update-page-builder/{id}", name="update_page_builder")
      */
-    public function update(Request $request, Page $page, ManagerRegistry $doctrine, PageService $pageService)
+    public function update(Request $request, Page $page, ManagerRegistry $doctrine)
     {
         $withPublic = $request->query->get('withPublic');
         $form = $this->createForm(PageType::class, $page, ['pageBuilder' => true]);
@@ -116,7 +121,6 @@ class PageController extends BaseApiController
                     $doctrine->getManager()->remove($gridCellItem);
                 }
             }
-            $pageService->removePageBlocks($page);
             $this->flush();
             if ($withPublic) {
                 $currentPublicPage = $doctrine->getRepository(PublicPage::class)->findOneBy(['parentForPublic' => $page->getId()]);
@@ -126,6 +130,9 @@ class PageController extends BaseApiController
                 $publicPage = $page->createPublicPage();
                 $this->persist($publicPage);
             }
+//            $as = $page->getPageBlockAssignments()->first()->getPageBlock();
+//            $as->refreshGridCellItemOrder();
+//            dd($as);
             $page->refreshGridCellItemOrder();
             return $this->jsonResponseSimple($page, 201);
         }

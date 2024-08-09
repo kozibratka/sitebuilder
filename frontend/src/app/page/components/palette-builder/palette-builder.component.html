@@ -13,10 +13,10 @@
       [class.dragged]="dragStatusService.isDragBlock"
       [class.resized]="isResized"
       #palette
-      [nxtSortablejs]="pageDetail.pageBlocks"
+      [nxtSortablejs]="pageDetail.pageBlockAssignments"
       [config]="{ group: 'block', handle: '.icon-move-block',animation: 0 }">
-      <li (dragstart)="dragStatusService.isDragBlock = true" (dragend)="dragStatusService.isDragBlock = false" class="list-group-item palette-item" *ngFor="let item of pageDetail.pageBlocks; trackBy: trackByBlock;index as i;">
-        <app-palette-block (deleteBlock)="deleteBlock(i)" [pageBlock]="item" (resized)="isResized=$event"></app-palette-block>
+      <li (dragstart)="dragStatusService.isDragBlock = true" (dragend)="dragStatusService.isDragBlock = false" class="list-group-item palette-item" *ngFor="let item of pageDetail.pageBlockAssignments; trackBy: trackByBlock;index as i;">
+        <app-palette-block (deleteBlock)="deleteBlock(i)" [pageBlockAssignment]="item" (resized)="isResized=$event"></app-palette-block>
       </li>
     </ul>
   </div>

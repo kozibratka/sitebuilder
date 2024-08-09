@@ -25,12 +25,14 @@ class PageBlock implements EntityFileProviderInterface
     private ?int $id = null;
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $height = null;
-
-    #[ORM\ManyToMany(targetEntity: AbstractPage::class, mappedBy: 'pageBlocks')]
-    private Collection $pages;
+    /**
+     * @var Collection|ArrayCollection
+     */
+    #[ORM\OneToMany(targetEntity: PageBlockAssignment::class, mappedBy: 'pageBlock')]
+    private Collection $pageBlockAssignments;
 
     #[Assert\Expression(
-        "this.getPages().count() or value",
+        "this.getPageBlockAssignments().count() or value",
         message: 'Web and Page is empty',
     )]
     #[AppAssert\PageBuilderUser]
@@ -54,7 +56,7 @@ class PageBlock implements EntityFileProviderInterface
     private Collection $rows;
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
     #[Assert\Expression(
-        "this.getPages().count() or value",
+        "this.getPageBlockAssignments().count() or value",
         message: 'Category is required',
     )]
     private ?PageBlockTemplateCategory $category;
@@ -94,7 +96,7 @@ class PageBlock implements EntityFileProviderInterface
     {
         $this->paletteGridItems = new ArrayCollection();
         $this->rows = new ArrayCollection();
-        $this->pages = new ArrayCollection();
+        $this->pageBlockAssignments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,32 +107,6 @@ class PageBlock implements EntityFileProviderInterface
     public function setId(int $id)
     {
         $this->id = $id;
-    }
-
-    public function getPages(): ?Collection
-    {
-        return $this->pages;
-    }
-
-    public function setPages(?Collection $pages)
-    {
-        $this->pages = $pages;
-    }
-
-    public function addPage($page)
-    {
-        if ($this->pages->contains($page)) {
-            return;
-        }
-        $this->pages->add($page);
-    }
-
-    public function removePage($page)
-    {
-        if (!$this->pages->contains($page)) {
-            return;
-        }
-        $this->pages->removeElement($page);
     }
 
     public function getPaletteGridItems(): Collection
@@ -239,7 +215,7 @@ class PageBlock implements EntityFileProviderInterface
     }
 
     public function getUser() {
-        return $this->getWeb()?->getUser() ?? $this->getPages()->first()->getUser();
+        return $this->getWeb()?->getUser() ?? $this->getPageBlockAssignments()->first()->getUser();
     }
 
     public function isFromTemplateBlock(): bool
@@ -351,6 +327,27 @@ class PageBlock implements EntityFileProviderInterface
         $this->isShared = $isShared;
     }
 
+    public function getPageBlockAssignments(): Collection
+    {
+        return $this->pageBlockAssignments;
+    }
+
+    public function setPageBlockAssignments(Collection $pageBlockAssignments): void
+    {
+        $this->pageBlockAssignments = $pageBlockAssignments;
+    }
+
+    public function addPageBlockAssignment(PageBlockAssignment $pageBlockAssignment)
+    {
+        $this->pageBlockAssignments->add($pageBlockAssignment);
+        $pageBlockAssignment->setPageBlock($this);
+    }
+    public function removePageBlockAssignment(PageBlockAssignment $pageBlockAssignment)
+    {
+        $this->pageBlockAssignments->removeElement($pageBlockAssignment);
+        $pageBlockAssignment->setPageBlock(null);
+    }
+
     /**
      * @Serializer\VirtualProperty()
      */
@@ -361,7 +358,6 @@ class PageBlock implements EntityFileProviderInterface
     public function __clone(): void
     {
         $this->id = null;
-        $this->isShared = false;
         $this->rows = new ArrayCollection($this->rows->map(function(GridRow $row) {
             $clone = clone $row;
             $clone->setPageBlock($this);

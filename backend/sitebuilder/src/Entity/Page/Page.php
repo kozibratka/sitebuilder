@@ -2,7 +2,7 @@
 
 namespace App\Entity\Page;
 
-use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Repository\PageRepository\PageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,9 +35,9 @@ class Page extends AbstractPage
         $page->setUrl($this->getUrl());
         $page->setDescription($this->getDescription());
         $page->setGlobalPlugins($this->getGlobalPlugins());
-        $originPageBlocks = $this->getPageBlocks();
-        $page->pageBlocks = new ArrayCollection($originPageBlocks->map(function(PageBlock $pageBlock) use($page) {
-            $clone = $pageBlock->isShared() ? $pageBlock : clone $pageBlock;
+        $originPageBlocks = $this->getPageBlockAssignments();
+        $page->pageBlockAssignments = new ArrayCollection($originPageBlocks->map(function(PageBlockAssignment $pageBlockAssignment) use($page) {
+            $clone = clone $pageBlockAssignment;
             return $clone;
         })->toArray());
         return $page;

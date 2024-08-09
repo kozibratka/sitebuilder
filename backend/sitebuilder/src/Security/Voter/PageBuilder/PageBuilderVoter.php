@@ -31,31 +31,7 @@ class PageBuilderVoter extends Voter
     }
 
     public function check($subject, UserInterface $userLogged) {
-        $user = null;
-        switch (true) {
-            case $subject instanceof Web:
-                $user = $subject->getUser();
-                break;
-            case $subject instanceof AbstractPage:
-                $user = $subject->getWeb()->getUser();
-                break;
-            case $subject instanceof PageBlock:
-                $page = $subject->getPages()->first();
-                $user = $page ? $page->getWeb()->getUser() : $subject->getWeb()->getUser();
-                break;
-            case $subject instanceof GridRow:
-                $user = $subject->getPageBlock()->getPages()->first()->getWeb()->getUser();
-                break;
-            case $subject instanceof GridCell:
-                $user = $subject->getRow()->getPageBlock()->getPages()->first()->getWeb()->getUser();
-                break;
-            case $subject instanceof GridCellItem:
-                $user = $subject->getCell()->getRow()->getPageBlock()->getPages()->first()->getWeb()->getUser();
-                break;
-            case $subject instanceof BasePlugin:
-                $user = $subject->getWeb()?->getUser() ?? $subject->getItems()->get(0)?->getCell()->getRow()->getPageBlock()->getPage()->getWeb()->getUser();
-                break;
-        }
+        $user = $subject->getUser();
         if($userLogged === $user || !$user) {
             return true;
         }

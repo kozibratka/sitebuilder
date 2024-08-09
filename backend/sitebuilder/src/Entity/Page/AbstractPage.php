@@ -4,6 +4,7 @@ namespace App\Entity\Page;
 
 use App\Constant\Limit;
 use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\Web\Web;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -47,8 +48,8 @@ abstract class AbstractPage
         max: Limit::PAGE_BLOCKS,
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
-    #[ORM\ManyToMany(targetEntity: 'App\Entity\SiteBuilder\PageBlock', inversedBy: 'pages', cascade: ['persist', 'remove'])]
-    protected Collection $pageBlocks;
+    #[ORM\OneToMany(targetEntity: PageBlockAssignment::class, mappedBy: 'page', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    public Collection $pageBlockAssignments;
 
     /**
      * @Serializer\Exclude()
@@ -71,11 +72,9 @@ abstract class AbstractPage
 
     private array $globalPlugins = [];
 
-    private array $pageBlockToDelete = [];
-
     public function __construct()
     {
-        $this->pageBlocks = new ArrayCollection();
+        $this->pageBlockAssignments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,20 +97,19 @@ abstract class AbstractPage
         $this->name = $name;
     }
 
-    public function getPageBlocks(): Collection
+    public function getPageBlockAssignments(): Collection
     {
-        return $this->pageBlocks;
+        return $this->pageBlockAssignments;
     }
 
-    public function addPageBlock(PageBlock $pageBlock) {
-        $this->pageBlocks->add($pageBlock);
-        $pageBlock->addPage($this);
+    public function addPageBlockAssignment(PageBlockAssignment $pageBlockAssignment) {
+        $this->pageBlockAssignments->add($pageBlockAssignment);
+        $pageBlockAssignment->setPage($this);
     }
 
-    public function removePageBlock(PageBlock $pageBlock) {
-        $this->pageBlocks->removeElement($pageBlock);
-        $pageBlock->removePage($this);
-        $this->pageBlockToDelete[] = $pageBlock;
+    public function removePageBlockAssignment(PageBlockAssignment $pageBlockAssignment) {
+        $this->pageBlockAssignments->removeElement($pageBlockAssignment);
+        $pageBlockAssignment->setPage(null);
     }
 
     public function getWeb(): Web
@@ -166,30 +164,20 @@ abstract class AbstractPage
 
     public function getGridCellItems(): array
     {
-        $gridCellItems = $this->pageBlocks->map(fn(PageBlock $pageBlock) => $pageBlock->getGridCellItems())->toArray();
+        $gridCellItems = $this->pageBlockAssignments->map(fn(PageBlockAssignment $pageBlockAssignment) => $pageBlockAssignment->getPageBlock()->getGridCellItems())->toArray();
         return array_merge(...$gridCellItems);
     }
 
     public function refreshGridCellItemOrder()
     {
-        /** @var PageBlock $block */
-        foreach ($this->pageBlocks as $block) {
+        /** @var PageBlockAssignment $block */
+        foreach ($this->pageBlockAssignments as $block) {
             $block->refreshGridCellItemOrder();
         }
     }
 
     public function getUser() {
         return $this->web?->getUser();
-    }
-
-    public function getPageBlockToDelete(): array
-    {
-        return $this->pageBlockToDelete;
-    }
-
-    public function setPageBlockToDelete(array $pageBlockToDelete): void
-    {
-        $this->pageBlockToDelete = $pageBlockToDelete;
     }
 
     /**
@@ -202,8 +190,9 @@ abstract class AbstractPage
     public function __clone(): void
     {
         $this->id = null;
-        $this->pageBlocks = new ArrayCollection($this->pageBlocks->map(function(PageBlock $pageBlock) {
-            $clone = $pageBlock->isShared() ? $pageBlock : clone $pageBlock;
+        $this->pageBlockAssignments = new ArrayCollection($this->pageBlockAssignments->map(function(PageBlockAssignment $pageBlockAssignment) {
+            $clone = clone $pageBlockAssignment;
+            $clone->setPage($this);
             return $clone;
         })->toArray());
     }

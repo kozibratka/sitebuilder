@@ -7,6 +7,7 @@ import {DragStatusService} from "../../services/drag-status.service";
 import { SortablejsModule } from 'nxt-sortablejs'
 import {PageBlockComponent} from "../page-block/page-block/page-block.component";
 import {CommonModule} from "@angular/common";
+import {PageBlockAssignmentInterface} from "../../interfaces/page-block-assignment-interface";
 
 @Component({
   selector: 'app-palette-builder',
@@ -55,7 +56,7 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
     this._isResized = value;
   }
 
-  trackByBlock(index, item: PageBlockInterface ) {
+  trackByBlock(index, item: PageBlockAssignmentInterface ) {
     if (!item.uniqueId) {
       item.uniqueId = StringService.randomString();
     }
@@ -63,6 +64,6 @@ export class PaletteBuilderComponent implements OnInit, AfterViewChecked{
   }
 
   deleteBlock(i: number) {
-    this.pageDetail.pageBlocks.splice(i, 1);
+    this.pageDetail.pageBlockAssignments.splice(i, 1);
   }
 }

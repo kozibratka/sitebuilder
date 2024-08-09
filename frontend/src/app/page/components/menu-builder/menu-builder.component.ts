@@ -25,6 +25,7 @@ import {
 } from "../../../core/components/hidder/animation-hider/animation-hider/animation-hider.component";
 import {MenuPluginResolverDirective} from "../../directives/menu-plugin-resolver.directive";
 import {CommonModule} from "@angular/common";
+import {PageBlockAssignmentInterface} from "../../interfaces/page-block-assignment-interface";
 
 @Component({
   selector: 'app-menu-builder',
@@ -70,7 +71,7 @@ export class MenuBuilderComponent implements OnInit, AfterViewInit {
   }
 
   clonePageBlock = (item: PageBlockInterface) => {
-    let cloneItem = {...item, isFromTemplateBlock: true}
+    let cloneItem: PageBlockAssignmentInterface = {pageBlock: {...item, isFromTemplateBlock: true}, orderItem: 0}
     return JSON.parse(JSON.stringify(cloneItem));
   }
 

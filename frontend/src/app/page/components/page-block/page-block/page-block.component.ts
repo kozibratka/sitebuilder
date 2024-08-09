@@ -42,6 +42,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 import {GridCellItemService} from "../../../services/grid-cell-item.service";
 import {GridRowService} from "../../../services/grid-row.service";
+import {PageBlockAssignmentInterface} from "../../../interfaces/page-block-assignment-interface";
 
 @Component({
   selector: 'app-palette-block',
@@ -67,7 +68,9 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   @ViewChild('palette_content', {static: true}) paletteContent: ElementRef<HTMLElement>;
   @ViewChild('video') video: ElementRef<HTMLElement>;
   @Output() resized = new EventEmitter<boolean>();
+  private _pageBlockAssignment: PageBlockAssignmentInterface;
   private _pageBlock: PageBlockInterface;
+
   hoverOnIndexRow: number = null;
   showMoveIcon: boolean;
   isMoveMenuHover = false;
@@ -131,6 +134,15 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
   set pageBlock(value: PageBlockInterface) {
     this._pageBlock = value;
     //this.paletteBlockGridstackService.gridStackNodes = this._pageBlock.paletteGridItems;
+  }
+
+  get pageBlockAssignment(): PageBlockAssignmentInterface {
+    return this._pageBlockAssignment;
+  }
+  @Input()
+  set pageBlockAssignment(value: PageBlockAssignmentInterface) {
+    this._pageBlockAssignment = value;
+    this.pageBlock = this._pageBlockAssignment.pageBlock;
   }
 
   onDragStart = (event: any) => {

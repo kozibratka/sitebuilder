@@ -8,6 +8,7 @@ use App\Entity\SiteBuilder\GridCell;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\GridRow;
 use App\Entity\SiteBuilder\PageBlock;
+use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\Web\Web;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -45,7 +46,16 @@ class PageBuilderWithChildrenVoter extends Voter
                 break;
             case $subject instanceof AbstractPage:
                 $user = $subject->getUser();
-                foreach ($subject->getPageBlocks() as $pageBlock) {
+                foreach ($subject->getPageBlockAssignments() as $pageBlock) {
+                    $result = $this->voteOnAttribute($attribute, $pageBlock, $token);
+                    if(!$result) {
+                        return false;
+                    }
+                }
+                break;
+            case $subject instanceof PageBlockAssignment:
+                $user = $subject->getUser();
+                foreach ($subject->getPageBlock() as $pageBlock) {
                     $result = $this->voteOnAttribute($attribute, $pageBlock, $token);
                     if(!$result) {
                         return false;

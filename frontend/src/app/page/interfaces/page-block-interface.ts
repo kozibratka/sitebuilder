@@ -16,4 +16,5 @@ export interface PageBlockInterface {
   paddingTop?: number;
   paddingBottom?: number;
   isShared?: boolean;
+  isFromTemplateBlock?: boolean;
 }

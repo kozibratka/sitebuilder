@@ -66,6 +66,10 @@ services:
         tags:
             - { name: doctrine.orm.entity_listener, event: preRemove, entity: 'App\Entity\SiteBuilder\GridCell' }
 
+    App\EventListener\Doctrine\PageBuilder\PageBlockAssignmentListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, event: postRemove, entity: 'App\Entity\SiteBuilder\PageBlockAssignment' }
+
     App\EventListener\Doctrine\PageBuilder\BasePluginListener:
         tags:
             - { name: doctrine.orm.entity_listener, event: prePersist, entity: 'App\Entity\SiteBuilder\Plugin\BasePlugin' }
