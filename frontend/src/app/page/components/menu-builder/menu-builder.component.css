@@ -14,12 +14,12 @@
 
 .menu-element-item:not(.ui-draggable-dragging){
   padding: 4px;
-  width: 45%;
+  width: 47%;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   border-radius: 3px;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-  margin: 6px;
+  margin: 3px;
   height: 55px;
 }
 
@@ -31,7 +31,7 @@
   padding: 5px;
   width: 100%;
   text-align: center;
-  font-size: 15px;
+  font-size: 0.9rem;
 }
 
 .menu-element-item img{

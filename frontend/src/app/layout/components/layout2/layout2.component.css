@@ -1,0 +1,171 @@
+
+
+/**** Kaiadmin_lte */
+
+body, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, .btn-simple, .alert, a, .td-name, td, button.close {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Public Sans', sans-serif; }
+
+body, html {
+  font-size: 14px;
+  color: #2A2F5B; }
+
+a {
+  color: #1572E8;
+  text-decoration: none !important; }
+a:hover, a:focus {
+  color: #1269DB; }
+
+h1,
+.h1 {
+  font-size: 2.15rem; }
+
+h2,
+.h2 {
+  font-size: 1.85rem; }
+
+h3,
+.h3 {
+  font-size: 1.64rem; }
+
+h4,
+.h4 {
+  font-size: 1.48rem; }
+
+h5,
+.h5 {
+  font-size: 1.3rem;
+  font-weight: 400; }
+
+h6,
+.h6 {
+  font-size: 1.07rem;
+  font-weight: 400; }
+
+p {
+  font-size: 1.07rem;
+  line-height: 1.82;
+  margin-bottom: 1rem;
+  word-break: break-word; }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  line-height: 1.5; }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, .h1 a, .h2 a, .h3 a, .h4 a, .h5 a, .h6 a {
+  color: inherit; }
+
+small, .small {
+  font-size: 13px; }
+
+b, .b, strong, .strong {
+  font-weight: 600; }
+
+.page-pretitle {
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #95aac9; }
+
+.page-title {
+  font-size: 23px;
+  font-weight: 600;
+  color: #444444;
+  line-height: 30px;
+  margin-bottom: 20px; }
+
+.page-category {
+  color: #444444;
+  line-height: 1.8;
+  margin-bottom: 25px; }
+
+.navbar .navbar-nav .nav-item {
+  padding: 0 4px; }
+
+.navbar[class*="bg-"] {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important; }
+.navbar[class*="bg-"] .navbar-brand {
+  color: #ffffff; }
+.navbar[class*="bg-"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
+.navbar[class*="bg-"] .navbar-nav > .nav-item > .nav-link {
+  color: #ffffff; }
+.navbar[class*="bg-"] .navbar-nav > .nav-item > .nav-link.disabled {
+  color: #d8d8d8 !important; }
+.navbar[class*="bg-"] .navbar-nav > .nav-item > .nav-link:hover {
+  background: rgba(255, 255, 255, 0.22) !important; }
+.navbar[class*="bg-"] .navbar-nav > .nav-item.active > .nav-link {
+  background: rgba(255, 255, 255, 0.22) !important; }
+.navbar[class*="bg-"] .btn-toggle {
+  background: rgba(19, 19, 19, 0.25) !important;
+  color: #ffffff !important; }
+.navbar[class*="bg-"] .nav-search .input-group {
+  border: 0;
+  background: rgba(19, 19, 19, 0.25) !important; }
+.navbar[class*="bg-"] .nav-search .input-group .form-control {
+  color: #ffffff !important; }
+.navbar[class*="bg-"] .nav-search .search-icon {
+  color: #ffffff !important; }
+.main-panel .row {
+  --bs-gutter-x: 30px; }
+@media screen and (max-width: 991.5px) {
+  .container, .container-full {
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+.wrapper {
+  min-height: 100vh;
+  position: relative;
+  top: 0;
+  height: 100vh; }
+/******* Kaiadmin_lte end */
+
+::ng-deep a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+::ng-deep app-palette-builder a {
+  text-decoration: underline;
+}
+
+.sidebar .nav>.nav-item a fa-icon, .sidebar[data-background-color=white] .nav>.nav-item a fa-icon {
+  color: #8d9498;
+  margin-right: 15px;
+  width: 25px;
+  text-align: center;
+  vertical-align: middle;
+  float: left;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+.sidebar .nav.nav-secondary>.nav-item.active a fa-icon, .sidebar[data-background-color=white] .nav.nav-secondary>.nav-item.active a fa-icon {
+  color: #6861ce !important;
+}
+
+.avatar-sm {
+  text-align: right;
+  width: 1.75rem !important;
+}
+
+.avatar-sm fa-icon {
+  font-size: x-large;
+}
+
+.toggle-sidebar {
+  height: 30px;
+}
+
+.dropdown-item {
+  padding: 4px 22px;
+}
+
+.progres-line {
+  z-index: 9999;
+  position: fixed;
+}
+
+.navbar .navbar-nav .nav-item {
+  padding: 0 4px; }

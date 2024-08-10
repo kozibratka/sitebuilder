@@ -1,11 +1,11 @@
-<div class="card card-primary card-outline"
+<div class="card card-outline"
      [class.menu-block-dragged] = "menuBlocDragged"
      [class.block-dragged] = "dragStatusService.isDragBlock"
      [class.plugin-dragged] = "dragStatusService.isDragPlugin"
      [class.menu-plugin-dragged] = "dragStatusService.isDragMenuPlugin"
 >
   <div class="card-header">
-    <h3 class="card-title">Editační plátno</h3>
+    <div class="card-title">Editační plátno</div>
   </div>
   <div class="card-body palette" [class.sortable-js-dragged]="dragStatusService.isDraggedResizedPlugin()">
     <ul

@@ -9,7 +9,6 @@ import {WebListResolverGuard} from '../../services/web-list-resolver.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';
-import {LayoutComponent} from '../../../layout/components/layout/layout.component';
 import {Title} from '@angular/platform-browser';
 import {
   MatTableModule
@@ -18,6 +17,7 @@ import {MatAnchor, MatButton} from "@angular/material/button";
 import {MatTooltip} from "@angular/material/tooltip";
 import {CommonModule} from "@angular/common";
 import {MatIconModule} from "@angular/material/icon";
+import {Layout2Component} from "../../../layout/components/layout2/layout2.component";
 
 @Component({
   selector: 'app-web-list',
@@ -47,7 +47,7 @@ export class WebListComponent implements OnInit {
     private notifierService: NotifierService,
     private router: Router,
     public webListGuard: WebListResolverGuard,
-    private layoutComponent: LayoutComponent,
+    private layoutComponent: Layout2Component,
     public title: Title,
     public webDetailResolverService: WebDetailResolverService,
   ) { }

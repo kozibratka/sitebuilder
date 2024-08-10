@@ -6,11 +6,12 @@ import {UserResolver} from "./authorization/resolvers/user.resolver";
 import {CompAComponent} from "./Test/comp-a/comp-a.component";
 import {PublicComponent} from "./public/pages/public/public.component";
 import {PageResolver} from "./public/services/page.resolver";
+import {Layout2Component} from "./layout/components/layout2/layout2.component";
 
 export const routes: Routes = [
   {
     path: 'admin/:webId',
-    component: LayoutComponent,
+    component: Layout2Component,
     canActivate: [WebListResolverGuard],
     runGuardsAndResolvers: 'always',
     children: [
