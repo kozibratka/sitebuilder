@@ -224,6 +224,9 @@ var kaiadmin = function(){
 				mini_sidebar = 1;
 			}
 			$(window).resize();
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 700);
 		});
 		minimize_sidebar = true;
 		first_toggle_sidebar = true;

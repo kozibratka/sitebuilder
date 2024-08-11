@@ -4,6 +4,8 @@ import {CommonModule} from "@angular/common";
 import {RouterModule} from "@angular/router";
 import {MatProgressBar} from "@angular/material/progress-bar";
 import {HiderElementDirective} from "../../../core/directives/hider-element.directive";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {GoogleSigninButtonModule} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-authorization',
@@ -14,16 +16,21 @@ import {HiderElementDirective} from "../../../core/directives/hider-element.dire
     CommonModule,
     RouterModule,
     MatProgressBar,
-    HiderElementDirective
+    HiderElementDirective,
+    FormsModule,
+    GoogleSigninButtonModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthorizationComponent implements OnInit {
 
   symfonyApiCallEvent = {startSendLogin: Event.PRE_SEND_POST, stopSendLogin: Event.POST_SEND_POST};
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
+    //this.loginLayoutService.initLayout()
   }
 
 }

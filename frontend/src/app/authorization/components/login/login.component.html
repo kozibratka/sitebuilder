@@ -1,52 +1,123 @@
-<p class="login-box-msg">Přihlášení do systému</p>
-<div class="social-auth-links text-center">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <p class="alert alert-success" *ngIf="activated">Účet byl aktivován, nyní se můžete přihlásit.</p>
-    <div class="form-group">
-      <div  class="input-group mb-3">
-        <input type="email" class="form-control" placeholder="Email" formControlName="email">
-        <div class="input-group-text">
-          <span class="fas fa-envelope"></span>
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center mb-5">
+    <h2 class="heading-section">Přihlášení do systému</h2>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="login-wrap p-0">
+      <h3 class="mb-4 text-center">Vyplňte email a heslo</h3>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signin-form">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Email" required formControlName="email">
         </div>
-      </div>
-      <div class="small text-danger" *ngIf="email && email.invalid && (email.touched) && email.errors?.['required']">
-        Toto pole je povinné
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <input type="password" class="form-control" placeholder="Heslo" formControlName="password">
-        <div class="input-group-text">
-          <span class="fas fa-lock"></span>
+        <div class="small text-danger" *ngIf="email && email.invalid && (email.touched) && email.errors?.['required']">
+          Toto pole je povinné
         </div>
+        <div class="form-group">
+          <input id="password-field" type="password" class="form-control" placeholder="Heslo" required formControlName="password">
+          <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+        </div>
+        <div class="small text-danger" *ngIf="password && password.invalid && (password.touched) && password.errors?.['required']">
+          Toto pole je povinné
+        </div>
+        <div class="form-group">
+          <button type="submit" class="form-control btn btn-primary submit px-3">Přihlásit</button>
+        </div>
+        <div class="form-group d-flex">
+          <div class="me-auto">
+            <a style="color: #fff; text-decoration: underline" [routerLink]="['../../registration']" class="text-center">Vytvořit účet</a>
+          </div>
+          <div class="text-end">
+            <a href="#" style="color: #fff;text-decoration: underline">Zapomenuté heslo?</a>
+          </div>
+        </div>
+      </form>
+      <p class="w-100 text-center">&mdash; Nebo přihlásit přes &mdash;</p>
+
+      <div class="social d-flex text-center">
+<!--        <div class="btn btn-block btn-primary w-48 me-2" (click)="socialLoginService.loginFacebook()">-->
+<!--          <i class="fab fa-facebook mr-2"></i>-->
+<!--          Facebook-->
+<!--        </div>-->
+        <a role="button" (click)="socialLoginService.loginFacebook()" class="px-2 py-2 me-md-1 rounded"><span class="ion-logo-facebook mr-2"></span><i class="fab fa-facebook mr-2"></i> Facebook</a>
+        <a role="button" (click)="socialLoginService.loginGoogle(googleButton)" class="px-2 py-2 ms-md-1 rounded"><span class="ion-logo-twitter mr-2"></span>            <i class="fab fa-google-plus mr-2"></i>
+          <asl-google-signin-button #googleButton type='icon' size='medium' class="d-none"></asl-google-signin-button>
+          Google</a>
       </div>
-      <div class="small text-danger" *ngIf="password && password.invalid && (password.touched) && password.errors?.['required']">
-        Toto pole je povinné
-      </div>
-    </div>
-    <div class="form-group">
-      <!-- /.col -->
-      <div class="d-flex flex-row-reverse">
-        <button type="submit" class="btn btn-primary btn-block">Přihlásit</button>
-      </div>
-      <!-- /.col -->
-    </div>
-  </form>
-  <p>- NEBO -</p>
-  <div class="d-grid gap-2">
-    <div class="btn btn-block btn-primary" (click)="socialLoginService.loginFacebook()">
-      <i class="fab fa-facebook mr-2"></i>
-      Přihlásit přes Facebook
-    </div>
-    <div class="btn btn-block btn-danger" (click)="socialLoginService.loginGoogle(googleButton)">
-      <i class="fab fa-google-plus mr-2"></i>
-      <asl-google-signin-button #googleButton type='icon' size='medium' class="d-none"></asl-google-signin-button>
-      Přihlásit přes Google
+
+<!--      <div class="social d-flex text-center">-->
+<!--        <div class="mx-auto">-->
+<!--          <div class="btn btn-block btn-primary w-48 me-2" (click)="socialLoginService.loginFacebook()">-->
+<!--            <i class="fab fa-facebook mr-2"></i>-->
+<!--            Facebook-->
+<!--          </div>-->
+<!--          <div class="btn btn-block btn-danger w-48" (click)="socialLoginService.loginGoogle(googleButton)">-->
+<!--            <i class="fab fa-google-plus mr-2"></i>-->
+<!--            <asl-google-signin-button #googleButton type='icon' size='medium' class="d-none"></asl-google-signin-button>-->
+<!--            Google-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
-  <br>
-  <a [routerLink]="['../../registration']" class="text-center">Vytvořit účet pomocí emailu</a>
 </div>
+
+
+
+
+
+
+
+<!--<p class="login-box-msg">Přihlášení do systému</p>-->
+<!--<div class="social-auth-links text-center">-->
+<!--  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">-->
+<!--    <p class="alert alert-success" *ngIf="activated">Účet byl aktivován, nyní se můžete přihlásit.</p>-->
+<!--    <div class="form-group">-->
+<!--      <div  class="input-group mb-3">-->
+<!--        <input type="email" class="form-control" placeholder="Email" formControlName="email">-->
+<!--        <div class="input-group-text">-->
+<!--          <span class="fas fa-envelope"></span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="small text-danger" *ngIf="email && email.invalid && (email.touched) && email.errors?.['required']">-->
+<!--        Toto pole je povinné-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      <div class="input-group mb-3">-->
+<!--        <input type="password" class="form-control" placeholder="Heslo" formControlName="password">-->
+<!--        <div class="input-group-text">-->
+<!--          <span class="fas fa-lock"></span>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="small text-danger" *ngIf="password && password.invalid && (password.touched) && password.errors?.['required']">-->
+<!--        Toto pole je povinné-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="form-group">-->
+<!--      &lt;!&ndash; /.col &ndash;&gt;-->
+<!--      <div class="d-flex flex-row-reverse">-->
+<!--        <button type="submit" class="btn btn-primary btn-block">Přihlásit</button>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /.col &ndash;&gt;-->
+<!--    </div>-->
+<!--  </form>-->
+<!--  <p>- NEBO -</p>-->
+<!--  <div class="d-grid gap-2">-->
+<!--    <div class="btn btn-block btn-primary" (click)="socialLoginService.loginFacebook()">-->
+<!--      <i class="fab fa-facebook mr-2"></i>-->
+<!--      Přihlásit přes Facebook-->
+<!--    </div>-->
+<!--    <div class="btn btn-block btn-danger" (click)="socialLoginService.loginGoogle(googleButton)">-->
+<!--      <i class="fab fa-google-plus mr-2"></i>-->
+<!--      <asl-google-signin-button #googleButton type='icon' size='medium' class="d-none"></asl-google-signin-button>-->
+<!--      Přihlásit přes Google-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <br>-->
+<!--  <a [routerLink]="['../../registration']" class="text-center">Vytvořit účet pomocí emailu</a>-->
+<!--</div>-->
 
 
 
