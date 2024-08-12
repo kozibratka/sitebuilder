@@ -223,3 +223,8 @@
   background: #fbceb5;
   color: #fff; }
 }
+
+.progres-line {
+  z-index: 9999;
+  position: fixed;
+}

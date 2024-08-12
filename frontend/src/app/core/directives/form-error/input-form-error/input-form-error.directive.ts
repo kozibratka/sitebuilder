@@ -18,7 +18,6 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
   @ContentChild(NgControl, {read: ElementRef}) formInputElementRef: ElementRef;
   @ContentChild('errorFormContainer', {read: ViewContainerRef}) errorFormContainer: ViewContainerRef;
   private errorMessageComonent: ErrorMessageComponent;
-  private cleanErrorMessageListenerFnc: () => void;
 
   constructor(
     private resolve: ComponentFactoryResolver,
@@ -49,11 +48,9 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
         }
       }
     });
-    this.registerErrorMessageClean();
   }
 
   ngOnDestroy(): void {
-    this.cleanErrorMessageListenerFnc();
   }
 
   createErrorMessage(): void {
@@ -62,12 +59,6 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy{
     if (this.selfInput?.errors) {
       this.errorMessageComonent.errors = this.selfInput.errors;
     }
-  }
-
-  registerErrorMessageClean(): void {
-    this.cleanErrorMessageListenerFnc = this.renderer2.listen(this.formInputElementRef.nativeElement, 'blur', (event) => {
-      this.clearMessage();
-    });
   }
 
   clearMessage(): void {

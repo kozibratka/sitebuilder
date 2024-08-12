@@ -20,7 +20,8 @@ class UserRegistrationType extends AbstractType
             ->add('fullName', TextType::class, ['empty_data' => ''])
             ->add('email', EmailType::class, ['empty_data' => ''])
             ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class, 'invalid_message' => 'hesla se neshodují, zkuste to prosím znovu'
+                'type' => PasswordType::class,
+                'invalid_message' => 'hesla se neshodují, zkuste to prosím znovu',
             ])
             ;
     }

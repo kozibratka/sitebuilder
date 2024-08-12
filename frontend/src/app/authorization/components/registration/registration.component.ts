@@ -7,6 +7,7 @@ import {HttpResponseToasterService} from '../../../core/services/http-response-t
 import {ApiFormService} from "../../../core/services/form/api-form.service";
 import {InputFormErrorDirective} from "../../../core/directives/form-error/input-form-error/input-form-error.directive";
 import {NgIf} from "@angular/common";
+import {GoogleSigninButtonModule} from "@abacritt/angularx-social-login";
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +17,8 @@ import {NgIf} from "@angular/common";
     ReactiveFormsModule,
     InputFormErrorDirective,
     NgIf,
-    RouterLink
+    RouterLink,
+    GoogleSigninButtonModule
   ],
   styleUrls: ['./registration.component.css']
 })
@@ -38,7 +40,7 @@ export class RegistrationComponent implements OnInit {
           // this.activationSend = true;
           this.loginClientService.tryLogin(this.registrationForm.get('email')?.value,
             this.registrationForm.get('password')?.get('first')?.value).subscribe({
-            next: () => this.router.navigate(['/admin', httpResponse.body]),
+            next: () => this.router.navigate(['/']),
           });
         });
       }

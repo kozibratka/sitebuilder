@@ -1,53 +1,43 @@
-<p class="login-box-msg">Registrace do systému</p>
-<div class="social-auth-links">
-  <p *ngIf="activationSend">
-    Registrace proběhla úspěšně, na email vám byl zaslán odkaz pro aktivaci vašeho nového účtu.
-  </p>
-  <form *ngIf="!activationSend" [formGroup]="registrationForm">
-    <div appFormError class="form-group mb-3">
-      <div #errorFormContainer class="input-group">
-        <input type="text" class="form-control" placeholder="Celé jméno" formControlName="fullName">
-          <div class="input-group-text">
-            <span class="fas fa-user"></span>
-          </div>
-      </div>
-    </div>
-    <div appFormError class="form-group mb-3">
-      <div #errorFormContainer class="input-group">
-        <input type="email" class="form-control" placeholder="Email" formControlName="email">
-          <div class="input-group-text">
-            <span class="fas fa-envelope"></span>
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center mb-5">
+    <h2 class="heading-section">Registrace do systému</h2>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="login-wrap p-0">
+      <form *ngIf="!activationSend" [formGroup]="registrationForm" class="signin-form">
+        <div appFormError class="form-group">
+          <div #errorFormContainer class="input-group">
+            <input type="text" class="form-control" placeholder="Celé jméno" formControlName="fullName">
           </div>
         </div>
-    </div>
-    <div formGroupName="password">
-      <div appFormError class="form-group mb-3">
-        <div #errorFormContainer class="input-group">
-          <input type="password" class="form-control" placeholder="Heslo" formControlName="first">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
+        <div appFormError class="form-group">
+          <div #errorFormContainer class="input-group">
+            <input type="text" class="form-control" placeholder="Email" formControlName="email">
+          </div>
         </div>
-      </div>
-      <div appFormError class="form-group mb-3">
-        <div #errorFormContainer class="input-group">
-          <input type="password" class="form-control" placeholder="Heslo znovu" formControlName="second">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+        <div appFormError formGroupName="password">
+          <div class="form-group">
+            <div #errorFormContainer class="input-group">
+              <input type="password" class="form-control" placeholder="Heslo" formControlName="first">
             </div>
+          </div>
+          <div appFormError class="form-group">
+            <div #errorFormContainer class="input-group">
+              <input type="password" class="form-control" placeholder="Heslo znovu" formControlName="second">
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="form-group">
+          <button type="submit" class="form-control btn btn-primary submit px-3">Vytvořit účet</button>
+        </div>
+        <div class="form-group d-flex">
+          <div class="w-100 text-center">
+            <a style="color: #fff; text-decoration: underline" [routerLink]="['../login']" class="">Přihlásit se</a>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-      <!-- /.col -->
-      <div class="d-flex flex-row-reverse">
-        <button type="submit" class="btn btn-primary btn-block">Vytvořit účet</button>
-      </div>
-      <!-- /.col -->
-    </div>
-  </form>
-  <br>
-  <div class="text-center">
-    <a [routerLink]="['../login']" class="text-center">Přihlásit se</a>
   </div>
 </div>

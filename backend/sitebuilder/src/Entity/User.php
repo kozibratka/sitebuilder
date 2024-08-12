@@ -50,7 +50,7 @@ class User implements UserInterface
      * @Serializer\Exclude()
      */
     #[ORM\Column(type: 'string')]
-    private string $password = '';
+    private ?string $password = '';
 
     #[ORM\OneToMany(targetEntity: Web::class, mappedBy: 'user', cascade: ['persist'])]
     private Collection $webs;
@@ -59,7 +59,7 @@ class User implements UserInterface
      * @Serializer\Groups({"default", "user"})
      */
     #[ORM\Column(type: 'boolean')]
-    private bool $lockBuilderMenu = false;
+    private bool $lockBuilderMenu = true;
 
     #[ORM\Column(type: 'json')]
     /**
@@ -72,7 +72,7 @@ class User implements UserInterface
 
     #[ORM\Column(type: 'login_type_enum')]
     private LoginTypeEnum $loginType = LoginTypeEnum::Form;
-    #[ORM\Column(type: 'simple_array')]
+    #[ORM\Column(type: 'simple_array', nullable: true)]
     private array $loginAttr = [];
 
     public function __construct()
@@ -111,12 +111,12 @@ class User implements UserInterface
         }
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password) {
+    public function setPassword(?string $password) {
         $this->password = $password;
     }
 
