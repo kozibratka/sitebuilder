@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {
+  faBell,
   faFile,
   faFileCode,
   faFolder,
@@ -56,6 +57,7 @@ export class Layout2Component {
   faFileCode = faFileCode;
   faFolder = faFolder;
   faUserCircle = faUserCircle;
+  faBell = faBell;
 
   constructor(
     private route: ActivatedRoute,
@@ -116,4 +118,5 @@ export class Layout2Component {
     ).subscribe(checkMenuDisplay);
     checkMenuDisplay(this.router.url);
   }
+
 }

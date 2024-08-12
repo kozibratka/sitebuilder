@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RegisterFormService} from '../../services/register-form.service';
+import {RegisterFormService} from '../../services/form/register-form.service';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {LoginClientService} from '../../services/login-client.service';

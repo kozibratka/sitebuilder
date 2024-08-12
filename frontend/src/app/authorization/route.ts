@@ -2,6 +2,7 @@ import {AuthorizationComponent} from "./pages/authorization/authorization.compon
 import {RegistrationComponent} from "./components/registration/registration.component";
 import {LoginComponent} from "./components/login/login.component";
 import {Routes} from "@angular/router";
+import {PasswordForgottenComponent} from "./components/password-forgotten/password-forgotten.component";
 
 export default   [
   {
@@ -16,6 +17,10 @@ export default   [
       {
         path: 'login/:activated',
         component: LoginComponent
+      },
+      {
+        path: 'password-forgotten',
+        component: PasswordForgottenComponent
       }
     ]
   }

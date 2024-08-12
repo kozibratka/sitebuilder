@@ -22,4 +22,8 @@ export class NotifierService {
         break;
     }
   }
+
+  success(message: string) {
+    this.toastrService.success(message);
+  }
 }

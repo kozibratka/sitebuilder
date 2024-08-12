@@ -1,5 +1,5 @@
 import {Component, importProvidersFrom, OnDestroy, OnInit} from '@angular/core';
-import {LoginFormService} from '../../services/login-form.service';
+import {LoginFormService} from '../../services/form/login-form.service';
 import {AbstractControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';

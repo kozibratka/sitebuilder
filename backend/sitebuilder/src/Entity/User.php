@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 
+use App\Constant\Limit;
 use App\Entity\Web\Web;
 use App\Enum\LoginTypeEnum;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -39,7 +40,7 @@ class User implements UserInterface
     /**
      * @Assert\NotBlank
      * @Assert\Email
-     * @Serializer\Groups({"default", "user"})
+     * @Serializer\Groups({"default", "user", "email"})
      */
     #[ORM\Column(type: 'string')]
     private string $email = '';
@@ -74,10 +75,17 @@ class User implements UserInterface
     private LoginTypeEnum $loginType = LoginTypeEnum::Form;
     #[ORM\Column(type: 'simple_array', nullable: true)]
     private array $loginAttr = [];
+    #[Assert\Count(
+        max: Limit::RESET_PASSWORD_ATTEMPTS,
+        maxMessage: 'You cannot specify more than {{limit}}',
+    )]
+    #[ORM\OneToMany(targetEntity: ResetPassword::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $resetPasswords;
 
     public function __construct()
     {
         $this->webs = new ArrayCollection();
+        $this->resetPasswords = new ArrayCollection();
     }
 
     public function getId(): int
@@ -209,4 +217,28 @@ class User implements UserInterface
     {
         $this->loginAttr = $loginAttr;
     }
+
+    public function getResetPasswords(): Collection
+    {
+        return $this->resetPasswords;
+    }
+
+    public function setResetPasswords(Collection $resetPasswords): void
+    {
+        $this->resetPasswords = $resetPasswords;
+    }
+
+    public function addResetPassword($resetPassword)
+    {
+        $this->resetPasswords->add($resetPassword);
+        $resetPassword->setUser($this);
+    }
+
+    public function removeResetPassword($resetPassword)
+    {
+        $this->resetPasswords->removeElement($resetPassword);
+        $resetPassword->setUser(null);
+    }
+
+
 }

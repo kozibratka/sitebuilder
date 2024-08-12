@@ -16,4 +16,6 @@ class Limit
     const WEBS = 4;
     const PLUGIN_ITEMS = 100;
     const PLUGIN_FORM_DATA_ITEMS = 500;
+
+    const RESET_PASSWORD_ATTEMPTS = 20;
 }

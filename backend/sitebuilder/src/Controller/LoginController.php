@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Constant\Limit;
 use App\Constant\Role;
+use App\Entity\ResetPassword;
 use App\Entity\User;
-use App\Entity\Web\Web;
 use App\Enum\LoginTypeEnum;
-use App\Enum\LoginTypeEnumType;
 use App\Exception\CustomErrorMessageException;
-use App\Form\UserRegistrationType;
-use App\Helper\Helper;
+use App\Form\LoginRegistration\ResendPasswordLinkType;
+use App\Form\LoginRegistration\UserRegistrationType;
 use App\Service\Storage\UserStorageService;
 use App\Service\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\RateLimiter\RateLimiterFactory;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -119,5 +121,43 @@ class LoginController extends BaseApiController
      */
     public function createToken() {
         return new JsonResponse(['yes new token']);
+    }
+
+    #[Route('/send-link-reset-password', name: 'link_reset_password')]
+
+    public function sendLinkResetPassword(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        TranslatorInterface $translator,
+        MailerInterface $mailer
+    )
+    {
+        $form = $this->createForm(ResendPasswordLinkType::class, null, ['validation_groups' => ['email']]);
+        $form->submit($request->request->all());
+        if ($form->isValid()) {
+            $data = $form->getData();
+            /** @var User $user */
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $data->getEmail(), 'loginType' => LoginTypeEnum::Form]);
+            if ($user) {
+                $resetPassword = new ResetPassword();
+                $user->addResetPassword($resetPassword);
+                if ($user->getResetPasswords()->count() > Limit::RESET_PASSWORD_ATTEMPTS) {
+                    throw new CustomErrorMessageException('Překročen limit pokusů obnovy hesla');
+                }
+
+                $email = (new TemplatedEmail())
+                ->from($this->getParameter('app.email_no_reply'))
+                ->to(new Address($user->getEmail()))
+                ->subject($translator->trans('Password recovery'))
+                ->htmlTemplate('email/LoginRegistration/password_reset_link.html.twig')
+                ->context([
+                    'hash' => $resetPassword->getHashId(),
+                ]);
+                $entityManager->flush();
+                $mailer->send($email);
+                return $this->jsonResponseSimple();
+            }
+            throw new CustomErrorMessageException('Email nenalezen');
+        }
     }
 }
