@@ -20,7 +20,7 @@ security:
                 username_path: email
 
         register:
-            pattern: ^/login/(registration|social)
+            pattern: ^/login
             stateless: true
             anonymous: true
 
@@ -52,10 +52,7 @@ security:
         ROLE_ADMIN: ROLE_USER
 
     access_control:
-         - { path: ^/login/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/login/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/login/activation, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/login/social, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-preview, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/page/get-public, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/plugin/plugin-form/save-data, roles: IS_AUTHENTICATED_ANONYMOUSLY }

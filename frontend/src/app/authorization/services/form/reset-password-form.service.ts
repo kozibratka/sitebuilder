@@ -12,7 +12,10 @@ export class ResetPasswordFormService {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      password: ['', Validators.required]
+      password: this.formBuilder.group({
+        first: '',
+        second: ''
+      }),
     }, {updateOn: 'submit'});
   }
 }

@@ -3,6 +3,8 @@ import {RegistrationComponent} from "./components/registration/registration.comp
 import {LoginComponent} from "./components/login/login.component";
 import {Routes} from "@angular/router";
 import {PasswordForgottenComponent} from "./components/password-forgotten/password-forgotten.component";
+import {ResetPasswordComponent} from "./components/reset-password/reset-password.component";
+import {resetPasswordGuard} from "./resolvers/reset-password.guard";
 
 export default   [
   {
@@ -21,6 +23,11 @@ export default   [
       {
         path: 'password-forgotten',
         component: PasswordForgottenComponent
+      },
+      {
+        path: 'reset-password/:hash',
+        component: ResetPasswordComponent,
+        canActivate: [resetPasswordGuard],
       }
     ]
   }

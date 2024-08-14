@@ -25,7 +25,7 @@ class ResetPassword
 
     public function __construct()
     {
-        $this->hashId = Helper::randomString(20);
+        $this->hashId = Helper::randomString(30);
     }
 
 

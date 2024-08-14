@@ -40,10 +40,8 @@ services:
 
     App\EventListener\Doctrine\UserPasswordEncodeListener:
         tags:
-            -
-                name: doctrine.orm.entity_listener
-                event: prePersist
-                entity: 'App\Entity\User'
+            - { name: doctrine.orm.entity_listener, event: prePersist, entity: 'App\Entity\User' }
+            - { name: doctrine.orm.entity_listener, event: preUpdate, entity: 'App\Entity\User' }
 
     App\EventListener\Doctrine\PageBuilder\PluginResolveIdentifierListener:
         tags:

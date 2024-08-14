@@ -38,16 +38,16 @@ class User implements UserInterface
     private string $fullName = '';
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Email
-     * @Serializer\Groups({"default", "user", "email"})
+     * @Assert\NotBlank(groups={"FORM", "email"}))
+     * @Assert\Email(groups={"FORM", "email"}))
+     * @Serializer\Groups({"default", "user"})
      */
     #[ORM\Column(type: 'string')]
     private string $email = '';
 
     /**
-     * @Assert\NotBlank(groups={"FORM"}))
-     * @Assert\Length(min="6", groups={"FORM"})
+     * @Assert\NotBlank(groups={"FORM", "password"}))
+     * @Assert\Length(min="6", groups={"FORM", "password"})
      * @Serializer\Exclude()
      */
     #[ORM\Column(type: 'string')]

@@ -11,9 +11,11 @@ use App\Entity\User;
 use App\Enum\LoginTypeEnum;
 use App\Exception\CustomErrorMessageException;
 use App\Form\LoginRegistration\ResendPasswordLinkType;
+use App\Form\LoginRegistration\ResetPasswordType;
 use App\Form\LoginRegistration\UserRegistrationType;
 use App\Service\Storage\UserStorageService;
 use App\Service\UserService;
+use Carbon\Carbon;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -124,7 +126,6 @@ class LoginController extends BaseApiController
     }
 
     #[Route('/send-link-reset-password', name: 'link_reset_password')]
-
     public function sendLinkResetPassword(
         Request $request,
         EntityManagerInterface $entityManager,
@@ -145,19 +146,49 @@ class LoginController extends BaseApiController
                     throw new CustomErrorMessageException('Překročen limit pokusů obnovy hesla');
                 }
 
-                $email = (new TemplatedEmail())
-                ->from($this->getParameter('app.email_no_reply'))
-                ->to(new Address($user->getEmail()))
-                ->subject($translator->trans('Password recovery'))
-                ->htmlTemplate('email/LoginRegistration/password_reset_link.html.twig')
-                ->context([
-                    'hash' => $resetPassword->getHashId(),
-                ]);
+//                $email = (new TemplatedEmail())
+//                ->from($this->getParameter('app.email_no_reply'))
+//                ->to(new Address($user->getEmail()))
+//                ->subject($translator->trans('Password recovery'))
+//                ->htmlTemplate('email/LoginRegistration/password_reset_link.html.twig')
+//                ->context([
+//                    'link' => $this->getParameter('app.domain').'/authorization/reset-password/'.$resetPassword->getHashId(),
+//                ]);
                 $entityManager->flush();
-                $mailer->send($email);
+//                $mailer->send($email);
                 return $this->jsonResponseSimple();
             }
             throw new CustomErrorMessageException('Email nenalezen');
+        } else {
+            return $this->invalidFormResponse($form);
         }
+    }
+
+    #[Route('/reset-password/{hash}', name: 'reset_password')]
+    public function resetPassword(
+        $hash,
+        Request $request,
+        EntityManagerInterface $entityManager,
+    )
+    {
+        $resetPassword = $entityManager->getRepository(ResetPassword::class)->findOneBy(['hashId' => $hash]);
+        if ($resetPassword) {
+            if ($resetPassword->getCreatedAt() < Carbon::now()->subMinutes(30)) {
+                throw new CustomErrorMessageException('Odkaz expiroval');
+            }
+        }
+        $form = $this->createForm(ResetPasswordType::class, $resetPassword->getUser(), ['validation_groups' => ['password']]);
+        if ($request->isMethod('POST')) {
+            $form->submit($request->request->all());
+        }
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $entityManager->flush();
+            } else {
+                return $this->invalidFormResponse($form);
+            }
+        }
+
+        return $this->jsonResponseSimple();
     }
 }
