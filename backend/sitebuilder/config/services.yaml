@@ -5,8 +5,9 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app.domain: '%env(APP_DOMAIN)%'
+    app.email_domain: '%env(APP_EMAIL_DOMAIN)%'
     app.port: '%env(PUBLIC_SERVER_PORT)%'
-    app.email_no_reply: 'noreply@%app.domain%'
+    app.email_no_reply: 'fotoporezany@%app.email_domain%'
     app.date_time_format: 'd.m.Y H:i:s'
     app.google_login_token: '923543574323-vpos32ti6erndrilgnofmjcq98oq1k2g.apps.googleusercontent.com'
 
@@ -123,3 +124,10 @@ services:
         arguments:
             - host: '%env(REDIS_HOST)%'
             - port: '%env(int:REDIS_PORT)%'
+
+    app.my_custom_redis_provider:
+        class: Redis
+        factory: [ 'Symfony\Component\Cache\Adapter\RedisAdapter', 'createConnection' ]
+        arguments:
+            - 'redis://%env(REDIS_HOST)%:%env(int:REDIS_PORT)%'
+            - { retry_interval: 2, timeout: 10 }

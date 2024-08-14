@@ -7,7 +7,11 @@ use App\Entity\Web\Web;
 use App\Helper\Helper;
 use App\Service\Storage\UserStorageService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserService
 {
@@ -15,26 +19,25 @@ class UserService
         private ParameterBagInterface $parameterBag,
         private EntityManagerInterface $entityManager,
         private UserStorageService $userStorageService,
+        private TranslatorInterface $translator,
+        private MailerInterface $mailer
     )
     {
     }
 
     public function create(User $user, $withStorage = true)
     {
-//        $newWeb = (new Web())->setName('Můj nový web '.(new \DateTime())->format($this->parameterBag->get('app.date_time_format')));
-//        $user->addWeb($newWeb);
         $hash = Helper::randomString(20);
         $user->setHash($hash);
-        $user->addRole('ROLE_USER'); // default empty, activation email set role!!!
-//            $email = (new TemplatedEmail())
-//                ->from($this->getParameter('app.email_no_reply'))
-//                ->to(new Address($user->getEmail()))
-//                ->subject($translator->trans('New Registration account'))
-//                ->htmlTemplate('email/account_activation.html.twig')
-//                ->context([
-//                    'hash' => $hash,
-//                ]);
-//            $mailer->send($email);
+            $email = (new TemplatedEmail())
+                ->from($this->parameterBag->get('app.email_no_reply'))
+                ->to(new Address($user->getEmail()))
+                ->subject($this->translator->trans('New Registration account'))
+                ->htmlTemplate('email/LoginRegistration/account_activation.html.twig')
+                ->context([
+                    'link' => $this->parameterBag->get('app.domain').'/authorization/activation/'.$hash,
+                ]);
+            $this->mailer->send($email);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

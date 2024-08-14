@@ -67,14 +67,18 @@ class LoginController extends BaseApiController
         UserStorageService $storageService,
         RateLimiterFactory $registrationApiLimiter
     ) {
+        if (!$hash) {
+            throw new CustomErrorMessageException('Activation failed');
+        }
         $limiter = $registrationApiLimiter->create($request->getClientIp());
         $limiter->consume(1)->ensureAccepted();
         $user = $entityManager->getRepository(User::class)->findOneBy(['hash' => $hash]);
         if ($user) {
             $user->addRole(Role::ROLE_USER);
+            $user->setHash('');
             $entityManager->flush();
             $storageService->createStorageForNewUser($user);
-            return $this->redirect($this->getParameter('app.domain').'/authorization/login/1');
+            return $this->jsonResponseSimple();
         }
 
         throw new CustomErrorMessageException('Activation failed');
@@ -146,16 +150,16 @@ class LoginController extends BaseApiController
                     throw new CustomErrorMessageException('Překročen limit pokusů obnovy hesla');
                 }
 
-//                $email = (new TemplatedEmail())
-//                ->from($this->getParameter('app.email_no_reply'))
-//                ->to(new Address($user->getEmail()))
-//                ->subject($translator->trans('Password recovery'))
-//                ->htmlTemplate('email/LoginRegistration/password_reset_link.html.twig')
-//                ->context([
-//                    'link' => $this->getParameter('app.domain').'/authorization/reset-password/'.$resetPassword->getHashId(),
-//                ]);
+                $email = (new TemplatedEmail())
+                ->from($this->getParameter('app.email_no_reply'))
+                ->to(new Address($user->getEmail()))
+                ->subject($translator->trans('Password recovery'))
+                ->htmlTemplate('email/LoginRegistration/password_reset_link.html.twig')
+                ->context([
+                    'link' => $this->getParameter('app.domain').'/authorization/reset-password/'.$resetPassword->getHashId(),
+                ]);
                 $entityManager->flush();
-//                $mailer->send($email);
+                $mailer->send($email);
                 return $this->jsonResponseSimple();
             }
             throw new CustomErrorMessageException('Email nenalezen');
@@ -176,6 +180,8 @@ class LoginController extends BaseApiController
             if ($resetPassword->getCreatedAt() < Carbon::now()->subMinutes(30)) {
                 throw new CustomErrorMessageException('Odkaz expiroval');
             }
+        } else {
+            throw new CustomErrorMessageException('Obnova hesla se nezdařila');
         }
         $form = $this->createForm(ResetPasswordType::class, $resetPassword->getUser(), ['validation_groups' => ['password']]);
         if ($request->isMethod('POST')) {

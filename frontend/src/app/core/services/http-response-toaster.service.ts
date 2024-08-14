@@ -27,7 +27,7 @@ export class HttpResponseToasterService {
             completedMessage = 'Operace zamítnuta. Ujistěte se, že máte dostatečná práva.';
             break;
           case 401:
-            completedMessage = 'Nemáte oprávnění na tento obsah nebo expiroval váš token.';
+            completedMessage = error.error.message;
             break;
           case 400:
             // completedMessage = error.error ? error.error : 'Server nemůže zpracovat požadavek';

@@ -18,6 +18,7 @@ class ResetPassword
     #[ORM\Column(type: 'string')]
     private string $hashId = '';
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'resetPassword')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private User $user;
     #[ORM\Column(type: 'datetime')]
     #[Timestampable(on: 'create')]

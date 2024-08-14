@@ -1,0 +1,24 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 text-center mb-5">
+    <h2 class="heading-section">Aktivace nového účtu</h2>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-5">
+    <div class="login-wrap p-0">
+        @if(activated) {
+          <p class="text-center">Váš účet byl úspěšně aktivován. Přihlaste se na odkazu níže:</p>
+          <div class="form-group d-flex">
+            <div class="w-100 text-center">
+              <a style="color: #fff; text-decoration: underline" [routerLink]="['../../login']" class="">Přihlásit se</a>
+            </div>
+          </div>
+        } @else {
+          <p class="text-center">Probíhá aktivace účtu. Vyčkejte prosím...</p>
+        }
+    </div>
+  </div>
+</div>
+
+
+

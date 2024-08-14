@@ -70,9 +70,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/admin', 0]);
       },
       error: (err: HttpErrorResponse) => {
-        if (err.status === 401) {
-          this.httpResponseToasterService.showError('Nepodařilo se přihlásit. Ujistěte se, že jste zadali správné přihlašovací údaje.');
-        }
+        // if (err.status === 401) {
+        //   this.httpResponseToasterService.showError('Nepodařilo se přihlásit. Ujistěte se, že jste zadali správné přihlašovací údaje.');
+        // }
       }
     });
   }

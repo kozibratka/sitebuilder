@@ -1,4 +1,5 @@
 security:
+    enable_authenticator_manager: true
     encoders:
         App\Entity\User:
             algorithm: 'auto'
@@ -11,8 +12,8 @@ security:
     firewalls:
         login:
             pattern: ^/login/token
+            login_throttling: true
             stateless: true
-            anonymous: true
             json_login:
                 check_path: /login/token
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -22,17 +23,14 @@ security:
         register:
             pattern: ^/login
             stateless: true
-            anonymous: true
 
         public:
             pattern: ^/page/(get-preview|get-public)
             stateless: true
-            anonymous: true
 
         public_plugin_endpoint:
             pattern: ^/plugin/(plugin-form/save-data)
             stateless: true
-            anonymous: true
 
         api:
             pattern:   ^/
@@ -45,7 +43,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
             lazy: true
 
     role_hierarchy:
