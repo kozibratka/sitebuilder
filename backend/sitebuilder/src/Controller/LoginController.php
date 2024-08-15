@@ -44,11 +44,11 @@ class LoginController extends BaseApiController
         RateLimiterFactory $registrationApiLimiter,
         UserService $userService
     ){
-        $limiter = $registrationApiLimiter->create($request->getClientIp());
-        $limiter->consume(1)->ensureAccepted();
         $form = $this->createForm(UserRegistrationType::class, null, ['validation_groups' => ['Default', 'FORM']]);
         $form->submit($request->request->all());
         if ($form->isValid()) {
+            $limiter = $registrationApiLimiter->create($request->getClientIp().'registration');
+            $limiter->consume(1)->ensureAccepted();
             /** @var User $user */
             $user = $form->getData();
             $userService->create($user); // Activation email is better - after create storage...
@@ -65,13 +65,10 @@ class LoginController extends BaseApiController
                 $hash,
         EntityManagerInterface $entityManager,
         UserStorageService $storageService,
-        RateLimiterFactory $registrationApiLimiter
     ) {
         if (!$hash) {
             throw new CustomErrorMessageException('Activation failed');
         }
-        $limiter = $registrationApiLimiter->create($request->getClientIp());
-        $limiter->consume(1)->ensureAccepted();
         $user = $entityManager->getRepository(User::class)->findOneBy(['hash' => $hash]);
         if ($user) {
             $user->addRole(Role::ROLE_USER);
@@ -91,7 +88,7 @@ class LoginController extends BaseApiController
                                 ParameterBagInterface $parameterBag,
                                 EntityManagerInterface $entityManager,
                                 JWTTokenManagerInterface $JWTManager,
-                                UserStorageService $storageService,
+                                RateLimiterFactory $registrationApiLimiter,
     )
     {
         $data = $request->request->all('user');
@@ -108,9 +105,13 @@ class LoginController extends BaseApiController
             $data = file_get_contents('https://graph.facebook.com/me?fields=email,name&access_token='.$data['authToken']);
             $data = json_decode($data, true);
         }
+        if (!isset($data['email']) || !$data['email']) {
+            throw new CustomErrorMessageException('Activation failed');
+        }
         $email = $data['email'];
         $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email, 'loginType' => $type]);
         if (!$user) {
+            $registrationApiLimiter->create($request->getClientIp().'login_social')->consume(2)->ensureAccepted();
             $user = new User();
             $user->setEmail($data['email']);
             $user->setFullName($data['name']);
@@ -134,9 +135,12 @@ class LoginController extends BaseApiController
         Request $request,
         EntityManagerInterface $entityManager,
         TranslatorInterface $translator,
-        MailerInterface $mailer
+        MailerInterface $mailer,
+        RateLimiterFactory $registrationApiLimiter,
     )
     {
+        $limiter = $registrationApiLimiter->create($request->getClientIp().'send_password_link');
+        $limiter->consume(1)->ensureAccepted();
         $form = $this->createForm(ResendPasswordLinkType::class, null, ['validation_groups' => ['email']]);
         $form->submit($request->request->all());
         if ($form->isValid()) {
@@ -173,8 +177,10 @@ class LoginController extends BaseApiController
         $hash,
         Request $request,
         EntityManagerInterface $entityManager,
+        RateLimiterFactory $registrationApiLimiter,
     )
     {
+        $registrationApiLimiter->create($request->getClientIp().'reset_password')->consume(1)->ensureAccepted();
         $resetPassword = $entityManager->getRepository(ResetPassword::class)->findOneBy(['hashId' => $hash]);
         if ($resetPassword) {
             if ($resetPassword->getCreatedAt() < Carbon::now()->subMinutes(30)) {
