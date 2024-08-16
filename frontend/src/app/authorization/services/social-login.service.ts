@@ -30,7 +30,7 @@ export class SocialLoginService {
       this.symfonyApiClient.post<any>('login_social', {user, type: 'Google'}).subscribe({
           next: (value) => {
             this.symfonyApiClient.token = value.body.token;
-            this.router.navigate(['/']);
+            this.router.navigate(['/admin/0']);
           },
         }
       );
@@ -49,7 +49,7 @@ export class SocialLoginService {
       this.symfonyApiClient.post<any>('login_social', {user, type: 'Facebook'}).subscribe({
           next: (value) => {
             this.symfonyApiClient.token = value.body.token;
-            this.router.navigate(['/']);
+            this.router.navigate(['/admin/0']);
           },
         }
       );

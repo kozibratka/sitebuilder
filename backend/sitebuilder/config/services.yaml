@@ -6,6 +6,7 @@
 parameters:
     app.domain: '%env(APP_DOMAIN)%'
     app.email_domain: '%env(APP_EMAIL_DOMAIN)%'
+    app.website_domain: '%env(APP_WEBSITE_DOMAIN)%'
     app.port: '%env(PUBLIC_SERVER_PORT)%'
     app.email_no_reply: 'fotoporezany@%app.email_domain%'
     app.date_time_format: 'd.m.Y H:i:s'

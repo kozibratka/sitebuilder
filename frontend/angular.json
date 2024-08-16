@@ -67,8 +67,8 @@
             },
             "public-dev": {
               "outputPath": "dist/frontend-public-dev",
-              "index": "src/public-index.html",
-              "browser": "src/public-main.ts",
+              "index": "src/app/public/public-index.html",
+              "browser": "src/app/public/public-main.ts",
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
@@ -103,6 +103,38 @@
                 "src/assets/kaiadmin_lte/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js",
                 "src/assets/kaiadmin_lte/js/kaiadmin.js",
                 "src/assets/kaiadmin_lte/js/setting-demo.js"
+              ]
+            },
+            "website-dev": {
+              "outputPath": "dist/website-dev",
+              "index": "src/app/website/index.html",
+              "browser": "src/app/website/main.ts",
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": false,
+              "assets": [
+              ],
+              "styles": [
+                "src/assets/website/aos.css",
+                "src/assets/website/swiper-bundle.min.css",
+                "src/assets/website/glightbox.min.css",
+                "src/assets/website/bootstrap.min.css",
+                "src/assets/website/bootstrap-icons.css",
+                "src/assets/website/styles.css"
+              ],
+              "scripts": [
+                "src/assets/website/jquery.min.js",
+                "src/assets/website/glightbox.min.js",
+                "src/assets/website/bootstrap.bundle.min.js",
+                "src/assets/website/aos.js",
+                "src/assets/website/swiper-bundle.min.js",
+                "src/assets/website/plugins.js",
+                "src/assets/website/purecounter_vanilla.js",
+                "src/assets/website/validator.min.js",
+                "src/assets/website/contactform.js",
+                "src/assets/website/particles.js",
+                "src/assets/website/script.js",
+                "src/assets/website/main.js"
               ]
             }
           },

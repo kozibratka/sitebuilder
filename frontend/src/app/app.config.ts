@@ -1,7 +1,7 @@
 import {ApplicationConfig, importProvidersFrom} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { routes, publicRoutes } from './app.routes';
+import { routes } from './app.routes';
 import {provideHttpClient} from "@angular/common/http";
 import {provideToastr} from "ngx-toastr";
 import { SortablejsModule } from 'nxt-sortablejs';
@@ -15,6 +15,7 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule
 } from "@abacritt/angularx-social-login";
+import {publicRoutes} from "./public/route";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -47,15 +48,3 @@ export const appConfig: ApplicationConfig = {
     PluginsProvider,
   ]
 };
-
-export const appConfigPublic: ApplicationConfig = {
-  providers: [
-    provideRouter(publicRoutes),
-    provideHttpClient(),
-    provideToastr(),
-    provideAnimations(),
-    importProvidersFrom(FontAwesomeModule),
-    PluginsProvider,
-  ]
-};
-

@@ -9,7 +9,8 @@
   },
   "files": [
     "src/admin-main.ts",
-    "src/public-main.ts"
+    "src/app/public/public-main.ts",
+    "src/app/website/main.ts"
   ],
   "include": [
     "src/**/*.d.ts"
