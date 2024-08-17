@@ -20,4 +20,9 @@ export class SystemInfoService {
     hostName.unshift(environment.previewSubdomain);
     return hostName.join('.');
   }
+
+  getAdminHostname(path: string = '', protocol = true) {
+    let result = (protocol ? (environment.protocol+'://') : '')+environment.hostname+path;
+    return result;
+  }
 }

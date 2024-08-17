@@ -113,6 +113,7 @@
               "extractLicenses": false,
               "sourceMap": false,
               "assets": [
+                "src/assets/website"
               ],
               "styles": [
                 "src/assets/website/aos.css",
@@ -123,10 +124,10 @@
                 "src/assets/website/styles.css"
               ],
               "scripts": [
+                "src/assets/website/aos.js",
                 "src/assets/website/jquery.min.js",
                 "src/assets/website/glightbox.min.js",
                 "src/assets/website/bootstrap.bundle.min.js",
-                "src/assets/website/aos.js",
                 "src/assets/website/swiper-bundle.min.js",
                 "src/assets/website/plugins.js",
                 "src/assets/website/purecounter_vanilla.js",

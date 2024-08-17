@@ -2,19 +2,22 @@
   <div id="particles-js"><canvas class="particles-js-canvas-el" width="1847" height="700" style="width: 100%; height: 100%;"></canvas></div>
   <div id="repulse-circle-div"></div>
   <div class="container position-relative">
-    <div class="row gy-5 aos-init aos-animate">
-      <div class="col-lg-7 offset-lg-5 dark-bg order-lg-1 d-flex flex-column justify-content-start text-left caption">
-        <h2 data-aos="fade-up" class="aos-init aos-animate">Vytvořte si vlastní <span>webové stránky</span><span class="circle aos-init aos-animate" data-aos="fade-right" data-aos-delay="800">.</span></h2>
-        <p data-aos="fade-up" data-aos-delay="400" class="aos-init aos-animate">Pomocí našeho nástroje zvládne vytvořit web opravdu každý.</p>
-        <div class="social aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+    <div class="row gy-5 aos-init ">
+      <div class="col-lg-5 dark-bg order-lg-1 d-flex flex-column justify-content-start text-left caption">
+        <img data-aos="fade-up" alt="ukázka administrace" src="/assets/website/admin-screen.png" class="me-2">
+      </div>
+      <div class="col-lg-7 dark-bg order-lg-1 d-flex flex-column justify-content-start text-left caption">
+        <h2 data-aos="fade-up" class="aos-init ">Vytvořte si vlastní <span>webové stránky</span><span class="circle aos-init " data-aos="fade-right" data-aos-delay="800">.</span></h2>
+        <p data-aos="fade-up" data-aos-delay="400" class="aos-init ">Náš systému je ideální pro ty, kteří hledají rychlý, cenově dostupný a snadno použitelný způsob, jak vytvořit profesionální webové stránky, aniž by potřebovali hluboké technické znalosti.</p>
+        <div class="social aos-init " data-aos="fade-up" data-aos-delay="600">
           <a href="https://zrtechsolutions.com/demo/html/technoit/"><i class="bi bi-twitter"></i></a>
           <a href="https://zrtechsolutions.com/demo/html/technoit/"><i class="bi bi-facebook"></i></a>
           <a href="https://zrtechsolutions.com/demo/html/technoit/"><i class="bi bi-linkedin"></i></a>
           <a href="https://zrtechsolutions.com/demo/html/technoit/"><i class="bi bi-instagram"></i></a>
         </div>
         <div class="d-flex justify-content-start">
-          <a href="https://zrtechsolutions.com/demo/html/technoit/#contact" class="btn-get-started mr-20 aos-init aos-animate" data-aos="fade-up" data-aos-delay="800">Vytvořit web</a>
-          <a href="https://zrtechsolutions.com/demo/html/technoit/#services" class="btn-get-started aos-init aos-animate" data-aos="fade-up" data-aos-delay="1000">Get Started</a>
+          <a href="{{systemInfoService.getAdminHostname()}}" class="btn-get-started mr-20 aos-init " data-aos="fade-up" data-aos-delay="800">Vytvořit web</a>
+          <a href="#main" class="btn-get-started aos-init " data-aos="fade-up" data-aos-delay="1000">Zjistit více</a>
         </div>
       </div>
     </div>
@@ -27,59 +30,74 @@
     <div class="top-icon-box position-relative">
       <div class="container position-relative">
         <div class="row gy-4">
-
-          <div class="col-xl-4 col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+          <div class="section-header aos-init " data-aos="fade-up" data-aos-delay="100">
+            <h2>Proč používat náš systém?</h2>
+            <p>Podívejte se na výhody, které přináší náš systém na tvorbu internetových stránek:</p>
+          </div>
+          <div class="col-xl-4 col-md-4 aos-init " data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box">
-              <div class="icon"><img src="./it web template_files/service-design.svg" alt="icon"></div>
-              <h4 class="title"><a href="https://zrtechsolutions.com/demo/html/technoit/" class="stretched-link">Application Design</a></h4>
-              <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div class="icon pt-4">
+                <fa-icon [icon]="faMobileScreen" class=""></fa-icon>
+              </div>
+              <h4 class="title">Responsivita</h4>
+              <p>Náš sysstém automaticky optimalizuje webové stránky pro různá zařízení, což je klíčové pro moderní uživatelský zážitek</p>
             </div>
           </div>
           <!--End Icon Box -->
 
-          <div class="col-xl-4 col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-xl-4 col-md-4 aos-init " data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box">
-              <div class="icon"><img src="./it web template_files/service-hosting.svg" alt="icon"></div>
-              <h4 class="title"><a href="https://zrtechsolutions.com/demo/html/technoit/" class="stretched-link">Web Hosting</a></h4>
-              <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div class="icon pt-4">
+                <fa-icon [icon]="faDisplay" class=""></fa-icon>
+              </div>
+              <h4 class="title">Okamžitý náhled</h4>
+              <p>Systém umožňuje okamžitě vidět změny, které provádíte, což zrychluje rozhodování a ladění designu.</p>
             </div>
           </div>
           <!--End Icon Box -->
 
-          <div class="col-xl-4 col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-xl-4 col-md-4 aos-init " data-aos="fade-up" data-aos-delay="500">
             <div class="icon-box">
-              <div class="icon"><img src="./it web template_files/service-social.svg" alt="icon"></div>
-              <h4 class="title"><a href="https://zrtechsolutions.com/demo/html/technoit/" class="stretched-link">Social Media</a></h4>
-              <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div class="icon pt-4">
+                <fa-icon [icon]="faGaugeHigh" class=""></fa-icon>
+              </div>
+              <h4 class="title">Rychlá tvorba</h4>
+              <p>Díky možnosti přetahovat prvky a používat předpřipravené šablony mohou uživatelé vytvořit kompletní webové stránky během několika hodin nebo dokonce minut.</p>
             </div>
           </div>
           <!--End Icon Box -->
 
-          <div class="col-xl-4 col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+          <!--End Icon Box -->
+
+
+          <div class="col-xl-4 col-md-4 aos-init " data-aos="fade-up" data-aos-delay="200">
             <div class="icon-box">
-              <div class="icon"><img src="./it web template_files/service-seo.svg" alt="icon"></div>
-              <h4 class="title"><a href="https://zrtechsolutions.com/demo/html/technoit/" class="stretched-link">SEO Optimization</a></h4>
-              <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div class="icon pt-4">
+                <fa-icon [icon]="faChild" class=""></fa-icon>
+              </div>
+              <h4 class="title">Snadné použití</h4>
+              <p>Uživatelé nepotřebují žádné technické znalosti nebo zkušenosti s kódováním. Rozhraní je intuitivní a vizuální, což umožňuje snadnou tvorbu webových stránek.</p>
             </div>
           </div>
           <!--End Icon Box -->
 
-
-          <div class="col-xl-4 col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-xl-4 col-md-4 aos-init " data-aos="fade-up" data-aos-delay="500">
             <div class="icon-box">
-              <div class="icon"><img src="./it web template_files/service-cloud.svg" alt="icon"></div>
-              <h4 class="title"><a href="https://zrtechsolutions.com/demo/html/technoit/" class="stretched-link">Cloud Server</a></h4>
-              <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div class="icon pt-4">
+                <fa-icon [icon]="faRocket" class=""></fa-icon>
+              </div>
+              <h4 class="title">Rychlý start</h4>
+              <p>Lze začít prakticky okamžitě bez nutnosti instalovat software nebo se učit složité nástroje.</p>
             </div>
           </div>
-          <!--End Icon Box -->
 
-
-          <div class="col-xl-4 col-md-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-xl-4 col-md-4 aos-init " data-aos="fade-up" data-aos-delay="500">
             <div class="icon-box">
-              <div class="icon"><img src="./it web template_files/service-secure.svg" alt="icon"></div>
-              <h4 class="title"><a href="https://zrtechsolutions.com/demo/html/technoit/" class="stretched-link">Data Secuity</a></h4>
-              <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <div class="icon pt-4">
+                <fa-icon [icon]="faSackDollar"></fa-icon>
+              </div>
+              <h4 class="title">Žádné dodatečné náklady na vývoj</h4>
+              <p>Všechny potřebné funkce a nástroje jsou zahrnuty v platformě, takže uživatelé nemusí platit za dodatečné pluginy nebo nástroje.</p>
             </div>
           </div>
           <!--End Icon Box -->
@@ -93,14 +111,14 @@
   <!-- Featured -->
   <section>
     <div class="container" id="featured">
-      <div class="section-header aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+      <div class="section-header aos-init " data-aos="fade-up" data-aos-delay="100">
         <h2>Why Choose Us</h2>
         <p>Lorem ipsum dolor sit amet</p>
       </div>
       <div class="row">
         <!-- start  left -->
         <div class="col-md-4 left">
-          <div class="list-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+          <div class="list-wrap aos-init " data-aos="fade-up" data-aos-delay="100">
             <div class="description">
               <h4>Experience</h4>
               <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -110,7 +128,7 @@
             </div>
           </div>
 
-          <div class="list-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+          <div class="list-wrap aos-init " data-aos="fade-up" data-aos-delay="400">
             <div class="description">
               <h4>Products</h4>
               <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -121,7 +139,7 @@
           </div>
 
 
-          <div class="list-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+          <div class="list-wrap aos-init " data-aos="fade-up" data-aos-delay="500">
             <div class="description">
               <h4>Approach</h4>
               <p>Ronsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -135,7 +153,7 @@
 
         <!-- start  center -->
         <div class="col-md-4 p-4 p-sm-5 center">
-          <div class="list-center-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+          <div class="list-center-wrap aos-init " data-aos="fade-up" data-aos-delay="100">
             <div class="center-icon">
               <img src="./it web template_files/features.jpg" alt="icon">
             </div>
@@ -144,7 +162,7 @@
         <!-- end  center -->
         <!-- start  right -->
         <div class="col-md-4 right">
-          <div class="list-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+          <div class="list-wrap aos-init " data-aos="fade-up" data-aos-delay="100">
             <div class="icon">
               <img src="./it web template_files/icon-4.svg" alt="icon">
             </div>
@@ -154,7 +172,7 @@
             </div>
           </div>
 
-          <div class="list-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+          <div class="list-wrap aos-init " data-aos="fade-up" data-aos-delay="200">
             <div class="icon">
               <img src="./it web template_files/icon-5.svg" alt="icon">
             </div>
@@ -165,7 +183,7 @@
           </div>
 
 
-          <div class="list-wrap aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+          <div class="list-wrap aos-init " data-aos="fade-up" data-aos-delay="500">
             <div class="icon">
               <img src="./it web template_files/icon-6.svg" alt="icon">
             </div>
@@ -185,12 +203,12 @@
 
   <!-- Portfolio Section -->
   <section id="portfolio" class="portfolio">
-    <div class="container aos-init aos-animate" data-aos="fade-up">
+    <div class="container aos-init " data-aos="fade-up">
       <div class="section-header">
         <h2>Our Portfolio</h2>
         <p>Lorem ipsum dolor sit amet</p>
       </div>
-      <div class="portfolio-isotope aos-init aos-animate" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+      <div class="portfolio-isotope aos-init " data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
         <div>
           <ul class="portfolio-flters">
             <li data-filter="*" class="filter-active">All</li>
@@ -336,14 +354,14 @@
 
   <!--  Testimonials Section  -->
   <section id="testimonials" class="testimonials">
-    <div class="container aos-init aos-animate" data-aos="fade-up">
+    <div class="container aos-init " data-aos="fade-up">
 
       <div class="section-header">
         <h2>Testimonials</h2>
         <p>Lorem ipsum dolor sit amet</p>
       </div>
 
-      <div class="slides-3 swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+      <div class="slides-3 swiper swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden aos-init " data-aos="fade-up" data-aos-delay="100">
         <div class="swiper-wrapper" id="swiper-wrapper-bd23b6f0e535c686" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-2232px, 0px, 0px);"><div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="1" role="group" aria-label="2 / 4" style="width: 372px;">
           <div class="testimonial-wrap">
             <div class="testimonial-item">
@@ -572,7 +590,7 @@
 
   <!--  Start Counter Section  -->
   <div id="stats-counter" class="call-to-action stats-counter section">
-    <div class="container aos-init aos-animate" data-aos="fade-up">
+    <div class="container aos-init " data-aos="fade-up">
       <div class="row gy-4 align-items-center">
         <div class="col-lg-4">
           <div class="stats-item d-flex flex-column align-items-center">
@@ -602,7 +620,7 @@
 
   <!--  Clients Section  -->
   <div id="clients" class="clients section">
-    <div class="container aos-init aos-animate" data-aos="zoom-out">
+    <div class="container aos-init " data-aos="zoom-out">
 
       <div class="clients-slider swiper swiper-initialized swiper-horizontal swiper-pointer-events">
         <div class="swiper-wrapper align-items-center" id="swiper-wrapper-26ba081d04547884" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-2116.8px, 0px, 0px);"><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" data-swiper-slide-index="3" role="group" aria-label="4 / 8" style="width: 175.2px; margin-right: 60px;"><img src="./it web template_files/client-4.png" class="img-fluid" alt=""></div><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="4" role="group" aria-label="5 / 8" style="width: 175.2px; margin-right: 60px;"><img src="./it web template_files/client-5.png" class="img-fluid" alt=""></div><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="5" role="group" aria-label="6 / 8" style="width: 175.2px; margin-right: 60px;"><img src="./it web template_files/client-6.png" class="img-fluid" alt=""></div><div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="6" role="group" aria-label="7 / 8" style="width: 175.2px; margin-right: 60px;"><img src="./it web template_files/client-7.png" class="img-fluid" alt=""></div><div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="7" role="group" aria-label="8 / 8" style="width: 175.2px; margin-right: 60px;"><img src="./it web template_files/client-8.png" class="img-fluid" alt=""></div>
@@ -624,7 +642,7 @@
 
   <!--  Our Team Section  -->
   <section id="team" class="team sections-bg">
-    <div class="container aos-init aos-animate" data-aos="fade-up">
+    <div class="container aos-init " data-aos="fade-up">
 
       <div class="section-header">
         <h2>Team</h2>
@@ -633,7 +651,7 @@
 
       <div class="row gy-4">
 
-        <div class="col-xl-3 col-md-6 d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-xl-3 col-md-6 d-flex aos-init " data-aos="fade-up" data-aos-delay="100">
           <div class="member">
             <img src="./it web template_files/team-1.jpg" class="img-fluid" alt="">
             <h4>Jhone Bi</h4>
@@ -647,7 +665,7 @@
           </div>
         </div><!-- End Team Member -->
 
-        <div class="col-xl-3 col-md-6 d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-xl-3 col-md-6 d-flex aos-init " data-aos="fade-up" data-aos-delay="200">
           <div class="member">
             <img src="./it web template_files/team-2.jpg" class="img-fluid" alt="">
             <h4>Sani Awesome</h4>
@@ -661,7 +679,7 @@
           </div>
         </div><!-- End Team Member -->
 
-        <div class="col-xl-3 col-md-6 d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+        <div class="col-xl-3 col-md-6 d-flex aos-init " data-aos="fade-up" data-aos-delay="300">
           <div class="member">
             <img src="./it web template_files/team-3.jpg" class="img-fluid" alt="">
             <h4>Andrio Willi</h4>
@@ -675,7 +693,7 @@
           </div>
         </div><!-- End Team Member -->
 
-        <div class="col-xl-3 col-md-6 d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-xl-3 col-md-6 d-flex aos-init " data-aos="fade-up" data-aos-delay="400">
           <div class="member">
             <img src="./it web template_files/team-4.jpg" class="img-fluid" alt="">
             <h4>Afa Jonson</h4>
@@ -698,14 +716,14 @@
 
   <!--  Frequently Asked Questions Section  -->
   <section id="faq" class="faq">
-    <div class="container aos-init aos-animate" data-aos="fade-up">
+    <div class="container aos-init " data-aos="fade-up">
       <div class="section-header">
         <h2>FAQ's</h2>
         <p>Lorem ipsum dolor sit amet</p>
       </div>
       <div class="row gy-4">
         <div class="col-lg-12">
-          <div class="accordion accordion-flush aos-init aos-animate" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+          <div class="accordion accordion-flush aos-init " id="faqlist" data-aos="fade-up" data-aos-delay="100">
             <div class="accordion-item">
               <h3 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
@@ -796,7 +814,7 @@
 
   <!--  Call To Action Section  -->
   <section id="call-to-action" class="call-to-action">
-    <div class="container text-center aos-init aos-animate" data-aos="zoom-out">
+    <div class="container text-center aos-init " data-aos="zoom-out">
       <div class="row gy-4">
         <div class="col-lg-12">
           <h3>Let's Discuss your Projects</h3>
@@ -811,7 +829,7 @@
 
   <!--  Recent Blog Posts Section  -->
   <section id="recent-posts" class="recent-posts sections-bg">
-    <div class="container aos-init aos-animate" data-aos="fade-up">
+    <div class="container aos-init " data-aos="fade-up">
       <div class="section-header">
         <h2>Blogs</h2>
         <p>Lorem ipsum dolor sit amet</p>
@@ -890,7 +908,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-12 aos-init aos-animate" data-aos="fade-right">
+        <div class="col-lg-4 col-md-12 aos-init " data-aos="fade-right">
           <div class="contact-information-box-3">
             <div class="row">
               <div class="col-lg-12">
@@ -923,7 +941,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-8 col-md-12 aos-init aos-animate" data-aos="fade-left">
+        <div class="col-lg-8 col-md-12 aos-init " data-aos="fade-left">
           <div class="contact-form-box contact-form contact-form-3">
             <div class="form-container-box">
               <form class="contact-form form" id="ajax-contact" method="post" action="https://zrtechsolutions.com/demo/html/technoit/assets/phpscripts/contact.php" novalidate="true">
