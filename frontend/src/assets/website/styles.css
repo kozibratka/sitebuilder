@@ -159,12 +159,11 @@ h6 {
 # Sections & Section Header
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  padding-top: 60px;
   overflow: hidden;
 }
 
 .section{
-  padding: 60px 0;
   overflow: hidden;
   background: var(--light-color);
 }
@@ -187,7 +186,6 @@ section {
 .section-header h2 {
   font-size: 32px;
   position: relative;
-  color: var(--color-primary);
 }
 
 .section-header p {
@@ -1698,7 +1696,6 @@ section {background: var(--light-color);}
   transition: all 0.3s ease-in-out;
   font-size: 48px;
   line-height: 1;
-  color: var(--color-primary);
 }
 
 .icon-box:hover {transform: scale(1.04);}
@@ -3530,4 +3527,11 @@ canvas{
 
 .footer-menu li a:hover {
   color: #000000;
+}
+
+.logo>.first {
+  color: #8c52ff;
+}
+.logo .second {
+  color: black;
 }
