@@ -13,6 +13,7 @@ import {SystemInfoService} from "../../../core/services/system-info.service";
   styleUrl: './website.component.css'
 })
 export class WebsiteComponent implements AfterViewInit{
+  routeChanged = false;
 
   constructor(
     private ngZone: NgZone,
@@ -21,9 +22,12 @@ export class WebsiteComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
+
+  }
+
+  routeActivate() {
     this.ngZone.runOutsideAngular(args => {
       (window as any).initMainJs();
     });
   }
-
 }

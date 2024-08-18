@@ -1,13 +1,13 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {SystemInfoService} from "../../../core/services/system-info.service";
 import {
-  faChild,
-  faDisplay, faGaugeHigh,
+  faChild, faClock,
+  faDisplay, faGaugeHigh, faHourglass,
   faMobile,
   faMobileButton,
   faMobilePhone,
   faMobileScreen,
-  faPlus, faRocket, faSackDollar
+  faPlus, faRocket, faSackDollar, faTicket, faUser
 } from "@fortawesome/free-solid-svg-icons";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
@@ -40,4 +40,8 @@ export class DashboardComponent implements OnInit{
   protected readonly faChild = faChild;
   protected readonly faRocket = faRocket;
   protected readonly faSackDollar = faSackDollar;
+  protected readonly faHourglass = faHourglass;
+  protected readonly faClock = faClock;
+  protected readonly faUser = faUser;
+  protected readonly faTicket = faTicket;
 }
