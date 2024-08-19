@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Constant\Limit;
+use App\Entity\User;
 use App\Exception\CustomErrorMessageException;
 use App\Service\Storage\UserStorageService;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -87,8 +88,11 @@ class UserStorageController extends BaseApiController
      * @Route("/size", name="size", methods={"GET"})
      */
     public function getUserStoragesize(Request $request, UserStorageService $storageService) {
-        $size = $storageService->getSize($this->getUser());
+        /** @var User $user */
+        $user = $this->getUser();
+        $used = $storageService->getSize($this->getUser());
+        $data = ['size' => $user->getTariff()->getDisk(), 'used' => $used];
 
-        return $this->jsonResponseSimple($size);
+        return $this->jsonResponseSimple($data);
     }
 }

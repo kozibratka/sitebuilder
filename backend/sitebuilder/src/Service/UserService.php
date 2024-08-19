@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\User;
 use App\Entity\Web\Web;
+use App\Enum\TariffEnum;
 use App\Helper\Helper;
 use App\Service\Storage\UserStorageService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +26,7 @@ class UserService
     {
     }
 
-    public function create(User $user, $withStorage = true)
+    public function create(User $user, $withStorage = false)
     {
         $hash = Helper::randomString(20);
         $user->setHash($hash);
@@ -38,7 +39,7 @@ class UserService
                     'link' => $this->parameterBag->get('app.domain').'/authorization/activation/'.$hash,
                 ]);
             $this->mailer->send($email);
-
+        $user->setTariff($this->entityManager->getRepository(TariffEnum::class)->find(TariffEnum::FREE));
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         if ($withStorage) {

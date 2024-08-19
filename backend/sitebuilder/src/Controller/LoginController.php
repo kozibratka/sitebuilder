@@ -117,7 +117,7 @@ class LoginController extends BaseApiController
             $user->setFullName($data['name']);
             $user->setLoginAttr($data);
             $user->setLoginType($type);
-            $userService->create($user);
+            $userService->create($user, true);
         }
 
         return $this->jsonResponseSimple(['token' => $JWTManager->create($user)], 201);

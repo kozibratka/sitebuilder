@@ -21,6 +21,9 @@ class PageBuilderUserValidator extends ConstraintValidator
         if (!$constraint instanceof PageBuilderUser) {
             throw new UnexpectedTypeException($constraint, PageBuilderUser::class);
         }
+        if (!$value) {
+            return;
+        }
 
         if ($this->pageBuilderVoter->check($value, $this->security->getUser())) {
             return;

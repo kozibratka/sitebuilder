@@ -81,6 +81,8 @@ class User implements UserInterface
     )]
     #[ORM\OneToMany(targetEntity: ResetPassword::class, mappedBy: 'user', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $resetPasswords;
+    #[ORM\ManyToOne(targetEntity: Tariff::class)]
+    private Tariff $tariff;
 
     public function __construct()
     {
@@ -240,5 +242,13 @@ class User implements UserInterface
         $resetPassword->setUser(null);
     }
 
+    public function getTariff(): Tariff
+    {
+        return $this->tariff;
+    }
 
+    public function setTariff(Tariff $tariff): void
+    {
+        $this->tariff = $tariff;
+    }
 }

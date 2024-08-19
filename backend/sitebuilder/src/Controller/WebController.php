@@ -69,7 +69,7 @@ class WebController extends BaseApiController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if ($user->getWebs()->count() == Limit::WEBS) {
+        if ($user->getWebs()->count() >= $user->getTariff()->getWebs()) {
             throw new CustomErrorMessageException('Překročen limit počtu webů');
         }
         $validationWeb = new Web();

@@ -57,16 +57,17 @@ class Web
     private $createdAt;
     #[ORM\OneToMany(targetEntity: PageBlock::class, mappedBy: 'web')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    #[Assert\Count(
-        max: Limit::PAGE_BLOCKS,
+    #[Assert\Valid()]
+    #[AppValidator\CountTariff(
+        type: 'blocks',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     private Collection $pageBlocks;
     /**
      * @Assert\Valid()
      */
-    #[Assert\Count(
-        max: Limit::PAGES,
+    #[AppValidator\CountTariff(
+        type: 'pages',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     #[ORM\OneToMany(targetEntity: AbstractPage::class, mappedBy: 'web', cascade: ['remove', 'persist'], orphanRemoval: true)]
@@ -75,8 +76,8 @@ class Web
     /**
      * @Serializer\Exclude()
      */
-    #[Assert\Count(
-        max: Limit::PLUGINS,
+    #[AppValidator\CountTariff(
+        type: 'plugins',
         maxMessage: 'You cannot specify more than {{limit}} domains',
     )]
     #[ORM\OneToMany(targetEntity: BasePlugin::class, mappedBy: 'web', cascade: ['persist', 'remove'], orphanRemoval: true)]
@@ -99,8 +100,8 @@ class Web
     private string $imagePath;
     /** @var Collection|ArrayCollection  */
     #[ORM\OneToMany(targetEntity: Domain::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'web')]
-    #[Assert\Count(
-        max: Limit::DOMAINS,
+    #[AppValidator\CountTariff(
+        type: 'domains',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     /**

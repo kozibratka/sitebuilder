@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppValidator;
+
 
 #[UniqueEntity(
     fields: ['name', 'web'],
@@ -41,13 +43,12 @@ abstract class AbstractPage
     #[ORM\Column(type: 'string')]
     private string $name;
 
-    /**
-     * @Assert\Valid()
-     */
-    #[Assert\Count(
-        max: Limit::PAGE_BLOCKS,
+
+    #[AppValidator\CountTariff(
+        type: 'blocks',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
+    #[Assert\Valid()]
     #[ORM\OneToMany(targetEntity: PageBlockAssignment::class, mappedBy: 'page', cascade: ['persist', 'remove'], orphanRemoval: true)]
     public Collection $pageBlockAssignments;
 

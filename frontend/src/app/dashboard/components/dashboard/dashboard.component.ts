@@ -51,14 +51,14 @@ export class DashboardComponent implements OnInit {
   }
 
   initDiskChart() {
-    this.symfonyApiClientService.get<number>('user_storage_size').subscribe(value => {
+    this.symfonyApiClientService.get<any>('user_storage_size').subscribe(value => {
       const documentStyle = getComputedStyle(document.documentElement);
       const textColor = documentStyle.getPropertyValue('--text-color');
       this.chartData = {
         labels: ['Využité místo', 'Volné místo'],
         datasets: [
           {
-            data: [value.body, 5-value.body],
+            data: [value.body.used, value.body.size-value.body.used],
             backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500')],
             hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400')]
           }

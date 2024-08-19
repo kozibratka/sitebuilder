@@ -6,13 +6,14 @@ use App\Entity\Plugin\BasePlugin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppValidator;
+
 
 #[ORM\Entity]
 class PluginMenu extends BasePlugin
 {
-    #[Assert\Count(
-        max: Limit::PLUGIN_ITEMS,
+    #[AppValidator\CountTariff(
+        type: 'pluginItems',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     #[ORM\OneToMany(targetEntity: 'MenuItem', mappedBy: 'menu', cascade: ['persist'], orphanRemoval: true)]

@@ -7,7 +7,7 @@ use App\Entity\Plugin\BasePlugin;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppValidator;
 
 #[ORM\Entity]
 class PluginCarousel extends BasePlugin
@@ -18,8 +18,8 @@ class PluginCarousel extends BasePlugin
     #[ORM\Column(type: 'boolean')]
     private ?bool $autostart = true;
 
-    #[Assert\Count(
-        max: Limit::PLUGIN_ITEMS,
+    #[AppValidator\CountTariff(
+        type: 'pluginItems',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     #[ORM\OneToMany(targetEntity: 'CarouselImage', cascade: ['persist'], orphanRemoval: true, mappedBy: 'carousel')]

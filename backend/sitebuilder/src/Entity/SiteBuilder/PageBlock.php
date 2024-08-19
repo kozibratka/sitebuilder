@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppValidator;
+
 
 #[ORM\Table(name: 'page_block')]
 #[ORM\Entity]
@@ -49,8 +51,8 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\OneToMany(targetEntity: 'PaletteGridItem', mappedBy: 'pageBlock', cascade: ['persist'], orphanRemoval: true)]
     private Collection $paletteGridItems;
     #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    #[Assert\Count(
-        max: Limit::PAGE_ROWS,
+    #[AppValidator\CountTariff(
+        type: 'rows',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     private Collection $rows;

@@ -7,7 +7,8 @@ use App\Helper\Helper;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Security\Validator as AppValidator;
+
 
 #[ORM\Entity]
 #[ORM\Index(columns: ['hash_id'], name: 'hash_id')]
@@ -15,8 +16,8 @@ class PluginForm extends BasePlugin
 {
     #[ORM\Column(type: 'json')]
     private $form;
-    #[Assert\Count(
-        max: Limit::PLUGIN_FORM_DATA_ITEMS,
+    #[AppValidator\CountTariff(
+        type: 'pluginFormData',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
     #[ORM\OneToMany(targetEntity: FormData::class, mappedBy: 'form', orphanRemoval: true, cascade: ['persist', 'remove'])]

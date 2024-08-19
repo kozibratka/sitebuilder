@@ -79,11 +79,12 @@ class UserStorageService
         }
     }
 
-    public function uploadFile(UploadedFile $file, string $path, UserInterface $user) {
+    public function uploadFile(UploadedFile $file, string $path, UserInterface|User $user) {
         $size = $this->getSize($user);
         $fileSize = UserStorageService::bytesToGigabyte($file->getSize());
         $size += $fileSize;
-        if ($size > Limit::DISK) {
+        $diskLimit = $user->getTariff()->getDisk();
+        if ($size > $diskLimit) {
             throw new CustomErrorMessageException('Některé soubory se nepodařilo nahrát kvůli překročení limitu místa na disku');
         }
         $realPath = $this->getValidUserServerPath($path, $user);
