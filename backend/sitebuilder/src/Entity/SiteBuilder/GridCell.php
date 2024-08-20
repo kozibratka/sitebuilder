@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Security\Validator as AppValidator;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'grid_cell')]
@@ -25,6 +26,7 @@ class GridCell
         type: 'cellItems',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
+    #[Assert\Valid()]
     #[ORM\OneToMany(targetEntity: GridCellItem::class, mappedBy: 'cell', cascade: ['persist'])]
     #[ORM\OrderBy(["itemOrder" => "ASC"])]
     private Collection $items;

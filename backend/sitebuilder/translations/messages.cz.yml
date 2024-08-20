@@ -1,4 +1,15 @@
 New Registration account: Registrace nového účtu.
 Activation failed: Aktivace selhala
 Password recovery: Obnova hesla
-Rate Limit Exceeded: Překročen limit requestů
+Rate Limit Exceeded: Překročen limit
+Rate Limit Exceeded Count: Překročen limit počtu
+of pages: stránek
+of domains: domén
+of plugins: pluginů webu
+of blocks on page: bloků na stránce
+of rows on block: řádků v některém z bloků
+of cells in row: sloupců v některé řádce
+of cell items in cell: pluginů v některém sloupci
+of plugin items: položek v některém z pluginů
+of webs: webů
+of form data: dat formuláře

@@ -45,9 +45,7 @@ class PageBlock implements EntityFileProviderInterface
      */
     private ?Web $web = null;
 
-    /**
-     * @Assert\Valid()
-     */
+    #[Assert\Valid()]
     #[ORM\OneToMany(targetEntity: 'PaletteGridItem', mappedBy: 'pageBlock', cascade: ['persist'], orphanRemoval: true)]
     private Collection $paletteGridItems;
     #[ORM\OneToMany(targetEntity: GridRow::class, mappedBy: 'pageBlock', cascade: ['persist', 'remove'], orphanRemoval: true)]
@@ -55,6 +53,7 @@ class PageBlock implements EntityFileProviderInterface
         type: 'rows',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
+    #[Assert\Valid()]
     private Collection $rows;
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
     #[Assert\Expression(

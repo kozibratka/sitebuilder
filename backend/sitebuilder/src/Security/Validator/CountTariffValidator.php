@@ -11,12 +11,14 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\CountValidator;
 use Symfony\Component\Validator\ConstraintViolationInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CountTariffValidator extends CountValidator
 {
     private ?Tariff $tariff = null;
     public function __construct(
         private Security $security,
+        private TranslatorInterface $translator
     )
     {}
 
@@ -33,7 +35,7 @@ class CountTariffValidator extends CountValidator
         }
         if($this->tariff) {
             $propertyAccessor = PropertyAccess::createPropertyAccessor();
-            $type = $constraint->type ??  $this->context->getPropertyName();
+            $type = $constraint->type ?? $this->context->getPropertyName();
             $max = $propertyAccessor->getValue($this->tariff, $type);
             $constraint->max = $max;
 
@@ -42,7 +44,23 @@ class CountTariffValidator extends CountValidator
         /** @var ConstraintViolationInterface $invalidate */
         $invalidate = $this->context->getViolations()[0] ?? null;
         if ($invalidate) {
-            throw new CustomErrorMessageException($invalidate->getMessage());
+            $transProperty = match ($type) {
+                'pages' => 'of pages',
+                'domains' => 'of domains',
+                'plugins' => 'of plugins',
+                'blocks' => 'of blocks on page',
+                'rows' => 'of rows on block',
+                'cells' => 'of cells in row',
+                'cellItems' => 'of cell items in cell',
+                'webs' => 'of webs',
+                'pluginItems' => 'of plugin items',
+                'pluginFormData' => 'of form data',
+                default => ''
+            };
+
+
+            $message = $this->translator->trans('Rate Limit Exceeded Count').' '.$this->translator->trans($transProperty);
+            throw new CustomErrorMessageException($message);
         }
 
     }
