@@ -47,8 +47,7 @@ class LoginController extends BaseApiController
         $form = $this->createForm(UserRegistrationType::class, null, ['validation_groups' => ['Default', 'FORM']]);
         $form->submit($request->request->all());
         if ($form->isValid()) {
-            $limiter = $registrationApiLimiter->create($request->getClientIp().'registration');
-            $limiter->consume(1)->ensureAccepted();
+            $registrationApiLimiter->create($request->getClientIp().'registration')->consume(1)->ensureAccepted();
             /** @var User $user */
             $user = $form->getData();
             $userService->create($user); // Activation email is better - after create storage...

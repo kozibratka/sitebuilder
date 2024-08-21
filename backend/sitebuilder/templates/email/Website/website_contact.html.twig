@@ -1,0 +1,10 @@
+{% extends "email/base_email.html.twig" %}
+{% block title %}
+    Zpráva z kontaktního formuláře
+{% endblock %}
+{% block content_text %}
+    Jméno: {{ websiteContact.name }}<br>
+    Email: {{ websiteContact.email }}<br>
+    Předmět: {{ websiteContact.subject }}<br>
+    Zpráva: {{ websiteContact.message }}<br>
+{% endblock %}

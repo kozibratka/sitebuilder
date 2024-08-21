@@ -3118,7 +3118,6 @@ dl, ol, ul {
   width: 100%;
   padding: 10px 20px;
   height: 52px;
-  color: #fff;
   border: none;
   border-radius: 8px;
   text-transform: capitalize;
@@ -3541,4 +3540,8 @@ canvas{
 }
 .logo .second {
   color: black;
+}
+
+.logo .second-white {
+  color: white;
 }

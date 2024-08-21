@@ -9,6 +9,7 @@ parameters:
     app.website_domain: '%env(APP_WEBSITE_DOMAIN)%'
     app.port: '%env(PUBLIC_SERVER_PORT)%'
     app.email_no_reply: 'fotoporezany@%app.email_domain%'
+    app.contact_email: 'martin.kozibratka@gmail.com'
     app.date_time_format: 'd.m.Y H:i:s'
     app.google_login_token: '923543574323-vpos32ti6erndrilgnofmjcq98oq1k2g.apps.googleusercontent.com'
 

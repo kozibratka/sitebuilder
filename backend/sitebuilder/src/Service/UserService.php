@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
+use App\Entity\Tariff;
 use App\Entity\User;
-use App\Entity\Web\Web;
 use App\Enum\TariffEnum;
 use App\Helper\Helper;
 use App\Service\Storage\UserStorageService;
@@ -39,7 +39,7 @@ class UserService
                     'link' => $this->parameterBag->get('app.domain').'/authorization/activation/'.$hash,
                 ]);
             $this->mailer->send($email);
-        $user->setTariff($this->entityManager->getRepository(TariffEnum::class)->find(TariffEnum::FREE));
+        $user->setTariff($this->entityManager->getRepository(Tariff::class)->find(TariffEnum::FREE));
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         if ($withStorage) {

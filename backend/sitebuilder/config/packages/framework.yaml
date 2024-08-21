@@ -21,5 +21,11 @@ framework:
             # use 'sliding_window' if you prefer that policy
             policy: 'fixed_window'
             limit: 10
-            interval: '1 minutes'
+            interval: '5 minutes'
+            cache_pool: 'cache.my_redis'
+        contact_form:
+            # use 'sliding_window' if you prefer that policy
+            policy: 'fixed_window'
+            limit: 5
+            interval: '5 minutes'
             cache_pool: 'cache.my_redis'
