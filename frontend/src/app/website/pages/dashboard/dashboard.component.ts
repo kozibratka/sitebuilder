@@ -11,7 +11,6 @@ import {ApiFormService} from "../../../core/services/form/api-form.service";
 import {ContactFormService} from "../../services/form/contact-form.service";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {InputFormErrorDirective} from "../../../core/directives/form-error/input-form-error/input-form-error.directive";
-import {NotifierService} from "../../../core/services/notifier.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -33,7 +32,6 @@ export class DashboardComponent implements OnInit{
     public systemInfoService: SystemInfoService,
     private apiFormService: ApiFormService,
     contactFormService: ContactFormService,
-    private notifierService: NotifierService,
   ) {
     this.contactForm = contactFormService.createForm();
   }
@@ -42,7 +40,6 @@ export class DashboardComponent implements OnInit{
     this.ngZone.runOutsideAngular(args => {
       (window as any).particlesJSRun();
     });
-    this.notifierService.notify('fefegeg')
   }
 
   onSubmit() {

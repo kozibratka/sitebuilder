@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Form\Website\ContactType;
+use App\Form\Website\NewsletterEmailType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +43,24 @@ class WebsiteController extends BaseApiController
                     'websiteContact' => $contact,
                 ]);
             $mailer->send($email);
+            return $this->json([]);
+        }
+        return $this->invalidFormResponse($form);
+    }
+
+    #[Route('/newsletter', name: 'newsletter', methods:['POST'])]
+    public function newsletter(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        RateLimiterFactory $contactFormLimiter,
+    ) {
+        $form = $this->createForm(NewsletterEmailType::class);
+        $form->submit($request->request->all());
+        if ($form->isValid()) {
+            $contactFormLimiter->create($request->getClientIp().'newsletter')->consume()->ensureAccepted();
+            $newsletter = $form->getData();
+            $entityManager->persist($newsletter);
+            $entityManager->flush();
             return $this->json([]);
         }
         return $this->invalidFormResponse($form);

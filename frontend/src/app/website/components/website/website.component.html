@@ -72,16 +72,15 @@
         <div class="col-xl-4 col-lg-4 mb-50">
           <div class="footer-widget">
             <div class="footer-logo">
-              <a href="https://zrtechsolutions.com/demo/html/technoit/index.html" class="logo d-flex align-items-center">
-                <img src="./it web template_files/logo.png" alt="logo">
+              <a href="/" class="logo d-flex align-items-center">
+                <img data-aos="fade-up" src="/assets/website/netdropper.png" alt="logo">
               </a>
             </div>
             <div class="footer-text">
-              <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
-                elit,Lorem ipsum dolor sit amet.</p>
+              <p>Přidejte se i vy k našim spokojeným zákazníkům. Náš systém postupně zdokonalujeme a přidáváme nové funkce.</p>
             </div>
             <div class="footer-social-icon">
-              <span>Follow us</span>
+              <a href="{{systemInfoService.getAdminHostname()}}" class="btn-get-started mr-20 aos-init " data-aos="fade-up" data-aos-delay="800">Vytvořit web</a>
               <a href="https://zrtechsolutions.com/demo/html/technoit/#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="https://zrtechsolutions.com/demo/html/technoit/#" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="https://zrtechsolutions.com/demo/html/technoit/#" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -93,7 +92,7 @@
         <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
           <div class="service-widget footer-widget">
             <div class="footer-widget-heading">
-              <h3>Services</h3>
+              <h3>Návody</h3>
             </div>
             <ul class="list">
               <li><a href="https://zrtechsolutions.com/demo/html/technoit/services.html">Web Design</a></li>
@@ -108,7 +107,7 @@
         <div class="col-lg-2 col-md-6 col-sm-12 footer-column">
           <div class="service-widget footer-widget">
             <div class="footer-widget-heading">
-              <h3>Information</h3>
+              <h3>Stránky</h3>
             </div>
             <ul class="list">
               <li><a href="https://zrtechsolutions.com/demo/html/technoit/about.html">About</a></li>
@@ -128,12 +127,12 @@
         <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
           <div class="contact-widget footer-widget">
             <div class="footer-widget-heading">
-              <h3>Contacts</h3>
+              <h3>Kontakt</h3>
             </div>
             <div class="footer-text">
-              <p><i class="bi bi-geo-alt-fill mr-15"></i> 101 West Town , PBO 12345, United States</p>
-              <p><i class="bi bi-telephone-inbound-fill mr-15"></i> +1 1234 56 789</p>
-              <p><i class="bi bi-envelope-fill mr-15"></i> contact&#64;"example.com</p>
+              <p><i class="bi bi-geo-alt-fill mr-15"></i> Pořežany 18 Týn nad Vltavou 375 01</p>
+              <p><i class="bi bi-telephone-inbound-fill mr-15"></i> +420 732846087</p>
+              <p><i class="bi bi-envelope-fill mr-15"></i> dotaz&#64;netdropper.cz</p>
             </div>
           </div>
           <div class="footer-widget">
@@ -141,13 +140,17 @@
               <h3>Newsletter</h3>
             </div>
             <div class="footer-text mb-25">
-              <p>Don't miss to subscribe to our new feeds, kindly fill the form below.</p>
+              <p>Pokud si přejete být informován o novinkách, zadejte váš email.</p>
             </div>
             <div class="subscribe-form">
-              <form action="https://zrtechsolutions.com/demo/html/technoit/#">
-                <input type="text" placeholder="Email Address">
-                <button><i class="bi bi-telegram"></i></button>
-              </form>
+              @if(newsletterForm) {
+                <form [formGroup]="newsletterForm" (ngSubmit)="onSubmit()">
+                  <input appFormError type="email" placeholder="Email" formControlName="email">
+                  <button class="float-end btn btn-primary">Odeslat</button>
+                </form>
+              } @else {
+                <p class="gold">Email byl odeslán</p>
+              }
             </div>
           </div>
         </div>
@@ -155,7 +158,7 @@
       <div class="row">
         <div class="col-xl-6 col-lg-6 text-left text-lg-left">
           <div class="copyright-text">
-            <p>Technoit © 2023 - Designed by <a href="https://www.templatemonster.com/authors/zrthemes/">Zr Themes</a></p>
+            <p>NetDropper © 2023 - Vytvořeno pro snadnou tvorbu webů</p>
           </div>
         </div>
       </div>

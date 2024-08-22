@@ -3477,7 +3477,6 @@ canvas{
 .subscribe-form {
   position: relative;
   overflow: hidden;
-  border-radius: 50px;
 }
 
 .subscribe-form input {
@@ -3490,11 +3489,7 @@ canvas{
 }
 
 .subscribe-form button {
-  position: absolute;
-  right: -3px;
-  background: transparent;
   border: 0;
-  top: -8px;
 }
 
 .subscribe-form button i {
@@ -3544,4 +3539,8 @@ canvas{
 
 .logo .second-white {
   color: white;
+}
+
+.gold {
+  color: #b8651d;
 }
