@@ -26,10 +26,10 @@ class WebsiteController extends BaseApiController
         MailerInterface $mailer,
     ): Response
     {
-        $contactFormLimiter->create($request->getClientIp())->consume()->ensureAccepted();
         $form = $this->createForm(ContactType::class);
         $form->submit($request->request->all());
         if ($form->isValid()) {
+            $contactFormLimiter->create($request->getClientIp())->consume()->ensureAccepted();
             $contact = $form->getData();
             $entityManager->persist($contact);
             $entityManager->flush();
