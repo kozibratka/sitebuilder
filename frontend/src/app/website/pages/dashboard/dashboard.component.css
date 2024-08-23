@@ -5,3 +5,7 @@
 .swiper-wrapper {
   height: initial !important;
 }
+
+.aloha::before {
+  content: "\f0c9";
+}

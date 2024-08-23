@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {SystemInfoService} from "../../../core/services/system-info.service";
 
 @Component({
   selector: 'app-preview',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class PreviewComponent {
 
+  constructor(
+    public systemInfoService: SystemInfoService,
+  ) {
+  }
 }

@@ -120,7 +120,6 @@
                 "src/assets/website/swiper-bundle.min.css",
                 "src/assets/website/glightbox.min.css",
                 "src/assets/website/bootstrap.min.css",
-                "src/assets/website/bootstrap-icons.css",
                 "node_modules/ngx-toastr/toastr.css",
                 "src/assets/website/styles.css"
               ],

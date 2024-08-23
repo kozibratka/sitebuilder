@@ -497,11 +497,11 @@ section {background: var(--light-color);}
 
   .navbar>ul>li {
     white-space: nowrap;
-    padding: 10px 0 10px 28px;
   }
 
   .navbar a,
   .navbar a:focus {
+    padding: 10px 0 10px 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -537,6 +537,17 @@ section {background: var(--light-color);}
   .navbar .active:focus,
   .navbar li:hover>a {
     color: var(--color-primary);
+  }
+
+.mobile-nav-show {
+    display: none!important;
+  }
+
+  @media screen and (max-width: 1279px) {
+    .mobile-nav-show {
+      display: block;
+      margin-left: 10px;
+    }
   }
 
   .navbar .dropdown ul {
@@ -705,6 +716,7 @@ section {background: var(--light-color);}
     transition: 0.5s;
     z-index: 9999;
     margin-right: 10px;
+    margin-left: 10px;
   }
 
   .mobile-nav-hide {
@@ -3539,6 +3551,10 @@ canvas{
 
 .logo .second-white {
   color: white;
+}
+
+.logo .second-black {
+  color: black;
 }
 
 .gold {
