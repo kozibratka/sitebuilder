@@ -151,6 +151,11 @@
   z-index: 1;
 }
 
+.hider-new-row-button {
+  position: relative;
+  z-index: 401;
+}
+
 .block-move-menu {
   width: 164px;
   position: absolute;
@@ -187,6 +192,16 @@
 
 .new-row-hover-bottom {
   box-shadow: 0 2px 0 red;
+}
+
+.new-row-hover-bottom:after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: -2px;
+  left: -10px;
+  z-index: 401;
+  border-bottom: 2px solid red;
 }
 
 i.active {

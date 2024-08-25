@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, NgZone} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, NgZone, ViewChild} from '@angular/core';
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {SystemInfoService} from "../../../core/services/system-info.service";
 import {NewsletterFormService} from "../../services/form/newsletter-form.service";
@@ -19,8 +19,10 @@ import {InputFormErrorDirective} from "../../../core/directives/form-error/input
   styleUrl: './website.component.css'
 })
 export class WebsiteComponent implements AfterViewInit{
+  @ViewChild('responsiveMenuIcon', {static: true}) responsiveMenuIcon: ElementRef;
   routeChanged = false;
   newsletterForm?: FormGroup;
+  isResponsiveMenuOpen = false;
 
   constructor(
     private ngZone: NgZone,
@@ -32,7 +34,7 @@ export class WebsiteComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-
+    (window as any).initMenuJs();
   }
 
   routeActivate() {
