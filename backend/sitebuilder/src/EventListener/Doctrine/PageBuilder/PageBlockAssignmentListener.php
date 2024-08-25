@@ -15,6 +15,9 @@ class PageBlockAssignmentListener
     public function postRemove(PageBlockAssignment $pageBlockAssignment)
     {
         if (!$pageBlockAssignment->getPageBlock()->isShared()) {
+            if ($pageBlockAssignment->getPageBlock()->isReassigned()) {
+                return;
+            }
             $this->entityManager->remove($pageBlockAssignment->getPageBlock());
             $this->entityManager->flush();
         }

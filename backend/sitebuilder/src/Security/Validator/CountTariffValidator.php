@@ -10,10 +10,11 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\CountValidator;
+use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class CountTariffValidator extends CountValidator
+class CountTariffValidator extends ConstraintValidator
 {
     private ?Tariff $tariff = null;
     public function __construct(
@@ -33,17 +34,16 @@ class CountTariffValidator extends CountValidator
             $user = $this->security->getUser();
             $this->tariff = $user->getTariff();
         }
+        $max = 0;
         if($this->tariff) {
             $propertyAccessor = PropertyAccess::createPropertyAccessor();
             $type = $constraint->type ?? $this->context->getPropertyName();
             $max = $propertyAccessor->getValue($this->tariff, $type);
-            $constraint->max = $max;
 
         }
-        parent::validate($value, $constraint);
-        /** @var ConstraintViolationInterface $invalidate */
-        $invalidate = $this->context->getViolations()[0] ?? null;
-        if ($invalidate) {
+        $count = \count($value);
+        if ($count > $max) {
+
             $transProperty = match ($type) {
                 'pages' => 'of pages',
                 'domains' => 'of domains',

@@ -32,11 +32,6 @@ class PageBlock implements EntityFileProviderInterface
      */
     #[ORM\OneToMany(targetEntity: PageBlockAssignment::class, mappedBy: 'pageBlock')]
     private Collection $pageBlockAssignments;
-
-    #[Assert\Expression(
-        "this.getPageBlockAssignments().count() or value",
-        message: 'Web and Page is empty',
-    )]
     #[AppAssert\PageBuilderUser]
     #[ORM\ManyToOne(targetEntity: Web::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -56,10 +51,6 @@ class PageBlock implements EntityFileProviderInterface
     #[Assert\Valid()]
     private Collection $rows;
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
-    #[Assert\Expression(
-        "this.getPageBlockAssignments().count() or value",
-        message: 'Category is required',
-    )]
     private ?PageBlockTemplateCategory $category;
 
     #[ORM\Column(type: 'string', nullable: true)]
@@ -90,6 +81,11 @@ class PageBlock implements EntityFileProviderInterface
     private bool $isShared = false;
 
     private ?string $uniqueId = '';
+
+    /**
+     * @Serializer\Exclude()
+     */
+    private $reassigned = false;
 
     private ?bool $isFromTemplateBlock = false;
 
@@ -347,6 +343,16 @@ class PageBlock implements EntityFileProviderInterface
     {
         $this->pageBlockAssignments->removeElement($pageBlockAssignment);
         $pageBlockAssignment->setPageBlock(null);
+    }
+
+    public function isReassigned(): bool
+    {
+        return $this->reassigned;
+    }
+
+    public function setReassigned(bool $reassigned): void
+    {
+        $this->reassigned = $reassigned;
     }
 
     /**
