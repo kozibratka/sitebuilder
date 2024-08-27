@@ -32,6 +32,10 @@ class PageBlock implements EntityFileProviderInterface
      */
     #[ORM\OneToMany(targetEntity: PageBlockAssignment::class, mappedBy: 'pageBlock')]
     private Collection $pageBlockAssignments;
+    #[Assert\Expression(
+        "this.getPageBlockAssignments().count() or value",
+        message: 'Web and Page is empty',
+    )]
     #[AppAssert\PageBuilderUser]
     #[ORM\ManyToOne(targetEntity: Web::class, inversedBy: 'pageBlocks')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -50,6 +54,10 @@ class PageBlock implements EntityFileProviderInterface
     )]
     #[Assert\Valid()]
     private Collection $rows;
+    #[Assert\Expression(
+        "this.getPageBlockAssignments().count() or value",
+        message: 'Category is required',
+    )]
     #[ORM\ManyToOne(targetEntity: PageBlockTemplateCategory::class)]
     private ?PageBlockTemplateCategory $category;
 
@@ -336,8 +344,10 @@ class PageBlock implements EntityFileProviderInterface
 
     public function addPageBlockAssignment(PageBlockAssignment $pageBlockAssignment)
     {
-        $this->pageBlockAssignments->add($pageBlockAssignment);
-        $pageBlockAssignment->setPageBlock($this);
+        if (!$this->pageBlockAssignments->contains($pageBlockAssignment)) {
+            $this->pageBlockAssignments->add($pageBlockAssignment);
+        }
+        //$pageBlockAssignment->setPageBlock($this);
     }
     public function removePageBlockAssignment(PageBlockAssignment $pageBlockAssignment)
     {

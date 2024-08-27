@@ -31,11 +31,9 @@ class PageBlockSubscriber implements EventSubscriberInterface
             if ($pageBlock->isShared() || !$pageBlock->getWeb()) {
                 $pageBlock->setReassigned(true);
                 $form->setData($pageBlock);
-            } else {
-                $form->setData(new PageBlock());
+                return;
             }
-        } else {
-            $form->setData(new PageBlock());
         }
+        $form->setData(new PageBlock());
     }
 }

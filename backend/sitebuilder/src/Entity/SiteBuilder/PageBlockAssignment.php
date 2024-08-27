@@ -19,7 +19,7 @@ class PageBlockAssignment
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?AbstractPage $page = null;
     #[Assert\Valid()]
-    #[ORM\ManyToOne(targetEntity: PageBlock::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: PageBlock::class, cascade: ['persist'], inversedBy: 'pageBlockAssignments')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?PageBlock $pageBlock = null;
 
@@ -75,6 +75,13 @@ class PageBlockAssignment
 
     public function setPageBlock(?PageBlock $pageBlock): void
     {
+        $oldPageBlock = $this->getPageBlock();
+        $pageBlock->addPageBlockAssignment($this);
+        if ($oldPageBlock && $pageBlock && $pageBlock !== $oldPageBlock) {
+            $res = $oldPageBlock->getPageBlockAssignments()->removeElement($this);
+//            dd($oldPageBlock->getPageBlockAssignments()->count());
+//            dd( $this->pageBlock->getId());
+        }
         $this->pageBlock = $pageBlock;
     }
 

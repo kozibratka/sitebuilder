@@ -130,6 +130,7 @@ class PageController extends BaseApiController
                 $publicPage = $page->createPublicPage();
                 $this->persist($publicPage);
             }
+
 //            $as = $page->getPageBlockAssignments()->first()->getPageBlock();
 //            $as->refreshGridCellItemOrder();
 //            dd($as);
