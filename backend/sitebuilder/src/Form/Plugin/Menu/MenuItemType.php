@@ -18,6 +18,7 @@ class MenuItemType extends AbstractType
             ->add('pageId', EntityType::class, ['class' => AbstractPage::class, 'property_path' => 'page'])
             ->add('name', TextType::class)
             ->add('level', NumberType::class)
+            ->add('uniqueId')
         ;
     }
 

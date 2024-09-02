@@ -88,6 +88,7 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'boolean')]
     private bool $isShared = false;
 
+    #[ORM\Column(type: 'string', nullable: true)]
     private ?string $uniqueId = '';
 
     /**

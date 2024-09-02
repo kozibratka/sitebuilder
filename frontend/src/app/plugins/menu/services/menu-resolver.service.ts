@@ -62,9 +62,9 @@ export class MenuResolverService extends AbstractPluginResolver<MenuConfigInterf
       logoImage: '',
       logoName: 'Logo',
       items: [
-        {name: 'one', level: 0, pageId: null, pageDetail: {pageUrl: '', isHomepage: false}},
-        {name: 'two', level: 0, pageId: null, pageDetail: {pageUrl: '', isHomepage: false}},
-        {name: 'tree', level: 0, pageId: null, pageDetail: {pageUrl: '', isHomepage: false}},
+        {name: 'one', type: 1, level: 0, pageId: null, pageDetail: {pageUrl: '', isHomepage: false}},
+        {name: 'two', type: 1, level: 0, pageId: null, pageDetail: {pageUrl: '', isHomepage: false}},
+        {name: 'tree', type: 1, level: 0, pageId: null, pageDetail: {pageUrl: '', isHomepage: false}},
       ]
     };
   }

@@ -169,3 +169,7 @@ b, .b, strong, .strong {
 
 .navbar .navbar-nav .nav-item {
   padding: 0 4px; }
+
+::ng-deep.validation-error-message{
+  color:red;
+}

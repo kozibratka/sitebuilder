@@ -6,12 +6,14 @@
 </div>
 <mat-dialog-actions class="float-end">
   <button mat-button [mat-dialog-close] = "false">Zrušit</button>
-  <button *ngIf="saveButtonShow" mat-button [mat-dialog-close] = "saveData">
+  <button *ngIf="saveButtonShow && !refCustomButton.hasChildNodes()" (click)="onSubmit()" mat-button>
     <span #ref><ng-content select="[save-button]"></ng-content></span>
     <ng-container *ngIf="!ref.hasChildNodes()">
       Uložit
     </ng-container>
   </button>
-  <ng-content select="[custom-button]"></ng-content>
+  <span #refCustomButton>
+    <ng-content select="[custom-button]"></ng-content>
+  </span>
 
 </mat-dialog-actions>

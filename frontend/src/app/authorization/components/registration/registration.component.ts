@@ -45,9 +45,10 @@ export class RegistrationComponent implements OnInit {
         });
       }
       else if (status === 'INVALID') {
-        this.registrationForm.get('password')?.get('first')?.reset(
-          this.registrationForm.get('password')?.get('first')?.value, {onlySelf: true, emitEvent: false}
-          );
+        // this.registrationForm.get('password')?.get('first')?.reset(
+        //   this.registrationForm.get('password')?.get('first')?.value, {onlySelf: true, emitEvent: false}
+        //   );
+        this.registrationForm.get('password')?.get('first')?.markAsTouched();
       }
     });
   }

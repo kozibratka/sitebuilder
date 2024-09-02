@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ValidationErrors} from '@angular/forms';
+import {FormControlName, ValidationErrors} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 
 @Component({
@@ -13,7 +13,8 @@ import {CommonModule} from "@angular/common";
 })
 export class ErrorMessageComponent implements OnInit {
 
-  private _errors: ValidationErrors;
+  private _errors: ValidationErrors = [];
+  control: FormControlName;
   objectKeys = Object.keys;
 
   constructor() {

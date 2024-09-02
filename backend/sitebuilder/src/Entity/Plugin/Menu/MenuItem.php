@@ -24,6 +24,9 @@ class MenuItem
      */
     private ?AbstractPage $page = null;
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $uniqueId = null;
+
     #[ORM\Column(type: 'string')]
     private string $name = '';
 
@@ -87,6 +90,16 @@ class MenuItem
     public function getPageId(): ?string
     {
         return $this->getPage()?->getId();
+    }
+
+    public function getUniqueId(): ?string
+    {
+        return $this->uniqueId;
+    }
+
+    public function setUniqueId(?string $uniqueId): void
+    {
+        $this->uniqueId = $uniqueId;
     }
 
     public function __clone(): void

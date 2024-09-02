@@ -1,31 +1,37 @@
 <app-dialog>
   <ng-container title>Nastavení položky menu</ng-container>
-  <form content [formGroup]="settings">
+  <form content [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="mb-3">
-      <label for="interval">Název:</label>
-      <input id="interval" formControlName="name" type="text" class="form-control">
-      <div *ngIf="settings.get('name').hasError('required')" class="invalid-feedback">
-        Toto pole je povinné
-      </div>
+      <label for="name">Název:</label>
+      <input appFormError id="name" formControlName="name" type="text" class="form-control">
     </div>
-    <div class="">
-      <label for="page">Stránka {{!settings.get('pageId').value}}</label>
-      <select class="form-control" required id="page" formControlName="pageId">
-        <option [ngValue]="null" disabled>Vyberte stránku...</option>
-        <option *ngFor="let item of pages" [ngValue]="item.id.toString()">{{item.name}}</option>
+    <div class="mb-3">
+      <label for="type">Odkaz na: </label>
+      <select class="form-control" required id="type" formControlName="type">
+        <option [ngValue]="1">Stránku</option>
+        <option [ngValue]="2">Blok</option>
       </select>
-      <div *ngIf="settings.get('pageId').hasError('required')" class="invalid-feedback">
-        Toto pole je povinné
-      </div>
     </div>
-
-
-    <!--    <mat-form-field appearance="fill">-->
-    <!--      <mat-label>Stránka: </mat-label>-->
-    <!--      <mat-select formControlName="idPage">-->
-    <!--        <mat-option *ngFor="let item of pages" [value]="item.id">{{item.name}}</mat-option>-->
-    <!--      </mat-select>-->
-    <!--      <mat-error *ngIf="settings.get('idPage').hasError('required')">Toto pole je povinné</mat-error>-->
-    <!--    </mat-form-field>-->
+    @if (form.get('type').value == 1) {
+      <div class="">
+        <label for="page">Vyberte stránku</label>
+        <select appFormError class="form-control" id="page" formControlName="pageId">
+          <option [ngValue]="null" disabled>Vyberte stránku...</option>
+          <option *ngFor="let item of pages" [ngValue]="item.id.toString()">{{item.name}}</option>
+        </select>
+      </div>
+    } @else {
+      <div class="">
+        <label for="block">Vyberte blok</label>
+        <select appFormError class="form-control" id="block" formControlName="uniqueId">
+          <option [ngValue]="null" disabled>Vyberte blok...</option>
+          <option *ngFor="let blockAssign of pageBuilderResolverService.page.pageBlockAssignments" [ngValue]="blockAssign.pageBlock.uniqueId">{{blockAssign.pageBlock.name}}</option>
+        </select>
+      </div>
+    }
+    <button #submit type="submit" class="btn btn-primary d-none">Uložit</button>
   </form>
+<!--  <ng-container custom-button>-->
+<!--    <button (click)="FormService.sendFormManually(formElement)" class="btn btn-primary">Uložit</button>-->
+<!--  </ng-container>-->
 </app-dialog>

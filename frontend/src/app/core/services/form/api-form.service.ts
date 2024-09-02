@@ -16,6 +16,7 @@ export class ApiFormService {
   ) { }
 
   send(path: string, form: AbstractControl, querySegment?: {}) {
+    form.markAllAsTouched();
     return this.symfonyApiClientService.post<any>(path, form.value, querySegment).pipe(tap(next => {
 
       },
