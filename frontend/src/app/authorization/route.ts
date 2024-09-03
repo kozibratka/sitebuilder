@@ -15,24 +15,29 @@ export default   [
       {pathMatch: 'full', path: 'login', redirectTo: 'login/0'},
       {
         path: 'registration',
-        component: RegistrationComponent
+        component: RegistrationComponent,
+        title: 'Registrace NetDropper',
       },
       {
         path: 'login/:activated',
-        component: LoginComponent
+        component: LoginComponent,
+        title: 'Přihlášení NetDropper',
       },
       {
         path: 'password-forgotten',
-        component: PasswordForgottenComponent
+        component: PasswordForgottenComponent,
+        title: 'Obnova hersla NetDropper',
       },
       {
         path: 'reset-password/:hash',
         component: ResetPasswordComponent,
         canActivate: [resetPasswordGuard],
+        title: 'Obnova hersla NetDropper',
       },
       {
         path: 'activation/:hash',
         component: ActivationComponent,
+        title: 'Aktivace NetDropper',
       }
     ]
   }

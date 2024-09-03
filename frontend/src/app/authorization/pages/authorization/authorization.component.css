@@ -28,19 +28,12 @@
   position: relative;
   z-index: 0;
   padding: 0;
-  background-image: url("/assets/loginLayout/img/bg.jpg");
+  background-image: url("/assets/shared/image/nasa2.jpg");
+  background-size: cover; /* or "contain" depending on what you want */
+  background-position: center center;
+  background-repeat: no-repeat;
 }
-::ng-deep body:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  content: '';
-  background: #000;
-  opacity: .3;
-  z-index: -1;
-}
+
 
 ::ng-deep h1, h2, h3, h4, h5,
 .h1, .h2, .h3, .h4, .h5 {
@@ -227,4 +220,15 @@
 .progres-line {
   z-index: 9999;
   position: fixed;
+}
+
+::ng-deep.particles-js-canvas-el {
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  height: 100vh;
+}
+
+::ng-deep.reg-login-form {
+  z-index: 1;
 }
