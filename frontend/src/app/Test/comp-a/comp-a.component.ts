@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, Component, OnInit} from '@angular/core';
 import {CompBComponent} from "../comp-b/comp-b.component";
-import {SerAService} from "../services/ser-a.service";
-import {SerBService} from "../services/ser-b.service";
 import {SortablejsModule} from "nxt-sortablejs";
 import {NgForOf} from "@angular/common";
+import {DirectiveADirective} from "../directives/directive-a.directive";
 
 @Component({
   selector: 'app-comp-a',
@@ -11,17 +10,34 @@ import {NgForOf} from "@angular/common";
   imports: [
     CompBComponent,
     SortablejsModule,
-    NgForOf
+    NgForOf,
+    DirectiveADirective
   ],
   templateUrl: './comp-a.component.html',
   styleUrl: './comp-a.component.css',
   providers: []
 })
-export class CompAComponent {
+export class CompAComponent implements OnInit, AfterContentChecked, AfterViewChecked{
   arrayA = ['A'];
   arrayB = ['B'];
+  kokos: string = 'wwwwwwwwwwwww';
 
 
   constructor() {
   }
+
+  ngAfterContentChecked(): void {
+    console.log('ngAfterContentChecked A')
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('ngAfterViewChecked A')
+  }
+
+  ngOnInit(): void {
+    console.log('ngOnInit A')
+    setTimeout(() => this.kokos='wwwwwwwwwwwww', 3000);
+  }
+
+
 }

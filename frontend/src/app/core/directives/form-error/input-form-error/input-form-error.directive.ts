@@ -2,10 +2,10 @@ import {
   AfterContentChecked,
   AfterContentInit, ChangeDetectorRef,
   ComponentFactoryResolver, ContentChild,
-  Directive, ElementRef, Host, OnDestroy, Optional, Renderer2, Self,
+  Directive, DoCheck, ElementRef, Host, Input, OnDestroy, OnInit, Optional, Renderer2, Self,
   ViewContainerRef
 } from '@angular/core';
-import {FormControlName, NgControl} from '@angular/forms';
+import {Form, FormControlName, NgControl, ValidationErrors} from '@angular/forms';
 import {ErrorMessageComponent} from './tools/components/error-message/error-message.component';
 import {InputFormErrorGrouperDirective} from '../input-form-error-grouper.directive';
 
@@ -13,11 +13,11 @@ import {InputFormErrorGrouperDirective} from '../input-form-error-grouper.direct
   selector: '[appFormError]',
   standalone: true,
 })
-export class InputFormErrorDirective implements AfterContentInit, OnDestroy, AfterContentChecked{
+export class InputFormErrorDirective implements OnInit, DoCheck{
 
-  @ContentChild(FormControlName, {read: FormControlName}) formInput: FormControlName;
-  @ContentChild(NgControl, {read: ElementRef}) formInputElementRef: ElementRef;
-  @ContentChild('errorFormContainer', {read: ViewContainerRef}) errorFormContainer: ViewContainerRef;
+  @ContentChild(FormControlName, {read: FormControlName, static: true}) formInput: FormControlName;
+  @ContentChild(NgControl, {read: ElementRef, static: true}) formInputElementRef: ElementRef;
+  @ContentChild('errorFormContainer', {read: ViewContainerRef, static: true}) errorFormContainer: ViewContainerRef;
   private errorMessageComonent: ErrorMessageComponent;
   private isError = false;
 
@@ -31,7 +31,7 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy, Aft
   ) {
   }
 
-  ngAfterContentInit(): void {
+  ngOnInit(): void {
     if (this.selfInput) {
       this.errorFormContainer = this.selfViewContainer;
       this.formInputElementRef = this.elementRef;
@@ -40,20 +40,10 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy, Aft
         this.errorFormContainer = this.selfViewContainer;
       }
       this.selfInput = this.formInput;
-
     }
-    // this.selfInput.statusChanges?.subscribe(status => {
-    //   this.clearMessage();
-    //   if (status === 'INVALID') {
-    //     this.createErrorMessage();
-    //     if (this.inputFormErrorGrouperDirective?.hasError) {
-    //       this.inputFormErrorGrouperDirective.hasError = true;
-    //     }
-    //   }
-    // });
   }
 
-  ngAfterContentChecked(): void {
+  ngDoCheck(): void {
     if (this.selfInput.touched || this.selfInput.dirty) {
       if (!this.isError && this.selfInput?.errors) {
         this.isError = true;
@@ -64,21 +54,13 @@ export class InputFormErrorDirective implements AfterContentInit, OnDestroy, Aft
       }
     }
   }
-
-
-  ngOnDestroy(): void {
-  }
-
   createErrorMessage(): void {
     this.errorMessageComonent = this.errorFormContainer.createComponent(ErrorMessageComponent).instance;
     this.errorMessageComonent.errors = this.selfInput.errors;
     this.errorMessageComonent.control = this.selfInput;
-    this.cdRef.detectChanges();
   }
 
   clearMessage(): void {
     this.errorFormContainer.clear();
-    this.cdRef.detectChanges();
   }
-
 }
