@@ -37,6 +37,7 @@ class PageBlockType extends AbstractType
             ->add('backgroundColor')
             ->add('backgroundImage')
             ->add('backgroundVideo')
+            ->add('name')
             ->add('height', NumberType::class)
             ->add('grayScale', NumberType::class)
             ->add('opacity', NumberType::class)

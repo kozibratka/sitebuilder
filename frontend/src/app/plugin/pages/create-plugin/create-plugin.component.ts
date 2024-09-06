@@ -9,7 +9,7 @@ import {WebDetailResolverService} from '../../../web/services/web-detail-resolve
 import {PluginFormService} from '../../services/plugin-form.service';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
-import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
+import {MiniAdminComponent} from '../../../core/modules/mini-admin/components/mini-admin.component';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {PluginResolverService} from '../../../plugins/shared/services/plugin-resolver.service';
 import {BasePlugConfigInterface} from '../../../plugins/shared/interfaces/base-plug-config-interface';

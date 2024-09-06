@@ -20,7 +20,7 @@ import {PluginResolverService} from "../../../plugins/shared/services/plugin-res
 import {PageBuilderComponent} from "../../pages/page-builder/page-builder.component";
 import {MoveableModalService} from "../../../core/components/moveable-modal/services/moveable-modal.service";
 import {AdminPluginSelectComponent} from "../../../plugins/shared/components/plugin-select/admin-plugin-select.component";
-import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
+import {MiniAdminComponent} from "../../../core/modules/mini-admin/components/mini-admin.component";
 import {
   PluginDimensionAdminComponent
 } from "../../../plugins/shared/components/admin-pages/plugin-dimension-admin/plugin-dimension-admin.component";

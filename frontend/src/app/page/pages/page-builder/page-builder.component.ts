@@ -11,7 +11,7 @@ import {MenuPluginResolverService} from '../../services/resolvers/menu-plugin-re
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {PageInterface} from '../../interfaces/page-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
-import {MiniAdminComponent} from '../../../core/components/mini-admin/mini-admin.component';
+import {MiniAdminComponent} from '../../../core/modules/mini-admin/components/mini-admin.component';
 import {HttpResponseToasterService} from '../../../core/services/http-response-toaster.service';
 import {SymfonyApiClientService} from '../../../core/services/api/symfony-api/symfony-api-client.service';
 import {NotifierService} from '../../../core/services/notifier.service';

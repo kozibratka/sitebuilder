@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SettingAbleInterface} from "../../../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
+import {SettingAbleInterface} from "../../../../../core/modules/mini-admin/interfaces/setting-able-interface";
 import {PageBlockInterface} from "../../../../interfaces/page-block-interface";
 import {PageBlockComponent} from "../../page-block/page-block.component";
 import {UrlService} from "../../../../../core/services/url.service";

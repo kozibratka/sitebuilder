@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="border-outer">
+            <div class="border border-inner">
+              <label for="name" class="form-label">Název:</label>
+              <input appFormError required type="text" class="form-control" id="name" formControlName="name">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

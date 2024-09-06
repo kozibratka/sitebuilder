@@ -25,7 +25,8 @@
         <label for="block">Vyberte blok</label>
         <select appFormError class="form-control" id="block" formControlName="uniqueId">
           <option [ngValue]="null" disabled>Vyberte blok...</option>
-          <option *ngFor="let blockAssign of pageBuilderResolverService.page.pageBlockAssignments" [ngValue]="blockAssign.pageBlock.uniqueId">{{blockAssign.pageBlock.name}}</option>
+          <option *ngFor="let blockAssign of pageBuilderResolverService.page.pageBlockAssignments"
+                  [ngValue]="blockAssign.pageBlock.uniqueId">{{blockAssign.pageBlock.name}}</option>
         </select>
       </div>
     }

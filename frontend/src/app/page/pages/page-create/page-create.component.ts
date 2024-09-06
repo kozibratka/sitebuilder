@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {PageFormService} from '../../services/page-form.service';
+import {PageFormService} from '../../services/form/page-form.service';
 import {WebInterface} from '../../../web/interfaces/web-interface';
 import {WebDetailResolverService} from '../../../web/services/web-detail-resolver.service';
 import {NotifierService} from '../../../core/services/notifier.service';

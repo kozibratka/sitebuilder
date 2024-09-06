@@ -11,9 +11,9 @@ import {AbstractPluginResolver} from '../../../page/services/abstract-classes/ab
 import {NotifierService} from '../../../core/services/notifier.service';
 import {BasePlugConfigInterface} from '../../../plugins/shared/interfaces/base-plug-config-interface';
 import {PluginResolverService} from '../../../plugins/shared/services/plugin-resolver.service';
-import {AdminAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/admin-able-interface";
-import {SettingAbleInterface} from "../../../core/components/mini-admin/tools/interfaces/setting-able-interface";
-import {MiniAdminComponent} from "../../../core/components/mini-admin/mini-admin.component";
+import {AdminAbleInterface} from "../../../core/modules/mini-admin/interfaces/admin-able-interface";
+import {SettingAbleInterface} from "../../../core/modules/mini-admin/interfaces/setting-able-interface";
+import {MiniAdminComponent} from "../../../core/modules/mini-admin/components/mini-admin.component";
 import {MatAnchor, MatButton} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
 

@@ -1,6 +1,6 @@
 import {Type} from '@angular/core';
-import {AdminAbleInterface} from '../../../core/components/mini-admin/tools/interfaces/admin-able-interface';
-import {SettingAbleInterface} from '../../../core/components/mini-admin/tools/interfaces/setting-able-interface';
+import {AdminAbleInterface} from '../../../core/modules/mini-admin/interfaces/admin-able-interface';
+import {SettingAbleInterface} from '../../../core/modules/mini-admin/interfaces/setting-able-interface';
 import {BasePlugConfigInterface} from "../../../plugins/shared/interfaces/base-plug-config-interface";
 
 export abstract class AbstractPluginResolver<T extends BasePlugConfigInterface> implements AdminAbleInterface{

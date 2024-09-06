@@ -22,10 +22,10 @@ import {UserService} from "../../../../authorization/services/user.service";
 import {PageBlockTemplateService} from "../../../services/page-block-template.service";
 import {MoveableModalService} from "../../../../core/components/moveable-modal/services/moveable-modal.service";
 import {BlockAppearanceComponent} from "../admin/block-appearance/block-appearance.component";
-import {MiniAdminComponent} from "../../../../core/components/mini-admin/mini-admin.component";
+import {MiniAdminComponent} from "../../../../core/modules/mini-admin/components/mini-admin.component";
 import {
   AdminSettingAbleInterface
-} from "../../../../core/components/mini-admin/tools/interfaces/admin-setting-able-interface";
+} from "../../../../core/modules/mini-admin/interfaces/admin-setting-able-interface";
 import {BlockDimensionComponent} from "../admin/block-dimension/block-dimension.component";
 import {UrlService} from "../../../../core/services/url.service";
 import {DragStatusService} from "../../../services/drag-status.service";
@@ -43,6 +43,8 @@ import {faCirclePlus} from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 import {GridCellItemService} from "../../../services/grid-cell-item.service";
 import {GridRowService} from "../../../services/grid-row.service";
 import {PageBlockAssignmentInterface} from "../../../interfaces/page-block-assignment-interface";
+import {PageBuilderResolverService} from "../../../services/resolvers/page-builder-resolver.service";
+import {AdminBlockComponent} from "../admin/admin-block/admin-block.component";
 
 @Component({
   selector: 'app-palette-block',
@@ -88,11 +90,13 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
     private dragStatusService: DragStatusService,
     public gridCellItemService: GridCellItemService,
     public gridRowService: GridRowService,
+    public pageBuilderResolverService: PageBuilderResolverService
   ) {
   }
 
   ngOnInit(): void {
     this.initVideoUrl();
+    this.initName();
   }
 
   ngAfterViewInit(): void {
@@ -105,6 +109,20 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
 
   ngOnDestroy() {
     this.destroyVideo();
+  }
+
+  initName() {
+    if (!this._pageBlock.name) {
+      let names = this.pageBuilderResolverService.page.pageBlockAssignments.map(e => e.pageBlock.name);
+      let prefix = 'blok'
+      for(let i = 1; i < 999; i++) {
+        let newName =prefix+'_'+i;
+        if (!names.includes(newName)) {
+          this._pageBlock.name = newName;
+          break;
+        }
+      }
+    }
   }
 
   @HostListener('mousedown', ['$event']) onClick(event: MouseEvent): void {
@@ -199,6 +217,7 @@ export class PageBlockComponent implements OnInit, AfterViewInit, OnDestroy, Aft
       settings: this.pageBlock,
       contextObject: this,
       adminComponentsClass: [
+        {component: AdminBlockComponent, label: 'Obecné'},
         {component: BlockAppearanceComponent, label: 'Pozadí'},
         {component: BlockDimensionComponent, label: 'Rozměry'}
       ]

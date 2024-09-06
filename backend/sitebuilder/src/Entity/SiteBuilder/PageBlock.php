@@ -91,6 +91,9 @@ class PageBlock implements EntityFileProviderInterface
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $uniqueId = '';
 
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $name = '';
+
     /**
      * @Serializer\Exclude()
      */
@@ -364,6 +367,15 @@ class PageBlock implements EntityFileProviderInterface
     public function setReassigned(bool $reassigned): void
     {
         $this->reassigned = $reassigned;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 
     /**

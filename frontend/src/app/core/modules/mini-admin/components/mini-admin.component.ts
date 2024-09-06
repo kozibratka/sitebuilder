@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {AdminAbleInterface} from './tools/interfaces/admin-able-interface';
-import {SettingAbleInterface} from './tools/interfaces/setting-able-interface';
-import {InitAbleInterface} from "../moveable-modal/interfaces/init-able-interface";
-import {AdminSettingAbleInterface} from "./tools/interfaces/admin-setting-able-interface";
+import {AdminAbleInterface} from '../interfaces/admin-able-interface';
+import {SettingAbleInterface} from '../interfaces/setting-able-interface';
+import {InitAbleInterface} from "../../../components/moveable-modal/interfaces/init-able-interface";
+import {AdminSettingAbleInterface} from "../interfaces/admin-setting-able-interface";
 import {MatIcon} from "@angular/material/icon";
 import {CommonModule} from "@angular/common";
 
