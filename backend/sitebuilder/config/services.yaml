@@ -134,3 +134,8 @@ services:
         arguments:
             - 'redis://%env(REDIS_HOST)%:%env(int:REDIS_PORT)%'
             - { retry_interval: 2, timeout: 10 }
+
+    app.handler.mapping_handler:
+        class: 'App\Service\JMS\EnumHandler'
+        tags:
+            - { name: jms_serializer.subscribing_handler }

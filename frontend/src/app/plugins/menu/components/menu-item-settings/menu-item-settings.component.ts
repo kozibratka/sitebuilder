@@ -56,10 +56,10 @@ export class MenuItemSettingsComponent {
     }, {
       updateOn: 'submit',
       validators: (control: AbstractControl) => {
-        if (control.get('type').value == 2 && !control.get('uniqueId').value) {
+        if (control.get('type').value == 'Block' && !control.get('uniqueId').value) {
           control.get('uniqueId').setErrors({required: true});
         }
-        if (control.get('type').value == 1 && !control.get('pageId').value) {
+        if (control.get('type').value == 'Page' && !control.get('pageId').value) {
           control.get('pageId').setErrors({required: true});
         }
         return null;

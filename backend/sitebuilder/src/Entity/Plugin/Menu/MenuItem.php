@@ -2,6 +2,7 @@
 
 namespace App\Entity\Plugin\Menu;
 use App\Entity\Page\AbstractPage;
+use App\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\MaxDepth;
@@ -32,6 +33,10 @@ class MenuItem
 
     #[ORM\Column(type: 'integer')]
     private int $level = 0;
+
+    #[ORM\Column(type: 'menu_item_type_enum')]
+    #[Serializer\Type("enum<'MenuItemTypeEnum', 'value'>")]
+    private MenuItemTypeEnum $type = MenuItemTypeEnum::Page;
 
     public function getMenu(): PluginMenu
     {
@@ -100,6 +105,16 @@ class MenuItem
     public function setUniqueId(?string $uniqueId): void
     {
         $this->uniqueId = $uniqueId;
+    }
+
+    public function getType(): MenuItemTypeEnum
+    {
+        return $this->type;
+    }
+
+    public function setType(MenuItemTypeEnum $type): void
+    {
+        $this->type = $type;
     }
 
     public function __clone(): void

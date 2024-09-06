@@ -3,5 +3,5 @@ export interface MenuItemInterface {
   level: number;
   pageId: number;
   pageDetail: {pageUrl: string, isHomepage: boolean};
-  type: number;
+  type: "Block" | "Page";
 }

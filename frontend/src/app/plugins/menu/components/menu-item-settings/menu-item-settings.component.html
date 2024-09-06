@@ -7,15 +7,15 @@
     </div>
     <div class="mb-3">
       <label for="type">Odkaz na: </label>
-      <select class="form-control" required id="type" formControlName="type">
-        <option [ngValue]="1">Stránku</option>
-        <option [ngValue]="2">Blok</option>
+      <select class="form-select" required id="type" formControlName="type">
+        <option [ngValue]="'Page'">Stránku</option>
+        <option [ngValue]="'Block'">Blok</option>
       </select>
     </div>
-    @if (form.get('type').value == 1) {
+    @if (form.get('type').value == 'Page') {
       <div class="">
         <label for="page">Vyberte stránku</label>
-        <select appFormError class="form-control" id="page" formControlName="pageId">
+        <select appFormError class="form-select" id="page" formControlName="pageId">
           <option [ngValue]="null" disabled>Vyberte stránku...</option>
           <option *ngFor="let item of pages" [ngValue]="item.id.toString()">{{item.name}}</option>
         </select>
@@ -23,7 +23,7 @@
     } @else {
       <div class="">
         <label for="block">Vyberte blok</label>
-        <select appFormError class="form-control" id="block" formControlName="uniqueId">
+        <select appFormError class="form-select" id="block" formControlName="uniqueId">
           <option [ngValue]="null" disabled>Vyberte blok...</option>
           <option *ngFor="let blockAssign of pageBuilderResolverService.page.pageBlockAssignments"
                   [ngValue]="blockAssign.pageBlock.uniqueId">{{blockAssign.pageBlock.name}}</option>

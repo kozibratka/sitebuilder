@@ -3,8 +3,10 @@
 namespace App\Form\Plugin\Menu;
 use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\Menu\MenuItem;
+use App\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +21,7 @@ class MenuItemType extends AbstractType
             ->add('name', TextType::class)
             ->add('level', NumberType::class)
             ->add('uniqueId')
+            ->add('type', EnumType::class, ['class' => MenuItemTypeEnum::class])
         ;
     }
 
