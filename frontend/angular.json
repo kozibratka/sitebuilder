@@ -22,12 +22,14 @@
             "tsConfig": "tsconfig.app.json"
           },
           "configurations": {
-            "shared-frontend": {
+            "shared-admin": {
               "assets": [
                 "src/favicon.ico",
                 "src/assets/kaiadmin_lte",
                 "src/assets/nanogallery2",
                 "src/assets/shared",
+                "src/assets/tinyLang",
+                "src/assets/fonts.css",
                 { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" },
                 { "glob": "bootstrap.min.css","input": "node_modules/bootstrap/dist/css", "output": "/bootstrap/css" }
               ],
@@ -63,12 +65,12 @@
                 "src/assets/website/particles.js"
               ]
             },
-            "development": {
+            "dev-admin": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             },
-            "production": {
+            "prod-admin": {
               "budgets": [
                 {
                   "type": "initial",

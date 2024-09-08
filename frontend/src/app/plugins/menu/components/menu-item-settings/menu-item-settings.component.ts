@@ -50,16 +50,18 @@ export class MenuItemSettingsComponent {
     });
     this.form = this.fb.group({
       name: ['', [Validators.required]],
-      type: [1, { validators: [Validators.required] ,updateOn: 'change' }],
+      type: ['Page', { validators: [Validators.required] ,updateOn: 'change' }],
       pageId: [null],
       uniqueId: [null],
     }, {
       updateOn: 'submit',
       validators: (control: AbstractControl) => {
+        control.get('uniqueId').setErrors(null);
+        control.get('pageId').setErrors(null);
         if (control.get('type').value == 'Block' && !control.get('uniqueId').value) {
           control.get('uniqueId').setErrors({required: true});
         }
-        if (control.get('type').value == 'Page' && !control.get('pageId').value) {
+        else if (control.get('type').value == 'Page' && !control.get('pageId').value) {
           control.get('pageId').setErrors({required: true});
         }
         return null;
@@ -77,10 +79,15 @@ export class MenuItemSettingsComponent {
     this.form.markAllAsTouched();
     if (this.form.status == 'VALID') {
       this.formData = this.form.value;
-      const page = this.pages.find(page => page.id == this.formData.pageId);
-      this.formData.pageDetail = {pageUrl: page.url, isHomepage: page.homePage};
+      if (this.formData.type === 'Block') {
+        this.formData.pageId = null;
+      } else { // page
+        this.formData.uniqueId = null;
+        const page = this.pages.find(page => page.id == this.formData.pageId);
+        this.formData.pageDetail = {pageUrl: page.url, isHomepage: page.homePage};
+      }
+
       this.dialogRef.close(true);
-    } else {
     }
   }
 
