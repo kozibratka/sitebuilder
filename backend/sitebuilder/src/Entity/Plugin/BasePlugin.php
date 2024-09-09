@@ -31,6 +31,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *          "Menu" = "App\Entity\Plugin\Menu\PluginMenu",
  *          "Image" = "App\Entity\Plugin\Image\PluginImage",
  *          "Video" = "App\Entity\Plugin\Video\PluginVideo",
+ *          "VideoBackground" = "App\Entity\Plugin\VideoBackground\PluginVideoBackground",
  *          "Form" = "App\Entity\Plugin\Form\PluginForm",
  *          "Button" = "App\Entity\Plugin\Button\PluginButton",
  *          "Icon" = "App\Entity\Plugin\Icon\PluginIcon",

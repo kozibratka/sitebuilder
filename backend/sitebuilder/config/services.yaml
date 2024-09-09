@@ -113,6 +113,10 @@ services:
         tags:
             - { name: 'plugin_service', key: 'video_v1' }
 
+    App\Service\Plugin\VideoBackground\VideoBackgroundService:
+        tags:
+            - { name: 'plugin_service', key: 'video_background_v1' }
+
     App\Service\Plugin\Form\FormService:
         tags:
             - { name: 'plugin_service', key: 'form_v1' }
