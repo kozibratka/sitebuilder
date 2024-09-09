@@ -7,6 +7,7 @@ import {
   InputFormErrorDirective
 } from "../../../../core/directives/form-error/input-form-error/input-form-error.directive";
 import {NgForOf} from "@angular/common";
+import {GalleryComponent} from "../../components/gallery/gallery.component";
 
 @Component({
   selector: 'app-gallery-size-admin',
@@ -20,7 +21,7 @@ import {NgForOf} from "@angular/common";
   templateUrl: './gallery-size-admin.component.html',
   styleUrl: './gallery-size-admin.component.css'
 })
-export class GallerySizeAdminComponent extends AbstractAdminSetting<GalleryConfigInterface> {
+export class GallerySizeAdminComponent extends AbstractAdminSetting<GalleryConfigInterface, GalleryComponent> {
   constructor(
     protected fb: FormBuilder,
     protected adminFormService: FormService

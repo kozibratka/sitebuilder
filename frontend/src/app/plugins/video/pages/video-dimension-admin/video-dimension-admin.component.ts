@@ -4,6 +4,7 @@ import {VideoConfigInterface} from "../../interfaces/video-config-interface";
 import {AdminFormService} from "../../../shared/forms/admin-form.service";
 import {FormService} from "../../../../core/services/form.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {VideoComponent} from "../../components/video/video.component";
 
 @Component({
   selector: 'app-video-dimension-admin',
@@ -14,7 +15,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   styleUrls: ['./video-dimension-admin.component.css']
 })
-export class VideoDimensionAdminComponent extends AbstractAdminSetting<VideoConfigInterface> {
+export class VideoDimensionAdminComponent extends AbstractAdminSetting<VideoConfigInterface, VideoComponent> {
   constructor(
     protected adminFormService: FormService,
   ) {

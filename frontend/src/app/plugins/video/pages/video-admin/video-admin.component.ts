@@ -3,6 +3,7 @@ import {VideoConfigInterface} from '../../interfaces/video-config-interface';
 import {AbstractAdminSetting} from '../../../shared/abstract-class/abstract-admin-setting';
 import {FormService} from "../../../../core/services/form.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {VideoComponent} from "../../components/video/video.component";
 
 @Component({
   selector: 'app-image-v1-admin',
@@ -13,7 +14,7 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   styleUrls: ['video-admin.component.css']
 })
-export class VideoAdminComponent extends AbstractAdminSetting<VideoConfigInterface> {
+export class VideoAdminComponent extends AbstractAdminSetting<VideoConfigInterface, VideoComponent> {
   constructor(
     protected adminFormService: FormService,
   ) {

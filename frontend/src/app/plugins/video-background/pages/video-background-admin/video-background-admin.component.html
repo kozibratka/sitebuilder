@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="border border-inner">
+            <label for="video-path" class="form-label">URL Youtube videa:</label>
+            <input type="url" class="form-control" id="video-path" formControlName="videoPath">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="border border-inner">
+            <label for="size" class="form-label">Výška (px):</label>
+            <input type="number" class="form-control" id="size" formControlName="height">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="border border-inner">
+            <label for="gray" class="form-label">Stupeň šedi videa</label>
+            <input type="range" min="0" max="100" class="form-range" id="gray" formControlName="grayScale">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="border border-inner">
+            <label for="opacity" class="form-label">Průhlednost videa</label>
+            <input type="range" min="0" max="10" class="form-range" id="opacity" formControlName="opacity">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+    </div>
+  </div>
+</div>

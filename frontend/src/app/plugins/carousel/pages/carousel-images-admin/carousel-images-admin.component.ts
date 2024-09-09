@@ -11,6 +11,7 @@ import {
 import {MatButton} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
+import {CarouselComponent} from "../../components/carousel/carousel.component";
 
 @Component({
   selector: 'app-carousel-bootstrap-images-admin',
@@ -28,7 +29,7 @@ import {CommonModule} from "@angular/common";
   ],
   styleUrls: ['carousel-images-admin.component.css']
 })
-export class CarouselImagesAdminComponent extends AbstractAdminSetting<CarouselConfigInterface> implements OnInit {
+export class CarouselImagesAdminComponent extends AbstractAdminSetting<CarouselConfigInterface, CarouselComponent> implements OnInit {
 
   showIconIndex = -2;
 

@@ -8,6 +8,7 @@ import {CommonModule, NgSwitch} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {FileManagerModalService} from "../../../../core/modules/file-manager/services/file-manager-modal.service";
 import {MatIconModule} from "@angular/material/icon";
+import {ButtonComponent} from "../../components/button/button.component";
 
 @Component({
   selector: 'app-button-link-admin',
@@ -22,7 +23,7 @@ import {MatIconModule} from "@angular/material/icon";
   ],
   styleUrls: ['./button-link-admin.component.css']
 })
-export class ButtonLinkAdminComponent extends AbstractAdminSetting<ButtonConfigInterface> {
+export class ButtonLinkAdminComponent extends AbstractAdminSetting<ButtonConfigInterface, ButtonComponent> {
   linkType = [{id: 1, name: 'Stránka'}, {id: 2, name: 'Url'}, {id: 3, name: 'Soubor'}];
   public pageList$ = null;
 

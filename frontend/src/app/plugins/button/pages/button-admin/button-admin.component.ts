@@ -9,6 +9,7 @@ import {
 } from "../../../../core/directives/form-error/input-form-error/input-form-error.directive";
 import {CommonModule} from "@angular/common";
 import {pluginPosition} from "../../../shared/constants/plugin-position";
+import {ButtonComponent} from "../../components/button/button.component";
 
 @Component({
   selector: 'app-buttom-admin',
@@ -21,7 +22,7 @@ import {pluginPosition} from "../../../shared/constants/plugin-position";
   ],
   styleUrls: ['./button-admin.component.css']
 })
-export class ButtonAdminComponent extends AbstractAdminSetting<ButtonConfigInterface> {
+export class ButtonAdminComponent extends AbstractAdminSetting<ButtonConfigInterface, ButtonComponent> {
   positions = pluginPosition;
   types = ['btn-primary', 'btn-secondary', 'btn-success', 'btn-danger', 'btn-warning', 'btn-info', 'btn-light', 'btn-dark', 'btn-link'];
   constructor(

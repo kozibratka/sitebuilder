@@ -22,13 +22,10 @@ export class MenuNewRowComponent implements OnDestroy{
     private gridRowService: GridRowService,
   ) {
     this.gridRowService.newRowMenuOpened = true;
-    console.log('opened: ',this.gridRowService.newRowMenuOpened)
   }
 
   ngOnDestroy(): void {
     this.gridRowService.newRowMenuOpened = false;
     this.gridRowService.addRowHoverIndex = null;
-    console.log('wwww')
-
   }
 }

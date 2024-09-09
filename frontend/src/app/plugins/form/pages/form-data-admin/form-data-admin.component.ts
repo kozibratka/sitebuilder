@@ -5,6 +5,7 @@ import {SymfonyApiClientService} from '../../../../core/services/api/symfony-api
 import {CommonModule} from "@angular/common";
 import {FileService} from "../../../../core/services/file.service";
 import {NotifierService} from "../../../../core/services/notifier.service";
+import {FormComponent} from "../../components/form/form.component";
 
 @Component({
   selector: 'app-form-data-admin',
@@ -15,7 +16,7 @@ import {NotifierService} from "../../../../core/services/notifier.service";
     CommonModule,
   ]
 })
-export class FormDataAdminComponent extends AbstractAdminSetting<FormConfigInterface> {
+export class FormDataAdminComponent extends AbstractAdminSetting<FormConfigInterface, FormComponent> {
   formData = [];
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,

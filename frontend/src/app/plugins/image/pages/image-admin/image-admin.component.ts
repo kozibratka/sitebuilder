@@ -8,6 +8,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {
   ImageInputComponent
 } from "../../../shared/components/inputs/image-inputs/image-input/image-input.component";
+import {ImageComponent} from "../../components/image/image.component";
 
 @Component({
   selector: 'app-image-v1-admin',
@@ -19,7 +20,7 @@ import {
   ],
   styleUrls: ['image-admin.component.css']
 })
-export class ImageAdminComponent extends AbstractAdminSetting<ImageConfigInterface> {
+export class ImageAdminComponent extends AbstractAdminSetting<ImageConfigInterface, ImageComponent> {
   constructor(
     protected adminFormService: FormService,
     private fileManagerModalService: FileManagerModalService,

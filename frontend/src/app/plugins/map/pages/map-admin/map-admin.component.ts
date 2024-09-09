@@ -9,6 +9,7 @@ import {
 } from "../../../../core/directives/form-error/input-form-error/input-form-error.directive";
 import {NgForOf} from "@angular/common";
 import {IconInputComponent} from "../../../shared/components/inputs/image-inputs/icon-input/icon-input.component";
+import {MapComponent} from "../../components/map/map.component";
 
 @Component({
   selector: 'app-icon-admin',
@@ -23,7 +24,7 @@ import {IconInputComponent} from "../../../shared/components/inputs/image-inputs
   templateUrl: './map-admin.component.html',
   styleUrl: './map-admin.component.css'
 })
-export class MapAdminComponent extends AbstractAdminSetting<MapConfigInterface> {
+export class MapAdminComponent extends AbstractAdminSetting<MapConfigInterface, MapComponent> {
   positions = pluginPosition;
   constructor(
     protected adminFormService: FormService,

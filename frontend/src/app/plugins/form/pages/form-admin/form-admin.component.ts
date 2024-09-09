@@ -4,6 +4,7 @@ import {AbstractAdminSetting} from '../../../shared/abstract-class/abstract-admi
 import {
   FormBuilderComponent
 } from "../../../../core/modules/form-builder/components/form-admin/form-builder/form-builder.component";
+import {FormComponent} from "../../components/form/form.component";
 
 @Component({
   selector: 'app-form-v1-admin',
@@ -14,7 +15,7 @@ import {
   ],
   styleUrls: ['form-admin.component.css']
 })
-export class FormAdminComponent extends AbstractAdminSetting<FormConfigInterface>{
+export class FormAdminComponent extends AbstractAdminSetting<FormConfigInterface, FormComponent>{
   createAdminForm(settings: FormConfigInterface): void {
   }
   refreshView() {

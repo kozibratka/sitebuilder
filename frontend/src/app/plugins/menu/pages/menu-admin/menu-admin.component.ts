@@ -7,6 +7,7 @@ import {MenuItemSettingsComponent} from '../../components/menu-item-settings/men
 import {MenuAdminItemComponent} from "../../components/menu-admin-item/menu-admin-item.component";
 import {MatButton} from "@angular/material/button";
 import { SortablejsModule } from 'nxt-sortablejs'
+import {MenuComponent} from "../../components/menu/menu.component";
 
 @Component({
   selector: 'app-menu-admin',
@@ -19,7 +20,7 @@ import { SortablejsModule } from 'nxt-sortablejs'
   ],
   styleUrls: ['menu-admin.component.css']
 })
-export class MenuAdminComponent extends AbstractAdminSetting<MenuConfigInterface> implements OnInit, OnDestroy{
+export class MenuAdminComponent extends AbstractAdminSetting<MenuConfigInterface, MenuComponent> implements OnInit, OnDestroy{
 
   items = [];
   options;

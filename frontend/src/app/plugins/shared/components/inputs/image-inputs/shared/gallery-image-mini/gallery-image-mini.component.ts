@@ -47,7 +47,6 @@ export class GalleryImageMiniComponent implements OnDestroy{
 
   set search(value: string) {
     this._search = value;
-    console.log(this._search)
     this.term$.next(value);
   }
 

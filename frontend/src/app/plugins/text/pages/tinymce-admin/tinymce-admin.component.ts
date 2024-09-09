@@ -8,6 +8,7 @@ import {PageListResolverService} from "../../../../page/services/resolvers/page-
 import {PageInterface} from "../../../../page/interfaces/page-interface";
 import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {CommonModule} from "@angular/common";
+import {TextComponent} from "../../components/text/text.component";
 
 @Component({
   selector: 'app-tinymce-admin',
@@ -23,7 +24,7 @@ import {CommonModule} from "@angular/common";
   ],
   styleUrls: ['./tinymce-admin.component.css']
 })
-export class TinymceAdminComponent extends AbstractAdminSetting<TextConfigInterface> implements OnInit{
+export class TinymceAdminComponent extends AbstractAdminSetting<TextConfigInterface, TextComponent> implements OnInit{
 
   tinyMceOptions;
 

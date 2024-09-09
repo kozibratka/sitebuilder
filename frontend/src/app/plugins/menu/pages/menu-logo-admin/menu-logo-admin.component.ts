@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {
   ImageInputComponent
 } from "../../../shared/components/inputs/image-inputs/image-input/image-input.component";
+import {MenuComponent} from "../../components/menu/menu.component";
 
 @Component({
   selector: 'app-menu-v1-logo-admin',
@@ -17,7 +18,7 @@ import {
   ],
   styleUrls: ['menu-logo-admin.component.css']
 })
-export class MenuLogoAdminComponent extends AbstractAdminSetting<MenuConfigInterface> {
+export class MenuLogoAdminComponent extends AbstractAdminSetting<MenuConfigInterface, MenuComponent> {
   constructor(
     protected adminFormService: FormService,
   ) {

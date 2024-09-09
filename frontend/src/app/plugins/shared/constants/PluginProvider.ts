@@ -9,6 +9,7 @@ import {VideoResolverService} from "../../video/services/video-resolver.service"
 import {IconResolverService} from "../../icon/services/icon-resolver.service";
 import {GalleryResolverService} from "../../gallery/services/gallery-resolver.service";
 import {MapResolverService} from "../../map/services/map-resolver.service";
+import {VideoBackgroundResolverService} from "../../video-background/services/video-background-resolver.service";
 
 export const PluginsProvider = [
   {provide: AbstractPluginResolver, useClass: MenuResolverService, multi: true},
@@ -19,6 +20,7 @@ export const PluginsProvider = [
   {provide: AbstractPluginResolver, useClass: ImageResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: TextResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: VideoResolverService, multi: true},
+  {provide: AbstractPluginResolver, useClass: VideoBackgroundResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: MapResolverService, multi: true},
   {provide: AbstractPluginResolver, useClass: IconResolverService, multi: true},
 ];

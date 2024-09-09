@@ -5,8 +5,8 @@ import {Directive} from '@angular/core';
 import {AbstractPluginResolver} from '../../../page/services/abstract-classes/abstract-plugin-resolver';
 
 @Directive()
-export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface>{
-  contextObject: AbstractPlugin<T>;
+export abstract class AbstractAdminSetting<T extends BasePlugConfigInterface, E extends AbstractPlugin<T> = any>{
+  contextObject: E;
   private _settings: T;
   webId: number;
   adminForm: FormGroup;

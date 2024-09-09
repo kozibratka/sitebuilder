@@ -3,6 +3,7 @@ import {CarouselConfigInterface} from '../../interfaces/carousel-config-interfac
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {AbstractAdminSetting} from '../../../shared/abstract-class/abstract-admin-setting';
 import {FormService} from "../../../../core/services/form.service";
+import {CarouselComponent} from "../../components/carousel/carousel.component";
 
 @Component({
   selector: 'app-carousel-bootstrap-effect-admin',
@@ -13,7 +14,7 @@ import {FormService} from "../../../../core/services/form.service";
   ],
   styleUrls: ['carousel-effect-admin.component.css']
 })
-export class CarouselEffectAdminComponent extends AbstractAdminSetting<CarouselConfigInterface> {
+export class CarouselEffectAdminComponent extends AbstractAdminSetting<CarouselConfigInterface, CarouselComponent> {
 
   constructor(
     protected fb: FormBuilder,
