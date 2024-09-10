@@ -125,6 +125,7 @@ class PageController extends BaseApiController
             if ($withPublic) {
                 $currentPublicPage = $doctrine->getRepository(PublicPage::class)->findOneBy(['parentForPublic' => $page->getId()]);
                 if ($currentPublicPage) {
+                    $page->setPublicPage(null);
                     $doctrine->getManager()->remove($currentPublicPage);
                 }
                 $publicPage = $page->createPublicPage();

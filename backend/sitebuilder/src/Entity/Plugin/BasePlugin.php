@@ -45,7 +45,7 @@ abstract class BasePlugin
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    protected ?int $id;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $name = null;

@@ -3031,18 +3031,6 @@ label.error {
   -ms-overflow-style: -ms-autohiding-scrollbar; }
 
 /*     Navbar     */
-
-  .navbar .navbar-nav .nav-item .nav-link {
-    display: inline-block;
-    vertical-align: middle;
-    color: #8a95a0;
-    padding: 8px 14px;
-    border-radius: 3px;
-    position: relative;
-    font-size: 13px;
-    font-weight: 400;
-    text-align: center;
-    transition: all .3s; }
     .navbar .navbar-nav .nav-item .nav-link:hover, .navbar .navbar-nav .nav-item .nav-link:focus {
       background: rgba(77, 89, 149, 0.06); }
     .navbar .navbar-nav .nav-item .nav-link i {

@@ -22,6 +22,26 @@
             "tsConfig": "tsconfig.app.json"
           },
           "configurations": {
+            "shared-public": {
+              "assets": [
+                "src/favicon.ico",
+                "src/assets/nanogallery2",
+                { "glob": "bootstrap.min.css","input": "node_modules/bootstrap/dist/css", "output": "/bootstrap/css" }
+              ],
+              "styles": [
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/ngx-toastr/toastr.css",
+                "src/assets/nanogallery2/css/nanogallery2.css",
+                "src/assets/fonts.css",
+                "./node_modules/leaflet/dist/leaflet.css"
+              ],
+              "scripts": [
+                "node_modules/jquery/dist/jquery.min.js",
+                "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+                "node_modules/youtube-background/jquery.youtube-background.js",
+                "node_modules/nanogallery2/dist/jquery.nanogallery2.js"
+              ]
+            },
             "shared-admin": {
               "assets": [
                 "src/favicon.ico",
@@ -52,7 +72,6 @@
                 "src/assets/kaiadmin_lte/css/kaiadmin.css"
               ],
               "scripts": [
-                "node_modules/jquery/dist/jquery.min.js",
                 "node_modules/jquery/dist/jquery.min.js",
                 "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
                 "node_modules/lodash/lodash.min.js",
@@ -85,7 +104,7 @@
               ],
               "outputHashing": "all"
             },
-            "public-dev": {
+            "dev-public": {
               "outputPath": "dist/frontend-public-dev",
               "index": "src/app/public/public-index.html",
               "browser": "src/app/public/public-main.ts",

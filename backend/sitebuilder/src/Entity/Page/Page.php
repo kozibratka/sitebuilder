@@ -38,6 +38,7 @@ class Page extends AbstractPage
         $originPageBlocks = $this->getPageBlockAssignments();
         $page->pageBlockAssignments = new ArrayCollection($originPageBlocks->map(function(PageBlockAssignment $pageBlockAssignment) use($page) {
             $clone = clone $pageBlockAssignment;
+            $clone->setPage($page);
             return $clone;
         })->toArray());
         return $page;
