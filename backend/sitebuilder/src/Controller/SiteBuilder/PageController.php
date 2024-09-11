@@ -144,7 +144,6 @@ class PageController extends BaseApiController
             }
             if ($publicPage = $page->getPublicPage()) {
                 $publicPage['description'] = $page->getDescription();
-                $publicPage['homePage'] = (int) $page->isHomePage();
                 $page->setPublicPage($publicPage);
             }
             $this->flush();
