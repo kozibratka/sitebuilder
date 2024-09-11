@@ -142,6 +142,11 @@ class PageController extends BaseApiController
             if ($page->isHomePage()) {
                 $this->deselectHomePage($page);
             }
+            if ($publicPage = $page->getPublicPage()) {
+                $publicPage['description'] = $page->getDescription();
+                $publicPage['homePage'] = (int) $page->isHomePage();
+                $page->setPublicPage($publicPage);
+            }
             $this->flush();
             return $this->jsonResponseSimple($page, 201);
         }
@@ -179,6 +184,7 @@ class PageController extends BaseApiController
         $path = $request->query->get('url');
         $hostname = $request->query->get('hostname');
         $pageRepository = $entityManager->getRepository(Page::class);
+        /** @var Page $page */
         $page = $pageRepository->getForHostnamePath($hostname, $path);
         if (!$page) {
             if (str_starts_with($hostname, 'www.')) {
@@ -191,7 +197,7 @@ class PageController extends BaseApiController
             }
         }
 
-        return $this->jsonResponseSimple($page ?? [], 201, group: 'public');
+        return $this->jsonResponseSimple($page->getPublicPage() ?? [], 201);
     }
 
     private function deselectHomePage(Page $exceptPage) {

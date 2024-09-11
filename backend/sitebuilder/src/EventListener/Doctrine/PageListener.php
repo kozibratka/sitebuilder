@@ -2,8 +2,8 @@
 
 namespace App\EventListener\Doctrine;
 
-use App\Exception\CustomErrorMessageException;
-use Doctrine\ORM\Event\OnFlushEventArgs;
+use App\Entity\Page\Page;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 class PageListener extends BaseListener
 {

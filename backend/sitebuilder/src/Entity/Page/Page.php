@@ -64,16 +64,11 @@ class Page
     private string $url = '';
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[Serializer\Groups(["public", "default"])]
     private ?string $description = '';
 
     #[ORM\Column(type: 'boolean')]
-    #[Serializer\Groups(["public", "default"])]
     private bool $homePage = false;
-
-
     #[ORM\Column(type: 'json', nullable: true)]
-    #[Serializer\Groups(["public"])]
     private array $publicPage;
 
     private array $globalPlugins = [];
