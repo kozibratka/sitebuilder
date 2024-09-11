@@ -4,7 +4,6 @@
 namespace App\Form;
 
 
-use App\Entity\Page\AbstractPage;
 use App\Entity\Page\Page;
 use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Form\SiteBuilder\PageBlockAssignmentType;

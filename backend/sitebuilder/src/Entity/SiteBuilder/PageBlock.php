@@ -4,7 +4,6 @@
 namespace App\Entity\SiteBuilder;
 
 use App\Constant\Limit;
-use App\Entity\Page\AbstractPage;
 use App\Entity\Web\Web;
 use App\Interface\EntityFileProviderInterface;
 use App\Security\Validator as AppAssert;

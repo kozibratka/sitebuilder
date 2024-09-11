@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity\Plugin\Menu;
-use App\Entity\Page\AbstractPage;
+use App\Entity\Page\Page;
 use App\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
@@ -19,11 +19,11 @@ class MenuItem
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private PluginMenu $menu;
 
-    #[ORM\ManyToOne(targetEntity: AbstractPage::class)]
+    #[ORM\ManyToOne(targetEntity: Page::class)]
     /**
      * @Serializer\Exclude()
      */
-    private ?AbstractPage $page = null;
+    private ?Page $page = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $uniqueId = null;
@@ -48,12 +48,12 @@ class MenuItem
         $this->menu = $menu;
     }
 
-    public function getPage(): ?AbstractPage
+    public function getPage(): ?Page
     {
         return $this->page;
     }
 
-    public function setPage(?AbstractPage $page)
+    public function setPage(?Page $page)
     {
         $this->page = $page;
     }

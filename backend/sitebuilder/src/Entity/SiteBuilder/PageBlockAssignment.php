@@ -2,7 +2,7 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Entity\Page\AbstractPage;
+use App\Entity\Page\Page;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -15,9 +15,9 @@ class PageBlockAssignment
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: AbstractPage::class)]
+    #[ORM\ManyToOne(targetEntity: Page::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    private ?AbstractPage $page = null;
+    private ?Page $page = null;
     #[Assert\Valid()]
     #[ORM\ManyToOne(targetEntity: PageBlock::class, cascade: ['persist'], inversedBy: 'pageBlockAssignments')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -38,12 +38,12 @@ class PageBlockAssignment
         $this->id = $id;
     }
 
-    public function getPage(): ?AbstractPage
+    public function getPage(): ?Page
     {
         return $this->page;
     }
 
-    public function setPage(?AbstractPage $page): void
+    public function setPage(?Page $page): void
     {
         $this->page = $page;
     }

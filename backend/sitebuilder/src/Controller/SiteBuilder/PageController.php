@@ -5,9 +5,7 @@ namespace App\Controller\SiteBuilder;
 
 
 use App\Controller\BaseApiController;
-use App\Entity\Page\AbstractPage;
 use App\Entity\Page\Page;
-use App\Entity\Page\PublicPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
@@ -15,9 +13,6 @@ use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\PageType;
-use App\Form\PublicPageType;
-use App\Repository\PageRepository\PublicPageRepository;
-use App\Service\PageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Predis\Client;
@@ -94,8 +89,8 @@ class PageController extends BaseApiController
             $page = $form->getData();
             $page->setWeb($web);
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
-            $jsonPage = $this->serializer->serialize($page, 'json');
-            $res = $client->set('page_preview_'.$web->getId(), $jsonPage, 'EX', 3600);
+            $result = $this->createPublicPage($page);
+            $res = $client->set('page_preview_'.$web->getId(), json_encode($result), 'EX', 3600);
             return $this->jsonResponseSimple([], 201);
         }
         return $this->invalidFormResponse($form);
@@ -121,17 +116,10 @@ class PageController extends BaseApiController
                     $doctrine->getManager()->remove($gridCellItem);
                 }
             }
-            $this->flush();
             if ($withPublic) {
-                $currentPublicPage = $doctrine->getRepository(PublicPage::class)->findOneBy(['parentForPublic' => $page->getId()]);
-                if ($currentPublicPage) {
-                    $page->setPublicPage(null);
-                    $doctrine->getManager()->remove($currentPublicPage);
-                }
-                $publicPage = $page->createPublicPage();
-                $this->persist($publicPage);
+                $page->setPublicPage($this->createPublicPage($page));
             }
-
+            $this->flush();
 //            $as = $page->getPageBlockAssignments()->first()->getPageBlock();
 //            $as->refreshGridCellItemOrder();
 //            dd($as);
@@ -151,10 +139,6 @@ class PageController extends BaseApiController
         $form->submit($request->request->all(), false);
         if($form->isSubmitted() && $form->isValid()) {
             $this->denyAccessUnlessGranted('page_builder_with_children_voter',$page);
-            if ($publicPage = $page->getPublicPage()) {
-                $formPublicPage = $this->createForm(PublicPageType::class, $publicPage, ['pageBuilder' => false]);
-                $formPublicPage->submit($request->request->all(), false);
-            }
             if ($page->isHomePage()) {
                 $this->deselectHomePage($page);
             }
@@ -194,7 +178,7 @@ class PageController extends BaseApiController
     {
         $path = $request->query->get('url');
         $hostname = $request->query->get('hostname');
-        $pageRepository = $entityManager->getRepository(PublicPage::class);
+        $pageRepository = $entityManager->getRepository(Page::class);
         $page = $pageRepository->getForHostnamePath($hostname, $path);
         if (!$page) {
             if (str_starts_with($hostname, 'www.')) {
@@ -207,7 +191,7 @@ class PageController extends BaseApiController
             }
         }
 
-        return $this->jsonResponseSimple($page ?? [], 201);
+        return $this->jsonResponseSimple($page ?? [], 201, group: 'public');
     }
 
     private function deselectHomePage(Page $exceptPage) {
@@ -220,5 +204,13 @@ class PageController extends BaseApiController
                 $page->setHomePage(false);
             }
         }
+    }
+
+    private function createPublicPage(Page $page): array
+    {
+        $serialized = $this->serializer->serialize($page, 'json');
+        $deserialized = json_decode($serialized, true);
+        $deserialized['publicPage'] = null;
+        return $deserialized;
     }
 }

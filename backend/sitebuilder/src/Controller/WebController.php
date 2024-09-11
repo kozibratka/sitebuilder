@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Constant\Limit;
-use App\Entity\Page\AbstractPage;
 use App\Entity\Page\Page;
-use App\Entity\Page\PublicPage;
 use App\Entity\User;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
@@ -33,8 +31,8 @@ class WebController extends BaseApiController
             $result[] = [
                 'name' => $web->getName(),
                 'createdAt' => Carbon::create($web->getCreatedAt())->toDateTimeString(),
-                'pagesCount' => $web->getPages()->filter(fn(AbstractPage $page) => $page instanceof Page)->count(),
-                'public' => $web->getPages()->filter(fn(AbstractPage $page) => $page instanceof PublicPage)->count(),
+                'pagesCount' => $web->getPages()->filter(fn(Page $page) => $page instanceof Page)->count(),
+                'public' => $web->getPages()->filter(fn(Page $page) => $page->getPublicPage())->count(),
                 'domain' => implode(', ', $web->getDomains()->toArray()),
                 'id' => $web->getId(),
             ];

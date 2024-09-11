@@ -2,7 +2,7 @@
 
 namespace App\Form\Plugin\shared;
 
-use App\Entity\Page\AbstractPage;
+use App\Entity\Page\Page;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -17,7 +17,7 @@ class LinkType extends AbstractType
         $builder
             ->add('fileUrl')
             ->add('linkType', IntegerType::class)
-            ->add('pageId', EntityType::class, ['class' => AbstractPage::class, 'property_path' => 'page'])
+            ->add('pageId', EntityType::class, ['class' => Page::class, 'property_path' => 'page'])
             ->add('externalUrl', TextType::class)
             ->add('targetBlank', CheckboxType::class)
         ;
