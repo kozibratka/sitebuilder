@@ -2,10 +2,18 @@
   height: 400px;
   width: 300px;
   border: 1px solid black;
+  overflow: hidden;
 }
 
 .template-image {
   width: 300px;
+  object-position: top center;
+  object-fit: cover;
+  transition: all 4s ease-in-out;
+}
+
+.template-image:hover {
+  object-position: bottom center;
 }
 
 .create-button {
