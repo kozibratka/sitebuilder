@@ -5,7 +5,7 @@ namespace App\Entity\Web;
 
 
 use App\Constant\Limit;
-use App\Entity\Page\Page;
+use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
@@ -70,7 +70,7 @@ class Web
         type: 'pages',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
-    #[ORM\OneToMany(targetEntity: Page::class, mappedBy: 'web', cascade: ['remove', 'persist'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: AbstractPage::class, mappedBy: 'web', cascade: ['remove', 'persist'], orphanRemoval: true)]
     private Collection $pages;
 
     /**
@@ -150,7 +150,7 @@ class Web
     }
 
     /**
-     * @return Collection<Page>
+     * @return Collection<AbstractPage>
      */
     public function getPages(): Collection
     {
@@ -162,12 +162,12 @@ class Web
         $this->pages = $pages;
     }
 
-    public function addPage(Page $page) {
+    public function addPage(AbstractPage $page) {
         $page->setWeb($this);
         $this->pages->add($page);
     }
 
-    public function removePage(Page $page) {
+    public function removePage(AbstractPage $page) {
         $this->pages->removeElement($page);
     }
 
@@ -310,8 +310,11 @@ class Web
             return $clone;
         })->toArray());
         $newPages = new ArrayCollection();
-        /** @var Page $page */
+        /** @var AbstractPage $page */
         foreach ($this->pages as $page) {
+            if($page->getParentForPublic()) {
+                continue;
+            }
             $newPage = clone $page;
             $newPage->setWeb($this);
             $cellItems = $newPage->getGridCellItems();

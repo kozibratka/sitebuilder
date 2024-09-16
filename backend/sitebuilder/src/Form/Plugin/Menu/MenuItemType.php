@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Form\Plugin\Menu;
-use App\Entity\Page\Page;
+use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\Menu\MenuItem;
 use App\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -17,7 +17,7 @@ class MenuItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pageId', EntityType::class, ['class' => Page::class, 'property_path' => 'page'])
+            ->add('pageId', EntityType::class, ['class' => AbstractPage::class, 'property_path' => 'page'])
             ->add('name', TextType::class)
             ->add('level', NumberType::class)
             ->add('uniqueId')
