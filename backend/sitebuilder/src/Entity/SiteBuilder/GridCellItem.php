@@ -3,6 +3,7 @@
 namespace App\Entity\SiteBuilder;
 
 use App\Entity\Plugin\BasePlugin;
+use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -11,9 +12,10 @@ use JMS\Serializer\Annotation as Serializer;
 class GridCellItem
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $id = null;
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
+    private ?string $id = null;
     #[ORM\ManyToOne(targetEntity: GridCell::class, inversedBy: 'items')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?GridCell $cell;
@@ -32,12 +34,12 @@ class GridCellItem
      */
     private $reasigned = false;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(?int $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }

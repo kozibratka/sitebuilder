@@ -8,6 +8,7 @@ use App\Entity\Page\AbstractPage;
 use App\Entity\Web\Web;
 use App\Interface\EntityFileProviderInterface;
 use App\Security\Validator as AppAssert;
+use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,9 +23,10 @@ use App\Security\Validator as AppValidator;
 class PageBlock implements EntityFileProviderInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
+    private ?string $id = null;
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $height = null;
     /**
@@ -108,12 +110,12 @@ class PageBlock implements EntityFileProviderInterface
         $this->pageBlockAssignments = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(int $id)
+    public function setId(string $id)
     {
         $this->id = $id;
     }

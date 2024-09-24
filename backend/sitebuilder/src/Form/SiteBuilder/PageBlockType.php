@@ -37,6 +37,7 @@ class PageBlockType extends AbstractType
             ->add('backgroundColor')
             ->add('backgroundImage')
             ->add('backgroundVideo')
+            ->add('isShared', CheckboxType::class, ['mapped' => false])
             ->add('name')
             ->add('height', NumberType::class)
             ->add('grayScale', NumberType::class)

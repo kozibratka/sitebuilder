@@ -43,9 +43,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 abstract class BasePlugin
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer')]
-    protected ?int $id;
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type: 'uuid', nullable: true)]
+    #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
+    private ?string $id = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $name = null;
@@ -71,6 +72,13 @@ abstract class BasePlugin
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $paddingTop = null;
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private ?bool $isShared = false;
+
+    /**
+     * @Serializer\Exclude()
+     */
+    private ?bool $reasigned = false;
 
 
     public ?string $identifier = null;
@@ -83,12 +91,12 @@ abstract class BasePlugin
 
     abstract public function setIdentifier();
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(?int $id)
+    public function setId(?string $id)
     {
         $this->id = $id;
     }
@@ -111,6 +119,7 @@ abstract class BasePlugin
     public function setWeb(?Web $web)
     {
         $this->web = $web;
+        $this->setIsShared((bool) $web);
     }
 
     public function getName(): ?string
@@ -149,6 +158,16 @@ abstract class BasePlugin
         return $this->getWeb()?->getUser() ?? $this->getGridCellItems()[0]->getUser();
     }
 
+    public function isShared(): ?bool
+    {
+        return $this->isShared;
+    }
+
+    public function setIsShared(?bool $isShared): void
+    {
+        $this->isShared = $isShared;
+    }
+
     public function getHorizontalMargin(): ?int
     {
         return $this->horizontalMargin;
@@ -177,6 +196,16 @@ abstract class BasePlugin
     public function setPaddingTop(?int $paddingTop): void
     {
         $this->paddingTop = $paddingTop;
+    }
+
+    public function isReasigned(): ?bool
+    {
+        return $this->reasigned;
+    }
+
+    public function setReasigned(?bool $reasigned): void
+    {
+        $this->reasigned = $reasigned;
     }
 
     /**

@@ -6,11 +6,13 @@ use App\Constant\Limit;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\Web\Web;
+use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Security\Validator as AppValidator;
 
@@ -33,9 +35,11 @@ use App\Security\Validator as AppValidator;
 abstract class AbstractPage
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
+
+    private ?string $id = null;
 
     /**
      * @Assert\NotBlank()
@@ -78,12 +82,12 @@ abstract class AbstractPage
         $this->pageBlockAssignments = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
+    public function getId(): ?string
+    {dd();
+        return $this->id ? $this->id->toRfc4122() : null;
     }
 
-    public function setId(int $id)
+    public function setId($id)
     {
         $this->id = $id;
     }

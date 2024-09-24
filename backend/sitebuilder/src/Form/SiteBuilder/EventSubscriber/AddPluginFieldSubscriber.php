@@ -3,9 +3,12 @@
 namespace App\Form\SiteBuilder\EventSubscriber;
 
 use App\Entity\Plugin\BasePlugin;
+use App\Entity\Plugin\Text\PluginText;
+use App\Entity\SiteBuilder\GridCell;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Exception\CustomErrorMessageException;
 use App\Form\SiteBuilder\GridRowType;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -35,24 +38,18 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
         $data = $event->getData();
         $form = $event->getForm();
         $plugin = $data['plugin'] ?? null;
-        if(isset($data['id']) && $this->syncById) {
-            $gridCellItem = $this->entityManager->getRepository(GridCellItem::class)->find($data['id']);
-            if($gridCellItem) {
-                $form->setData($gridCellItem);
-                $gridCellItem->setReasigned(true);
-            }else{
-                throw new CustomErrorMessageException('Pokoušíte se upravit element, který je již smazaný');
-            }
-        } else {
-            $gridCellItem = new GridCellItem();
-            $form->setData($gridCellItem);
-        }
+        /** @var GridCellItem $gridCellItem */
+        $gridCellItem = $event->getForm()->getNormData();
+        $actualPlugin = $gridCellItem?->getPlugin();
         if ($plugin) {
             if($plugin && $plugin['identifier']) {
                 $identifier = $plugin['identifier'];
                 $formClass = $this->pluginServices[$identifier]->getFormClass();
             }
-            if(isset($plugin['id']) && $this->syncById) {
+            if(isset($plugin['id']) && $this->syncById && ($plugin['isShared'] ?? false)) {
+                if ($plugin['id'] == $gridCellItem?->getPlugin()?->getId()) {
+                    return;
+                }
                 $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
                 if($pluginDb->getWeb()) {
                     $data['plugin'] = $plugin['id'];
@@ -61,10 +58,8 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
                     return;
                 }
             }
-            $form->add('plugin', $formClass);
-            if (!isset($plugin['id'])) {
-                $form->get('plugin')->setData(null);
-            }
+            $pluginData = $actualPlugin?->getIdentifier() == $plugin['identifier'] ? $actualPlugin : null;
+            $form->add('plugin', $formClass, ['data' => $pluginData]);
         }
     }
 }

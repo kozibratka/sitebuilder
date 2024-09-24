@@ -3,6 +3,7 @@
 namespace App\Entity\SiteBuilder;
 
 use App\Constant\Limit;
+use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,9 +15,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class GridCell
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private ?int $id = null;
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
+    private ?string $id = null;
     #[ORM\Column(type: 'integer')]
     private int $width = 0;
     #[ORM\ManyToOne(targetEntity: GridRow::class, inversedBy: 'cells')]
@@ -43,12 +45,12 @@ class GridCell
         $this->items = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(?int $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity\SiteBuilder;
 
 use App\Entity\Page\AbstractPage;
+use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -10,10 +11,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: 'page_block_assignment')]
 class PageBlockAssignment
 {
-    #[ORM\Id()]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
-    #[ORM\Column(type: 'integer')]
-    private ?int $id = null;
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
+    private ?string $id = null;
 
     #[ORM\ManyToOne(targetEntity: AbstractPage::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
@@ -28,12 +30,12 @@ class PageBlockAssignment
 
     private ?string $uniqueId = '';
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function setId(?int $id): void
+    public function setId(?string $id): void
     {
         $this->id = $id;
     }

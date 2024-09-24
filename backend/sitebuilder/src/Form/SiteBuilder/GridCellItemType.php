@@ -6,6 +6,7 @@ use App\Entity\SiteBuilder\GridCellItem;
 use App\Form\SiteBuilder\EventSubscriber\AddPluginFieldSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
