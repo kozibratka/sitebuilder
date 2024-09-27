@@ -128,6 +128,7 @@ class PageController extends BaseApiController
                     $page->setPublicPage(null);
                     $doctrine->getManager()->remove($currentPublicPage);
                 }
+
                 $publicPage = $page->createPublicPage();
                 $this->persist($publicPage);
             }
@@ -162,6 +163,17 @@ class PageController extends BaseApiController
             return $this->jsonResponseSimple($page, 201);
         }
         return $this->invalidFormResponse($form);
+    }
+
+    /**
+     * @Route("/clone/{id}", name="clone")
+     */
+    public function clone(Page $page)
+    {
+        $this->denyAccessUnlessGranted('page_builder_voter',$page);
+        $clone = clone $page;
+        $this->persist($clone);
+        return new JsonResponse();
     }
 
     /**
@@ -212,12 +224,16 @@ class PageController extends BaseApiController
 
     private function deselectHomePage(Page $exceptPage) {
         $web = $exceptPage->getWeb();
+        /** @var Page $page */
         foreach ($web->getPages() as $page) {
             if ($page === $exceptPage || $page === $exceptPage->getPublicPage()) {
                 continue;
             }
             if ($page->isHomePage()) {
                 $page->setHomePage(false);
+                if ($publicPage = $page->getPublicPage()) {
+                    $publicPage->setHomePage(false);
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ namespace App\Entity\Web;
 
 use App\Constant\Limit;
 use App\Entity\Page\AbstractPage;
+use App\Entity\Page\Page;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
@@ -152,8 +153,11 @@ class Web
     /**
      * @return Collection<AbstractPage>
      */
-    public function getPages(): Collection
+    public function getPages($onlyPrivate = false): Collection
     {
+        if ($onlyPrivate) {
+            return $this->pages->filter(fn(AbstractPage $abstractPage) => $abstractPage instanceof Page);
+        }
         return $this->pages;
     }
 

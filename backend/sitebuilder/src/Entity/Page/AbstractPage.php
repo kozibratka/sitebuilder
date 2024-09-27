@@ -21,10 +21,6 @@ use App\Security\Validator as AppValidator;
     fields: ['name', 'web'],
     errorPath: 'name',
 )]
-#[UniqueEntity(
-    fields: ['url', 'web'],
-    errorPath: 'url',
-)]
 #[ORM\Table(name: 'page')]
 #[ORM\Index(columns: ['url'], name: 'url')]
 #[ORM\Entity()]
@@ -39,7 +35,7 @@ abstract class AbstractPage
     #[ORM\Column(type: 'string', nullable: true)]
     #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
 
-    private ?string $id = null;
+    protected ?string $id = null;
 
     /**
      * @Assert\NotBlank()
@@ -83,8 +79,8 @@ abstract class AbstractPage
     }
 
     public function getId(): ?string
-    {dd();
-        return $this->id ? $this->id->toRfc4122() : null;
+    {
+        return $this->id;
     }
 
     public function setId($id)

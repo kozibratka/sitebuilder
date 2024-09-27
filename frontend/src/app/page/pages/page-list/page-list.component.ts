@@ -13,6 +13,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButton} from "@angular/material/button";
 import {CommonModule} from "@angular/common";
+import {PageListResolverService} from "../../services/resolvers/page-list-resolver.service";
 
 @Component({
   selector: 'app-page-list',
@@ -40,6 +41,7 @@ export class PageListComponent implements OnInit {
     private httpResponseToasterService: HttpResponseToasterService,
     private notifierService: NotifierService,
     private router: Router,
+    private pageListResolverService: PageListResolverService,
     public title: Title
   ) { }
 
@@ -65,6 +67,15 @@ export class PageListComponent implements OnInit {
         this.notifierService.notify('Stránka byla úspěšně smazána');
         this.router.navigate(['./'], { relativeTo: this.route });
       },
+    });
+  }
+
+  clone(page: PageInterface) {
+    this.symfonyApiClientService.get('page_clone', {id: page.id}).subscribe(value => {
+      this.pageListResolverService.getPageList().subscribe(value1 => {
+        this.dataToTable = value1;
+        this.notifierService.success('Kopie stránky byla vytvořena')
+      });
     });
   }
 

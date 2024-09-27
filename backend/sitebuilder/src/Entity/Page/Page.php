@@ -17,7 +17,7 @@ class Page extends AbstractPage
      */
     private $publicPage;
 
-    public function getPublicPage()
+    public function getPublicPage(): ?PublicPage
     {
         return $this->publicPage;
     }
@@ -42,5 +42,26 @@ class Page extends AbstractPage
             return $clone;
         })->toArray());
         return $page;
+    }
+
+    public function __clone(): void
+    {
+        $this->id = null;
+        $this->setHomePage(false);
+        $pagesName = $this->getWeb()->getPages(true)->map(fn(AbstractPage $page) => $page->getName());
+        $i = 1;
+        while(true) {
+            $name = $this->getName().' kopie '.$i++;
+            if (!$pagesName->contains($name)) {
+                $this->setName($name);
+                break;
+            }
+        }
+        $originPageBlocks = $this->getPageBlockAssignments();
+        $this->pageBlockAssignments = new ArrayCollection($originPageBlocks->map(function(PageBlockAssignment $pageBlockAssignment) {
+            $clone = clone $pageBlockAssignment;
+            $clone->setPage($this);
+            return $clone;
+        })->toArray());
     }
 }
