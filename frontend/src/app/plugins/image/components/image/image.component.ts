@@ -11,6 +11,12 @@ import {PluginIdentifier} from '../../../shared/constants/plugin-identifier';
 })
 export class ImageComponent extends AbstractPlugin<ImageConfigInterface> implements AfterViewChecked{
 
+
+  constructor() {
+    super();
+
+  }
+
   ngAfterViewChecked(): void {
   }
 

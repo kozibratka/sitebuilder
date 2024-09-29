@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, NgZone, ViewChild} from '@angular/core';
 import {
   faBell,
   faFile,
@@ -68,11 +68,14 @@ export class Layout2Component {
     public title: Title,
     public userService: UserService,
     public webListResolverGuard: WebListResolverGuard,
+    private ngZone: NgZone,
   ) {
   }
 
   ngOnInit(): void {
-    (window as any).kaiadmin();
+    this.ngZone.runOutsideAngular(args => {
+      (window as any).kaiadmin();
+    });
     this.initSelectWeb(this.webListResolverGuard.webList);
     this.registerCheckVisibilityMenu();
   }
