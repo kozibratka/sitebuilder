@@ -67,5 +67,8 @@ export class GalleryComponent extends AbstractPlugin<GalleryConfigInterface> imp
   }
 
   ngOnDestroy(): void {
+    if (this.gallery) {
+      ($(this.content.nativeElement) as any).nanogallery2('destroy');
+    }
   }
 }
