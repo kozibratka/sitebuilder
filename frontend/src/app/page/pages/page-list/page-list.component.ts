@@ -64,8 +64,10 @@ export class PageListComponent implements OnInit {
       })
     ).subscribe({
       next: () => {
-        this.notifierService.notify('Stránka byla úspěšně smazána');
-        this.router.navigate(['./'], { relativeTo: this.route });
+        this.pageListResolverService.getPageList().subscribe(value1 => {
+          this.dataToTable = value1;
+          this.notifierService.notify('Stránka byla úspěšně smazána');
+        });
       },
     });
   }
