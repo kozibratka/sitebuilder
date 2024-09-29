@@ -4,7 +4,6 @@ import {VideoAdminComponent} from '../pages/video-admin/video-admin.component';
 import {VideoComponent} from '../components/video/video.component';
 import {PluginIdentifier} from '../../shared/constants/plugin-identifier';
 import {VideoConfigInterface} from "../interfaces/video-config-interface";
-import {VideoDimensionAdminComponent} from "../pages/video-dimension-admin/video-dimension-admin.component";
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,6 @@ export class VideoResolverService extends AbstractPluginResolver<VideoConfigInte
     {
       label: 'Video',
       component: VideoAdminComponent,
-      path: ''
-    },
-    {
-      label: 'Rozměry',
-      component: VideoDimensionAdminComponent,
       path: ''
     },
   ];

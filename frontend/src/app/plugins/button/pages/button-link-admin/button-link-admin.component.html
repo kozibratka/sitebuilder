@@ -3,7 +3,7 @@
     <form [formGroup]="adminForm">
       <div class="row">
         <div class="col-md-6">
-          <div class="border border-inner">
+          <div class="form-group border border-inner">
             <label for="type" class="form-label">Typ odkazu:</label>
             <select class="form-select" required id="type" formControlName="linkType">
               <option *ngFor="let item of linkType" [ngValue]="item.id">{{item.name}}</option>
@@ -13,7 +13,7 @@
         <div class="col-md-6">
           <div [ngSwitch]="settings.linkType">
             <div *ngSwitchCase="1">
-              <div class="border border-inner">
+              <div class="form-group border border-inner">
                 <label for="page" class="form-label">Vyberte stránku:</label>
                 <select class="form-control" id="page" formControlName="pageId">
                   <option [ngValue]="null" disabled>Vyberte stránku...</option>
@@ -22,13 +22,13 @@
               </div>
             </div>
             <div *ngSwitchCase="2">
-              <div class="border border-inner">
+              <div class="form-group border border-inner">
                 <label for="url" class="form-label">Zadejte URL:</label>
                 <input placeholder="Např: https://www.youtube.com" type="text" class="form-control" id="url" formControlName="externalUrl">
               </div>
             </div>
             <div *ngSwitchCase="3">
-              <div class="border border-inner">
+              <div class="form-group border border-inner">
                 <label for="file" class="form-label">Vyberte soubor:</label>
                 <button (click)="openFileManager()" mat-raised-button color="primary" class="my-2" id="file">
                   <mat-icon>cloud_upload</mat-icon>Vybrat Soubor
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="border border-inner">
+          <div class="form-group border border-inner">
             <div class="form-check form-switch">
               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" formControlName="targetBlank">
               <label class="form-check-label" for="flexSwitchCheckChecked">Otevřít v novém okně</label>

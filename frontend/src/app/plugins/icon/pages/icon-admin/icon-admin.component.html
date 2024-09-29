@@ -2,25 +2,23 @@
   <div class="card-body">
     <form [formGroup]="adminForm">
       <div class="row">
-        <div class="col-md-4">
-          <div class="border border-inner">
+        <div class="col-md-12 border border-inner d-flex justify-content-center">
             <app-icon-input [iconName]="settings.icon" (selectedIcon)="settings.icon=$event"></app-icon-input>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="border border-inner">
-            <label for="position" class="form-label">Pozice:</label>
+        <div class="border border-inner col-md-6 left">
+          <div class="form-group">
+            <label for="position">Pozice:</label>
             <select class="form-select" required id="position" formControlName="position">
               <option *ngFor="let item of positions" [ngValue]="item.id">{{item.name}}</option>
             </select>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="border border-inner">
-            <label for="size" class="form-label">Velikost:</label>
-            <select class="form-select" required id="size" formControlName="size">
-              <option *ngFor="let item of [].constructor(10);let i = index" [ngValue]="i+'x'">{{i}}x</option>
-            </select>
+        <div class="border border-inner col-md-6">
+          <div class="form-group">
+            <label for="size">Velikost:</label>
+              <select class="form-select" required id="size" formControlName="size">
+                <option *ngFor="let item of [].constructor(10);let i = index" [ngValue]="i+'x'">{{i}}x</option>
+              </select>
           </div>
         </div>
       </div>

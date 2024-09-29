@@ -95,8 +95,11 @@
   padding-right: 1rem !important;
   padding-left: 1rem !important;
   padding-top: .25rem !important;
-  padding-bottom: 1.25rem !important;
-  margin-bottom: 19px;
+  margin-bottom: 12px;
+}
+
+::ng-deep.border.left {
+  border-right: none!important;
 }
 
 ::ng-deep.mat-mdc-dialog-surface:has(app-mini-admin) {

@@ -1,12 +1,20 @@
-<form [formGroup]="adminForm">
-  <div class="d-flex flex-md-row flex-wrap">
-    <div class="form-check">
-      <div>
-        <div class="mb-3">
-          <label for="input-video" class="form-label">Odkaz na video z youtube</label>
-          <input type="url" class="form-control" id="input-video" formControlName="videoPath">
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="adminForm">
+      <div class="row">
+        <div class="col-md-12 border border-inner">
+          <div class="form-group">
+            <label for="input-video" class="form-label">Odkaz na video z youtube</label>
+            <input type="url" class="form-control" id="input-video" formControlName="videoPath">
+          </div>
+        </div>
+        <div class="col-md-12 border border-inner">
+          <div class="form-group">
+            <label for="height" class="form-label">Výška (px):</label>
+            <input type="number" class="form-control" id="height" formControlName="height">
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>

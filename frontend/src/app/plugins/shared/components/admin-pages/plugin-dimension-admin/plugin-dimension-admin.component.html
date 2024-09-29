@@ -2,22 +2,22 @@
   <div class="card-body">
     <form [formGroup]="adminForm">
       <div class="row">
-        <div class="col-md-4">
-          <div class="border border-inner">
-            <label for="video" class="form-label">Odsazení levé a pravé (px):</label>
-            <input type="number" class="form-control" id="video" formControlName="horizontalMargin">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="border border-inner">
-            <label for="padding-top" class="form-label">Odsazení horní (px):</label>
+        <div class="col-md-6 border border-inner left">
+          <div class="form-group">
+            <label for="padding-top">Odsazení horní (px):</label>
             <input type="number" class="form-control" id="padding-top" formControlName="paddingTop">
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="border border-inner">
-            <label for="padding-bottom" class="form-label">Odsazení dolní (px):</label>
+        <div class="col-md-6 border border-inner">
+          <div class="form-group">
+            <label for="padding-bottom">Odsazení dolní (px):</label>
             <input type="number" class="form-control" id="padding-bottom" formControlName="paddingBottom">
+          </div>
+        </div>
+        <div class="col-md-12 border border-inner">
+          <div class="form-group">
+            <label for="video">Odsazení levé a pravé (px):</label>
+            <input type="number" class="form-control" id="video" formControlName="horizontalMargin">
           </div>
         </div>
       </div>

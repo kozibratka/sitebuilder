@@ -2,31 +2,27 @@
   <div class="card-body">
     <form [formGroup]="adminForm">
       <div class="row">
-        <div class="col-md-6">
-          <div class="border border-inner">
+          <div class="col-md-12 border border-inner">
             <div class="text-center">GPS Souřadnice:</div>
-            <div>
-              <div>
-                <label for="lat" class="form-label">Lat:</label>
-                <input id="lat" type="number" class="float-end" formControlName="lat">
-              </div>
-              <div>
-                <label for="lng" class="form-label">Lng:</label>
-                <input id="lng" type="number" class="float-end" formControlName="lng">
-              </div>
+            <div class="form-group">
+              <label for="lat">Lat:</label>
+              <input type="number" class="form-control" id="lat" placeholder="lat" formControlName="lat">
+            </div>
+            <div class="form-group">
+              <label for="lng">Lng:</label>
+              <input type="number" class="form-control" id="lng" placeholder="lng" formControlName="lng">
             </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="border border-inner">
-            <label for="height" class="form-label">Výška(px):</label>
-            <input id="height" type="number" formControlName="height">
+        <div class="col-md-6 border border-inner left">
+          <div class="form-group">
+            <label for="height">Výška (px):</label>
+            <input type="number" class="form-control" id="height" placeholder="výška" formControlName="height">
           </div>
         </div>
-        <div class="col-md-5">
-          <div class="border border-inner">
-            <label for="title" class="form-label">Popisek:</label>
-            <input id="title" type="text" formControlName="title">
+        <div class="col-md-6 border border-inner">
+          <div class="form-group">
+            <label for="title">Popisek:</label>
+            <input type="text" class="form-control" id="title" placeholder="popisek" formControlName="title">
           </div>
         </div>
       </div>

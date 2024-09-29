@@ -3,13 +3,16 @@ import {AbstractAdminSetting} from "../../../abstract-class/abstract-admin-setti
 import {BasePlugConfigInterface} from "../../../interfaces/base-plug-config-interface";
 import {FormService} from "../../../../../core/services/form.service";
 import {ReactiveFormsModule} from "@angular/forms";
+import {pluginPosition} from "../../../constants/plugin-position";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-plugin-dimension-admin',
   standalone: true,
   templateUrl: './plugin-dimension-admin.component.html',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgForOf
   ],
   styleUrls: ['./plugin-dimension-admin.component.css']
 })
@@ -32,4 +35,6 @@ export class PluginDimensionAdminComponent extends AbstractAdminSetting<BasePlug
       settings
     );
   }
+
+  protected readonly positions = pluginPosition;
 }

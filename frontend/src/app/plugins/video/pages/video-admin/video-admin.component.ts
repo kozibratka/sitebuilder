@@ -24,6 +24,7 @@ export class VideoAdminComponent extends AbstractAdminSetting<VideoConfigInterfa
     this.adminForm = this.adminFormService.createForm(
       {
         videoPath: [''],
+        height: [''],
       },
       settings
     );
