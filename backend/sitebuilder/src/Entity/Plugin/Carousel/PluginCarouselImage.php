@@ -6,7 +6,7 @@ use App\Entity\Plugin\Traits\ImageTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class CarouselImage
+class PluginCarouselImage
 {
     use ImageTrait;
     #[ORM\Id]

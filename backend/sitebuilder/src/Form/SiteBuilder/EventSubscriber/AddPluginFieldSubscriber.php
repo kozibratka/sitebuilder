@@ -47,18 +47,16 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
                 $formClass = $this->pluginServices[$identifier]->getFormClass();
             }
             if(isset($plugin['id']) && $this->syncById && ($plugin['isShared'] ?? false)) {
-                if ($plugin['id'] == $gridCellItem?->getPlugin()?->getId()) {
-                    return;
-                }
                 $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
-                if($pluginDb->getWeb()) {
+
+                if($pluginDb->isShared()) {
                     $data['plugin'] = $plugin['id'];
                     $event->setData($data);
                     $form->add('plugin', EntityType::class, ['class' => get_class($pluginDb), 'choices' => [$pluginDb]]);
                     return;
                 }
             }
-            $pluginData = $actualPlugin?->getIdentifier() == $plugin['identifier'] ? $actualPlugin : null;
+            $pluginData = $actualPlugin?->getIdentifier() == $plugin['identifier'] && !$actualPlugin?->isShared() ? $actualPlugin : null;
             $form->add('plugin', $formClass, ['data' => $pluginData]);
         }
     }

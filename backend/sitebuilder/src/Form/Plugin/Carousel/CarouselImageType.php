@@ -2,7 +2,7 @@
 
 namespace App\Form\Plugin\Carousel;
 
-use App\Entity\Plugin\Carousel\CarouselImage;
+use App\Entity\Plugin\Carousel\PluginCarouselImage;
 use App\Form\Plugin\shared\ImageType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,7 +22,7 @@ class CarouselImageType extends ImageType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => CarouselImage::class,
+            'data_class' => PluginCarouselImage::class,
             'allow_extra_fields' => true,
         ]);
     }

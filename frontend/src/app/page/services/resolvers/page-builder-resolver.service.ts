@@ -19,10 +19,8 @@ export class PageBuilderResolverService implements Resolve<PageInterface> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PageInterface> {
-    const withGlobalPlugins = route.data['withGlobalPlugins'];
     return this.symfonyApiClientService.get<PageInterface>('page_read', {
       id: route.paramMap.get('pageId'),
-      withGlobalPlugins
     }).pipe(catchError(err => {
       return throwError(err);
     }), map(httpResponse => {

@@ -15,9 +15,9 @@ export class ApiFormService {
     private httpResponseToasterService: HttpResponseToasterService,
   ) { }
 
-  send(path: string, form: AbstractControl, querySegment?: {}) {
+  send(path: string, form: AbstractControl, querySegment?: {}, additionalPostData = {}) {
     form.markAllAsTouched();
-    return this.symfonyApiClientService.post<any>(path, form.value, querySegment).pipe(tap(next => {
+    return this.symfonyApiClientService.post<any>(path, {...form.value, ...additionalPostData}, querySegment).pipe(tap(next => {
 
       },
       (err: HttpErrorResponse) => {

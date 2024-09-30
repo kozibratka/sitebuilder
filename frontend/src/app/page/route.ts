@@ -5,6 +5,7 @@ import {PageDetailResolverService} from "./services/resolvers/page-detail-resolv
 import {PageBuilderComponent} from "./pages/page-builder/page-builder.component";
 import {PageBuilderResolverService} from "./services/resolvers/page-builder-resolver.service";
 import {PageListResolverService} from "./services/resolvers/page-list-resolver.service";
+import {GlobalPluginsResolver} from "../plugin/services/global-plugins.resolver";
 
 export default   [
   {
@@ -25,7 +26,6 @@ export default   [
   {
     path: 'page-builder/:pageId',
     component: PageBuilderComponent,
-    resolve: {pageDetail: PageBuilderResolverService},
-    data: {withGlobalPlugins: true},
+    resolve: {pageDetail: PageBuilderResolverService, globalPlugins: GlobalPluginsResolver},
   }
 ];

@@ -5,11 +5,13 @@ namespace App\Entity\Plugin;
 
 use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\Web\Web;
+use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity(
     fields: ['name', 'web'],
@@ -44,11 +46,12 @@ abstract class BasePlugin
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-    #[ORM\Column(type: 'uuid', nullable: true)]
-    #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
     private ?string $id = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\NotBlank(groups: ['Name'])]
     private ?string $name = null;
 
     /**

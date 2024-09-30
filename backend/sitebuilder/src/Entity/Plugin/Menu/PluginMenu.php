@@ -16,7 +16,7 @@ class PluginMenu extends BasePlugin
         type: 'pluginItems',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
-    #[ORM\OneToMany(targetEntity: 'MenuItem', mappedBy: 'menu', cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: PluginMenuItem::class, mappedBy: 'menu', cascade: ['persist'], orphanRemoval: true)]
     protected Collection $items;
 
     #[ORM\Column(type: 'string', nullable: true)]
@@ -45,14 +45,14 @@ class PluginMenu extends BasePlugin
         $this->items = $items;
     }
 
-    public function addItem(MenuItem $menuSimpleItem): self
+    public function addItem(PluginMenuItem $menuSimpleItem): self
     {
         $this->items->add($menuSimpleItem);
         $menuSimpleItem->setMenu($this);
         return $this;
     }
 
-    public function removeItem(MenuItem $menuSimpleItem): self
+    public function removeItem(PluginMenuItem $menuSimpleItem): self
     {
         $this->items->removeElement($menuSimpleItem);
         return $this;
@@ -81,7 +81,7 @@ class PluginMenu extends BasePlugin
     public function __clone(): void
     {
         $this->id = null;
-        $this->items = new ArrayCollection($this->items->map(function(MenuItem $item) {
+        $this->items = new ArrayCollection($this->items->map(function(PluginMenuItem $item) {
             $clone = clone $item;
             $clone->setMenu($this);
             return $clone;

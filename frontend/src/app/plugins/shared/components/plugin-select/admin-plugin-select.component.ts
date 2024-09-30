@@ -8,6 +8,7 @@ import {ObjectHelper} from "../../../../core/helpers/object-helper";
 import {pairwise, startWith} from "rxjs/operators";
 import {MiniAdminComponent} from "../../../../core/modules/mini-admin/components/mini-admin.component";
 import {CommonModule} from "@angular/common";
+import {GlobalPluginsResolver} from "../../../../plugin/services/global-plugins.resolver";
 
 @Component({
   selector: 'app-plugin-select',
@@ -27,6 +28,7 @@ export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugCon
     private pluginResolverService: PluginResolverService,
     private fb: FormBuilder,
     private pageBuilderResolverService: PageBuilderResolverService,
+    private globalPluginsResolver: GlobalPluginsResolver,
     private miniAdminComponent: MiniAdminComponent,
   ) {
     super();
@@ -36,7 +38,7 @@ export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugCon
   }
 
   createAdminForm(settings: any): void {
-    this.selectOptions = this.pageBuilderResolverService.page.globalPlugins.filter(value => {
+    this.selectOptions = this.globalPluginsResolver.plugins.filter(value => {
       return value.identifier == this.settings.identifier;
     }).map(value => {return {id: value.id, name: value.name}});
     this.selectedId = this.settings.webId ? this.settings.id.toString() : '0';
@@ -52,7 +54,7 @@ export class AdminPluginSelectComponent extends AbstractAdminSetting<BasePlugCon
       }
       let pluginConfig: any = {};
       if (next != '0') {
-        pluginConfig = this.pageBuilderResolverService.page.globalPlugins.find(value1 => value1.id == next);
+        pluginConfig = this.globalPluginsResolver.plugins.find(value1 => value1.id == next);
         this.miniAdminComponent.allowedAdminComponent = AdminPluginSelectComponent;
       } else {
         pluginConfig = this.contextObject.lastAdminSettings ? this.contextObject.lastAdminSettings : this.pluginResolverService.getPluginResolverByIdentifier(this.contextObject.settings.identifier).getEmptySettings();

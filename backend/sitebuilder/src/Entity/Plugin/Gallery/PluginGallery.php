@@ -19,7 +19,7 @@ class PluginGallery extends BasePlugin
         type: 'pluginItems',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
-    #[ORM\OneToMany(targetEntity: GalleryImage::class, cascade: ['persist'], orphanRemoval: true, mappedBy: 'gallery')]
+    #[ORM\OneToMany(targetEntity: PluginGalleryImage::class, cascade: ['persist'], orphanRemoval: true, mappedBy: 'gallery')]
     private $images;
 
     public function __construct()
@@ -54,7 +54,7 @@ class PluginGallery extends BasePlugin
         $this->images = $images;
     }
 
-    public function addImage(GalleryImage $image)
+    public function addImage(PluginGalleryImage $image)
     {
         $this->images->add($image);
         $image->setGallery($this);

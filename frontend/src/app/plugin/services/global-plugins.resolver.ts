@@ -15,6 +15,7 @@ import {WebDetailResolverService} from "../../web/services/web-detail-resolver.s
   providedIn: 'root'
 })
 export class GlobalPluginsResolver implements Resolve<BasePlugConfigInterface[]> {
+  plugins = []
 
   constructor(
     private symfonyApiClientService: SymfonyApiClientService,
@@ -29,6 +30,7 @@ export class GlobalPluginsResolver implements Resolve<BasePlugConfigInterface[]>
       .pipe(catchError(err => {
         return throwError(err);
       }), map(httpResponse => {
+        this.plugins = httpResponse.body;
         return httpResponse.body;
         // return this.sortGlobalPlugins(httpResponse.body);
       }));

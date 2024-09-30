@@ -18,12 +18,6 @@ class PageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('name',null, ['empty_data' => ''])
-            ->add('url', null, ['empty_data' => ''])
-            ->add('description')
-            ->add('homePage')
-        ;
         if ($options['pageBuilder']) {
             $builder
                 ->add(
@@ -37,6 +31,13 @@ class PageType extends AbstractType
                         'entry_options' => ['sync_by_id' => $options['sync_by_id']],
                     ]
                 );
+        } else {
+            $builder
+                ->add('name',null, ['empty_data' => ''])
+                ->add('url', null, ['empty_data' => ''])
+                ->add('description')
+                ->add('homePage')
+                ;
         }
     }
 

@@ -14,9 +14,9 @@ class BasePluginType extends AbstractType
     {
         $builder->add('id', null, ['mapped' => false])
             ->add('identifier')
-            ->add('name')
+            ->add('name', null, ['mapped' => false])
             ->add('horizontalMargin', NumberType::class)
-            ->add('isShared', CheckboxType::class, ['required' => false])
+            ->add('isShared', CheckboxType::class, ['mapped' => false])
             ->add('paddingBottom', NumberType::class)
             ->add('paddingTop', NumberType::class)
         ;

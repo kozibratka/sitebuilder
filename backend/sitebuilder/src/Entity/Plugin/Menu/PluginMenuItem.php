@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity]
-class MenuItem
+class PluginMenuItem
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]

@@ -5,6 +5,7 @@ namespace App\Entity\SiteBuilder;
 use App\Entity\Page\AbstractPage;
 use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
@@ -17,6 +18,9 @@ class PageBlockAssignment
     #[ORM\CustomIdGenerator(CustomUidGenerator::class)]
     private ?string $id = null;
 
+    /**
+     * @Serializer\Exclude()
+     */
     #[ORM\ManyToOne(targetEntity: AbstractPage::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?AbstractPage $page = null;

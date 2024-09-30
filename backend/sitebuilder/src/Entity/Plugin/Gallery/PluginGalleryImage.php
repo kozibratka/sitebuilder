@@ -6,8 +6,8 @@ use App\Entity\Plugin\Traits\ImageTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'gallery_image')]
-class GalleryImage
+#[ORM\Table(name: 'plugin_gallery_image')]
+class PluginGalleryImage
 {
     use ImageTrait;
 

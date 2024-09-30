@@ -22,7 +22,7 @@ class PluginCarousel extends BasePlugin
         type: 'pluginItems',
         maxMessage: 'You cannot specify more than {{limit}}',
     )]
-    #[ORM\OneToMany(targetEntity: 'CarouselImage', cascade: ['persist'], orphanRemoval: true, mappedBy: 'carousel')]
+    #[ORM\OneToMany(targetEntity: PluginCarouselImage::class, cascade: ['persist'], orphanRemoval: true, mappedBy: 'carousel')]
     private $images;
 
     public function __construct()
@@ -76,7 +76,7 @@ class PluginCarousel extends BasePlugin
         $this->images = $images;
     }
 
-    public function addImage(CarouselImage $image)
+    public function addImage(PluginCarouselImage $image)
     {
         $this->images->add($image);
         $image->setCarousel($this);
@@ -90,7 +90,7 @@ class PluginCarousel extends BasePlugin
     public function __clone(): void
     {
         $this->id = null;
-        $this->images = new ArrayCollection($this->images->map(function(CarouselImage $item) {
+        $this->images = new ArrayCollection($this->images->map(function(PluginCarouselImage $item) {
             $clone = clone $item;
             $clone->setCarousel($this);
             return $clone;

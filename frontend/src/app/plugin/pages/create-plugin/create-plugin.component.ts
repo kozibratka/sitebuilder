@@ -61,9 +61,10 @@ export class CreatePluginComponent implements OnInit {
       const identifier = params.get('identifier');
       this.pluginResolver = this.pluginResolverService.getPluginResolverByIdentifier(identifier);
       this.createForm = this.pluginFormService.createForm();
+      let defaultSettings = this.pluginResolver.getEmptySettings();
       this.createForm.statusChanges.subscribe(status => {
         if (status === 'VALID') {
-          this.apiFormService.send('plugin_create', this.createForm, {id: this.webDetailResolverService.selectedId, identifier}).subscribe({
+          this.apiFormService.send('plugin_create', this.createForm, {id: this.webDetailResolverService.selectedId, identifier}, defaultSettings).subscribe({
             next: (response) => {
               this.notifierService.notify('Plugin byl úspěšně vytvořen');
               this.router.navigate(['update', response.body.id], { relativeTo: this.route.parent });

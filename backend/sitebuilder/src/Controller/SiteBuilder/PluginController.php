@@ -43,7 +43,7 @@ class PluginController extends BaseApiController
     {
         $this->denyAccessUnlessGranted('page_builder_voter',$web);
         $pluginService = $pluginServiceService->getPluginServiceByIdentifier($identifier);
-        $form = $this->createForm($pluginService->getFormClass());
+        $form = $this->createForm($pluginService->getFormClass(), null, ['validation_groups' => ['Default', 'Name']]);
         $form->submit($request->request->all(), false);
         if($form->isValid()) {
             /** @var BasePlugin $plugin */

@@ -2,7 +2,7 @@
 
 namespace App\Form\Plugin\Menu;
 use App\Entity\Page\AbstractPage;
-use App\Entity\Plugin\Menu\MenuItem;
+use App\Entity\Plugin\Menu\PluginMenuItem;
 use App\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +28,7 @@ class MenuItemType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => MenuItem::class,
+            'data_class' => PluginMenuItem::class,
             'allow_extra_fields' => true,
         ]);
     }

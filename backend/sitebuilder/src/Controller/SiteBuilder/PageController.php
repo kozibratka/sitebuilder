@@ -46,13 +46,11 @@ class PageController extends BaseApiController
     public function read(Request $request, Page $page)
     {
         $this->denyAccessUnlessGranted('page_builder_voter', $page);
-        $withGlobalPlugins = $request->query->get('withGlobalPlugins');
-        if($withGlobalPlugins) {
-            $globalPlugins = $this->getDoctrine()->getRepository(BasePlugin::class)->findBy(['web' => $page->getWeb()]);
-            $page->setGlobalPlugins($globalPlugins);
-        }
+        $data['pageBlockAssignments'] = $page->getPageBlockAssignments();
+        $data['id'] = $page->getId();
+        $data['webBlocks'] = $page->getWebBlocks();
 
-        return $this->jsonResponseSimple($page);
+        return $this->jsonResponseSimple($data);
     }
 
     /**
