@@ -3,25 +3,26 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Constant\Limit;
-use App\Entity\Page\AbstractPage;
+use App\Entity\Util\Attribute\FilePathAttr;
+use App\Entity\Util\Interface\EntityFileProviderInterface;
+use App\Entity\Util\Trait\FIleProviderTrait;
 use App\Entity\Web\Web;
-use App\Interface\EntityFileProviderInterface;
 use App\Security\Validator as AppAssert;
+use App\Security\Validator as AppValidator;
 use App\Service\Doctrine\CustomUidGenerator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-use App\Security\Validator as AppValidator;
 
 
 #[ORM\Table(name: 'page_block')]
 #[ORM\Entity]
 class PageBlock implements EntityFileProviderInterface
 {
+    use FIleProviderTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\Column(type: 'string', nullable: true)]
@@ -64,6 +65,7 @@ class PageBlock implements EntityFileProviderInterface
     private ?PageBlockTemplateCategory $category;
 
     #[ORM\Column(type: 'string', nullable: true)]
+    #[FilePathAttr]
     private ?string $imagePath = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
@@ -239,23 +241,14 @@ class PageBlock implements EntityFileProviderInterface
         $this->isFromTemplateBlock = $isFromTemplateBlock;
     }
 
-    public function getDestinationFilePath(): ?string
-    {
-        return null;
-    }
-
     public function setFilePath(string $path)
     {
+        $this->imagePath = $path;
     }
 
     public function getFilePath(): ?string
     {
         return $this->imagePath;
-    }
-
-    public function getFile(): ?UploadedFile
-    {
-        return null;
     }
 
     public function getBackgroundImage(): ?string

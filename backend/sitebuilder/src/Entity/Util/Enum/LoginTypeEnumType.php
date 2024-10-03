@@ -1,5 +1,5 @@
 <?php
-namespace App\Enum;
+namespace App\Entity\Util\Enum;
 
 enum LoginTypeEnum: string {
     case Form = 'Form';

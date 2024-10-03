@@ -8,9 +8,13 @@ use App\Entity\SiteBuilder\PageBlockTemplateCategory;
 use App\Exception\CustomErrorMessageException;
 use App\Form\SiteBuilder\PageBlockType;
 use App\Helper\Helper;
+use App\Helper\ImageHelper;
+use App\Service\Storage\StorageService;
 use App\Service\Storage\WebStorageService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -55,15 +59,23 @@ class PageBlockController extends BaseApiController
             /** @var PageBlock $pageBlock */
             $pageBlock = $form->getData();
             $web = $pageBlock->getWeb();
+            /** @var UploadedFile $image */
             $image = $request->files->get('image');
             if ($image) {
-                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString());
+                $pageBlock->setFileName(Helper::randomString());
+                $pageBlock->setImagePath($webStorageService->getWebUserServerPath($web));
+                $pageBlock->file = $image;
             } else {
+                /** @var UploadedFile $image */
                 $image = $request->files->get('imageBase64');
-                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString(), true);
+                $path = $webStorageService->getWebUserServerPath($web).'/'.Helper::randomString();
+                ImageHelper::base64_to_jpeg_file($image->getContent(), $path);
+                if ($pageBlock->getImagePath()) {
+                    (new Filesystem())->remove(StorageService::getFullPath($pageBlock->getImagePath()));
+                }
+                $pageBlock->setImagePath(StorageService::getPublicPath($path));
             }
             $pageBlock->setIsShared(true);
-            $pageBlock->setImagePath($path);
             $this->persist($pageBlock);
             return $this->jsonResponseSimple(['blocks' => $web->getPageBlocks(), 'block' => $pageBlock], 201);
         }
@@ -83,12 +95,19 @@ class PageBlockController extends BaseApiController
             $web = $pageBlock->getWeb();
             $image = $request->files->get('image');
             if ($image) {
-                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString());
+                $pageBlock->setFileName(Helper::randomString());
+                $pageBlock->setImagePath($webStorageService->getWebUserServerPath($web));
+                $pageBlock->file = $image;
             } else {
+                /** @var UploadedFile $image */
                 $image = $request->files->get('imageBase64');
-                $path = $webStorageService->uploadBlockImage($web, $image, Helper::randomString(), true);
+                $path = $webStorageService->getWebUserServerPath($web).'/'.Helper::randomString();
+                ImageHelper::base64_to_jpeg_file($image->getContent(), $path);
+                if ($pageBlock->getImagePath()) {
+                    (new Filesystem())->remove(StorageService::getFullPath($pageBlock->getImagePath()));
+                }
+                $pageBlock->setImagePath(StorageService::getPublicPath($path));
             }
-            $pageBlock->setImagePath($path);
             $this->flush();
             return $this->jsonResponseSimple($web->getPageBlocks(), 201);
         }
@@ -97,20 +116,19 @@ class PageBlockController extends BaseApiController
 
     /**
      * @Route("/delete/{id}", name="delete")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(PageBlock $pageBlock, EntityManagerInterface $entityManager) {
         $web = $pageBlock->getWeb();
         if (!$web) {
             throw new CustomErrorMessageException('Není šablona');
         }
+        $this->denyAccessUnlessGranted('page_builder_voter', $pageBlock);
         $this->removeEntity($pageBlock);
         return $this->jsonResponseSimple($web->getPageBlocks(), 200);
     }
 
     /**
      * @Route("/category-list", name="category_list")
-     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function categoryList(EntityManagerInterface $entityManager) {
         $category = $entityManager->getRepository(PageBlockTemplateCategory::class)->findAll();

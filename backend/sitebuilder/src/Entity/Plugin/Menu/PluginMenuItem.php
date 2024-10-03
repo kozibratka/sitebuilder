@@ -2,10 +2,9 @@
 
 namespace App\Entity\Plugin\Menu;
 use App\Entity\Page\AbstractPage;
-use App\Enum\Plugin\Menu\MenuItemTypeEnum;
+use App\Entity\Util\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use JMS\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity]
 class PluginMenuItem

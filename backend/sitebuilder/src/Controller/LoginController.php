@@ -8,7 +8,7 @@ use App\Constant\Limit;
 use App\Constant\Role;
 use App\Entity\ResetPassword;
 use App\Entity\User;
-use App\Enum\LoginTypeEnum;
+use App\Entity\Util\Enum\LoginTypeEnum;
 use App\Exception\CustomErrorMessageException;
 use App\Form\LoginRegistration\ResendPasswordLinkType;
 use App\Form\LoginRegistration\ResetPasswordType;

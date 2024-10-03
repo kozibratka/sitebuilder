@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enum;
+namespace App\Entity\Util\Enum;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;

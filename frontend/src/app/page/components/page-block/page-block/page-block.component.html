@@ -61,7 +61,7 @@
       <div title="Aktualizovat šablonu" *ngIf="userService.hasRole('ROLE_ADMIN') && pageBlock.webId && !pageBlock.isShared" class="btn draganddrop" (click)="pageBlockTemplateService.update(this)">
         <i class="material-icons icon-update">update</i>
       </div>
-      <div title="{{pageBlock.isShared ? 'Tento blok je sdílen' : 'Vytvořit sdílený blok'}}" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this, true)">
+      <div title="{{pageBlock.isShared ? 'Tento blok je sdílen - přeuložit' : 'Vytvořit sdílený blok'}}" class="btn draganddrop" (click)="pageBlockTemplateService.saveAsTemplateDialog(this, true)">
         <i class="material-icons icon-update" [class.active]="pageBlock.isShared">share</i>
       </div>
 

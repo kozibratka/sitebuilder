@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Enum\Plugin\Menu;
+namespace App\Entity\Util\Enum\Plugin\Menu;
 
-use App\Enum\AbstractEnumType;
+use App\Entity\Util\Enum\AbstractEnumType;
 
 enum MenuItemTypeEnum: string
 {

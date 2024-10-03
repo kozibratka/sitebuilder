@@ -3,7 +3,7 @@
 namespace App\Form\Plugin\Menu;
 use App\Entity\Page\AbstractPage;
 use App\Entity\Plugin\Menu\PluginMenuItem;
-use App\Enum\Plugin\Menu\MenuItemTypeEnum;
+use App\Entity\Util\Enum\Plugin\Menu\MenuItemTypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;

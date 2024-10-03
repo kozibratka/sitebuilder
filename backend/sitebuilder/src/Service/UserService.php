@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Entity\Tariff;
 use App\Entity\User;
-use App\Enum\TariffEnum;
+use App\Entity\Util\Enum\TariffEnum;
 use App\Helper\Helper;
 use App\Service\Storage\UserStorageService;
 use Doctrine\ORM\EntityManagerInterface;

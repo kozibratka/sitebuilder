@@ -34,7 +34,7 @@ class PageBlockSubscriber implements EventSubscriberInterface
                 return;
             }
             $pageBlock = $this->entityManager->getRepository(PageBlock::class)->find($data['id']);
-            if ($pageBlock->isShared()) {
+            if ($pageBlock && $pageBlock->isShared()) {
                 $pageBlock->setReassigned(true);
                 $form->setData($pageBlock);
             }

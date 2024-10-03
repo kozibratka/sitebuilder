@@ -20,7 +20,7 @@ class WebStorageService
     }
 
     public function uploadBlockImage(Web $web, UploadedFile $file, $name, $isBAse64 = false) {
-        $realPath = $this->getUserWebServerRootStorage($web);
+        $realPath = $this->getWebUserServerPath($web);
         if ($isBAse64) {
             ImageHelper::base64_to_jpeg_file($file->getContent(), $realPath.'/'.$name);
         } else {
@@ -30,11 +30,11 @@ class WebStorageService
     }
 
     public function getPublicPathFile(Web $web, $name) {
-        $path = $this->getUserWebServerRootStorage($web).'/'.$name;
+        $path = $this->getWebUserServerPath($web).'/'.$name;
         return str_replace($_SERVER['DOCUMENT_ROOT'].'/', '', $path);
     }
 
-    private function getUserWebServerRootStorage(Web $web) {
+    public function getWebUserServerPath(Web $web) {
         $user = $this->security->getUser();
         $rootPath = $this->userStorageService->getRootServerStorage($user);
         $path = $rootPath.'/web/'.$web->getId();

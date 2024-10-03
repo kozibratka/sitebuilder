@@ -49,7 +49,7 @@ class AddPluginFieldSubscriber implements EventSubscriberInterface
             if(isset($plugin['id']) && $this->syncById && ($plugin['isShared'] ?? false)) {
                 $pluginDb = $this->entityManager->getRepository(BasePlugin::class)->find($plugin['id']);
 
-                if($pluginDb->isShared()) {
+                if($pluginDb && $pluginDb->isShared()) {
                     $data['plugin'] = $plugin['id'];
                     $event->setData($data);
                     $form->add('plugin', EntityType::class, ['class' => get_class($pluginDb), 'choices' => [$pluginDb]]);
