@@ -22,21 +22,12 @@ class ImageHelper
         return $output_file;
     }
 
-    function check_base64_image($base64) {
-        $img = imagecreatefromstring(base64_decode($base64));
-        if (!$img) {
-            return false;
-        }
-
-        imagepng($img, 'tmp.png');
-        $info = getimagesize('tmp.png');
-
-        unlink('tmp.png');
-
-        if ($info[0] > 0 && $info[1] > 0 && $info['mime']) {
+    public static function isImage( $file )
+    {
+        $imagesizedata = getimagesize($file);
+        if ($imagesizedata ) {
             return true;
         }
-
         return false;
     }
 }

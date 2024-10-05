@@ -18,7 +18,6 @@ export class ApiFormService {
   send(path: string, form: FormGroup, querySegment?: {}, additionalPostData = {}) {
     form.markAllAsTouched();
     let data = {...form.value, ...additionalPostData};
-    console.log(data)
     let formData = this.convertJsonToFormData(data, null, null);
     return this.symfonyApiClientService.post<any>(path, formData, querySegment).pipe(tap(next => {
 

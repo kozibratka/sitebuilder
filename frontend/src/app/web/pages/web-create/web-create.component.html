@@ -17,7 +17,7 @@
           </div>
           <div class="col-md-6">
               <label for="formFile" class="form-label">Obrázek šablony</label>
-              <input (change)="createWebForm.patchValue({file: $any($event.target).files[0]})" class="form-control" type="file" id="formFile">
+              <input appFormError (change)="createWebForm.patchValue({file: $any($event.target).files[0]})" class="form-control" type="file" id="formFile" formControlName="file" accept="image/*">
               @if(webDetail.imagePath) {
                 <img width="150" class="img-thumbnail" src="{{webDetail.imagePath}}">
               }

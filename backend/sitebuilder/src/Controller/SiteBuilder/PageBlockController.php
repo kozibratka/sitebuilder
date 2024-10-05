@@ -100,8 +100,12 @@ class PageBlockController extends BaseApiController
 
     private function uploadImage(Request $request,Web $web, PageBlock $pageBlock, WebStorageService $webStorageService, StorageService $storageService)
     {
+        /** @var UploadedFile $image */
         $image = $request->files->get('image');
         if ($image) {
+            if (!ImageHelper::isImage($image->getRealPath())) {
+                throw new CustomErrorMessageException('Obrázek není validní');
+            }
             if ($pageBlock->getImagePath()) {
                 $storageService->removePublic($pageBlock->getImagePath());
             }

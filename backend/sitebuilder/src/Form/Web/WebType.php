@@ -13,13 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class WebType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null, ['empty_data' => ''])
             ->add('domains', CollectionType::class, [
                 'entry_type' => DomainType::class,
                 'allow_add' => true,
@@ -31,7 +32,11 @@ class WebType extends AbstractType
             $builder->add('isTemplate', CheckboxType::class, [
                 'required' => false,
             ])
-                ->add('file', FileType::class)
+                ->add('file', FileType::class, [
+                    'constraints' => [
+                        new Assert\Image()
+                    ]
+                ])
 
             ;
         }
