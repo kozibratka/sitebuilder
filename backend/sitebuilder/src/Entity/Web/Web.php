@@ -12,6 +12,8 @@ use App\Entity\SiteBuilder\GridCellItem;
 use App\Entity\SiteBuilder\PageBlock;
 use App\Entity\SiteBuilder\PageBlockAssignment;
 use App\Entity\User;
+use App\Entity\Util\Attribute\FilePathAttr;
+use App\Entity\Util\Trait\FileProviderTrait;
 use App\Security\Validator as AppValidator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: 'App\Repository\WebRepository')]
 class Web
 {
+    use FileProviderTrait;
     /**
      * @Serializer\Groups({"default", "base_list"})
      */
@@ -98,6 +101,7 @@ class Web
      * @Serializer\Groups({"default", "base_list"})
      */
     #[ORM\Column(type: 'string', nullable: true)]
+    #[FilePathAttr]
     private string $imagePath;
     /** @var Collection|ArrayCollection  */
     #[ORM\OneToMany(targetEntity: Domain::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'web')]

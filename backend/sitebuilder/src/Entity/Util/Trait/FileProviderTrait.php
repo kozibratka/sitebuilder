@@ -4,7 +4,7 @@ namespace App\Entity\Util\Trait;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-trait FIleProviderTrait
+trait FileProviderTrait
 {
     public ?UploadedFile $file = null;
     private ?string $fileName = '';

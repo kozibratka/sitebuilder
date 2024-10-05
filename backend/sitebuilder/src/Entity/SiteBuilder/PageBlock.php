@@ -5,7 +5,7 @@ namespace App\Entity\SiteBuilder;
 
 use App\Entity\Util\Attribute\FilePathAttr;
 use App\Entity\Util\Interface\EntityFileProviderInterface;
-use App\Entity\Util\Trait\FIleProviderTrait;
+use App\Entity\Util\Trait\FileProviderTrait;
 use App\Entity\Web\Web;
 use App\Security\Validator as AppAssert;
 use App\Security\Validator as AppValidator;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 class PageBlock implements EntityFileProviderInterface
 {
-    use FIleProviderTrait;
+    use FileProviderTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]

@@ -10,6 +10,9 @@ use App\Entity\User;
 use App\Entity\Web\Web;
 use App\Exception\CustomErrorMessageException;
 use App\Form\Web\WebType;
+use App\Helper\Helper;
+use App\Service\Storage\StorageService;
+use App\Service\Storage\WebStorageService;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,13 +99,18 @@ class WebController extends BaseApiController
     /**
      * @Route("/update/{id}", name="update")
      */
-    public function update(Request $request, Web $web)
+    public function update(Request $request, Web $web, StorageService $storageService, WebStorageService $webStorageService)
     {
         $this->denyAccessUnlessGranted('page_builder_with_children_voter',$web);
         $form = $this->createForm(WebType::class, $web, ['allow_is_template' => $this->isGranted('ROLE_ADMIN')]);
         $form->submit($request->request->all());
-        if($form->isValid()) {
-            $web = $form->getData();
+        if($form->isSubmitted() && $form->isValid()) {
+            if ($web->getFile()) {
+                if ($web->getImagePath()) {
+                    $storageService->removePublic($web->getImagePath());
+                }
+                $web->setImagePath($storageService->upload($webStorageService->getWebUserServerPath($web), Helper::randomString(), $web->getFile()));
+            }
             $this->flush();
             return $this->jsonResponseSimple($web, 201);
         }
