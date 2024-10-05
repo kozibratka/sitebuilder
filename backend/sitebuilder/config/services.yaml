@@ -58,6 +58,14 @@ services:
             - { name: doctrine.orm.entity_listener, event: preRemove, entity: 'App\Entity\SiteBuilder\PaletteGridItem' }
             - { name: doctrine.orm.entity_listener, event: preUpdate, entity: 'App\Entity\SiteBuilder\PaletteGridItem' }
 
+    App\EventListener\Doctrine\WebListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, event: preRemove, entity: 'App\Entity\Web\Web' }
+
+    App\EventListener\Doctrine\PageBuilder\PageBlockListener:
+        tags:
+            - { name: doctrine.orm.entity_listener, event: preRemove, entity: 'App\Entity\SiteBuilder\PageBlock' }
+
     App\EventListener\Doctrine\PageBuilder\GridCellItemListener:
         tags:
             - { name: doctrine.orm.entity_listener, event: preRemove, entity: 'App\Entity\SiteBuilder\GridCellItem' }

@@ -62,8 +62,11 @@
             <ng-container *ngIf="item.imagePath">
               <img alt="" src="{{item.imagePath}}">
               <app-animation-hider [show] = "showMoveIcon">
-                <i class="material-icons icon-move-block">open_with</i>
-                <i class="material-icons icon-delete" *ngIf="webDetailResolverService.isTemplateWeb()" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
+                <div class="position-absolute menu-bloc-icons">
+                  <i title="Přesunout na plátno" class="material-icons icon-move-block">open_with</i>
+                  <i title="Smazat" class="material-icons icon-delete" *ngIf="webDetailResolverService.isTemplateWeb()" (click)="pageBlockTemplateService.deleteTemplateBlock(item)">delete</i>
+                  <i *ngIf="item.isShared" title="Tento blok je sdílený" class="material-icons icon-shared">share</i>
+                </div>
               </app-animation-hider>
             </ng-container>
             <ng-container *ngIf="last && !pageBlockTemplateService.selectedCategory">

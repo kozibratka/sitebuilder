@@ -80,7 +80,7 @@ class PageBlockController extends BaseApiController
     /**
      * @Route("/delete/{id}", name="delete")
      */
-    public function delete(PageBlock $pageBlock, EntityManagerInterface $entityManager) {
+    public function delete(PageBlock $pageBlock, EntityManagerInterface $entityManager, StorageService $storageService) {
         $web = $pageBlock->getWeb();
         if (!$web) {
             throw new CustomErrorMessageException('Není šablona');
@@ -110,11 +110,11 @@ class PageBlockController extends BaseApiController
         } else {
             /** @var UploadedFile $image */
             $image = $request->files->get('imageBase64');
+            if ($pageBlock->getImagePath()) {
+                $storageService->removePublic($pageBlock->getImagePath());
+            }
             $path = $webStorageService->getWebUserServerPath($web).'/'.Helper::randomString();
             ImageHelper::base64_to_jpeg_file($image->getContent(), $path);
-            if ($pageBlock->getImagePath()) {
-                $storageService->remove($path);
-            }
             $pageBlock->setImagePath(StorageService::getPublicPath($path));
         }
     }

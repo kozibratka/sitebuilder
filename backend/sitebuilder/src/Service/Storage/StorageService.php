@@ -19,7 +19,7 @@ class StorageService
     {
         $this->fileSystem->mkdir($fullPath);
         $file->move($fullPath, $name);
-        return self::getPublicPath($fullPath);
+        return self::getPublicPath($fullPath.'/'.$name);
     }
 
     public function removePublic(string $publicPath)

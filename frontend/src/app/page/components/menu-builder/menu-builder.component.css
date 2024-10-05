@@ -107,23 +107,30 @@ i.icon-move, i.icon-move-grid{
   top: 16px;
 }
 
-i.icon-move-block, i.icon-delete{
-  position: absolute;
-  top: 1px;
-  color: black;
-  /*display: none;*/
-  left: 1px;
+i.icon-move-block, i.icon-delete, i.icon-shared{
+  float: left;
   cursor: move;
   font-size: 17px !important;
 }
 
 i.icon-delete {
-  left: 24px;
   cursor: pointer;
+  float: right;
+}
+
+i.icon-shared {
+  float: right;
+  cursor: default;
 }
 
 ::ng-deep .menu-element-block .empty-block-template {
   height: 63px;
+  width: 100%;
+}
+
+.menu-bloc-icons {
+  top: 0px;
+  left: 0px;
   width: 100%;
 }
 

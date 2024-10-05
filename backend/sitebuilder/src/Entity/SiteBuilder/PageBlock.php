@@ -3,7 +3,6 @@
 
 namespace App\Entity\SiteBuilder;
 
-use App\Entity\Util\Attribute\FilePathAttr;
 use App\Entity\Util\Interface\EntityFileProviderInterface;
 use App\Entity\Util\Trait\FileProviderTrait;
 use App\Entity\Web\Web;
@@ -16,10 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
-#[ORM\Table(name: 'page_block')]
 #[ORM\Entity]
-class PageBlock implements EntityFileProviderInterface
+#[ORM\Table(name: 'page_block')]
+class PageBlock
 {
     use FileProviderTrait;
 
@@ -65,7 +63,6 @@ class PageBlock implements EntityFileProviderInterface
     private ?PageBlockTemplateCategory $category;
 
     #[ORM\Column(type: 'string', nullable: true)]
-    #[FilePathAttr]
     private ?string $imagePath = null;
 
     #[ORM\Column(type: 'string', nullable: true)]
