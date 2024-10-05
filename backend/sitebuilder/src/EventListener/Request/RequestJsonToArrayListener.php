@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\EventListener;
+namespace App\EventListener\Request;
 
 
 use App\Helper\RequestHelper;

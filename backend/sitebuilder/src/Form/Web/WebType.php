@@ -10,6 +10,7 @@ use phpDocumentor\Reflection\Types\Collection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,7 +30,10 @@ class WebType extends AbstractType
         if ($options['allow_is_template']) {
             $builder->add('isTemplate', CheckboxType::class, [
                 'required' => false,
-            ]);
+            ])
+                ->add('file', FileType::class)
+
+            ;
         }
     }
 

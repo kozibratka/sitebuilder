@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {WebInterface} from "../interfaces/web-interface";
+import {WebInterface} from "../../interfaces/web-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,7 @@ export class WebFormService{
     }, {updateOn: 'submit'});
     if (allowTemplate) {
       form.addControl('isTemplate',new FormControl(''));
+      form.addControl('file',new FormControl(''));
     }
     if (webInterface?.domains.length) {
       webInterface.domains.forEach(value => {

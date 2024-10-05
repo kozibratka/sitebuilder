@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WebFormService} from "../../../services/web-form.service";
+import {WebFormService} from "../../../services/Form/web-form.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {NotifierService} from "../../../../core/services/notifier.service";

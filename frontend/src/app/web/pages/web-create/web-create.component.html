@@ -8,9 +8,20 @@
       <label for="webName" class="form-label">Název webu</label>
       <input id="webName" appFormError type="text" class="form-control mb-3" placeholder="Název webu" formControlName="name">
       <ng-container *ngIf="createWebForm.contains('isTemplate')">
-        <div class="form-check">
-          <input class="form-check-input" id="help-text1" type="checkbox" formControlName="isTemplate">
-          <label class="form-check-label" for="help-text1">Web bude sloužit jako šablona</label>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-check">
+              <input class="form-check-input" id="help-text1" type="checkbox" formControlName="isTemplate">
+              <label class="form-check-label" for="help-text1">Web bude sloužit jako šablona</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+              <label for="formFile" class="form-label">Obrázek šablony</label>
+              <input (change)="createWebForm.patchValue({file: $any($event.target).files[0]})" class="form-control" type="file" id="formFile">
+              @if(webDetail.imagePath) {
+                <img width="150" class="img-thumbnail" src="{{webDetail.imagePath}}">
+              }
+          </div>
         </div>
       </ng-container>
       <label class="form-label">Doména:</label>

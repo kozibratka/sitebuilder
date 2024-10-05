@@ -100,7 +100,7 @@ class Web
      * @Serializer\Groups({"default", "base_list"})
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    private string $imagePath;
+    private ?string $imagePath;
 
     #[ORM\OneToMany(targetEntity: Domain::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'web')]
     #[AppValidator\CountTariff(
@@ -237,12 +237,12 @@ class Web
         $this->parent = $parent;
     }
 
-    public function getImagePath(): string
+    public function getImagePath(): ?string
     {
         return $this->imagePath;
     }
 
-    public function setImagePath(string $imagePath): void
+    public function setImagePath(?string $imagePath): void
     {
         $this->imagePath = $imagePath;
     }

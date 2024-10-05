@@ -7,4 +7,6 @@ export interface WebInterface {
   pages: {id: number, name: string}[];
   parent?: number;
   domains: any[];
+  imagePath?: string;
+  file?: Blob;
 }

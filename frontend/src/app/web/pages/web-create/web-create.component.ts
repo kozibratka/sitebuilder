@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {WebFormService} from '../../services/web-form.service';
+import {FormArray, FormGroup, isFormGroup, ReactiveFormsModule} from '@angular/forms';
+import {WebFormService} from '../../services/Form/web-form.service';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {NotifierService} from '../../../core/services/notifier.service';
 import {Title} from '@angular/platform-browser';
@@ -13,6 +13,7 @@ import {CommonModule} from "@angular/common";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {MatTooltip} from "@angular/material/tooltip";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {WebInterface} from "../../interfaces/web-interface";
 
 @Component({
   selector: 'app-web-create',
@@ -36,6 +37,7 @@ export class WebCreateComponent implements OnInit {
   createWebForm: FormGroup;
   protected readonly faPlus = faPlus;
   protected readonly faMinus = faMinus;
+  webDetail: WebInterface;
 
   constructor(
     public webFormService: WebFormService,
@@ -54,15 +56,14 @@ export class WebCreateComponent implements OnInit {
   }
 
   createForm(): void {
-    const webDetail = this.route.snapshot.data['web'];
-    this.createWebForm = this.webFormService.createForm(this.userService.hasRole('ROLE_ADMIN'), webDetail);
-    this.createWebForm.patchValue(webDetail);
+    this.webDetail = this.route.snapshot.data['web'];
+    this.createWebForm = this.webFormService.createForm(this.userService.hasRole('ROLE_ADMIN'), this.webDetail);
+    this.createWebForm.patchValue(this.webDetail);
   }
 
   onSubmit() {
-    const webDetail = this.route.snapshot.data['web'];
     if (this.createWebForm.valid) {
-      this.apiFormService.send('web_update', this.createWebForm, {id: webDetail.id}).subscribe(response => {
+      this.apiFormService.send('web_update', this.createWebForm, {id: this.webDetail.id}).subscribe(response => {
         this.notifierService.notify('Web byl úspěšně upraven');
         this.router.navigate(['list'], { relativeTo: this.route.parent });
       });
@@ -79,4 +80,6 @@ export class WebCreateComponent implements OnInit {
     domainName = domainName.replaceAll(' ', '-').toLowerCase();
     (this.createWebForm.get('domains') as FormArray).at(index).patchValue({name: domainName}, {emitEvent: false});
   }
+
+  protected readonly isFormGroup = isFormGroup;
 }
