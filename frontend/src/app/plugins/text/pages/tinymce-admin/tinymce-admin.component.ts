@@ -1,4 +1,4 @@
-import {ApplicationRef, Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {AbstractAdminSetting} from "../../../shared/abstract-class/abstract-admin-setting";
 import {TextConfigInterface} from "../../interfaces/text-config-interface";
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
@@ -9,6 +9,7 @@ import {PageInterface} from "../../../../page/interfaces/page-interface";
 import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {CommonModule} from "@angular/common";
 import {TextComponent} from "../../components/text/text.component";
+import {PageBlockComponent} from "../../../../page/components/page-block/page-block/page-block.component";
 
 @Component({
   selector: 'app-tinymce-admin',
@@ -32,15 +33,14 @@ export class TinymceAdminComponent extends AbstractAdminSetting<TextConfigInterf
     protected fb: FormBuilder,
     protected adminFormService: FormService,
     private fileManagerModalService: FileManagerModalService,
-    private applicationRef: ApplicationRef,
     private ngZone: NgZone,
     private pageListResolverService: PageListResolverService,
   ) {
     super();
-    this.initTinyMce();
   }
 
   ngOnInit(): void {
+    this.initTinyMce();
   }
 
   createAdminForm(settings: TextConfigInterface) {
@@ -57,7 +57,7 @@ export class TinymceAdminComponent extends AbstractAdminSetting<TextConfigInterf
       base_url: '/tinymce',
       language: 'cs',
       content_css: ["/bootstrap/css/bootstrap.min.css", "/assets/fonts.css"],
-      content_style: 'body {padding: 12px;}',
+      content_style: 'body {margin: 12px;} .mce-content-body  {background: '+(this.contextObject.pageBlockComponent.pageBlock.backgroundColor ?? '')+'}',
       language_url: "assets/tinyLang/cs.js",
       suffix: '.min',
       file_picker_callback: (callback, value, meta) => {
