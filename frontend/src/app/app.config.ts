@@ -1,4 +1,4 @@
-import {ApplicationConfig, importProvidersFrom} from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, InjectionToken} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -15,8 +15,8 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule
 } from "@abacritt/angularx-social-login";
-import {publicRoutes} from "./public/route";
 
+export const ADMIN_CONFIG = new InjectionToken<{}>('admin info');
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
@@ -46,5 +46,7 @@ export const appConfig: ApplicationConfig = {
       } as SocialAuthServiceConfig,
     },
     PluginsProvider,
+    {provide: ADMIN_CONFIG, useValue: {}}
   ]
 };
+

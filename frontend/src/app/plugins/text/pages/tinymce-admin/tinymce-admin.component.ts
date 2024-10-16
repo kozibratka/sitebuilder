@@ -56,6 +56,7 @@ export class TinymceAdminComponent extends AbstractAdminSetting<TextConfigInterf
     this.tinyMceOptions = {
       base_url: '/tinymce',
       language: 'cs',
+      branding: false,
       content_css: ["/bootstrap/css/bootstrap.min.css", "/assets/fonts.css"],
       content_style: 'body {margin: 12px;} .mce-content-body  {background: '+(this.contextObject.pageBlockComponent.pageBlock.backgroundColor ?? '')+'}',
       language_url: "assets/tinyLang/cs.js",

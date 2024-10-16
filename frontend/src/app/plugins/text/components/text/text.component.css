@@ -1,3 +1,7 @@
 .ck-content {
   overflow: auto;
 }
+
+::ng-deep.tox-tinymce-inline {
+  z-index: 1000;
+}

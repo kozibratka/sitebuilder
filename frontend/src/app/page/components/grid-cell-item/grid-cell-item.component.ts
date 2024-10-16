@@ -90,6 +90,16 @@ export class GridCellItemComponent implements OnInit, OnChanges{
     this.showMoveIcon = false;
   }
 
+  @HostListener('dragstart')
+  dragStart() {
+    this.plugin.instance.isDragged = true;
+  }
+
+  @HostListener('dragend')
+  dragEnd() {
+    this.plugin.instance.isDragged = false;
+  }
+
   getResolverFromIdentifier() {
     return this.abstractPluginResolvers.find(value => {
       return value.identifier === this.gridCellItem.plugin.identifier;

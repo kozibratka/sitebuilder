@@ -25,4 +25,8 @@ export class SystemInfoService {
     let result = (protocol ? (environment.protocol+'://') : '')+environment.hostname+path;
     return result;
   }
+
+  isAdmin() {
+
+  }
 }

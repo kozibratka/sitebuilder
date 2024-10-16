@@ -5,6 +5,8 @@ export abstract class AbstractPlugin<T extends BasePlugConfigInterface>{
 
   lastAdminSettings: T = null;
 
+  isDragged = false;
+
   abstract refreshView(): void;
 
   initializeSettings(settings: T): void {
