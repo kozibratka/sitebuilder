@@ -62,4 +62,22 @@ export class ElementHelper {
       return null;
     }
   }
+
+  static getInnerNodeFromClickPosition(event: MouseEvent): Node | null {
+    let range;
+    if (document.caretRangeFromPoint) {
+      range = document.caretRangeFromPoint(event.clientX, event.clientY);
+    }
+    else if ((document as any).caretPositionFromPoint) {
+      const pos = (document as any).caretPositionFromPoint(event.clientX, event.clientY);
+      range = document.createRange();
+      range.setStart(pos.offsetNode, pos.offset);
+      range.setEnd(pos.offsetNode, pos.offset);
+    }
+    if (range) {
+      return range.startContainer;
+    }
+
+    return null;
+  }
 }

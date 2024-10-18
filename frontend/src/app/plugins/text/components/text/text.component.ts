@@ -39,7 +39,7 @@ export class TextComponent extends AbstractPlugin<TextConfigInterface> implement
   editorReady: boolean = false;
   adminConfig = inject(ADMIN_CONFIG, { optional: true});
   private cursorPosition: number | null;
-  private clickedPosition: { x: number; y: number };
+  private clickedPosition: MouseEvent;
   constructor(
     public pageBlockComponent: PageBlockComponent,
     protected adminFormService: FormService,
@@ -123,23 +123,18 @@ export class TextComponent extends AbstractPlugin<TextConfigInterface> implement
 
   disable(e: MouseEvent) {
     if (e.button === 0) {
-      this.clickedPosition = {x: e.x, y: e.y};
+      this.clickedPosition = e;
       this.cursorPosition = ElementHelper.getCursorPosition();
       this.disabled = false;
     }
   }
 
   setCursorPosition() {
-    let node = document.elementFromPoint(this.clickedPosition.x, this.clickedPosition.y);
-    console.log(node)
+    let node = ElementHelper.getInnerNodeFromClickPosition(this.clickedPosition);
     const range = this.editor.editor.selection.getRng();
-    if (node.firstChild) {
-      console.log(node.firstChild);
-      console.log(this.cursorPosition)
-
-
-      range.setStart(node.firstChild, this.cursorPosition);
-      range.setEnd(node.firstChild, this.cursorPosition);
+    if (node) {
+      range.setStart(node, this.cursorPosition);
+      range.setEnd(node, this.cursorPosition);
       this.editor.editor.selection.setRng(range);
     }
   }
