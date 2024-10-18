@@ -1,7 +1,6 @@
-
 @if (adminConfig) {
   @if (disabled) {
-    <div (mousedown)="disable($event)" #text class="ck-content" [contentEditable]="false" [innerHTML]="settings.text | safeHtml"></div>
+    <div (click)="disable($event)" #text class="ck-content" [contentEditable]="true" [innerHTML]="settings.text | safeHtml"></div>
   } @else {
     @if(!editorReady) {
       <div #text class="ck-content" [contentEditable]="false" [innerHTML]="settings.text | safeHtml"></div>

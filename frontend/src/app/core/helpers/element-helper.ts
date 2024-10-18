@@ -51,4 +51,15 @@ export class ElementHelper {
 
     return new ElementPositionMessenger(differenceX, differenceY);
   }
+
+  public static getCursorPosition(): number | null {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+       // Cursor position
+      return range.startOffset;
+    } else {
+      return null;
+    }
+  }
 }

@@ -11,6 +11,8 @@ import {PageListResolverService} from "../../../../page/services/resolvers/page-
 import {EditorComponent, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
 import {PageInterface} from "../../../../page/interfaces/page-interface";
 import {ADMIN_CONFIG} from "../../../../app.config";
+import {ElementHelper} from "../../../../core/helpers/element-helper";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 declare let tinymce: any;
 @Component({
@@ -36,6 +38,8 @@ export class TextComponent extends AbstractPlugin<TextConfigInterface> implement
   tinyMceOptions;
   editorReady: boolean = false;
   adminConfig = inject(ADMIN_CONFIG, { optional: true});
+  private cursorPosition: number | null;
+  private clickedPosition: { x: number; y: number };
   constructor(
     public pageBlockComponent: PageBlockComponent,
     protected adminFormService: FormService,
@@ -96,6 +100,7 @@ export class TextComponent extends AbstractPlugin<TextConfigInterface> implement
         this.editorReady = true;
         setTimeout(() => {
           this.editor.editor.focus();
+          this.setCursorPosition();
         }, 100)
       },
       font_family_formats:
@@ -116,9 +121,26 @@ export class TextComponent extends AbstractPlugin<TextConfigInterface> implement
     }
   }
 
-  disable(e) {
+  disable(e: MouseEvent) {
     if (e.button === 0) {
+      this.clickedPosition = {x: e.x, y: e.y};
+      this.cursorPosition = ElementHelper.getCursorPosition();
       this.disabled = false;
+    }
+  }
+
+  setCursorPosition() {
+    let node = document.elementFromPoint(this.clickedPosition.x, this.clickedPosition.y);
+    console.log(node)
+    const range = this.editor.editor.selection.getRng();
+    if (node.firstChild) {
+      console.log(node.firstChild);
+      console.log(this.cursorPosition)
+
+
+      range.setStart(node.firstChild, this.cursorPosition);
+      range.setEnd(node.firstChild, this.cursorPosition);
+      this.editor.editor.selection.setRng(range);
     }
   }
 }
