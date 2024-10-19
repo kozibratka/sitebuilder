@@ -41,6 +41,7 @@
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "nanogallery2": "^3.0.5",
+    "ngx-color-picker": "^17.0.0",
     "ngx-drag-to-select": "^5.0.1",
     "ngx-gravatar": "^13.0.0",
     "ngx-toastr": "^19.0.0",

@@ -9,6 +9,7 @@ import {
   ImageInputComponent
 } from "../../../../../plugins/shared/components/inputs/image-inputs/image-input/image-input.component";
 import {FormsModule} from "@angular/forms";
+import {ColorPickerModule} from "ngx-color-picker";
 
 @Component({
   selector: 'block-appearance',
@@ -16,7 +17,8 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './block-appearance.component.html',
   imports: [
     ImageInputComponent,
-    FormsModule
+    FormsModule,
+    ColorPickerModule
   ],
   styleUrls: ['./block-appearance.component.css']
 })
@@ -69,10 +71,6 @@ export class BlockAppearanceComponent implements SettingAbleInterface, OnInit, O
         this.contextObject.destroyVideo();
       }
     });
-  }
-
-  updateColor($event) {
-    this._settings.backgroundColor = $event.target.value;
   }
 
   updateImage(path: string) {

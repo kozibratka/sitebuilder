@@ -15,6 +15,7 @@ import {
   SocialAuthServiceConfig,
   SocialLoginModule
 } from "@abacritt/angularx-social-login";
+import {ColorPickerModule} from "ngx-color-picker";
 
 export const ADMIN_CONFIG = new InjectionToken<{}>('admin info');
 export const appConfig: ApplicationConfig = {
@@ -27,6 +28,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(DragToSelectModule.forRoot()),
     importProvidersFrom(FontAwesomeModule),
     importProvidersFrom(SocialLoginModule),
+    importProvidersFrom(ColorPickerModule),
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

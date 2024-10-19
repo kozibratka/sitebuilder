@@ -4,7 +4,7 @@
         <div class="col-md-6">
           <div class="border border-inner text-center">
             <label for="color" class="form-check-label">Barva:</label>
-            <input (input)="updateColor($event)" type="color" class="form-control form-control-color mx-auto" id="color" value="{{settings.backgroundColor}}" title="Vyberte barvu">
+            <input id="color" [value]="this.settings.backgroundColor" [(colorPicker)]="this.settings.backgroundColor" [style.background]="this.settings.backgroundColor"/>
           </div>
         </div>
         <div class="col-md-6">
