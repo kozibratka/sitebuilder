@@ -59,7 +59,8 @@ export class DelimiterResolverService extends AbstractPluginResolver<DelimiterCo
   getEmptySettings(): DelimiterConfigInterface {
     return {
       identifier: PluginIdentifier.DELIMITER_V1,
-      type: 'v1',
+      type: 'v2',
+      color: '#000000',
       paddingTop: 15,
       paddingBottom: 15,
     };

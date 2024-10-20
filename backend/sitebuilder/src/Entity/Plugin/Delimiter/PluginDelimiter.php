@@ -5,25 +5,27 @@ namespace App\Entity\Plugin\Delimiter;
 use App\Entity\Plugin\BasePlugin;
 use App\Entity\Util\Enum\Plugin\DelimiterTypeEnum;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'plugin_delimiter')]
 class PluginDelimiter extends BasePlugin
 {
     #[ORM\Column(type: 'delimiter_type_enum')]
-    private DelimiterTypeEnum $delimiterType;
+    #[Serializer\Type("enum<'DelimiterTypeEnum', 'value'>")]
+    private DelimiterTypeEnum $type;
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $color = null;
 
-    public function getDelimiterType(): DelimiterTypeEnum
+    public function getType(): DelimiterTypeEnum
     {
-        return $this->delimiterType;
+        return $this->type;
     }
 
-    public function setDelimiterType(DelimiterTypeEnum $delimiterType): void
+    public function setType(DelimiterTypeEnum $type): void
     {
-        $this->delimiterType = $delimiterType;
+        $this->type = $type;
     }
 
     public function getColor(): ?string

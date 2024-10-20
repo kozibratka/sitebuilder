@@ -17,7 +17,7 @@ class DelimiterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('delimiter', EnumType::class, ['class' => DelimiterTypeEnum::class])
+        $builder->add('type', EnumType::class, ['class' => DelimiterTypeEnum::class])
             ->add('color', TextType::class)
             ;
     }

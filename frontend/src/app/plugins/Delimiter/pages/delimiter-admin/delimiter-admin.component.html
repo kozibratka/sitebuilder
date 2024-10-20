@@ -1,1 +1,22 @@
-<p>delimiter-admin works!</p>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="adminForm">
+      <div class="row">
+        <div class="border border-inner col-md-6 left">
+          <div class="form-group">
+            <label for="type">Styl:</label>
+            <select class="form-select" required id="type" formControlName="type">
+              <option *ngFor="let item of ['v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'v7', 'v8']" [ngValue]="item">{{item}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="border border-inner col-md-6">
+          <div class="form-group">
+            <label for="color">Barva:</label>
+            <input class="form-control" id="color" [value]="this.settings.color" [(colorPicker)]="this.settings.color" [style.background]="this.settings.color"/>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
