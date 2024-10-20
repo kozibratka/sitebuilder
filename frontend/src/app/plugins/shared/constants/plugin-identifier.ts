@@ -10,5 +10,6 @@ export class PluginIdentifier {
   static VIDEO_BACKGROUND_V1 = 'video_background_v1';
   static FORM_V1 = 'form_v1';
   static ICON_V1 = 'icon_v1';
+  static DELIMITER_V1 = 'delimiter_v1';
   static MAP_V1 = 'map_v1';
 }

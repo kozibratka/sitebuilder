@@ -39,7 +39,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "Icon" = "App\Entity\Plugin\Icon\PluginIcon",
  *          "Gallery" = "App\Entity\Plugin\Gallery\PluginGallery",
  *          "Map" = "App\Entity\Plugin\Map\PluginMap",
- *
+ *          "Delimiter" = "App\Entity\Plugin\Delimiter\PluginDelimiter",
  *     })
  */
 abstract class BasePlugin
